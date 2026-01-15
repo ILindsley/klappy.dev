@@ -178,6 +178,16 @@
       "voice": "neutral",
       "stability": "evolving",
       "tags": ["about", "faq"]
+    },
+    {
+      "uri": "klappy://projects/index",
+      "path": "/projects/index.md",
+      "title": "Projects Index",
+      "type": "text/markdown",
+      "audience": "public",
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": ["projects", "index"]
     }
   ]
 }
