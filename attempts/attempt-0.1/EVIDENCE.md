@@ -2,9 +2,9 @@
 
 ## Evidence Location
 
-- **Evidence folder:** `/evidence/phase-1/`
+- **Evidence folder:** `./evidence/`
 - **Live site:** https://klappy.dev
-- **GitHub:** https://github.com/klappy/klappy.dev/tree/main/evidence/phase-1
+- **GitHub:** https://github.com/klappy/klappy.dev/tree/main/attempts/attempt-0.1/evidence
 
 ---
 
