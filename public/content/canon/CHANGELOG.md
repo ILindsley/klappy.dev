@@ -7,6 +7,26 @@ Per-file versions are intentionally omitted to reduce ceremony and prevent metad
 
 ---
 
+## 0.1.1 — 2026-01-15
+
+### Added
+- Attempt Lifecycle appendix (`/canon/odd/appendices/attempt-lifecycle.md`)
+- Repository Topology appendix (`/canon/odd/appendices/repo-topology.md`)
+- PRD Template (`/docs/PRD/PRD_TEMPLATE.md`)
+
+### Established
+- PRD → Attempt → Evidence model
+- Decoupled infrastructure from truth (SHA is canonical, deploys are views)
+- Three planes: App (disposable), Content (accumulates), Infrastructure (persists)
+- Four core principles including "Deployments are views, not truth"
+
+### Notes
+- This release stabilizes the process model itself, not just content.
+- Future PRDs and attempts will stress-test this structure.
+- Operational procedures live in `/docs/ATTEMPTS.md`, not Canon.
+
+---
+
 ## 0.1.0 — 2026-01-15
 
 ### Added
