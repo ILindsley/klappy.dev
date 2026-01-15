@@ -59,13 +59,16 @@ export function findResourceByPath(resources, path) {
 
 /**
  * Group resources by audience (Public vs Canon)
+ * Only includes resources with exposure === "nav" (or no exposure field, for backwards compatibility)
  * @param {import('./types').ManifestResource[]} resources
  * @returns {{ public: import('./types').ManifestResource[], canon: import('./types').ManifestResource[] }}
  */
 export function groupByAudience(resources) {
+  // Filter to only nav-exposed resources (default to nav if exposure not set)
+  const navResources = resources.filter(r => !r.exposure || r.exposure === 'nav');
   return {
-    public: resources.filter(r => r.audience === 'public'),
-    canon: resources.filter(r => r.audience === 'canon')
+    public: navResources.filter(r => r.audience === 'public'),
+    canon: navResources.filter(r => r.audience === 'canon')
   };
 }
 

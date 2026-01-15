@@ -32,9 +32,10 @@
  * @property {string} path - File path relative to content root (e.g., "/canon/constraints.md")
  * @property {string} title - Human-readable title
  * @property {string} type - MIME type (e.g., "text/markdown")
- * @property {string} audience - "public" or "canon"
+ * @property {string} audience - "public", "canon", or "internal"
+ * @property {string} [exposure] - "nav" (sidebar), "hidden" (addressable but not listed), or "internal" (tools only)
  * @property {string} voice - "first_person" or "neutral"
- * @property {string} stability - "stable", "semi_stable", or "evolving"
+ * @property {string} stability - "stable", "semi_stable", "evolving", or "frozen"
  * @property {string[]} tags - Categorization tags
  */
 

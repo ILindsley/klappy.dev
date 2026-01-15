@@ -1,7 +1,7 @@
 {
   "pack": {
     "name": "klappy-canon",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "updated_at": "2026-01-15",
     "description": "Canonical orientation, constraints, decision rules, evidence policies, and ODD appendices used across klappy.dev.",
     "public_entrypoint": "klappy://public/odd",
@@ -15,6 +15,7 @@
       "title": "ODD Manifesto — Public",
       "type": "text/markdown",
       "audience": "public",
+      "exposure": "nav",
       "voice": "neutral",
       "stability": "semi_stable",
       "tags": ["odd", "public", "overview"]
@@ -25,6 +26,7 @@
       "title": "Canon Index",
       "type": "text/markdown",
       "audience": "canon",
+      "exposure": "nav",
       "voice": "neutral",
       "stability": "semi_stable",
       "tags": ["canon", "index", "orientation"]
@@ -35,6 +37,7 @@
       "title": "Canon Changelog",
       "type": "text/markdown",
       "audience": "canon",
+      "exposure": "nav",
       "voice": "neutral",
       "stability": "semi_stable",
       "tags": ["meta", "changelog", "versioning"]
@@ -45,6 +48,7 @@
       "title": "Constraints",
       "type": "text/markdown",
       "audience": "canon",
+      "exposure": "nav",
       "voice": "first_person",
       "stability": "stable",
       "tags": ["constraints", "assumptions"]
@@ -55,6 +59,7 @@
       "title": "Decision Rules",
       "type": "text/markdown",
       "audience": "canon",
+      "exposure": "nav",
       "voice": "first_person",
       "stability": "stable",
       "tags": ["decision-rules", "heuristics"]
@@ -65,6 +70,7 @@
       "title": "Definition of Done & Evidence Policy",
       "type": "text/markdown",
       "audience": "canon",
+      "exposure": "nav",
       "voice": "first_person",
       "stability": "semi_stable",
       "tags": ["definition-of-done", "evidence"]
@@ -75,6 +81,7 @@
       "title": "Self-Audit Checklist",
       "type": "text/markdown",
       "audience": "canon",
+      "exposure": "nav",
       "voice": "first_person",
       "stability": "evolving",
       "tags": ["self-audit", "verification"]
@@ -85,6 +92,7 @@
       "title": "Visual Proof Standards",
       "type": "text/markdown",
       "audience": "canon",
+      "exposure": "nav",
       "voice": "first_person",
       "stability": "semi_stable",
       "tags": ["visual-proof", "evidence"]
@@ -95,6 +103,7 @@
       "title": "Completion Report Template",
       "type": "text/markdown",
       "audience": "canon",
+      "exposure": "nav",
       "voice": "first_person",
       "stability": "evolving",
       "tags": ["completion-report", "template"]
@@ -105,6 +114,7 @@
       "title": "ODD Manifesto — Extended",
       "type": "text/markdown",
       "audience": "canon",
+      "exposure": "nav",
       "voice": "neutral",
       "stability": "stable",
       "tags": ["odd", "philosophy"]
@@ -115,6 +125,7 @@
       "title": "Project Maturity & Progressive Governance",
       "type": "text/markdown",
       "audience": "canon",
+      "exposure": "nav",
       "voice": "first_person",
       "stability": "semi_stable",
       "tags": ["maturity", "governance"]
@@ -125,6 +136,7 @@
       "title": "ODD Misuse Patterns",
       "type": "text/markdown",
       "audience": "canon",
+      "exposure": "nav",
       "voice": "neutral",
       "stability": "evolving",
       "tags": ["odd", "misuse", "failure-modes"]
@@ -135,6 +147,7 @@
       "title": "Prompt Architecture",
       "type": "text/markdown",
       "audience": "canon",
+      "exposure": "nav",
       "voice": "neutral",
       "stability": "semi_stable",
       "tags": ["odd", "prompt-architecture", "orchestration"]
@@ -145,9 +158,21 @@
       "title": "ODD + Canon + Evidence — Orientation Map",
       "type": "text/markdown",
       "audience": "canon",
+      "exposure": "nav",
       "voice": "neutral",
       "stability": "semi_stable",
       "tags": ["odd", "orientation", "mental-model"]
+    },
+    {
+      "uri": "klappy://canon/odd/attempt-lifecycle",
+      "path": "/canon/odd/appendices/attempt-lifecycle.md",
+      "title": "Attempt Lifecycle",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "voice": "neutral",
+      "stability": "semi_stable",
+      "tags": ["odd", "attempt", "lifecycle", "restartability"]
     },
     {
       "uri": "klappy://about/bio",
@@ -155,6 +180,7 @@
       "title": "Bio",
       "type": "text/markdown",
       "audience": "public",
+      "exposure": "nav",
       "voice": "first_person",
       "stability": "semi_stable",
       "tags": ["about", "bio"]
@@ -165,6 +191,7 @@
       "title": "Credibility",
       "type": "text/markdown",
       "audience": "public",
+      "exposure": "nav",
       "voice": "neutral",
       "stability": "semi_stable",
       "tags": ["about", "credibility", "trust"]
@@ -175,6 +202,7 @@
       "title": "FAQ",
       "type": "text/markdown",
       "audience": "public",
+      "exposure": "nav",
       "voice": "neutral",
       "stability": "evolving",
       "tags": ["about", "faq"]
@@ -185,9 +213,43 @@
       "title": "Projects Index",
       "type": "text/markdown",
       "audience": "public",
+      "exposure": "nav",
       "voice": "neutral",
       "stability": "evolving",
       "tags": ["projects", "index"]
+    },
+    {
+      "uri": "klappy://projects/adding-a-project",
+      "path": "/projects/ADDING-A-PROJECT.md",
+      "title": "Adding a Project",
+      "type": "text/markdown",
+      "audience": "public",
+      "exposure": "nav",
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": ["projects", "contributing", "guide"]
+    },
+    {
+      "uri": "klappy://projects/repo-as-a-system",
+      "path": "/projects/repo-as-a-system/README.md",
+      "title": "Repo-as-a-System",
+      "type": "text/markdown",
+      "audience": "public",
+      "exposure": "nav",
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": ["projects", "repo-as-a-system"]
+    },
+    {
+      "uri": "klappy://projects/repo-as-a-system/build-prompt-phase1",
+      "path": "/projects/repo-as-a-system/BUILD_PROMPT_PHASE1.md",
+      "title": "Build Prompt — Phase 1",
+      "type": "text/markdown",
+      "audience": "internal",
+      "exposure": "internal",
+      "voice": "neutral",
+      "stability": "frozen",
+      "tags": ["projects", "repo-as-a-system", "build-prompt", "internal"]
     }
   ]
 }
