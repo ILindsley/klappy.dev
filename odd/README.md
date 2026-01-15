@@ -1,83 +1,140 @@
-# Outcome-Driven Development (ODD)
+# Outcomes-Driven Development (ODD)
 
-In an AI-accelerated world, software can be generated faster than it can be understood.
+Outcomes-Driven Development (ODD) is an approach to building software that prioritizes real-world results over artifacts.
 
-The scarce resources are no longer code or tooling. They are **clarity**, **judgment**, **verification**, and **trust**.
+In an environment where AI can generate code, interfaces, and entire applications quickly, the limiting factor is no longer production speed—it is clarity of intent, quality of verification, and the ability to choose among many possible outcomes.
 
-ODD shifts the focus from writing code to delivering real, verifiable outcomes.
-
----
-
-## The core idea
-
-**Code is an output. Outcomes are the objective. Verification is non-negotiable.**
-
-AI can generate infinite implementations. Humans curate which outcomes matter — and whether they actually happened.
+ODD exists to make those constraints explicit.
 
 ---
 
-## Seven principles
+## The Core Idea
 
-These guide how systems are shaped, regardless of tooling.
+Traditional software development often optimizes for outputs:
 
-| Principle                | What it means                                                                                     |
-| ------------------------ | ------------------------------------------------------------------------------------------------- |
-| **Prompt over code**     | Express intent at the highest level possible. Code is generated, adapted, or discarded as needed. |
-| **KISS**                 | Prefer the simplest solution that plausibly works. Complexity must be earned.                     |
-| **DRY (with isolation)** | Avoid unnecessary duplication without creating brittle coupling.                                  |
-| **Consistency**          | Systems should behave predictably. Consistency is contextual, not universal.                      |
-| **Maintainability**      | Assume long timelines and changing ownership. Optimize for the next maintainer.                   |
-| **Antifragile**          | Design for failure, recovery, and learning — not perfection.                                      |
-| **Scalable**             | Growth should not cause collapse — technically, operationally, or cognitively.                    |
+- lines of code
+- shipped features
+- completed tickets
 
----
+ODD shifts the focus to outcomes:
 
-## Verification over confidence
+- Does this solve the real problem?
+- Can it be demonstrated, not just explained?
+- Will it hold up as conditions change?
 
-ODD rejects "trust me" development.
-
-If something works, it can be shown.  
-If it can't be shown, it isn't verified.
-
-Evidence matters more than explanation.
+Code is still written. Tools still matter. But they are means, not ends.
 
 ---
 
-## Ephemerality is a feature
+## Why ODD Now
 
-AI makes regeneration cheap. Not every artifact deserves to live forever.
+AI changes the economics of software creation.
 
-ODD prioritizes **durable principles** and **trustworthy outcomes** over permanent codebases.
+When generation becomes cheap:
 
----
+- variation explodes
+- artifacts become disposable
+- maintenance becomes the real cost
 
-## A note on maturity
+ODD responds by:
 
-Not every project needs the same rigor on day one.
+- treating code as ephemeral
+- emphasizing verification over explanation
+- encouraging curation over accumulation
 
-Exploration comes first. Governance follows dependency and trust.
-
-ODD supports experimentation without sacrificing credibility later.
-
----
-
-## What this isn't
-
-- Not a framework you install
-- Not a process you follow step-by-step
-- Not a certification or methodology
-
-It's a way of thinking about what matters when AI can write the code for you.
+The goal is not to generate _more_ software, but to ship _better_ outcomes with less long-term drag.
 
 ---
 
-## Learn more
+## Core Principles
 
-- [Canon Index](/canon/index.md) — Full orientation, constraints, and decision rules
-- [About](/about/bio.md) — Who wrote this and why
+ODD is guided by a small set of principles that recur across projects:
+
+- **Prompt over Code**
+  Natural language intent guides generation; code is an output, not the source of truth.
+
+- **Keep It Simple (KISS)**
+  Prefer the simplest solution that works and can be explained clearly.
+
+- **Don’t Repeat Yourself (DRY), with Isolation**
+  Reuse ideas and components where it helps, but avoid brittle global coupling.
+
+- **Consistency**
+  Similar problems should feel similar to users and maintainers.
+
+- **Maintainability**
+  Optimize for low-effort upkeep and clear handoff, not cleverness.
+
+- **Antifragility**
+  Systems should learn from stress and failure, not just survive them.
+
+- **Scalability**
+  Growth should increase capability without exploding complexity or cost.
+
+These principles are lenses, not rules. Their application changes as projects mature.
 
 ---
 
-## License
+## Evidence Over Explanation
 
-[MIT](/LICENSE)
+ODD places a strong emphasis on evidence.
+
+In practice, this means:
+
+- showing working systems
+- favoring visual or experiential proof
+- treating explanations as hypotheses until verified
+
+This is especially important in AI-assisted workflows, where fluent explanations are easy to produce but easy to trust incorrectly.
+
+---
+
+## Project Maturity Matters
+
+ODD does not apply the same rigor at every stage.
+
+- **Exploration (PoC)** — bias toward learning and speed
+- **Validation (Pilot)** — bias toward proof and repeatability
+- **Commitment (Production)** — bias toward trust, durability, and handoff
+
+Rigor increases with maturity. Governance tightens gradually. There are no sharp lines.
+
+---
+
+## What ODD Is Not
+
+ODD is not:
+
+- a framework to install
+- a fixed workflow
+- a claim that outcomes can be fully predicted
+
+It does not replace judgment. It exists to support it.
+
+---
+
+## How This Repository Uses ODD
+
+This repository applies ODD in two layers:
+
+- **Public-facing** — this document and related writing explain the philosophy in human terms.
+- **Canonical** — internal reference documents capture constraints, decision rules, evidence standards, and failure modes.
+
+The Canon is designed for orientation, not enforcement.
+
+---
+
+## Where to Go Next
+
+If you want to explore further:
+
+- Read the **extended ODD Manifesto** in `/canon/odd/manifesto.md`
+- See how rigor scales in **Project Maturity & Progressive Governance**
+- Browse the **Canon Index** to understand how decisions and verification are structured
+
+Or skip the theory and look at projects as they are added over time.
+
+---
+
+> ODD is about preserving intent without freezing execution.
+> The measure of success is not how elegant the artifact is, but whether the outcome holds up in the real world.
