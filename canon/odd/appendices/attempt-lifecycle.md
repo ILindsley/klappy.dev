@@ -16,14 +16,17 @@ This appendix exists to make stopping, restarting, and rebuilding a normal, expl
 
 ---
 
-## Core Principle
+## Core Principles
 
-**Attempts are disposable.**  
-**Infrastructure persists.**  
-**Content accumulates.**
+1. **Attempts are disposable.**
+2. **Infrastructure persists.**
+3. **Content accumulates.**
+4. **Deployments are views, not truth.**
 
 Restarting is not a failure of execution.  
 Restarting is evidence that intent has sharpened.
+
+Branch and preview deployments exist to observe behavior. The canonical record is the sealed attempt + commit SHA, not the deployment URL.
 
 ---
 
@@ -127,7 +130,9 @@ attempts/
 - `sealed_commit` — the commit SHA (truth)
 - `git_tag` — convenience pointer (optional)
 - `status` — CLOSED or ABANDONED
-- `live_url` — deployed artifact (if applicable)
+- `deploy` — recorded URLs (production, preview) as evidence artifacts
+
+The concrete sealing procedure is documented in `/docs/ATTEMPTS.md`.
 
 ---
 

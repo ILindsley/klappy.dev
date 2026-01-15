@@ -179,7 +179,7 @@ How intent scales without giant prompts. Orientation only.
 • Orientation Map (odd/orientation-map.md)
 A one-page mental model of ODD, Canon, Evidence, and Outcomes.
 • Attempt Lifecycle (odd/appendices/attempt-lifecycle.md)
-How PRD versions and attempts relate. PRDs can have multiple attempts; attempts are sealed records.
+How PRD versions, attempts, evidence, and deployments are preserved across iterations. PRDs can have multiple attempts; attempts are sealed records.
 • Repository Topology (odd/appendices/repo-topology.md)
 What lives where and what changes when. Encodes App/Content/Infrastructure decoupling.
 

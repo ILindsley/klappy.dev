@@ -105,11 +105,13 @@ git push --follow-tags
 ## How to Start a New Attempt
 
 ### Same PRD version (retry)
+
 1. Create `attempts/prd-vX.Y/attempt-NNN/` (increment NNN)
 2. Rebuild `/src/` as needed
 3. When complete, seal the attempt
 
 ### New PRD version
+
 1. Create `docs/PRD/PRD_vX.Y.md`
 2. Create `attempts/prd-vX.Y/PRD.md` (frozen copy)
 3. Create `attempts/prd-vX.Y/attempt-001/`
@@ -120,14 +122,14 @@ git push --follow-tags
 
 ## What Evolves vs. What is Frozen
 
-| Category | Evolves? | Notes |
-|----------|----------|-------|
-| `/canon/**` | ✅ Yes | Living orientation docs |
-| `/odd/**` | ✅ Yes | Living philosophy docs |
-| `/about/**` | ✅ Yes | Living about docs |
-| `/docs/PRD/*` | ✅ Yes | Versioned but editable |
-| `/attempts/prd-vX.Y/PRD.md` | ❌ No | Frozen snapshot |
-| `/attempts/*/attempt-NNN/*` | ❌ No | Sealed record + evidence |
+| Category                    | Evolves? | Notes                    |
+| --------------------------- | -------- | ------------------------ |
+| `/canon/**`                 | ✅ Yes   | Living orientation docs  |
+| `/odd/**`                   | ✅ Yes   | Living philosophy docs   |
+| `/about/**`                 | ✅ Yes   | Living about docs        |
+| `/docs/PRD/*`               | ✅ Yes   | Versioned but editable   |
+| `/attempts/prd-vX.Y/PRD.md` | ❌ No    | Frozen snapshot          |
+| `/attempts/*/attempt-NNN/*` | ❌ No    | Sealed record + evidence |
 
 ---
 
@@ -150,6 +152,7 @@ attempt/prd-v0.2/a003
 ```
 
 These branches:
+
 - Trigger preview deploys on push (Cloudflare/Netlify)
 - Are deleted after sealing
 - Are NOT the durable record (commit SHA is)
@@ -159,11 +162,13 @@ These branches:
 ## Preview URLs
 
 When sealing an attempt with UI changes:
+
 1. Record the preview URL in `META.json` under `deploy.preview_url`
 2. The preview URL is treated as an evidence artifact
 3. If the branch is deleted later, the URL may stop working — but the commit SHA allows resurrection
 
 **Preview deploy required?**
+
 - Required for UI changes
 - Optional for doc-only changes
 
@@ -181,6 +186,7 @@ npm run build
 ```
 
 The attempt folder contains everything needed:
+
 - Exact code state (via commit SHA)
 - Evidence (screenshots, logs)
 - Deploy history (URLs where it ran)
@@ -189,9 +195,9 @@ The attempt folder contains everything needed:
 
 ## Decisions (Current Policy)
 
-| Decision | Answer |
-|----------|--------|
-| Are preview deploys required for sealing? | Required for UI changes, optional for doc-only |
+| Decision                                     | Answer                                                         |
+| -------------------------------------------- | -------------------------------------------------------------- |
+| Are preview deploys required for sealing?    | Required for UI changes, optional for doc-only                 |
 | Do we preserve attempt previews permanently? | No — we preserve links + evidence. Permanent hosting deferred. |
 
 This matches the maturity model: don't over-govern early.
