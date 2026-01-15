@@ -22,14 +22,14 @@ This folder contains proofs of concept, experiments, and working artifacts built
 
 ## Current projects
 
-_None yet._
+- **repo-as-a-system** — treating the repository itself as an outcomes-driven system
 
 Projects will be added as they reach a point worth sharing.  
-Each project will include its own README documenting context, constraints, tradeoffs, and evidence of completion.
+Each project will include its own README with context, constraints, tradeoffs, and evidence of completion.
 
 ---
 
 ## Status
 
-This folder is intentionally empty at launch.  
-The Canon comes first. Projects follow once an idea has survived scrutiny at the level of intent and constraints.
+This folder intentionally starts small.  
+The Canon comes first. Projects follow.
