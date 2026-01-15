@@ -29,13 +29,12 @@ An **attempt** is a bounded effort to implement a specific PRD version. When an 
 /docs/PRD/               # versioned PRDs (living, editable)
   PRD_v0.1.md
   PRD_v0.2.md
-/attempts/               # sealed attempts (frozen snapshots)
+/attempts/               # sealed attempts (self-contained)
   attempt-0.1/
     ATTEMPT.md           # closure record
     PRD.md               # frozen PRD snapshot
-    EVIDENCE.md          # links to evidence
-/evidence/               # evidence bundles per phase/attempt
-  phase-1/
+    EVIDENCE.md          # evidence index
+    evidence/            # evidence files (screenshots, logs)
 /public/content/         # generated (by sync script)
 ```
 
@@ -47,11 +46,12 @@ An **attempt** is a bounded effort to implement a specific PRD version. When an 
 2. Create `attempts/attempt-X.Y/` folder
 3. Add `ATTEMPT.md` (status, intent, what was proven/not proven)
 4. Copy PRD snapshot to `PRD.md`
-5. Add `EVIDENCE.md` (links to evidence folder)
-6. Commit and tag:
+5. Add `evidence/` folder with screenshots, logs, etc.
+6. Add `EVIDENCE.md` (index of evidence files)
+7. Commit and tag:
 
 ```bash
-git add attempts/attempt-X.Y evidence/phase-X
+git add attempts/attempt-X.Y
 git commit -m "Seal attempt X.Y"
 git tag -a attempt-X.Y -m "Attempt X.Y sealed"
 git push --follow-tags
@@ -78,7 +78,7 @@ git push --follow-tags
 | `/docs/PRD/*` | ✅ Yes | Versioned but editable |
 | `/attempts/*/PRD.md` | ❌ No | Frozen snapshot |
 | `/attempts/*/ATTEMPT.md` | ❌ No | Sealed record |
-| `/evidence/**` | ❌ No | Immutable after commit |
+| `/attempts/*/evidence/**` | ❌ No | Immutable after commit |
 
 ---
 
