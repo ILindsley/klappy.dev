@@ -175,6 +175,17 @@
       "tags": ["odd", "attempt", "lifecycle", "restartability"]
     },
     {
+      "uri": "klappy://canon/odd/repo-topology",
+      "path": "/canon/odd/appendices/repo-topology.md",
+      "title": "Repository Topology",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "voice": "neutral",
+      "stability": "semi_stable",
+      "tags": ["odd", "topology", "structure", "decoupling"]
+    },
+    {
       "uri": "klappy://about/bio",
       "path": "/about/bio.md",
       "title": "Bio",

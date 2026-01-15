@@ -19,6 +19,8 @@ The Canon is a curated set of documents that capture:
 
 Its purpose is clarity, not control.
 
+PRDs are versioned and may be attempted multiple times; attempts are sealed records, not evolving workstreams.
+
 The Canon exists so that:
 • reasoning does not have to be repeated
 • principles remain stable while implementations change
@@ -60,6 +62,9 @@ Canon Structure
     misuse-patterns.md
     prompt-architecture.md
     orientation-map.md
+    appendices/
+      attempt-lifecycle.md
+      repo-topology.md
 ```
 
 Each file addresses a different dimension of decision-making.
@@ -173,6 +178,10 @@ Common failure modes and how ODD is misapplied in practice. Diagnostic only.
 How intent scales without giant prompts. Orientation only.
 • Orientation Map (odd/orientation-map.md)
 A one-page mental model of ODD, Canon, Evidence, and Outcomes.
+• Attempt Lifecycle (odd/appendices/attempt-lifecycle.md)
+How PRD versions and attempts relate. PRDs can have multiple attempts; attempts are sealed records.
+• Repository Topology (odd/appendices/repo-topology.md)
+What lives where and what changes when. Encodes App/Content/Infrastructure decoupling.
 
 ⸻
 
