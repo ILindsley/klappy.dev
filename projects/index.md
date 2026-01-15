@@ -25,11 +25,11 @@ This folder contains proofs of concept, experiments, and working artifacts built
 _None yet._
 
 Projects will be added as they reach a point worth sharing.  
-Each project will include its own README with context, constraints, and evidence of completion.
+Each project will include its own README documenting context, constraints, tradeoffs, and evidence of completion.
 
 ---
 
 ## Status
 
 This folder is intentionally empty at launch.  
-The Canon comes first. Projects follow.
+The Canon comes first. Projects follow once an idea has survived scrutiny at the level of intent and constraints.
