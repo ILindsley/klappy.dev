@@ -209,7 +209,30 @@ Phase 3 — MCP Export
 
 ⸻
 
-15. Risks & Mitigations
+15. Platform Constraints
+
+Target Hosting
+• Cloudflare Pages + Workers (preferred)
+
+Runtime Constraint
+• Must run on Cloudflare Workers runtime (no Node-only APIs)
+
+Default Architecture
+• Static SPA served by Pages
+• Optional API via Worker (for LLM calls requiring secrets, later MCP endpoints)
+
+Compatibility
+• Avoid dependencies that require Node runtime on the server
+• Phase 1 should be a static SPA deployable to Pages
+• Any server-side logic (LLM calls, later MCP) must be implemented as Worker-compatible endpoints
+
+Build Guidance
+• Prefer Vite + static builds over SSR frameworks for v0
+• SSR adds complexity without payoff at this stage
+
+⸻
+
+16. Risks & Mitigations
 
 Risk: Oververbose AI responses
 Mitigation: Enforce UI-first + permissioned depth rules
@@ -222,7 +245,7 @@ Mitigation: Retrieval-first + explicit refusal when missing
 
 ⸻
 
-16. Out of Scope (Explicit)
+17. Out of Scope (Explicit)
     • Monetization
     • Authentication
     • Multi-user profiles
