@@ -1,89 +1,10 @@
 Excellent choice. This keeps ODD legible, sharable, and non-preachy publicly, while preserving the operational teeth internally.
 
 Below are both artifacts, already refactored and aligned:
-• ODD v1.1 — Public (1 page) → for klappy.dev, Medium, sharing
-• ODD v1.1 — Extended (Internal / Agent-Governance) → for canon, MCP, agents
+• ODD v1.1 — Public (1 page) → for klappy.dev, Medium, sharing, /odd/README.md
+• ODD v1.1 — Extended (Internal / Agent-Governance) → for canon, MCP, agents (this file)
 
 They are intentionally complementary, not redundant.
-
-⸻
-
-ODD Manifesto v1.1 (Public — 1 Page)
-
-Outcomes-Driven Development
-
-In an AI-accelerated world, software can be generated faster than it can be understood.
-
-The scarce resources are no longer code or tooling.
-They are clarity, judgment, verification, and trust.
-
-Outcomes-Driven Development (ODD) shifts the focus of software creation away from writing code and toward delivering real, verifiable outcomes.
-
-⸻
-
-Core Idea
-
-Code is an output.
-Outcomes are the objective.
-Verification is non-negotiable.
-
-AI can generate infinite implementations.
-Humans curate which outcomes matter—and whether they actually happened.
-
-⸻
-
-The Seven Pillars of ODD
-
-These principles guide how systems are shaped, regardless of tooling. 1. Prompt Over Code
-Express intent at the highest level possible. Code is generated, adapted, or discarded as needed. 2. KISS (Keep It Simple, Stupid)
-Prefer the simplest solution that plausibly works. Complexity must be earned. 3. DRY (With Isolation)
-Avoid unnecessary duplication without creating brittle coupling. 4. Consistency
-Systems should behave predictably. Consistency is contextual, not universal. 5. Maintainability
-Assume long timelines and changing ownership. Optimize for the next maintainer. 6. Antifragile
-Design for failure, recovery, and learning—not perfection. 7. Scalable
-Growth should not cause collapse—technically, operationally, or cognitively.
-
-⸻
-
-Verification Over Confidence
-
-ODD rejects “trust me” development.
-
-If something works, it can be shown.
-If it can’t be shown, it isn’t verified.
-
-Evidence matters more than explanation.
-
-⸻
-
-Ephemerality Is a Feature
-
-AI makes regeneration cheap.
-Not every artifact deserves to live forever.
-
-ODD prioritizes durable principles and trustworthy outcomes over permanent codebases.
-
-⸻
-
-A Note on Maturity
-
-Not every project needs the same rigor on day one.
-
-Exploration comes first.
-Governance follows dependency and trust.
-
-ODD supports experimentation without sacrificing credibility later.
-
-⸻
-
-Closing
-
-The future of development isn’t writing more code.
-It’s curating better outcomes.
-
-ODD exists to make that possible—without killing exploration, outsourcing judgment, or trusting what cannot be proven.
-
-⸻
 
 ⸻
 
@@ -260,8 +181,217 @@ Status
 
 ⸻
 
-Next (Natural) Steps
+Perfect. Below is an additive update to ODD Manifesto v1.1 — Extended (Internal).
+You do not need to rewrite the document—this slots in cleanly near the end (just before the closing section).
 
-If you want, the highest-leverage next artifacts are: 1. Agent Handoff Instruction (single reusable contract) 2. ODD → Canon traceability map (pillar → file → rule) 3. MCP schema exposing ODD + maturity + canon 4. Public klappy.dev landing copy that references the 1-page ODD
+This preserves:
+• non-instructional tone
+• intellectual honesty
+• compatibility with your Canon Index confidence model
+• zero workflow coupling
 
-Just tell me which one you want next.
+⸻
+
+Add This Section to
+
+/canon/odd/manifesto.md
+
+⸻
+
+Confidence, Risks, and Known Failure Modes
+
+(ODD v1.1 — Internal Self-Assessment)
+
+This section captures a snapshot assessment of how well Outcomes-Driven Development (ODD), as currently defined, aligns with its stated principles and where it is most vulnerable.
+
+This is not a guarantee of correctness.
+It is an explicit acknowledgment of uncertainty.
+
+⸻
+
+Confidence Model
+
+Confidence scores express current belief that ODD will behave as intended when applied thoughtfully.
+
+Scale: 0.0–1.0
+• 0.9+ — robust under most conditions
+• 0.7–0.85 — strong, but watch for drift
+• 0.5–0.7 — plausible, fragile under misuse
+• <0.5 — likely misaligned without correction
+
+Scores are expected to change as ODD is applied in practice.
+
+⸻
+
+Principle-Level Confidence Snapshot
+
+Prompt Over Code / Convention Over Configuration
+Confidence: 0.80
+
+Why this is strong
+• ODD treats intent, constraints, and outcomes as first-class artifacts.
+• Canonical resources replace brittle, repeated prompts with stable conventions.
+
+Primary risks
+• Conventions silently becoming configuration sprawl.
+• Clients inventing ad hoc mappings instead of using shared conventions.
+
+Failure mode
+• “Prompt over code” degenerates into “prompt + hidden config everywhere.”
+
+⸻
+
+KISS (Keep It Simple, Stupid)
+Confidence: 0.75
+
+Why this is strong
+• ODD avoids embedding workflows or agent loops.
+• Complexity is deferred intentionally.
+
+Primary risks
+• Meta-layers (manifests, indices, maturity flags) accumulating unchecked.
+• Over-abstracting governance before it proves necessary.
+
+Failure mode
+• Governance becomes heavier than the systems it governs.
+
+⸻
+
+DRY (With Isolation)
+Confidence: 0.70
+
+Why this is strong
+• Canon centralizes worldview and defaults.
+• Single-inventory patterns reduce duplication.
+
+Primary risks
+• Multiple parallel indices drifting out of sync.
+• Reuse pressure creating brittle shared abstractions too early.
+
+Failure mode
+• “One source of truth” becomes “many partial truths.”
+
+⸻
+
+Consistency
+Confidence: 0.65
+
+Why this is weaker
+• Consistency depends on discipline, not tooling.
+• Naming, casing, and URI patterns are easy to drift over time.
+
+Primary risks
+• Small inconsistencies compounding across resources and clients.
+• Human tolerance masking slow degradation.
+
+Failure mode
+• The system remains logically sound but ergonomically frustrating.
+
+⸻
+
+Maintainability
+Confidence: 0.70
+
+Why this is strong
+• Separation of stable principles from evolving operations.
+• Explicit maturity model prevents premature hardening.
+
+Primary risks
+• Manual maintenance of inventories becoming burdensome.
+• Version semantics implied but not enforced.
+
+Failure mode
+• Canon becomes respected but stale.
+
+⸻
+
+Antifragile
+Confidence: 0.60
+
+Why this is intentionally cautious
+• Antifragility depends on real-world stress, not theory.
+• Recovery paths are assumed, not yet proven.
+
+Primary risks
+• MCP or tooling layers becoming hidden single points of failure.
+• Ephemerality mistaken for disposability of meaning.
+
+Failure mode
+• System recovers technically but loses trust socially.
+
+⸻
+
+Scalable
+Confidence: 0.70
+
+Why this is strong
+• ODD scales conceptually: more resources do not require new rules.
+• Governance grows linearly, not exponentially.
+
+Primary risks
+• Human cognitive load becoming the true bottleneck.
+• Discovery/search degrading without deliberate tooling later.
+
+Failure mode
+• System scales in size but not in usability.
+
+⸻
+
+Cross-Cutting Risks
+
+Premature Formalization
+
+ODD is vulnerable to being “locked in” too early, reducing exploration.
+
+False Authority
+
+Well-written governance can be mistaken for correctness without evidence.
+
+Silent Drift
+
+Small deviations, left unnamed, can erode trust over time.
+
+⸻
+
+Intended Use of This Section
+
+This section exists to:
+• prevent ideological hardening
+• make risks discussable
+• encourage re-evaluation
+• model intellectual humility
+
+It is expected to change.
+
+⸻
+
+Re-evaluation Philosophy
+
+ODD should be reassessed when:
+• it is applied to real production systems
+• autonomous agents operate for extended periods
+• failure modes surface that are not addressed here
+
+Confidence should be updated based on evidence, not optimism.
+
+⸻
+
+Closing (Internal)
+
+ODD is not complete.
+
+It is a living attempt to govern creativity, autonomy, and trust in a world where generation is cheap and certainty is not.
+
+Its strength is not that it claims to be right—
+but that it makes being wrong visible early.
+
+For common failure modes and practical misapplications of ODD, see _Misuse Patterns_ and _Prompt Architecture_ in the ODD appendices.
+
+⸻
+
+Status
+• ODD v1.1 Extended updated
+• Confidence scoring and failure modes explicitly documented
+• Fully aligned with Canon Index confidence model
+
+⸻
