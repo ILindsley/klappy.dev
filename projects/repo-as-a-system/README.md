@@ -87,4 +87,22 @@ Those claims require future projects and comparison.
 
 ## Status
 
-Exploratory
+**Phase 1 Complete** — Conversational UI SPA built and verified.
+
+---
+
+## Phases
+
+### Phase 1 — Conversational UI (Complete)
+
+Built a static Vite + React SPA that:
+- Loads the manifest and renders documents
+- Provides a chat panel with mock LLM provider
+- Executes UI action primitives (`open`, `scroll_to`, `highlight`, `suggest_questions`)
+- Deployable to Cloudflare Pages
+
+See [BUILD_PROMPT_PHASE1.md](BUILD_PROMPT_PHASE1.md) for the kickoff prompt.
+
+### Phase 2 — Evidence & Self-Audit (Planned)
+
+### Phase 3 — MCP Export (Planned)

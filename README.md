@@ -84,6 +84,21 @@ Reuse is encouraged.
 
 ---
 
+## Web App (Phase 1)
+
+This repository includes a static SPA for browsing content via a chat-first interface.
+
+```bash
+npm install
+npm run dev
+```
+
+The app lives in `/src` and serves content from `/public/content/`.
+
+**Note:** `/public/content/` contains copies of source content (`/canon`, `/odd`, `/about`, `/projects`) for the SPA to serve. The source folders remain the canonical authoring location; `/public/content/` is the rendered content root for the web app.
+
+---
+
 ## Status
 
 This repository is active and evolving.  

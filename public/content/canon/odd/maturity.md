@@ -1,0 +1,175 @@
+# Project Maturity & Progressive Governance
+
+Canon v0.1
+
+This page defines how my principles, constraints, and policies change as a project matures.
+
+Not every project needs the same level of rigor on day one.
+Applying production-level governance to exploratory work kills learning.
+Failing to apply it later destroys trust.
+
+This model exists to activate the right constraints at the right time.
+
+---
+
+## Core Principle
+
+I do not apply all rules equally at all times.
+
+Rigor increases with maturity.
+Exploration comes first. Governance comes later.
+
+Every project must explicitly state its current maturity level.
+
+---
+
+## Maturity Levels Overview
+
+I use three maturity levels:
+1. PoC / Exploration
+2. Pilot / Product
+3. Production / Long-Term
+
+These levels are not about importance.
+They are about risk, trust, and dependency.
+
+---
+
+## Level 0 — PoC / Exploration
+
+**Goal:** Learn quickly and discard freely.
+
+### Characteristics
+- Short-lived or experimental
+- Ephemeral artifacts
+- Low dependency from others
+- High uncertainty tolerated
+
+### What applies
+- Prompt over code
+- KISS (loosely)
+- DRY (lightly)
+- Consistency (local only)
+- Evidence of possibility (not correctness)
+
+### What does not apply yet
+- Formal observability
+- Cost optimization
+- Trust or authority boundaries
+- Production security guarantees
+- Long-term reversibility planning
+
+### Required labeling
+
+"This is a PoC. Outputs are exploratory and non-authoritative."
+
+### Critical rule
+
+Nothing at this level is considered final or trusted.
+
+---
+
+## Level 1 — Pilot / Product
+
+**Goal:** Deliver real value safely to real users.
+
+### Characteristics
+- Repeated use
+- Growing user expectations
+- Shared ownership begins
+- Partial persistence
+
+### What turns on
+- Definition of Done & Evidence Policy
+- Visual proof for UI behavior
+- Explicit tradeoffs
+- Basic observability
+- Reversibility for major decisions
+- Defined human approval points
+
+### New obligation
+
+If users depend on it, it must be verifiable.
+
+### Risk posture
+
+Failure is acceptable, but silent failure is not.
+
+---
+
+## Level 2 — Production / Long-Term
+
+**Goal:** Sustain trust over time.
+
+### Characteristics
+- Canonical or authoritative data
+- External dependencies
+- Organizational or reputational risk
+- Long timelines
+
+### What becomes mandatory
+- Measurable outcomes with metrics
+- Continuous feedback loops
+- Full observability
+- Trust & authority boundaries
+- Cost predictability
+- Security and privacy defaults
+- Explicit stop conditions for autonomy
+
+### Critical rule
+
+Nothing enters production without:
+- a named owner
+- an undo path
+- an audit trail
+
+At this level, correctness and trust outweigh speed.
+
+---
+
+## Relationship to Other Canon Documents
+
+This maturity model modulates the following:
+
+- **Constraints** — Some constraints are optional at PoC and mandatory later.
+- **Decision Rules** — Rules like KISS and Borrow→Build apply at all levels, but escalation thresholds change.
+- **Definition of Done** — Evidence requirements increase with maturity.
+- **Self-Audit Checklist** — More items become non-optional as maturity increases.
+- **Visual Proof Standards** — Optional for PoCs, required for Pilot and Production.
+
+---
+
+## Agent Expectations
+
+Agents and collaborators are expected to:
+- explicitly state the project's maturity level
+- apply only the rules required for that level
+- refuse to over-govern PoCs
+- refuse to under-govern Production systems
+
+If maturity is unclear, the correct action is to ask.
+
+---
+
+## Escalation Rules
+
+A project should move up a maturity level when:
+- others begin depending on it
+- artifacts persist beyond initial intent
+- decisions become costly to reverse
+- trust is implicitly assumed
+
+A project may move down only with explicit acknowledgment.
+
+---
+
+## Closing Note
+
+This model exists to protect both:
+- exploration, and
+- trust.
+
+Rigor too early kills creativity.
+Rigor too late kills credibility.
+
+Progressive governance keeps both alive.

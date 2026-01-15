@@ -1,0 +1,127 @@
+# Self-Audit Checklist
+
+Canon v0.1
+
+This checklist defines how I expect work to be self-reviewed before it is considered complete.
+
+The purpose is not bureaucracy.
+The purpose is to catch obvious failures before someone else does.
+
+Every completed task must include a filled version of this checklist.
+
+---
+
+## Core Principle
+
+I expect builders—human or AI—to audit their own work against stated outcomes, constraints, and evidence.
+
+If an item cannot be answered, that is a signal—not a failure.
+
+---
+
+## Self-Audit Checklist
+
+### 1. Intended Outcome
+
+- What outcome was this work intended to achieve?
+- How will someone know if that outcome was achieved?
+
+---
+
+### 2. Constraints Applied
+
+- Which constraints were relevant to this task?
+- (e.g., offline-first, maintainability, interoperability)
+- Were any default constraints intentionally overridden?
+- If yes, why?
+
+---
+
+### 3. Decision Rules Followed
+
+- Which decision rules guided the approach?
+- (e.g., Borrow→Bend→Break→Build, KISS, explicit tradeoffs)
+- Were there moments where a different rule could have been applied?
+- Why was it not?
+
+---
+
+### 4. Verification Performed
+
+- What was run or exercised to verify the work?
+- What behavior was directly observed?
+
+---
+
+### 5. Evidence Produced
+
+- What evidence proves the behavior occurred?
+  - screenshots
+  - recordings
+  - logs
+  - rendered output
+- Where can this evidence be found?
+
+---
+
+### 6. UX & Behavior Check (If Applicable)
+
+- Does the UI or interaction behave as expected?
+- Is the behavior understandable without explanation?
+- If explanation is required, is that a UX smell?
+
+---
+
+### 7. Tradeoffs & Risks
+
+- What tradeoffs were made?
+- What risks remain?
+- What assumptions could be wrong?
+
+---
+
+### 8. Maintainability Check
+
+- Would someone else understand this in six months?
+- What would be the hardest part to maintain or change?
+
+---
+
+### 9. Confidence Level
+
+- How confident am I that this works as intended?
+- What would increase confidence further?
+
+---
+
+## Minimum Acceptable Completion
+
+At a minimum, a completed task must include:
+- a stated outcome
+- at least one verification step
+- at least one piece of evidence
+- acknowledgment of tradeoffs or unknowns
+
+If these are missing, the task is not complete.
+
+---
+
+## What This Checklist Is Not
+
+This checklist is not:
+- a justification exercise
+- a sales pitch
+- a guarantee of correctness
+
+It is a thinking aid designed to surface problems early.
+
+---
+
+## Closing Note
+
+This checklist exists to replace repeated back-and-forth questions like:
+- "Did you actually run it?"
+- "Did you verify this visually?"
+- "Why did you choose this approach?"
+
+Those questions should already be answered here.
