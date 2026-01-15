@@ -175,6 +175,17 @@
       "tags": ["odd", "attempt", "lifecycle", "restartability"]
     },
     {
+      "uri": "klappy://canon/odd/quantum-development",
+      "path": "/canon/odd/quantum-development.md",
+      "title": "Quantum Development",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "voice": "neutral",
+      "stability": "semi_stable",
+      "tags": ["odd", "quantum", "attempts", "uncertainty", "orientation"]
+    },
+    {
       "uri": "klappy://canon/odd/repo-topology",
       "path": "/canon/odd/appendices/repo-topology.md",
       "title": "Repository Topology",
