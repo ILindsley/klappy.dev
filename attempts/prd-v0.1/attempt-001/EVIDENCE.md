@@ -1,10 +1,10 @@
-# Evidence — Attempt 0.1
+# Evidence — PRD v0.1 / Attempt 001
 
 ## Evidence Location
 
 - **Evidence folder:** `./evidence/`
 - **Live site:** https://klappy.dev
-- **GitHub:** https://github.com/klappy/klappy.dev/tree/main/attempts/attempt-0.1/evidence
+- **GitHub:** https://github.com/klappy/klappy.dev/tree/main/attempts/prd-v0.1/attempt-001/evidence
 
 ---
 

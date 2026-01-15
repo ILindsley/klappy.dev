@@ -1,0 +1,10 @@
+{
+  "prd_version": "v0.1",
+  "attempt": "001",
+  "status": "CLOSED",
+  "sealed_commit": "0477fc3609c0fe670e388bb54c4965ba520b61dc",
+  "git_tag": "prd-v0.1-attempt-001",
+  "live_url": "https://klappy.dev",
+  "sealed_at": "2026-01-15",
+  "notes": "Phase 1 baseline. Static SPA with mock provider. In-memory chat state."
+}

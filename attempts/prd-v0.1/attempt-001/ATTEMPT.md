@@ -1,10 +1,9 @@
-# Attempt 0.1 — Phase 1 Conversational UI (Closed)
+# PRD v0.1 / Attempt 001 — Phase 1 Conversational UI (Closed)
 
 **Status:** CLOSED  
-**PRD:** ./PRD.md  
-**Evidence:** ./EVIDENCE.md  
-**Tag:** `attempt-0.1`  
-**Canon baseline commit:** 0690baa
+**PRD:** `../PRD.md`  
+**Evidence:** `./EVIDENCE.md`  
+**Canonical pointers:** `./META.json`
 
 ---
 
@@ -36,15 +35,4 @@ Build Phase 1 static SPA rendering local markdown and supporting UI action primi
 
 ## Closure rationale
 
-This attempt met its Phase 1 DoD and is intentionally frozen. Further improvements will be pursued via a new PRD and a new attempt.
-
----
-
-## Artifacts
-
-| Artifact | Location |
-|----------|----------|
-| Evidence folder | `/evidence/phase-1/` |
-| Live site | https://klappy.dev |
-| PRD snapshot | `./PRD.md` |
-| Git tag | `attempt-0.1` |
+This attempt met its Phase 1 DoD and is intentionally frozen. Further improvements will be pursued via the same PRD (new attempt) or a new PRD version.
