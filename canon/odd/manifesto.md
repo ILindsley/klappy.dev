@@ -72,6 +72,32 @@ Scalable
 
 ⸻
 
+Restartability Over Salvage
+
+ODD assumes that restarting from refined intent is often more effective than steering a system that has already drifted.
+
+As systems grow, prompts accrete, assumptions harden, and local fixes compound. At a certain point, continued steering optimizes for preserving effort rather than improving outcomes.
+
+Restarting is not failure.
+Restarting is a recognition that:
+• intent has become clearer
+• constraints are better understood
+• evidence from prior attempts now exists
+
+In an AI-accelerated environment, restarting is cheap.
+Misalignment is expensive.
+
+ODD therefore treats restartability as a design feature:
+• prompts are disposable
+• implementations are ephemeral
+• canon and intent persist
+
+The goal is not to preserve artifacts, but to preserve learning.
+
+A clean restart with better constraints is progress.
+
+⸻
+
 Progressive Governance (Maturity-Aware ODD)
 
 ODD enforcement depends on project maturity.
