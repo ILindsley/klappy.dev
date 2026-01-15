@@ -148,6 +148,24 @@ There is one `/src/` that gets rebuilt.
 
 ---
 
+## Deployment Preservation
+
+Each attempt may be deployed as a preview during development.
+
+Attempt metadata (`META.json`) stores:
+- `sealed_commit` — the commit SHA (truth)
+- `deploy.production_url` — live site URL (if applicable)
+- `deploy.preview_url` — branch/commit preview URL
+- `deploy.provider` — deployment platform (e.g., cloudflare-pages)
+
+Preview URLs are treated as evidence artifacts and must be recorded when sealing.
+
+**Resurrection path:** To resurrect any attempt, check out the `sealed_commit` and redeploy. The attempt record contains everything needed.
+
+Branches used during development are ephemeral. The durable record is the commit SHA and recorded URLs, not the branch name.
+
+---
+
 ## Summary
 
 - **App is disposable** — rebuilt per attempt
@@ -155,6 +173,7 @@ There is one `/src/` that gets rebuilt.
 - **Infrastructure persists** — shared across attempts
 - **Attempts are archived** — sealed and immutable
 - **PRDs are versioned** — frozen when attempted
+- **Deploys are recorded** — preview URLs preserved in metadata
 
 This topology makes restartability cheap and keeps concerns decoupled.
 

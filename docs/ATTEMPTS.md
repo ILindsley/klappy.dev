@@ -63,13 +63,18 @@ Each attempt contains a `META.json` with canonical pointers:
   "status": "CLOSED",
   "sealed_commit": "0477fc36...",
   "git_tag": "prd-v0.1-attempt-001",
-  "live_url": "https://klappy.dev",
   "sealed_at": "2026-01-15",
-  "notes": "Phase 1 baseline."
+  "notes": "Phase 1 baseline.",
+  "deploy": {
+    "provider": "cloudflare-pages",
+    "production_url": "https://klappy.dev",
+    "preview_url": "https://prd-v01-a001.klappy-dev.pages.dev",
+    "captured_at": "2026-01-15"
+  }
 }
 ```
 
-**Why?** The commit SHA is the truth. If tags drift or are renamed, the attempt record remains accurate.
+**Why?** The commit SHA is the truth. If tags drift or are renamed, the attempt record remains accurate. Deploy URLs are evidence artifacts.
 
 ---
 
@@ -133,3 +138,60 @@ git push --follow-tags
 - **Retry-friendly:** Multiple attempts per PRD version is expected
 - **SHA is truth:** `META.json` ensures attempts are interpretable even if tags drift
 - **Self-contained:** Each attempt has everything needed to understand it
+
+---
+
+## Branch Naming Convention
+
+During development, use ephemeral branches:
+
+```
+attempt/prd-v0.2/a003
+```
+
+These branches:
+- Trigger preview deploys on push (Cloudflare/Netlify)
+- Are deleted after sealing
+- Are NOT the durable record (commit SHA is)
+
+---
+
+## Preview URLs
+
+When sealing an attempt with UI changes:
+1. Record the preview URL in `META.json` under `deploy.preview_url`
+2. The preview URL is treated as an evidence artifact
+3. If the branch is deleted later, the URL may stop working — but the commit SHA allows resurrection
+
+**Preview deploy required?**
+- Required for UI changes
+- Optional for doc-only changes
+
+---
+
+## Resurrection
+
+To resurrect any sealed attempt:
+
+```bash
+git checkout <sealed_commit>
+npm install
+npm run build
+# Deploy to preview or production as needed
+```
+
+The attempt folder contains everything needed:
+- Exact code state (via commit SHA)
+- Evidence (screenshots, logs)
+- Deploy history (URLs where it ran)
+
+---
+
+## Decisions (Current Policy)
+
+| Decision | Answer |
+|----------|--------|
+| Are preview deploys required for sealing? | Required for UI changes, optional for doc-only |
+| Do we preserve attempt previews permanently? | No — we preserve links + evidence. Permanent hosting deferred. |
+
+This matches the maturity model: don't over-govern early.

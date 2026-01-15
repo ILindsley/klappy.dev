@@ -12,6 +12,7 @@ Use this template when creating a new PRD version.
 | **Status** | Draft / Active / Superseded |
 | **Created** | YYYY-MM-DD |
 | **Author** | |
+| **Preview Deploy Required** | Yes / No (phase-dependent) |
 
 ---
 
