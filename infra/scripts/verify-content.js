@@ -15,7 +15,7 @@ import { join, dirname, relative } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = join(__dirname, '..');
+const ROOT = join(__dirname, '../..');
 const CONTENT_DIR = join(ROOT, 'public', 'content');
 const MANIFEST_PATH = join(CONTENT_DIR, 'manifest.json');
 
