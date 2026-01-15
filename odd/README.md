@@ -20,15 +20,15 @@ AI can generate infinite implementations. Humans curate which outcomes matter �
 
 These guide how systems are shaped, regardless of tooling.
 
-| Principle | What it means |
-|-----------|---------------|
-| **Prompt over code** | Express intent at the highest level possible. Code is generated, adapted, or discarded as needed. |
-| **KISS** | Prefer the simplest solution that plausibly works. Complexity must be earned. |
-| **DRY (with isolation)** | Avoid unnecessary duplication without creating brittle coupling. |
-| **Consistency** | Systems should behave predictably. Consistency is contextual, not universal. |
-| **Maintainability** | Assume long timelines and changing ownership. Optimize for the next maintainer. |
-| **Antifragile** | Design for failure, recovery, and learning — not perfection. |
-| **Scalable** | Growth should not cause collapse — technically, operationally, or cognitively. |
+| Principle                | What it means                                                                                     |
+| ------------------------ | ------------------------------------------------------------------------------------------------- |
+| **Prompt over code**     | Express intent at the highest level possible. Code is generated, adapted, or discarded as needed. |
+| **KISS**                 | Prefer the simplest solution that plausibly works. Complexity must be earned.                     |
+| **DRY (with isolation)** | Avoid unnecessary duplication without creating brittle coupling.                                  |
+| **Consistency**          | Systems should behave predictably. Consistency is contextual, not universal.                      |
+| **Maintainability**      | Assume long timelines and changing ownership. Optimize for the next maintainer.                   |
+| **Antifragile**          | Design for failure, recovery, and learning — not perfection.                                      |
+| **Scalable**             | Growth should not cause collapse — technically, operationally, or cognitively.                    |
 
 ---
 

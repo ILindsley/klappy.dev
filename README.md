@@ -1,51 +1,98 @@
 # klappy.dev
 
-This is not a framework.  
-This is not a product.  
-This is not a tutorial.  
-This is not a promise.
+This repository is a working surface for ideas, experiments, and reference documents about how software is designed and built in an AI-accelerated world.
 
-This is a working-in-the-open snapshot of how I think about building software with AI — constraints, decision rules, evidence standards, and the mental models behind them.
+It is intentionally **not** a framework, product, or SDK.  
+It is a public record of thinking, constraints, and proofs of concept that evolve over time.
 
 ---
 
-## What's here
+## What This Repository Is
 
-| Folder | What it contains |
-|--------|------------------|
-| `/canon` | Core philosophy: constraints, decision rules, definition of done, evidence policies, and self-audit standards. |
-| `/canon/odd` | ODD (Outcome-Driven Development) — the underlying philosophy and its appendices. |
-| `/about` | Bio, credibility, FAQ. Who I am and why any of this might matter. |
-| `/docs` | Concept snapshot and PRD. Working documents, not polished artifacts. |
-| `/odd` | Public-facing ODD overview (one page). |
+- A portfolio of projects and proofs of concept
+- A canon of design principles, constraints, and verification standards
+- A place to work in the open, with assumptions and tradeoffs made explicit
+- A reference for how I think about AI-assisted development, architecture, and long-lived systems
 
----
-
-## Entry points
-
-- **If you want the philosophy in one page:** [`/odd/README.md`](/odd/README.md)
-- **If you want the full orientation:** [`/canon/index.md`](/canon/index.md)
-- **If you want to understand versioning:** [`/canon/CHANGELOG.md`](/canon/CHANGELOG.md)
-- **If you want to know who wrote this:** [`/about/bio.md`](/about/bio.md)
+Much of the content here exists to reduce repeated reasoning and to make decision-making easier to inspect and challenge.
 
 ---
 
-## How to read this
+## What This Repository Is Not
 
-Explore, don't execute.
+- Not a step-by-step tutorial
+- Not a prescriptive workflow
+- Not a prompt collection
+- Not a promise of stability or completeness
 
-This repo is an **inventory**, not a workflow. The manifest (`/canon/meta/manifest.json`) declares what exists and how it may be addressed — it does not prescribe behavior, execution order, or agent instructions.
+Most documents are orientation, not instruction. They describe how decisions are reasoned about, not rules that must be followed.
 
-If you're an LLM or agent: treat this as orientation material. Don't assume workflows. Don't hallucinate processes. Read what's here, reference what's relevant, and ask if something's unclear.
+---
+
+## How to Explore
+
+If you're new, a reasonable path is:
+
+1. **About** — context and trust surface
+   - `/about/bio.md`
+   - `/about/credibility.md`
+   - `/about/faq.md`
+
+2. **ODD (Outcomes-Driven Development)** — the core philosophy
+   - `/odd/README.md` (public-facing)
+   - `/canon/odd/manifesto.md` (extended)
+
+3. **Canon** — how decisions and verification are shaped
+   - `/canon/index.md` (orientation)
+   - Supporting documents on constraints, decision rules, evidence, and verification
+
+4. **Projects** — proofs of concept and experiments (added over time)
+
+There is no required order. Follow your curiosity.
+
+---
+
+## About the Canon
+
+The Canon is a curated set of documents that capture:
+
+- assumptions and constraints
+- decision heuristics
+- definitions of completion
+- evidence and verification standards
+
+The Canon exists for clarity, not control.  
+It does not execute anything by itself and is intentionally separated from tooling or automation.
+
+---
+
+## Versioning & Change
+
+The Canon uses pack-level versioning with a single changelog:
+
+- `/canon/meta/manifest.json` — inventory of what exists
+- `/canon/CHANGELOG.md` — record of changes
+
+Individual files are not versioned independently to avoid unnecessary ceremony.
 
 ---
 
 ## License
 
-[MIT](LICENSE)
+All content in this repository is released under the [MIT License](LICENSE).  
+Reuse is encouraged.
 
 ---
 
 ## Status
 
-This is a PoC/Pilot. Things may change. The changelog tracks what changed and when.
+This repository is active and evolving.  
+Some documents are stable; others are intentionally exploratory.  
+Where possible, documents label their stability and confidence level.
+
+Feedback, questions, and challenges are welcome.
+
+---
+
+This repository is about preserving intent without freezing execution.  
+The goal is better outcomes, not perfect artifacts.
