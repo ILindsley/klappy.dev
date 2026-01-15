@@ -5,17 +5,22 @@
  * Syncs source markdown documents to /public/content/ for the static SPA.
  * Run this before build or as part of CI.
  * 
- * Source of truth: /canon, /odd, /about, /projects (excluding _template)
+ * Source of truth:
+ * - /canon, /odd, /about, /projects (excluding _template) → markdown content
+ * - /canon/meta/manifest.json → content manifest
+ * 
  * Target: /public/content/
  */
 
-import { cpSync, rmSync, mkdirSync, existsSync } from 'fs';
+import { cpSync, rmSync, mkdirSync, existsSync, copyFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '../..');
 const TARGET = join(ROOT, 'public', 'content');
+const MANIFEST_SRC = join(ROOT, 'canon', 'meta', 'manifest.json');
+const MANIFEST_DEST = join(TARGET, 'manifest.json');
 
 // Source directories to sync
 const SOURCES = [
@@ -68,9 +73,17 @@ function sync() {
     console.log(`  ✅ ${src}/ → public/content/${dest}/`);
   }
 
+  // Sync manifest.json
+  if (existsSync(MANIFEST_SRC)) {
+    copyFileSync(MANIFEST_SRC, MANIFEST_DEST);
+    console.log(`  ✅ canon/meta/manifest.json → public/content/manifest.json`);
+  } else {
+    console.log(`  ⚠️  Manifest not found: canon/meta/manifest.json`);
+  }
+
   console.log('\n✅ Content sync complete.\n');
-  console.log('Note: manifest.json is NOT auto-generated.');
-  console.log('If you add new documents, update /public/content/manifest.json manually.\n');
+  console.log('Source of truth: /canon/meta/manifest.json');
+  console.log('If you add new documents, update /canon/meta/manifest.json.\n');
 }
 
 sync();
