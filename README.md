@@ -34,15 +34,18 @@ Most documents are orientation, not instruction. They describe how decisions are
 If you're new, a reasonable path is:
 
 1. **About** — context and trust surface
+
    - `/about/bio.md`
    - `/about/credibility.md`
    - `/about/faq.md`
 
 2. **ODD (Outcomes-Driven Development)** — the core philosophy
+
    - `/odd/README.md` (public-facing)
    - `/canon/odd/manifesto.md` (extended)
 
 3. **Canon** — how decisions and verification are shaped
+
    - `/canon/index.md` (orientation)
    - Supporting documents on constraints, decision rules, evidence, and verification
 

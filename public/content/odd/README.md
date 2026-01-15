@@ -56,7 +56,7 @@ ODD is guided by a small set of principles that recur across projects:
 - **Keep It Simple (KISS)**
   Prefer the simplest solution that works and can be explained clearly.
 
-- **Don't Repeat Yourself (DRY), with Isolation**
+- **Don’t Repeat Yourself (DRY), with Isolation**
   Reuse ideas and components where it helps, but avoid brittle global coupling.
 
 - **Consistency**
