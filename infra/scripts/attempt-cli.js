@@ -102,6 +102,7 @@ function parseArgs() {
     attempt: null,
     n: 1,
     agent: 'default',
+    model: null,          // Model provenance (opus-4.5, gpt-4o, etc.)
     worktree: false,
     worktreeDir: null,
     dryRun: false,
@@ -131,6 +132,9 @@ function parseArgs() {
     } else if (arg === '--agent' && next) {
       result.agent = next;
       i++;
+    } else if (arg === '--model' && next) {
+      result.model = next;
+      i++;
     } else if (arg === '--worktree') {
       result.worktree = true;
     } else if (arg === '--worktree-dir' && next) {
@@ -149,6 +153,32 @@ function parseArgs() {
   }
   
   return result;
+}
+
+/**
+ * Generate a model slug for branch naming.
+ * Converts model strings like "opus-4.5" or "gpt-4o-mini" to short slugs.
+ */
+function generateModelSlug(model) {
+  if (!model || model === 'unknown') return 'unknown';
+  
+  // Normalize to lowercase, replace spaces/dots with hyphens
+  return model.toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/\./g, '')
+    .replace(/[^a-z0-9-]/g, '')
+    .substring(0, 20); // Limit length for branch names
+}
+
+/**
+ * Generate a provenance-aware branch name.
+ * Format: run/<prd_version>/<agent_id>/<model_slug>/<run_id>
+ * 
+ * Example: run/v0.3/cursor-a/opus45/a1b2c3d4
+ */
+function generateBranchName(prd, agent, model, runId) {
+  const modelSlug = generateModelSlug(model);
+  return `run/v${prd}/${agent}/${modelSlug}/${runId}`;
 }
 
 // ============================================================
@@ -852,9 +882,17 @@ Agents will now start from a clean main with all the latest scripts.
  * 
  * PRD version is automatically read from /docs/PRD.md (single source of truth).
  * If --prd is provided, it must match PRD.md or the command fails.
+ * 
+ * PROVENANCE CAPTURED:
+ *   - run_id (unique identifier)
+ *   - agent (human-friendly label like cursor-a, cursor-b)
+ *   - model (AI model identifier like opus-4.5, gpt-4o)
+ *   - git_head (SHA at registration time)
+ *   - worktree_path (filesystem location)
+ *   - branch (git branch name)
  */
 function cmdRegister(opts) {
-  const { agent, dryRun } = opts;
+  const { agent, model, dryRun } = opts;
   
   // Parse PRD version from /docs/PRD.md (single source of truth)
   const activePrd = parsePrdVersion();
@@ -882,10 +920,40 @@ function cmdRegister(opts) {
   console.log(`  (Version auto-detected from /docs/PRD.md)\n`);
   if (dryRun) console.log('  [DRY RUN MODE]\n');
   
+  // ========================================
+  // MODEL PROVENANCE WARNING
+  // ========================================
+  const modelId = model || 'unknown';
+  if (!model) {
+    console.log('  ⚠️  WARNING: --model not provided');
+    console.log('     Provenance will be degraded. Re-run with --model if possible.');
+    console.log('');
+    console.log('     Example: npm run attempt:register -- --agent cursor-a --model "opus-4.5"');
+    console.log('');
+  }
+  
   // Generate unique run ID
   const runId = generateRunId();
   const timestamp = new Date().toISOString();
-  const branch = run('git branch --show-current', { silent: true, dryRun: false }) || 'unknown';
+  
+  // Capture git state for provenance
+  let currentBranch = 'unknown';
+  let gitHead = 'unknown';
+  let isDetached = false;
+  
+  try {
+    currentBranch = run('git branch --show-current', { silent: true, dryRun: false }) || '';
+    gitHead = run('git rev-parse HEAD', { silent: true, dryRun: false });
+    isDetached = !currentBranch;
+  } catch (e) {
+    console.log('  ⚠️  Could not read git state');
+  }
+  
+  // Capture worktree path
+  const worktreePath = ROOT;
+  
+  // Generate provenance-aware branch name
+  const targetBranch = generateBranchName(prd, agent, modelId, runId);
   
   // Paths
   const prdFolder = join(ROOT, 'attempts', `prd-v${prd}`);
@@ -899,13 +967,18 @@ function cmdRegister(opts) {
   }
   console.log(`  ✅ Created: ${runsDir}/\n`);
   
-  // Write .attempt.json in worktree root
+  // Write .attempt.json in worktree root (local provenance)
   console.log('2️⃣  Writing .attempt.json...');
   const attemptMeta = {
     prd: `v${prd}`,
     run_id: runId,
     agent: agent,
-    branch: branch,
+    model: modelId,
+    worktree_path: worktreePath,
+    branch: currentBranch || targetBranch,
+    target_branch: targetBranch,
+    git_head: gitHead,
+    is_detached: isDetached,
     registered_at: timestamp,
     runs_dir: runsDir
   };
@@ -914,17 +987,32 @@ function cmdRegister(opts) {
   }
   console.log('  ✅ Written .attempt.json\n');
   
-  // Write skeleton META.json in run folder
+  // Write skeleton META.json in run folder (merges to main)
   console.log('3️⃣  Creating skeleton files...');
   const meta = {
     prd_version: `v${prd}`,
     run_id: runId,
     attempt: null, // Will be assigned during finalize
+    
+    // PROVENANCE (captured at registration)
     agent: agent,
-    branch: branch,
+    model: modelId,
+    worktree_path: worktreePath,
+    branch: currentBranch || targetBranch,
+    target_branch: targetBranch,
+    git_head: gitHead,
+    
+    // TIMESTAMPS
     registered_at: timestamp,
+    completed_at: null,
     finalized_at: null,
-    status: 'in_progress'
+    
+    // STATUS
+    status: 'OPEN', // OPEN → CLOSED/ABANDONED
+    
+    // EVIDENCE (to be filled)
+    evidence_index: [],
+    preview_url: null
   };
   if (!dryRun) {
     writeFileSync(join(runFolder, 'META.json'), JSON.stringify(meta, null, 2) + '\n');
@@ -938,10 +1026,24 @@ function cmdRegister(opts) {
   console.log('\n🎫 RUN REGISTERED\n');
   console.log(`  PRD Version:   v${prd}`);
   console.log(`  Run ID:        ${runId}`);
-  console.log(`  Agent:         ${agent}`);
-  console.log(`  Branch:        ${branch}`);
+  console.log('');
+  console.log('  PROVENANCE:');
+  console.log(`    Agent:       ${agent}`);
+  console.log(`    Model:       ${modelId}${modelId === 'unknown' ? ' ⚠️' : ''}`);
+  console.log(`    Git HEAD:    ${gitHead.substring(0, 8)}`);
+  console.log(`    Worktree:    ${worktreePath}`);
+  console.log('');
+  console.log('  BRANCH:');
+  console.log(`    Current:     ${currentBranch || '(detached)'}`);
+  console.log(`    Target:      ${targetBranch}`);
+  console.log('');
   console.log(`  Artifacts:     ${runsDir}/`);
   console.log('\n' + '═'.repeat(60));
+  
+  // Suggest branch rename if not on target branch
+  const branchHint = currentBranch !== targetBranch 
+    ? `\n   Optional: rename branch to match provenance:\n   git checkout -b ${targetBranch}\n`
+    : '';
   
   console.log(`
 📋 Next steps:
@@ -951,7 +1053,7 @@ function cmdRegister(opts) {
    3. When done, commit and push
    4. After all agents finish, run on main:
       npm run attempt:finalize -- --prd v${prd}
-`);
+${branchHint}`);
 }
 
 /**
@@ -1790,8 +1892,10 @@ COMMANDS:
       ⚠️  Requires --force on main
       ✅ Allowed on attempt/* branches
 
-  npm run attempt:register
-      Register a new run (auto-reads PRD version from /docs/PRD.md)
+  npm run attempt:register -- --agent <id> --model <model>
+      Register a new run with provenance (PRD version auto-detected)
+      --agent: human-friendly label (cursor-a, cursor-b, etc.)
+      --model: AI model identifier (opus-4.5, gpt-4o, etc.)
 
   npm run attempt:submit
       Commit and push work (triggers Cloudflare preview)

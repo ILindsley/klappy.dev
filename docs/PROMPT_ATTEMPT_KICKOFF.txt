@@ -7,7 +7,22 @@ CRITICAL: READ THIS ENTIRE PROMPT. DO NOT STOP UNTIL ALL COMPLETION GATES PASS.
 FIRST ACTIONS (MANDATORY — run these commands first):
 
   npm run attempt:nuke
-  npm run attempt:register
+  npm run attempt:register -- --agent <YOUR_AGENT_ID> --model <YOUR_MODEL>
+
+AGENT AND MODEL IDENTIFICATION (for provenance):
+
+  Replace <YOUR_AGENT_ID> with a short label like: cursor-a, cursor-b, opus-1
+  Replace <YOUR_MODEL> with your model identifier like: opus-4.5, gpt-4o, claude-sonnet
+
+  Examples:
+    npm run attempt:register -- --agent cursor-a --model "opus-4.5"
+    npm run attempt:register -- --agent cursor-b --model "gpt-4o"
+
+  If you don't know your model, use:
+    npm run attempt:register -- --agent cursor-a --model "unknown"
+
+  WHY THIS MATTERS: Provenance tracking. Without knowing which model made which
+  attempt, comparisons between attempts are meaningless.
 
 If you don't have terminal access, ask the human to run these for you.
 
