@@ -747,12 +747,233 @@ Options:
   run(`node infra/scripts/promote-attempt.js ${args.join(' ')}`, { silent: false, dryRun: false });
 }
 
+/**
+ * Submit current work (commit + push for Cloudflare preview).
+ * 
+ * This is for agents to publish their work-in-progress or final state.
+ * Ensures the branch is pushed so Cloudflare can generate a preview URL.
+ */
+function cmdSubmit(opts) {
+  const { dryRun } = opts;
+  const message = opts.message || 'Attempt progress';
+  
+  console.log('\n📤 SUBMITTING ATTEMPT\n');
+  if (dryRun) console.log('  [DRY RUN MODE]\n');
+  
+  // Check .attempt.json exists
+  const attemptJsonPath = join(ROOT, '.attempt.json');
+  if (!existsSync(attemptJsonPath)) {
+    fail('No .attempt.json found. Run attempt:register first.');
+  }
+  
+  const attemptMeta = JSON.parse(readFileSync(attemptJsonPath, 'utf8'));
+  const { prd, run_id, runs_dir, branch } = attemptMeta;
+  
+  console.log(`  PRD:       ${prd}`);
+  console.log(`  Run ID:    ${run_id}`);
+  console.log(`  Branch:    ${branch}`);
+  console.log(`  Artifacts: ${runs_dir}/\n`);
+  
+  // Check we're on the right branch
+  const currentBranch = run('git branch --show-current', { silent: true, dryRun: false });
+  if (currentBranch !== branch) {
+    console.log(`  ⚠️  Expected branch: ${branch}`);
+    console.log(`     Current branch:  ${currentBranch}`);
+    console.log('     Proceeding anyway...\n');
+  }
+  
+  // Stage changes
+  console.log('1️⃣  Staging changes...');
+  
+  // Always stage these if they exist
+  const pathsToStage = [
+    runs_dir,
+    'src',
+    'app',
+    'public',
+    'package.json',
+    'package-lock.json',
+    'vite.config.js',
+    'vite.config.ts',
+    '.attempt.json'
+  ];
+  
+  for (const p of pathsToStage) {
+    const fullPath = join(ROOT, p);
+    if (existsSync(fullPath)) {
+      run(`git add "${p}"`, { dryRun, silent: true });
+    }
+  }
+  console.log('  ✅ Staged\n');
+  
+  // Check if there's anything to commit
+  const status = run('git status --porcelain', { silent: true, dryRun: false });
+  if (!status) {
+    console.log('  ℹ️  Nothing new to commit. Pushing existing commits...\n');
+  } else {
+    // Commit
+    console.log('2️⃣  Committing...');
+    const commitMsg = `${message} [run: ${run_id}]`;
+    run(`git commit -m "${commitMsg}"`, { dryRun });
+    console.log('  ✅ Committed\n');
+  }
+  
+  // Push
+  console.log('3️⃣  Pushing to origin...');
+  run(`git push -u origin HEAD`, { dryRun });
+  console.log('  ✅ Pushed\n');
+  
+  // Generate preview URL
+  const previewUrl = `https://${branch.replace(/\//g, '-')}.klappy-dev.pages.dev`;
+  
+  // Update META.json with preview URL
+  const metaPath = join(ROOT, runs_dir, 'META.json');
+  if (existsSync(metaPath) && !dryRun) {
+    const meta = JSON.parse(readFileSync(metaPath, 'utf8'));
+    meta.preview_url = previewUrl;
+    meta.last_submitted = new Date().toISOString();
+    writeFileSync(metaPath, JSON.stringify(meta, null, 2) + '\n');
+  }
+  
+  console.log('═'.repeat(60));
+  console.log('\n📤 SUBMITTED\n');
+  console.log(`  Preview URL: ${previewUrl}`);
+  console.log('  (May take 1-2 min for Cloudflare to build)\n');
+  console.log('  Check build status:');
+  console.log('    - GitHub: https://github.com/klappy/klappy.dev/actions');
+  console.log('    - Cloudflare: Pages dashboard → Deployments');
+  console.log('\n' + '═'.repeat(60));
+}
+
+/**
+ * Import artifacts from attempt branches back to main.
+ * 
+ * This is run on main to pull in artifacts from completed attempt branches
+ * without merging their code.
+ */
+function cmdImport(opts) {
+  const { prd, dryRun } = opts;
+  
+  if (!prd) {
+    console.log(`
+Usage: npm run attempt:import -- --prd <version>
+
+Example:
+  npm run attempt:import -- --prd v0.2
+
+This imports all _runs/ artifacts from attempt branches back to main.
+
+Options:
+  --prd <version>   PRD version (required)
+  --dry-run         Show what would happen
+`);
+    process.exit(1);
+  }
+  
+  console.log(`\n📥 IMPORTING ARTIFACTS for PRD v${prd}\n`);
+  if (dryRun) console.log('  [DRY RUN MODE]\n');
+  
+  // Check we're on main
+  const currentBranch = run('git branch --show-current', { silent: true, dryRun: false });
+  if (currentBranch !== 'main') {
+    fail(`Must be on main branch. Currently on: ${currentBranch}`);
+  }
+  console.log('  ✅ On main branch\n');
+  
+  // Pull latest main
+  console.log('1️⃣  Pulling latest main...');
+  run('git pull origin main', { dryRun });
+  console.log('  ✅ Main up to date\n');
+  
+  // Find all attempt branches for this PRD
+  console.log('2️⃣  Finding attempt branches...');
+  const branchOutput = run('git branch -r', { silent: true, dryRun: false });
+  const branchPattern = new RegExp(`origin/attempt/prd-v${prd}/a\\d+`);
+  const branches = branchOutput
+    .split('\n')
+    .map(b => b.trim())
+    .filter(b => branchPattern.test(b))
+    .map(b => b.replace('origin/', ''));
+  
+  if (branches.length === 0) {
+    fail(`No attempt branches found for PRD v${prd}`);
+  }
+  console.log(`  ✅ Found ${branches.length} branches:\n`);
+  branches.forEach(b => console.log(`     - ${b}`));
+  console.log('');
+  
+  // Fetch all remote branches
+  console.log('3️⃣  Fetching remote branches...');
+  run('git fetch --all', { dryRun });
+  console.log('  ✅ Fetched\n');
+  
+  // Import artifacts from each branch
+  console.log('4️⃣  Importing artifacts from each branch...\n');
+  const runsPath = `attempts/prd-v${prd}/_runs`;
+  let imported = 0;
+  
+  for (const branch of branches) {
+    console.log(`  📦 ${branch}`);
+    
+    // Check if _runs/ exists on that branch
+    try {
+      run(`git checkout origin/${branch} -- ${runsPath}`, { dryRun, silent: true });
+      console.log(`     ✅ Imported artifacts`);
+      imported++;
+    } catch (e) {
+      console.log(`     ⚠️  No _runs/ folder found`);
+    }
+  }
+  
+  if (imported === 0) {
+    console.log('\n  ⚠️  No artifacts found to import');
+    return;
+  }
+  
+  console.log('');
+  
+  // Stage and commit
+  console.log('5️⃣  Committing imported artifacts...');
+  run(`git add ${runsPath}`, { dryRun });
+  run(`git commit -m "Import attempt artifacts for PRD v${prd}"`, { dryRun });
+  console.log('  ✅ Committed\n');
+  
+  // Push
+  console.log('6️⃣  Pushing to main...');
+  run('git push origin main', { dryRun });
+  console.log('  ✅ Pushed\n');
+  
+  console.log('═'.repeat(60));
+  console.log('\n📥 IMPORT COMPLETE\n');
+  console.log(`  Imported artifacts from ${imported} branches`);
+  console.log(`  Artifacts location: ${runsPath}/`);
+  console.log('\n' + '═'.repeat(60));
+  
+  console.log(`
+📋 Next steps:
+
+   1. Finalize runs to assign attempt numbers:
+      npm run attempt:finalize -- --prd v${prd}
+
+   2. Review and promote champion:
+      npm run attempt:promote -- --prd v${prd} --attempt <number>
+`);
+}
+
 // ============================================================
 // Main
 // ============================================================
 
 function main() {
   const opts = parseArgs();
+  
+  // Parse --message for submit command
+  const args = process.argv.slice(2);
+  for (let i = 0; i < args.length; i++) {
+    if (args[i] === '--message' && args[i + 1]) {
+      opts.message = args[i + 1];
+    }
+  }
   
   switch (opts.command) {
     case 'register':
@@ -767,6 +988,12 @@ function main() {
     case 'promote':
       cmdPromote(opts);
       break;
+    case 'submit':
+      cmdSubmit(opts);
+      break;
+    case 'import':
+      cmdImport(opts);
+      break;
     default:
       console.log(`
 ODD Attempt CLI
@@ -774,6 +1001,12 @@ ODD Attempt CLI
 Commands:
   npm run attempt:register -- --prd v0.2 --agent agent-1
       Register a run (creates unique run_id, writes to _runs/)
+
+  npm run attempt:submit
+      Commit and push current work (triggers Cloudflare preview)
+
+  npm run attempt:import -- --prd v0.2
+      Import artifacts from all attempt branches back to main
 
   npm run attempt:finalize -- --prd v0.2
       Finalize all runs (assigns attempt numbers, moves to attempt-00N/)
@@ -786,9 +1019,10 @@ Commands:
 
 Workflow:
   1. register → each agent registers their run (inside their workspace)
-  2. [build]  → agents work and write to _runs/<run_id>/
-  3. finalize → assigns attempt-001, 002, ... after all done
-  4. promote  → merge champion to main
+  2. submit   → agents push their work (triggers Cloudflare preview)
+  3. import   → pull artifacts from all branches back to main
+  4. finalize → assigns attempt-001, 002, ... after all done
+  5. promote  → merge champion's code to main
 `);
       process.exit(1);
   }

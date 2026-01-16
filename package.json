@@ -11,6 +11,8 @@
     "verify:content": "node infra/scripts/verify-content.js",
     "attempt": "node infra/scripts/attempt-cli.js",
     "attempt:register": "node infra/scripts/attempt-cli.js register",
+    "attempt:submit": "node infra/scripts/attempt-cli.js submit",
+    "attempt:import": "node infra/scripts/attempt-cli.js import",
     "attempt:finalize": "node infra/scripts/attempt-cli.js finalize",
     "attempt:reset": "node infra/scripts/attempt-cli.js reset",
     "attempt:promote": "node infra/scripts/attempt-cli.js promote"

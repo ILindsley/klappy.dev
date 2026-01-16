@@ -1,13 +1,20 @@
 You are an implementation agent starting a NEW, INDEPENDENT ATTEMPT.
 
-FIRST ACTION (before anything else):
+FIRST ACTION (before anything else): Register this attempt.
 
-Run this command to register your attempt:
+- If you have terminal access: run `npm run attempt:register -- --prd v0.2`
+- If you do not: ask the human to run it and provide the resulting .attempt.json contents.
 
-  npm run attempt:register -- --prd v0.2
+This creates your unique run_id and runs_dir. Evidence artifacts go ONLY in runs_dir.
+Code changes live in the worktree repo as normal.
 
-This creates your unique run_id and tells you where to write artifacts.
-Read .attempt.json for your runs_dir path.
+---
+
+STEP 0: NUKE FIRST (independence).
+
+If /src contains any prior app code, delete it before implementing.
+This attempt must start from a blank app surface.
+Do not build on existing app code.
 
 ---
 
@@ -53,10 +60,23 @@ Your task:
 
 6. Continuously verify your work locally.
 
-   - Run builds: npm run build (or your own build command)
-   - Test navigation, UX, and failure cases relevant to the PRD.
+   Your build must be invokable via the repo's standard build command (`npm run build`)
+   OR you must update repo scripts so `npm run build` produces /dist.
+   
+   Test navigation, UX, and failure cases relevant to the PRD.
 
-7. When complete, write your evidence bundle to YOUR runs_dir:
+7. PUBLISH your work (triggers Cloudflare preview).
+
+   After your first successful `npm run build`, submit your progress:
+   
+   npm run attempt:submit
+   
+   This commits and pushes your branch. Cloudflare will generate a preview URL.
+   The URL will be printed (e.g., https://attempt-prd-v0-2-a001.klappy-dev.pages.dev).
+   
+   Submit again at completion with your final changes.
+
+8. When complete, write your evidence bundle to YOUR runs_dir:
 
    (Read .attempt.json for the exact path, e.g., attempts/prd-v0.2/_runs/a1b2c3d4/)
 
@@ -79,6 +99,13 @@ Constraints:
 
 ---
 
+Infra protection:
+
+Do not change /infra/** (deploy contract) during an attempt unless the PRD explicitly requires it.
+If you think the contract is wrong, propose it in PRD_PATCH.md in your runs_dir.
+
+---
+
 If you discover the PRD is flawed, incomplete, or contradictory:
 
 - Stop.
@@ -88,4 +115,6 @@ If you discover the PRD is flawed, incomplete, or contradictory:
 
 ---
 
-Begin by running attempt:register, then summarize the PRD in your own words and propose your plan (including stack choice).
+Begin by running attempt:register (or requesting registration), then summarize the PRD in your own words and propose your plan (including stack choice).
+
+When finished: run `npm run attempt:submit` to publish your final state.
