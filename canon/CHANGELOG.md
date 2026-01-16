@@ -7,6 +7,39 @@ Per-file versions are intentionally omitted to reduce ceremony and prevent metad
 
 ---
 
+## 0.1.5 — 2026-01-16
+
+### Added
+
+- **Worktrees and learnings model** (`/canon/odd/appendices/attempt-lifecycle.md`)
+  - Worktrees are disposable sandboxes, learnings are repo-state
+  - Learnings payload requirement (artifacts + PRD patches)
+- **Artifacts always merge rule**
+  - Failed attempts contribute learnings via artifacts merge
+  - Two merges: artifacts (always) + code (only Champion)
+- **Attempt registry mechanism** (`ATTEMPT_REGISTRY.json`)
+  - Prevents collision when running parallel agents/worktrees
+  - `npm run attempt:reserve -- --prd v0.2`
+- **Fresh start requirement** 
+  - `/src` must be reset between attempts for true independence
+  - `npm run attempt:reset` purges and creates minimal shell
+- **Scripts**
+  - `attempt:reserve` — reserve next attempt number
+  - `attempt:reset` — purge /src for fresh start
+
+### Changed
+
+- Attempt Lifecycle: worktrees, registry, fresh start, artifacts merge (`/canon/odd/appendices/attempt-lifecycle.md`)
+- ATTEMPTS.md: collision prevention, reset workflow, tooling summary (`/docs/ATTEMPTS.md`)
+
+### Notes
+
+- Worktrees don't share memory. They publish outputs.
+- Every attempt contributes learnings, regardless of whether its code ships.
+- The reset step ensures attempts are truly independent (no inherited UI patterns).
+
+---
+
 ## 0.1.4 — 2026-01-16
 
 ### Added

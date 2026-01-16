@@ -74,6 +74,76 @@ Branches and preview deployments can support independence by reducing accidental
 
 ---
 
+## Worktrees and Learnings
+
+**Worktrees are disposable sandboxes. Learnings live in the main repo.**
+
+When using git worktrees for parallel attempts:
+- Each worktree is isolated code state
+- Learnings are repo state, not worktree state
+- Learnings must land in one canonical place that every attempt can write to
+
+You do not try to "share memory" between worktree agents. You publish outputs.
+
+### Canonical Places (Single Source of Truth)
+
+These paths live in the main repo (not inside a worktree only):
+
+- `/attempts/prd-vX.Y/attempt-NNN/**` — sealed record + evidence
+- `/docs/PRD.md` — living PRD (single active)
+- `/docs/learnings/prd-vX.Y.md` — (optional) rolling "what we learned" log
+
+Anything in those paths is real. Anything else is temporary.
+
+### Learnings Payload (Required)
+
+At the end of each attempt, the agent must produce:
+
+1. `attempts/prd-vX.Y/attempt-NNN/ATTEMPT.md` — closure record
+2. `attempts/prd-vX.Y/attempt-NNN/META.json` — commit SHA, preview URL, status
+3. `attempts/prd-vX.Y/attempt-NNN/evidence/*` — screenshots, logs
+4. PRD patch (if learnings exist): updates to `/docs/PRD.md` in a dedicated section:
+   - "Observed failure modes"
+   - "Clarifications / constraints added"
+   - "New DoD checks"
+
+The PRD patch is how learning persists across attempts.
+
+---
+
+## Artifacts Always Merge
+
+**Failed attempts still contribute learnings.**
+
+Attempts produce two types of outputs:
+- **Code changes** — the implementation
+- **Artifacts** — attempt folder, evidence, PRD patches
+
+The merge rule:
+
+| Output | Merge to main? |
+|--------|----------------|
+| Artifacts (attempt folder, evidence, PRD patches) | **Always** |
+| Code (src/, components, etc.) | **Only if Champion** |
+
+This prevents "we lost the learning because the attempt failed."
+
+### Two Merges Per Attempt
+
+1. **Artifacts merge** (always happens)
+   - Seal the attempt folder
+   - Commit evidence and closure record
+   - Apply any PRD patches
+   - Merge to `main`
+
+2. **Code promotion** (only if winner)
+   - Champion's code merges to `main`
+   - Non-winners keep their preview URLs but code stays on attempt branch
+
+This separation ensures every attempt contributes to the knowledge base, regardless of whether its code ships.
+
+---
+
 ## What an Attempt Is
 
 An Attempt is a bounded execution of a specific Product Requirements Document (PRD).
@@ -146,6 +216,7 @@ This plane **changes slowly and intentionally**.
 ```
 attempts/
   prd-vX.Y/
+    ATTEMPT_REGISTRY.json     # reserves attempt numbers (prevents collisions)
     PRD.md                    # frozen PRD for this version
     attempt-001/
       ATTEMPT.md              # closure record
@@ -163,7 +234,82 @@ attempts/
 - `promoted_commit` — (Champion only) the merge commit SHA on `main`
 - `production_tag` — (Champion only) the production tag
 
+**ATTEMPT_REGISTRY.json** contains:
+- `next_attempt` — the next available attempt number
+- `reserved` — (optional) list of reserved but not yet sealed attempts
+
 The concrete sealing procedure is documented in `/docs/ATTEMPTS.md`.
+
+---
+
+## Attempt Registry (Preventing Collisions)
+
+When running parallel agents/worktrees, attempt numbers must be reserved to prevent collisions.
+
+### Registry File
+
+Location: `/attempts/prd-vX.Y/ATTEMPT_REGISTRY.json`
+
+```json
+{
+  "next_attempt": 5,
+  "reserved": [
+    { "attempt": 3, "reserved_at": "2026-01-16T10:00:00Z", "agent": "worktree-a" },
+    { "attempt": 4, "reserved_at": "2026-01-16T10:05:00Z", "agent": "worktree-b" }
+  ]
+}
+```
+
+### Allocation Rule
+
+1. Reserve attempt number by editing ATTEMPT_REGISTRY.json on `main` first
+2. Increment `next_attempt`
+3. Add entry to `reserved` array
+4. Commit and push before starting work
+5. Use the reserved number in folder/branch/tag names
+
+This prevents "who is attempt-001 vs 002" collisions even with parallel runs.
+
+### Tooling
+
+- `npm run attempt:reserve -- --prd v0.2` — reserves next attempt number
+- Returns the reserved number for use in branch/folder names
+
+---
+
+## Fresh Start Requirement
+
+**Attempts must start from a clean slate to be independent.**
+
+Worktrees don't magically start from scratch — they inherit whatever commit they branched from. Without explicit purging, attempts become "variations of the same UI."
+
+### The Problem
+
+If attempt-002 branches from attempt-001's code, it's not independent. The agent will see existing patterns and converge on similar solutions.
+
+### The Solution
+
+Before an agent writes code, `/src` must be reset to a minimal baseline.
+
+### Reset Strategies
+
+**Strategy 1: Baseline scaffold commit**
+- Tag a known-good infrastructure state: `scaffold-phase1`
+- Starting an attempt means: branch from that tag
+- Apply only stable infra scripts + content sync
+- Then build from PRD
+
+**Strategy 2: Generated and disposable /src**
+- Stable infrastructure lives in `/infra` + `/public/content`
+- `/src` is always generated, never preserved
+- `npm run attempt:reset` deletes `/src` and recreates minimal shell
+- Every attempt begins with that reset commit
+
+### Tooling
+
+- `npm run attempt:reset` — purges `/src`, creates minimal app shell, commits as starting point
+
+The reset step must happen **before** the agent writes code.
 
 ---
 
@@ -366,4 +512,4 @@ Observations without promotion are incomplete experiments.
 
 ---
 
-**Status:** Appendix stable for v0.1
+**Status:** Appendix stable for v0.1.5

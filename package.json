@@ -9,6 +9,8 @@
     "preview": "vite preview",
     "sync": "node infra/scripts/sync-content.js",
     "verify:content": "node infra/scripts/verify-content.js",
+    "attempt:reserve": "node infra/scripts/reserve-attempt.js",
+    "attempt:reset": "node infra/scripts/reset-attempt.js",
     "attempt:promote": "node infra/scripts/promote-attempt.js"
   },
   "dependencies": {

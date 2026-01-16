@@ -9,6 +9,8 @@ This document explains how PRDs are versioned, how attempts are sealed, and wher
 1. **One active implementation:** `/src/` is disposable; prior attempts are preserved by git history + sealed records.
 2. **PRD versions are first-class:** A PRD version can have multiple attempts.
 3. **SHA is truth, tags are convenience:** `META.json` stores the canonical commit pointer.
+4. **Artifacts always merge:** Even failed attempts contribute learnings.
+5. **Worktrees are sandboxes, learnings are repo-state:** Outputs get published to main, not shared between agents.
 
 Single kickoff prompt: `/docs/ATTEMPT_KICKOFF.md`
 
@@ -62,6 +64,7 @@ See [Quantum Development](/canon/odd/appendices/quantum-development.md) for the 
 /attempts/                      # sealed attempts (immutable after seal)
   prd-v0.1/
     PRD.md                      # frozen PRD for this version
+    ATTEMPT_REGISTRY.json       # reserves attempt numbers (prevents collisions)
     attempt-001/
       ATTEMPT.md                # closure record
       EVIDENCE.md               # evidence index
@@ -71,6 +74,7 @@ See [Quantum Development](/canon/odd/appendices/quantum-development.md) for the 
       ...
   prd-v0.2/
     PRD.md
+    ATTEMPT_REGISTRY.json
     attempt-001/
       ...
 /public/content/                # generated (by sync script)
@@ -132,17 +136,100 @@ git push --follow-tags
 
 ### Same PRD version (retry)
 
-1. Create `attempts/prd-vX.Y/attempt-NNN/` (increment NNN)
-2. Rebuild `/src/` as needed
-3. When complete, seal the attempt
+1. **Reserve attempt number** (prevents collisions with parallel agents):
+   ```bash
+   npm run attempt:reserve -- --prd v0.2
+   ```
+2. **Create attempt branch**:
+   ```bash
+   git checkout -b attempt/prd-v0.2/a003
+   ```
+3. **Reset /src for fresh start** (ensures independence):
+   ```bash
+   npm run attempt:reset
+   ```
+4. Build from PRD, capture evidence
+5. When complete, seal the attempt
 
 ### New PRD version
 
 1. Update `/docs/PRD.md` with the new PRD version (this is the single active PRD)
 2. Create `attempts/prd-vX.Y/PRD.md` (frozen copy, created once per PRD version)
-3. Create `attempts/prd-vX.Y/attempt-001/`
-4. Rebuild `/src/` as needed
-5. When complete, seal the attempt
+3. Create `attempts/prd-vX.Y/ATTEMPT_REGISTRY.json`:
+   ```json
+   { "prd_version": "X.Y", "next_attempt": 1, "reserved": [], "sealed": [] }
+   ```
+4. Follow "Same PRD version" steps above
+
+---
+
+## Attempt Registry (Preventing Collisions)
+
+When running parallel agents/worktrees, attempt numbers must be reserved to prevent "who is attempt-001 vs 002" collisions.
+
+**Registry file:** `/attempts/prd-vX.Y/ATTEMPT_REGISTRY.json`
+
+```json
+{
+  "prd_version": "0.2",
+  "next_attempt": 3,
+  "reserved": [
+    { "attempt": 1, "reserved_at": "2026-01-16T10:00:00Z", "agent": "worktree-a" },
+    { "attempt": 2, "reserved_at": "2026-01-16T10:05:00Z", "agent": "worktree-b" }
+  ],
+  "sealed": []
+}
+```
+
+**Allocation rule:**
+1. Reserve by editing ATTEMPT_REGISTRY.json on `main` first
+2. Increment `next_attempt`, add to `reserved`
+3. Commit and push before starting work
+4. Use reserved number in folder/branch/tag names
+
+**Tooling:** `npm run attempt:reserve -- --prd v0.2`
+
+---
+
+## Fresh Start Requirement
+
+**Attempts must start from a clean `/src/` to be truly independent.**
+
+Without explicit purging, attempts inherit UI patterns from prior attempts and converge on similar solutions.
+
+**Reset command:** `npm run attempt:reset`
+
+What it does:
+1. Deletes everything in `/src/`
+2. Creates minimal shell (main.jsx, index.css, App.jsx)
+3. Commits as the attempt's starting point
+
+The minimal shell proves the build works but has no UI opinions.
+
+---
+
+## Artifacts Always Merge
+
+**Failed attempts still contribute learnings.**
+
+| Output | Merge to main? |
+|--------|----------------|
+| Artifacts (attempt folder, evidence, PRD patches) | **Always** |
+| Code (src/, components, etc.) | **Only if Champion** |
+
+### Two Merges Per Attempt
+
+1. **Artifacts merge** (always)
+   - Seal attempt folder
+   - Commit evidence and closure record
+   - Apply any PRD patches
+   - Merge to `main`
+
+2. **Code promotion** (only if winner)
+   - Champion's code merges to `main`
+   - Non-winners keep preview URLs but code stays on attempt branch
+
+This ensures every attempt contributes to the knowledge base.
 
 ---
 
@@ -225,5 +312,20 @@ The attempt folder contains everything needed:
 | -------------------------------------------- | -------------------------------------------------------------- |
 | Are preview deploys required for sealing?    | Required for UI changes, optional for doc-only                 |
 | Do we preserve attempt previews permanently? | No — we preserve links + evidence. Permanent hosting deferred. |
+| Do failed attempts merge to main?            | Artifacts yes, code no                                         |
+| How do parallel agents avoid collisions?     | Reserve attempt numbers via ATTEMPT_REGISTRY.json              |
+| Must /src be reset between attempts?         | Yes, for true independence                                     |
 
 This matches the maturity model: don't over-govern early.
+
+---
+
+## Tooling Summary
+
+| Command | Purpose |
+|---------|---------|
+| `npm run attempt:reserve -- --prd v0.2` | Reserve next attempt number |
+| `npm run attempt:reset` | Purge /src, create minimal shell |
+| `npm run attempt:promote -- --prd v0.2 --attempt 003` | Promote winner to production |
+
+See `/canon/odd/appendices/attempt-lifecycle.md` for the orientation model.
