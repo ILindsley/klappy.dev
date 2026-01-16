@@ -1,10 +1,10 @@
-# Cloudflare Pages Configuration
+# ☁️ Cloudflare Pages Configuration
 
 This document describes how Cloudflare Pages should be configured for the klappy.dev repository.
 
 ---
 
-## Branch Roles
+## 🌿 Branch Roles
 
 | Branch | Purpose | Deploy Target |
 |--------|---------|---------------|
@@ -14,7 +14,7 @@ This document describes how Cloudflare Pages should be configured for the klappy
 
 ---
 
-## Critical Configuration
+## ⚠️ Critical Configuration
 
 ### Production Branch
 
@@ -48,7 +48,7 @@ This ensures:
 
 ---
 
-## Build Configuration
+## 🛠️ Build Configuration
 
 ```
 Build command:     npm run build
@@ -58,7 +58,7 @@ Root directory:    (leave empty)
 
 ---
 
-## Expected Behavior
+## 📋 Expected Behavior
 
 | Action | Result |
 |--------|--------|
@@ -69,7 +69,7 @@ Root directory:    (leave empty)
 
 ---
 
-## Verification
+## ✅ Verification
 
 After configuring, verify:
 
@@ -79,7 +79,7 @@ After configuring, verify:
 
 ---
 
-## Why This Matters
+## 💡 Why This Matters
 
 > **Production and experimentation must never share a mutable surface.**
 

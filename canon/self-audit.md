@@ -1,19 +1,8 @@
-Below is Canon v0.1 — Self-Audit Checklist.
-This is the reflection and enforcement layer that makes the Definition of Done actionable without turning you into a QA manager.
+# 🔍 Self-Audit Checklist
 
-It is:
-• first person
-• website-ready
-• agent-translatable
-• intentionally short and repeatable
+**Canon v0.1**
 
-Paste this into /about/self-audit.md.
-
-⸻
-
-Self-Audit Checklist
-
-Canon v0.1
+> This is the reflection and enforcement layer that makes the Definition of Done actionable without turning you into a QA manager.
 
 This checklist defines how I expect work to be self-reviewed before it is considered complete.
 
@@ -22,92 +11,92 @@ The purpose is to catch obvious failures before someone else does.
 
 Every completed task must include a filled version of this checklist.
 
-⸻
+---
 
-Core Principle
+## 📌 Core Principle
 
 I expect builders—human or AI—to audit their own work against stated outcomes, constraints, and evidence.
 
 If an item cannot be answered, that is a signal—not a failure.
 
-⸻
+---
 
-Self-Audit Checklist
+## 📋 Self-Audit Checklist
 
-1. Intended Outcome
+### 1. Intended Outcome
 
    • What outcome was this work intended to achieve?
    • How will someone know if that outcome was achieved?
 
-⸻
+---
 
-2. Constraints Applied
+### 2. Constraints Applied
 
-   • Which constraints were relevant to this task?
-   • (e.g., offline-first, maintainability, interoperability)
-   • Were any default constraints intentionally overridden?
-   • If yes, why?
+- Which constraints were relevant to this task?
+- (e.g., offline-first, maintainability, interoperability)
+- Were any default constraints intentionally overridden?
+- If yes, why?
 
-⸻
+---
 
-3. Decision Rules Followed
+### 3. Decision Rules Followed
 
-   • Which decision rules guided the approach?
-   • (e.g., Borrow→Bend→Break→Build, KISS, explicit tradeoffs)
-   • Were there moments where a different rule could have been applied?
-   • Why was it not?
+- Which decision rules guided the approach?
+- (e.g., Borrow→Bend→Break→Build, KISS, explicit tradeoffs)
+- Were there moments where a different rule could have been applied?
+- Why was it not?
 
-⸻
+---
 
-4. Verification Performed
+### 4. Verification Performed
 
-   • What was run or exercised to verify the work?
-   • What behavior was directly observed?
+- What was run or exercised to verify the work?
+- What behavior was directly observed?
 
-⸻
+---
 
-5. Evidence Produced
+### 5. Evidence Produced
 
-   • What evidence proves the behavior occurred?
-   • screenshots
-   • recordings
-   • logs
-   • rendered output
-   • Where can this evidence be found?
+- What evidence proves the behavior occurred?
+  - screenshots
+  - recordings
+  - logs
+  - rendered output
+- Where can this evidence be found?
 
-⸻
+---
 
-6. UX & Behavior Check (If Applicable)
+### 6. UX & Behavior Check (If Applicable)
 
-   • Does the UI or interaction behave as expected?
-   • Is the behavior understandable without explanation?
-   • If explanation is required, is that a UX smell?
+- Does the UI or interaction behave as expected?
+- Is the behavior understandable without explanation?
+- If explanation is required, is that a UX smell?
 
-⸻
+---
 
-7. Tradeoffs & Risks
+### 7. Tradeoffs & Risks
 
-   • What tradeoffs were made?
-   • What risks remain?
-   • What assumptions could be wrong?
+- What tradeoffs were made?
+- What risks remain?
+- What assumptions could be wrong?
 
-⸻
+---
 
-8. Maintainability Check
+### 8. Maintainability Check
 
-   • Would someone else understand this in six months?
-   • What would be the hardest part to maintain or change?
+- Would someone else understand this in six months?
+- What would be the hardest part to maintain or change?
 
-⸻
+---
 
-9. Confidence Level
+### 9. Confidence Level
 
-   • How confident am I that this works as intended?
-   • What would increase confidence further?
+- How confident am I that this works as intended?
+- What would increase confidence further?
 
-⸻
+---
 
-Minimum Acceptable Completion
+## ⚠️ Minimum Acceptable Completion
 
 At a minimum, a completed task must include:
 • a stated outcome
@@ -117,9 +106,9 @@ At a minimum, a completed task must include:
 
 If these are missing, the task is not complete.
 
-⸻
+---
 
-What This Checklist Is Not
+## 🚫 What This Checklist Is Not
 
 This checklist is not:
 • a justification exercise
@@ -128,9 +117,9 @@ This checklist is not:
 
 It is a thinking aid designed to surface problems early.
 
-⸻
+---
 
-Agent Expectations
+## 🤖 Agent Expectations
 
 Agents and collaborators are expected to:
 • fill this checklist before claiming completion
@@ -139,9 +128,9 @@ Agents and collaborators are expected to:
 
 If an agent cannot complete the checklist honestly, the correct action is to continue working or mark the task incomplete.
 
-⸻
+---
 
-Closing Note
+## 💡 Closing Note
 
 This checklist exists to replace repeated back-and-forth questions like:
 • “Did you actually run it?”
@@ -150,11 +139,9 @@ This checklist exists to replace repeated back-and-forth questions like:
 
 Those questions should already be answered here.
 
-⸻
+---
 
-Status
-• Canon v0.1 — Self-Audit Checklist complete
-• Ready to proceed to Canon v0.1 — Visual Proof Standards
+## ✅ Status
 
-When you’re ready, say:
-“Proceed with Canon v0.1 — visual proof standards.”
+- Canon v0.1 — Self-Audit Checklist complete
+- Ready to proceed to Canon v0.1 — Visual Proof Standards

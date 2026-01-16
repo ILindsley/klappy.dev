@@ -1,11 +1,4 @@
-About — Draft Content (v0.1)
-
-These drafts are intentionally calm, non-ego-driven, and evidence-oriented.
-They are designed to answer common questions without overselling or teaching.
-
-⸻
-
-bio.md — Who I Am
+# 👤 Bio — Who I Am
 
 I work at the intersection of software architecture, AI-assisted development, and long-term system sustainability.
 
@@ -15,6 +8,4 @@ My background includes building and advising software in complex, real-world con
 
 I’m particularly interested in how AI changes the shape of software creation: shifting the bottleneck from writing code to defining intent, verifying results, and curating among many possible outcomes. Much of my recent work explores how to design systems that make those shifts explicit instead of accidental.
 
-This site is not a résumé. It’s a working surface for ideas, experiments, and proofs of concept that reflect how I think and build.
-
-⸻
+This site is not a résumé. It's a working surface for ideas, experiments, and proofs of concept that reflect how I think and build.

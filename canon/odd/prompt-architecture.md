@@ -1,6 +1,6 @@
-Prompt Architecture (Orientation)
+# 🧠 Prompt Architecture (Orientation)
 
-Canon / ODD Appendix v0.1
+**Canon / ODD Appendix v0.1**
 
 This appendix names a common scaling failure mode: the God Prompt.
 
@@ -13,9 +13,9 @@ As an app’s scope grows, prompts tend to grow into a single monolith that beco
 
 This is rarely intentional. It is a natural default.
 
-⸻
+---
 
-The Anti-Pattern: Prompt Maximalism (“God Prompt”)
+## ⚠️ The Anti-Pattern: Prompt Maximalism ("God Prompt")
 
 What it looks like
 • One prompt tries to cover:
@@ -34,9 +34,9 @@ Why it fails
 • Small edits have unpredictable consequences
 • The prompt becomes a fragile dependency
 
-⸻
+---
 
-The Alternative: Orchestrated Intent
+## ✅ The Alternative: Orchestrated Intent
 
 Instead of one prompt that does everything:
 • keep stable intent in canonical artifacts (ODD + Canon)
@@ -49,20 +49,21 @@ In this model:
 • the task prompt is a temporary work order
 • the output is verified by evidence, not confidence
 
-⸻
+---
 
-Intent Graph (Mental Model)
+## 🧭 Intent Graph (Mental Model)
 
-Think of intent as layered: 1. Worldview (rarely changes)
-• ODD, constraints, decision rules 2. Project intent (changes occasionally)
-• PRD, scope, priorities, maturity level 3. Task intent (changes constantly)
-• the specific job to be done right now
+Think of intent as layered:
+
+1. **Worldview** (rarely changes) — ODD, constraints, decision rules
+2. **Project intent** (changes occasionally) — PRD, scope, priorities, maturity level
+3. **Task intent** (changes constantly) — the specific job to be done right now
 
 Only the bottom layer should enter the working prompt in full detail.
 
-⸻
+---
 
-Context Budgeting (A Simple Heuristic)
+## 💰 Context Budgeting (A Simple Heuristic)
 
 Treat context like a budget:
 • Every token spent on generic policy reduces tokens available for task specifics.
@@ -73,18 +74,19 @@ A healthy system prefers:
 • stable references by URI
 • on-demand retrieval
 
-⸻
+---
 
-Maturity Note (Intentionally Light)
-• PoC: A larger prompt may be acceptable for speed, as long as it is treated as disposable.
+## 📊 Maturity Note (Intentionally Light)
+
+- **PoC:** A larger prompt may be acceptable for speed, as long as it is treated as disposable.
 • Pilot: Prompt growth becomes a risk. Begin splitting tasks and referencing canonical resources.
 • Production: Monolithic prompts become a liability. Orchestrated intent and bounded sub-tasks become the default.
 
 This is not a rule. It is a scaling reality.
 
-⸻
+---
 
-Failure Mode of Orchestration (So We Don’t Romanticize It)
+## ⚠️ Failure Mode of Orchestration (So We Don't Romanticize It)
 
 Orchestration can fail too.
 
@@ -99,9 +101,9 @@ The mitigation is not “more instructions,” but:
 • explicit evidence requirements
 • clear boundaries between tasks
 
-⸻
+---
 
-Closing
+## 💡 Closing
 
 When prompts grow without bound, the system becomes fragile.
 
@@ -110,16 +112,17 @@ ODD favors:
 • small prompts constructed for the task at hand
 • verification through evidence rather than explanation
 
-⸻
+---
 
-Status
-• Appendix v0.1 complete
-• Orientation-only
-• No enforcement semantics
+## ✅ Status
 
-⸻
+- Appendix v0.1 complete
+- Orientation-only
+- No enforcement semantics
 
-Why this fits your pillars
+---
+
+## 🔗 Why This Fits Your Pillars
 • KISS: It discourages giant prompts; encourages small bounded contexts.
 • DRY: Canonical references prevent repeating the same boilerplate in every prompt.
 • Consistency: Canon provides a stable “source of truth” across sub-agents.
@@ -128,4 +131,4 @@ Why this fits your pillars
 • Scalable: Orchestration scales better than monoliths.
 • Prompt-over-code: This is the application of that principle at scale.
 
-⸻
+---

@@ -1,17 +1,8 @@
-This dimension is important enough that it deserves its own canonical file, not footnotes scattered across others.
+# 📊 Project Maturity & Progressive Governance
 
-What you’re really adding is a governance axis that tells agents when to apply rigor, not just what rigor exists.
+**Canon v0.1**
 
-Below is Canon v0.1 — Project Maturity & Progressive Governance.
-This plugs cleanly into everything you’ve already built.
-
-You can paste this directly into /about/project-maturity.md.
-
-⸻
-
-Project Maturity & Progressive Governance
-
-Canon v0.1
+> This governance axis tells agents *when* to apply rigor, not just what rigor exists.
 
 This page defines how my principles, constraints, and policies change as a project matures.
 
@@ -21,9 +12,9 @@ Failing to apply it later destroys trust.
 
 This model exists to activate the right constraints at the right time.
 
-⸻
+---
 
-Core Principle
+## 📌 Core Principle
 
 I do not apply all rules equally at all times.
 
@@ -32,22 +23,26 @@ Exploration comes first. Governance comes later.
 
 Every project must explicitly state its current maturity level.
 
-⸻
+---
 
-Maturity Levels Overview
+## 📋 Maturity Levels Overview
 
-I use three maturity levels: 1. PoC / Exploration 2. Pilot / Product 3. Production / Long-Term
+I use three maturity levels:
+
+1. PoC / Exploration
+2. Pilot / Product
+3. Production / Long-Term
 
 These levels are not about importance.
 They are about risk, trust, and dependency.
 
-⸻
+---
 
-Level 0 — PoC / Exploration
+## 🔬 Level 0 — PoC / Exploration
 
-Goal: Learn quickly and discard freely.
+**Goal:** Learn quickly and discard freely.
 
-Characteristics
+**Characteristics**
 • Short-lived or experimental
 • Ephemeral artifacts
 • Low dependency from others
@@ -75,13 +70,13 @@ Critical rule
 
 Nothing at this level is considered final or trusted.
 
-⸻
+---
 
-Level 1 — Pilot / Product
+## 🚀 Level 1 — Pilot / Product
 
-Goal: Deliver real value safely to real users.
+**Goal:** Deliver real value safely to real users.
 
-Characteristics
+**Characteristics**
 • Repeated use
 • Growing user expectations
 • Shared ownership begins
@@ -103,13 +98,13 @@ Risk posture
 
 Failure is acceptable, but silent failure is not.
 
-⸻
+---
 
-Level 2 — Production / Long-Term
+## ✅ Level 2 — Production / Long-Term
 
-Goal: Sustain trust over time.
+**Goal:** Sustain trust over time.
 
-Characteristics
+**Characteristics**
 • Canonical or authoritative data
 • External dependencies
 • Organizational or reputational risk
@@ -133,9 +128,9 @@ Nothing enters production without:
 
 At this level, correctness and trust outweigh speed.
 
-⸻
+---
 
-Relationship to Other Canon Documents
+## 🔗 Relationship to Other Canon Documents
 
 This maturity model modulates the following:
 • Constraints
@@ -149,9 +144,9 @@ More items become non-optional as maturity increases.
 • Visual Proof Standards
 Optional for PoCs, required for Pilot and Production.
 
-⸻
+---
 
-Agent Expectations
+## 🤖 Agent Expectations
 
 Agents and collaborators are expected to:
 • explicitly state the project’s maturity level
@@ -161,9 +156,9 @@ Agents and collaborators are expected to:
 
 If maturity is unclear, the correct action is to ask.
 
-⸻
+---
 
-Escalation Rules
+## ⚠️ Escalation Rules
 
 A project should move up a maturity level when:
 • others begin depending on it
@@ -173,9 +168,9 @@ A project should move up a maturity level when:
 
 A project may move down only with explicit acknowledgment.
 
-⸻
+---
 
-Closing Note
+## 💡 Closing Note
 
 This model exists to protect both:
 • exploration, and
@@ -186,13 +181,13 @@ Rigor too late kills credibility.
 
 Progressive governance keeps both alive.
 
-⸻
+---
 
 Status
 • Canon v0.1 — Project Maturity complete
 • Canon now supports lifecycle-aware enforcement
 
-⸻
+---
 
 What This Unlocks (Important)
 
@@ -204,7 +199,7 @@ With this file added, agents can now:
 
 This completes the missing dimension you identified.
 
-⸻
+---
 
 Suggested Next Moves (Choose One) 1. Update ODD Manifesto → ODD + Maturity 2. Agent Handoff Instruction (now maturity-aware) 3. MCP schema that exposes maturity as a first-class field 4. Refactor existing canon docs to reference maturity thresholds
 

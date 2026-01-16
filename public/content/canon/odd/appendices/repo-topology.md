@@ -1,4 +1,4 @@
-# ODD Appendix — Repository Topology
+# 📁 ODD Appendix — Repository Topology
 
 **Status:** Orientation  
 **Audience:** Internal / Canon  

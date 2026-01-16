@@ -1,6 +1,6 @@
-# Attempt Workflow
+# 🚀 Attempt Workflow
 
-## Before Starting (Human)
+## ⚠️ Before Starting (Human)
 
 1. Ensure you're on `main` branch
 2. Run `npm run attempt:reset` if /src needs nuking
@@ -11,7 +11,7 @@
 
 ---
 
-## During Attempt (Agent)
+## 🤖 During Attempt (Agent)
 
 Each agent follows `/docs/PROMPT_ATTEMPT_KICKOFF.txt` which requires:
 
@@ -26,7 +26,7 @@ Each agent follows `/docs/PROMPT_ATTEMPT_KICKOFF.txt` which requires:
 
 ---
 
-## After All Agents Finish (Human)
+## ✅ After All Agents Finish (Human)
 
 On main branch:
 
@@ -46,7 +46,7 @@ npm run attempt:promote -- --prd v0.2 --attempt 001
 
 ---
 
-## CLI Reference
+## 🛠️ CLI Reference
 
 | Command                                               | Purpose                                      |
 | ----------------------------------------------------- | -------------------------------------------- |
@@ -59,7 +59,7 @@ npm run attempt:promote -- --prd v0.2 --attempt 001
 
 ---
 
-## Artifact Locations
+## 📁 Artifact Locations
 
 **During attempt:** `attempts/prd-v0.2/_runs/<run_id>/`
 
@@ -67,7 +67,7 @@ npm run attempt:promote -- --prd v0.2 --attempt 001
 
 ---
 
-## Deploy Contract
+## 📜 Deploy Contract
 
 See `/infra/contracts/build-output.md`
 
@@ -77,7 +77,7 @@ See `/infra/contracts/build-output.md`
 
 ---
 
-## Cloudflare Preview URLs
+## 🔗 Cloudflare Preview URLs
 
 After `attempt:submit`, branches deploy to:
 

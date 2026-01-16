@@ -1,4 +1,4 @@
-# PRD Template
+# 📋 PRD Template
 
 Use this template when drafting or revising the active PRD.
 

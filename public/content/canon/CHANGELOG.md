@@ -1,4 +1,4 @@
-# Canon Changelog
+# 📜 Canon Changelog
 
 This changelog tracks changes to the **Canon pack** as a whole.
 

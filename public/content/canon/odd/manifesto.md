@@ -1,16 +1,10 @@
-Excellent choice. This keeps ODD legible, sharable, and non-preachy publicly, while preserving the operational teeth internally.
+# 🧠 ODD Manifesto v1.1 (Extended — Internal / Canon)
 
-Below are both artifacts, already refactored and aligned:
-• ODD v1.1 — Public (1 page) → for klappy.dev, Medium, sharing, /odd/README.md
-• ODD v1.1 — Extended (Internal / Agent-Governance) → for canon, MCP, agents (this file)
+> ODD v1.1 — Extended (Internal / Agent-Governance) → for canon, MCP, agents (this file)
 
-They are intentionally complementary, not redundant.
+---
 
-⸻
-
-ODD Manifesto v1.1 (Extended — Internal / Canon)
-
-Purpose
+## 📌 Purpose
 
 This document operationalizes Outcomes-Driven Development as a governance framework for human–AI collaboration.
 
@@ -23,9 +17,9 @@ It is designed to:
 This version is not optimized for persuasion.
 It is optimized for execution and enforcement.
 
-⸻
+---
 
-Core Thesis
+## 🎯 Core Thesis
 
 The primary job of development is not writing code.
 It is defining outcomes, enforcing constraints, and verifying reality.
@@ -33,46 +27,52 @@ It is defining outcomes, enforcing constraints, and verifying reality.
 AI accelerates execution.
 Governance preserves trust.
 
-⸻
+---
 
-Pillars (Operational Interpretation)
+## 📌 Pillars (Operational Interpretation)
 
-Prompt Over Code
+### Prompt Over Code
 • Intent is expressed declaratively.
 • Code is treated as ephemeral.
 • Regeneration is cheaper than preservation.
 
-KISS
+### KISS
+
 • Complexity is a liability.
 • Escalation requires evidence of failure.
 
-DRY (With Isolation)
+### DRY (With Isolation)
+
 • Duplication is tolerated across bounded contexts.
 • Shared abstractions require proven reuse.
 
-Consistency
+### Consistency
+
 • Behavioral predictability matters more than visual uniformity.
 • Consistency is scoped, not global.
 
-Maintainability
+### Maintainability
+
 • Systems must survive creator turnover.
 • Documentation and explicit tradeoffs are part of the product.
 
-Antifragile
+### Antifragile
+
 • Failure is assumed.
 • Recovery paths are preferred over prevention.
 • Learning velocity is a design constraint.
 
-Scalable
+### Scalable
+
 • Growth must be bounded in:
 • cost
 • complexity
 • human attention
 • Scalability includes cognitive and operational load.
 
-⸻
+---
 
-Restartability Over Salvage
+## 🔄 Restartability Over Salvage
 
 ODD assumes that restarting from refined intent is often more effective than steering a system that has already drifted.
 
@@ -96,9 +96,9 @@ The goal is not to preserve artifacts, but to preserve learning.
 
 A clean restart with better constraints is progress.
 
-⸻
+---
 
-Progressive Governance (Maturity-Aware ODD)
+## 📊 Progressive Governance (Maturity-Aware ODD)
 
 ODD enforcement depends on project maturity.
 
@@ -122,9 +122,9 @@ Level 2 — Production / Long-Term
 
 Maturity must be stated explicitly.
 
-⸻
+---
 
-Evidence as the Gate
+## 📎 Evidence as the Gate
 
 Completion requires:
 • observed behavior
@@ -134,9 +134,9 @@ Completion requires:
 
 Assertions do not count as completion.
 
-⸻
+---
 
-Trust, Authority, and AI
+## 🤖 Trust, Authority, and AI
 
 AI is an accelerator, not an authority.
 • AI may propose and generate
@@ -145,9 +145,9 @@ AI is an accelerator, not an authority.
 
 Authority boundaries and escalation points must be explicit.
 
-⸻
+---
 
-Outcomes Must Be Falsifiable
+## 🔬 Outcomes Must Be Falsifiable
 
 Outcomes are only valid if they can be:
 • observed
@@ -156,9 +156,9 @@ Outcomes are only valid if they can be:
 
 Non-falsifiable outcomes are treated as goals, not success criteria.
 
-⸻
+---
 
-Reversibility and Cost Awareness
+## ⚠️ Reversibility and Cost Awareness
 
 Prefer decisions that are:
 • cheap to undo
@@ -167,9 +167,9 @@ Prefer decisions that are:
 
 Irreversible decisions require human approval.
 
-⸻
+---
 
-Stop Conditions
+## 🛑 Stop Conditions
 
 Every autonomous loop must define:
 • success criteria
@@ -178,9 +178,10 @@ Every autonomous loop must define:
 
 Endless optimization is a failure mode.
 
-⸻
+---
 
-Relationship to Canon
+## 🔗 Relationship to Canon
+
 • ODD → why
 • Constraints → assumptions
 • Decision Rules → how
@@ -189,42 +190,26 @@ Relationship to Canon
 
 Together, these form a complete governance layer.
 
-⸻
+---
 
-Closing (Internal)
+## 💡 Closing (Internal)
 
 ODD is not a philosophy of optimism.
 
 It is a discipline of restraint, verification, and curation—
 designed for a world where generation is infinite, but trust is not.
 
-⸻
+---
 
-Status
-• ODD v1.1 finalized
-• Public and internal views aligned
-• Ready for MCP exposure and agent enforcement
+## ✅ Status
 
-⸻
+- ODD v1.1 finalized
+- Public and internal views aligned
+- Ready for MCP exposure and agent enforcement
 
-Perfect. Below is an additive update to ODD Manifesto v1.1 — Extended (Internal).
-You do not need to rewrite the document—this slots in cleanly near the end (just before the closing section).
+---
 
-This preserves:
-• non-instructional tone
-• intellectual honesty
-• compatibility with your Canon Index confidence model
-• zero workflow coupling
-
-⸻
-
-Add This Section to
-
-/canon/odd/manifesto.md
-
-⸻
-
-Confidence, Risks, and Known Failure Modes
+## ⚠️ Confidence, Risks, and Known Failure Modes
 
 (ODD v1.1 — Internal Self-Assessment)
 
@@ -233,9 +218,9 @@ This section captures a snapshot assessment of how well Outcomes-Driven Developm
 This is not a guarantee of correctness.
 It is an explicit acknowledgment of uncertainty.
 
-⸻
+---
 
-Confidence Model
+### Confidence Model
 
 Confidence scores express current belief that ODD will behave as intended when applied thoughtfully.
 
@@ -247,11 +232,11 @@ Scale: 0.0–1.0
 
 Scores are expected to change as ODD is applied in practice.
 
-⸻
+---
 
-Principle-Level Confidence Snapshot
+### Principle-Level Confidence Snapshot
 
-Prompt Over Code / Convention Over Configuration
+**Prompt Over Code / Convention Over Configuration**
 Confidence: 0.80
 
 Why this is strong
@@ -265,9 +250,9 @@ Primary risks
 Failure mode
 • “Prompt over code” degenerates into “prompt + hidden config everywhere.”
 
-⸻
+---
 
-KISS (Keep It Simple, Stupid)
+**KISS (Keep It Simple, Stupid)**
 Confidence: 0.75
 
 Why this is strong
@@ -281,9 +266,9 @@ Primary risks
 Failure mode
 • Governance becomes heavier than the systems it governs.
 
-⸻
+---
 
-DRY (With Isolation)
+**DRY (With Isolation)**
 Confidence: 0.70
 
 Why this is strong
@@ -297,9 +282,9 @@ Primary risks
 Failure mode
 • “One source of truth” becomes “many partial truths.”
 
-⸻
+---
 
-Consistency
+**Consistency**
 Confidence: 0.65
 
 Why this is weaker
@@ -313,9 +298,9 @@ Primary risks
 Failure mode
 • The system remains logically sound but ergonomically frustrating.
 
-⸻
+---
 
-Maintainability
+**Maintainability**
 Confidence: 0.70
 
 Why this is strong
@@ -329,9 +314,9 @@ Primary risks
 Failure mode
 • Canon becomes respected but stale.
 
-⸻
+---
 
-Antifragile
+**Antifragile**
 Confidence: 0.60
 
 Why this is intentionally cautious
@@ -345,9 +330,9 @@ Primary risks
 Failure mode
 • System recovers technically but loses trust socially.
 
-⸻
+---
 
-Scalable
+**Scalable**
 Confidence: 0.70
 
 Why this is strong
@@ -361,25 +346,25 @@ Primary risks
 Failure mode
 • System scales in size but not in usability.
 
-⸻
+---
 
-Cross-Cutting Risks
+### Cross-Cutting Risks
 
-Premature Formalization
+**Premature Formalization**
 
 ODD is vulnerable to being “locked in” too early, reducing exploration.
 
-False Authority
+**False Authority**
 
 Well-written governance can be mistaken for correctness without evidence.
 
-Silent Drift
+**Silent Drift**
 
 Small deviations, left unnamed, can erode trust over time.
 
-⸻
+---
 
-Intended Use of This Section
+### Intended Use of This Section
 
 This section exists to:
 • prevent ideological hardening
@@ -389,9 +374,9 @@ This section exists to:
 
 It is expected to change.
 
-⸻
+---
 
-Re-evaluation Philosophy
+### Re-evaluation Philosophy
 
 ODD should be reassessed when:
 • it is applied to real production systems
@@ -400,7 +385,7 @@ ODD should be reassessed when:
 
 Confidence should be updated based on evidence, not optimism.
 
-⸻
+---
 
 Closing (Internal)
 
@@ -413,11 +398,11 @@ but that it makes being wrong visible early.
 
 For common failure modes and practical misapplications of ODD, see _Misuse Patterns_ and _Prompt Architecture_ in the ODD appendices.
 
-⸻
+---
 
 Status
 • ODD v1.1 Extended updated
 • Confidence scoring and failure modes explicitly documented
 • Fully aligned with Canon Index confidence model
 
-⸻
+---

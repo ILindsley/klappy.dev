@@ -1,4 +1,4 @@
-# Projects
+# 📁 Projects
 
 This folder contains proofs of concept, experiments, and working artifacts built using the principles described in the [Canon](/canon/index.md).
 

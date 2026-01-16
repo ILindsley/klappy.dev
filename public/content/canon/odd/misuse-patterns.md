@@ -1,37 +1,17 @@
-We’ll use dual-layer framing inside the same artifact:
-• Primary framing (neutral, clinical):
-“Common Failure Modes”
-• Secondary framing (plainspoken, human):
-“How ODD Gets Misused in Practice”
+# ⚠️ ODD Misuse Patterns
 
-This mirrors how engineers actually think:
-• first we diagnose
-• then we admit how humans break things
-
-No moralizing. No scolding. Just pattern recognition.
-
-This also gives you rhetorical flexibility:
-• formal conversations → use the clinical language
-• mentoring / blog / portfolio conversations → use the plainspoken language
-
-⸻
-
-Artifact 1
-
-ODD Misuse Patterns
-
-(Appendix to ODD Manifesto — Internal)
+**(Appendix to ODD Manifesto — Internal)**
 
 This section documents predictable ways Outcomes-Driven Development (ODD) fails when applied incorrectly.
 These are not violations of intent; they are human failure modes under real constraints.
 
 The purpose is not prevention through rules, but early recognition through shared language.
 
-⸻
+---
 
-Misuse Pattern 1: Outcome Theater
+## Misuse Pattern 1: Outcome Theater
 
-(“We say outcomes, but still worship artifacts.”)
+> "We say outcomes, but still worship artifacts."
 
 What it looks like
 • Outcomes are stated, but success is still measured by:
@@ -51,11 +31,11 @@ Where it shows up
 Risk
 • ODD becomes rebranded output-driven development.
 
-⸻
+---
 
-Misuse Pattern 2: Prompt Maximalism
+## Misuse Pattern 2: Prompt Maximalism
 
-(“If one prompt is good, ten must be better.”)
+> "If one prompt is good, ten must be better."
 
 What it looks like
 • Large, ornate prompts replace thinking.
@@ -73,11 +53,11 @@ Where it shows up
 Risk
 • Prompt over code collapses into prompt over judgment.
 
-⸻
+---
 
-Misuse Pattern 3: Premature Governance
+## Misuse Pattern 3: Premature Governance
 
-(“Let’s lock this down before it breaks.”)
+> "Let's lock this down before it breaks."
 
 What it looks like
 • Rules introduced before patterns stabilize.
@@ -95,11 +75,11 @@ Where it shows up
 Risk
 • Innovation slows before it has a chance to inform governance.
 
-⸻
+---
 
-Misuse Pattern 4: Evidence Substitution
+## Misuse Pattern 4: Evidence Substitution
 
-(“Trust me, it works.”)
+> "Trust me, it works."
 
 What it looks like
 • Assertions replace demonstrations.
@@ -117,11 +97,11 @@ Where it shows up
 Risk
 • Trust becomes social instead of empirical.
 
-⸻
+---
 
-Misuse Pattern 5: Consistency Absolutism
+## Misuse Pattern 5: Consistency Absolutism
 
-(“One way forever.”)
+> "One way forever."
 
 What it looks like
 • Early conventions treated as immutable.
@@ -139,11 +119,11 @@ Where it shows up
 Risk
 • The system becomes brittle under real-world variation.
 
-⸻
+---
 
-Misuse Pattern 6: Antifragility as Optimism
+## Misuse Pattern 6: Antifragility as Optimism
 
-(“It’ll recover.”)
+> "It'll recover."
 
 What it looks like
 • Failure assumed to be harmless.
@@ -161,7 +141,7 @@ Where it shows up
 Risk
 • Systems degrade silently until trust collapses.
 
-⸻
+---
 
 A note on maturity (intentionally light)
 
@@ -172,7 +152,7 @@ These patterns tend to:
 
 The solution is not stricter rules, but timely awareness.
 
-⸻
+---
 
 How this appendix should be used
 • As a diagnostic lens
@@ -181,4 +161,4 @@ How this appendix should be used
 
 This list is expected to grow as real failures are observed.
 
-⸻
+---

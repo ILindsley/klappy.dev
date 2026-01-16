@@ -1,19 +1,8 @@
-Below is Canon v0.1 — Visual Proof Standards.
-This defines what “prove it visually” actually means, so neither humans nor agents can wiggle out with vague claims.
+# 👁️ Visual Proof Standards
 
-It is:
-• first person
-• website-ready
-• precise but not heavy
-• designed to eliminate “trust me” outputs
+**Canon v0.1**
 
-Paste this into /about/visual-proof.md.
-
-⸻
-
-Visual Proof Standards
-
-Canon v0.1
+> This defines what "prove it visually" actually means, so neither humans nor agents can wiggle out with vague claims.
 
 This page defines what I mean by visual proof.
 
@@ -22,9 +11,9 @@ If work affects anything a user can see or interact with, I expect direct visual
 Visual proof replaces explanation.
 If it can’t be shown, it isn’t verified.
 
-⸻
+---
 
-Core Principle
+## 📌 Core Principle
 
 I trust observed behavior more than reasoning.
 
@@ -33,9 +22,9 @@ Visual proof demonstrates that:
 • the behavior exists in reality
 • the output matches the intended outcome
 
-⸻
+---
 
-When Visual Proof Is Required
+## ⚠️ When Visual Proof Is Required
 
 Visual proof is required for any work involving:
 • UI or layout
@@ -47,35 +36,35 @@ Visual proof is required for any work involving:
 
 If a user could notice the change, visual proof is required.
 
-⸻
+---
 
-Acceptable Forms of Visual Proof
+## 📎 Acceptable Forms of Visual Proof
 
 One or more of the following is required, depending on the task:
 
-Screenshots
+**Screenshots**
 • Show the relevant state clearly
 • Must not be cropped ambiguously
 • Must reflect the final behavior
 
-Screen Recordings (Preferred for Interaction)
+**Screen Recordings (Preferred for Interaction)**
 • 10–30 seconds is usually sufficient
 • Show the interaction from start to end
 • No narration required
 
-Rendered Output Artifacts
+**Rendered Output Artifacts**
 • Generated HTML files
 • Static exports
 • Snapshots of rendered states
 
-Structured UI Captures
+**Structured UI Captures**
 • DOM snapshots
 • Component tree states
 • Selector highlights
 
-⸻
+---
 
-What Visual Proof Must Show
+## 📋 What Visual Proof Must Show
 
 Visual proof must demonstrate:
 • the correct state
@@ -87,9 +76,9 @@ When relevant, it should include:
 • the resulting state
 • the transition between them
 
-⸻
+---
 
-Labeling Requirements
+## 🏷️ Labeling Requirements
 
 Each piece of visual proof must be accompanied by a short caption:
 • What this proof demonstrates
@@ -99,9 +88,9 @@ One sentence is enough.
 
 Unlabeled screenshots are not acceptable.
 
-⸻
+---
 
-Before / After Evidence
+## 🔄 Before / After Evidence
 
 For changes that modify existing behavior or UI:
 • Include “before” and “after” visuals when feasible
@@ -109,9 +98,9 @@ For changes that modify existing behavior or UI:
 
 This makes regressions and improvements obvious.
 
-⸻
+---
 
-Tooling Expectations
+## 🛠️ Tooling Expectations
 
 Visual proof may be produced via:
 • browser dev servers
@@ -122,9 +111,9 @@ Visual proof may be produced via:
 The specific tool does not matter.
 The evidence does.
 
-⸻
+---
 
-When Visual Proof Is Not Possible
+## 🚫 When Visual Proof Is Not Possible
 
 If visual proof cannot be produced, the output must explicitly state:
 • why it was not possible
@@ -134,9 +123,9 @@ If visual proof cannot be produced, the output must explicitly state:
 “Not possible” is acceptable.
 “Not mentioned” is not.
 
-⸻
+---
 
-What Does Not Count as Visual Proof
+## ⚠️ What Does Not Count as Visual Proof
 
 The following do not qualify:
 • descriptions of expected behavior
@@ -145,9 +134,9 @@ The following do not qualify:
 • “it looks correct to me”
 • reasoning without observation
 
-⸻
+---
 
-Relationship to Definition of Done
+## 🔗 Relationship to Definition of Done
 
 Visual proof is a required component of the Definition of Done for UI-related work.
 
@@ -155,9 +144,9 @@ Without visual proof:
 • the task is not complete
 • confidence claims are invalid
 
-⸻
+---
 
-Agent Expectations
+## 🤖 Agent Expectations
 
 Agents are expected to:
 • capture visual proof themselves when possible
@@ -167,9 +156,9 @@ Agents are expected to:
 Producing visual proof is not optional.
 It is part of the work.
 
-⸻
+---
 
-Closing Note
+## 💡 Closing Note
 
 This standard exists to eliminate ambiguity.
 
@@ -179,11 +168,9 @@ If something works:
 If it can’t be shown:
 • it isn’t verified
 
-⸻
+---
 
-Status
-• Canon v0.1 — Visual Proof Standards complete
-• Ready to proceed to Canon v0.1 — Completion Report Template
+## ✅ Status
 
-When you’re ready, say:
-“Proceed with Canon v0.1 — completion report template.”
+- Canon v0.1 — Visual Proof Standards complete
+- Ready to proceed to Canon v0.1 — Completion Report Template

@@ -1,20 +1,11 @@
-Below is Deliverable 2: Updated PRD.
-This is written in a neutral/system voice, explicitly designed to be handed to Claude Code, Cursor, or any other agent as the primary build document.
+# 📋 Product Requirements Document (PRD)
 
-It assumes Deliverable 1 (Concept Snapshot) is the conceptual foundation and does not re-argue it.
+**Product Name (working):** klappy.dev — Conversational Portfolio & Canon
+**Status:** v0.1 (Foundational)
 
-You can copy this into /docs/PRD.md.
+---
 
-⸻
-
-Product Requirements Document (PRD)
-
-Product Name (working): klappy.dev — Conversational Portfolio & Canon
-Status: v0.1 (Foundational)
-
-⸻
-
-1. Purpose
+## 1. Purpose
 
 The purpose of this product is to create an LLM-driven, conversational portfolio website that:
 • Orients visitors through dialogue rather than navigation
@@ -25,9 +16,9 @@ The purpose of this product is to create an LLM-driven, conversational portfolio
 
 This product intentionally treats content as canonical and LLM behavior as constrained.
 
-⸻
+---
 
-2. Problem Statement
+## 2. Problem Statement
 
 Traditional portfolio websites assume users know what to click and what they are looking for. They also separate “about me” content from the actual thinking that shapes work.
 
@@ -42,42 +33,45 @@ This product addresses both problems by:
 • embedding constraints, decision rules, and evidence standards directly into the system
 • requiring LLM-driven interactions to show, not just tell
 
-⸻
+---
 
-3. Goals
+## 3. Goals
 
-Primary Goals
+**Primary Goals**
 • Enable first-time visitors to orient themselves via conversation
 • Dynamically surface relevant projects, writings, and context
 • Keep verbal responses concise by favoring generative UI
 • Ensure all answers are grounded in published content
 • Make constraints, principles, and QA expectations explicit and reusable
 
-Secondary Goals
+**Secondary Goals**
+
 • Support hands-free / voice-driven interaction
 • Allow the same canon to guide external LLM coding agents
 • Demonstrate evidence-based completion and self-auditing in practice
 
-⸻
+---
 
-4. Non-Goals
-   • Teaching users how to code or adopt a methodology
+## 4. Non-Goals
+
+• Teaching users how to code or adopt a methodology
    • Generating opinions not present in the knowledge base
    • Acting as a general-purpose AI assistant
    • Providing exhaustive explanations by default
    • Replacing human judgment or taste
 
-⸻
+---
 
-5. Target Users 1. Curious Visitor
-   Wants to understand what this person works on and why it matters. 2. Technical Peer
-   Wants to understand design philosophy, constraints, and tradeoffs. 3. Potential Collaborator
-   Wants to see relevant proof-of-concepts and reasoning quickly. 4. LLM Agent (Secondary Consumer)
-   Consumes the same canon to guide planning, building, and verification.
+## 5. Target Users
 
-⸻
+1. **Curious Visitor** — Wants to understand what this person works on and why it matters.
+2. **Technical Peer** — Wants to understand design philosophy, constraints, and tradeoffs.
+3. **Potential Collaborator** — Wants to see relevant proof-of-concepts and reasoning quickly.
+4. **LLM Agent (Secondary Consumer)** — Consumes the same canon to guide planning, building, and verification.
 
-6. Core Product Concept
+---
+
+## 6. Core Product Concept
 
 The website presents a chat-first UI that looks familiar (AI chat), but behaves differently:
 • The LLM keeps responses short
@@ -87,13 +81,13 @@ The website presents a chat-first UI that looks familiar (AI chat), but behaves 
 
 The LLM is a guide, not a narrator.
 
-⸻
+---
 
-7. Knowledge Base Scope (Canonical Content)
+## 7. Knowledge Base Scope (Canonical Content)
 
 The system must only answer from approved content sources.
 
-v0 Canonical Sources
+**v0 Canonical Sources**
 • README (context)
 • FAQ
 • Constraints (first-person)
@@ -103,27 +97,28 @@ v0 Canonical Sources
 • Visual Proof Standards
 • Project pages + project metadata
 
-Future Sources (not required for v0)
+**Future Sources (not required for v0)**
 • Blog posts
 • Articles
 • Meeting transcripts
 • Talks / podcasts
 • Design notes
 
-⸻
+---
 
-8. Voice Model (Critical)
-   • Canonical content is written in first-person (authorial voice).
+## 8. Voice Model (Critical)
+
+• Canonical content is written in first-person (authorial voice).
    • LLMs and agents must translate first-person intent into neutral/system constraints at runtime.
    • First-person language must not appear in generated code, system plans, or operational outputs unless explicitly requested.
 
 This translation is the responsibility of the consuming agent.
 
-⸻
+---
 
-9. LLM Behavior Contract
+## 9. LLM Behavior Contract
 
-General Rules
+**General Rules**
 • Retrieve relevant content before answering
 • Ground answers in visible artifacts
 • Prefer navigation and UI actions over text
@@ -131,19 +126,19 @@ General Rules
 • Ask permission before providing deeper explanations
 • Explicitly state when information is missing
 
-Disallowed Behavior
+**Disallowed Behavior**
 • Inventing motivations or future plans
 • Overgeneralizing from a single project
 • Claiming success without evidence
 • Narrating what is already visible on screen
 
-⸻
+---
 
-10. Generative UI Requirements
+## 10. Generative UI Requirements
 
 The LLM may only use a fixed set of UI action primitives.
 
-Approved UI Actions (v0)
+**Approved UI Actions (v0)**
 • open(page)
 • scroll_to(section_id)
 • highlight(section_id)
@@ -159,62 +154,69 @@ The LLM must:
 • explain why an action is relevant in one sentence or less
 • never describe UI elements redundantly
 
-⸻
+---
 
-11. Evidence-Based Completion (System Principle)
+## 11. Evidence-Based Completion (System Principle)
 
 All implementation work related to this product—whether by humans or agents—must follow evidence-based completion.
 
-A task is only complete when it includes: 1. What changed (diff summary) 2. What was run (build/tests/commands) 3. Visual proof (screenshots, recordings, or rendered output) 4. A filled self-audit checklist
+A task is only complete when it includes:
+
+1. What changed (diff summary)
+2. What was run (build/tests/commands)
+3. Visual proof (screenshots, recordings, or rendered output)
+4. A filled self-audit checklist
 
 If any of these are missing, the task is incomplete.
 
-⸻
+---
 
-12. Accessibility & Hands-Free Support
-    • All navigation must be triggerable via voice
-    • The LLM must briefly confirm navigation actions during voice use
-    • UI actions must not require precise pointer interaction
+## 12. Accessibility & Hands-Free Support
 
-⸻
+• All navigation must be triggerable via voice
+• The LLM must briefly confirm navigation actions during voice use
+• UI actions must not require precise pointer interaction
 
-13. Success Metrics (v0)
-    • Users reach a relevant artifact within 1–2 conversational turns
-    • Reduced bounce rate on first visit
-    • Increased time-to-orientation (users stay because they’re guided)
-    • LLM correctly responds with “not covered” when information is missing
-    • No claims of completion without evidence
+---
 
-⸻
+## 13. Success Metrics (v0)
 
-14. Phased Rollout
+• Users reach a relevant artifact within 1–2 conversational turns
+• Reduced bounce rate on first visit
+• Increased time-to-orientation (users stay because they're guided)
+• LLM correctly responds with "not covered" when information is missing
+• No claims of completion without evidence
 
-Phase 0 — Canon
+---
+
+## 14. Phased Rollout
+
+**Phase 0 — Canon**
 • Write and publish canonical content
 • Add stable anchors and metadata
 
-Phase 1 — Conversational UI
+**Phase 1 — Conversational UI**
 • Chat-first interface
 • UI action primitives
 • Content-driven navigation
 
-Phase 2 — Evidence & Self-Audit
+**Phase 2 — Evidence & Self-Audit**
 • Completion reports
 • Visual proof capture
 • Self-audit enforcement
 
-Phase 3 — MCP Export
+**Phase 3 — MCP Export**
 • Serve canon via MCP
 • Enable reuse by external agents
 
-⸻
+---
 
-15. Platform Constraints
+## 15. Platform Constraints
 
-Target Hosting
+**Target Hosting**
 • Cloudflare Pages + Workers (preferred)
 
-Runtime Constraint
+**Runtime Constraint**
 • Must run on Cloudflare Workers runtime (no Node-only APIs)
 
 Default Architecture
@@ -230,7 +232,7 @@ Build Guidance
 • Prefer Vite + static builds over SSR frameworks for v0
 • SSR adds complexity without payoff at this stage
 
-⸻
+---
 
 16. Risks & Mitigations
 
@@ -243,7 +245,7 @@ Mitigation: Versioning + changelog
 Risk: Hallucinations
 Mitigation: Retrieval-first + explicit refusal when missing
 
-⸻
+---
 
 17. Out of Scope (Explicit)
     • Monetization
@@ -252,10 +254,10 @@ Mitigation: Retrieval-first + explicit refusal when missing
     • Personalized recommendations
     • Teaching curriculum
 
-⸻
+---
 
 Status
 • PRD complete for v0
 • Ready to proceed to Canon v0.1 artifacts
 
-⸻
+---

@@ -1,15 +1,8 @@
-Below is Canon v0.1 — Definition of Done & Evidence Policy.
-This is the enforcement backbone of the canon. It replaces repeated QA reminders with a clear, reusable contract.
+# ✅ Definition of Done & Evidence Policy
 
-It is written in first person, website-ready, and structured so agents can translate it into neutral/system requirements at runtime.
+**Canon v0.1**
 
-Paste this into /about/definition-of-done.md.
-
-⸻
-
-Definition of Done & Evidence Policy
-
-Canon v0.1
+> This is the enforcement backbone of the canon. It replaces repeated QA reminders with a clear, reusable contract.
 
 This page defines what I mean when I say work is “done.”
 If these conditions are not met, the work is not complete, regardless of confidence or explanation.
@@ -21,31 +14,32 @@ This policy applies to:
 • automation
 • AI-assisted outputs
 
-⸻
+---
 
-Core Principle
+## 📌 Core Principle
 
 I do not consider work complete unless it is verified with evidence.
 
 Reasoning alone is insufficient.
 Assertions like “this should work” or “this is correct” do not count as completion.
 
-⸻
+---
 
-Definition of Done (DoD)
+## 📋 Definition of Done (DoD)
 
-A task is only considered done when all of the following are present: 1. Change Description
-What changed, where, and why. 2. Verification Performed
-What was run or checked to verify the change. 3. Observed Behavior
-What actually happened when the system was run. 4. Evidence Produced
-Proof that the behavior matches the intended outcome. 5. Self-Audit Completed
-A brief audit against constraints and decision rules.
+A task is only considered done when all of the following are present:
+
+1. **Change Description** — What changed, where, and why.
+2. **Verification Performed** — What was run or checked to verify the change.
+3. **Observed Behavior** — What actually happened when the system was run.
+4. **Evidence Produced** — Proof that the behavior matches the intended outcome.
+5. **Self-Audit Completed** — A brief audit against constraints and decision rules.
 
 If any of these is missing, the task is incomplete.
 
-⸻
+---
 
-Evidence Requirements
+## 📎 Evidence Requirements
 
 Evidence must demonstrate actual behavior, not expected behavior.
 
@@ -61,9 +55,9 @@ Evidence must be:
 • specific to the task
 • clearly labeled
 
-⸻
+---
 
-Visual Verification (Preferred)
+## 👁️ Visual Verification (Preferred)
 
 If the work affects:
 • UI
@@ -74,16 +68,16 @@ If the work affects:
 
 Then visual proof is required.
 
-What counts as visual proof
+**What counts as visual proof**
 • screenshot showing the correct state
 • short recording demonstrating the interaction
 • before/after comparison when relevant
 
 If visual proof cannot be produced, the reason must be stated explicitly.
 
-⸻
+---
 
-Verification Must Be Performed
+## 🔬 Verification Must Be Performed
 
 I expect the system to be run or exercised, not just reasoned about.
 
@@ -96,9 +90,9 @@ Verification may include:
 
 If verification cannot be performed (missing environment, credentials, etc.), this must be stated clearly, along with a proposed alternative.
 
-⸻
+---
 
-Self-Audit Requirement
+## 🔍 Self-Audit Requirement
 
 Each completed task must include a short self-audit covering:
 • intended outcome
@@ -109,9 +103,9 @@ Each completed task must include a short self-audit covering:
 
 The purpose is reflection and traceability, not bureaucracy.
 
-⸻
+---
 
-What Does Not Count as Done
+## ⚠️ What Does Not Count as Done
 
 The following do not qualify as completion:
 • “It compiles”
@@ -122,9 +116,9 @@ The following do not qualify as completion:
 
 These may be intermediate states, but they are not “done.”
 
-⸻
+---
 
-Partial Completion
+## ⏳ Partial Completion
 
 If work is partially complete, it must be labeled as such.
 
@@ -136,9 +130,9 @@ A valid partial completion includes:
 
 Ambiguity is worse than incompleteness.
 
-⸻
+---
 
-Explicit Exceptions
+## 🚫 Explicit Exceptions
 
 This policy may be relaxed only when explicitly stated, such as for:
 • conceptual design discussions
@@ -147,9 +141,9 @@ This policy may be relaxed only when explicitly stated, such as for:
 
 In those cases, the output must be clearly labeled “unverified”.
 
-⸻
+---
 
-Agent Responsibility
+## 🤖 Agent Responsibility
 
 Agents and collaborators are expected to:
 • retrieve this policy before claiming completion
@@ -161,9 +155,9 @@ If evidence cannot be produced, the correct response is:
 
 “This is not complete yet.”
 
-⸻
+---
 
-Closing Note
+## 💡 Closing Note
 
 This policy exists to:
 • prevent false confidence
@@ -174,11 +168,9 @@ This policy exists to:
 It is not meant to slow work down.
 It is meant to stop work from being incorrectly declared finished.
 
-⸻
+---
 
-Status
-• Canon v0.1 — Definition of Done & Evidence Policy complete
-• Ready to proceed to Canon v0.1 — Self-Audit Checklist
+## ✅ Status
 
-If you want to continue, say:
-“Proceed with Canon v0.1 — self-audit checklist.”
+- Canon v0.1 — Definition of Done & Evidence Policy complete
+- Ready to proceed to Canon v0.1 — Self-Audit Checklist

@@ -1,16 +1,12 @@
-Artifact 2
+# 🧭 ODD + Canon + Evidence — 1-Page Orientation Map
 
-ODD + Canon + Evidence — 1-Page Orientation Map
+> This is not a workflow. It is a mental model.
 
-(Textual + Visual Description)
+---
 
-This is not a workflow.
-It is a mental model.
+## 🎯 The Core Idea
 
-⸻
-
-The Core Idea
-
+```
         Intent
           |
           v
@@ -26,13 +22,14 @@ Decisions
 |
 v
 Evidence
-|
-v
-Outcomes
+        |
+        v
+      Outcomes
+```
 
-⸻
+---
 
-How to read this map
+## 📖 How to Read This Map
 • ODD explains why and what we care about
 • Canon explains how decisions tend to be shaped
 • Decisions are local, contextual, and human
@@ -42,12 +39,14 @@ How to read this map
 Nothing here enforces anything.
 Everything here informs something.
 
-⸻
+---
 
-Where maturity lives (not gates)
+## 📊 Where Maturity Lives (Not Gates)
 
+```
 Exploration ──────→ Validation ──────→ Commitment
-(PoC) (Pilot) (Production)
+   (PoC)            (Pilot)         (Production)
+```
 
 Rigor increases →
 Evidence expectations increase →
@@ -59,24 +58,24 @@ Governance tightens →
 
 No sharp lines. No ceremony required.
 
-⸻
+---
 
-What this map explicitly rejects
+## 🚫 What This Map Explicitly Rejects
 • “If it compiles, it’s done.”
 • “Trust the explanation.”
 • “One true workflow.”
 • “Governance replaces judgment.”
 
-⸻
+---
 
-Why this map exists
+## 💡 Why This Map Exists
 • To explain the system in under 60 seconds
 • To anchor conversations without debate
 • To keep humans oriented while tools change
 
-⸻
+---
 
-Why these two artifacts are enough for now
+## ✅ Why These Two Artifacts Are Enough for Now
 • They surface risk without prescribing control
 • They encode wisdom without freezing behavior
 • They respect maturity without formalizing it

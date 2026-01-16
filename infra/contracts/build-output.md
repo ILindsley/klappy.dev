@@ -1,4 +1,4 @@
-# Build Output Contract
+# 📜 Build Output Contract
 
 > **This is the ONLY surviving build rule across all attempts.**
 > Do not modify this file during an attempt unless the PRD explicitly requires it.

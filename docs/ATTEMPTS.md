@@ -1,4 +1,4 @@
-# Attempt Lifecycle — Orientation
+# 🧭 Attempt Lifecycle — Orientation
 
 > **If the repository is dirty, conclusions drawn from it are invalid.**
 
@@ -6,7 +6,7 @@ This document explains how PRDs are versioned, how attempts are sealed, and wher
 
 ---
 
-## Core Principles
+## 📌 Core Principles
 
 1. **One active implementation:** `/src/` is disposable; prior attempts are preserved by git history + sealed records.
 2. **PRD versions are first-class:** A PRD version can have multiple attempts.
@@ -30,7 +30,7 @@ If the PRD is flawed, revise `/docs/PRD.md` and start a new attempt (or new PRD 
 
 ---
 
-## What is an Attempt?
+## 🧠 What is an Attempt?
 
 An **attempt** is a bounded effort to implement a specific PRD version. When an attempt is complete (or abandoned), it is **sealed**:
 
@@ -55,7 +55,7 @@ See [Quantum Development](/canon/odd/appendices/quantum-development.md) for the 
 
 ---
 
-## Folder Structure
+## 📁 Folder Structure
 
 ```
 /src/                           # current implementation (disposable)
@@ -84,7 +84,7 @@ See [Quantum Development](/canon/odd/appendices/quantum-development.md) for the 
 
 ---
 
-## META.json Schema
+## 📎 META.json Schema
 
 Each attempt contains a `META.json` with canonical pointers:
 
@@ -110,7 +110,7 @@ Each attempt contains a `META.json` with canonical pointers:
 
 ---
 
-## How to Seal an Attempt
+## ✅ How to Seal an Attempt
 
 1. Ensure all DoD requirements are met
 2. Create `attempts/prd-vX.Y/` if it doesn't exist
@@ -134,7 +134,7 @@ git push --follow-tags
 
 ---
 
-## How to Start a New Attempt
+## 🚀 How to Start a New Attempt
 
 ### Same PRD version (retry)
 
@@ -165,7 +165,7 @@ git push --follow-tags
 
 ---
 
-## Attempt Registry (Preventing Collisions)
+## ⚠️ Attempt Registry (Preventing Collisions)
 
 When running parallel agents/worktrees, attempt numbers must be reserved to prevent "who is attempt-001 vs 002" collisions.
 
@@ -193,7 +193,7 @@ When running parallel agents/worktrees, attempt numbers must be reserved to prev
 
 ---
 
-## Fresh Start Requirement
+## 🧹 Fresh Start Requirement
 
 **Attempts must start from a clean `/src/` to be truly independent.**
 
@@ -210,7 +210,7 @@ The minimal shell proves the build works but has no UI opinions.
 
 ---
 
-## Artifacts Always Merge
+## 📦 Artifacts Always Merge
 
 **Failed attempts still contribute learnings.**
 
@@ -235,7 +235,7 @@ This ensures every attempt contributes to the knowledge base.
 
 ---
 
-## What Evolves vs. What is Frozen
+## 🔄 What Evolves vs. What is Frozen
 
 | Category                    | Evolves? | Notes                    |
 | --------------------------- | -------- | ------------------------ |
@@ -248,7 +248,7 @@ This ensures every attempt contributes to the knowledge base.
 
 ---
 
-## Why This Structure?
+## 💡 Why This Structure?
 
 - **No filesystem sprawl:** One `/src/`, not `/app-v1`, `/app-v2`, etc.
 - **PRD-first:** Clear hierarchy of what was attempted
@@ -258,7 +258,7 @@ This ensures every attempt contributes to the knowledge base.
 
 ---
 
-## Branch Naming Convention
+## 🌿 Branch Naming Convention
 
 During development, use ephemeral branches:
 
@@ -274,7 +274,7 @@ These branches:
 
 ---
 
-## Preview URLs
+## 🔗 Preview URLs
 
 When sealing an attempt with UI changes:
 
@@ -289,7 +289,7 @@ When sealing an attempt with UI changes:
 
 ---
 
-## Resurrection
+## 🔮 Resurrection
 
 To resurrect any sealed attempt:
 
@@ -308,7 +308,7 @@ The attempt folder contains everything needed:
 
 ---
 
-## Decisions (Current Policy)
+## 📋 Decisions (Current Policy)
 
 | Decision                                     | Answer                                                         |
 | -------------------------------------------- | -------------------------------------------------------------- |
@@ -322,7 +322,7 @@ This matches the maturity model: don't over-govern early.
 
 ---
 
-## Tooling Summary
+## 🛠️ Tooling Summary
 
 | Command | Purpose |
 |---------|---------|

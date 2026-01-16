@@ -1,4 +1,4 @@
-# ODD Appendix — Attempt Lifecycle
+# 🔄 ODD Appendix — Attempt Lifecycle
 
 **Status:** Orientation  
 **Audience:** Internal / Canon  

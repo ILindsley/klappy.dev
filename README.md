@@ -1,4 +1,4 @@
-# klappy.dev
+# 🧠 klappy.dev
 
 This repository is a working surface for ideas, experiments, and reference documents about how software is designed and built in an AI-accelerated world.
 
