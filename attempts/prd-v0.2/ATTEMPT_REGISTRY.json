@@ -1,6 +1,6 @@
 {
   "prd_version": "0.2",
-  "next_attempt": 4,
+  "next_attempt": 5,
   "reserved": [
     {
       "attempt": 1,
@@ -16,6 +16,11 @@
       "attempt": 3,
       "reserved_at": "2026-01-16T02:58:19.954Z",
       "agent": "spawn-3"
+    },
+    {
+      "attempt": 4,
+      "reserved_at": "2026-01-16T02:58:20.624Z",
+      "agent": "spawn-4"
     }
   ],
   "sealed": []
