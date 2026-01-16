@@ -89,3 +89,18 @@ This configuration ensures:
 - Nuclear resets on `main` never affect production
 - Agents can work in parallel without coordination
 - One winner ships; losers don't pollute production
+
+---
+
+## 📝 Note on Branch Naming
+
+> **Branch names are optional convenience. Provenance lives in META.json.**
+
+Cloudflare does not depend on specific branch naming conventions. Any branch that:
+- Is not `prod`
+- Produces a valid `/dist` on build
+
+Will get a preview URL.
+
+The canonical record of "who made what" lives in `META.json`, not in the branch name.
+This keeps the system antifragile — branch naming can drift without breaking provenance.

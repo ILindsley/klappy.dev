@@ -6,26 +6,30 @@ CRITICAL: READ THIS ENTIRE PROMPT. DO NOT STOP UNTIL ALL COMPLETION GATES PASS.
 
 FIRST ACTIONS (MANDATORY — run these commands first):
 
-  npm run attempt:register -- --agent <YOUR_AGENT_ID> --model <YOUR_MODEL>
+  npm run attempt:register -- --tool cursor --agent <YOUR_AGENT_ID> --model <YOUR_MODEL>
   npm run attempt:nuke
 
-WHY THIS ORDER: Register first to capture provenance (agent, model, timestamp).
+WHY THIS ORDER: Register first to capture provenance (tool, agent, model, timestamp).
 Then nuke to start fresh. If nuke fails, at least we know an attempt was started.
 
-AGENT AND MODEL IDENTIFICATION (for provenance):
+PROVENANCE IDENTIFICATION:
 
-  Replace <YOUR_AGENT_ID> with a short label like: cursor-a, cursor-b, opus-1
-  Replace <YOUR_MODEL> with your model identifier like: opus-4.5, gpt-4o, claude-sonnet
+  --tool:  The development tool (cursor, vscode, cli, etc.)
+  --agent: Your agent ID within the tool (a, b, cursor-a, etc.)
+  --model: Your AI model identifier (opus-4.5, gpt-4o, claude-sonnet, etc.)
 
   Examples:
-    npm run attempt:register -- --agent cursor-a --model "opus-4.5"
-    npm run attempt:register -- --agent cursor-b --model "gpt-4o"
+    npm run attempt:register -- --tool cursor --agent a --model "opus-4.5"
+    npm run attempt:register -- --tool cursor --agent b --model "gpt-4o"
+    npm run attempt:register -- --tool vscode --agent copilot-1 --model "gpt-4"
 
   If you don't know your model, use:
-    npm run attempt:register -- --agent cursor-a --model "unknown"
+    npm run attempt:register -- --tool cursor --agent a --model "unknown"
 
-  WHY THIS MATTERS: Provenance tracking. Without knowing which model made which
-  attempt, comparisons between attempts are meaningless.
+  WHY THIS MATTERS: Provenance tracking. Without knowing which tool/model made 
+  which attempt, comparisons between attempts are meaningless.
+  
+  Branch names are optional convenience. Provenance lives in META.json.
 
 If you don't have terminal access, ask the human to run these for you.
 

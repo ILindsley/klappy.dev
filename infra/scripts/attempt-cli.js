@@ -101,7 +101,8 @@ function parseArgs() {
     prd: null, 
     attempt: null,
     n: 1,
-    agent: 'default',
+    tool: 'cursor',       // Tool provenance (cursor, vscode, cli, etc.)
+    agent: 'default',     // Agent ID within tool (cursor-a, cursor-b, etc.)
     model: null,          // Model provenance (opus-4.5, gpt-4o, etc.)
     worktree: false,
     worktreeDir: null,
@@ -128,6 +129,9 @@ function parseArgs() {
       i++;
     } else if (arg === '--n' && next) {
       result.n = parseInt(next, 10);
+      i++;
+    } else if (arg === '--tool' && next) {
+      result.tool = next;
       i++;
     } else if (arg === '--agent' && next) {
       result.agent = next;
@@ -892,7 +896,7 @@ Agents will now start from a clean main with all the latest scripts.
  *   - branch (git branch name)
  */
 function cmdRegister(opts) {
-  const { agent, model, dryRun } = opts;
+  const { tool, agent, model, dryRun } = opts;
   
   // Parse PRD version from /docs/PRD.md (single source of truth)
   const activePrd = parsePrdVersion();
@@ -921,14 +925,14 @@ function cmdRegister(opts) {
   if (dryRun) console.log('  [DRY RUN MODE]\n');
   
   // ========================================
-  // MODEL PROVENANCE WARNING
+  // PROVENANCE WARNINGS
   // ========================================
   const modelId = model || 'unknown';
   if (!model) {
     console.log('  ⚠️  WARNING: --model not provided');
     console.log('     Provenance will be degraded. Re-run with --model if possible.');
     console.log('');
-    console.log('     Example: npm run attempt:register -- --agent cursor-a --model "opus-4.5"');
+    console.log('     Example: npm run attempt:register -- --tool cursor --agent a --model "opus-4.5"');
     console.log('');
   }
   
@@ -970,16 +974,26 @@ function cmdRegister(opts) {
   // Write .attempt.json in worktree root (local provenance)
   console.log('2️⃣  Writing .attempt.json...');
   const attemptMeta = {
-    prd: `v${prd}`,
+    // IDENTITY
+    prd_version: `v${prd}`,
     run_id: runId,
-    agent: agent,
-    model: modelId,
+    
+    // PROVENANCE (who/what made this)
+    tool: tool,           // cursor, vscode, cli, etc.
+    agent: agent,         // agent ID within tool (a, b, cursor-a, etc.)
+    model: modelId,       // AI model (opus-4.5, gpt-4o, unknown)
+    
+    // GIT STATE (captured at registration)
     worktree_path: worktreePath,
     branch: currentBranch || targetBranch,
-    target_branch: targetBranch,
+    target_branch: targetBranch,  // suggested branch name (convenience, not required)
     git_head: gitHead,
     is_detached: isDetached,
+    
+    // TIMESTAMPS
     registered_at: timestamp,
+    
+    // ARTIFACT LOCATION
     runs_dir: runsDir
   };
   if (!dryRun) {
@@ -988,18 +1002,23 @@ function cmdRegister(opts) {
   console.log('  ✅ Written .attempt.json\n');
   
   // Write skeleton META.json in run folder (merges to main)
+  // NOTE: Branch names are optional convenience. Provenance lives in META.
   console.log('3️⃣  Creating skeleton files...');
   const meta = {
+    // IDENTITY
     prd_version: `v${prd}`,
     run_id: runId,
     attempt: null, // Will be assigned during finalize
     
-    // PROVENANCE (captured at registration)
-    agent: agent,
-    model: modelId,
+    // PROVENANCE (who/what made this — this is the canonical record)
+    tool: tool,           // cursor, vscode, cli, etc.
+    agent: agent,         // agent ID within tool
+    model: modelId,       // AI model identifier
+    
+    // GIT STATE (captured at registration)
     worktree_path: worktreePath,
     branch: currentBranch || targetBranch,
-    target_branch: targetBranch,
+    target_branch: targetBranch,  // suggested branch (convenience only)
     git_head: gitHead,
     
     // TIMESTAMPS
@@ -1027,7 +1046,8 @@ function cmdRegister(opts) {
   console.log(`  PRD Version:   v${prd}`);
   console.log(`  Run ID:        ${runId}`);
   console.log('');
-  console.log('  PROVENANCE:');
+  console.log('  PROVENANCE (canonical record in META.json):');
+  console.log(`    Tool:        ${tool}`);
   console.log(`    Agent:       ${agent}`);
   console.log(`    Model:       ${modelId}${modelId === 'unknown' ? ' ⚠️' : ''}`);
   console.log(`    Git HEAD:    ${gitHead.substring(0, 8)}`);
@@ -1892,10 +1912,11 @@ COMMANDS:
       ⚠️  Requires --force on main
       ✅ Allowed on attempt/* branches
 
-  npm run attempt:register -- --agent <id> --model <model>
+  npm run attempt:register -- --tool <tool> --agent <id> --model <model>
       Register a new run with provenance (PRD version auto-detected)
-      --agent: human-friendly label (cursor-a, cursor-b, etc.)
-      --model: AI model identifier (opus-4.5, gpt-4o, etc.)
+      --tool:  development tool (cursor, vscode, cli, etc.) [default: cursor]
+      --agent: agent ID within tool (a, b, cursor-a, etc.) [default: default]
+      --model: AI model identifier (opus-4.5, gpt-4o, etc.) [required for good provenance]
 
   npm run attempt:submit
       Commit and push work (triggers Cloudflare preview)

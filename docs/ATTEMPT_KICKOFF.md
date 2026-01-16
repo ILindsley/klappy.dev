@@ -25,11 +25,12 @@ Each agent follows `/docs/PROMPT_ATTEMPT_KICKOFF.txt`.
 
 1. **Register** (provenance first)
    ```bash
-   npm run attempt:register -- --agent <id> --model <model>
+   npm run attempt:register -- --tool <tool> --agent <id> --model <model>
    ```
    - Creates `.attempt.json` with run_id and provenance
    - Auto-reads PRD version from `/docs/PRD.md`
-   - Example: `npm run attempt:register -- --agent cursor-a --model "opus-4.5"`
+   - Example: `npm run attempt:register -- --tool cursor --agent a --model "opus-4.5"`
+   - **Branch names are convenience. Provenance lives in META.json.**
 
 2. **Nuke**
    ```bash
@@ -99,7 +100,7 @@ npm run attempt:promote -- --prd <active> --attempt 001
 | Command | Purpose |
 |---------|---------|
 | `npm run attempt:nuke` | Blank slate — delete `/src`, configs |
-| `npm run attempt:register -- --agent <id> --model <model>` | Register run with provenance |
+| `npm run attempt:register -- --tool <t> --agent <id> --model <m>` | Register run with provenance |
 | `npm run attempt:submit` | Commit + push (triggers CF preview) |
 | `npm run attempt:import -- --prd <v>` | Pull artifacts from branches to main |
 | `npm run attempt:finalize -- --prd <v>` | Assign attempt numbers |
