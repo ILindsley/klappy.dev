@@ -7,9 +7,12 @@ CRITICAL: READ THIS ENTIRE PROMPT. DO NOT STOP UNTIL ALL COMPLETION GATES PASS.
 FIRST ACTIONS (MANDATORY — run these commands first):
 
   npm run attempt:nuke
-  npm run attempt:register -- --prd v0.2
+  npm run attempt:register
 
 If you don't have terminal access, ask the human to run these for you.
+
+NOTE: attempt:register auto-reads the PRD version from /docs/PRD.md.
+      No --prd argument needed. This keeps the prompt version-agnostic.
 
 ---
 
@@ -17,11 +20,12 @@ If you don't have terminal access, ask the human to run these for you.
 CONTEXT: WHAT IS HAPPENING
 ================================================================================
 
-- You are on an attempt/* branch (e.g., attempt/prd-v0.2/a001)
+- You are on an attempt/* branch (e.g., attempt/prd-vX.Y/a001)
 - /src is now EMPTY. That is intentional. Start from scratch.
 - Production is on the `prod` branch — you cannot affect it
 - Your work will deploy to a Cloudflare PREVIEW URL (not production)
 - You must choose your stack from scratch (any framework or none)
+- The active PRD version comes from /docs/PRD.md (single source of truth)
 
 The only requirement: your build must produce /dist per the deploy contract.
 

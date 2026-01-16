@@ -38,6 +38,40 @@ const ROOT = join(__dirname, '../..');
 // Utilities
 // ============================================================
 
+/**
+ * Parse PRD version from /docs/PRD.md (single source of truth).
+ * 
+ * Looks for:
+ *   | **PRD Version** | v0.3 |
+ * OR:
+ *   PRD Version: v0.3
+ * 
+ * Returns version without 'v' prefix (e.g., "0.3").
+ */
+function parsePrdVersion() {
+  const prdPath = join(ROOT, 'docs', 'PRD.md');
+  
+  if (!existsSync(prdPath)) {
+    return null;
+  }
+  
+  const content = readFileSync(prdPath, 'utf8');
+  
+  // Match table format: | **PRD Version** | v0.3 |
+  const tableMatch = content.match(/\|\s*\*\*PRD Version\*\*\s*\|\s*v?([0-9.]+)\s*\|/i);
+  if (tableMatch) {
+    return tableMatch[1];
+  }
+  
+  // Match key-value format: PRD Version: v0.3
+  const kvMatch = content.match(/PRD Version:\s*v?([0-9.]+)/i);
+  if (kvMatch) {
+    return kvMatch[1];
+  }
+  
+  return null;
+}
+
 function run(cmd, options = {}) {
   const { silent, dryRun, cwd } = options;
   if (dryRun) {
@@ -609,38 +643,38 @@ function cmdReset(opts) {
   // ========================================
   if (!opts.noNuke) {
     console.log('1️⃣  Nuking /src...\n');
-    console.log('  Will delete:');
-    console.log('    - /src (entire directory)');
-    console.log('    - /app (if exists)');
-    console.log('    - vite.config.js (framework-specific)');
-    console.log('');
+  console.log('  Will delete:');
+  console.log('    - /src (entire directory)');
+  console.log('    - /app (if exists)');
+  console.log('    - vite.config.js (framework-specific)');
+  console.log('');
   } else {
     console.log('1️⃣  Skipping /src nuke (production protected)\n');
   }
   
   if (!opts.noNuke) {
-    const srcPath = join(ROOT, 'src');
-    const appPath = join(ROOT, 'app');
-    const viteConfig = join(ROOT, 'vite.config.js');
-    
-    // Delete /src
-    if (existsSync(srcPath)) {
-      if (!dryRun) rmSync(srcPath, { recursive: true });
-      console.log('  ✅ Deleted /src');
-    } else {
-      console.log('  ⚠️  /src does not exist');
-    }
-    
-    // Delete /app if present
-    if (existsSync(appPath)) {
-      if (!dryRun) rmSync(appPath, { recursive: true });
-      console.log('  ✅ Deleted /app');
-    }
-    
-    // Delete vite.config.js (framework-specific)
-    if (existsSync(viteConfig)) {
-      if (!dryRun) rmSync(viteConfig);
-      console.log('  ✅ Deleted vite.config.js');
+  const srcPath = join(ROOT, 'src');
+  const appPath = join(ROOT, 'app');
+  const viteConfig = join(ROOT, 'vite.config.js');
+  
+  // Delete /src
+  if (existsSync(srcPath)) {
+    if (!dryRun) rmSync(srcPath, { recursive: true });
+    console.log('  ✅ Deleted /src');
+  } else {
+    console.log('  ⚠️  /src does not exist');
+  }
+  
+  // Delete /app if present
+  if (existsSync(appPath)) {
+    if (!dryRun) rmSync(appPath, { recursive: true });
+    console.log('  ✅ Deleted /app');
+  }
+  
+  // Delete vite.config.js (framework-specific)
+  if (existsSync(viteConfig)) {
+    if (!dryRun) rmSync(viteConfig);
+    console.log('  ✅ Deleted vite.config.js');
     }
   }
   
@@ -815,27 +849,37 @@ Agents will now start from a clean main with all the latest scripts.
  * 
  * This is called by each agent inside its worktree at the start of work.
  * No attempt numbers are assigned yet - that happens during finalize.
+ * 
+ * PRD version is automatically read from /docs/PRD.md (single source of truth).
+ * If --prd is provided, it must match PRD.md or the command fails.
  */
 function cmdRegister(opts) {
-  const { prd, agent, dryRun } = opts;
+  const { agent, dryRun } = opts;
   
-  if (!prd) {
-    console.log(`
-Usage: npm run attempt:register -- --prd <version> [--agent <label>]
-
-Example:
-  npm run attempt:register -- --prd v0.2
-  npm run attempt:register -- --prd v0.2 --agent agent-1
-
-Options:
-  --prd <version>   PRD version (required)
-  --agent <label>   Agent identifier (default: "default")
-  --dry-run         Show what would happen
-`);
-    process.exit(1);
+  // Parse PRD version from /docs/PRD.md (single source of truth)
+  const activePrd = parsePrdVersion();
+  
+  if (!activePrd) {
+    fail('Could not parse PRD version from /docs/PRD.md.\n' +
+         '   Expected format: | **PRD Version** | v0.3 | (in table)\n' +
+         '   Or: PRD Version: v0.3');
   }
   
+  // If --prd was provided, validate it matches the active PRD
+  if (opts.prd && opts.prd !== activePrd) {
+    fail(`PRD mismatch detected!\n\n` +
+         `   --prd argument:     v${opts.prd}\n` +
+         `   /docs/PRD.md says:  v${activePrd}\n\n` +
+         `   The PRD version in /docs/PRD.md is the source of truth.\n` +
+         `   Update your prompt or use:\n\n` +
+         `     npm run attempt:register\n\n` +
+         `   (no --prd argument needed)`);
+  }
+  
+  const prd = activePrd;
+  
   console.log(`\n🎫 Registering run for PRD v${prd}\n`);
+  console.log(`  (Version auto-detected from /docs/PRD.md)\n`);
   if (dryRun) console.log('  [DRY RUN MODE]\n');
   
   // Generate unique run ID
@@ -1746,8 +1790,8 @@ COMMANDS:
       ⚠️  Requires --force on main
       ✅ Allowed on attempt/* branches
 
-  npm run attempt:register -- --prd v0.2
-      Register a new run (creates unique run_id, writes to _runs/)
+  npm run attempt:register
+      Register a new run (auto-reads PRD version from /docs/PRD.md)
 
   npm run attempt:submit
       Commit and push work (triggers Cloudflare preview)
