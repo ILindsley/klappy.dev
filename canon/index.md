@@ -46,6 +46,63 @@ Nothing in the Canon executes by itself.
 
 ---
 
+## 🚀 Start Here
+
+**Constraints** — baseline assumptions and non-negotiables that shape every decision. What must be true for this work to make sense?
+
+**Definition of Done** — what qualifies as completed work and what evidence is required. When can work honestly be called done?
+
+These two documents anchor everything else.
+
+---
+
+## 🔍 If You Want the Philosophy
+
+**ODD Manifesto** — the philosophical and operational foundation of Outcomes-Driven Development. Why this approach exists.
+
+**Maturity Model** — how rigor changes as projects mature. When different expectations become binding.
+
+**Decision Rules** — default heuristics used when multiple valid options exist.
+
+---
+
+## 🧩 If You Want the Edge Cases
+
+The appendices extend understanding without introducing enforcement:
+
+• **Attempt Lifecycle** — how PRD versions, attempts, and evidence are preserved
+• **Quantum Development** — evaluating multiple paths before revising intent
+• **Repository Topology** — what lives where and what changes when
+• **Misuse Patterns** — common failure modes and how ODD gets misapplied
+
+These are diagnostic and orientation documents, not requirements.
+
+---
+
+## 🔒 Public vs Internal Boundary
+
+• `/odd/README.md` → public-facing ODD (shareable, human-friendly)
+• `/canon/**` → internal reference (governance artifacts, precise language)
+
+Public documents explain intent.
+Canon documents preserve precision.
+
+---
+
+## 📖 Precedence & Interpretation (Orientation Only)
+
+A useful mental model for reading:
+
+1. ODD Manifesto provides philosophical grounding
+2. Maturity Model explains when rigor increases
+3. Constraints shape the solution space
+4. Decision Rules guide choices
+5. Evidence Policies define completion
+
+If documents appear to conflict, maturity context and explicit tradeoffs usually explain why.
+
+---
+
 ## 📁 Canon Structure
 
 ```text
@@ -131,7 +188,7 @@ Defines what qualifies as acceptable visual evidence.
 
 Answers:
 
-What does “prove it visually” mean?
+What does "prove it visually" mean?
 
 ---
 
@@ -186,30 +243,6 @@ How PRD versions, attempts, evidence, and deployments are preserved across itera
 Evaluating multiple execution paths before revising intent. Explains why divergence is signal, not waste.
 • Repository Topology (odd/appendices/repo-topology.md)
 What lives where and what changes when. Encodes App/Content/Infrastructure decoupling.
-
----
-
-## 🔒 Public vs Internal Boundary
-
-• `/odd/README.md` → public-facing ODD (shareable, human-friendly)
-• `/canon/**` → internal reference (governance artifacts, precise language)
-
-Public documents explain intent.
-Canon documents preserve precision.
-
----
-
-## 📖 Precedence & Interpretation (Orientation Only)
-
-A useful mental model for reading:
-
-1. ODD Manifesto provides philosophical grounding
-2. Maturity Model explains when rigor increases
-3. Constraints shape the solution space
-4. Decision Rules guide choices
-5. Evidence Policies define completion
-
-If documents appear to conflict, maturity context and explicit tradeoffs usually explain why.
 
 ---
 

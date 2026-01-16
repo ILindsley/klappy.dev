@@ -1,7 +1,7 @@
 {
   "pack": {
     "name": "klappy-canon",
-    "version": "0.1.3",
+    "version": "0.2.0",
     "updated_at": "2026-01-16",
     "description": "Canonical orientation, constraints, decision rules, evidence policies, and ODD appendices used across klappy.dev.",
     "public_entrypoint": "klappy://public/odd",
@@ -16,6 +16,7 @@
       "type": "text/markdown",
       "audience": "public",
       "exposure": "nav",
+      "tier": 0,
       "voice": "neutral",
       "stability": "semi_stable",
       "tags": ["odd", "public", "overview"]
@@ -27,6 +28,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
+      "tier": 1,
       "voice": "neutral",
       "stability": "semi_stable",
       "tags": ["canon", "index", "orientation"]
@@ -38,6 +40,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
+      "tier": 2,
       "voice": "neutral",
       "stability": "semi_stable",
       "tags": ["meta", "changelog", "versioning"]
@@ -49,6 +52,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
+      "tier": 1,
       "voice": "first_person",
       "stability": "stable",
       "tags": ["constraints", "assumptions"]
@@ -60,6 +64,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
+      "tier": 2,
       "voice": "first_person",
       "stability": "stable",
       "tags": ["decision-rules", "heuristics"]
@@ -71,6 +76,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
+      "tier": 1,
       "voice": "first_person",
       "stability": "semi_stable",
       "tags": ["definition-of-done", "evidence"]
@@ -82,6 +88,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
+      "tier": 2,
       "voice": "first_person",
       "stability": "evolving",
       "tags": ["self-audit", "verification"]
@@ -93,6 +100,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
+      "tier": 2,
       "voice": "first_person",
       "stability": "semi_stable",
       "tags": ["visual-proof", "evidence"]
@@ -104,6 +112,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
+      "tier": 2,
       "voice": "first_person",
       "stability": "evolving",
       "tags": ["completion-report", "template"]
@@ -115,6 +124,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
+      "tier": 2,
       "voice": "neutral",
       "stability": "stable",
       "tags": ["odd", "philosophy"]
@@ -126,6 +136,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
+      "tier": 2,
       "voice": "first_person",
       "stability": "semi_stable",
       "tags": ["maturity", "governance"]
@@ -137,6 +148,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
+      "tier": 2,
       "voice": "neutral",
       "stability": "evolving",
       "tags": ["odd", "misuse", "failure-modes"]
@@ -148,6 +160,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
+      "tier": 2,
       "voice": "neutral",
       "stability": "semi_stable",
       "tags": ["odd", "prompt-architecture", "orchestration"]
@@ -159,6 +172,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
+      "tier": 2,
       "voice": "neutral",
       "stability": "semi_stable",
       "tags": ["odd", "orientation", "mental-model"]
@@ -170,6 +184,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
+      "tier": 2,
       "voice": "neutral",
       "stability": "semi_stable",
       "tags": ["odd", "attempt", "lifecycle", "restartability"]
@@ -181,6 +196,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
+      "tier": 2,
       "voice": "neutral",
       "stability": "semi_stable",
       "tags": ["odd", "quantum", "attempts", "uncertainty", "orientation"]
@@ -192,6 +208,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
+      "tier": 2,
       "voice": "neutral",
       "stability": "semi_stable",
       "tags": ["odd", "topology", "structure", "decoupling"]
@@ -203,6 +220,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
+      "tier": 2,
       "voice": "neutral",
       "stability": "stable",
       "tags": ["odd", "epistemic", "hygiene", "truth", "cleanup"]
@@ -214,6 +232,7 @@
       "type": "text/markdown",
       "audience": "public",
       "exposure": "nav",
+      "tier": 0,
       "voice": "neutral",
       "stability": "semi_stable",
       "tags": ["about", "philosophy", "overview"]
@@ -225,6 +244,7 @@
       "type": "text/markdown",
       "audience": "public",
       "exposure": "nav",
+      "tier": 1,
       "voice": "first_person",
       "stability": "semi_stable",
       "tags": ["about", "bio"]
@@ -236,6 +256,7 @@
       "type": "text/markdown",
       "audience": "public",
       "exposure": "nav",
+      "tier": 1,
       "voice": "neutral",
       "stability": "semi_stable",
       "tags": ["about", "credibility", "trust"]
@@ -247,6 +268,7 @@
       "type": "text/markdown",
       "audience": "public",
       "exposure": "nav",
+      "tier": 2,
       "voice": "neutral",
       "stability": "evolving",
       "tags": ["about", "faq"]
@@ -258,6 +280,7 @@
       "type": "text/markdown",
       "audience": "public",
       "exposure": "nav",
+      "tier": 0,
       "voice": "neutral",
       "stability": "evolving",
       "tags": ["projects", "index"]
@@ -269,6 +292,7 @@
       "type": "text/markdown",
       "audience": "public",
       "exposure": "nav",
+      "tier": 2,
       "voice": "neutral",
       "stability": "evolving",
       "tags": ["projects", "contributing", "guide"]
@@ -280,6 +304,7 @@
       "type": "text/markdown",
       "audience": "public",
       "exposure": "nav",
+      "tier": 2,
       "voice": "neutral",
       "stability": "evolving",
       "tags": ["projects", "repo-as-a-system"]
@@ -291,6 +316,7 @@
       "type": "text/markdown",
       "audience": "internal",
       "exposure": "internal",
+      "tier": 2,
       "voice": "neutral",
       "stability": "frozen",
       "tags": ["projects", "repo-as-a-system", "build-prompt", "internal"]

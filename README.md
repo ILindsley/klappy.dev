@@ -29,27 +29,13 @@ Most documents are orientation, not instruction. They describe how decisions are
 
 ---
 
-## How to Explore
+## If You Want to Explore
 
-If you're new, a reasonable path is:
+Start with **ODD** (Outcomes-Driven Development) — the core philosophy that shapes everything here.
 
-1. **About** — context and trust surface
+If that resonates, the **Canon** contains the principles, constraints, and verification standards that guide decisions.
 
-   - `/about/bio.md`
-   - `/about/credibility.md`
-   - `/about/faq.md`
-
-2. **ODD (Outcomes-Driven Development)** — the core philosophy
-
-   - `/odd/README.md` (public-facing)
-   - `/canon/odd/manifesto.md` (extended)
-
-3. **Canon** — how decisions and verification are shaped
-
-   - `/canon/index.md` (orientation)
-   - Supporting documents on constraints, decision rules, evidence, and verification
-
-4. **Projects** — proofs of concept and experiments (added over time)
+If you want to see the philosophy applied, browse the **Projects**.
 
 There is no required order. Follow your curiosity.
 
@@ -84,6 +70,30 @@ Individual files are not versioned independently to avoid unnecessary ceremony.
 
 All content in this repository is released under the [MIT License](LICENSE).  
 Reuse is encouraged.
+
+---
+
+## Detailed Exploration Paths
+
+If you're new and want a concrete path, here's a reasonable order:
+
+1. **About** — context and trust surface
+
+   - `/about/bio.md`
+   - `/about/credibility.md`
+   - `/about/faq.md`
+
+2. **ODD (Outcomes-Driven Development)** — the core philosophy
+
+   - `/odd/README.md` (public-facing)
+   - `/canon/odd/manifesto.md` (extended)
+
+3. **Canon** — how decisions and verification are shaped
+
+   - `/canon/index.md` (orientation)
+   - Supporting documents on constraints, decision rules, evidence, and verification
+
+4. **Projects** — proofs of concept and experiments (added over time)
 
 ---
 
