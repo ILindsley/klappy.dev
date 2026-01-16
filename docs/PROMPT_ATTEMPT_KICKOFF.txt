@@ -16,7 +16,7 @@ Context:
 - This repository follows Outcomes-Driven Development (ODD).
 - A PRD is a hypothesis. An attempt is an observation.
 - Attempts must be independent; do not reuse or steer from prior attempts.
-- /src has been reset to a minimal shell. You are starting fresh.
+- /src may be empty or nuked. You are choosing your stack from scratch.
 
 ---
 
@@ -25,7 +25,10 @@ Your task:
 1. Read the active PRD:
    /docs/PRD.md
 
-2. Read required orientation documents:
+2. Read the deploy contract:
+   /infra/contracts/build-output.md
+
+3. Read required orientation documents:
 
    MUST READ:
    - /canon/constraints.md
@@ -35,29 +38,30 @@ Your task:
    - /canon/index.md
    - /canon/odd/manifesto.md
 
-3. Propose a concrete implementation plan for THIS attempt only.
+4. Choose your stack.
 
-   - Do not reference prior attempts.
-   - Do not assume success or failure modes.
-   - Make explicit tradeoffs.
+   You may use any framework: React, Svelte, Vue, Vanilla JS, Astro, etc.
+   Or no framework at all.
+   
+   The only requirement: your build must output to /dist per the deploy contract.
 
-4. Implement the plan from scratch.
+5. Implement the plan from scratch.
 
-   - /src is a minimal shell. Build everything fresh.
-   - Do not look for existing components to "fix" — create what the PRD requires.
+   - Build everything fresh.
+   - Do not look for existing components — there are none.
    - Prefer clarity and evidence over cleverness.
 
-5. Continuously verify your work locally.
+6. Continuously verify your work locally.
 
-   - Run builds: npm run build
+   - Run builds: npm run build (or your own build command)
    - Test navigation, UX, and failure cases relevant to the PRD.
 
-6. When complete, write your evidence bundle to YOUR runs_dir:
+7. When complete, write your evidence bundle to YOUR runs_dir:
 
    (Read .attempt.json for the exact path, e.g., attempts/prd-v0.2/_runs/a1b2c3d4/)
 
    Files to create:
-     ATTEMPT.md      # what you built, approach taken
+     ATTEMPT.md      # what you built, approach taken, stack chosen
      EVIDENCE.md     # index of evidence files
      evidence/       # screenshots, logs, diffs
 
@@ -71,6 +75,7 @@ Constraints:
 - Do NOT write to attempt-001/, attempt-002/, etc. — those are assigned later
 - Do not change the PRD during this attempt.
 - Do not claim completion without evidence.
+- Must output to /dist (see deploy contract)
 
 ---
 
@@ -83,4 +88,4 @@ If you discover the PRD is flawed, incomplete, or contradictory:
 
 ---
 
-Begin by running attempt:register, then summarize the PRD in your own words and propose your plan.
+Begin by running attempt:register, then summarize the PRD in your own words and propose your plan (including stack choice).

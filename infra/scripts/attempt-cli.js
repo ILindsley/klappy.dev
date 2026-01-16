@@ -404,25 +404,40 @@ Options:
 }
 
 /**
- * Standalone reset command for manual use.
+ * Nuke /src completely.
+ * 
+ * This is a FULL reset - no skeleton, no framework, nothing.
+ * The deploy contract is preserved via /public/index.html.
+ * Agents choose their own stack.
  */
 function cmdReset(opts) {
   const { dryRun, noCommit } = opts;
   
-  console.log('\n🧹 Resetting /src to minimal shell\n');
+  console.log('\n💥 NUKING /src (complete reset)\n');
   if (dryRun) console.log('  [DRY RUN MODE]\n');
   
-  // Safety check: show what we're protecting
-  console.log('  Safety: Only /src and /app will be purged');
-  console.log(`  Purgeable: ${PURGEABLE_DIRS.join(', ')}\n`);
+  // What gets nuked
+  console.log('  Will delete:');
+  console.log('    - /src (entire directory)');
+  console.log('    - /app (if exists)');
+  console.log('    - vite.config.js (framework-specific)');
+  console.log('');
+  console.log('  Protected (deploy contract):');
+  console.log('    - /public/index.html (placeholder)');
+  console.log('    - /public/content/* (content)');
+  console.log('    - /infra/* (contracts)');
+  console.log('');
   
   const srcPath = join(ROOT, 'src');
   const appPath = join(ROOT, 'app');
+  const viteConfig = join(ROOT, 'vite.config.js');
   
   // Delete /src
   if (existsSync(srcPath)) {
     if (!dryRun) rmSync(srcPath, { recursive: true });
     console.log('  ✅ Deleted /src');
+  } else {
+    console.log('  ⚠️  /src does not exist');
   }
   
   // Delete /app if present
@@ -431,28 +446,27 @@ function cmdReset(opts) {
     console.log('  ✅ Deleted /app');
   }
   
-  // Create minimal shell
-  if (!dryRun) {
-    mkdirSync(join(srcPath, 'components'), { recursive: true });
-    for (const [filename, content] of Object.entries(SHELL_FILES)) {
-      writeFileSync(join(srcPath, filename), content);
-      console.log(`  ✅ Created ${filename}`);
-    }
+  // Delete vite.config.js (framework-specific)
+  if (existsSync(viteConfig)) {
+    if (!dryRun) rmSync(viteConfig);
+    console.log('  ✅ Deleted vite.config.js');
   }
   
   // Commit (unless --no-commit)
   if (!noCommit) {
-    console.log('\n  Committing reset...');
-    run('git add src/', { dryRun });
-    run('git commit -m "chore: reset /src to minimal shell for fresh attempt"', { dryRun });
+    console.log('\n  Committing nuke...');
+    run('git add -A', { dryRun });
+    run('git commit -m "chore: nuke /src for fresh attempt (stack-agnostic)"', { dryRun });
     console.log('  ✅ Committed\n');
   } else {
     console.log('\n  Skipping commit (--no-commit)\n');
   }
   
   console.log('═'.repeat(60));
-  console.log('\n🧹 RESET COMPLETE\n');
-  console.log('  /src is now a minimal shell. Build your implementation fresh.');
+  console.log('\n💥 NUKE COMPLETE\n');
+  console.log('  /src is gone. Choose any stack for your attempt.');
+  console.log('  Deploy contract preserved: /public/index.html serves as fallback.');
+  console.log('  See /infra/contracts/build-output.md for build requirements.');
   console.log('\n' + '═'.repeat(60));
 }
 
@@ -768,7 +782,7 @@ Commands:
       Promote champion to production
 
   npm run attempt:reset
-      Reset /src to minimal shell
+      Nuke /src completely (no skeleton, choose any stack)
 
 Workflow:
   1. register → each agent registers their run (inside their workspace)

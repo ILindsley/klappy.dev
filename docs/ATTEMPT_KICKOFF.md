@@ -4,9 +4,11 @@
 
 Before starting attempts:
 
-1. Ensure `main` has a clean `/src` (the starting point for all attempts)
+1. Nuke `/src` if needed: `npm run attempt:reset`
 2. Commit this state: `git status` should be clean
 3. **If it isn't committed before the Cursor run starts, it doesn't exist**
+
+The app is disposable. The deploy contract is not.
 
 ---
 
@@ -35,4 +37,6 @@ npm run attempt:promote -- --prd v0.2 --attempt 001
 
 **After finalize:** Folders become `attempt-001/`, `attempt-002/`, etc.
 
-**Reset `/src` manually if needed:** `npm run attempt:reset`
+**Deploy contract:** See `/infra/contracts/build-output.md`
+
+**Stack:** Agents choose any stack (React, Svelte, Vanilla, etc.) — no bias.
