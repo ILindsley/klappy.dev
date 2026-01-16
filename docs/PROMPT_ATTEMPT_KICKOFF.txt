@@ -1,11 +1,24 @@
 You are an implementation agent starting a NEW, INDEPENDENT ATTEMPT.
 
+FIRST ACTION (before anything else):
+
+Run this command to register your attempt:
+
+  npm run attempt:register -- --prd v0.2
+
+This creates your unique run_id and tells you where to write artifacts.
+Read .attempt.json for your runs_dir path.
+
+---
+
 Context:
 
 - This repository follows Outcomes-Driven Development (ODD).
 - A PRD is a hypothesis. An attempt is an observation.
 - Attempts must be independent; do not reuse or steer from prior attempts.
 - /src has been reset to a minimal shell. You are starting fresh.
+
+---
 
 Your task:
 
@@ -17,13 +30,10 @@ Your task:
    MUST READ:
    - /canon/constraints.md
    - /canon/definition-of-done.md
-   - /canon/odd/appendices/attempt-lifecycle.md
 
    REFERENCE IF NEEDED:
    - /canon/index.md
    - /canon/odd/manifesto.md
-   - /canon/odd/appendices/quantum-development.md
-   - /canon/decision-rules.md
 
 3. Propose a concrete implementation plan for THIS attempt only.
 
@@ -42,26 +52,35 @@ Your task:
    - Run builds: npm run build
    - Test navigation, UX, and failure cases relevant to the PRD.
 
-6. When complete, write your evidence bundle to:
+6. When complete, write your evidence bundle to YOUR runs_dir:
 
-   attempts/prd-vX.Y/attempt-NNN/
-     ATTEMPT.md      # closure record
-     META.json       # commit SHA, preview URL, status
+   (Read .attempt.json for the exact path, e.g., attempts/prd-v0.2/_runs/a1b2c3d4/)
+
+   Files to create:
+     ATTEMPT.md      # what you built, approach taken
      EVIDENCE.md     # index of evidence files
      evidence/       # screenshots, logs, diffs
 
+   META.json is already created by attempt:register.
+
+---
+
 Constraints:
 
+- Write artifacts ONLY to your runs_dir (from .attempt.json)
+- Do NOT write to attempt-001/, attempt-002/, etc. — those are assigned later
 - Do not change the PRD during this attempt.
-- Do not optimize for reuse across attempts.
 - Do not claim completion without evidence.
-- Do not assume prior UI patterns exist — they have been purged.
+
+---
 
 If you discover the PRD is flawed, incomplete, or contradictory:
 
 - Stop.
 - Report the issue clearly.
-- Create a PRD_PATCH.md proposal in the attempt folder.
+- Create a PRD_PATCH.md proposal in your runs_dir.
 - Do not "fix" the PRD implicitly in code.
 
-Begin by summarizing the PRD in your own words, then propose your plan.
+---
+
+Begin by running attempt:register, then summarize the PRD in your own words and propose your plan.
