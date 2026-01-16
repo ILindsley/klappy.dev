@@ -25,10 +25,11 @@
  *   Optionally creates worktrees.
  */
 
-import { existsSync, readFileSync, writeFileSync, mkdirSync, rmSync } from 'fs';
+import { existsSync, readFileSync, writeFileSync, mkdirSync, rmSync, readdirSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
+import { randomBytes } from 'crypto';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '../..');
@@ -52,6 +53,11 @@ function run(cmd, options = {}) {
 function fail(message) {
   console.error(`\n❌ ${message}\n`);
   process.exit(1);
+}
+
+function generateRunId() {
+  // Short 8-char hex ID (collision-resistant for practical purposes)
+  return randomBytes(4).toString('hex');
 }
 
 function parseArgs() {
@@ -398,151 +404,104 @@ Options:
 }
 
 function cmdSpawn(opts) {
-  const { prd, n, worktree, worktreeDir, dryRun } = opts;
+  const { prd, n, worktreeDir, dryRun, force } = opts;
   
   if (!prd || n < 1) {
     console.log(`
 Usage: npm run attempt:spawn -- --prd <version> --n <count>
 
 Example:
-  npm run attempt:spawn -- --prd v0.2 --n 4
-  npm run attempt:spawn -- --prd v0.2 --n 3 --worktree
+  npm run attempt:spawn -- --prd v0.2 --n 5
 
 Options:
-  --prd <version>   PRD version (required)
-  --n <count>       Number of parallel attempts (required)
-  --worktree        Create git worktrees for each attempt
-  --worktree-dir    Custom worktree directory (default: attempts/_worktrees)
-  --dry-run         Show what would happen
+  --prd <version>     PRD version (required)
+  --n <count>         Number of worktrees to create (required)
+  --worktree-dir      Custom worktree directory (default: .worktrees/prd-<v>)
+  --force             Override clean working directory check
+  --dry-run           Show what would happen
+
+Note: This only creates worktrees. Each agent must run attempt:register
+      inside their worktree to get a unique run ID.
 `);
     process.exit(1);
   }
   
-  console.log(`\n🌌 Spawning ${n} parallel attempts for PRD v${prd}\n`);
+  console.log(`\n🌌 Spawning ${n} worktrees for PRD v${prd}\n`);
   if (dryRun) console.log('  [DRY RUN MODE]\n');
   
-  ensureCleanMain(opts);
-  
-  // Reserve all attempt numbers first (on main)
-  console.log(`2️⃣  Reserving ${n} attempt numbers...\n`);
-  
-  const attempts = [];
-  for (let i = 0; i < n; i++) {
-    const { attemptPadded } = reserveAttemptNumber(prd, `spawn-${i + 1}`, opts);
-    attempts.push({ attemptPadded });
+  // Validate git state
+  console.log('1️⃣  Validating git state...');
+  const status = run('git status --porcelain', { silent: true, dryRun: false });
+  if (status && !force) {
+    fail('Working directory not clean. Commit or stash changes first.\n' +
+         '   (use --force to override)\n\n' + status);
+  }
+  if (status && force) {
+    console.log('  ⚠️  Working directory not clean (--force used)');
+  } else {
+    console.log('  ✅ Working directory clean');
   }
   
-  // Now create branches and reset each
-  console.log(`\n3️⃣  Creating ${n} branches and resetting /src in each...\n`);
+  const branch = run('git branch --show-current', { silent: true, dryRun: false });
+  if (branch !== 'main') {
+    fail(`Must be on main branch. Currently on: ${branch}`);
+  }
+  console.log('  ✅ On main branch\n');
+  
+  // Create worktrees
+  console.log(`2️⃣  Creating ${n} worktrees...\n`);
   
   const wtDir = worktreeDir || join(ROOT, '.worktrees', `prd-v${prd}`);
+  const worktrees = [];
   
-  for (let i = 0; i < attempts.length; i++) {
-    const { attemptPadded } = attempts[i];
-    const branchName = `attempt/prd-v${prd}/a${attemptPadded}`;
-    const attemptDir = `attempts/prd-v${prd}/attempt-${attemptPadded}`;
+  for (let i = 1; i <= n; i++) {
+    const label = String(i).padStart(2, '0');
+    const branchName = `attempt/prd-v${prd}/wt${label}`;
+    const wtPath = join(wtDir, `wt${label}`);
+    const wtRel = `.worktrees/prd-v${prd}/wt${label}`;
     
-    if (worktree) {
-      // === WORKTREE PATH ===
-      // Create worktree with new branch
-      const wtPath = join(wtDir, `a${attemptPadded}`);
-      console.log(`  Creating worktree: ${wtPath}`);
-      if (!dryRun) {
-        mkdirSync(wtDir, { recursive: true });
-        run(`git worktree add ${wtPath} -b ${branchName}`, { dryRun });
-      }
-      
-      // Write .attempt.json so agents know their identity
-      const attemptMeta = {
-        prd: `v${prd}`,
-        attempt: attemptPadded,
-        branch: branchName,
-        attempt_dir: attemptDir
-      };
-      if (!dryRun) {
-        writeFileSync(join(wtPath, '.attempt.json'), JSON.stringify(attemptMeta, null, 2) + '\n');
-      }
+    console.log(`  Creating: ${wtRel}`);
+    if (!dryRun) {
+      mkdirSync(wtDir, { recursive: true });
+      run(`git worktree add ${wtPath} -b ${branchName}`, { dryRun });
       
       // Reset /src in worktree
       const srcPath = join(wtPath, 'src');
-      if (!dryRun) {
-        if (existsSync(srcPath)) rmSync(srcPath, { recursive: true });
-        mkdirSync(join(srcPath, 'components'), { recursive: true });
-        for (const [filename, content] of Object.entries(SHELL_FILES)) {
-          writeFileSync(join(srcPath, filename), content);
-        }
-        run('git add src/ .attempt.json', { dryRun, cwd: wtPath });
-        run('git commit -m "chore: reset /src to minimal shell for fresh attempt"', { dryRun, cwd: wtPath });
+      if (existsSync(srcPath)) rmSync(srcPath, { recursive: true });
+      mkdirSync(join(srcPath, 'components'), { recursive: true });
+      for (const [filename, content] of Object.entries(SHELL_FILES)) {
+        writeFileSync(join(srcPath, filename), content);
       }
-      
-      attempts[i].branchName = branchName;
-      attempts[i].worktreePath = wtPath;
-      attempts[i].attemptDir = attemptDir;
-      console.log(`  ✅ ${branchName} ready (worktree: ${wtPath})\n`);
-      
-    } else {
-      // === NON-WORKTREE PATH ===
-      // Create branch, checkout, reset /src, commit, then move to next
-      console.log(`  Setting up ${branchName}...`);
-      
-      run(`git checkout -b ${branchName}`, { dryRun });
-      
-      // Write .attempt.json so agents know their identity
-      const attemptMeta = {
-        prd: `v${prd}`,
-        attempt: attemptPadded,
-        branch: branchName,
-        attempt_dir: attemptDir
-      };
-      if (!dryRun) {
-        writeFileSync(join(ROOT, '.attempt.json'), JSON.stringify(attemptMeta, null, 2) + '\n');
-      }
-      
-      // Reset /src in this branch
-      const srcPath = join(ROOT, 'src');
-      const appPath = join(ROOT, 'app');
-      
-      if (!dryRun) {
-        if (existsSync(srcPath)) rmSync(srcPath, { recursive: true });
-        if (existsSync(appPath)) rmSync(appPath, { recursive: true });
-        mkdirSync(join(srcPath, 'components'), { recursive: true });
-        for (const [filename, content] of Object.entries(SHELL_FILES)) {
-          writeFileSync(join(srcPath, filename), content);
-        }
-      }
-      
-      run('git add src/ .attempt.json', { dryRun });
-      run('git commit -m "chore: reset /src to minimal shell for fresh attempt"', { dryRun });
-      
-      attempts[i].branchName = branchName;
-      attempts[i].attemptDir = attemptDir;
-      console.log(`  ✅ ${branchName} ready\n`);
-      
-      // Go back to main to create next branch
-      run('git checkout main', { dryRun });
+      run('git add src/', { dryRun, cwd: wtPath });
+      run('git commit -m "chore: reset /src to minimal shell"', { dryRun, cwd: wtPath });
     }
+    
+    worktrees.push({ label, branchName, wtPath, wtRel });
+    console.log(`  ✅ ${branchName}\n`);
   }
   
   // Print summary table
-  console.log('═'.repeat(100));
-  console.log('\n🌌 PARALLEL ATTEMPTS READY\n');
-  console.log('  Attempt │ Branch                      │ Worktree Path                          │ Artifact Dir');
-  console.log('  ────────┼─────────────────────────────┼────────────────────────────────────────┼─────────────────────────────────');
-  for (const a of attempts) {
-    const wtRel = a.worktreePath ? a.worktreePath.replace(ROOT + '/', '') : '(checkout)';
-    console.log(`  ${a.attemptPadded}     │ ${a.branchName.padEnd(27)} │ ${wtRel.padEnd(38)} │ ${a.attemptDir}`);
+  console.log('═'.repeat(70));
+  console.log('\n🌌 WORKTREES READY\n');
+  console.log('  # │ Branch                        │ Path');
+  console.log('  ──┼───────────────────────────────┼─────────────────────────────────');
+  for (const wt of worktrees) {
+    console.log(`  ${wt.label} │ ${wt.branchName.padEnd(29)} │ ${wt.wtRel}`);
   }
-  console.log('\n' + '═'.repeat(100));
+  console.log('\n' + '═'.repeat(70));
   
   console.log(`
 📋 Next steps:
 
-   1. Assign each agent ONE row from the table above
-   2. Each agent works ONLY in its worktree path
-   3. Each agent writes artifacts ONLY to its artifact dir
-   4. Paste /docs/PROMPT_ATTEMPT_KICKOFF.txt into each agent
+   1. Assign each Cursor agent ONE worktree path from the table
+   2. Each agent runs inside their worktree:
+      npm run attempt:register -- --prd v${prd} --agent <label>
+   3. Each agent builds and writes artifacts to their runs_dir
+   4. After all agents finish, run on main:
+      npm run attempt:finalize -- --prd v${prd}
 
-   Each worktree contains .attempt.json with the agent's identity.
+   Agents write to: attempts/prd-v${prd}/_runs/<run_id>/
+   Finalize assigns: attempts/prd-v${prd}/attempt-001, 002, ...
 `);
 }
 
@@ -599,6 +558,258 @@ function cmdReset(opts) {
   console.log('\n' + '═'.repeat(60));
 }
 
+/**
+ * Register a new run (Phase A of two-phase model).
+ * Creates unique run_id, writes .attempt.json, creates _runs/<run_id>/ folder.
+ * 
+ * This is called by each agent inside its worktree at the start of work.
+ * No attempt numbers are assigned yet - that happens during finalize.
+ */
+function cmdRegister(opts) {
+  const { prd, agent, dryRun } = opts;
+  
+  if (!prd) {
+    console.log(`
+Usage: npm run attempt:register -- --prd <version> [--agent <label>]
+
+Example:
+  npm run attempt:register -- --prd v0.2
+  npm run attempt:register -- --prd v0.2 --agent agent-1
+
+Options:
+  --prd <version>   PRD version (required)
+  --agent <label>   Agent identifier (default: "default")
+  --dry-run         Show what would happen
+`);
+    process.exit(1);
+  }
+  
+  console.log(`\n🎫 Registering run for PRD v${prd}\n`);
+  if (dryRun) console.log('  [DRY RUN MODE]\n');
+  
+  // Generate unique run ID
+  const runId = generateRunId();
+  const timestamp = new Date().toISOString();
+  const branch = run('git branch --show-current', { silent: true, dryRun: false }) || 'unknown';
+  
+  // Paths
+  const prdFolder = join(ROOT, 'attempts', `prd-v${prd}`);
+  const runsFolder = join(prdFolder, '_runs');
+  const runFolder = join(runsFolder, runId);
+  const runsDir = `attempts/prd-v${prd}/_runs/${runId}`;
+  
+  console.log('1️⃣  Creating run folder...');
+  if (!dryRun) {
+    mkdirSync(join(runFolder, 'evidence'), { recursive: true });
+  }
+  console.log(`  ✅ Created: ${runsDir}/\n`);
+  
+  // Write .attempt.json in worktree root
+  console.log('2️⃣  Writing .attempt.json...');
+  const attemptMeta = {
+    prd: `v${prd}`,
+    run_id: runId,
+    agent: agent,
+    branch: branch,
+    registered_at: timestamp,
+    runs_dir: runsDir
+  };
+  if (!dryRun) {
+    writeFileSync(join(ROOT, '.attempt.json'), JSON.stringify(attemptMeta, null, 2) + '\n');
+  }
+  console.log('  ✅ Written .attempt.json\n');
+  
+  // Write skeleton META.json in run folder
+  console.log('3️⃣  Creating skeleton files...');
+  const meta = {
+    prd_version: `v${prd}`,
+    run_id: runId,
+    attempt: null, // Will be assigned during finalize
+    agent: agent,
+    branch: branch,
+    registered_at: timestamp,
+    finalized_at: null,
+    status: 'in_progress'
+  };
+  if (!dryRun) {
+    writeFileSync(join(runFolder, 'META.json'), JSON.stringify(meta, null, 2) + '\n');
+    writeFileSync(join(runFolder, 'ATTEMPT.md'), `# Attempt (Run ${runId})\n\n## Summary\n\n_TODO: Describe what was built_\n\n## Approach\n\n_TODO: Describe the approach taken_\n`);
+    writeFileSync(join(runFolder, 'EVIDENCE.md'), `# Evidence (Run ${runId})\n\n## Screenshots\n\n_TODO: Add evidence files to evidence/ folder and reference them here_\n`);
+  }
+  console.log('  ✅ Created META.json, ATTEMPT.md, EVIDENCE.md\n');
+  
+  // Print summary
+  console.log('═'.repeat(60));
+  console.log('\n🎫 RUN REGISTERED\n');
+  console.log(`  PRD Version:   v${prd}`);
+  console.log(`  Run ID:        ${runId}`);
+  console.log(`  Agent:         ${agent}`);
+  console.log(`  Branch:        ${branch}`);
+  console.log(`  Artifacts:     ${runsDir}/`);
+  console.log('\n' + '═'.repeat(60));
+  
+  console.log(`
+📋 Next steps:
+
+   1. Build your implementation in this worktree
+   2. Write artifacts to: ${runsDir}/
+   3. When done, commit and push
+   4. After all agents finish, run on main:
+      npm run attempt:finalize -- --prd v${prd}
+`);
+}
+
+/**
+ * Finalize all runs for a PRD version (Phase B of two-phase model).
+ * Reads all _runs/<run_id>/, assigns sequential attempt numbers,
+ * moves folders to attempt-00N, updates META.json.
+ * 
+ * This is run once on main after all agents have completed.
+ */
+function cmdFinalize(opts) {
+  const { prd, dryRun } = opts;
+  
+  if (!prd) {
+    console.log(`
+Usage: npm run attempt:finalize -- --prd <version>
+
+Example:
+  npm run attempt:finalize -- --prd v0.2
+
+Options:
+  --prd <version>   PRD version (required)
+  --dry-run         Show what would happen
+`);
+    process.exit(1);
+  }
+  
+  console.log(`\n🏁 Finalizing runs for PRD v${prd}\n`);
+  if (dryRun) console.log('  [DRY RUN MODE]\n');
+  
+  const prdFolder = join(ROOT, 'attempts', `prd-v${prd}`);
+  const runsFolder = join(prdFolder, '_runs');
+  const registryPath = join(prdFolder, 'ATTEMPT_REGISTRY.json');
+  
+  // Check _runs exists
+  if (!existsSync(runsFolder)) {
+    fail(`No _runs folder found at ${runsFolder}`);
+  }
+  
+  // Read all run folders
+  console.log('1️⃣  Reading runs...');
+  const runIds = readdirSync(runsFolder).filter(f => {
+    const metaPath = join(runsFolder, f, 'META.json');
+    return existsSync(metaPath);
+  });
+  
+  if (runIds.length === 0) {
+    fail('No runs found to finalize');
+  }
+  console.log(`  ✅ Found ${runIds.length} runs\n`);
+  
+  // Read META.json for each run and sort by timestamp
+  const runs = runIds.map(runId => {
+    const metaPath = join(runsFolder, runId, 'META.json');
+    const meta = JSON.parse(readFileSync(metaPath, 'utf8'));
+    return { runId, meta, path: join(runsFolder, runId) };
+  }).sort((a, b) => {
+    // Sort by registration timestamp
+    return new Date(a.meta.registered_at) - new Date(b.meta.registered_at);
+  });
+  
+  // Read or create registry
+  console.log('2️⃣  Reading attempt registry...');
+  let registry;
+  if (existsSync(registryPath)) {
+    registry = JSON.parse(readFileSync(registryPath, 'utf8'));
+  } else {
+    registry = {
+      prd_version: prd,
+      next_attempt: 1,
+      finalized: []
+    };
+  }
+  console.log(`  ✅ Next attempt number: ${registry.next_attempt}\n`);
+  
+  // Assign attempt numbers and move folders
+  console.log('3️⃣  Assigning attempt numbers and moving folders...\n');
+  const finalized = [];
+  
+  for (const run of runs) {
+    const attemptNum = registry.next_attempt;
+    const attemptPadded = String(attemptNum).padStart(3, '0');
+    const newFolderName = `attempt-${attemptPadded}`;
+    const newPath = join(prdFolder, newFolderName);
+    
+    console.log(`  ${run.runId} → ${newFolderName}`);
+    console.log(`    Agent: ${run.meta.agent}, Branch: ${run.meta.branch}`);
+    
+    if (!dryRun) {
+      // Update META.json with attempt number
+      run.meta.attempt = attemptPadded;
+      run.meta.finalized_at = new Date().toISOString();
+      run.meta.status = 'sealed';
+      writeFileSync(join(run.path, 'META.json'), JSON.stringify(run.meta, null, 2) + '\n');
+      
+      // Move folder
+      if (existsSync(newPath)) {
+        fail(`Target folder already exists: ${newPath}`);
+      }
+      // Use fs.rename would be better but for safety we copy then remove
+      execSync(`mv "${run.path}" "${newPath}"`, { cwd: ROOT });
+      
+      // Update registry
+      registry.next_attempt = attemptNum + 1;
+      registry.finalized.push({
+        attempt: attemptNum,
+        run_id: run.runId,
+        agent: run.meta.agent,
+        branch: run.meta.branch,
+        finalized_at: run.meta.finalized_at
+      });
+    }
+    
+    finalized.push({
+      runId: run.runId,
+      attemptPadded,
+      agent: run.meta.agent,
+      branch: run.meta.branch
+    });
+    
+    console.log('');
+  }
+  
+  // Write updated registry
+  if (!dryRun) {
+    writeFileSync(registryPath, JSON.stringify(registry, null, 2) + '\n');
+    
+    // Remove empty _runs folder
+    const remaining = readdirSync(runsFolder);
+    if (remaining.length === 0) {
+      rmSync(runsFolder, { recursive: true });
+    }
+  }
+  
+  // Print summary
+  console.log('═'.repeat(80));
+  console.log('\n🏁 FINALIZATION COMPLETE\n');
+  console.log('  Run ID   │ Attempt │ Agent              │ Branch');
+  console.log('  ─────────┼─────────┼────────────────────┼─────────────────────────────');
+  for (const f of finalized) {
+    console.log(`  ${f.runId} │ ${f.attemptPadded}     │ ${f.agent.padEnd(18)} │ ${f.branch}`);
+  }
+  console.log('\n' + '═'.repeat(80));
+  
+  console.log(`
+📋 Next steps:
+
+   1. Review each attempt's artifacts in attempts/prd-v${prd}/
+   2. Pick champion based on evidence
+   3. Promote winner:
+      npm run attempt:promote -- --prd v${prd} --attempt <number>
+`);
+}
+
 function cmdPromote(opts) {
   const { prd, attempt, dryRun } = opts;
   
@@ -632,11 +843,14 @@ function main() {
   const opts = parseArgs();
   
   switch (opts.command) {
-    case 'start':
-      cmdStart(opts);
-      break;
     case 'spawn':
       cmdSpawn(opts);
+      break;
+    case 'register':
+      cmdRegister(opts);
+      break;
+    case 'finalize':
+      cmdFinalize(opts);
       break;
     case 'reset':
       cmdReset(opts);
@@ -644,25 +858,39 @@ function main() {
     case 'promote':
       cmdPromote(opts);
       break;
+    // Legacy commands (deprecated)
+    case 'start':
+      cmdStart(opts);
+      break;
     default:
       console.log(`
-ODD Attempt CLI
+ODD Attempt CLI (Two-Phase Model)
 
 Commands:
-  npm run attempt start -- --prd v0.2
-      Start a single attempt (reserve, branch, reset)
+  npm run attempt spawn -- --prd v0.2 --n 5
+      Create N worktrees for parallel development
 
-  npm run attempt spawn -- --prd v0.2 --n 4
-      Spawn N parallel attempts (each with /src reset)
+  npm run attempt register -- --prd v0.2 --agent agent-1
+      Register a run (creates unique run_id, writes to _runs/)
 
-  npm run attempt reset
-      Reset /src to minimal shell (standalone)
+  npm run attempt finalize -- --prd v0.2
+      Finalize all runs (assigns attempt numbers, moves to attempt-00N/)
 
   npm run attempt promote -- --prd v0.2 --attempt 001
       Promote champion to production
 
+  npm run attempt reset
+      Reset /src to minimal shell
+
+Workflow:
+  1. spawn    → creates worktrees (optional, Cursor may do this)
+  2. register → each agent registers their run
+  3. [build]  → agents work and write to _runs/<run_id>/
+  4. finalize → assigns attempt-001, 002, ... after all done
+  5. promote  → merge champion to main
+
 For help on a specific command:
-  npm run attempt <command> -- --help
+  npm run attempt <command>
 `);
       process.exit(1);
   }
