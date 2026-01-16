@@ -158,8 +158,10 @@ attempts/
 **META.json** contains:
 - `sealed_commit` — the commit SHA (truth)
 - `git_tag` — convenience pointer (optional)
-- `status` — CLOSED or ABANDONED
+- `status` — CLOSED, ABANDONED, or CHAMPION
 - `deploy` — recorded URLs (production, preview) as evidence artifacts
+- `promoted_commit` — (Champion only) the merge commit SHA on `main`
+- `production_tag` — (Champion only) the production tag
 
 The concrete sealing procedure is documented in `/docs/ATTEMPTS.md`.
 
@@ -197,12 +199,99 @@ A **sealed attempt** has:
 - A frozen PRD snapshot (at the PRD version level)
 - Evidence captured and linked
 - A commit pointer (SHA) in META.json
-- Status: CLOSED or ABANDONED
+- Status: CLOSED, ABANDONED, or CHAMPION
 
 Once sealed:
 - No further work is done on that attempt
 - The record is immutable
 - New work requires a new attempt (same PRD) or new PRD version
+
+---
+
+## Champion Selection and Promotion
+
+Quantum Development produces observations. Promotion converts one observation into production.
+
+### Definitions
+
+- **Attempts** = competing candidates (separate branches / preview deploys)
+- **Champion** = the single candidate chosen to become production
+- **Production** = whatever is deployed from `main`
+
+### The Promotion Rule
+
+**Exactly one attempt becomes Champion for a PRD version.**
+
+The Champion is merged to `main`, tagged, and becomes the live site. Everything else stays sealed evidence.
+
+### Minimum Gate (must pass)
+
+1. PRD Success Criteria (the checkboxes in the PRD)
+2. Evidence bundle (desktop + mobile + deep-link round-trip + failure behavior)
+3. Cloudflare preview URL captured in META.json
+4. No fatal regressions vs current production
+
+### Tie-Breakers (when multiple pass)
+
+Pick one axis and declare it ahead of time:
+
+- Best mobile UX
+- Best navigation clarity
+- Cleanest deep-link contract and anchor behavior
+- Simplest code / fewest dependencies (maintainability)
+
+**Important:** Tie-breakers are not more features. They're about quality under the same PRD.
+
+### Promotion Procedure
+
+**Branches:**
+- Each attempt lives on: `attempt/prd-vX.Y/aNNN`
+- Production deploy comes from: `main`
+
+**When an attempt wins:**
+
+1. **Seal it**
+   - `attempts/prd-vX.Y/attempt-NNN/` has: ATTEMPT.md, META.json, evidence folder, preview URL.
+   - Status: CHAMPION
+
+2. **Tag it** (immutable pointer)
+   - Tag: `prd-vX.Y-attempt-NNN`
+
+3. **Promote it**
+   - Merge the attempt branch into `main`
+
+4. **Tag production**
+   - Tag on `main`: `production-vX.Y` (or `prod-YYYY-MM-DD`)
+
+5. **Cloudflare does the rest**
+   - `main` auto-deploys → becomes production
+
+**What happens to other attempts?**
+- Seal them (ABANDONED or CLOSED-but-not-chosen)
+- Keep their preview URLs + evidence
+- Do not merge to `main`
+
+### The One Rule That Prevents Chaos
+
+**Only `main` is allowed to be production.**
+
+Attempts can be preview deployments forever — but only `main` ships.
+
+This makes "which one is live?" a non-question.
+
+### Winner Declaration (ATTEMPT.md snippet)
+
+When an attempt wins, add to its ATTEMPT.md:
+
+```
+Status: CHAMPION (Promoted to Production)
+Promoted commit: <sha>
+Attempt tag: prd-vX.Y-attempt-NNN
+Production tag: production-vX.Y
+Production URL: https://klappy.dev
+Preview URL: <cloudflare preview>
+Why this one won (tie-breaker): <one sentence>
+```
 
 ---
 
@@ -271,6 +360,9 @@ ODD optimizes for learning velocity, not artifact continuity.
 Attempts exist to be finished.  
 Infrastructure exists to make finishing cheap.  
 Content exists to compound over time.
+
+**Quantum Development ends when one candidate is promoted.**
+Observations without promotion are incomplete experiments.
 
 ---
 

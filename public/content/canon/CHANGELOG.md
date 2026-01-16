@@ -7,17 +7,39 @@ Per-file versions are intentionally omitted to reduce ceremony and prevent metad
 
 ---
 
+## 0.1.4 — 2026-01-16
+
+### Added
+
+- **Champion selection and promotion policy** (`/canon/odd/appendices/attempt-lifecycle.md`)
+  - Defines how one attempt graduates from experiment to production
+  - Minimum gates, tie-breakers, and promotion procedure
+  - Winner declaration snippet for ATTEMPT.md
+- **Promotion script** (`npm run attempt:promote`) for automated Champion workflow
+
+### Changed
+
+- Attempt Lifecycle: CHAMPION status + META.json promotion fields (`/canon/odd/appendices/attempt-lifecycle.md`)
+- Quantum Development: grounding line that experiments end with promotion (`/canon/odd/appendices/quantum-development.md`)
+
+### Notes
+
+- This release closes the loop on Quantum Development: observations without promotion are incomplete experiments.
+- Only `main` ships. Attempts can be preview deploys forever, but only the Champion merges to production.
+
+---
+
 ## 0.1.3 — 2026-01-16
 
 ### Added
 
 - Cloudflare branch deploys infra note (`/docs/infra/cloudflare-branch-deploys.md`)
-- Attempts doc: “PRD as the Unit of Test” (procedural) (`/docs/ATTEMPTS.md`)
-- Attempt Lifecycle: “PRD as the Unit of Test” + “Independence: goal vs infrastructure” (`/canon/odd/appendices/attempt-lifecycle.md`)
+- Attempts doc: "PRD as the Unit of Test" (procedural) (`/docs/ATTEMPTS.md`)
+- Attempt Lifecycle: "PRD as the Unit of Test" + "Independence: goal vs infrastructure" (`/canon/odd/appendices/attempt-lifecycle.md`)
 
 ### Changed
 
-- Decision Rules: “Prefer one-shot builds; don’t steer a miss” and “Don’t hard-code domain tables; hard-code protocol contracts” (`/canon/decision-rules.md`)
+- Decision Rules: "Prefer one-shot builds; don't steer a miss" and "Don't hard-code domain tables; hard-code protocol contracts" (`/canon/decision-rules.md`)
 - Quantum Development: cross-link to PRD-as-unit-of-test framing (`/canon/odd/appendices/quantum-development.md`)
 - Active PRD: requires infra artifact when deploy behavior is in scope; adds attempt independence enforcement (`/docs/PRD.md`)
 

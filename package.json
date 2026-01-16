@@ -8,7 +8,8 @@
     "build": "npm run sync && npm run verify:content && vite build",
     "preview": "vite preview",
     "sync": "node infra/scripts/sync-content.js",
-    "verify:content": "node infra/scripts/verify-content.js"
+    "verify:content": "node infra/scripts/verify-content.js",
+    "attempt:promote": "node infra/scripts/promote-attempt.js"
   },
   "dependencies": {
     "react": "^18.3.1",

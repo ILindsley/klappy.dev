@@ -190,6 +190,10 @@ Quantum Development acknowledges a reality of modern software:
 
 By observing more than one, teams reduce the risk of mistaking chance for truth.
 
+**Quantum Development ends when one candidate is promoted.**
+
+Observations without promotion are incomplete experiments. See the Champion selection and promotion procedure in `/canon/odd/appendices/attempt-lifecycle.md`.
+
 ---
 
 ## Status
