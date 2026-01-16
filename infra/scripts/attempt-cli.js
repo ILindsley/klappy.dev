@@ -634,6 +634,10 @@ Options:
   let registry;
   if (existsSync(registryPath)) {
     registry = JSON.parse(readFileSync(registryPath, 'utf8'));
+    // Ensure finalized array exists (might be old format)
+    if (!registry.finalized) {
+      registry.finalized = [];
+    }
   } else {
     registry = {
       prd_version: prd,
