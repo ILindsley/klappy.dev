@@ -4,11 +4,31 @@ You are an implementation agent starting a NEW, INDEPENDENT ATTEMPT.
 CRITICAL: READ THIS ENTIRE PROMPT. DO NOT STOP UNTIL ALL COMPLETION GATES PASS.
 ================================================================================
 
+================================================================================
+DOGFOODING REQUIREMENT
+================================================================================
+
+You are building a docs site that showcases AI build processes.
+You MUST actually FOLLOW those processes - this validates the documentation.
+
+Key canon documents you must APPLY (not just read):
+- /canon/constraints.md - Apply these to your design decisions
+- /canon/decision-rules.md - Use these when making choices
+- /canon/self-audit.md - Fill this checklist in your ATTEMPT.md
+
+Your ATTEMPT.md must demonstrate you internalized the canon:
+- Which constraints you applied and why
+- Which decision rules you followed
+- A completed self-audit checklist (9 sections)
+
+If the docs are unclear or contradictory, that is valuable feedback - note it.
+================================================================================
+
 ---
 
 FIRST ACTION (before anything else): Register this attempt.
 
-- If you have terminal access: run `npm run attempt:register -- --prd v0.2`
+- If you have terminal access: run npm run attempt:register -- --prd v0.2
 - If you do not: ask the human to run it and provide the resulting .attempt.json contents.
 
 This creates your unique run_id and runs_dir. Evidence artifacts go ONLY in runs_dir.
@@ -19,7 +39,7 @@ Code changes live in the worktree repo as normal.
 STEP 0: NUKE FIRST (independence).
 
 If /src contains any prior app code, delete it before implementing.
-Run: `npm run attempt:reset` OR manually delete /src contents.
+Run: npm run attempt:reset OR manually delete /src contents.
 This attempt must start from a blank app surface.
 Do not build on existing app code.
 
@@ -36,17 +56,17 @@ Context:
 
 Your task:
 
-1. Read the active PRD:
-   /docs/PRD.md
+1. Read the active PRD: /docs/PRD.md
 
-2. Read the deploy contract:
-   /infra/contracts/build-output.md
+2. Read the deploy contract: /infra/contracts/build-output.md
 
-3. Read required orientation documents:
+3. Read and INTERNALIZE these canon documents:
 
-   MUST READ:
-   - /canon/constraints.md
-   - /canon/definition-of-done.md
+   MUST READ AND APPLY:
+   - /canon/constraints.md (apply to your design decisions)
+   - /canon/decision-rules.md (use when making choices)
+   - /canon/definition-of-done.md (meet these requirements)
+   - /canon/self-audit.md (fill this out in ATTEMPT.md)
 
    REFERENCE IF NEEDED:
    - /canon/index.md
@@ -58,48 +78,121 @@ Your task:
    Or no framework at all.
    
    The only requirement: your build must output to /dist per the deploy contract.
+   Document WHY you chose this stack in ATTEMPT.md.
 
 5. Implement the plan from scratch.
 
    - Build everything fresh.
-   - Do not look for existing components — there are none.
-   - Prefer clarity and evidence over cleverness.
+   - Do not look for existing components - there are none.
+   - Apply constraints from /canon/constraints.md to your design.
+   - Follow decision rules from /canon/decision-rules.md.
 
 6. Continuously verify your work locally.
 
-   Your build must be invokable via the repo's standard build command (`npm run build`)
-   OR you must update repo scripts so `npm run build` produces /dist.
-   
+   Your build must be invokable via npm run build.
    Test navigation, UX, and failure cases relevant to the PRD.
 
 7. FIRST SUBMIT (MANDATORY after first successful build):
 
-   Once `npm run build` passes:
+   Once npm run build passes:
    
    npm run attempt:submit
    
    This commits and pushes your branch. Cloudflare will generate a preview URL.
-   DO NOT PROCEED TO NEXT STEPS UNTIL THIS SUCCEEDS.
+   
+   VERIFY YOUR PREVIEW URL WORKS:
+   - Wait 1-2 minutes for Cloudflare to build
+   - Open the preview URL in a browser
+   - Confirm the app loads and works
+   
+   DO NOT PROCEED UNTIL PREVIEW IS VERIFIED.
 
 8. Write your evidence bundle to YOUR runs_dir:
 
-   (Read .attempt.json for the exact path, e.g., attempts/prd-v0.2/_runs/a1b2c3d4/)
+   (Read .attempt.json for the exact path)
 
    Files to create:
-     ATTEMPT.md      # what you built, approach taken, stack chosen
-     EVIDENCE.md     # index of evidence files with descriptions
-     evidence/       # screenshots proving the app works
+     ATTEMPT.md - See template below (includes self-audit)
+     EVIDENCE.md - index of evidence files with descriptions
+     evidence/ - screenshots proving the app works
 
    META.json is already created by attempt:register.
 
-9. Capture visual evidence (REQUIRED):
+---
+
+ATTEMPT.md TEMPLATE (must include self-audit):
+
+# Attempt Summary
+
+## What I Built
+[2-3 sentences describing the implementation]
+
+## Stack Chosen
+- Framework: [React/Svelte/Vue/Vanilla/etc.]
+- Build tool: [Vite/Webpack/etc.]
+- Why this stack: [justify your choice]
+
+## Approach
+[How did you tackle the PRD? 3-5 sentences]
+
+## What Works
+[List working features]
+
+## What Does Not Work / Known Issues
+[List gaps or issues]
+
+## Preview URL
+[Your verified Cloudflare preview URL]
+
+---
+
+## Self-Audit (from /canon/self-audit.md)
+
+### 1. Intended Outcome
+- What outcome was this work intended to achieve?
+- How will someone know if that outcome was achieved?
+
+### 2. Constraints Applied (from /canon/constraints.md)
+- Which constraints were relevant to this task?
+- Were any constraints intentionally overridden? Why?
+
+### 3. Decision Rules Followed (from /canon/decision-rules.md)
+- Which decision rules guided the approach?
+- Why were alternative approaches not taken?
+
+### 4. Verification Performed
+- What was run to verify the work?
+- What behavior was directly observed?
+
+### 5. Evidence Produced
+- Screenshots: [list files in evidence/]
+- Preview URL verified: [Yes/No]
+
+### 6. UX and Behavior Check
+- Does the UI behave as expected?
+- Is it understandable without explanation?
+
+### 7. Tradeoffs and Risks
+- What tradeoffs were made?
+- What risks remain?
+
+### 8. Maintainability Check
+- Would someone else understand this in 6 months?
+
+### 9. Confidence Level
+- Confidence: [Low/Medium/High]
+- What would increase confidence?
+
+---
+
+9. Capture visual evidence (REQUIRED - minimum 3 screenshots):
 
    Use browser tools to take screenshots showing:
-   - [ ] App loads correctly (desktop)
-   - [ ] App loads correctly (mobile width)
-   - [ ] At least one PRD feature working
+   - App loads correctly (desktop) -> evidence/desktop-load.png
+   - App loads correctly (mobile width) -> evidence/mobile-load.png
+   - At least one PRD feature working -> evidence/feature-proof.png
    
-   Save to: <runs_dir>/evidence/
+   Save to: runs_dir/evidence/
 
 10. FINAL SUBMIT (MANDATORY):
 
@@ -112,7 +205,7 @@ Your task:
 Constraints:
 
 - Write artifacts ONLY to your runs_dir (from .attempt.json)
-- Do NOT write to attempt-001/, attempt-002/, etc. — those are assigned later
+- Do NOT write to attempt-001/, attempt-002/, etc.
 - Do not change the PRD during this attempt.
 - Do not claim completion without evidence.
 - Must output to /dist (see deploy contract)
@@ -121,40 +214,44 @@ Constraints:
 
 Infra protection:
 
-Do not change /infra/** (deploy contract) during an attempt unless the PRD explicitly requires it.
-If you think the contract is wrong, propose it in PRD_PATCH.md in your runs_dir.
+Do not change /infra/** during an attempt unless the PRD explicitly requires it.
+If you think the contract is wrong, propose it in PRD_PATCH.md.
 
 ---
 
-If you discover the PRD is flawed, incomplete, or contradictory:
+If you discover the PRD or CANON is flawed or contradictory:
 
-- Stop.
-- Report the issue clearly.
-- Create a PRD_PATCH.md proposal in your runs_dir.
-- Do not "fix" the PRD implicitly in code.
+- Note it clearly in your ATTEMPT.md
+- Create a PRD_PATCH.md proposal if needed
+- This feedback is valuable - the docs should be followable
 
 ---
 
 ================================================================================
-COMPLETION GATES — YOU ARE NOT DONE UNTIL ALL OF THESE ARE TRUE:
+COMPLETION GATES - YOU ARE NOT DONE UNTIL ALL OF THESE ARE TRUE:
 ================================================================================
 
 Before stopping, verify EVERY item:
 
-[ ] 1. `npm run build` passes without errors
-[ ] 2. `npm run attempt:submit` was run (branch is pushed)
-[ ] 3. ATTEMPT.md exists in runs_dir with: summary, stack, approach
-[ ] 4. EVIDENCE.md exists in runs_dir with: screenshot index
-[ ] 5. evidence/ folder contains at least 2 screenshots
-[ ] 6. Screenshots show the app actually working (not just code)
-[ ] 7. Final `npm run attempt:submit` was run after evidence was written
+[ ] 1. npm run build passes without errors
+[ ] 2. npm run attempt:submit was run (branch is pushed)
+[ ] 3. Cloudflare preview URL was verified working
+[ ] 4. ATTEMPT.md exists with ALL sections including full self-audit (9 sections)
+[ ] 5. EVIDENCE.md exists with screenshot index
+[ ] 6. evidence/ folder contains at least 3 screenshots
+[ ] 7. Screenshots show the app actually working (not just code)
+[ ] 8. Self-audit demonstrates you applied canon constraints and decision rules
+[ ] 9. Final npm run attempt:submit was run after evidence was written
 
 If ANY gate fails, you are not done. Fix it before stopping.
 
 ================================================================================
-DO NOT STOP. DO NOT CLAIM COMPLETION. UNTIL ALL 7 GATES PASS.
+DO NOT STOP. DO NOT CLAIM COMPLETION. UNTIL ALL 9 GATES PASS.
 ================================================================================
 
 ---
 
-Begin by running attempt:register (or requesting registration), then summarize the PRD in your own words and propose your plan (including stack choice).
+Begin by running attempt:register (or requesting registration), then:
+1. Summarize the PRD in your own words
+2. Note which canon constraints are most relevant
+3. Propose your stack choice and approach
