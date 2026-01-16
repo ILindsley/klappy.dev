@@ -72,7 +72,8 @@ function parseArgs() {
     worktreeDir: null,
     dryRun: false,
     force: false,
-    noCommit: false
+    noCommit: false,
+    noNuke: false
   };
   
   // First arg is command
@@ -108,6 +109,8 @@ function parseArgs() {
       result.force = true;
     } else if (arg === '--no-commit') {
       result.noCommit = true;
+    } else if (arg === '--no-nuke') {
+      result.noNuke = true;
     }
   }
   
@@ -411,43 +414,73 @@ Options:
  * Agents choose their own stack.
  */
 function cmdReset(opts) {
-  const { dryRun, noCommit, prd } = opts;
+  const { dryRun, noCommit, prd, force } = opts;
   
   console.log('\n💥 NUCLEAR RESET\n');
   if (dryRun) console.log('  [DRY RUN MODE]\n');
   
-  // ========================================
-  // Part 1: Nuke /src
-  // ========================================
-  console.log('1️⃣  Nuking /src...\n');
-  console.log('  Will delete:');
-  console.log('    - /src (entire directory)');
-  console.log('    - /app (if exists)');
-  console.log('    - vite.config.js (framework-specific)');
-  console.log('');
+  // Check if we're on main - warn about production
+  const currentBranch = run('git branch --show-current', { silent: true, dryRun: false });
+  const isMain = currentBranch === 'main';
   
-  const srcPath = join(ROOT, 'src');
-  const appPath = join(ROOT, 'app');
-  const viteConfig = join(ROOT, 'vite.config.js');
+  if (isMain && !force) {
+    console.log('  ⚠️  WARNING: You are on main branch!');
+    console.log('  ⚠️  Nuking /src on main will break production.');
+    console.log('');
+    console.log('  If you ONLY want to clean up attempt branches (recommended):');
+    console.log('    npm run attempt:reset -- --prd v0.2 --no-nuke');
+    console.log('');
+    console.log('  If you really want to nuke production too:');
+    console.log('    npm run attempt:reset -- --prd v0.2 --force');
+    console.log('');
+    
+    // Only do branch cleanup if --prd was provided
+    if (prd) {
+      console.log('  Proceeding with branch cleanup only (not nuking /src)...\n');
+      opts.noNuke = true;
+    } else {
+      fail('Use --force to nuke /src on main, or run from an attempt branch.');
+    }
+  }
   
-  // Delete /src
-  if (existsSync(srcPath)) {
-    if (!dryRun) rmSync(srcPath, { recursive: true });
-    console.log('  ✅ Deleted /src');
+  // ========================================
+  // Part 1: Nuke /src (unless --no-nuke or on main without --force)
+  // ========================================
+  if (!opts.noNuke) {
+    console.log('1️⃣  Nuking /src...\n');
+    console.log('  Will delete:');
+    console.log('    - /src (entire directory)');
+    console.log('    - /app (if exists)');
+    console.log('    - vite.config.js (framework-specific)');
+    console.log('');
   } else {
-    console.log('  ⚠️  /src does not exist');
+    console.log('1️⃣  Skipping /src nuke (production protected)\n');
   }
   
-  // Delete /app if present
-  if (existsSync(appPath)) {
-    if (!dryRun) rmSync(appPath, { recursive: true });
-    console.log('  ✅ Deleted /app');
-  }
-  
-  // Delete vite.config.js (framework-specific)
-  if (existsSync(viteConfig)) {
-    if (!dryRun) rmSync(viteConfig);
-    console.log('  ✅ Deleted vite.config.js');
+  if (!opts.noNuke) {
+    const srcPath = join(ROOT, 'src');
+    const appPath = join(ROOT, 'app');
+    const viteConfig = join(ROOT, 'vite.config.js');
+    
+    // Delete /src
+    if (existsSync(srcPath)) {
+      if (!dryRun) rmSync(srcPath, { recursive: true });
+      console.log('  ✅ Deleted /src');
+    } else {
+      console.log('  ⚠️  /src does not exist');
+    }
+    
+    // Delete /app if present
+    if (existsSync(appPath)) {
+      if (!dryRun) rmSync(appPath, { recursive: true });
+      console.log('  ✅ Deleted /app');
+    }
+    
+    // Delete vite.config.js (framework-specific)
+    if (existsSync(viteConfig)) {
+      if (!dryRun) rmSync(viteConfig);
+      console.log('  ✅ Deleted vite.config.js');
+    }
   }
   
   // ========================================
