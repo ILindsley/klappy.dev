@@ -5,17 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "dev:v1": "vite --config vite.config.attempt-001.js",
     "build": "npm run sync && npm run verify:content && vite build",
-    "build:v1": "npm run sync && npm run verify:content && vite build --config vite.config.attempt-001.js",
     "preview": "vite preview",
     "sync": "node infra/scripts/sync-content.js",
     "verify:content": "node infra/scripts/verify-content.js"
   },
   "dependencies": {
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "marked": "^15.0.4"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",

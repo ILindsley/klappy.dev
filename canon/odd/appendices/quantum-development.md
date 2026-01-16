@@ -106,6 +106,33 @@ Independence is conceptual, not infrastructural. It refers to decision-making an
 
 ---
 
+## Infrastructure for Independence
+
+Independence between attempts is achieved through **version control and preview infrastructure**, not parallel filesystem structures.
+
+Correct:
+
+- One `/src/` at a time
+- One attempt per branch
+- One preview deploy per branch
+- Seal → merge or discard
+
+Incorrect:
+
+- Multiple `/src-*` directories in the same workspace
+- Parallel build configurations for different attempts
+- Keeping old attempts "alive" as selectable variants
+
+Sealed attempts are observed via:
+
+- Git history (commit SHA, tag)
+- Evidence bundles (`/attempts/`)
+- Preview URLs (captured in META.json)
+
+They are not kept as parallel realities in the working tree.
+
+---
+
 ## Outcome Interpretation (Conceptual)
 
 Observed outcomes across attempts can be interpreted as follows:
