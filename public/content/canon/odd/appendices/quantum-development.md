@@ -90,46 +90,31 @@ Quantum Development is not an excuse to avoid revising a bad PRD.
 
 ---
 
-## Independence Requirement
+## Independence Requirement (Clarified)
 
-For Quantum Development to be valid, attempts must be independent.
+Independence in Quantum Development is epistemic, not intrinsic to any specific tool or infrastructure.
 
-Independence means:
+An attempt is independent if:
 
-- fresh implementation state
-- no incremental steering of a failed attempt
-- clear documentation of the axis of variation (agent, prompt, approach)
+- decisions are not steered by prior outcomes,
+- implementation state is fresh,
+- and the approach represents a genuine re-instantiation of the PRD.
 
-Attempts are not iterations; they are re-instantiations.
+Independence is therefore a property of decision-making and state, not of deployment mechanics.
 
-Independence is conceptual, not infrastructural. It refers to decision-making and state, not directory layout or deployment topology.
+### Infrastructure for Observability (Supporting, Not Defining)
 
----
+Version control systems, isolated branches, and preview deployments do not create independence.
 
-## Infrastructure for Independence
+They support independence by:
 
-Independence between attempts is achieved through **version control and preview infrastructure**, not parallel filesystem structures.
+- preventing accidental state leakage,
+- enabling parallel observation of outcomes,
+- and preserving each attempt as an inspectable artifact.
 
-Correct:
+Infrastructure exists to protect and surface independence, not to define it.
 
-- One `/src/` at a time
-- One attempt per branch
-- One preview deploy per branch
-- Seal → merge or discard
-
-Incorrect:
-
-- Multiple `/src-*` directories in the same workspace
-- Parallel build configurations for different attempts
-- Keeping old attempts "alive" as selectable variants
-
-Sealed attempts are observed via:
-
-- Git history (commit SHA, tag)
-- Evidence bundles (`/attempts/`)
-- Preview URLs (captured in META.json)
-
-They are not kept as parallel realities in the working tree.
+Confusing infrastructural isolation with epistemic independence is a common failure mode in AI-assisted development.
 
 ---
 
