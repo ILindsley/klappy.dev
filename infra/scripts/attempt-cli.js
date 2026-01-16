@@ -745,6 +745,57 @@ function cmdReset(opts) {
   console.log('\n' + '═'.repeat(60));
   
   if (prd) {
+    // Auto-cleanup after nuclear reset
+    console.log('\n7️⃣  Auto-cleanup: pruning stale worktrees...');
+    try {
+      run('git worktree prune', { dryRun, silent: true });
+      
+      // Remove detached worktrees automatically
+      const worktreeOutput = run('git worktree list --porcelain', { silent: true, dryRun: false });
+      let cleanedCount = 0;
+      let currentPath = null;
+      let isDetached = false;
+      
+      for (const line of worktreeOutput.split('\n')) {
+        if (line.startsWith('worktree ')) {
+          // Process previous worktree if it was detached
+          if (currentPath && isDetached && currentPath.includes('.cursor/worktrees/')) {
+            if (!dryRun) {
+              try {
+                run(`git worktree remove --force "${currentPath}"`, { silent: true });
+                cleanedCount++;
+              } catch (e) { /* ignore */ }
+            }
+          }
+          currentPath = line.replace('worktree ', '');
+          isDetached = false;
+        } else if (line === 'detached') {
+          isDetached = true;
+        }
+      }
+      // Process last one
+      if (currentPath && isDetached && currentPath.includes('.cursor/worktrees/')) {
+        if (!dryRun) {
+          try {
+            run(`git worktree remove --force "${currentPath}"`, { silent: true });
+            cleanedCount++;
+          } catch (e) { /* ignore */ }
+        }
+      }
+      
+      if (cleanedCount > 0) {
+        console.log(`  ✅ Removed ${cleanedCount} orphaned worktrees`);
+      } else {
+        console.log('  ✅ No orphaned worktrees');
+      }
+      
+      // Prune stale remote refs
+      run('git fetch --prune', { dryRun, silent: true });
+      console.log('  ✅ Remote refs pruned\n');
+    } catch (e) {
+      console.log('  ⚠️  Cleanup encountered errors (non-fatal)\n');
+    }
+    
     console.log(`
 📋 Ready for fresh attempts:
 
@@ -1334,6 +1385,201 @@ function cmdSubmit(opts) {
  * This is run on main to pull in artifacts from completed attempt branches
  * without merging their code.
  */
+/**
+ * CLEANUP: Prune stale worktrees and branches.
+ * 
+ * This should be run periodically or after a PRD cycle completes.
+ * Removes:
+ *   - Orphaned git worktrees
+ *   - Local branches with deleted remotes
+ *   - Stale remote tracking refs
+ */
+function cmdCleanup(opts) {
+  const { dryRun, force } = opts;
+  
+  console.log('\n🧹 CLEANUP — Pruning Stale Worktrees & Branches\n');
+  if (dryRun) console.log('  [DRY RUN MODE]\n');
+  
+  // ========================================
+  // 1. Prune git worktree registry
+  // ========================================
+  console.log('1️⃣  Pruning worktree registry...');
+  run('git worktree prune', { dryRun });
+  console.log('  ✅ Registry pruned\n');
+  
+  // ========================================
+  // 2. Find and remove orphaned worktrees
+  // ========================================
+  console.log('2️⃣  Scanning for orphaned worktrees...');
+  
+  const worktreeOutput = run('git worktree list --porcelain', { silent: true, dryRun: false });
+  const worktrees = [];
+  let current = {};
+  
+  for (const line of worktreeOutput.split('\n')) {
+    if (line.startsWith('worktree ')) {
+      if (current.path) worktrees.push(current);
+      current = { path: line.replace('worktree ', '') };
+    } else if (line.startsWith('HEAD ')) {
+      current.head = line.replace('HEAD ', '');
+    } else if (line.startsWith('branch ')) {
+      current.branch = line.replace('branch refs/heads/', '');
+    } else if (line === 'detached') {
+      current.detached = true;
+    }
+  }
+  if (current.path) worktrees.push(current);
+  
+  // Filter to only Cursor worktrees (in .cursor/worktrees/)
+  const cursorWorktrees = worktrees.filter(w => w.path.includes('.cursor/worktrees/'));
+  const mainWorktree = worktrees.find(w => !w.path.includes('.cursor/worktrees/'));
+  
+  console.log(`  Found ${cursorWorktrees.length} Cursor worktrees\n`);
+  
+  if (cursorWorktrees.length === 0) {
+    console.log('  ✅ No worktrees to clean\n');
+  } else {
+    // Categorize worktrees
+    const detached = cursorWorktrees.filter(w => w.detached);
+    const withBranch = cursorWorktrees.filter(w => w.branch);
+    
+    console.log(`  Detached HEAD (orphans): ${detached.length}`);
+    console.log(`  With branches: ${withBranch.length}\n`);
+    
+    // Remove detached worktrees (always safe - they're orphans)
+    if (detached.length > 0) {
+      console.log('  Removing detached worktrees:');
+      for (const wt of detached) {
+        const shortPath = wt.path.split('/').slice(-1)[0];
+        console.log(`    🗑️  ${shortPath} (detached at ${wt.head.substring(0, 7)})`);
+        if (!dryRun) {
+          try {
+            run(`git worktree remove --force "${wt.path}"`, { silent: true });
+          } catch (e) {
+            console.log(`       ⚠️  Could not remove (may need manual cleanup)`);
+          }
+        }
+      }
+      console.log('');
+    }
+    
+    // For worktrees with branches, check if remote exists
+    if (withBranch.length > 0 && force) {
+      console.log('  Removing branch worktrees (--force):');
+      for (const wt of withBranch) {
+        const shortPath = wt.path.split('/').slice(-1)[0];
+        console.log(`    🗑️  ${shortPath} [${wt.branch}]`);
+        if (!dryRun) {
+          try {
+            run(`git worktree remove --force "${wt.path}"`, { silent: true });
+          } catch (e) {
+            console.log(`       ⚠️  Could not remove`);
+          }
+        }
+      }
+      console.log('');
+    } else if (withBranch.length > 0) {
+      console.log('  ⚠️  Skipping branch worktrees (use --force to remove)');
+      for (const wt of withBranch) {
+        const shortPath = wt.path.split('/').slice(-1)[0];
+        console.log(`     - ${shortPath} [${wt.branch}]`);
+      }
+      console.log('');
+    }
+  }
+  
+  // ========================================
+  // 3. Prune stale remote tracking refs
+  // ========================================
+  console.log('3️⃣  Pruning stale remote tracking refs...');
+  run('git fetch --prune', { dryRun });
+  console.log('  ✅ Remote refs pruned\n');
+  
+  // ========================================
+  // 4. Find and delete local branches with gone remotes
+  // ========================================
+  console.log('4️⃣  Finding local branches with deleted remotes...');
+  
+  const branchOutput = run('git branch -vv', { silent: true, dryRun: false });
+  const goneBranches = [];
+  
+  for (const line of branchOutput.split('\n')) {
+    if (line.includes(': gone]')) {
+      // Extract branch name (skip leading * or spaces)
+      const match = line.match(/^[\s*]+(\S+)/);
+      if (match && match[1] !== 'main' && match[1] !== 'prod') {
+        goneBranches.push(match[1]);
+      }
+    }
+  }
+  
+  if (goneBranches.length === 0) {
+    console.log('  ✅ No stale local branches\n');
+  } else {
+    console.log(`  Found ${goneBranches.length} stale branches:\n`);
+    for (const branch of goneBranches) {
+      console.log(`    🗑️  ${branch}`);
+      if (!dryRun) {
+        try {
+          run(`git branch -D "${branch}"`, { silent: true });
+        } catch (e) {
+          console.log(`       ⚠️  Could not delete`);
+        }
+      }
+    }
+    console.log('');
+  }
+  
+  // ========================================
+  // 5. Find local attempt branches without remotes
+  // ========================================
+  console.log('5️⃣  Finding orphan attempt branches...');
+  
+  const localBranches = run('git branch', { silent: true, dryRun: false })
+    .split('\n')
+    .map(b => b.trim().replace('* ', ''))
+    .filter(b => b.startsWith('attempt/'));
+  
+  const remoteBranches = run('git branch -r', { silent: true, dryRun: false })
+    .split('\n')
+    .map(b => b.trim().replace('origin/', ''))
+    .filter(b => b.startsWith('attempt/'));
+  
+  const orphanBranches = localBranches.filter(b => !remoteBranches.includes(b) && !goneBranches.includes(b));
+  
+  if (orphanBranches.length === 0) {
+    console.log('  ✅ No orphan attempt branches\n');
+  } else if (force) {
+    console.log(`  Found ${orphanBranches.length} orphan branches:\n`);
+    for (const branch of orphanBranches) {
+      console.log(`    🗑️  ${branch}`);
+      if (!dryRun) {
+        try {
+          run(`git branch -D "${branch}"`, { silent: true });
+        } catch (e) {
+          console.log(`       ⚠️  Could not delete`);
+        }
+      }
+    }
+    console.log('');
+  } else {
+    console.log(`  ⚠️  Found ${orphanBranches.length} orphan branches (use --force to delete):`);
+    for (const branch of orphanBranches) {
+      console.log(`     - ${branch}`);
+    }
+    console.log('');
+  }
+  
+  // ========================================
+  // SUMMARY
+  // ========================================
+  console.log('═'.repeat(60));
+  console.log('\n🧹 CLEANUP COMPLETE\n');
+  console.log('  Run with --force to remove branch worktrees and orphan branches.');
+  console.log('  Run with --dry-run to preview changes.');
+  console.log('\n' + '═'.repeat(60));
+}
+
 function cmdImport(opts) {
   const { prd, dryRun } = opts;
   
@@ -1480,6 +1726,9 @@ function main() {
     case 'import':
       cmdImport(opts);
       break;
+    case 'cleanup':
+      cmdCleanup(opts);
+      break;
     default:
       console.log(`
 ODD Attempt CLI — Environment Hardened
@@ -1514,6 +1763,10 @@ COMMANDS:
 
   npm run attempt:reset -- --prd v0.2
       NUCLEAR RESET: Nuke + delete all attempt branches for PRD
+
+  npm run attempt:cleanup
+      Prune stale worktrees and branches (run after PRD cycles)
+      --force removes branch worktrees and orphan branches
 
 WORKFLOW:
   1. nuke     → agent starts with blank slate

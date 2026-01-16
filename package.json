@@ -16,7 +16,8 @@
     "attempt:import": "node infra/scripts/attempt-cli.js import",
     "attempt:finalize": "node infra/scripts/attempt-cli.js finalize",
     "attempt:reset": "node infra/scripts/attempt-cli.js reset",
-    "attempt:promote": "node infra/scripts/attempt-cli.js promote"
+    "attempt:promote": "node infra/scripts/attempt-cli.js promote",
+    "attempt:cleanup": "node infra/scripts/attempt-cli.js cleanup"
   },
   "dependencies": {
     "marked": "^17.0.1",
