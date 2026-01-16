@@ -6,8 +6,11 @@ CRITICAL: READ THIS ENTIRE PROMPT. DO NOT STOP UNTIL ALL COMPLETION GATES PASS.
 
 FIRST ACTIONS (MANDATORY — run these commands first):
 
-  npm run attempt:nuke
   npm run attempt:register -- --agent <YOUR_AGENT_ID> --model <YOUR_MODEL>
+  npm run attempt:nuke
+
+WHY THIS ORDER: Register first to capture provenance (agent, model, timestamp).
+Then nuke to start fresh. If nuke fails, at least we know an attempt was started.
 
 AGENT AND MODEL IDENTIFICATION (for provenance):
 

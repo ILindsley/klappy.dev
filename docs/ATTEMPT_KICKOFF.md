@@ -23,21 +23,21 @@ Each agent follows `/docs/PROMPT_ATTEMPT_KICKOFF.txt`.
 
 ### Required Sequence
 
-1. **Nuke**
-   ```bash
-   npm run attempt:nuke
-   ```
-   - Deletes `/src` and framework configs
-   - Start from a blank slate
-   - Choose any stack that satisfies the deploy contract
-
-2. **Register**
+1. **Register** (provenance first)
    ```bash
    npm run attempt:register -- --agent <id> --model <model>
    ```
    - Creates `.attempt.json` with run_id and provenance
    - Auto-reads PRD version from `/docs/PRD.md`
    - Example: `npm run attempt:register -- --agent cursor-a --model "opus-4.5"`
+
+2. **Nuke**
+   ```bash
+   npm run attempt:nuke
+   ```
+   - Deletes `/src` and framework configs
+   - Start from a blank slate
+   - Choose any stack that satisfies the deploy contract
 
 3. **Build**
    - Implement against `/docs/PRD.md` (active PRD)
@@ -57,11 +57,12 @@ Each agent follows `/docs/PROMPT_ATTEMPT_KICKOFF.txt`.
    - `EVIDENCE.md` — screenshot index
    - `evidence/` — screenshots proving app works
 
-6. **Final Push**
+6. **Final Push** (optional helper)
    ```bash
    npm run attempt:submit
    ```
-   - Commits and pushes final state including evidence
+   - Commits and pushes evidence (if not already pushed manually)
+   - This is a convenience wrapper, not a gate
 
 **Agents may stop once evidence is complete and pushed.**
 
@@ -72,9 +73,14 @@ Each agent follows `/docs/PROMPT_ATTEMPT_KICKOFF.txt`.
 On `main` branch:
 
 ```bash
-# 1. Import artifact folders from all attempt branches (no code)
+# 1. Import artifact folders from all attempt branches
 npm run attempt:import -- --prd <active>
+```
 
+**Invariant:** This command **MUST NOT** merge application code (`/src`).  
+Only sealed attempt artifacts (`_runs/` folders) are imported.
+
+```bash
 # 2. Finalize runs (assign attempt-001, 002…)
 npm run attempt:finalize -- --prd <active>
 
