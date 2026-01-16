@@ -31,4 +31,8 @@ Can I reuse these ideas?
 
 Yes. The intent is openness and reuse. Attribution is appreciated, but the bigger goal is to reduce repeated mistakes and encourage clearer thinking.
 
+Why do some ideas appear unfinished or revisited?
+
+Because in non-deterministic systems, one outcome isn't enough to judge an idea. This work favors observing multiple attempts before drawing conclusions.
+
 ⸻

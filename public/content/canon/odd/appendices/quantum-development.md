@@ -15,6 +15,7 @@ This is an orientation model, not a workflow.
 In AI-assisted development, outcomes are non-deterministic.
 
 Given the same PRD:
+
 - different agents,
 - different prompts,
 - different execution paths,
@@ -24,6 +25,7 @@ can produce meaningfully different results.
 Quantum Development treats each implementation attempt as an independent observation of the same specification.
 
 The goal is to distinguish:
+
 - specification failure from
 - execution-path variance.
 
@@ -108,12 +110,12 @@ Independence is conceptual, not infrastructural. It refers to decision-making an
 
 Observed outcomes across attempts can be interpreted as follows:
 
-| Pattern | Implication |
-|---------|-------------|
-| Multiple failures, same failure mode | PRD likely flawed |
-| Failure → success | Execution-path sensitivity |
-| Multiple successes | PRD likely robust |
-| Divergent behaviors | PRD underspecified |
+| Pattern                              | Implication                |
+| ------------------------------------ | -------------------------- |
+| Multiple failures, same failure mode | PRD likely flawed          |
+| Failure → success                    | Execution-path sensitivity |
+| Multiple successes                   | PRD likely robust          |
+| Divergent behaviors                  | PRD underspecified         |
 
 These interpretations are signals, not proofs.
 

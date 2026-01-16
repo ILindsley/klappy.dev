@@ -33,3 +33,5 @@ Each project will include its own README with context, constraints, tradeoffs, a
 
 This folder intentionally starts small.  
 The Canon comes first. Projects follow.
+
+Projects may represent different attempts at the same idea. Multiple outcomes are sometimes necessary to understand whether an idea or its execution needs to change.

@@ -124,6 +124,14 @@ The Canon is designed for orientation, not enforcement.
 
 ---
 
+## On Variance and Learning
+
+In AI-assisted development, outcomes are not deterministic. The same intent can produce different results depending on execution paths.
+
+This site reflects that reality. Ideas are tested, observed, and sometimes retried before conclusions are drawn. What you see here is not a straight line—it's a record of learning under uncertainty.
+
+---
+
 ## Where to Go Next
 
 If you want to explore further:
