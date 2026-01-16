@@ -213,6 +213,9 @@ Prefer stable file and URI naming over clever branding. Rename rarely. 3. Audien
 “Public” explains and invites. “Canon” defines and stabilizes. 4. Voice Is Labeled, Not Transformed
 First-person documents may be consumed as-is or translated by clients. The Canon itself does not require a specific rendering voice.
 
+5. Single Active PRD
+There is exactly one active PRD at any time: `/docs/PRD.md`. Prior PRDs only exist as frozen artifacts within sealed attempts.
+
 ⸻
 
 Stability & Change Philosophy

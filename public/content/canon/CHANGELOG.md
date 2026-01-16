@@ -7,6 +7,28 @@ Per-file versions are intentionally omitted to reduce ceremony and prevent metad
 
 ---
 
+## 0.1.2 — 2026-01-16
+
+### Added
+- Quantum Development appendix (`/canon/odd/appendices/quantum-development.md`)
+- Attempt Kickoff prompt (`/docs/ATTEMPT_KICKOFF.md`)
+- Agent Entry Point (`/docs/AGENT_ENTRYPOINT.md`)
+- Single active PRD (`/docs/PRD.md`)
+
+### Changed
+- Canon Index: explicit “single active PRD” policy (`/canon/index.md`)
+- Attempt Lifecycle: cross-link to the single kickoff prompt (`/canon/odd/appendices/attempt-lifecycle.md`)
+- Attempts documentation updated to reflect single active PRD + kickoff prompt (`/docs/ATTEMPTS.md`)
+- PRD template updated to reflect single active PRD policy (`/docs/PRD/PRD_TEMPLATE.md`)
+
+### Removed
+- Versioned PRDs from the main docs surface (`/docs/PRD/PRD_v*.md`) in favor of `/docs/PRD.md`
+
+### Notes
+- This release reduces PRD and prompt sprawl by making the active PRD and kickoff prompt uniquely authoritative.
+
+---
+
 ## 0.1.1 — 2026-01-15
 
 ### Added

@@ -1,6 +1,9 @@
 # PRD Template
 
-Use this template when creating a new PRD version.
+Use this template when drafting or revising the active PRD.
+
+Policy: There is exactly one active PRD at any time: `/docs/PRD.md`.
+Prior PRDs only exist as frozen artifacts within sealed attempts.
 
 ---
 

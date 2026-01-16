@@ -10,6 +10,8 @@ This document explains how PRDs are versioned, how attempts are sealed, and wher
 2. **PRD versions are first-class:** A PRD version can have multiple attempts.
 3. **SHA is truth, tags are convenience:** `META.json` stores the canonical commit pointer.
 
+Single kickoff prompt: `/docs/ATTEMPT_KICKOFF.md`
+
 ---
 
 ## What is an Attempt?
@@ -42,9 +44,9 @@ See [Quantum Development](/canon/odd/appendices/quantum-development.md) for the 
 ```
 /src/                           # current implementation (disposable)
 /infra/scripts/                 # build scripts (persist across attempts)
-/docs/PRD/                      # versioned PRDs (living, editable)
-  PRD_v0.1.md
-  PRD_v0.2.md
+/docs/PRD.md                    # single active PRD (authoritative)
+/docs/PRD/                      # templates and supporting notes
+  PRD_TEMPLATE.md
 /attempts/                      # sealed attempts (immutable after seal)
   prd-v0.1/
     PRD.md                      # frozen PRD for this version
@@ -124,8 +126,8 @@ git push --follow-tags
 
 ### New PRD version
 
-1. Create `docs/PRD/PRD_vX.Y.md`
-2. Create `attempts/prd-vX.Y/PRD.md` (frozen copy)
+1. Update `/docs/PRD.md` with the new PRD version (this is the single active PRD)
+2. Create `attempts/prd-vX.Y/PRD.md` (frozen copy, created once per PRD version)
 3. Create `attempts/prd-vX.Y/attempt-001/`
 4. Rebuild `/src/` as needed
 5. When complete, seal the attempt
@@ -139,7 +141,7 @@ git push --follow-tags
 | `/canon/**`                 | ✅ Yes   | Living orientation docs  |
 | `/odd/**`                   | ✅ Yes   | Living philosophy docs   |
 | `/about/**`                 | ✅ Yes   | Living about docs        |
-| `/docs/PRD/*`               | ✅ Yes   | Versioned but editable   |
+| `/docs/PRD.md`              | ✅ Yes   | Single active PRD        |
 | `/attempts/prd-vX.Y/PRD.md` | ❌ No    | Frozen snapshot          |
 | `/attempts/*/attempt-NNN/*` | ❌ No    | Sealed record + evidence |
 
