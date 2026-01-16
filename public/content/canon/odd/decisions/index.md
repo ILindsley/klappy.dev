@@ -14,6 +14,7 @@ This folder contains Architecture Decision Records (ADRs) for the ODD workflow a
 |----|----------|--------|
 | [D0001](./D0001-prod-branch-is-production.md) | `prod` branch is production; `main` is experiment ledger | **Active** |
 | [D0005](./D0005-nuke-safety-guards.md) | Nuke command refuses on `prod`, warns on `main` | **Active** |
+| [D0007](./D0007-branch-names-are-convenience.md) | Branch names are convenience; provenance lives in META | **Active** |
 
 ### Attempt Lifecycle
 

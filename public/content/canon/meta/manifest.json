@@ -310,6 +310,18 @@
       "tags": ["odd", "decisions", "dogfooding", "validation"]
     },
     {
+      "uri": "klappy://canon/odd/decisions/D0007",
+      "path": "/canon/odd/decisions/D0007-branch-names-are-convenience.md",
+      "title": "D0007: Branch Names Are Convenience",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "internal",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": ["odd", "decisions", "branches", "provenance"]
+    },
+    {
       "uri": "klappy://about/why-this-exists",
       "path": "/about/why-this-exists.md",
       "title": "Why This Exists",

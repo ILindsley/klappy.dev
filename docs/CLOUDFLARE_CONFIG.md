@@ -2,6 +2,8 @@
 
 This document describes how Cloudflare Pages should be configured for the klappy.dev repository.
 
+**Scope:** Deploy behavior only. For attempt workflow mechanics, see `/docs/ATTEMPTS.md`.
+
 ---
 
 ## 🌿 Branch Roles
@@ -10,7 +12,9 @@ This document describes how Cloudflare Pages should be configured for the klappy
 |--------|---------|---------------|
 | `prod` | Live production deployment | **Production URL** (klappy.dev) |
 | `main` | Experiment aggregation + history | Preview URL only |
-| `attempt/*` | Ephemeral agent workspaces | Preview URLs |
+| Any other branch | Agent workspaces, Cursor worktrees, experiments | Preview URLs |
+
+**Note:** Cloudflare does not require specific branch naming. Any non-`prod` branch that builds successfully gets a preview URL.
 
 ---
 
@@ -42,8 +46,8 @@ Preview branches: All non-production branches
 ```
 
 This ensures:
-- Every `attempt/*` branch gets a preview URL
-- Agents can verify their work before promotion
+- Every agent branch gets a preview URL
+- Cursor worktrees get preview URLs automatically
 - Reviewers can compare multiple attempts side-by-side
 
 ---
@@ -64,8 +68,17 @@ Root directory:    (leave empty)
 |--------|--------|
 | Push to `prod` | Deploys to klappy.dev (production) |
 | Push to `main` | Deploys to preview URL (main.klappy-dev.pages.dev) |
-| Push to `attempt/prd-v0.2/a001` | Deploys to preview URL (attempt-prd-v0-2-a001.klappy-dev.pages.dev) |
-| `npm run attempt:promote` | Merges to main, fast-forwards prod → deploys to production |
+| Push to any other branch | Deploys to preview URL (`<branch-slug>.klappy-dev.pages.dev`) |
+| `npm run attempt:promote` | Merges champion to `main`, fast-forwards `prod` → deploys to production |
+
+### Promotion Semantics
+
+1. **Artifacts merge first** — attempt evidence merges to `main` before promotion
+2. **Champion code merges** — winning attempt's code merges to `main`
+3. **`prod` fast-forwards** — `prod` fast-forwards to match `main`
+4. **Cloudflare deploys** — `prod` push triggers production deployment
+
+Only champion code reaches production. Losing attempts contribute artifacts but not code.
 
 ---
 
@@ -73,9 +86,9 @@ Root directory:    (leave empty)
 
 After configuring, verify:
 
-1. **Push to prod** → klappy.dev updates
-2. **Push to main** → main.klappy-dev.pages.dev updates (NOT klappy.dev)
-3. **Push to attempt branch** → preview URL generates
+1. **Push to `prod`** → klappy.dev updates
+2. **Push to `main`** → main.klappy-dev.pages.dev updates (NOT klappy.dev)
+3. **Push to any agent branch** → preview URL generates
 
 ---
 
@@ -104,3 +117,11 @@ Will get a preview URL.
 
 The canonical record of "who made what" lives in `META.json`, not in the branch name.
 This keeps the system antifragile — branch naming can drift without breaking provenance.
+
+---
+
+## 🔗 Related Documents
+
+- Attempt workflow: `/docs/ATTEMPTS.md`
+- Deploy contract: `/infra/contracts/build-output.md`
+- Decision: `/canon/odd/decisions/D0001-prod-branch-is-production.md`
