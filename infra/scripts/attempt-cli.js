@@ -806,6 +806,54 @@ function cmdSubmit(opts) {
   }
   console.log('  ✅ Staged\n');
   
+  // Check evidence completeness (warn but don't block)
+  console.log('📋 Evidence check...');
+  const evidenceDir = join(ROOT, runs_dir, 'evidence');
+  const attemptMdPath = join(ROOT, runs_dir, 'ATTEMPT.md');
+  const evidenceMdPath = join(ROOT, runs_dir, 'EVIDENCE.md');
+  
+  let evidenceWarnings = [];
+  
+  // Check ATTEMPT.md has content beyond skeleton
+  if (existsSync(attemptMdPath)) {
+    const content = readFileSync(attemptMdPath, 'utf8');
+    if (content.includes('_TODO:') || content.includes('[Describe') || content.length < 500) {
+      evidenceWarnings.push('ATTEMPT.md appears incomplete (still has placeholders or is too short)');
+    }
+  } else {
+    evidenceWarnings.push('ATTEMPT.md does not exist');
+  }
+  
+  // Check EVIDENCE.md has content beyond skeleton
+  if (existsSync(evidenceMdPath)) {
+    const content = readFileSync(evidenceMdPath, 'utf8');
+    if (content.includes('_TODO:') || content.includes('_No screenshots') || content.length < 300) {
+      evidenceWarnings.push('EVIDENCE.md appears incomplete (still has placeholders or is too short)');
+    }
+  } else {
+    evidenceWarnings.push('EVIDENCE.md does not exist');
+  }
+  
+  // Check evidence folder has screenshots
+  if (existsSync(evidenceDir)) {
+    const files = readdirSync(evidenceDir);
+    const screenshots = files.filter(f => f.endsWith('.png') || f.endsWith('.jpg') || f.endsWith('.jpeg'));
+    if (screenshots.length < 3) {
+      evidenceWarnings.push(`evidence/ folder has only ${screenshots.length} screenshots (need at least 3)`);
+    }
+  } else {
+    evidenceWarnings.push('evidence/ folder does not exist');
+  }
+  
+  if (evidenceWarnings.length > 0) {
+    console.log('\n  ⚠️  EVIDENCE INCOMPLETE:\n');
+    evidenceWarnings.forEach(w => console.log(`     - ${w}`));
+    console.log('\n  You should fix these before your final submit.\n');
+    console.log('  Required: ATTEMPT.md, EVIDENCE.md, 3+ screenshots in evidence/\n');
+  } else {
+    console.log('  ✅ Evidence looks complete\n');
+  }
+  
   // Check if there's anything to commit
   const status = run('git status --porcelain', { silent: true, dryRun: false });
   if (!status) {

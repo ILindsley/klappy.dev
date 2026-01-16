@@ -48,14 +48,14 @@ npm run attempt:promote -- --prd v0.2 --attempt 001
 
 ## CLI Reference
 
-| Command | Purpose |
-|---------|---------|
-| `npm run attempt:register -- --prd v0.2` | Agent registers their run |
-| `npm run attempt:submit` | Agent commits + pushes (triggers CF preview) |
-| `npm run attempt:reset` | Nuke /src for fresh attempt |
-| `npm run attempt:import -- --prd v0.2` | Pull artifacts from branches to main |
-| `npm run attempt:finalize -- --prd v0.2` | Assign attempt numbers |
-| `npm run attempt:promote -- --prd v0.2 --attempt 001` | Merge champion to main |
+| Command                                               | Purpose                                      |
+| ----------------------------------------------------- | -------------------------------------------- |
+| `npm run attempt:register -- --prd v0.2`              | Agent registers their run                    |
+| `npm run attempt:submit`                              | Agent commits + pushes (triggers CF preview) |
+| `npm run attempt:reset`                               | Nuke /src for fresh attempt                  |
+| `npm run attempt:import -- --prd v0.2`                | Pull artifacts from branches to main         |
+| `npm run attempt:finalize -- --prd v0.2`              | Assign attempt numbers                       |
+| `npm run attempt:promote -- --prd v0.2 --attempt 001` | Merge champion to main                       |
 
 ---
 
