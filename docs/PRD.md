@@ -2,7 +2,7 @@
 
 | Field                       | Value       |
 | --------------------------- | ----------- |
-| **PRD Version**             | v0.2        |
+| **PRD Version**             | v0.3        |
 | **Status**                  | Draft       |
 | **Created**                 | 2026-01-16  |
 | **Author**                  | Chris Klapp |
@@ -136,6 +136,62 @@ A deep link is considered valid only if:
 On first load, the navigation MUST expose no more than one screen-height of primary options without interaction.
 
 Additional content MUST be revealed progressively (collapse, expand, filter, or context).
+
+**2.5 Progressive Disclosure Model**
+
+Goal: Prevent overwhelm by default. Reveal complexity only after user intent.
+
+Disclosure tiers:
+
+- **Tier 0 (Immediate Orientation)**: Minimal, calming entry. One obvious next step. No decisions required.
+- **Tier 1 (Tell Me More)**: Core principles + curated entrypoints. Hints that deeper structure exists.
+- **Tier 2 (Machinery)**: Full canon, appendices, attempts, CLI/process, lifecycle mechanics.
+
+Tier assignments are encoded in the manifest via the `tier` field.
+
+**2.6 Repo Disclosure Requirements**
+
+Progressive disclosure applies to documentation, not just UI:
+
+- `README.md` MUST be a narrative scroll (no folder trees, no path dumps up front).
+- `README.md` MUST NOT enumerate all subfolders or file paths in the first screen.
+- `canon/index.md` MUST present a "Start here / Go deeper / Edge cases" structure without enumerating all files.
+- Tier 2 content (appendices, lifecycle, confidence scores) MUST appear only after explicit scroll or navigation.
+
+**2.7 Manifest Contract: Tier Field**
+
+Each resource in `manifest.json` MUST include a `tier` field:
+
+- `tier`: 0, 1, or 2
+
+Tier assignment rules:
+
+- **Tier 0**: Public entrypoints (ODD public, Why This Exists, Projects Index)
+- **Tier 1**: Core canon (Canon Index, Constraints, Definition of Done, Bio, Credibility)
+- **Tier 2**: Everything else (appendices, templates, internal docs, changelogs)
+
+The manifest is the authoritative source for tier assignments. UI and agents MUST respect these tiers.
+
+**2.8 Site Disclosure Requirements**
+
+- Sidebar MUST NOT render the full manifest as a wall by default.
+- Sidebar MUST show Tier 0 + Tier 1 resources first.
+- Tier 2 resources MUST require explicit expansion ("Show more", "Expand", or equivalent affordance).
+- Default view MUST expose no more than 7 nav items without scrolling (desktop).
+- On mobile, navigation MUST NOT exceed a single-column view on first load.
+
+**2.9 Progressive Disclosure Acceptance Criteria**
+
+An attempt satisfies progressive disclosure requirements if:
+
+- [ ] First load shows ≤ 7 nav items visible without scrolling (desktop).
+- [ ] First load shows single-column navigation (mobile).
+- [ ] A visitor can reach any Tier 2 resource in ≤ 2 intentional actions.
+- [ ] No information is deleted; only the default revelation order changes.
+- [ ] `README.md` contains no folder paths in its first 3 sections.
+- [ ] `canon/index.md` does not enumerate all files in its first screen.
+
+These criteria are testable via visual inspection and interaction audit.
 
 ---
 
@@ -293,7 +349,7 @@ This PRD is shaped by Canon constraints and decision rules, especially:
 
 ## Notes
 
-- PRD v0.1 proved mechanics; v0.2 targets linkability, usability, and credible polish.
+- PRD v0.1 proved mechanics; v0.2 targeted linkability, usability, and credible polish; v0.3 adds explicit progressive disclosure requirements (Tier model, manifest contract, repo/site disclosure).
 - Attempts should be bounded: if a phase fails, start a new attempt rather than extending a drifting implementation.
 
 ---
