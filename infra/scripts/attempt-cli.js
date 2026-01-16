@@ -7,6 +7,7 @@
  * Commands:
  *   npm run attempt:start -- --prd v0.2
  *   npm run attempt:spawn -- --prd v0.2 --n 4
+ *   npm run attempt:reset
  *   npm run attempt:promote -- --prd v0.2 --attempt 001
  * 
  * What attempt:start does (everything automated):
@@ -20,6 +21,7 @@
  * 
  * What attempt:spawn does:
  *   Same as start, but for N parallel attempts.
+ *   Each branch gets /src reset and committed.
  *   Optionally creates worktrees.
  */
 
@@ -63,7 +65,8 @@ function parseArgs() {
     worktree: false,
     worktreeDir: null,
     dryRun: false,
-    force: false
+    force: false,
+    noCommit: false
   };
   
   // First arg is command
@@ -97,6 +100,8 @@ function parseArgs() {
       result.dryRun = true;
     } else if (arg === '--force') {
       result.force = true;
+    } else if (arg === '--no-commit') {
+      result.noCommit = true;
     }
   }
   
@@ -104,7 +109,7 @@ function parseArgs() {
 }
 
 // ============================================================
-// Minimal shell files (same as reset-attempt.js)
+// Minimal shell files
 // ============================================================
 
 const SHELL_FILES = {
@@ -195,6 +200,9 @@ export default function App() {
 }
 `
 };
+
+// SAFETY: Only these directories may be purged
+const PURGEABLE_DIRS = ['src', 'app'];
 
 // ============================================================
 // Core functions
@@ -296,13 +304,17 @@ function createAttemptBranch(prd, attemptPadded, opts) {
   return { branchName, prdSha };
 }
 
-function resetSrc(opts) {
-  const { dryRun } = opts;
+/**
+ * Reset /src to minimal shell.
+ * Can operate in current directory or a specific cwd (for worktrees).
+ */
+function resetSrc(opts, targetDir = ROOT) {
+  const { dryRun, noCommit } = opts;
   
   console.log('4️⃣  Resetting /src to minimal shell...');
   
-  const srcPath = join(ROOT, 'src');
-  const appPath = join(ROOT, 'app');
+  const srcPath = join(targetDir, 'src');
+  const appPath = join(targetDir, 'app');
   
   // Delete /src
   if (existsSync(srcPath) && !dryRun) {
@@ -322,9 +334,11 @@ function resetSrc(opts) {
     }
   }
   
-  // Commit reset
-  run('git add src/', { dryRun });
-  run('git commit -m "chore: reset /src to minimal shell for fresh attempt"', { dryRun });
+  // Commit reset (unless --no-commit)
+  if (!noCommit) {
+    run('git add src/', { dryRun, cwd: targetDir });
+    run('git commit -m "chore: reset /src to minimal shell for fresh attempt"', { dryRun, cwd: targetDir });
+  }
   
   console.log('  ✅ /src reset and committed\n');
 }
@@ -419,7 +433,7 @@ Options:
   }
   
   // Now create branches and reset each
-  console.log(`\n3️⃣  Creating ${n} branches...\n`);
+  console.log(`\n3️⃣  Creating ${n} branches and resetting /src in each...\n`);
   
   const wtDir = worktreeDir || join(ROOT, 'attempts', '_worktrees');
   
@@ -428,7 +442,8 @@ Options:
     const branchName = `attempt/prd-v${prd}/a${attemptPadded}`;
     
     if (worktree) {
-      // Create worktree
+      // === WORKTREE PATH ===
+      // Create worktree with new branch
       const wtPath = join(wtDir, `a${attemptPadded}`);
       console.log(`  Creating worktree: ${wtPath}`);
       if (!dryRun) {
@@ -436,7 +451,7 @@ Options:
         run(`git worktree add ${wtPath} -b ${branchName}`, { dryRun });
       }
       
-      // Reset in worktree
+      // Reset /src in worktree
       const srcPath = join(wtPath, 'src');
       if (!dryRun) {
         if (existsSync(srcPath)) rmSync(srcPath, { recursive: true });
@@ -450,42 +465,119 @@ Options:
       
       attempts[i].branchName = branchName;
       attempts[i].worktreePath = wtPath;
+      console.log(`  ✅ ${branchName} ready (worktree: ${wtPath})\n`);
+      
     } else {
-      // Just create branch (user will checkout manually)
-      run(`git branch ${branchName}`, { dryRun });
+      // === NON-WORKTREE PATH ===
+      // Create branch, checkout, reset /src, commit, then move to next
+      console.log(`  Setting up ${branchName}...`);
+      
+      run(`git checkout -b ${branchName}`, { dryRun });
+      
+      // Reset /src in this branch
+      const srcPath = join(ROOT, 'src');
+      const appPath = join(ROOT, 'app');
+      
+      if (!dryRun) {
+        if (existsSync(srcPath)) rmSync(srcPath, { recursive: true });
+        if (existsSync(appPath)) rmSync(appPath, { recursive: true });
+        mkdirSync(join(srcPath, 'components'), { recursive: true });
+        for (const [filename, content] of Object.entries(SHELL_FILES)) {
+          writeFileSync(join(srcPath, filename), content);
+        }
+      }
+      
+      run('git add src/', { dryRun });
+      run('git commit -m "chore: reset /src to minimal shell for fresh attempt"', { dryRun });
+      
       attempts[i].branchName = branchName;
+      console.log(`  ✅ ${branchName} ready\n`);
+      
+      // Go back to main to create next branch
+      run('git checkout main', { dryRun });
     }
   }
   
-  // Return to main
-  if (!worktree) {
-    run('git checkout main', { dryRun });
-  }
-  
   // Print summary table
-  console.log('\n' + '═'.repeat(60));
+  console.log('═'.repeat(60));
   console.log('\n🌌 PARALLEL ATTEMPTS READY\n');
-  console.log('  Attempt  │ Branch                         │ Worktree');
+  console.log('  Attempt  │ Branch                         │ Location');
   console.log('  ─────────┼────────────────────────────────┼──────────────────────');
   for (const a of attempts) {
-    const wt = a.worktreePath || '(checkout manually)';
-    console.log(`  ${a.attemptPadded}      │ ${a.branchName.padEnd(30)} │ ${wt}`);
+    const loc = a.worktreePath || '(checkout to use)';
+    console.log(`  ${a.attemptPadded}      │ ${a.branchName.padEnd(30)} │ ${loc}`);
   }
   console.log('\n' + '═'.repeat(60));
   
   console.log(`
 📋 Next steps:
 
-   1. Open each branch/worktree in a separate agent
+   1. Checkout each branch in a separate terminal/agent:
+      git checkout ${attempts[0]?.branchName || 'attempt/prd-vX.Y/aNNN'}
+
    2. Paste /docs/PROMPT_ATTEMPT_KICKOFF.txt verbatim into each
+
    3. Do NOT share code, diffs, or guidance between attempts
-   4. Push each branch to trigger preview deploys
+
+   4. Push each branch to trigger preview deploys:
+      git push origin <branch-name>
 `);
 }
 
+/**
+ * Standalone reset command for manual use.
+ */
+function cmdReset(opts) {
+  const { dryRun, noCommit } = opts;
+  
+  console.log('\n🧹 Resetting /src to minimal shell\n');
+  if (dryRun) console.log('  [DRY RUN MODE]\n');
+  
+  // Safety check: show what we're protecting
+  console.log('  Safety: Only /src and /app will be purged');
+  console.log(`  Purgeable: ${PURGEABLE_DIRS.join(', ')}\n`);
+  
+  const srcPath = join(ROOT, 'src');
+  const appPath = join(ROOT, 'app');
+  
+  // Delete /src
+  if (existsSync(srcPath)) {
+    if (!dryRun) rmSync(srcPath, { recursive: true });
+    console.log('  ✅ Deleted /src');
+  }
+  
+  // Delete /app if present
+  if (existsSync(appPath)) {
+    if (!dryRun) rmSync(appPath, { recursive: true });
+    console.log('  ✅ Deleted /app');
+  }
+  
+  // Create minimal shell
+  if (!dryRun) {
+    mkdirSync(join(srcPath, 'components'), { recursive: true });
+    for (const [filename, content] of Object.entries(SHELL_FILES)) {
+      writeFileSync(join(srcPath, filename), content);
+      console.log(`  ✅ Created ${filename}`);
+    }
+  }
+  
+  // Commit (unless --no-commit)
+  if (!noCommit) {
+    console.log('\n  Committing reset...');
+    run('git add src/', { dryRun });
+    run('git commit -m "chore: reset /src to minimal shell for fresh attempt"', { dryRun });
+    console.log('  ✅ Committed\n');
+  } else {
+    console.log('\n  Skipping commit (--no-commit)\n');
+  }
+  
+  console.log('═'.repeat(60));
+  console.log('\n🧹 RESET COMPLETE\n');
+  console.log('  /src is now a minimal shell. Build your implementation fresh.');
+  console.log('\n' + '═'.repeat(60));
+}
+
 function cmdPromote(opts) {
-  // Delegate to existing promote script for now
-  // This keeps the logic in one place
   const { prd, attempt, dryRun } = opts;
   
   if (!prd || !attempt) {
@@ -503,8 +595,7 @@ Options:
     process.exit(1);
   }
   
-  // Import and run the existing promote logic
-  // For now, just call the script directly
+  // Delegate to existing promote script
   const args = ['--prd', prd, '--attempt', attempt];
   if (dryRun) args.push('--dry-run');
   
@@ -525,6 +616,9 @@ function main() {
     case 'spawn':
       cmdSpawn(opts);
       break;
+    case 'reset':
+      cmdReset(opts);
+      break;
     case 'promote':
       cmdPromote(opts);
       break;
@@ -537,7 +631,10 @@ Commands:
       Start a single attempt (reserve, branch, reset)
 
   npm run attempt spawn -- --prd v0.2 --n 4
-      Spawn N parallel attempts
+      Spawn N parallel attempts (each with /src reset)
+
+  npm run attempt reset
+      Reset /src to minimal shell (standalone)
 
   npm run attempt promote -- --prd v0.2 --attempt 001
       Promote champion to production

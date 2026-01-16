@@ -5,6 +5,7 @@
 1. **Freeze PRD**: Update `/docs/PRD.md`, commit to main. No PRD edits until attempts seal.
 
 2. **Start attempt(s)**:
+
    ```bash
    # Single attempt
    npm run attempt:start -- --prd v0.2
@@ -25,6 +26,7 @@
 ## What the CLI Does
 
 The `attempt:start` command automates everything:
+
 - Validates clean git state on main
 - Reserves attempt number (commits registry to main)
 - Creates attempt branch from that commit
@@ -47,10 +49,10 @@ The `attempt:spawn` command does this N times, optionally creating worktrees.
 
 ## Reference
 
-| Command | Purpose |
-| ------- | ------- |
-| `npm run attempt:start -- --prd v0.2` | Start single attempt |
-| `npm run attempt:spawn -- --prd v0.2 --n 4` | Spawn N parallel attempts |
+| Command                                               | Purpose                        |
+| ----------------------------------------------------- | ------------------------------ |
+| `npm run attempt:start -- --prd v0.2`                 | Start single attempt           |
+| `npm run attempt:spawn -- --prd v0.2 --n 4`           | Spawn N parallel attempts      |
 | `npm run attempt:promote -- --prd v0.2 --attempt 001` | Promote champion to production |
 
 Prompt file: `/docs/PROMPT_ATTEMPT_KICKOFF.txt`

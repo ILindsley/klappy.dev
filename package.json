@@ -12,6 +12,7 @@
     "attempt": "node infra/scripts/attempt-cli.js",
     "attempt:start": "node infra/scripts/attempt-cli.js start",
     "attempt:spawn": "node infra/scripts/attempt-cli.js spawn",
+    "attempt:reset": "node infra/scripts/attempt-cli.js reset",
     "attempt:promote": "node infra/scripts/attempt-cli.js promote"
   },
   "dependencies": {
