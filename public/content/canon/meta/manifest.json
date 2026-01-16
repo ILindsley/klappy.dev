@@ -1,7 +1,7 @@
 {
   "pack": {
     "name": "klappy-canon",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "updated_at": "2026-01-16",
     "description": "Canonical orientation, constraints, decision rules, evidence policies, and ODD appendices used across klappy.dev.",
     "public_entrypoint": "klappy://public/odd",
@@ -224,6 +224,90 @@
       "voice": "neutral",
       "stability": "stable",
       "tags": ["odd", "epistemic", "hygiene", "truth", "cleanup"]
+    },
+    {
+      "uri": "klappy://canon/odd/decisions",
+      "path": "/canon/odd/decisions/index.md",
+      "title": "ODD Decision Log",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 1,
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": ["odd", "decisions", "adr", "index"]
+    },
+    {
+      "uri": "klappy://canon/odd/decisions/D0001",
+      "path": "/canon/odd/decisions/D0001-prod-branch-is-production.md",
+      "title": "D0001: prod Branch Is Production",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "internal",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": ["odd", "decisions", "branch", "deploy"]
+    },
+    {
+      "uri": "klappy://canon/odd/decisions/D0002",
+      "path": "/canon/odd/decisions/D0002-attempt-provenance-required.md",
+      "title": "D0002: Attempt Provenance Required",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "internal",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": ["odd", "decisions", "provenance", "model"]
+    },
+    {
+      "uri": "klappy://canon/odd/decisions/D0003",
+      "path": "/canon/odd/decisions/D0003-prd-version-auto-detection.md",
+      "title": "D0003: PRD Version Auto-Detection",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "internal",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": ["odd", "decisions", "prd", "version"]
+    },
+    {
+      "uri": "klappy://canon/odd/decisions/D0004",
+      "path": "/canon/odd/decisions/D0004-repo-truth-cleanup-mandatory.md",
+      "title": "D0004: Repo Truth & Cleanup Mandatory",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "internal",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": ["odd", "decisions", "cleanup", "hygiene"]
+    },
+    {
+      "uri": "klappy://canon/odd/decisions/D0005",
+      "path": "/canon/odd/decisions/D0005-nuke-safety-guards.md",
+      "title": "D0005: Nuke Command Safety Guards",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "internal",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": ["odd", "decisions", "nuke", "safety"]
+    },
+    {
+      "uri": "klappy://canon/odd/decisions/D0006",
+      "path": "/canon/odd/decisions/D0006-dogfooding-requirement.md",
+      "title": "D0006: Dogfooding Requirement",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "internal",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": ["odd", "decisions", "dogfooding", "validation"]
     },
     {
       "uri": "klappy://about/why-this-exists",
