@@ -204,6 +204,43 @@ Signals this rule was violated
 
 ⸻
 
+13. Prefer One-Shot Builds; Don’t Steer a Miss
+
+I prefer fixing the asset (PRD, constraints, inputs) and re-running clean over steering a multi-turn miss.
+
+How I apply this
+• I treat a failed execution path as signal, not a trajectory to nurse back to health
+• If context decays, I restart with corrected inputs rather than accumulating patches
+• I preserve the attempt as evidence, then begin a new attempt independently
+
+Signals this rule was violated
+• “Just one more tweak” turns into extended steering
+• The system only works if the same person keeps nudging it
+• The final outcome cannot be reproduced from a clean start
+
+⸻
+
+14. Don’t Hard-Code Domain Tables; Hard-Code Protocol Contracts
+
+I avoid hard-coding domain lookups that can be derived, fetched, or updated without code changes.
+
+I do hard-code protocol contracts that define interoperability:
+• types
+• schemas
+• action primitives
+• allowed states and transitions
+
+How I apply this
+• If it’s “data,” I prefer it to live in content, configuration, or a source of truth
+• If it’s “interface,” I prefer it to be explicit and enforced in code
+
+Signals this rule was violated
+• Large in-code tables that drift from reality (e.g., enumerations maintained by hand)
+• Domain updates require redeploys without justification
+• Integrations fail because the “contract” was implicit or inconsistent
+
+⸻
+
 Closing Note
 
 These rules describe how I tend to decide, not how decisions must always be made.

@@ -14,6 +14,18 @@ Single kickoff prompt: `/docs/ATTEMPT_KICKOFF.md`
 
 ---
 
+## PRD as the Unit of Test (Procedural)
+
+Treat the PRD as the primary test unit:
+
+- Issues and failures should map to PRD improvements (new constraints, clarified success criteria, refined DoD).
+- Attempts validate the PRD as a hypothesis via observable outcomes + evidence.
+- Avoid scattered ticket systems that drift from the PRD’s intent.
+
+If the PRD is flawed, revise `/docs/PRD.md` and start a new attempt (or new PRD version as appropriate).
+
+---
+
 ## What is an Attempt?
 
 An **attempt** is a bounded effort to implement a specific PRD version. When an attempt is complete (or abandoned), it is **sealed**:

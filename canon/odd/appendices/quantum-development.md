@@ -116,6 +116,8 @@ Infrastructure exists to protect and surface independence, not to define it.
 
 Confusing infrastructural isolation with epistemic independence is a common failure mode in AI-assisted development.
 
+See `/canon/odd/appendices/attempt-lifecycle.md` for the attempt model and the “PRD as the unit of test” framing.
+
 ---
 
 ## Outcome Interpretation (Conceptual)

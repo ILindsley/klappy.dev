@@ -49,6 +49,31 @@ For the single canonical kickoff prompt used to start any new attempt, see: `/do
 
 ---
 
+## PRD as the Unit of Test
+
+In ODD, a PRD is treated as the primary test unit.
+
+Issues and failures are mapped back to PRD improvements, and attempts are used to validate PRDs as hypotheses.
+
+This reduces ticket sprawl by keeping the system legible: one PRD version, multiple observable attempts, sealed evidence.
+
+---
+
+## Independence: Goal vs. Infrastructure
+
+Independence is the goal (epistemic).
+
+Infrastructure is an enabler, not a guarantee.
+
+An attempt is independent if:
+- decisions are not steered by prior outcomes,
+- implementation state is fresh,
+- and the approach represents a genuine re-instantiation of the PRD.
+
+Branches and preview deployments can support independence by reducing accidental state leakage and enabling parallel observation, but they do not define independence.
+
+---
+
 ## What an Attempt Is
 
 An Attempt is a bounded execution of a specific Product Requirements Document (PRD).
