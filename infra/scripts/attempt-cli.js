@@ -440,6 +440,7 @@ Options:
   for (let i = 0; i < attempts.length; i++) {
     const { attemptPadded } = attempts[i];
     const branchName = `attempt/prd-v${prd}/a${attemptPadded}`;
+    const attemptDir = `attempts/prd-v${prd}/attempt-${attemptPadded}`;
     
     if (worktree) {
       // === WORKTREE PATH ===
@@ -451,6 +452,17 @@ Options:
         run(`git worktree add ${wtPath} -b ${branchName}`, { dryRun });
       }
       
+      // Write .attempt.json so agents know their identity
+      const attemptMeta = {
+        prd: `v${prd}`,
+        attempt: attemptPadded,
+        branch: branchName,
+        attempt_dir: attemptDir
+      };
+      if (!dryRun) {
+        writeFileSync(join(wtPath, '.attempt.json'), JSON.stringify(attemptMeta, null, 2) + '\n');
+      }
+      
       // Reset /src in worktree
       const srcPath = join(wtPath, 'src');
       if (!dryRun) {
@@ -459,12 +471,13 @@ Options:
         for (const [filename, content] of Object.entries(SHELL_FILES)) {
           writeFileSync(join(srcPath, filename), content);
         }
-        run('git add src/', { dryRun, cwd: wtPath });
+        run('git add src/ .attempt.json', { dryRun, cwd: wtPath });
         run('git commit -m "chore: reset /src to minimal shell for fresh attempt"', { dryRun, cwd: wtPath });
       }
       
       attempts[i].branchName = branchName;
       attempts[i].worktreePath = wtPath;
+      attempts[i].attemptDir = attemptDir;
       console.log(`  ✅ ${branchName} ready (worktree: ${wtPath})\n`);
       
     } else {
@@ -473,6 +486,17 @@ Options:
       console.log(`  Setting up ${branchName}...`);
       
       run(`git checkout -b ${branchName}`, { dryRun });
+      
+      // Write .attempt.json so agents know their identity
+      const attemptMeta = {
+        prd: `v${prd}`,
+        attempt: attemptPadded,
+        branch: branchName,
+        attempt_dir: attemptDir
+      };
+      if (!dryRun) {
+        writeFileSync(join(ROOT, '.attempt.json'), JSON.stringify(attemptMeta, null, 2) + '\n');
+      }
       
       // Reset /src in this branch
       const srcPath = join(ROOT, 'src');
@@ -487,10 +511,11 @@ Options:
         }
       }
       
-      run('git add src/', { dryRun });
+      run('git add src/ .attempt.json', { dryRun });
       run('git commit -m "chore: reset /src to minimal shell for fresh attempt"', { dryRun });
       
       attempts[i].branchName = branchName;
+      attempts[i].attemptDir = attemptDir;
       console.log(`  ✅ ${branchName} ready\n`);
       
       // Go back to main to create next branch
@@ -499,28 +524,25 @@ Options:
   }
   
   // Print summary table
-  console.log('═'.repeat(60));
+  console.log('═'.repeat(100));
   console.log('\n🌌 PARALLEL ATTEMPTS READY\n');
-  console.log('  Attempt  │ Branch                         │ Location');
-  console.log('  ─────────┼────────────────────────────────┼──────────────────────');
+  console.log('  Attempt │ Branch                      │ Worktree Path                          │ Artifact Dir');
+  console.log('  ────────┼─────────────────────────────┼────────────────────────────────────────┼─────────────────────────────────');
   for (const a of attempts) {
-    const loc = a.worktreePath || '(checkout to use)';
-    console.log(`  ${a.attemptPadded}      │ ${a.branchName.padEnd(30)} │ ${loc}`);
+    const wtRel = a.worktreePath ? a.worktreePath.replace(ROOT + '/', '') : '(checkout)';
+    console.log(`  ${a.attemptPadded}     │ ${a.branchName.padEnd(27)} │ ${wtRel.padEnd(38)} │ ${a.attemptDir}`);
   }
-  console.log('\n' + '═'.repeat(60));
+  console.log('\n' + '═'.repeat(100));
   
   console.log(`
 📋 Next steps:
 
-   1. Checkout each branch in a separate terminal/agent:
-      git checkout ${attempts[0]?.branchName || 'attempt/prd-vX.Y/aNNN'}
+   1. Assign each agent ONE row from the table above
+   2. Each agent works ONLY in its worktree path
+   3. Each agent writes artifacts ONLY to its artifact dir
+   4. Paste /docs/PROMPT_ATTEMPT_KICKOFF.txt into each agent
 
-   2. Paste /docs/PROMPT_ATTEMPT_KICKOFF.txt verbatim into each
-
-   3. Do NOT share code, diffs, or guidance between attempts
-
-   4. Push each branch to trigger preview deploys:
-      git push origin <branch-name>
+   Each worktree contains .attempt.json with the agent's identity.
 `);
 }
 
