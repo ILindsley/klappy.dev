@@ -11,9 +11,24 @@
  *   npm run attempt:reset -- --no-commit
  * 
  * What it does:
- *   1. Deletes everything in /src
+ *   1. Deletes everything in /src (and /app if present)
  *   2. Creates minimal shell files (main.jsx, index.css, App.jsx)
  *   3. Commits the reset as the attempt's starting point
+ * 
+ * SAFETY BOUNDARIES:
+ *   This script may ONLY delete:
+ *     - /src
+ *     - /app (if present)
+ *   
+ *   This script must NEVER touch:
+ *     - /infra
+ *     - /public/content
+ *     - /canon
+ *     - /odd
+ *     - /docs
+ *     - /attempts
+ *     - /about
+ *     - /projects
  * 
  * The minimal shell:
  *   - Loads manifest
@@ -29,6 +44,24 @@ import { execSync } from 'child_process';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '../..');
 const SRC = join(ROOT, 'src');
+const APP = join(ROOT, 'app');
+
+// SAFETY: Directories that must NEVER be deleted
+const PROTECTED_DIRS = [
+  'infra',
+  'public',
+  'canon',
+  'odd',
+  'docs',
+  'attempts',
+  'about',
+  'projects',
+  'node_modules',
+  '.git',
+];
+
+// SAFETY: Only these directories may be purged
+const PURGEABLE_DIRS = ['src', 'app'];
 
 function parseArgs() {
   const args = process.argv.slice(2);
@@ -144,6 +177,11 @@ export default function App() {
 `
 };
 
+function fail(message) {
+  console.error(`\n❌ ${message}\n`);
+  process.exit(1);
+}
+
 function reset() {
   const { dryRun, noCommit } = parseArgs();
   
@@ -151,6 +189,16 @@ function reset() {
   if (dryRun) {
     console.log('  [DRY RUN MODE - no changes will be made]\n');
   }
+  
+  // Safety check: verify we're only touching allowed directories
+  console.log('0️⃣  Safety check...');
+  for (const dir of PROTECTED_DIRS) {
+    const protectedPath = join(ROOT, dir);
+    if (existsSync(protectedPath)) {
+      console.log(`  ✅ Protected: /${dir}/`);
+    }
+  }
+  console.log(`  ✅ Will purge only: ${PURGEABLE_DIRS.map(d => '/' + d + '/').join(', ')}\n`);
   
   // Step 1: Delete /src
   console.log('1️⃣  Purging /src...');
@@ -161,6 +209,15 @@ function reset() {
     console.log('  ✅ Deleted /src\n');
   } else {
     console.log('  ⚠️  /src does not exist\n');
+  }
+  
+  // Step 1b: Delete /app if present
+  if (existsSync(APP)) {
+    console.log('1️⃣b Purging /app...');
+    if (!dryRun) {
+      rmSync(APP, { recursive: true });
+    }
+    console.log('  ✅ Deleted /app\n');
   }
   
   // Step 2: Create minimal shell
@@ -212,15 +269,18 @@ function reset() {
   console.log(`
 📋 Next steps:
 
-1. Read the PRD: /docs/PRD.md
+1. Run the kickoff prompt from: /docs/PROMPT_ATTEMPT_KICKOFF.txt
 
-2. Build your implementation from scratch
+2. Read the PRD: /docs/PRD.md
+
+3. Build your implementation from scratch
    - No inherited UI patterns
    - No assumptions from prior attempts
 
-3. Test with: npm run dev
+4. Test with: npm run dev
 
-4. When done, seal the attempt with evidence
+5. When done, seal the attempt with evidence in:
+   attempts/prd-vX.Y/attempt-NNN/
 `);
 }
 
