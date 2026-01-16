@@ -403,108 +403,6 @@ Options:
   printStartSummary(prd, attemptPadded, branchName, prdSha);
 }
 
-function cmdSpawn(opts) {
-  const { prd, n, worktreeDir, dryRun, force } = opts;
-  
-  if (!prd || n < 1) {
-    console.log(`
-Usage: npm run attempt:spawn -- --prd <version> --n <count>
-
-Example:
-  npm run attempt:spawn -- --prd v0.2 --n 5
-
-Options:
-  --prd <version>     PRD version (required)
-  --n <count>         Number of worktrees to create (required)
-  --worktree-dir      Custom worktree directory (default: .worktrees/prd-<v>)
-  --force             Override clean working directory check
-  --dry-run           Show what would happen
-
-Note: This only creates worktrees. Each agent must run attempt:register
-      inside their worktree to get a unique run ID.
-`);
-    process.exit(1);
-  }
-  
-  console.log(`\n🌌 Spawning ${n} worktrees for PRD v${prd}\n`);
-  if (dryRun) console.log('  [DRY RUN MODE]\n');
-  
-  // Validate git state
-  console.log('1️⃣  Validating git state...');
-  const status = run('git status --porcelain', { silent: true, dryRun: false });
-  if (status && !force) {
-    fail('Working directory not clean. Commit or stash changes first.\n' +
-         '   (use --force to override)\n\n' + status);
-  }
-  if (status && force) {
-    console.log('  ⚠️  Working directory not clean (--force used)');
-  } else {
-    console.log('  ✅ Working directory clean');
-  }
-  
-  const branch = run('git branch --show-current', { silent: true, dryRun: false });
-  if (branch !== 'main') {
-    fail(`Must be on main branch. Currently on: ${branch}`);
-  }
-  console.log('  ✅ On main branch\n');
-  
-  // Create worktrees
-  console.log(`2️⃣  Creating ${n} worktrees...\n`);
-  
-  const wtDir = worktreeDir || join(ROOT, '.worktrees', `prd-v${prd}`);
-  const worktrees = [];
-  
-  for (let i = 1; i <= n; i++) {
-    const label = String(i).padStart(2, '0');
-    const branchName = `attempt/prd-v${prd}/wt${label}`;
-    const wtPath = join(wtDir, `wt${label}`);
-    const wtRel = `.worktrees/prd-v${prd}/wt${label}`;
-    
-    console.log(`  Creating: ${wtRel}`);
-    if (!dryRun) {
-      mkdirSync(wtDir, { recursive: true });
-      run(`git worktree add ${wtPath} -b ${branchName}`, { dryRun });
-      
-      // Reset /src in worktree
-      const srcPath = join(wtPath, 'src');
-      if (existsSync(srcPath)) rmSync(srcPath, { recursive: true });
-      mkdirSync(join(srcPath, 'components'), { recursive: true });
-      for (const [filename, content] of Object.entries(SHELL_FILES)) {
-        writeFileSync(join(srcPath, filename), content);
-      }
-      run('git add src/', { dryRun, cwd: wtPath });
-      run('git commit -m "chore: reset /src to minimal shell"', { dryRun, cwd: wtPath });
-    }
-    
-    worktrees.push({ label, branchName, wtPath, wtRel });
-    console.log(`  ✅ ${branchName}\n`);
-  }
-  
-  // Print summary table
-  console.log('═'.repeat(70));
-  console.log('\n🌌 WORKTREES READY\n');
-  console.log('  # │ Branch                        │ Path');
-  console.log('  ──┼───────────────────────────────┼─────────────────────────────────');
-  for (const wt of worktrees) {
-    console.log(`  ${wt.label} │ ${wt.branchName.padEnd(29)} │ ${wt.wtRel}`);
-  }
-  console.log('\n' + '═'.repeat(70));
-  
-  console.log(`
-📋 Next steps:
-
-   1. Assign each Cursor agent ONE worktree path from the table
-   2. Each agent runs inside their worktree:
-      npm run attempt:register -- --prd v${prd} --agent <label>
-   3. Each agent builds and writes artifacts to their runs_dir
-   4. After all agents finish, run on main:
-      npm run attempt:finalize -- --prd v${prd}
-
-   Agents write to: attempts/prd-v${prd}/_runs/<run_id>/
-   Finalize assigns: attempts/prd-v${prd}/attempt-001, 002, ...
-`);
-}
-
 /**
  * Standalone reset command for manual use.
  */
@@ -843,9 +741,6 @@ function main() {
   const opts = parseArgs();
   
   switch (opts.command) {
-    case 'spawn':
-      cmdSpawn(opts);
-      break;
     case 'register':
       cmdRegister(opts);
       break;
@@ -858,39 +753,28 @@ function main() {
     case 'promote':
       cmdPromote(opts);
       break;
-    // Legacy commands (deprecated)
-    case 'start':
-      cmdStart(opts);
-      break;
     default:
       console.log(`
-ODD Attempt CLI (Two-Phase Model)
+ODD Attempt CLI
 
 Commands:
-  npm run attempt spawn -- --prd v0.2 --n 5
-      Create N worktrees for parallel development
-
-  npm run attempt register -- --prd v0.2 --agent agent-1
+  npm run attempt:register -- --prd v0.2 --agent agent-1
       Register a run (creates unique run_id, writes to _runs/)
 
-  npm run attempt finalize -- --prd v0.2
+  npm run attempt:finalize -- --prd v0.2
       Finalize all runs (assigns attempt numbers, moves to attempt-00N/)
 
-  npm run attempt promote -- --prd v0.2 --attempt 001
+  npm run attempt:promote -- --prd v0.2 --attempt 001
       Promote champion to production
 
-  npm run attempt reset
+  npm run attempt:reset
       Reset /src to minimal shell
 
 Workflow:
-  1. spawn    → creates worktrees (optional, Cursor may do this)
-  2. register → each agent registers their run
-  3. [build]  → agents work and write to _runs/<run_id>/
-  4. finalize → assigns attempt-001, 002, ... after all done
-  5. promote  → merge champion to main
-
-For help on a specific command:
-  npm run attempt <command>
+  1. register → each agent registers their run (inside their workspace)
+  2. [build]  → agents work and write to _runs/<run_id>/
+  3. finalize → assigns attempt-001, 002, ... after all done
+  4. promote  → merge champion to main
 `);
       process.exit(1);
   }

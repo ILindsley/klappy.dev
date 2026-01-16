@@ -10,7 +10,6 @@
     "sync": "node infra/scripts/sync-content.js",
     "verify:content": "node infra/scripts/verify-content.js",
     "attempt": "node infra/scripts/attempt-cli.js",
-    "attempt:spawn": "node infra/scripts/attempt-cli.js spawn",
     "attempt:register": "node infra/scripts/attempt-cli.js register",
     "attempt:finalize": "node infra/scripts/attempt-cli.js finalize",
     "attempt:reset": "node infra/scripts/attempt-cli.js reset",
