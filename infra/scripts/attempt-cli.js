@@ -210,8 +210,30 @@ export default function App() {
 `
 };
 
-// SAFETY: Only these directories may be purged
-const PURGEABLE_DIRS = ['src', 'app'];
+// SAFETY: Only these paths may be purged during nuke
+const EPHEMERAL_PATHS = [
+  'src',
+  'app',
+  'index.html',       // App entry (if not in public)
+  'vite.config.js',
+  'vite.config.ts',
+  'tsconfig.json',
+  'tailwind.config.js',
+  'postcss.config.js',
+  // NOTE: package.json intentionally NOT nuked to preserve scripts
+  // Agents can modify package.json but the scripts should remain
+];
+
+// These are NEVER touched during nuke (the contract)
+const PROTECTED_PATHS = [
+  'canon',
+  'docs',
+  'attempts',
+  'infra',
+  'public',
+  '.cloudflare',
+  '.github',
+];
 
 // ============================================================
 // Core functions
@@ -407,11 +429,150 @@ Options:
 }
 
 /**
- * Nuke /src completely.
+ * NUKE: Guarantee blank slate for ephemeral paths.
  * 
- * This is a FULL reset - no skeleton, no framework, nothing.
- * The deploy contract is preserved via /public/index.html.
- * Agents choose their own stack.
+ * Branch safety rules:
+ *   - ❌ Refuses on prod (NEVER)
+ *   - ❌ Refuses on main unless --force
+ *   - ✅ Allowed on attempt/* branches
+ * 
+ * Deletes ONLY the EPHEMERAL_PATHS list.
+ * Protected paths (canon, docs, infra, etc.) are NEVER touched.
+ */
+function cmdNuke(opts) {
+  const { dryRun, force } = opts;
+  const all = opts.all || process.argv.includes('--all');
+  
+  console.log('\n💥 NUKE — Blank Slate Reset\n');
+  if (dryRun) console.log('  [DRY RUN MODE]\n');
+  
+  // ========================================
+  // BRANCH SAFETY CHECK (Critical)
+  // ========================================
+  const currentBranch = run('git branch --show-current', { silent: true, dryRun: false });
+  
+  // NEVER allow nuke on prod
+  if (currentBranch === 'prod') {
+    fail('🛑 REFUSED: Cannot nuke on prod branch.\n' +
+         '   prod is the live production deployment.\n' +
+         '   Switch to an attempt/* branch first.');
+  }
+  
+  // Warn and require --force on main
+  if (currentBranch === 'main' && !force) {
+    console.log('  ⚠️  WARNING: You are on main branch!');
+    console.log('  ⚠️  main is the experiment aggregation branch.');
+    console.log('');
+    console.log('  Nuking main will remove any UI code currently there.');
+    console.log('  Production (prod branch) is NOT affected.');
+    console.log('');
+    console.log('  To proceed, use:');
+    console.log('    npm run attempt:nuke -- --force');
+    console.log('');
+    console.log('  Or switch to an attempt branch:');
+    console.log('    git checkout attempt/prd-v0.2/a001');
+    console.log('');
+    fail('Use --force to nuke main, or run from an attempt/* branch.');
+  }
+  
+  // Confirm attempt/* branch is allowed
+  const isAttemptBranch = currentBranch.startsWith('attempt/');
+  if (!isAttemptBranch && currentBranch !== 'main') {
+    console.log(`  ⚠️  Unknown branch type: ${currentBranch}`);
+    console.log('  Expected: attempt/* or main');
+    if (!force) {
+      fail('Use --force to nuke on this branch.');
+    }
+  }
+  
+  console.log(`  Branch: ${currentBranch}`);
+  if (isAttemptBranch) {
+    console.log('  ✅ Attempt branch — nuke allowed\n');
+  } else if (currentBranch === 'main' && force) {
+    console.log('  ⚠️  main branch with --force — proceeding with caution\n');
+  }
+  
+  // ========================================
+  // SHOW WHAT WILL BE DELETED
+  // ========================================
+  console.log('1️⃣  Scanning ephemeral paths...\n');
+  console.log('  Will delete:');
+  
+  const toDelete = [];
+  for (const p of EPHEMERAL_PATHS) {
+    const fullPath = join(ROOT, p);
+    if (existsSync(fullPath)) {
+      toDelete.push(p);
+      console.log(`    ✗ /${p}`);
+    }
+  }
+  
+  if (toDelete.length === 0) {
+    console.log('    (nothing to delete - already clean)');
+  }
+  
+  console.log('');
+  console.log('  Protected (NEVER deleted):');
+  for (const p of PROTECTED_PATHS) {
+    console.log(`    ✓ /${p}`);
+  }
+  console.log('');
+  
+  // ========================================
+  // EXECUTE DELETION
+  // ========================================
+  if (toDelete.length > 0) {
+    console.log('2️⃣  Deleting ephemeral paths...\n');
+    
+    for (const p of toDelete) {
+      const fullPath = join(ROOT, p);
+      if (!dryRun) {
+        rmSync(fullPath, { recursive: true, force: true });
+      }
+      console.log(`  ✅ Deleted /${p}`);
+    }
+    console.log('');
+  }
+  
+  // ========================================
+  // COMMIT IF NOT --no-commit
+  // ========================================
+  if (!opts.noCommit && toDelete.length > 0) {
+    console.log('3️⃣  Committing nuke...');
+    run('git add -A', { dryRun });
+    run('git commit -m "chore: nuke ephemeral paths for fresh attempt" --allow-empty', { dryRun });
+    console.log('  ✅ Committed\n');
+  }
+  
+  // ========================================
+  // SUMMARY
+  // ========================================
+  console.log('═'.repeat(60));
+  console.log('\n💥 NUKE COMPLETE\n');
+  console.log(`  Branch: ${currentBranch}`);
+  console.log(`  Deleted: ${toDelete.length} path(s)`);
+  console.log('  Protected paths: intact');
+  console.log('');
+  console.log('  The deploy contract (/infra/contracts/build-output.md) is preserved.');
+  console.log('  Choose any stack. Build must produce /dist.');
+  console.log('\n' + '═'.repeat(60));
+  
+  console.log(`
+📋 Next steps:
+
+   1. Choose your stack (React, Vue, Svelte, vanilla, etc.)
+   2. Install dependencies: npm install <packages>
+   3. Create your implementation
+   4. Build: npm run build
+   5. Submit: npm run attempt:submit
+`);
+}
+
+/**
+ * Nuclear reset: Nuke + clean up attempt branches for a PRD.
+ * 
+ * This is the "hard reset" for starting a fresh PRD cycle.
+ * Combines nuke with branch cleanup.
  */
 function cmdReset(opts) {
   const { dryRun, noCommit, prd, force } = opts;
@@ -853,8 +1014,22 @@ Options:
 `);
 }
 
+/**
+ * PROMOTE: Ship a winner to production.
+ * 
+ * Steps:
+ *   1. Validate attempt exists
+ *   2. Merge attempt branch → main
+ *   3. Fast-forward prod to main
+ *   4. Tag with prd-vX.Y-attempt-00N and production-vX.Y
+ * 
+ * Result:
+ *   - prod deploys (Cloudflare production)
+ *   - main reflects shipped code
+ *   - history preserved
+ */
 function cmdPromote(opts) {
-  const { prd, attempt, dryRun } = opts;
+  const { prd, attempt, dryRun, force } = opts;
   
   if (!prd || !attempt) {
     console.log(`
@@ -867,15 +1042,144 @@ Options:
   --prd <version>     PRD version (required)
   --attempt <number>  Attempt number (required)
   --dry-run           Show what would happen
+  --force             Skip confirmation prompts
 `);
     process.exit(1);
   }
   
-  // Delegate to existing promote script
-  const args = ['--prd', prd, '--attempt', attempt];
-  if (dryRun) args.push('--dry-run');
+  console.log(`\n🏆 PROMOTING CHAMPION\n`);
+  console.log(`  PRD:     v${prd}`);
+  console.log(`  Attempt: ${attempt}\n`);
+  if (dryRun) console.log('  [DRY RUN MODE]\n');
   
-  run(`node infra/scripts/promote-attempt.js ${args.join(' ')}`, { silent: false, dryRun: false });
+  // ========================================
+  // 1. Validate attempt exists
+  // ========================================
+  console.log('1️⃣  Validating attempt...');
+  const attemptFolder = join(ROOT, 'attempts', `prd-v${prd}`, `attempt-${attempt}`);
+  const metaPath = join(attemptFolder, 'META.json');
+  
+  if (!existsSync(metaPath)) {
+    fail(`Attempt not found: ${attemptFolder}`);
+  }
+  
+  const meta = JSON.parse(readFileSync(metaPath, 'utf8'));
+  const attemptBranch = meta.branch;
+  
+  if (!attemptBranch) {
+    fail('META.json missing branch information');
+  }
+  
+  console.log(`  ✅ Found: ${attemptFolder}`);
+  console.log(`     Branch: ${attemptBranch}`);
+  console.log(`     Agent: ${meta.agent || 'unknown'}\n`);
+  
+  // ========================================
+  // 2. Ensure clean state on main
+  // ========================================
+  console.log('2️⃣  Preparing main branch...');
+  
+  const currentBranch = run('git branch --show-current', { silent: true, dryRun: false });
+  if (currentBranch !== 'main') {
+    run('git checkout main', { dryRun });
+  }
+  run('git pull origin main', { dryRun });
+  console.log('  ✅ Main is up to date\n');
+  
+  // ========================================
+  // 3. Merge attempt branch to main
+  // ========================================
+  console.log('3️⃣  Merging attempt branch to main...');
+  
+  // Fetch the branch
+  run(`git fetch origin ${attemptBranch}`, { dryRun });
+  
+  // Merge (no fast-forward to preserve history)
+  const mergeMsg = `Promote prd-v${prd} attempt-${attempt} to main`;
+  run(`git merge origin/${attemptBranch} --no-ff -m "${mergeMsg}"`, { dryRun });
+  
+  console.log('  ✅ Merged to main\n');
+  
+  // ========================================
+  // 4. Tag the merge
+  // ========================================
+  console.log('4️⃣  Creating tags...');
+  
+  const attemptTag = `prd-v${prd}-attempt-${attempt}`;
+  const prodTag = `production-v${prd}`;
+  
+  run(`git tag -a ${attemptTag} -m "PRD v${prd} Attempt ${attempt} promoted"`, { dryRun });
+  
+  // Delete old production tag if exists, then create new one
+  try {
+    run(`git tag -d ${prodTag}`, { silent: true, dryRun });
+    run(`git push origin :refs/tags/${prodTag}`, { silent: true, dryRun });
+  } catch (e) {
+    // Tag didn't exist, that's fine
+  }
+  run(`git tag -a ${prodTag} -m "Production release for PRD v${prd}"`, { dryRun });
+  
+  console.log(`  ✅ Tagged: ${attemptTag}`);
+  console.log(`  ✅ Tagged: ${prodTag}\n`);
+  
+  // ========================================
+  // 5. Push main with tags
+  // ========================================
+  console.log('5️⃣  Pushing main...');
+  run('git push origin main --tags', { dryRun });
+  console.log('  ✅ Main pushed with tags\n');
+  
+  // ========================================
+  // 6. Fast-forward prod to main
+  // ========================================
+  console.log('6️⃣  Fast-forwarding prod to main...');
+  
+  run('git checkout prod', { dryRun });
+  run('git pull origin prod', { dryRun });
+  run('git merge main --ff-only', { dryRun });
+  run('git push origin prod', { dryRun });
+  
+  console.log('  ✅ prod now matches main\n');
+  
+  // Switch back to main
+  run('git checkout main', { dryRun });
+  
+  // ========================================
+  // 7. Update META.json with promotion status
+  // ========================================
+  if (!dryRun) {
+    meta.promoted_at = new Date().toISOString();
+    meta.status = 'champion';
+    meta.production_tag = prodTag;
+    writeFileSync(metaPath, JSON.stringify(meta, null, 2) + '\n');
+    run('git add ' + metaPath, { silent: true });
+    run('git commit -m "Mark attempt-' + attempt + ' as champion"', { silent: true });
+    run('git push origin main', { silent: true });
+  }
+  
+  // ========================================
+  // SUMMARY
+  // ========================================
+  console.log('═'.repeat(60));
+  console.log('\n🏆 PROMOTION COMPLETE\n');
+  console.log(`  Champion:        attempt-${attempt}`);
+  console.log(`  Merged to:       main`);
+  console.log(`  Production:      prod (fast-forwarded)`);
+  console.log(`  Tags:            ${attemptTag}, ${prodTag}`);
+  console.log('');
+  console.log('  Cloudflare will now deploy prod → production URL');
+  console.log('\n' + '═'.repeat(60));
+  
+  console.log(`
+📋 What happened:
+
+   1. Attempt branch merged → main (with history)
+   2. main pushed with tags
+   3. prod fast-forwarded to match main
+   4. Cloudflare deploys prod → klappy.dev
+
+Production is now live with the champion's code!
+`);
 }
 
 /**
@@ -1155,6 +1459,9 @@ function main() {
   }
   
   switch (opts.command) {
+    case 'nuke':
+      cmdNuke(opts);
+      break;
     case 'register':
       cmdRegister(opts);
       break;
@@ -1175,36 +1482,51 @@ function main() {
       break;
     default:
       console.log(`
-ODD Attempt CLI
+ODD Attempt CLI — Environment Hardened
 
-Commands:
-  npm run attempt:register -- --prd v0.2 --agent agent-1
-      Register a run (creates unique run_id, writes to _runs/)
+BRANCH ROLES:
+  prod        → Live production (NEVER nuked)
+  main        → Experiment aggregation + history
+  attempt/*   → Ephemeral agent workspaces (always nuked)
+
+COMMANDS:
+
+  npm run attempt:nuke
+      Blank slate reset. Deletes /src, /app, config files.
+      ❌ Refuses on prod
+      ⚠️  Requires --force on main
+      ✅ Allowed on attempt/* branches
+
+  npm run attempt:register -- --prd v0.2
+      Register a new run (creates unique run_id, writes to _runs/)
 
   npm run attempt:submit
-      Commit and push current work (triggers Cloudflare preview)
+      Commit and push work (triggers Cloudflare preview)
 
   npm run attempt:import -- --prd v0.2
-      Import artifacts from all attempt branches back to main
+      Import artifacts from attempt branches back to main
 
   npm run attempt:finalize -- --prd v0.2
-      Finalize all runs (assigns attempt numbers, moves to attempt-00N/)
+      Finalize runs → attempt-001, 002, etc.
 
   npm run attempt:promote -- --prd v0.2 --attempt 001
-      Promote champion to production
-
-  npm run attempt:reset
-      Nuke /src completely (no skeleton, choose any stack)
+      Ship champion: merge → main, fast-forward → prod
 
   npm run attempt:reset -- --prd v0.2
-      NUCLEAR RESET: Nuke /src AND delete all attempt branches for that PRD
+      NUCLEAR RESET: Nuke + delete all attempt branches for PRD
 
-Workflow:
-  1. register → each agent registers their run (inside their workspace)
-  2. submit   → agents push their work (triggers Cloudflare preview)
-  3. import   → pull artifacts from all branches back to main
-  4. finalize → assigns attempt-001, 002, ... after all done
-  5. promote  → merge champion's code to main
+WORKFLOW:
+  1. nuke     → agent starts with blank slate
+  2. register → agent claims unique run_id
+  3. build    → agent implements from scratch
+  4. submit   → agent pushes (CF preview)
+  5. import   → pull all artifacts to main
+  6. finalize → assign attempt numbers
+  7. promote  → ship winner to prod
+
+DEPLOY MAPPING:
+  prod branch  → klappy.dev (production)
+  other branches → preview URLs
 `);
       process.exit(1);
   }

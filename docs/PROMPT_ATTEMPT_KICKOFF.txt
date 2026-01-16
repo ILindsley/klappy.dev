@@ -4,6 +4,27 @@ You are an implementation agent starting a NEW, INDEPENDENT ATTEMPT.
 CRITICAL: READ THIS ENTIRE PROMPT. DO NOT STOP UNTIL ALL COMPLETION GATES PASS.
 ================================================================================
 
+FIRST ACTIONS (MANDATORY — run these commands first):
+
+  npm run attempt:nuke
+  npm run attempt:register -- --prd v0.2
+
+If you don't have terminal access, ask the human to run these for you.
+
+---
+
+================================================================================
+CONTEXT: WHAT IS HAPPENING
+================================================================================
+
+- You are on an attempt/* branch (e.g., attempt/prd-v0.2/a001)
+- /src is now EMPTY. That is intentional. Start from scratch.
+- Production is on the `prod` branch — you cannot affect it
+- Your work will deploy to a Cloudflare PREVIEW URL (not production)
+- You must choose your stack from scratch (any framework or none)
+
+The only requirement: your build must produce /dist per the deploy contract.
+
 ================================================================================
 DOGFOODING REQUIREMENT
 ================================================================================
@@ -22,43 +43,20 @@ Your ATTEMPT.md must demonstrate you internalized the canon:
 - A completed self-audit checklist (9 sections)
 
 If the docs are unclear or contradictory, that is valuable feedback - note it.
+
 ================================================================================
-
----
-
-FIRST ACTION (before anything else): Register this attempt.
-
-- If you have terminal access: run npm run attempt:register -- --prd v0.2
-- If you do not: ask the human to run it and provide the resulting .attempt.json contents.
-
-This creates your unique run_id and runs_dir. Evidence artifacts go ONLY in runs_dir.
-Code changes live in the worktree repo as normal.
-
----
-
-STEP 0: NUKE FIRST (independence).
-
-If /src contains any prior app code, delete it before implementing.
-Run: npm run attempt:reset OR manually delete /src contents.
-This attempt must start from a blank app surface.
-Do not build on existing app code.
-
----
-
-Context:
-
-- This repository follows Outcomes-Driven Development (ODD).
-- A PRD is a hypothesis. An attempt is an observation.
-- Attempts must be independent; do not reuse or steer from prior attempts.
-- /src may be empty or nuked. You are choosing your stack from scratch.
-
----
-
-Your task:
+TASKS
+================================================================================
 
 1. Read the active PRD: /docs/PRD.md
 
 2. Read the deploy contract: /infra/contracts/build-output.md
+   
+   This is the ONLY surviving build rule across all attempts:
+   - Build must produce /dist
+   - /dist must load /public/content/manifest.json
+   - No client secrets
+   - Must work on Cloudflare Pages
 
 3. Read and INTERNALIZE these canon documents:
 
@@ -77,7 +75,7 @@ Your task:
    You may use any framework: React, Svelte, Vue, Vanilla JS, Astro, etc.
    Or no framework at all.
    
-   The only requirement: your build must output to /dist per the deploy contract.
+   The only requirement: npm run build must produce /dist.
    Document WHY you chose this stack in ATTEMPT.md.
 
 5. Implement the plan from scratch.
@@ -89,13 +87,11 @@ Your task:
 
 6. Continuously verify your work locally.
 
-   Your build must be invokable via npm run build.
-   Test navigation, UX, and failure cases relevant to the PRD.
+   npm run build
+   npm run preview
 
 7. FIRST SUBMIT (MANDATORY after first successful build):
 
-   Once npm run build passes:
-   
    npm run attempt:submit
    
    This commits and pushes your branch. Cloudflare will generate a preview URL.
@@ -118,9 +114,9 @@ Your task:
 
    META.json is already created by attempt:register.
 
----
-
-ATTEMPT.md TEMPLATE (must include self-audit):
+================================================================================
+ATTEMPT.md TEMPLATE (must include self-audit)
+================================================================================
 
 # Attempt Summary
 
@@ -183,9 +179,9 @@ ATTEMPT.md TEMPLATE (must include self-audit):
 - Confidence: [Low/Medium/High]
 - What would increase confidence?
 
----
-
-9. Capture visual evidence (REQUIRED - minimum 3 screenshots):
+================================================================================
+EVIDENCE REQUIREMENTS (minimum 3 screenshots)
+================================================================================
 
    Use browser tools to take screenshots showing:
    - App loads correctly (desktop) -> evidence/desktop-load.png
@@ -194,41 +190,27 @@ ATTEMPT.md TEMPLATE (must include self-audit):
    
    Save to: runs_dir/evidence/
 
-10. FINAL SUBMIT (MANDATORY):
+================================================================================
+FINAL SUBMIT (MANDATORY)
+================================================================================
 
-    npm run attempt:submit
-    
-    This pushes your final state including evidence.
+   npm run attempt:submit
+   
+   This pushes your final state including evidence.
 
----
-
-Constraints:
+================================================================================
+CONSTRAINTS
+================================================================================
 
 - Write artifacts ONLY to your runs_dir (from .attempt.json)
 - Do NOT write to attempt-001/, attempt-002/, etc.
 - Do not change the PRD during this attempt.
 - Do not claim completion without evidence.
 - Must output to /dist (see deploy contract)
-
----
-
-Infra protection:
-
-Do not change /infra/** during an attempt unless the PRD explicitly requires it.
-If you think the contract is wrong, propose it in PRD_PATCH.md.
-
----
-
-If you discover the PRD or CANON is flawed or contradictory:
-
-- Note it clearly in your ATTEMPT.md
-- Create a PRD_PATCH.md proposal if needed
-- This feedback is valuable - the docs should be followable
-
----
+- Do NOT modify /infra/** (deploy contract) unless PRD requires it
 
 ================================================================================
-COMPLETION GATES - YOU ARE NOT DONE UNTIL ALL OF THESE ARE TRUE:
+COMPLETION GATES - YOU ARE NOT DONE UNTIL ALL OF THESE ARE TRUE
 ================================================================================
 
 Before stopping, verify EVERY item:
@@ -249,9 +231,8 @@ If ANY gate fails, you are not done. Fix it before stopping.
 DO NOT STOP. DO NOT CLAIM COMPLETION. UNTIL ALL 9 GATES PASS.
 ================================================================================
 
----
-
-Begin by running attempt:register (or requesting registration), then:
-1. Summarize the PRD in your own words
-2. Note which canon constraints are most relevant
-3. Propose your stack choice and approach
+Begin by:
+1. Running the FIRST ACTIONS commands above
+2. Summarizing the PRD in your own words
+3. Noting which canon constraints are most relevant
+4. Proposing your stack choice and approach

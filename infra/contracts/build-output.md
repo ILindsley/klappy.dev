@@ -1,49 +1,72 @@
 # Build Output Contract
 
-This contract defines what any stack must produce to be deployable via Cloudflare Pages.
+> **This is the ONLY surviving build rule across all attempts.**
+> Do not modify this file during an attempt unless the PRD explicitly requires it.
+> If you believe this contract is wrong, propose changes in `PRD_PATCH.md`.
+
+---
 
 ## Requirements
 
-### Output Directory
+### 1. Build Must Produce `/dist`
 
-All builds must output to: `/dist`
+```
+npm run build → /dist
+```
 
-This is non-negotiable. Cloudflare Pages is configured to serve from this directory.
+The build command must generate a production-ready bundle in the `/dist` directory.
+Any stack is allowed (React, Vue, Svelte, Vanilla JS, static HTML, etc.)
 
-### Entry Point
+### 2. `/dist` Must Load Content
 
-The output must include: `dist/index.html`
+The app MUST fetch and display content from:
 
-This file is the SPA entry point and fallback for all routes.
+```
+/content/manifest.json
+```
 
-### Assets
+This manifest is synced from `/canon/meta/manifest.json` during build.
+Your app must be able to load and render resources listed in this manifest.
 
-Static assets should be placed in: `dist/assets/`
+### 3. No Client Secrets
 
-### Content
+- No API keys in client code
+- No secrets in `/dist`
+- If external APIs are needed, they must be public or use server-side proxies
 
-Content files are served from: `dist/content/`
+### 4. Cloudflare Pages Compatible
 
-(Copied from `/public/content/` during build)
+The build output must work with Cloudflare Pages:
 
-## Routing
+- Static files only (no SSR unless using Workers)
+- No server-side dependencies
+- Assets must use relative paths or be under `/dist`
 
-Cloudflare Pages handles SPA routing via `_redirects` or the default fallback behavior:
-- All unmatched routes serve `index.html`
-- This enables client-side routing for any framework
+---
 
-## Stack Agnostic
+## The Contract
 
-This contract does not specify:
-- Framework (React, Svelte, Vue, Vanilla, etc.)
-- Build tool (Vite, Webpack, esbuild, none)
-- Language (JS, TS, etc.)
+| Requirement | Test |
+|-------------|------|
+| `/dist` exists after build | `ls dist/` succeeds |
+| Entry point exists | `ls dist/index.html` succeeds |
+| Manifest is accessible | `curl $PREVIEW_URL/content/manifest.json` returns JSON |
+| App loads | Browser shows content, no white screen |
 
-Any stack that produces the required output structure is valid.
+---
 
-## Placeholder Deploy
+## What This Means for Agents
 
-If `/src` is nuked:
-- `/public/index.html` serves as the fallback
-- Cloudflare remains deployable with zero app code
-- This keeps preview URLs alive during experiments
+- You may use **any framework** or no framework
+- You may use **any CSS approach** (Tailwind, vanilla, CSS-in-JS)
+- You may use **any build tool** (Vite, esbuild, Rollup, Parcel, none)
+- You **must** ensure `npm run build` produces `/dist`
+- You **must** ensure the app can display content from `/content/manifest.json`
+
+---
+
+## Non-Negotiable
+
+If your build doesn't produce `/dist` with a working `index.html` that loads the manifest, **your attempt fails the deploy contract**.
+
+Fix the build. Don't modify this contract.
