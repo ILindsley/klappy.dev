@@ -411,21 +411,19 @@ Options:
  * Agents choose their own stack.
  */
 function cmdReset(opts) {
-  const { dryRun, noCommit } = opts;
+  const { dryRun, noCommit, prd } = opts;
   
-  console.log('\n💥 NUKING /src (complete reset)\n');
+  console.log('\n💥 NUCLEAR RESET\n');
   if (dryRun) console.log('  [DRY RUN MODE]\n');
   
-  // What gets nuked
+  // ========================================
+  // Part 1: Nuke /src
+  // ========================================
+  console.log('1️⃣  Nuking /src...\n');
   console.log('  Will delete:');
   console.log('    - /src (entire directory)');
   console.log('    - /app (if exists)');
   console.log('    - vite.config.js (framework-specific)');
-  console.log('');
-  console.log('  Protected (deploy contract):');
-  console.log('    - /public/index.html (placeholder)');
-  console.log('    - /public/content/* (content)');
-  console.log('    - /infra/* (contracts)');
   console.log('');
   
   const srcPath = join(ROOT, 'src');
@@ -452,22 +450,118 @@ function cmdReset(opts) {
     console.log('  ✅ Deleted vite.config.js');
   }
   
-  // Commit (unless --no-commit)
+  // ========================================
+  // Part 2: Clean up attempt branches (if --prd provided)
+  // ========================================
+  if (prd) {
+    console.log(`\n2️⃣  Cleaning up attempt branches for PRD v${prd}...\n`);
+    
+    // Find local attempt branches
+    const localBranchOutput = run('git branch', { silent: true, dryRun: false });
+    const localBranches = localBranchOutput
+      .split('\n')
+      .map(b => b.trim().replace('* ', ''))
+      .filter(b => b.startsWith(`attempt/prd-v${prd}/`));
+    
+    // Find remote attempt branches
+    const remoteBranchOutput = run('git branch -r', { silent: true, dryRun: false });
+    const remoteBranches = remoteBranchOutput
+      .split('\n')
+      .map(b => b.trim())
+      .filter(b => b.startsWith(`origin/attempt/prd-v${prd}/`))
+      .map(b => b.replace('origin/', ''));
+    
+    console.log(`  Found ${localBranches.length} local branches`);
+    console.log(`  Found ${remoteBranches.length} remote branches\n`);
+    
+    // Delete local branches
+    for (const branch of localBranches) {
+      console.log(`  🗑️  Deleting local: ${branch}`);
+      if (!dryRun) {
+        try {
+          run(`git branch -D "${branch}"`, { silent: true });
+        } catch (e) {
+          console.log(`     ⚠️  Could not delete (might be current branch)`);
+        }
+      }
+    }
+    
+    // Delete remote branches
+    for (const branch of remoteBranches) {
+      console.log(`  🗑️  Deleting remote: origin/${branch}`);
+      if (!dryRun) {
+        try {
+          run(`git push origin --delete "${branch}"`, { silent: true });
+        } catch (e) {
+          console.log(`     ⚠️  Could not delete remote`);
+        }
+      }
+    }
+    
+    // Clean up _runs folder
+    const runsPath = join(ROOT, 'attempts', `prd-v${prd}`, '_runs');
+    if (existsSync(runsPath)) {
+      console.log(`\n  🗑️  Deleting _runs folder...`);
+      if (!dryRun) rmSync(runsPath, { recursive: true });
+      console.log('  ✅ Deleted _runs/');
+    }
+    
+    // Reset registry
+    const registryPath = join(ROOT, 'attempts', `prd-v${prd}`, 'ATTEMPT_REGISTRY.json');
+    if (existsSync(registryPath)) {
+      console.log(`\n  🔄 Resetting attempt registry...`);
+      if (!dryRun) {
+        const registry = {
+          prd_version: prd,
+          next_attempt: 1,
+          reserved: [],
+          sealed: [],
+          finalized: [],
+          notes: `Reset on ${new Date().toISOString()}. Previous attempts cleared.`
+        };
+        writeFileSync(registryPath, JSON.stringify(registry, null, 2) + '\n');
+      }
+      console.log('  ✅ Registry reset to attempt 1');
+    }
+  }
+  
+  // ========================================
+  // Part 3: Commit changes
+  // ========================================
   if (!noCommit) {
-    console.log('\n  Committing nuke...');
+    console.log('\n3️⃣  Committing nuke...');
     run('git add -A', { dryRun });
-    run('git commit -m "chore: nuke /src for fresh attempt (stack-agnostic)"', { dryRun });
+    const msg = prd 
+      ? `chore: nuclear reset for PRD v${prd} - nuked src and cleared attempt branches`
+      : 'chore: nuke /src for fresh attempt (stack-agnostic)';
+    run(`git commit -m "${msg}" --allow-empty`, { dryRun });
     console.log('  ✅ Committed\n');
   } else {
     console.log('\n  Skipping commit (--no-commit)\n');
   }
   
   console.log('═'.repeat(60));
-  console.log('\n💥 NUKE COMPLETE\n');
+  console.log('\n💥 NUCLEAR RESET COMPLETE\n');
   console.log('  /src is gone. Choose any stack for your attempt.');
+  if (prd) {
+    console.log(`  All attempt branches for PRD v${prd} have been deleted.`);
+    console.log('  Registry reset - next attempt will be attempt-001.');
+  }
   console.log('  Deploy contract preserved: /public/index.html serves as fallback.');
-  console.log('  See /infra/contracts/build-output.md for build requirements.');
   console.log('\n' + '═'.repeat(60));
+  
+  if (prd) {
+    console.log(`
+📋 Ready for fresh attempts:
+
+   1. Commit this state (if not auto-committed)
+   2. Push to main: git push origin main
+   3. Create worktrees for agents
+   4. Paste /docs/PROMPT_ATTEMPT_KICKOFF.txt into each agent
+
+Agents will now start from a clean main with all the latest scripts.
+`);
+  }
 }
 
 /**
@@ -1068,6 +1162,9 @@ Commands:
 
   npm run attempt:reset
       Nuke /src completely (no skeleton, choose any stack)
+
+  npm run attempt:reset -- --prd v0.2
+      NUCLEAR RESET: Nuke /src AND delete all attempt branches for that PRD
 
 Workflow:
   1. register → each agent registers their run (inside their workspace)
