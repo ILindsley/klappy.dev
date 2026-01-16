@@ -1,0 +1,16 @@
+{
+  "prd_version": "v0.1",
+  "attempt": "002",
+  "status": "OPEN",
+  "axis_of_variation": "fresh_execution_path",
+  "sealed_commit": null,
+  "git_tag": null,
+  "sealed_at": null,
+  "notes": "Phase 1 fresh rebuild. Same stack (React/Vite), independent implementation in /src-attempt-002/.",
+  "deploy": {
+    "provider": "cloudflare-pages",
+    "production_url": null,
+    "preview_url": null,
+    "captured_at": null
+  }
+}
