@@ -1,5 +1,7 @@
 # Attempt Lifecycle — Orientation
 
+> **If the repository is dirty, conclusions drawn from it are invalid.**
+
 This document explains how PRDs are versioned, how attempts are sealed, and where artifacts live.
 
 ---

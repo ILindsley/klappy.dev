@@ -197,6 +197,28 @@
       "tags": ["odd", "topology", "structure", "decoupling"]
     },
     {
+      "uri": "klappy://canon/odd/repo-truth",
+      "path": "/canon/odd/appendices/repo-truth.md",
+      "title": "Repository Truth & Epistemic Hygiene",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": ["odd", "epistemic", "hygiene", "truth", "cleanup"]
+    },
+    {
+      "uri": "klappy://about/why-this-exists",
+      "path": "/about/why-this-exists.md",
+      "title": "Why This Exists",
+      "type": "text/markdown",
+      "audience": "public",
+      "exposure": "nav",
+      "voice": "neutral",
+      "stability": "semi_stable",
+      "tags": ["about", "philosophy", "overview"]
+    },
+    {
       "uri": "klappy://about/bio",
       "path": "/about/bio.md",
       "title": "Bio",
