@@ -10,16 +10,19 @@ Per-file versions are intentionally omitted to reduce ceremony and prevent metad
 ## 0.1.3 — 2026-01-16
 
 ### Added
+
 - Cloudflare branch deploys infra note (`/docs/infra/cloudflare-branch-deploys.md`)
 - Attempts doc: “PRD as the Unit of Test” (procedural) (`/docs/ATTEMPTS.md`)
 - Attempt Lifecycle: “PRD as the Unit of Test” + “Independence: goal vs infrastructure” (`/canon/odd/appendices/attempt-lifecycle.md`)
 
 ### Changed
+
 - Decision Rules: “Prefer one-shot builds; don’t steer a miss” and “Don’t hard-code domain tables; hard-code protocol contracts” (`/canon/decision-rules.md`)
 - Quantum Development: cross-link to PRD-as-unit-of-test framing (`/canon/odd/appendices/quantum-development.md`)
 - Active PRD: requires infra artifact when deploy behavior is in scope; adds attempt independence enforcement (`/docs/PRD.md`)
 
 ### Notes
+
 - This release encodes transcript-derived learnings as rules and procedures, while avoiding operationally irrelevant or sensitive details.
 
 ---

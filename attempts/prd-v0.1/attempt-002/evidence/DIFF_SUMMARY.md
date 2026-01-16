@@ -3,11 +3,13 @@
 ## Files Created
 
 ### Attempt Scaffolding
+
 - `attempts/prd-v0.1/attempt-002/ATTEMPT.md`
 - `attempts/prd-v0.1/attempt-002/META.json`
 - `attempts/prd-v0.1/attempt-002/evidence/`
 
 ### Source Code (Fresh Build)
+
 - `src-attempt-002/main.jsx` — Entry point
 - `src-attempt-002/index.css` — Styles (dark theme, 3-column grid)
 - `src-attempt-002/components/App.jsx` — Main app shell
@@ -23,10 +25,12 @@
 - `src-attempt-002/providers/mock.js` — Mock LLM provider
 
 ### Build Configuration
+
 - `index-attempt-002.html` — Entry HTML for attempt-002
 - `vite.config.attempt-002.js` — Vite config (port 5174, dist-attempt-002)
 
 ### Build Output
+
 - `dist-attempt-002/` — Production build
 
 ## Total Files: 17 source files + build output
@@ -61,13 +65,13 @@
 
 ## Key Differences from Attempt 001
 
-| Aspect | Attempt 001 | Attempt 002 |
-|--------|-------------|-------------|
-| Markdown | Uses `marked` library | Custom regex-based renderer |
-| Directory | `/src/` | `/src-attempt-002/` |
-| Build output | `/dist/` | `/dist-attempt-002/` |
-| Dev port | 5173 | 5174 |
-| Chat messages | In-memory useState | Same approach |
+| Aspect        | Attempt 001           | Attempt 002                 |
+| ------------- | --------------------- | --------------------------- |
+| Markdown      | Uses `marked` library | Custom regex-based renderer |
+| Directory     | `/src/`               | `/src-attempt-002/`         |
+| Build output  | `/dist/`              | `/dist-attempt-002/`        |
+| Dev port      | 5173                  | 5174                        |
+| Chat messages | In-memory useState    | Same approach               |
 
 ## Observations
 
