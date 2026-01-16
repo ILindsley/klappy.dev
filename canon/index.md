@@ -180,8 +180,8 @@ How intent scales without giant prompts. Orientation only.
 A one-page mental model of ODD, Canon, Evidence, and Outcomes.
 • Attempt Lifecycle (odd/appendices/attempt-lifecycle.md)
 How PRD versions, attempts, evidence, and deployments are preserved across iterations. PRDs can have multiple attempts; attempts are sealed records.
-• Quantum Development (odd/quantum-development.md)
-Why multiple attempts against the same PRD are sometimes necessary. Distinguishes specification failure from execution-path variance.
+• Quantum Development (odd/appendices/quantum-development.md)
+Evaluating multiple execution paths before revising intent. Explains why divergence is signal, not waste.
 • Repository Topology (odd/appendices/repo-topology.md)
 What lives where and what changes when. Encodes App/Content/Infrastructure decoupling.
 

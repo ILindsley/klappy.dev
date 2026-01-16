@@ -176,7 +176,7 @@
     },
     {
       "uri": "klappy://canon/odd/quantum-development",
-      "path": "/canon/odd/quantum-development.md",
+      "path": "/canon/odd/appendices/quantum-development.md",
       "title": "Quantum Development",
       "type": "text/markdown",
       "audience": "canon",

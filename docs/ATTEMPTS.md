@@ -23,6 +23,17 @@ An **attempt** is a bounded effort to implement a specific PRD version. When an 
 
 Multiple attempts against the same PRD version are expected (fail, retry with different approach).
 
+### Attempt Origin Variations
+
+Attempts may originate from different sources while targeting the same PRD:
+- Different agents (Claude, Cursor, manual)
+- Different approaches or architectures
+- The same prompt interpreted differently
+
+Parallel or sequential agent runs against the same PRD may be treated as distinct attempts, even if only one is ultimately sealed.
+
+See [Quantum Development](/canon/odd/appendices/quantum-development.md) for the orientation model behind this practice.
+
 ---
 
 ## Folder Structure
