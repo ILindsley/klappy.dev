@@ -100,6 +100,8 @@ Independence means:
 
 Attempts are not iterations; they are re-instantiations.
 
+Independence is conceptual, not infrastructural. It refers to decision-making and state, not directory layout or deployment topology.
+
 ---
 
 ## Outcome Interpretation (Conceptual)
@@ -116,6 +118,20 @@ Observed outcomes across attempts can be interpreted as follows:
 These interpretations are signals, not proofs.
 
 Judgment is still required.
+
+---
+
+## On Timing and Observation
+
+Quantum Development does not require attempts to run simultaneously.
+
+Attempts may be:
+
+- sequential or parallel
+- human-driven or agent-driven
+- observed over time rather than at once
+
+The key requirement is not simultaneity, but comparability.
 
 ---
 

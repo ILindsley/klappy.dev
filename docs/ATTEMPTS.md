@@ -26,6 +26,7 @@ Multiple attempts against the same PRD version are expected (fail, retry with di
 ### Attempt Origin Variations
 
 Attempts may originate from different sources while targeting the same PRD:
+
 - Different agents (Claude, Cursor, manual)
 - Different approaches or architectures
 - The same prompt interpreted differently
