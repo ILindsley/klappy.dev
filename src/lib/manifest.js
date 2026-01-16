@@ -1,87 +1,70 @@
 /**
- * Manifest loading and path normalization
- * This code runs in the browser + Cloudflare Pages. Do not use Node-only APIs.
+ * Manifest loading and utilities
  * 
- * Content loading convention:
- * - Manifest paths are relative to /content with a leading slash
- * - Example: path "/canon/constraints.md" -> fetch "/content/canon/constraints.md"
- * - All fetches go through getContentUrl() for consistent normalization
+ * Per PRD v0.1:
+ * - manifest-driven doc listing
+ * - Resources with URIs, paths, titles, audiences
  */
 
-/**
- * Base URL for content files served from /public/content
- */
-const CONTENT_BASE = '/content';
+const MANIFEST_PATH = '/content/manifest.json';
 
 /**
- * Normalize a manifest path to a fetchable URL
- * @param {string} path - Path from manifest (e.g., "/canon/constraints.md")
- * @returns {string} Full URL to fetch (e.g., "/content/canon/constraints.md")
- */
-export function getContentUrl(path) {
-  // Ensure path starts with /
-  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
-  return `${CONTENT_BASE}${normalizedPath}`;
-}
-
-/**
- * Load and parse the manifest.json
- * @returns {Promise<{pack: Object, resources: import('./types').ManifestResource[]}>}
+ * Load the content manifest
  */
 export async function loadManifest() {
-  const response = await fetch(getContentUrl('/manifest.json'));
+  const response = await fetch(MANIFEST_PATH);
+  
   if (!response.ok) {
     throw new Error(`Failed to load manifest: ${response.status}`);
   }
+  
   return response.json();
 }
 
 /**
- * Find a resource by its canonical URI
- * @param {import('./types').ManifestResource[]} resources 
- * @param {string} uri - Canonical URI (e.g., "klappy://canon/constraints")
- * @returns {import('./types').ManifestResource|undefined}
+ * Get resources that should appear in navigation
+ * Filters to resources with exposure: 'nav'
  */
-export function findResourceByUri(resources, uri) {
-  return resources.find(r => r.uri === uri);
+export function getNavResources(manifest) {
+  if (!manifest?.resources) return [];
+  
+  return manifest.resources.filter(resource => 
+    resource.exposure === 'nav'
+  );
 }
 
 /**
- * Find a resource by its file path
- * @param {import('./types').ManifestResource[]} resources 
- * @param {string} path - File path (e.g., "/canon/constraints.md")
- * @returns {import('./types').ManifestResource|undefined}
+ * Find a resource by URI
  */
-export function findResourceByPath(resources, path) {
-  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
-  return resources.find(r => r.path === normalizedPath);
+export function findResourceByUri(manifest, uri) {
+  if (!manifest?.resources) return null;
+  
+  return manifest.resources.find(resource => resource.uri === uri);
 }
 
 /**
- * Group resources by audience (Public vs Canon)
- * Only includes resources with exposure === "nav" (or no exposure field, for backwards compatibility)
- * @param {import('./types').ManifestResource[]} resources
- * @returns {{ public: import('./types').ManifestResource[], canon: import('./types').ManifestResource[] }}
+ * Find a resource by path
  */
-export function groupByAudience(resources) {
-  // Filter to only nav-exposed resources (default to nav if exposure not set)
-  const navResources = resources.filter(r => !r.exposure || r.exposure === 'nav');
-  return {
-    public: navResources.filter(r => r.audience === 'public'),
-    canon: navResources.filter(r => r.audience === 'canon')
-  };
+export function findResourceByPath(manifest, path) {
+  if (!manifest?.resources) return null;
+  
+  return manifest.resources.find(resource => resource.path === path);
 }
 
 /**
- * Fetch markdown content for a resource
- * @param {import('./types').ManifestResource} resource
- * @returns {Promise<string>}
+ * Find resources by tag
  */
-export async function fetchResourceContent(resource) {
-  const url = getContentUrl(resource.path);
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error(`Failed to load ${resource.path}: ${response.status}`);
-  }
-  return response.text();
+export function findResourcesByTag(manifest, tag) {
+  if (!manifest?.resources) return [];
+  
+  return manifest.resources.filter(resource => 
+    resource.tags?.includes(tag)
+  );
+}
+
+/**
+ * Get the title for a resource, falling back to path
+ */
+export function getResourceTitle(resource) {
+  return resource?.title || resource?.path || 'Untitled';
 }

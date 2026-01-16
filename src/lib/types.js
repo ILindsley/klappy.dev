@@ -1,61 +1,69 @@
 /**
- * Type definitions for klappy.dev
- * This code runs in the browser + Cloudflare Pages. Do not use Node-only APIs.
+ * Type definitions and constants
+ * 
+ * Per PRD v0.1:
+ * - Defines action types
+ * - Defines resource structure expectations
+ * - Provides documentation for consumers
  */
 
 /**
- * Canonical UIAction schema
- * All action interpreters and providers MUST use this shape.
- * 
- * @typedef {Object} UIAction
- * @property {string} action - The action type (open, scroll_to, highlight, etc.)
- * @property {Object} [params] - Action parameters (varies by action type)
- * 
- * Supported actions:
- * - { action: "open", params: { uri: string } }
- * - { action: "scroll_to", params: { sectionId: string } }
- * - { action: "highlight", params: { sectionId: string } }
- * - { action: "expand", params: { sectionId: string } }
- * - { action: "collapse", params: { sectionId: string } }
- * - { action: "preview", params: { itemId: string } }
- * - { action: "show_related", params: { items: string[] } }
- * - { action: "pin", params: { itemId: string } }
- * - { action: "ask_followup", params: { question: string } }
- * - { action: "suggest_questions", params: { questions: string[] } }
+ * Approved UI Action types (PRD Section 10)
  */
+export const ActionTypes = {
+  OPEN: 'open',
+  SCROLL_TO: 'scroll_to',
+  HIGHLIGHT: 'highlight',
+  EXPAND: 'expand',
+  COLLAPSE: 'collapse',
+  PREVIEW: 'preview',
+  SHOW_RELATED: 'show_related',
+  PIN: 'pin',
+  ASK_FOLLOWUP: 'ask_followup',
+  SUGGEST_QUESTIONS: 'suggest_questions'
+};
 
 /**
- * Manifest resource from manifest.json
- * 
- * @typedef {Object} ManifestResource
- * @property {string} uri - Canonical URI (e.g., "klappy://canon/constraints")
- * @property {string} path - File path relative to content root (e.g., "/canon/constraints.md")
- * @property {string} title - Human-readable title
- * @property {string} type - MIME type (e.g., "text/markdown")
- * @property {string} audience - "public", "canon", or "internal"
- * @property {string} [exposure] - "nav" (sidebar), "hidden" (addressable but not listed), or "internal" (tools only)
- * @property {string} voice - "first_person" or "neutral"
- * @property {string} stability - "stable", "semi_stable", "evolving", or "frozen"
- * @property {string[]} tags - Categorization tags
+ * Resource audience types
  */
+export const AudienceTypes = {
+  PUBLIC: 'public',
+  CANON: 'canon',
+  INTERNAL: 'internal'
+};
 
 /**
- * Chat message
- * 
- * @typedef {Object} ChatMessage
- * @property {string} role - "user" or "assistant"
- * @property {string} text - Message content
- * @property {UIAction[]} [actions] - UI actions to execute (assistant only)
+ * Resource exposure types
  */
+export const ExposureTypes = {
+  NAV: 'nav',
+  INTERNAL: 'internal',
+  HIDDEN: 'hidden'
+};
 
 /**
- * App context passed to providers
- * 
- * @typedef {Object} AppContext
- * @property {ManifestResource[]} resources - All available resources
- * @property {ManifestResource|null} currentResource - Currently displayed resource
- * @property {string|null} currentSectionId - Currently highlighted section
+ * Resource stability levels
  */
+export const StabilityTypes = {
+  STABLE: 'stable',
+  SEMI_STABLE: 'semi_stable',
+  EVOLVING: 'evolving',
+  FROZEN: 'frozen'
+};
 
-// Export empty object to make this a module
-export {};
+/**
+ * Message roles for chat
+ */
+export const MessageRoles = {
+  USER: 'user',
+  ASSISTANT: 'assistant',
+  SYSTEM: 'system'
+};
+
+/**
+ * Voice types for content
+ */
+export const VoiceTypes = {
+  FIRST_PERSON: 'first_person',
+  NEUTRAL: 'neutral'
+};

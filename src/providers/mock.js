@@ -1,189 +1,233 @@
 /**
- * Mock LLM provider for Phase 1
- * This code runs in the browser + Cloudflare Pages. Do not use Node-only APIs.
+ * Mock LLM Provider
  * 
- * Returns short responses + UI actions based on keyword matching.
- * Demonstrates navigation without real LLM calls.
+ * Per PRD v0.1:
+ * - Phase 1 uses deterministic mock responses
+ * - Responses should be concise (1-3 sentences)
+ * - Prefer UI actions over verbose explanations
+ * - Can trigger approved UI actions
  */
 
+import { createAction } from '../lib/actions';
+import { ActionTypes } from '../lib/types';
+
 /**
- * Pattern-based response generator
- * @param {string} userMessage - User's input message
- * @param {import('../lib/types').AppContext} context - Current app context
- * @returns {Promise<{text: string, actions: import('../lib/types').UIAction[]}>}
+ * Get a mock response for a user query
+ * @param {string} query - User's message
+ * @param {Object} manifest - Content manifest
+ * @returns {Promise<Object>} Response with content and actions
  */
-export async function respond(userMessage, context) {
-  const input = userMessage.toLowerCase().trim();
+export async function getMockResponse(query, manifest) {
+  // Simulate network delay
+  await delay(300 + Math.random() * 400);
+  
+  const queryLower = query.toLowerCase();
   
   // Pattern matching for common queries
-  if (matchesAny(input, ['hello', 'hi', 'hey', 'start', 'help'])) {
+  
+  // About/orientation queries
+  if (matchesAny(queryLower, ['what is this', 'about', 'who are you', 'introduce'])) {
     return {
-      text: "Welcome to klappy.dev. I can help you explore the canon and projects.",
+      content: "This is klappy.dev - a conversational portfolio built with outcome-driven development principles. Would you like to learn about the philosophy behind it?",
       actions: [
-        { action: 'suggest_questions', params: { 
-          questions: [
-            "What is ODD?",
-            "Show me the constraints",
-            "Who are you?",
-            "What projects are here?"
-          ]
-        }}
+        createAction(ActionTypes.OPEN, 'klappy://public/odd', { 
+          label: 'ODD Manifesto' 
+        })
       ]
     };
   }
   
-  if (matchesAny(input, ['who', 'about', 'bio', 'you'])) {
+  // Constraints queries
+  if (matchesAny(queryLower, ['constraint', 'rule', 'principle', 'guidelines'])) {
     return {
-      text: "Opening the bio.",
+      content: "Here are the constraints that guide development here.",
       actions: [
-        { action: 'open', params: { uri: 'klappy://about/bio' } },
-        { action: 'suggest_questions', params: { 
-          questions: ["What's your credibility?", "Show me projects"]
-        }}
+        createAction(ActionTypes.OPEN, 'klappy://canon/constraints', { 
+          label: 'Constraints' 
+        })
       ]
     };
   }
   
-  if (matchesAny(input, ['constraint', 'principles', 'rules'])) {
+  // ODD queries
+  if (matchesAny(queryLower, ['odd', 'outcome', 'driven', 'development', 'methodology'])) {
     return {
-      text: "Jumping you to the constraints.",
+      content: "ODD (Outcome-Driven Development) is the philosophy behind how this site is built. It prioritizes observable results over process adherence.",
       actions: [
-        { action: 'open', params: { uri: 'klappy://canon/constraints' } }
+        createAction(ActionTypes.OPEN, 'klappy://public/odd', { 
+          label: 'ODD Manifesto' 
+        }),
+        createAction(ActionTypes.OPEN, 'klappy://canon/odd/manifesto', { 
+          label: 'Extended Manifesto' 
+        })
       ]
     };
   }
   
-  if (matchesAny(input, ['odd', 'outcome', 'driven'])) {
+  // Project queries
+  if (matchesAny(queryLower, ['project', 'work', 'portfolio', 'built'])) {
     return {
-      text: "Here's the ODD manifesto.",
+      content: "Check out the projects section to see what's being built here.",
       actions: [
-        { action: 'open', params: { uri: 'klappy://public/odd' } },
-        { action: 'suggest_questions', params: { 
-          questions: ["What are the misuse patterns?", "Show me the maturity model"]
-        }}
+        createAction(ActionTypes.OPEN, 'klappy://projects/index', { 
+          label: 'Projects' 
+        })
       ]
     };
   }
   
-  if (matchesAny(input, ['project', 'work', 'portfolio'])) {
+  // Canon/documentation queries
+  if (matchesAny(queryLower, ['canon', 'documentation', 'docs', 'reference'])) {
     return {
-      text: "Here are the projects.",
+      content: "The Canon contains all the governance documents - constraints, decision rules, evidence policies, and more.",
       actions: [
-        { action: 'open', params: { uri: 'klappy://projects/index' } }
+        createAction(ActionTypes.OPEN, 'klappy://meta/canon-index', { 
+          label: 'Canon Index' 
+        })
       ]
     };
   }
   
-  if (matchesAny(input, ['decision', 'heuristic'])) {
+  // Decision rules queries
+  if (matchesAny(queryLower, ['decision', 'how to decide', 'heuristic'])) {
     return {
-      text: "Opening decision rules.",
+      content: "Decision rules help guide choices during development.",
       actions: [
-        { action: 'open', params: { uri: 'klappy://canon/decision-rules' } }
+        createAction(ActionTypes.OPEN, 'klappy://canon/decision-rules', { 
+          label: 'Decision Rules' 
+        })
       ]
     };
   }
   
-  if (matchesAny(input, ['done', 'evidence', 'complete', 'proof'])) {
+  // Evidence/proof queries
+  if (matchesAny(queryLower, ['evidence', 'proof', 'done', 'complete', 'verify'])) {
     return {
-      text: "Here's the definition of done.",
+      content: "Evidence-based completion is a core principle here. Work isn't done until there's proof.",
       actions: [
-        { action: 'open', params: { uri: 'klappy://canon/definition-of-done' } },
-        { action: 'suggest_questions', params: { 
-          questions: ["What about visual proof?", "Show me the self-audit checklist"]
-        }}
+        createAction(ActionTypes.OPEN, 'klappy://canon/definition-of-done', { 
+          label: 'Definition of Done' 
+        }),
+        createAction(ActionTypes.OPEN, 'klappy://canon/visual-proof', { 
+          label: 'Visual Proof Standards' 
+        })
       ]
     };
   }
   
-  if (matchesAny(input, ['audit', 'check', 'verify'])) {
+  // Bio/personal queries
+  if (matchesAny(queryLower, ['bio', 'chris', 'klapp', 'yourself', 'author'])) {
     return {
-      text: "Here's the self-audit checklist.",
+      content: "Here's a bit about the person behind this site.",
       actions: [
-        { action: 'open', params: { uri: 'klappy://canon/self-audit' } }
+        createAction(ActionTypes.OPEN, 'klappy://about/bio', { 
+          label: 'Bio' 
+        })
       ]
     };
   }
   
-  if (matchesAny(input, ['visual', 'screenshot', 'recording'])) {
+  // FAQ queries
+  if (matchesAny(queryLower, ['faq', 'question', 'help', 'common'])) {
     return {
-      text: "Visual proof standards.",
+      content: "The FAQ might have what you're looking for.",
       actions: [
-        { action: 'open', params: { uri: 'klappy://canon/visual-proof' } }
+        createAction(ActionTypes.OPEN, 'klappy://about/faq', { 
+          label: 'FAQ' 
+        })
       ]
     };
   }
   
-  if (matchesAny(input, ['faq', 'question', 'ask'])) {
+  // Greeting responses
+  if (matchesAny(queryLower, ['hi', 'hello', 'hey', 'greet', 'morning', 'afternoon', 'evening'])) {
     return {
-      text: "Opening the FAQ.",
+      content: "Hey! What would you like to explore? I can show you projects, the philosophy behind this site, or dive into the governance documents.",
+      actions: []
+    };
+  }
+  
+  // Thanks responses
+  if (matchesAny(queryLower, ['thank', 'thanks', 'appreciate'])) {
+    return {
+      content: "You're welcome! Let me know if there's anything else you'd like to explore.",
+      actions: []
+    };
+  }
+  
+  // Default fallback - try to find relevant content
+  const matchedResource = findRelevantResource(query, manifest);
+  
+  if (matchedResource) {
+    return {
+      content: `I found something that might be relevant: "${matchedResource.title}"`,
       actions: [
-        { action: 'open', params: { uri: 'klappy://about/faq' } }
+        createAction(ActionTypes.OPEN, matchedResource.uri, { 
+          label: matchedResource.title 
+        })
       ]
     };
   }
   
-  if (matchesAny(input, ['credib', 'trust', 'background'])) {
-    return {
-      text: "Here's the credibility page.",
-      actions: [
-        { action: 'open', params: { uri: 'klappy://about/credibility' } }
-      ]
-    };
-  }
-  
-  if (matchesAny(input, ['index', 'canon', 'overview', 'all'])) {
-    return {
-      text: "Here's the canon index.",
-      actions: [
-        { action: 'open', params: { uri: 'klappy://meta/canon-index' } }
-      ]
-    };
-  }
-  
-  if (matchesAny(input, ['scroll', 'section', 'heading'])) {
-    // Demo scroll functionality if we have a current document
-    if (context.currentResource) {
-      return {
-        text: "Scrolling to the first heading I find.",
-        actions: [
-          { action: 'scroll_to', params: { sectionId: 'purpose' } },
-          { action: 'highlight', params: { sectionId: 'purpose' } }
-        ]
-      };
-    }
-  }
-  
-  // Default: offer suggestions
+  // True fallback
   return {
-    text: "I'm not sure what you're looking for. Try one of these:",
+    content: "I'm not sure I have specific information about that. Would you like to explore the Canon index or browse projects?",
     actions: [
-      { action: 'suggest_questions', params: { 
-        questions: [
-          "What is ODD?",
-          "Show me the constraints",
-          "Who are you?",
-          "What projects are here?"
-        ]
-      }}
+      createAction(ActionTypes.OPEN, 'klappy://meta/canon-index', { 
+        label: 'Canon Index' 
+      }),
+      createAction(ActionTypes.OPEN, 'klappy://projects/index', { 
+        label: 'Projects' 
+      })
     ]
   };
 }
 
 /**
- * Check if input matches any of the patterns
- * @param {string} input - Lowercase user input
- * @param {string[]} patterns - Patterns to match
- * @returns {boolean}
+ * Check if query matches any of the keywords
  */
-function matchesAny(input, patterns) {
-  return patterns.some(p => input.includes(p));
+function matchesAny(query, keywords) {
+  return keywords.some(keyword => query.includes(keyword));
 }
 
 /**
- * Provider metadata
+ * Try to find a relevant resource based on query keywords
  */
-export const providerInfo = {
-  name: 'mock',
-  description: 'Mock provider for Phase 1 - pattern matching without real LLM',
-  supportsStreaming: false
-};
+function findRelevantResource(query, manifest) {
+  if (!manifest?.resources) return null;
+  
+  const queryWords = query.toLowerCase().split(/\s+/);
+  
+  // Score each resource by keyword matches
+  let bestMatch = null;
+  let bestScore = 0;
+  
+  for (const resource of manifest.resources) {
+    if (resource.exposure !== 'nav') continue;
+    
+    let score = 0;
+    const titleLower = (resource.title || '').toLowerCase();
+    const tags = resource.tags || [];
+    
+    for (const word of queryWords) {
+      if (word.length < 3) continue; // Skip short words
+      
+      if (titleLower.includes(word)) score += 2;
+      if (tags.some(tag => tag.includes(word))) score += 1;
+    }
+    
+    if (score > bestScore) {
+      bestScore = score;
+      bestMatch = resource;
+    }
+  }
+  
+  return bestScore >= 2 ? bestMatch : null;
+}
+
+/**
+ * Simple delay helper
+ */
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}

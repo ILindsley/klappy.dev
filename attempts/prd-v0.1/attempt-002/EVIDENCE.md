@@ -10,23 +10,23 @@
 
 ## Evidence Files
 
-| File | Description |
-|------|-------------|
-| `attempt-002-evidence-1-initial-load.png` | Initial page load verification |
+| File                                                 | Description                           |
+| ---------------------------------------------------- | ------------------------------------- |
+| `attempt-002-evidence-1-initial-load.png`            | Initial page load verification        |
 | `attempt-002-evidence-2-after-constraints-click.png` | After clicking Constraints in sidebar |
-| `attempt-002-evidence-3-chat-action.png` | Chat panel interaction test |
-| `COMMANDS_RUN.md` | Build commands and output |
-| `DIFF_SUMMARY.md` | Diff summary + self-audit |
+| `attempt-002-evidence-3-chat-action.png`             | Chat panel interaction test           |
+| `COMMANDS_RUN.md`                                    | Build commands and output             |
+| `DIFF_SUMMARY.md`                                    | Diff summary + self-audit             |
 
 ---
 
 ## Network Evidence
 
-| Request | Status |
-|---------|--------|
+| Request                      | Status |
+| ---------------------------- | ------ |
 | `GET /content/manifest.json` | 200 ✅ |
 | `GET /content/odd/README.md` | 200 ✅ |
-| All component modules | 200 ✅ |
+| All component modules        | 200 ✅ |
 
 ---
 
@@ -45,6 +45,7 @@ dist-attempt-002/assets/*.js             156.53 kB
 ## Accessibility Verification
 
 Three-pane layout confirmed via accessibility snapshot:
+
 - Sidebar (`aside`) with navigation sections (Public, Canon)
 - Reading pane (`main`) with markdown content
 - Chat panel (`aside`) with suggested questions and input form

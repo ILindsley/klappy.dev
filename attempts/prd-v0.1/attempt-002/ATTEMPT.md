@@ -20,6 +20,7 @@ This is a fresh, independent implementation of the same PRD that attempt-001 was
 **Type:** Fresh execution path only
 
 **What is the same:**
+
 - PRD v0.1 (unchanged)
 - Technology stack (React/Vite)
 - Success criteria (Phase 1 DoD)
@@ -27,6 +28,7 @@ This is a fresh, independent implementation of the same PRD that attempt-001 was
 - Deployment target (Cloudflare Pages)
 
 **What is different:**
+
 - Fresh `/src-attempt-002/` directory (no code reuse from `/src/`)
 - Independent implementation decisions
 - No reference to attempt-001 code during build
