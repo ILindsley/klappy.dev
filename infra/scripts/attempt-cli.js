@@ -435,7 +435,7 @@ Options:
   // Now create branches and reset each
   console.log(`\n3️⃣  Creating ${n} branches and resetting /src in each...\n`);
   
-  const wtDir = worktreeDir || join(ROOT, 'attempts', '_worktrees');
+  const wtDir = worktreeDir || join(ROOT, '.worktrees', `prd-v${prd}`);
   
   for (let i = 0; i < attempts.length; i++) {
     const { attemptPadded } = attempts[i];
