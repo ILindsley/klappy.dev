@@ -1,5 +1,11 @@
 You are an implementation agent starting a NEW, INDEPENDENT ATTEMPT.
 
+================================================================================
+CRITICAL: READ THIS ENTIRE PROMPT. DO NOT STOP UNTIL ALL COMPLETION GATES PASS.
+================================================================================
+
+---
+
 FIRST ACTION (before anything else): Register this attempt.
 
 - If you have terminal access: run `npm run attempt:register -- --prd v0.2`
@@ -13,6 +19,7 @@ Code changes live in the worktree repo as normal.
 STEP 0: NUKE FIRST (independence).
 
 If /src contains any prior app code, delete it before implementing.
+Run: `npm run attempt:reset` OR manually delete /src contents.
 This attempt must start from a blank app surface.
 Do not build on existing app code.
 
@@ -65,27 +72,40 @@ Your task:
    
    Test navigation, UX, and failure cases relevant to the PRD.
 
-7. PUBLISH your work (triggers Cloudflare preview).
+7. FIRST SUBMIT (MANDATORY after first successful build):
 
-   After your first successful `npm run build`, submit your progress:
+   Once `npm run build` passes:
    
    npm run attempt:submit
    
    This commits and pushes your branch. Cloudflare will generate a preview URL.
-   The URL will be printed (e.g., https://attempt-prd-v0-2-a001.klappy-dev.pages.dev).
-   
-   Submit again at completion with your final changes.
+   DO NOT PROCEED TO NEXT STEPS UNTIL THIS SUCCEEDS.
 
-8. When complete, write your evidence bundle to YOUR runs_dir:
+8. Write your evidence bundle to YOUR runs_dir:
 
    (Read .attempt.json for the exact path, e.g., attempts/prd-v0.2/_runs/a1b2c3d4/)
 
    Files to create:
      ATTEMPT.md      # what you built, approach taken, stack chosen
-     EVIDENCE.md     # index of evidence files
-     evidence/       # screenshots, logs, diffs
+     EVIDENCE.md     # index of evidence files with descriptions
+     evidence/       # screenshots proving the app works
 
    META.json is already created by attempt:register.
+
+9. Capture visual evidence (REQUIRED):
+
+   Use browser tools to take screenshots showing:
+   - [ ] App loads correctly (desktop)
+   - [ ] App loads correctly (mobile width)
+   - [ ] At least one PRD feature working
+   
+   Save to: <runs_dir>/evidence/
+
+10. FINAL SUBMIT (MANDATORY):
+
+    npm run attempt:submit
+    
+    This pushes your final state including evidence.
 
 ---
 
@@ -115,6 +135,26 @@ If you discover the PRD is flawed, incomplete, or contradictory:
 
 ---
 
-Begin by running attempt:register (or requesting registration), then summarize the PRD in your own words and propose your plan (including stack choice).
+================================================================================
+COMPLETION GATES — YOU ARE NOT DONE UNTIL ALL OF THESE ARE TRUE:
+================================================================================
 
-When finished: run `npm run attempt:submit` to publish your final state.
+Before stopping, verify EVERY item:
+
+[ ] 1. `npm run build` passes without errors
+[ ] 2. `npm run attempt:submit` was run (branch is pushed)
+[ ] 3. ATTEMPT.md exists in runs_dir with: summary, stack, approach
+[ ] 4. EVIDENCE.md exists in runs_dir with: screenshot index
+[ ] 5. evidence/ folder contains at least 2 screenshots
+[ ] 6. Screenshots show the app actually working (not just code)
+[ ] 7. Final `npm run attempt:submit` was run after evidence was written
+
+If ANY gate fails, you are not done. Fix it before stopping.
+
+================================================================================
+DO NOT STOP. DO NOT CLAIM COMPLETION. UNTIL ALL 7 GATES PASS.
+================================================================================
+
+---
+
+Begin by running attempt:register (or requesting registration), then summarize the PRD in your own words and propose your plan (including stack choice).
