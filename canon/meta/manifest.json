@@ -322,6 +322,18 @@
       "tags": ["odd", "decisions", "branches", "provenance"]
     },
     {
+      "uri": "klappy://canon/odd/decisions/D0008",
+      "path": "/canon/odd/decisions/D0008-register-before-nuke.md",
+      "title": "D0008: Register Before Nuke",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "internal",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": ["odd", "decisions", "lifecycle", "provenance", "independence"]
+    },
+    {
       "uri": "klappy://about/why-this-exists",
       "path": "/about/why-this-exists.md",
       "title": "Why This Exists",

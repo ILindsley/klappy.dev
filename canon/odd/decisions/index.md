@@ -23,6 +23,7 @@ This folder contains Architecture Decision Records (ADRs) for the ODD workflow a
 | [D0002](./D0002-attempt-provenance-required.md) | Model provenance must be captured at registration | **Active** |
 | [D0003](./D0003-prd-version-auto-detection.md) | PRD version auto-detected from `/docs/PRD.md` | **Active** |
 | [D0006](./D0006-dogfooding-requirement.md) | Agents must apply canon docs, not just read them | **Active** |
+| [D0008](./D0008-register-before-nuke.md) | Register first (provenance), then nuke (independence) | **Active** |
 
 ### Repository Hygiene
 
