@@ -1,3 +1,14 @@
+---
+uri: klappy://canon/odd/decisions/D0008
+title: "D0008: Register Before Nuke"
+audience: canon
+exposure: internal
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "decisions", "lifecycle", "provenance", "independence"]
+---
+
 # D0008: Register Before Nuke
 
 **Status:** Active  

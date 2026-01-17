@@ -101,7 +101,8 @@ function verify() {
       console.warn(`   • ${path}`);
     }
     console.warn('\n   These files exist but won\'t appear in the UI.');
-    console.warn('   Add them to manifest.json or remove them.\n');
+    console.warn('   To include a file, add YAML frontmatter (uri/title/audience/...).');
+    console.warn('   To exclude it intentionally, leave it without frontmatter.\n');
   } else {
     console.log('✅ No orphan files detected\n');
   }

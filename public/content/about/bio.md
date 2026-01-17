@@ -1,3 +1,14 @@
+---
+uri: klappy://about/bio
+title: "Bio"
+audience: public
+exposure: nav
+tier: 1
+voice: first_person
+stability: semi_stable
+tags: ["about", "bio"]
+---
+
 # 👤 Bio — Who I Am
 
 I work at the intersection of software architecture, AI-assisted development, and long-term system sustainability.

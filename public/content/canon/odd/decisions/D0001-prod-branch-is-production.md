@@ -1,3 +1,14 @@
+---
+uri: klappy://canon/odd/decisions/D0001
+title: "D0001: prod Branch Is Production"
+audience: canon
+exposure: internal
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "decisions", "branch", "deploy"]
+---
+
 # D0001 — `prod` Branch Is Production
 
 ## Decision

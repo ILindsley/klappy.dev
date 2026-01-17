@@ -1,3 +1,14 @@
+---
+uri: klappy://about/credibility
+title: "Credibility"
+audience: public
+exposure: nav
+tier: 1
+voice: neutral
+stability: semi_stable
+tags: ["about", "credibility", "trust"]
+---
+
 # 🏛️ Credibility — Why Trust My Work
 
 Trust, in software, is rarely about credentials alone. It’s about whether ideas hold up when conditions are imperfect.

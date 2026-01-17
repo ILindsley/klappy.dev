@@ -1,3 +1,14 @@
+---
+uri: klappy://canon/odd/decisions/D0005
+title: "D0005: Nuke Command Safety Guards"
+audience: canon
+exposure: internal
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "decisions", "nuke", "safety"]
+---
+
 # D0005 — Nuke Command Safety Guards
 
 ## Decision

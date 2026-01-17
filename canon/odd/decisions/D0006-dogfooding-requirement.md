@@ -1,3 +1,14 @@
+---
+uri: klappy://canon/odd/decisions/D0006
+title: "D0006: Dogfooding Requirement"
+audience: canon
+exposure: internal
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "decisions", "dogfooding", "validation"]
+---
+
 # D0006 — Dogfooding Requirement
 
 ## Decision

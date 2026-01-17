@@ -1,3 +1,14 @@
+---
+uri: klappy://public/odd
+title: "ODD Manifesto — Public"
+audience: public
+exposure: nav
+tier: 0
+voice: neutral
+stability: semi_stable
+tags: ["odd", "public", "overview"]
+---
+
 # 🧠 Outcomes-Driven Development (ODD)
 
 Outcomes-Driven Development (ODD) is an approach to building software that prioritizes real-world results over artifacts.

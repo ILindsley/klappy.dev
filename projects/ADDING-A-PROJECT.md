@@ -1,3 +1,14 @@
+---
+uri: klappy://projects/adding-a-project
+title: "Adding a Project"
+audience: public
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["projects", "contributing", "guide"]
+---
+
 # How to Add a Project
 
 This repository treats projects as **evidence**, not outputs.

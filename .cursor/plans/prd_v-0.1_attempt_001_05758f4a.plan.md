@@ -100,7 +100,7 @@ flowchart TB
 
 ## Key Data Structures
 
-**Manifest Resource** (from [manifest.json](canon/meta/manifest.json)):
+**Manifest Resource** (from `/public/content/manifest.json` — generated from per-file frontmatter):
 
 ```javascript
 {
@@ -206,7 +206,7 @@ interface LLMProvider {
 
 ## Files to Reference
 
-- [manifest.json](canon/meta/manifest.json) - Content inventory (17 resources)
+- `/public/content/manifest.json` - Generated content inventory
 - [PRD.md](docs/PRD.md) - Behavior contract, UI actions (Section 10)
 - [BUILD_PROMPT_PHASE1.md](projects/repo-as-a-system/BUILD_PROMPT_PHASE1.md) - Phase 1 requirements
 

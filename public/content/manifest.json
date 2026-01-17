@@ -1,8 +1,8 @@
 {
   "pack": {
     "name": "klappy-canon",
-    "version": "0.3.0",
-    "updated_at": "2026-01-16",
+    "version": "0.3.1",
+    "updated_at": "2026-01-17",
     "description": "Canonical orientation, constraints, decision rules, evidence policies, and ODD appendices used across klappy.dev.",
     "public_entrypoint": "klappy://public/odd",
     "canon_entrypoint": "klappy://meta/canon-index",
@@ -10,172 +10,20 @@
   },
   "resources": [
     {
-      "uri": "klappy://public/odd",
-      "path": "/odd/README.md",
-      "title": "ODD Manifesto — Public",
+      "uri": "klappy://projects/adding-a-project",
+      "path": "/projects/ADDING-A-PROJECT.md",
+      "title": "Adding a Project",
       "type": "text/markdown",
       "audience": "public",
       "exposure": "nav",
-      "tier": 0,
-      "voice": "neutral",
-      "stability": "semi_stable",
-      "tags": ["odd", "public", "overview"]
-    },
-    {
-      "uri": "klappy://meta/canon-index",
-      "path": "/canon/index.md",
-      "title": "Canon Index",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 1,
-      "voice": "neutral",
-      "stability": "semi_stable",
-      "tags": ["canon", "index", "orientation"]
-    },
-    {
-      "uri": "klappy://meta/changelog",
-      "path": "/canon/CHANGELOG.md",
-      "title": "Canon Changelog",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "semi_stable",
-      "tags": ["meta", "changelog", "versioning"]
-    },
-    {
-      "uri": "klappy://canon/constraints",
-      "path": "/canon/constraints.md",
-      "title": "Constraints",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 1,
-      "voice": "first_person",
-      "stability": "stable",
-      "tags": ["constraints", "assumptions"]
-    },
-    {
-      "uri": "klappy://canon/decision-rules",
-      "path": "/canon/decision-rules.md",
-      "title": "Decision Rules",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 2,
-      "voice": "first_person",
-      "stability": "stable",
-      "tags": ["decision-rules", "heuristics"]
-    },
-    {
-      "uri": "klappy://canon/definition-of-done",
-      "path": "/canon/definition-of-done.md",
-      "title": "Definition of Done & Evidence Policy",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 1,
-      "voice": "first_person",
-      "stability": "semi_stable",
-      "tags": ["definition-of-done", "evidence"]
-    },
-    {
-      "uri": "klappy://canon/self-audit",
-      "path": "/canon/self-audit.md",
-      "title": "Self-Audit Checklist",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 2,
-      "voice": "first_person",
-      "stability": "evolving",
-      "tags": ["self-audit", "verification"]
-    },
-    {
-      "uri": "klappy://canon/visual-proof",
-      "path": "/canon/visual-proof.md",
-      "title": "Visual Proof Standards",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 2,
-      "voice": "first_person",
-      "stability": "semi_stable",
-      "tags": ["visual-proof", "evidence"]
-    },
-    {
-      "uri": "klappy://canon/completion-report-template",
-      "path": "/canon/completion-report-template.md",
-      "title": "Completion Report Template",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 2,
-      "voice": "first_person",
-      "stability": "evolving",
-      "tags": ["completion-report", "template"]
-    },
-    {
-      "uri": "klappy://canon/odd/manifesto",
-      "path": "/canon/odd/manifesto.md",
-      "title": "ODD Manifesto — Extended",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "stable",
-      "tags": ["odd", "philosophy"]
-    },
-    {
-      "uri": "klappy://canon/odd/maturity",
-      "path": "/canon/odd/maturity.md",
-      "title": "Project Maturity & Progressive Governance",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 2,
-      "voice": "first_person",
-      "stability": "semi_stable",
-      "tags": ["maturity", "governance"]
-    },
-    {
-      "uri": "klappy://canon/odd/misuse-patterns",
-      "path": "/canon/odd/misuse-patterns.md",
-      "title": "ODD Misuse Patterns",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
       "tier": 2,
       "voice": "neutral",
       "stability": "evolving",
-      "tags": ["odd", "misuse", "failure-modes"]
-    },
-    {
-      "uri": "klappy://canon/odd/prompt-architecture",
-      "path": "/canon/odd/prompt-architecture.md",
-      "title": "Prompt Architecture",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "semi_stable",
-      "tags": ["odd", "prompt-architecture", "orchestration"]
-    },
-    {
-      "uri": "klappy://canon/odd/orientation-map",
-      "path": "/canon/odd/orientation-map.md",
-      "title": "ODD + Canon + Evidence — Orientation Map",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "semi_stable",
-      "tags": ["odd", "orientation", "mental-model"]
+      "tags": [
+        "projects",
+        "contributing",
+        "guide"
+      ]
     },
     {
       "uri": "klappy://canon/odd/attempt-lifecycle",
@@ -187,163 +35,12 @@
       "tier": 2,
       "voice": "neutral",
       "stability": "semi_stable",
-      "tags": ["odd", "attempt", "lifecycle", "restartability"]
-    },
-    {
-      "uri": "klappy://canon/odd/quantum-development",
-      "path": "/canon/odd/appendices/quantum-development.md",
-      "title": "Quantum Development",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "semi_stable",
-      "tags": ["odd", "quantum", "attempts", "uncertainty", "orientation"]
-    },
-    {
-      "uri": "klappy://canon/odd/repo-topology",
-      "path": "/canon/odd/appendices/repo-topology.md",
-      "title": "Repository Topology",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "semi_stable",
-      "tags": ["odd", "topology", "structure", "decoupling"]
-    },
-    {
-      "uri": "klappy://canon/odd/repo-truth",
-      "path": "/canon/odd/appendices/repo-truth.md",
-      "title": "Repository Truth & Epistemic Hygiene",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "stable",
-      "tags": ["odd", "epistemic", "hygiene", "truth", "cleanup"]
-    },
-    {
-      "uri": "klappy://canon/odd/decisions",
-      "path": "/canon/odd/decisions/index.md",
-      "title": "ODD Decision Log",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 1,
-      "voice": "neutral",
-      "stability": "evolving",
-      "tags": ["odd", "decisions", "adr", "index"]
-    },
-    {
-      "uri": "klappy://canon/odd/decisions/D0001",
-      "path": "/canon/odd/decisions/D0001-prod-branch-is-production.md",
-      "title": "D0001: prod Branch Is Production",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "internal",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "stable",
-      "tags": ["odd", "decisions", "branch", "deploy"]
-    },
-    {
-      "uri": "klappy://canon/odd/decisions/D0002",
-      "path": "/canon/odd/decisions/D0002-attempt-provenance-required.md",
-      "title": "D0002: Attempt Provenance Required",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "internal",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "stable",
-      "tags": ["odd", "decisions", "provenance", "model"]
-    },
-    {
-      "uri": "klappy://canon/odd/decisions/D0003",
-      "path": "/canon/odd/decisions/D0003-prd-version-auto-detection.md",
-      "title": "D0003: PRD Version Auto-Detection",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "internal",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "stable",
-      "tags": ["odd", "decisions", "prd", "version"]
-    },
-    {
-      "uri": "klappy://canon/odd/decisions/D0004",
-      "path": "/canon/odd/decisions/D0004-repo-truth-cleanup-mandatory.md",
-      "title": "D0004: Repo Truth & Cleanup Mandatory",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "internal",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "stable",
-      "tags": ["odd", "decisions", "cleanup", "hygiene"]
-    },
-    {
-      "uri": "klappy://canon/odd/decisions/D0005",
-      "path": "/canon/odd/decisions/D0005-nuke-safety-guards.md",
-      "title": "D0005: Nuke Command Safety Guards",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "internal",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "stable",
-      "tags": ["odd", "decisions", "nuke", "safety"]
-    },
-    {
-      "uri": "klappy://canon/odd/decisions/D0006",
-      "path": "/canon/odd/decisions/D0006-dogfooding-requirement.md",
-      "title": "D0006: Dogfooding Requirement",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "internal",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "stable",
-      "tags": ["odd", "decisions", "dogfooding", "validation"]
-    },
-    {
-      "uri": "klappy://canon/odd/decisions/D0007",
-      "path": "/canon/odd/decisions/D0007-branch-names-are-convenience.md",
-      "title": "D0007: Branch Names Are Convenience",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "internal",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "stable",
-      "tags": ["odd", "decisions", "branches", "provenance"]
-    },
-    {
-      "uri": "klappy://canon/odd/decisions/D0008",
-      "path": "/canon/odd/decisions/D0008-register-before-nuke.md",
-      "title": "D0008: Register Before Nuke",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "internal",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "stable",
-      "tags": ["odd", "decisions", "lifecycle", "provenance", "independence"]
-    },
-    {
-      "uri": "klappy://about/why-this-exists",
-      "path": "/about/why-this-exists.md",
-      "title": "Why This Exists",
-      "type": "text/markdown",
-      "audience": "public",
-      "exposure": "nav",
-      "tier": 0,
-      "voice": "neutral",
-      "stability": "semi_stable",
-      "tags": ["about", "philosophy", "overview"]
+      "tags": [
+        "odd",
+        "attempt",
+        "lifecycle",
+        "restartability"
+      ]
     },
     {
       "uri": "klappy://about/bio",
@@ -355,67 +52,10 @@
       "tier": 1,
       "voice": "first_person",
       "stability": "semi_stable",
-      "tags": ["about", "bio"]
-    },
-    {
-      "uri": "klappy://about/credibility",
-      "path": "/about/credibility.md",
-      "title": "Credibility",
-      "type": "text/markdown",
-      "audience": "public",
-      "exposure": "nav",
-      "tier": 1,
-      "voice": "neutral",
-      "stability": "semi_stable",
-      "tags": ["about", "credibility", "trust"]
-    },
-    {
-      "uri": "klappy://about/faq",
-      "path": "/about/faq.md",
-      "title": "FAQ",
-      "type": "text/markdown",
-      "audience": "public",
-      "exposure": "nav",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "evolving",
-      "tags": ["about", "faq"]
-    },
-    {
-      "uri": "klappy://projects/index",
-      "path": "/projects/index.md",
-      "title": "Projects Index",
-      "type": "text/markdown",
-      "audience": "public",
-      "exposure": "nav",
-      "tier": 0,
-      "voice": "neutral",
-      "stability": "evolving",
-      "tags": ["projects", "index"]
-    },
-    {
-      "uri": "klappy://projects/adding-a-project",
-      "path": "/projects/ADDING-A-PROJECT.md",
-      "title": "Adding a Project",
-      "type": "text/markdown",
-      "audience": "public",
-      "exposure": "nav",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "evolving",
-      "tags": ["projects", "contributing", "guide"]
-    },
-    {
-      "uri": "klappy://projects/repo-as-a-system",
-      "path": "/projects/repo-as-a-system/README.md",
-      "title": "Repo-as-a-System",
-      "type": "text/markdown",
-      "audience": "public",
-      "exposure": "nav",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "evolving",
-      "tags": ["projects", "repo-as-a-system"]
+      "tags": [
+        "about",
+        "bio"
+      ]
     },
     {
       "uri": "klappy://projects/repo-as-a-system/build-prompt-phase1",
@@ -427,7 +67,546 @@
       "tier": 2,
       "voice": "neutral",
       "stability": "frozen",
-      "tags": ["projects", "repo-as-a-system", "build-prompt", "internal"]
+      "tags": [
+        "projects",
+        "repo-as-a-system",
+        "build-prompt",
+        "internal"
+      ]
+    },
+    {
+      "uri": "klappy://meta/changelog",
+      "path": "/canon/CHANGELOG.md",
+      "title": "Canon Changelog",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "semi_stable",
+      "tags": [
+        "meta",
+        "changelog",
+        "versioning"
+      ]
+    },
+    {
+      "uri": "klappy://meta/canon-index",
+      "path": "/canon/index.md",
+      "title": "Canon Index",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 1,
+      "voice": "neutral",
+      "stability": "semi_stable",
+      "tags": [
+        "canon",
+        "index",
+        "orientation"
+      ]
+    },
+    {
+      "uri": "klappy://canon/completion-report-template",
+      "path": "/canon/completion-report-template.md",
+      "title": "Completion Report Template",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "first_person",
+      "stability": "evolving",
+      "tags": [
+        "completion-report",
+        "template"
+      ]
+    },
+    {
+      "uri": "klappy://canon/constraints",
+      "path": "/canon/constraints.md",
+      "title": "Constraints",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 1,
+      "voice": "first_person",
+      "stability": "stable",
+      "tags": [
+        "constraints",
+        "assumptions"
+      ]
+    },
+    {
+      "uri": "klappy://about/credibility",
+      "path": "/about/credibility.md",
+      "title": "Credibility",
+      "type": "text/markdown",
+      "audience": "public",
+      "exposure": "nav",
+      "tier": 1,
+      "voice": "neutral",
+      "stability": "semi_stable",
+      "tags": [
+        "about",
+        "credibility",
+        "trust"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/decisions/D0001",
+      "path": "/canon/odd/decisions/D0001-prod-branch-is-production.md",
+      "title": "D0001: prod Branch Is Production",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "internal",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "decisions",
+        "branch",
+        "deploy"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/decisions/D0002",
+      "path": "/canon/odd/decisions/D0002-attempt-provenance-required.md",
+      "title": "D0002: Attempt Provenance Required",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "internal",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "decisions",
+        "provenance",
+        "model"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/decisions/D0003",
+      "path": "/canon/odd/decisions/D0003-prd-version-auto-detection.md",
+      "title": "D0003: PRD Version Auto-Detection",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "internal",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "decisions",
+        "prd",
+        "version"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/decisions/D0004",
+      "path": "/canon/odd/decisions/D0004-repo-truth-cleanup-mandatory.md",
+      "title": "D0004: Repo Truth & Cleanup Mandatory",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "internal",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "decisions",
+        "cleanup",
+        "hygiene"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/decisions/D0005",
+      "path": "/canon/odd/decisions/D0005-nuke-safety-guards.md",
+      "title": "D0005: Nuke Command Safety Guards",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "internal",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "decisions",
+        "nuke",
+        "safety"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/decisions/D0006",
+      "path": "/canon/odd/decisions/D0006-dogfooding-requirement.md",
+      "title": "D0006: Dogfooding Requirement",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "internal",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "decisions",
+        "dogfooding",
+        "validation"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/decisions/D0007",
+      "path": "/canon/odd/decisions/D0007-branch-names-are-convenience.md",
+      "title": "D0007: Branch Names Are Convenience",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "internal",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "decisions",
+        "branches",
+        "provenance"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/decisions/D0008",
+      "path": "/canon/odd/decisions/D0008-register-before-nuke.md",
+      "title": "D0008: Register Before Nuke",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "internal",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "decisions",
+        "lifecycle",
+        "provenance",
+        "independence"
+      ]
+    },
+    {
+      "uri": "klappy://canon/decision-rules",
+      "path": "/canon/decision-rules.md",
+      "title": "Decision Rules",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "first_person",
+      "stability": "stable",
+      "tags": [
+        "decision-rules",
+        "heuristics"
+      ]
+    },
+    {
+      "uri": "klappy://canon/definition-of-done",
+      "path": "/canon/definition-of-done.md",
+      "title": "Definition of Done & Evidence Policy",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 1,
+      "voice": "first_person",
+      "stability": "semi_stable",
+      "tags": [
+        "definition-of-done",
+        "evidence"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/evolution-not-automation",
+      "path": "/canon/odd/appendices/evolution-not-automation.md",
+      "title": "Evolution, Not Automation",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "hidden",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "semi_stable",
+      "tags": [
+        "odd",
+        "evolution",
+        "automation",
+        "orientation"
+      ]
+    },
+    {
+      "uri": "klappy://canon/evolution/failure-driven-modularity",
+      "path": "/canon/evolution/failure-driven-modularity.md",
+      "title": "Failure-Driven Modularity",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "canon",
+        "evolution",
+        "modularity",
+        "regenerability"
+      ]
+    },
+    {
+      "uri": "klappy://about/faq",
+      "path": "/about/faq.md",
+      "title": "FAQ",
+      "type": "text/markdown",
+      "audience": "public",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": [
+        "about",
+        "faq"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/orientation-map",
+      "path": "/canon/odd/orientation-map.md",
+      "title": "ODD + Canon + Evidence — Orientation Map",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "semi_stable",
+      "tags": [
+        "odd",
+        "orientation",
+        "mental-model"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/decisions",
+      "path": "/canon/odd/decisions/index.md",
+      "title": "ODD Decision Log",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 1,
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": [
+        "odd",
+        "decisions",
+        "adr",
+        "index"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/manifesto",
+      "path": "/canon/odd/manifesto.md",
+      "title": "ODD Manifesto — Extended",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "philosophy"
+      ]
+    },
+    {
+      "uri": "klappy://public/odd",
+      "path": "/odd/README.md",
+      "title": "ODD Manifesto — Public",
+      "type": "text/markdown",
+      "audience": "public",
+      "exposure": "nav",
+      "tier": 0,
+      "voice": "neutral",
+      "stability": "semi_stable",
+      "tags": [
+        "odd",
+        "public",
+        "overview"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/misuse-patterns",
+      "path": "/canon/odd/misuse-patterns.md",
+      "title": "ODD Misuse Patterns",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": [
+        "odd",
+        "misuse",
+        "failure-modes"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/maturity",
+      "path": "/canon/odd/maturity.md",
+      "title": "Project Maturity & Progressive Governance",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "first_person",
+      "stability": "semi_stable",
+      "tags": [
+        "maturity",
+        "governance"
+      ]
+    },
+    {
+      "uri": "klappy://projects/index",
+      "path": "/projects/index.md",
+      "title": "Projects Index",
+      "type": "text/markdown",
+      "audience": "public",
+      "exposure": "nav",
+      "tier": 0,
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": [
+        "projects",
+        "index"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/prompt-architecture",
+      "path": "/canon/odd/prompt-architecture.md",
+      "title": "Prompt Architecture",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "semi_stable",
+      "tags": [
+        "odd",
+        "prompt-architecture",
+        "orchestration"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/quantum-development",
+      "path": "/canon/odd/appendices/quantum-development.md",
+      "title": "Quantum Development",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "semi_stable",
+      "tags": [
+        "odd",
+        "quantum",
+        "attempts",
+        "uncertainty",
+        "orientation"
+      ]
+    },
+    {
+      "uri": "klappy://projects/repo-as-a-system",
+      "path": "/projects/repo-as-a-system/README.md",
+      "title": "Repo-as-a-System",
+      "type": "text/markdown",
+      "audience": "public",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": [
+        "projects",
+        "repo-as-a-system"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/repo-topology",
+      "path": "/canon/odd/appendices/repo-topology.md",
+      "title": "Repository Topology",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "semi_stable",
+      "tags": [
+        "odd",
+        "topology",
+        "structure",
+        "decoupling"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/repo-truth",
+      "path": "/canon/odd/appendices/repo-truth.md",
+      "title": "Repository Truth & Epistemic Hygiene",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "epistemic",
+        "hygiene",
+        "truth",
+        "cleanup"
+      ]
+    },
+    {
+      "uri": "klappy://canon/self-audit",
+      "path": "/canon/self-audit.md",
+      "title": "Self-Audit Checklist",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "first_person",
+      "stability": "evolving",
+      "tags": [
+        "self-audit",
+        "verification"
+      ]
+    },
+    {
+      "uri": "klappy://canon/visual-proof",
+      "path": "/canon/visual-proof.md",
+      "title": "Visual Proof Standards",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "first_person",
+      "stability": "semi_stable",
+      "tags": [
+        "visual-proof",
+        "evidence"
+      ]
+    },
+    {
+      "uri": "klappy://about/why-this-exists",
+      "path": "/about/why-this-exists.md",
+      "title": "Why This Exists",
+      "type": "text/markdown",
+      "audience": "public",
+      "exposure": "nav",
+      "tier": 0,
+      "voice": "neutral",
+      "stability": "semi_stable",
+      "tags": [
+        "about",
+        "philosophy",
+        "overview"
+      ]
     }
   ]
 }

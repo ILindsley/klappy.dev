@@ -1,9 +1,35 @@
+---
+uri: klappy://meta/changelog
+title: "Canon Changelog"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: semi_stable
+tags: ["meta", "changelog", "versioning"]
+---
+
 # 📜 Canon Changelog
 
 This changelog tracks changes to the **Canon pack** as a whole.
 
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
+
+---
+
+## 0.3.1 — 2026-01-17
+
+### Changed
+
+- Content metadata now lives in per-file YAML frontmatter (source of truth).
+- `/public/content/manifest.json` is now generated during `npm run sync` from frontmatter + `/canon/meta/pack.json`.
+- `canon/meta/manifest.json` has been removed to prevent metadata drift.
+- The renderer strips frontmatter before rendering markdown content.
+
+### Notes
+
+- `npm run verify:content` now validates the generated manifest coverage against `/public/content/`.
 
 ---
 
@@ -177,7 +203,7 @@ Per-file versions are intentionally omitted to reduce ceremony and prevent metad
   - Bio
   - Credibility
   - FAQ
-- Canon manifest inventory (`/canon/meta/manifest.json`) with stable URIs.
+- Content manifest (`/public/content/manifest.json`) generated from per-file frontmatter (stable URIs).
 
 ### Notes
 

@@ -1,3 +1,14 @@
+---
+uri: klappy://canon/odd/repo-truth
+title: "Repository Truth & Epistemic Hygiene"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "epistemic", "hygiene", "truth", "cleanup"]
+---
+
 # Repository Truth & Epistemic Hygiene
 
 ## Core Principle

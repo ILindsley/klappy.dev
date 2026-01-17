@@ -1,3 +1,14 @@
+---
+uri: klappy://canon/odd/prompt-architecture
+title: "Prompt Architecture"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: semi_stable
+tags: ["odd", "prompt-architecture", "orchestration"]
+---
+
 # 🧠 Prompt Architecture (Orientation)
 
 **Canon / ODD Appendix v0.1**

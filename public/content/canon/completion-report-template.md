@@ -1,3 +1,14 @@
+---
+uri: klappy://canon/completion-report-template
+title: "Completion Report Template"
+audience: canon
+exposure: nav
+tier: 2
+voice: first_person
+stability: evolving
+tags: ["completion-report", "template"]
+---
+
 # 📋 Completion Report Template
 
 **Canon v0.1**

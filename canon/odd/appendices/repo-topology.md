@@ -1,3 +1,14 @@
+---
+uri: klappy://canon/odd/repo-topology
+title: "Repository Topology"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: semi_stable
+tags: ["odd", "topology", "structure", "decoupling"]
+---
+
 # 📁 ODD Appendix — Repository Topology
 
 **Status:** Orientation  
@@ -115,7 +126,7 @@ Once sealed, these folders are not modified.
 
 | Asset | Source | Synced To |
 |-------|--------|-----------|
-| Canon manifest | `/canon/meta/manifest.json` | `/public/content/manifest.json` |
+| Content manifest | per-file frontmatter in `/canon/`, `/odd/`, `/about/`, `/projects/` | `/public/content/manifest.json` |
 | Markdown content | `/canon/`, `/odd/`, `/about/`, `/projects/` | `/public/content/` |
 | PRD (frozen) | `/attempts/prd-vX.Y/PRD.md` | N/A (immutable) |
 | Evidence | `/attempts/prd-vX.Y/attempt-NNN/evidence/` | N/A (immutable) |

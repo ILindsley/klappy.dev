@@ -1,3 +1,14 @@
+---
+uri: klappy://about/faq
+title: "FAQ"
+audience: public
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["about", "faq"]
+---
+
 # ❓ FAQ — Frequently Asked Questions
 
 ## What is this site?

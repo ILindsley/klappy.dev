@@ -1,3 +1,14 @@
+---
+uri: klappy://canon/odd/decisions/D0007
+title: "D0007: Branch Names Are Convenience"
+audience: canon
+exposure: internal
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "decisions", "branches", "provenance"]
+---
+
 # D0007 — Branch Names Are Convenience, Provenance Lives in META
 
 ## Decision

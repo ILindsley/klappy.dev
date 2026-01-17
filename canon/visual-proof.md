@@ -1,3 +1,14 @@
+---
+uri: klappy://canon/visual-proof
+title: "Visual Proof Standards"
+audience: canon
+exposure: nav
+tier: 2
+voice: first_person
+stability: semi_stable
+tags: ["visual-proof", "evidence"]
+---
+
 # 👁️ Visual Proof Standards
 
 **Canon v0.1**

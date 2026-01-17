@@ -1,3 +1,14 @@
+---
+uri: klappy://canon/odd/quantum-development
+title: "Quantum Development"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: semi_stable
+tags: ["odd", "quantum", "attempts", "uncertainty", "orientation"]
+---
+
 # 🔮 Quantum Development — ODD Appendix (Orientation)
 
 ## Purpose

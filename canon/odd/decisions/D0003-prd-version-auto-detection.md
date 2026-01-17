@@ -1,3 +1,14 @@
+---
+uri: klappy://canon/odd/decisions/D0003
+title: "D0003: PRD Version Auto-Detection"
+audience: canon
+exposure: internal
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "decisions", "prd", "version"]
+---
+
 # D0003 — PRD Version Auto-Detection
 
 ## Decision

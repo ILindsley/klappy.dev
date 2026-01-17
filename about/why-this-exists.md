@@ -1,3 +1,14 @@
+---
+uri: klappy://about/why-this-exists
+title: "Why This Exists"
+audience: public
+exposure: nav
+tier: 0
+voice: neutral
+stability: semi_stable
+tags: ["about", "philosophy", "overview"]
+---
+
 # 💡 Why This Exists
 
 This site is not a product.

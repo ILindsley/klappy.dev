@@ -1,3 +1,14 @@
+---
+uri: klappy://canon/odd/orientation-map
+title: "ODD + Canon + Evidence — Orientation Map"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: semi_stable
+tags: ["odd", "orientation", "mental-model"]
+---
+
 # 🧭 ODD + Canon + Evidence — 1-Page Orientation Map
 
 > This is not a workflow. It is a mental model.

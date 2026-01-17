@@ -1,3 +1,14 @@
+---
+uri: klappy://projects/repo-as-a-system/build-prompt-phase1
+title: "Build Prompt — Phase 1"
+audience: internal
+exposure: internal
+tier: 2
+voice: neutral
+stability: frozen
+tags: ["projects", "repo-as-a-system", "build-prompt", "internal"]
+---
+
 # Build Prompt (Phase 1)
 
 This document captures the kickoff prompt used to initialize AI-assisted development for Phase 1 of this project.
@@ -20,7 +31,7 @@ Assume Workers runtime later (no Node-only server APIs). Avoid SSR for v0.
 
 Repository inputs you must use:
 
-- /canon/meta/manifest.json (authoritative inventory of content)
+- /public/content/manifest.json (generated inventory of content; compiled from per-file frontmatter)
 - Markdown content under /canon, /odd, /about, /projects (do not invent content)
 - The PRD at /docs/PRD.md (behavior contract + scope)
   Important: Canon documents are orientation, not executable workflow. Do not encode agent loops in the app.

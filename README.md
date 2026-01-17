@@ -59,7 +59,7 @@ It does not execute anything by itself and is intentionally separated from tooli
 
 The Canon uses pack-level versioning with a single changelog:
 
-- `/canon/meta/manifest.json` — inventory of what exists
+- `/public/content/manifest.json` — generated inventory of what exists (compiled from per-file frontmatter)
 - `/canon/CHANGELOG.md` — record of changes
 
 Individual files are not versioned independently to avoid unnecessary ceremony.

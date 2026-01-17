@@ -1,3 +1,14 @@
+---
+uri: klappy://canon/odd/misuse-patterns
+title: "ODD Misuse Patterns"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["odd", "misuse", "failure-modes"]
+---
+
 # ⚠️ ODD Misuse Patterns
 
 **(Appendix to ODD Manifesto — Internal)**

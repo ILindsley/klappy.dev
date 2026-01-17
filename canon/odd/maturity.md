@@ -1,3 +1,14 @@
+---
+uri: klappy://canon/odd/maturity
+title: "Project Maturity & Progressive Governance"
+audience: canon
+exposure: nav
+tier: 2
+voice: first_person
+stability: semi_stable
+tags: ["maturity", "governance"]
+---
+
 # 📊 Project Maturity & Progressive Governance
 
 **Canon v0.1**

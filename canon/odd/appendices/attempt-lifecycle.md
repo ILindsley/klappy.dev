@@ -1,3 +1,14 @@
+---
+uri: klappy://canon/odd/attempt-lifecycle
+title: "Attempt Lifecycle"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: semi_stable
+tags: ["odd", "attempt", "lifecycle", "restartability"]
+---
+
 # 🔄 ODD Appendix — Attempt Lifecycle
 
 **Status:** Orientation  

@@ -1,3 +1,14 @@
+---
+uri: klappy://canon/odd/decisions/D0004
+title: "D0004: Repo Truth & Cleanup Mandatory"
+audience: canon
+exposure: internal
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "decisions", "cleanup", "hygiene"]
+---
+
 # D0004 — Repository Truth: Cleanup Is Mandatory
 
 ## Decision

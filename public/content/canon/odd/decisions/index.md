@@ -1,3 +1,14 @@
+---
+uri: klappy://canon/odd/decisions
+title: "ODD Decision Log"
+audience: canon
+exposure: nav
+tier: 1
+voice: neutral
+stability: evolving
+tags: ["odd", "decisions", "adr", "index"]
+---
+
 # ODD Decision Log
 
 This folder contains Architecture Decision Records (ADRs) for the ODD workflow and repository practices.

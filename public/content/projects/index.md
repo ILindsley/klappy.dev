@@ -1,3 +1,14 @@
+---
+uri: klappy://projects/index
+title: "Projects Index"
+audience: public
+exposure: nav
+tier: 0
+voice: neutral
+stability: evolving
+tags: ["projects", "index"]
+---
+
 # 📁 Projects
 
 This folder contains proofs of concept, experiments, and working artifacts built using the principles described in the [Canon](/canon/index.md).

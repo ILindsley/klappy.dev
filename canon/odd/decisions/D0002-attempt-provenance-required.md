@@ -1,3 +1,14 @@
+---
+uri: klappy://canon/odd/decisions/D0002
+title: "D0002: Attempt Provenance Required"
+audience: canon
+exposure: internal
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "decisions", "provenance", "model"]
+---
+
 # D0002 — Attempt Provenance Required
 
 ## Decision

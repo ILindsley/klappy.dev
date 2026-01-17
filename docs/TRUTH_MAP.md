@@ -12,7 +12,7 @@
 | **Attempt workflow** | `/docs/ATTEMPTS.md` | Lifecycle, META schema, finalization |
 | **Agent kickoff** | `/docs/PROMPT_ATTEMPT_KICKOFF.txt` | The contract agents receive |
 | **Active PRD** | `/docs/PRD.md` | Current hypothesis being tested |
-| **Content manifest** | `/canon/meta/manifest.json` | What exists, disclosure tiers, UI spine |
+| **Content manifest** | `/public/content/manifest.json` | Generated from per-file frontmatter; what exists, disclosure tiers, UI spine |
 | **Decision log** | `/canon/odd/decisions/index.md` | Durable decisions (ADR-lite) |
 
 ---

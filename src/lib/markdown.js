@@ -11,6 +11,24 @@
 import { marked } from 'marked';
 
 /**
+ * Strip YAML frontmatter from markdown content.
+ * Frontmatter is treated as metadata and should not be rendered.
+ * @param {string} markdown
+ * @returns {string}
+ */
+function stripFrontmatter(markdown) {
+  // Only treat a leading frontmatter block as metadata.
+  if (!markdown.startsWith('---')) return markdown;
+  const normalized = markdown.replace(/\r\n/g, '\n');
+  if (!normalized.startsWith('---\n')) return markdown;
+
+  const endIdx = normalized.indexOf('\n---\n', 4);
+  if (endIdx === -1) return markdown;
+
+  return normalized.slice(endIdx + '\n---\n'.length);
+}
+
+/**
  * Create a deterministic slug from text
  * @param {string} text - Heading text
  * @returns {string} URL-safe slug
@@ -63,6 +81,7 @@ export function createSlugger() {
  * @returns {{ html: string, headings: Array<{id: string, text: string, level: number}> }}
  */
 export function parseMarkdown(markdown) {
+  const content = stripFrontmatter(markdown);
   const slugger = createSlugger();
   const headings = [];
   
@@ -76,7 +95,7 @@ export function parseMarkdown(markdown) {
     return `<h${depth} id="${id}">${this.parser.parseInline(tokens)}</h${depth}>\n`;
   };
   
-  const html = marked(markdown, { 
+  const html = marked(content, { 
     renderer,
     gfm: true,
     breaks: false

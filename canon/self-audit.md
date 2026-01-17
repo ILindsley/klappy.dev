@@ -1,3 +1,14 @@
+---
+uri: klappy://canon/self-audit
+title: "Self-Audit Checklist"
+audience: canon
+exposure: nav
+tier: 2
+voice: first_person
+stability: evolving
+tags: ["self-audit", "verification"]
+---
+
 # 🔍 Self-Audit Checklist
 
 **Canon v0.1**

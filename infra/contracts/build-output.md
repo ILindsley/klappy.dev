@@ -25,7 +25,7 @@ The app MUST fetch and display content from:
 /content/manifest.json
 ```
 
-This manifest is synced from `/canon/meta/manifest.json` during build.
+This manifest is generated from per-file frontmatter during `npm run sync`.
 Your app must be able to load and render resources listed in this manifest.
 
 ### 3. No Client Secrets

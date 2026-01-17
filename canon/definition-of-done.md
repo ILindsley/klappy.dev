@@ -1,3 +1,14 @@
+---
+uri: klappy://canon/definition-of-done
+title: "Definition of Done & Evidence Policy"
+audience: canon
+exposure: nav
+tier: 1
+voice: first_person
+stability: semi_stable
+tags: ["definition-of-done", "evidence"]
+---
+
 # ✅ Definition of Done & Evidence Policy
 
 **Canon v0.1**

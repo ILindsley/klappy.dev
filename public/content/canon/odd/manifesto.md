@@ -1,3 +1,14 @@
+---
+uri: klappy://canon/odd/manifesto
+title: "ODD Manifesto — Extended"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "philosophy"]
+---
+
 # 🧠 ODD Manifesto v1.1 (Extended — Internal / Canon)
 
 > ODD v1.1 — Extended (Internal / Agent-Governance) → for canon, MCP, agents (this file)

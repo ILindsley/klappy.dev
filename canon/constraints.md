@@ -1,3 +1,14 @@
+---
+uri: klappy://canon/constraints
+title: "Constraints"
+audience: canon
+exposure: nav
+tier: 1
+voice: first_person
+stability: stable
+tags: ["constraints", "assumptions"]
+---
+
 # 📌 Constraints
 
 **Canon v0.1**

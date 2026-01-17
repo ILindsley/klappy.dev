@@ -1,3 +1,14 @@
+---
+uri: klappy://canon/decision-rules
+title: "Decision Rules"
+audience: canon
+exposure: nav
+tier: 2
+voice: first_person
+stability: stable
+tags: ["decision-rules", "heuristics"]
+---
+
 # 📋 Decision Rules
 
 **Canon v0.1**

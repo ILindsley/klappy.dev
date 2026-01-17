@@ -1,3 +1,14 @@
+---
+uri: klappy://projects/repo-as-a-system
+title: "Repo-as-a-System"
+audience: public
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["projects", "repo-as-a-system"]
+---
+
 # 🧪 This Repository as a System
 
 ## Intent

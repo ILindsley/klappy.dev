@@ -1,3 +1,14 @@
+---
+uri: klappy://meta/canon-index
+title: "Canon Index"
+audience: canon
+exposure: nav
+tier: 1
+voice: neutral
+stability: semi_stable
+tags: ["canon", "index", "orientation"]
+---
+
 # 🧭 Canon Index v0.1
 
 **Scope, Structure, Intent, and Confidence**
@@ -153,6 +164,12 @@ Default heuristics used when multiple valid options exist.
 Answers:
 
 How do choices tend to be made?
+
+---
+
+### Evolution
+
+- [Failure-Driven Modularity](./evolution/failure-driven-modularity.md)
 
 ---
 
