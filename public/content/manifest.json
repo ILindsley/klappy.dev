@@ -722,6 +722,23 @@
       ]
     },
     {
+      "uri": "klappy://canon/odd/visual-evolution",
+      "path": "/canon/odd/appendices/visual-evolution.md",
+      "title": "Visual Evolution",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "semi_stable",
+      "tags": [
+        "odd",
+        "visual",
+        "evolution",
+        "interfaces"
+      ]
+    },
+    {
       "uri": "klappy://canon/visual-proof",
       "path": "/canon/visual-proof.md",
       "title": "Visual Proof Standards",

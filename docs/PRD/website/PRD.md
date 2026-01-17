@@ -20,6 +20,21 @@ This lane MUST remain compatible with:
 
 ---
 
+## Visual Interfaces
+
+This product MUST remain compatible with:
+
+- color-system >=1.0.0 <2.0.0
+- typography >=1.0.0 <2.0.0
+- spacing >=1.0.0 <2.0.0
+
+This product does NOT define colors, fonts, or spacing directly.
+It consumes visual interfaces.
+
+See `/canon/odd/appendices/visual-evolution.md` for the visual evolution model.
+
+---
+
 ## Objective
 
 Create a public website that allows humans to:

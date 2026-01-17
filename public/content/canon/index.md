@@ -139,10 +139,13 @@ If documents appear to conflict, maturity context and explicit tradeoffs usually
       lane-implementation-surfaces.md
       product-lanes.md
       attempt-lifecycle.md
+      drift-checks.md
       evolution-not-automation.md
+      lane-build-layout.md
       quantum-development.md
       repo-topology.md
       repo-truth.md
+      visual-evolution.md
     decisions/
       D0001-prod-branch-is-production.md
       ...
@@ -293,6 +296,12 @@ Evaluating multiple execution paths before revising intent. Explains why diverge
 What lives where and what changes when. Encodes App/Content/Infrastructure decoupling.
 • Evolution, Not Automation (odd/appendices/evolution-not-automation.md)
 Why this system supports learning, not automatic execution. Humans stay in the loop.
+• Visual Evolution (odd/appendices/visual-evolution.md)
+Why visual systems evolve independently from products. Products consume visual interfaces, not raw design decisions.
+• Drift Checks (odd/appendices/drift-checks.md)
+The drift-prevention mechanism. When docs, prompts, and tooling diverge, truth becomes vibes.
+• Lane Build Layout (odd/appendices/lane-build-layout.md)
+How lanes avoid /src and /dist collisions. Worktrees isolate, deployments are lane-scoped.
 
 ---
 

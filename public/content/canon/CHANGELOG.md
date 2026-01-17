@@ -18,6 +18,38 @@ Per-file versions are intentionally omitted to reduce ceremony and prevent metad
 
 ---
 
+## 0.4.2 — 2026-01-17
+
+**Visual Evolution Layer**
+
+This release introduces visual interfaces as a first-class concept, allowing visual systems to evolve independently from products using the same evolutionary model as code.
+
+### Added
+
+- **Visual Evolution** (`/canon/odd/appendices/visual-evolution.md`) — Why visual systems evolve independently from products
+- **Visual Interfaces** (`/visual/interfaces/`) — Semver'd visual compatibility contracts
+  - `color-system@1.0.0` — Semantic color tokens and accessibility requirements
+  - `typography@1.0.0` — Modular type scale and semantic roles
+  - `spacing@1.0.0` — Base-8 spacing scale and application rules
+- **Visual directory structure:**
+  - `/visual/interfaces/` — Visual contracts
+  - `/visual/assets/` — Generated outputs (disposable)
+  - `/visual/attempts/` — Evolutionary visual exploration
+
+### Changed
+
+- **Website PRD** — Now declares visual interface compatibility (color-system, typography, spacing)
+- **Canon Index** — Added visual evolution, drift checks, and lane build layout to appendices list
+
+### Philosophy
+
+- Visual consistency is a property of contracts, not code
+- Products consume visual interfaces, they do not define colors/fonts/spacing directly
+- Visual attempts compete; only champions advance interface versions
+- Visual systems can evolve faster than products without invalidating experiments
+
+---
+
 ## 0.4.1 — 2026-01-17
 
 **Interface Contracts + Semver Layer**
