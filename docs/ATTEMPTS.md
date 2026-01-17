@@ -5,17 +5,22 @@
 This document explains the mental model behind attempts: what they are, why they exist, and how they fit together.
 
 **For step-by-step procedures, see:** `/docs/ATTEMPT_KICKOFF.md`  
-**For the agent prompt, see:** `/docs/PROMPT_ATTEMPT_KICKOFF.txt`
+**For the agent entry point, see:** `/docs/AGENT_KICKOFF.md`
 
 ---
 
 ## 📌 Core Principles
 
-1. **One active implementation:** `/src/` is disposable; prior attempts are preserved by git history + sealed records.
-2. **PRD versions are first-class:** A PRD version can have multiple attempts.
-3. **Provenance is truth:** `META.json` stores who made what (tool, agent, model), not branch names.
-4. **Artifacts always merge:** Even failed attempts contribute learnings.
-5. **Production is explicit:** Only the `prod` branch deploys to production.
+1. **One active implementation per lane:** `products/<lane>/src/` is disposable; prior attempts are preserved by git history + sealed records.
+2. **PRD lanes are independent:** Each product lane (website, ai-navigation, agent-skill) has its own PRD, attempts, and lifecycle. Lanes share canon, not lifecycle.
+3. **PRD versions are first-class:** A PRD version can have multiple attempts.
+4. **Provenance is truth:** `META.json` stores who made what (tool, agent, model) AND which lane, not branch names.
+5. **Artifacts always merge:** Even failed attempts contribute learnings.
+6. **Production is explicit:** Only the `prod` branch deploys to production.
+
+> **Every attempt MUST declare a lane before registration. Attempts without a lane are invalid.**
+
+See `/canon/odd/appendices/product-lanes.md` for the multi-lane architecture.
 
 ---
 
@@ -63,12 +68,15 @@ See `/canon/odd/appendices/quantum-development.md` for the orientation model beh
 
 **Attempts must start from a blank slate.**
 
-`attempt:nuke` deletes `/src` and removes framework configs so the agent can choose any stack that satisfies the deploy contract.
+`attempt:nuke --lane <lane>` deletes `products/<lane>/src/` and removes lane-local framework configs so the agent can choose any stack that satisfies the deploy contract.
 
 This ensures:
 - No inherited UI patterns
 - No framework bias (React, Vue, Svelte — all valid)
 - True independence between attempts
+- No cross-lane contamination
+
+See `/canon/odd/appendices/lane-implementation-surfaces.md` for the locked folder contract.
 
 ---
 
@@ -77,13 +85,13 @@ This ensures:
 ### During an Attempt
 
 1. **Each agent starts in its own workspace** (Cursor worktree, branch, etc.)
-2. **First actions:**
+2. **Declare lane and register** (lane declaration is MANDATORY):
    ```bash
-   npm run attempt:register -- --tool cursor --agent a --model "opus-4.5"
-   npm run attempt:nuke
+   npm run attempt:register -- --lane website --tool cursor --agent a --model "opus-4.5"
+   npm run attempt:nuke -- --lane website
    ```
-3. **Build from PRD** — implement against `/docs/PRD.md`
-4. **Write artifacts** to `attempts/prd-vX.Y/_runs/<run_id>/`
+3. **Build from lane PRD** — implement against the lane's PRD (e.g., `/docs/PRD/website/PRD.md`)
+4. **Write artifacts** to `attempts/<lane>/prd-vX.Y/_runs/<run_id>/`
 5. **Push** — triggers Cloudflare preview
 
 ### After All Agents Finish
@@ -106,37 +114,65 @@ Attempt numbers are assigned **after** work completes, not before.
 ## 📁 Folder Structure
 
 ```
-/src/                           # current implementation (disposable)
+/products/                      # lane implementation surfaces
+  website/
+    src/                        # website source (disposable)
+    dist/                       # website build output (not committed)
+  ai-navigation/
+    src/                        # ai-navigation source (disposable)
+    dist/                       # ai-navigation build output (not committed)
+  agent-skill/
+    src/                        # agent-skill source (disposable)
+    dist/                       # agent-skill build output (not committed)
 /infra/scripts/                 # build scripts (persist across attempts)
-/docs/PRD.md                    # single active PRD (authoritative)
+/docs/PRD/                      # active PRDs organized by lane
+  website/PRD.md                # website lane PRD
+  ai-navigation/PRD.md          # ai-navigation lane PRD
+  agent-skill/PRD.md            # agent-skill lane PRD
 /attempts/                      # sealed attempts (immutable after seal)
-  prd-v0.3/
-    PRD.md                      # frozen PRD for this version
-    _runs/                      # in-progress runs (before finalize)
-      <run_id>/
-        META.json
+  website/                      # website lane attempts
+    prd-v1.0/
+      PRD.md                    # frozen PRD for this version
+      _runs/                    # in-progress runs (before finalize)
+        <run_id>/
+          META.json
+          ATTEMPT.md
+          EVIDENCE.md
+          evidence/
+      attempt-001/              # finalized attempts
+        META.json               # canonical pointers + provenance + lane
         ATTEMPT.md
         EVIDENCE.md
         evidence/
-    attempt-001/                # finalized attempts
-      META.json                 # canonical pointers + provenance
-      ATTEMPT.md
-      EVIDENCE.md
-      evidence/
-    attempt-002/
+      attempt-002/
+        ...
+  ai-navigation/                # ai-navigation lane attempts
+    prd-v1.0/
+      ...
+  agent-skill/                  # agent-skill lane attempts
+    prd-v1.0/
       ...
 /public/content/                # generated (by sync script)
 ```
+
+**Locked folder structure:** `/attempts/<lane>/prd-vX.Y/attempt-NNN/`
+
+Do NOT use:
+- `/attempts/prd-vX.Y/<lane>/`
+- `/attempts/<lane>/attempt-NNN/`
+- `/attempts/<lane>/<anything creative>/`
 
 ---
 
 ## 📎 META.json Schema
 
-Each attempt contains a `META.json` with provenance and canonical pointers:
+Each attempt contains a `META.json` with provenance, lane, and canonical pointers:
 
 ```json
 {
-  "prd_version": "v0.3",
+  "lane": "website",
+  "prd_version": "v1.0",
+  "epoch_id": "E0002-multi-lane-era",
   "run_id": "a1b2c3d4",
   "attempt": "001",
   
@@ -144,8 +180,11 @@ Each attempt contains a `META.json` with provenance and canonical pointers:
   "agent": "a",
   "model": "opus-4.5",
   
+  "lane_root": "products/website",
+  "dist_dir": "products/website/dist",
+  
   "worktree_path": "/path/to/worktree",
-  "branch": "run/v0.3/cursor/a/opus-45/a1b2c3d4",
+  "branch": "run/website/v1.0/cursor/a/opus-45/a1b2c3d4",
   "git_head": "abc123...",
   
   "registered_at": "2026-01-16T10:00:00Z",
@@ -153,12 +192,16 @@ Each attempt contains a `META.json` with provenance and canonical pointers:
   "finalized_at": "2026-01-16T14:00:00Z",
   
   "status": "CLOSED",
-  "preview_url": "https://run-v03-cursor-a-opus-45-a1b2c3d4.klappy-dev.pages.dev",
+  "preview_url": "https://run-website-v10-cursor-a-opus-45-a1b2c3d4.klappy-dev.pages.dev",
   "evidence_index": ["evidence/desktop.png", "evidence/mobile.png"]
 }
 ```
 
-**Key insight:** The commit SHA + provenance fields are truth. Branch names and tags are convenience.
+**Lane field is REQUIRED.** Valid values: `website`, `ai-navigation`, `agent-skill`
+
+**Epoch field is REQUIRED.** If `epoch_id` is missing, the attempt is not comparable to other attempts by default. See `/canon/odd/appendices/epochs.md`.
+
+**Key insight:** The commit SHA + provenance fields + lane + epoch are truth. Branch names and tags are convenience.
 
 ---
 
@@ -169,7 +212,7 @@ Each attempt contains a `META.json` with provenance and canonical pointers:
 | Output | Merge to main? |
 |--------|----------------|
 | Artifacts (attempt folder, evidence, PRD patches) | **Always** |
-| Code (`/src`, components, etc.) | **Only if Champion** |
+| Code (`products/<lane>/src`, components, etc.) | **Only if Champion** |
 
 ### Two Phases Per Attempt
 
@@ -191,16 +234,18 @@ This ensures every attempt contributes to the knowledge base.
 
 | Category | Evolves? | Notes |
 |----------|----------|-------|
-| `/canon/**` | ✅ Yes | Living orientation docs |
-| `/docs/PRD.md` | ✅ Yes | Single active PRD |
-| `/attempts/prd-vX.Y/PRD.md` | ❌ No | Frozen snapshot |
-| `/attempts/*/attempt-NNN/*` | ❌ No | Sealed record + evidence |
+| `/canon/**` | ✅ Yes | Living orientation docs (shared across lanes) |
+| `/docs/PRD/<lane>/PRD.md` | ✅ Yes | Active PRD per lane |
+| `/attempts/<lane>/prd-vX.Y/PRD.md` | ❌ No | Frozen snapshot |
+| `/attempts/<lane>/*/attempt-NNN/*` | ❌ No | Sealed record + evidence |
+
+**Note:** Each lane evolves independently. Changes to the website PRD do not affect agent-skill attempts.
 
 ---
 
 ## 💡 Why This Structure?
 
-- **No filesystem sprawl:** One `/src/`, not `/app-v1`, `/app-v2`, etc.
+- **No filesystem sprawl:** One `products/<lane>/src/` per lane, not `/app-v1`, `/app-v2`, etc.
 - **PRD-first:** Clear hierarchy of what was attempted
 - **Retry-friendly:** Multiple attempts per PRD version is expected
 - **Provenance is truth:** `META.json` ensures attempts are interpretable even if branch names drift
@@ -235,7 +280,7 @@ The attempt folder contains everything needed:
 | Do we preserve attempt previews permanently? | No — we preserve links + evidence |
 | Do failed attempts merge to main? | Artifacts yes, code no |
 | How do parallel agents avoid collisions? | `finalize` assigns numbers after completion |
-| Must /src be reset between attempts? | Yes, via `attempt:nuke` (blank slate) |
+| Must lane src be reset between attempts? | Yes, via `attempt:nuke --lane <lane>` (blank slate) |
 | What branch is production? | `prod` (never nuked, explicit promotion only) |
 
 ---
@@ -244,19 +289,22 @@ The attempt folder contains everything needed:
 
 | Command | Purpose |
 |---------|---------|
-| `npm run attempt:register -- --tool <t> --agent <id> --model <m>` | Register run with provenance |
-| `npm run attempt:nuke` | Blank slate — delete `/src` |
+| `npm run attempt:register -- --lane <lane> --tool <t> --agent <id> --model <m>` | Register run with lane + provenance |
+| `npm run attempt:nuke -- --lane <lane>` | Blank slate — delete `products/<lane>/src` |
 | `npm run attempt:submit` | Commit + push (triggers CF preview) |
-| `npm run attempt:finalize -- --prd vX.Y` | Assign attempt numbers |
-| `npm run attempt:promote -- --prd vX.Y --attempt 001` | Promote champion to production |
+| `npm run attempt:finalize -- --lane <lane> --prd vX.Y` | Assign attempt numbers for lane |
+| `npm run attempt:promote -- --lane <lane> --prd vX.Y --attempt 001` | Promote lane champion to production |
 | `npm run attempt:cleanup` | Prune stale worktrees and branches |
+
+**Lane is required for register, nuke, finalize, and promote commands.**
 
 ---
 
 ## 🔗 Related Documents
 
+- **Product Lanes Architecture: `/canon/odd/appendices/product-lanes.md`** (READ FIRST)
 - Step-by-step workflow: `/docs/ATTEMPT_KICKOFF.md`
-- Agent prompt: `/docs/PROMPT_ATTEMPT_KICKOFF.txt`
+- Agent entry point: `/docs/AGENT_KICKOFF.md`
 - Deploy behavior: `/docs/CLOUDFLARE_CONFIG.md`
 - Decision log: `/canon/odd/decisions/`
 - Quantum Development: `/canon/odd/appendices/quantum-development.md`

@@ -32,9 +32,17 @@ This folder contains Architecture Decision Records (ADRs) for the ODD workflow a
 | ID | Decision | Status |
 |----|----------|--------|
 | [D0002](./D0002-attempt-provenance-required.md) | Model provenance must be captured at registration | **Active** |
-| [D0003](./D0003-prd-version-auto-detection.md) | PRD version auto-detected from `/docs/PRD.md` | **Active** |
+| [D0003](./D0003-prd-version-auto-detection.md) | PRD version auto-detected from lane PRD | **Active** |
 | [D0006](./D0006-dogfooding-requirement.md) | Agents must apply canon docs, not just read them | **Active** |
 | [D0008](./D0008-register-before-nuke.md) | Register first (provenance), then nuke (independence) | **Active** |
+| [D0010](./D0010-canonical-agent-kickoff.md) | Single canonical agent entry point (`AGENT_KICKOFF.md`) | **Active** |
+
+### Architecture
+
+| ID | Decision | Status |
+|----|----------|--------|
+| [D0009](./D0009-multi-lane-prd-architecture.md) | PRDs organized into independent product lanes | **Active** |
+| [D0011](./D0011-odd-contract-2.0.0.md) | ODD System Contract 2.0.0 (multi-lane era) | **Active** |
 
 ### Repository Hygiene
 

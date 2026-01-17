@@ -18,6 +18,66 @@ Per-file versions are intentionally omitted to reduce ceremony and prevent metad
 
 ---
 
+## 0.4.0 — 2026-01-17
+
+**ODD Contract 2.0.0 — Multi-Lane Era**
+
+This release introduces the multi-lane PRD architecture, epochs for comparability, alignment reviews for drift detection, and lane-scoped implementation surfaces. This is a breaking change from the single-PRD model.
+
+### Added
+
+- **ODD Contract 2.0.0** (`/canon/odd/contract.md`) — Single source of ODD system versioning
+- **Epochs** (`/canon/odd/appendices/epochs.md`) — Named periods where success meaning is stable
+- **Alignment Reviews** (`/canon/odd/appendices/alignment-reviews.md`) — Periodic evaluation for drift detection
+- **Product Lanes** (`/canon/odd/appendices/product-lanes.md`) — Multi-lane PRD architecture
+- **Lane-Scoped Implementation Surfaces** (`/canon/odd/appendices/lane-implementation-surfaces.md`) — Each lane owns `products/<lane>/src` and `products/<lane>/dist`
+- **Decision Logs:**
+  - D0009: Multi-lane PRD architecture
+  - D0010: Canonical agent kickoff (`AGENT_KICKOFF.md`)
+  - D0011: ODD Contract 2.0.0 declaration
+- **Lane PRD directories:**
+  - `/docs/PRD/website/PRD.md`
+  - `/docs/PRD/ai-navigation/PRD.md`
+  - `/docs/PRD/agent-skill/PRD.md`
+- **Lane implementation surfaces:**
+  - `/products/website/src/`
+  - `/products/ai-navigation/src/`
+  - `/products/agent-skill/src/`
+
+### Changed
+
+- **Attempt CLI** — Now lane-scoped:
+  - `attempt:nuke` requires `--lane`, only deletes `products/<lane>/src`
+  - `attempt:register` requires `--lane`, includes `lane_root`, `dist_dir`, `epoch_id` in META.json
+- **META.json schema** — Now includes `lane`, `lane_root`, `dist_dir`, `epoch_id`
+- **Cloudflare config** — Lane-root deployments (`products/<lane>` as root directory)
+- **ATTEMPTS.md** — Lane-scoped folder structure and paths
+- **ATTEMPT_KICKOFF.md** — Lane-scoped nuke/build commands
+- **AGENT_KICKOFF.md** — Lane and epoch declaration required at Step 0
+
+### Epochs
+
+| Epoch | Contract | Description |
+|-------|----------|-------------|
+| E0001-single-prd-era | 1.x | Single PRD world (`/docs/PRD.md`) |
+| E0002-multi-lane-era | 2.x | Multi-lane world (`/docs/PRD/<lane>/PRD.md`) |
+
+### Breaking Changes
+
+- Single active PRD rule removed
+- Lane declaration required for all attempts
+- Epoch declaration required in META.json
+- Repo-root `/src` and `/dist` are no longer product surfaces
+- Attempts stored under `/attempts/<lane>/prd-vX.Y/attempt-NNN/`
+
+### Notes
+
+- Do not compare outcomes across epochs without explicit adjustment
+- Canon is shared across lanes; PRDs and attempts are lane-scoped
+- Each lane is an independent product with its own evolutionary track
+
+---
+
 ## 0.3.1 — 2026-01-17
 
 ### Changed

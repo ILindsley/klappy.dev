@@ -1,25 +1,36 @@
 # 🧭 Agent Entry Point
 
-This repository does not use a single "rules" file.
+**If you are an AI agent starting an attempt, go directly to:**
 
-Agent behavior, constraints, and "done" are encoded across canonical documents (orientation over enforcement).
+## `/docs/AGENT_KICKOFF.md`
 
----
-
-## 📖 Read Order (Recommended)
-
-1. `/canon/index.md` (orientation, precedence, stability)
-2. `/canon/odd/manifesto.md` (philosophy & intent)
-3. `/canon/odd/appendices/attempt-lifecycle.md` (process model, orientation-only)
-4. `/canon/odd/appendices/quantum-development.md` (uncertainty model)
-5. `/canon/constraints.md` (assumptions and non-negotiables)
-6. `/canon/decision-rules.md` (default heuristics)
-7. `/canon/definition-of-done.md` (completion & evidence policy)
-8. `/canon/self-audit.md` and `/canon/visual-proof.md` (review + proof standards)
+That file is the canonical, copy-pasteable entry point for all agent attempts.
 
 ---
 
-## 📎 Where Procedural Instructions Live
+## For Orientation (Not Execution)
 
-- Versioned PRDs: `/docs/PRD/PRD_vX.Y.md`
-- Sealed attempts (frozen): `/attempts/prd-vX.Y/attempt-NNN/`
+If you want to understand the system before acting:
+
+1. `/canon/odd/appendices/product-lanes.md` — multi-lane PRD architecture
+2. `/canon/index.md` — Canon orientation, precedence, stability
+3. `/canon/odd/manifesto.md` — philosophy and intent
+4. `/docs/ATTEMPTS.md` — attempt lifecycle orientation
+
+---
+
+## For Humans
+
+Human workflow lives at `/docs/ATTEMPT_KICKOFF.md`.
+
+---
+
+## Quick Reference
+
+| Lane | PRD Location |
+|------|--------------|
+| `website` | `/docs/PRD/website/PRD.md` |
+| `ai-navigation` | `/docs/PRD/ai-navigation/PRD.md` |
+| `agent-skill` | `/docs/PRD/agent-skill/PRD.md` |
+
+**Every attempt MUST declare a lane before registration.**

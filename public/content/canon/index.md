@@ -127,14 +127,25 @@ If documents appear to conflict, maturity context and explicit tradeoffs usually
   visual-proof.md
   completion-report-template.md
   odd/
+    contract.md
     manifesto.md
     maturity.md
     misuse-patterns.md
     prompt-architecture.md
     orientation-map.md
     appendices/
+      alignment-reviews.md
+      epochs.md
+      lane-implementation-surfaces.md
+      product-lanes.md
       attempt-lifecycle.md
+      evolution-not-automation.md
+      quantum-development.md
       repo-topology.md
+      repo-truth.md
+    decisions/
+      D0001-prod-branch-is-production.md
+      ...
 ```
 
 Each file addresses a different dimension of decision-making.
@@ -221,6 +232,18 @@ How should completion be communicated?
 
 ---
 
+### ODD System Contract
+
+**File:** `odd/contract.md`
+
+The single source of truth for ODD workflow contract versioning.
+
+Answers:
+
+What version of ODD is this repo compatible with?
+
+---
+
 ### ODD Manifesto (Extended)
 
 **File:** `odd/manifesto.md`
@@ -248,6 +271,14 @@ When different expectations become binding.
 ### ODD Appendices (Orientation Only)
 
 These files extend understanding without introducing enforcement:
+• Alignment Reviews (odd/appendices/alignment-reviews.md)
+Periodic evaluation of the ODD system itself. Detects drift between stated intent, implemented process, and observed outcomes.
+• Epochs (odd/appendices/epochs.md)
+Named periods where the meaning of "success" is stable enough that outcomes can be compared. Prevents invalid cross-era comparisons.
+• Lane-Scoped Implementation Surfaces (odd/appendices/lane-implementation-surfaces.md)
+Each lane owns its own `/products/<lane>/src` and `/products/<lane>/dist`. No shared repo-root surfaces.
+• Product Lanes (odd/appendices/product-lanes.md)
+Why multiple PRD lanes exist and how they relate. Each lane has its own PRD, attempts, and lifecycle. Lanes share canon, not lifecycle.
 • Misuse Patterns (odd/misuse-patterns.md)
 Common failure modes and how ODD is misapplied in practice. Diagnostic only.
 • Prompt Architecture (odd/prompt-architecture.md)
@@ -260,6 +291,8 @@ How PRD versions, attempts, evidence, and deployments are preserved across itera
 Evaluating multiple execution paths before revising intent. Explains why divergence is signal, not waste.
 • Repository Topology (odd/appendices/repo-topology.md)
 What lives where and what changes when. Encodes App/Content/Infrastructure decoupling.
+• Evolution, Not Automation (odd/appendices/evolution-not-automation.md)
+Why this system supports learning, not automatic execution. Humans stay in the loop.
 
 ---
 
@@ -280,8 +313,8 @@ Prefer stable file and URI naming over clever branding. Rename rarely.
 **4. Voice Is Labeled, Not Transformed**
 First-person documents may be consumed as-is or translated by clients. The Canon itself does not require a specific rendering voice.
 
-**5. Single Active PRD**
-There is exactly one active PRD at any time: `/docs/PRD.md`. Prior PRDs only exist as frozen artifacts within sealed attempts.
+**5. Multi-Lane PRD Architecture**
+PRDs are organized into independent product lanes. Each lane has its own active PRD, attempts, and lifecycle. Lanes share canon, not lifecycle. See `/canon/odd/appendices/product-lanes.md` for the full model.
 
 ---
 

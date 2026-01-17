@@ -94,12 +94,16 @@ function generateRunId() {
   return randomBytes(4).toString('hex');
 }
 
+// Valid lanes (locked)
+const VALID_LANES = ['website', 'ai-navigation', 'agent-skill'];
+
 function parseArgs() {
   const args = process.argv.slice(2);
   const result = { 
     command: null,
     prd: null, 
     attempt: null,
+    lane: null,           // Product lane (website, ai-navigation, agent-skill)
     n: 1,
     tool: 'cursor',       // Tool provenance (cursor, vscode, cli, etc.)
     agent: 'default',     // Agent ID within tool (cursor-a, cursor-b, etc.)
@@ -123,6 +127,9 @@ function parseArgs() {
     
     if (arg === '--prd' && next) {
       result.prd = next.replace(/^v/, '');
+      i++;
+    } else if (arg === '--lane' && next) {
+      result.lane = next;
       i++;
     } else if (arg === '--attempt' && next) {
       result.attempt = next.padStart(3, '0');
@@ -497,21 +504,46 @@ Options:
 }
 
 /**
- * NUKE: Guarantee blank slate for ephemeral paths.
+ * NUKE: Guarantee blank slate for a lane's implementation surface.
+ * 
+ * Lane-scoped: Only deletes products/<lane>/src and lane-local configs.
  * 
  * Branch safety rules:
  *   - ❌ Refuses on prod (NEVER)
  *   - ❌ Refuses on main unless --force
- *   - ✅ Allowed on attempt/* branches
+ *   - ✅ Allowed on attempt/* or run/* branches
  * 
- * Deletes ONLY the EPHEMERAL_PATHS list.
- * Protected paths (canon, docs, infra, etc.) are NEVER touched.
+ * Protected paths (canon, docs, infra, other lanes) are NEVER touched.
  */
 function cmdNuke(opts) {
-  const { dryRun, force } = opts;
-  const all = opts.all || process.argv.includes('--all');
+  const { dryRun, force, lane } = opts;
   
-  console.log('\n💥 NUKE — Blank Slate Reset\n');
+  // ========================================
+  // LANE VALIDATION (Required)
+  // ========================================
+  if (!lane) {
+    console.log(`
+Usage: npm run attempt:nuke -- --lane <lane>
+
+Example:
+  npm run attempt:nuke -- --lane website
+
+Valid lanes: ${VALID_LANES.join(', ')}
+
+Options:
+  --lane <lane>   Product lane (required)
+  --force         Override main branch check
+  --dry-run       Show what would happen
+  --no-commit     Don't commit the nuke
+`);
+    process.exit(1);
+  }
+  
+  if (!VALID_LANES.includes(lane)) {
+    fail(`Invalid lane: ${lane}\n   Valid lanes: ${VALID_LANES.join(', ')}`);
+  }
+  
+  console.log(`\n💥 NUKE — Blank Slate Reset for lane: ${lane}\n`);
   if (dryRun) console.log('  [DRY RUN MODE]\n');
   
   // ========================================
@@ -523,7 +555,7 @@ function cmdNuke(opts) {
   if (currentBranch === 'prod') {
     fail('🛑 REFUSED: Cannot nuke on prod branch.\n' +
          '   prod is the live production deployment.\n' +
-         '   Switch to an attempt/* branch first.');
+         '   Switch to an attempt/* or run/* branch first.');
   }
   
   // Warn and require --force on main
@@ -531,43 +563,60 @@ function cmdNuke(opts) {
     console.log('  ⚠️  WARNING: You are on main branch!');
     console.log('  ⚠️  main is the experiment aggregation branch.');
     console.log('');
-    console.log('  Nuking main will remove any UI code currently there.');
+    console.log(`  Nuking will remove products/${lane}/src/.`);
     console.log('  Production (prod branch) is NOT affected.');
+    console.log('  Other lanes are NOT affected.');
     console.log('');
     console.log('  To proceed, use:');
-    console.log('    npm run attempt:nuke -- --force');
+    console.log(`    npm run attempt:nuke -- --lane ${lane} --force`);
     console.log('');
-    console.log('  Or switch to an attempt branch:');
-    console.log('    git checkout attempt/prd-v0.2/a001');
-    console.log('');
-    fail('Use --force to nuke main, or run from an attempt/* branch.');
+    fail('Use --force to nuke on main, or run from an attempt/run branch.');
   }
   
-  // Confirm attempt/* branch is allowed
-  const isAttemptBranch = currentBranch.startsWith('attempt/');
+  // Check for valid branch types
+  const isAttemptBranch = currentBranch.startsWith('attempt/') || currentBranch.startsWith('run/');
   if (!isAttemptBranch && currentBranch !== 'main') {
     console.log(`  ⚠️  Unknown branch type: ${currentBranch}`);
-    console.log('  Expected: attempt/* or main');
+    console.log('  Expected: attempt/*, run/*, or main');
     if (!force) {
       fail('Use --force to nuke on this branch.');
     }
   }
   
   console.log(`  Branch: ${currentBranch}`);
+  console.log(`  Lane:   ${lane}`);
   if (isAttemptBranch) {
-    console.log('  ✅ Attempt branch — nuke allowed\n');
+    console.log('  ✅ Attempt/run branch — nuke allowed\n');
   } else if (currentBranch === 'main' && force) {
     console.log('  ⚠️  main branch with --force — proceeding with caution\n');
   }
   
   // ========================================
+  // LANE-SCOPED PATHS
+  // ========================================
+  const laneRoot = join(ROOT, 'products', lane);
+  const laneSrc = join(laneRoot, 'src');
+  
+  // Lane-local config files that may exist
+  const laneEphemeralPaths = [
+    join('products', lane, 'src'),
+    join('products', lane, 'vite.config.js'),
+    join('products', lane, 'vite.config.ts'),
+    join('products', lane, 'tsconfig.json'),
+    join('products', lane, 'tailwind.config.js'),
+    join('products', lane, 'postcss.config.js'),
+  ];
+  
+  // ========================================
   // SHOW WHAT WILL BE DELETED
   // ========================================
-  console.log('1️⃣  Scanning ephemeral paths...\n');
+  console.log('1️⃣  Scanning lane ephemeral paths...\n');
+  console.log(`  Lane root: products/${lane}/`);
+  console.log('');
   console.log('  Will delete:');
   
   const toDelete = [];
-  for (const p of EPHEMERAL_PATHS) {
+  for (const p of laneEphemeralPaths) {
     const fullPath = join(ROOT, p);
     if (existsSync(fullPath)) {
       toDelete.push(p);
@@ -581,8 +630,13 @@ function cmdNuke(opts) {
   
   console.log('');
   console.log('  Protected (NEVER deleted):');
-  for (const p of PROTECTED_PATHS) {
-    console.log(`    ✓ /${p}`);
+  console.log('    ✓ /canon/**');
+  console.log('    ✓ /docs/**');
+  console.log('    ✓ /attempts/**');
+  console.log('    ✓ /infra/**');
+  console.log('    ✓ /public/**');
+  for (const otherLane of VALID_LANES.filter(l => l !== lane)) {
+    console.log(`    ✓ /products/${otherLane}/**`);
   }
   console.log('');
   
@@ -590,7 +644,7 @@ function cmdNuke(opts) {
   // EXECUTE DELETION
   // ========================================
   if (toDelete.length > 0) {
-    console.log('2️⃣  Deleting ephemeral paths...\n');
+    console.log('2️⃣  Deleting lane ephemeral paths...\n');
     
     for (const p of toDelete) {
       const fullPath = join(ROOT, p);
@@ -608,7 +662,7 @@ function cmdNuke(opts) {
   if (!opts.noCommit && toDelete.length > 0) {
     console.log('3️⃣  Committing nuke...');
     run('git add -A', { dryRun });
-    run('git commit -m "chore: nuke ephemeral paths for fresh attempt" --allow-empty', { dryRun });
+    run(`git commit -m "chore: nuke products/${lane}/src for fresh attempt" --allow-empty`, { dryRun });
     console.log('  ✅ Committed\n');
   }
   
@@ -618,11 +672,13 @@ function cmdNuke(opts) {
   console.log('═'.repeat(60));
   console.log('\n💥 NUKE COMPLETE\n');
   console.log(`  Branch: ${currentBranch}`);
+  console.log(`  Lane:   ${lane}`);
   console.log(`  Deleted: ${toDelete.length} path(s)`);
+  console.log('  Other lanes: intact');
   console.log('  Protected paths: intact');
   console.log('');
-  console.log('  The deploy contract (/infra/contracts/build-output.md) is preserved.');
-  console.log('  Choose any stack. Build must produce /dist.');
+  console.log('  The deploy contract is preserved.');
+  console.log(`  Build must produce products/${lane}/dist/index.html`);
   console.log('\n' + '═'.repeat(60));
   
   console.log(`
@@ -630,8 +686,8 @@ function cmdNuke(opts) {
 
    1. Choose your stack (React, Vue, Svelte, vanilla, etc.)
    2. Install dependencies: npm install <packages>
-   3. Create your implementation
-   4. Build: npm run build
+   3. Create your implementation in products/${lane}/src/
+   4. Build: npm run build -- --lane ${lane}
    5. Submit: npm run attempt:submit
 `);
 }
@@ -896,13 +952,59 @@ Agents will now start from a clean main with all the latest scripts.
  *   - branch (git branch name)
  */
 function cmdRegister(opts) {
-  const { tool, agent, model, dryRun } = opts;
+  const { tool, agent, model, lane, dryRun } = opts;
   
-  // Parse PRD version from /docs/PRD.md (single source of truth)
-  const activePrd = parsePrdVersion();
+  // ========================================
+  // LANE VALIDATION (Required)
+  // ========================================
+  if (!lane) {
+    console.log(`
+Usage: npm run attempt:register -- --lane <lane> --tool <tool> --agent <id> --model <model>
+
+Example:
+  npm run attempt:register -- --lane website --tool cursor --agent a --model "claude-opus-4"
+
+Valid lanes: ${VALID_LANES.join(', ')}
+
+Options:
+  --lane <lane>   Product lane (required)
+  --tool <tool>   Development tool (default: cursor)
+  --agent <id>    Agent identifier (default: default)
+  --model <model> AI model identifier (recommended)
+`);
+    process.exit(1);
+  }
+  
+  if (!VALID_LANES.includes(lane)) {
+    fail(`Invalid lane: ${lane}\n   Valid lanes: ${VALID_LANES.join(', ')}`);
+  }
+  
+  // Parse PRD version from lane-specific PRD
+  const lanePrdPath = join(ROOT, 'docs', 'PRD', lane, 'PRD.md');
+  let activePrd = null;
+  
+  if (existsSync(lanePrdPath)) {
+    const content = readFileSync(lanePrdPath, 'utf8');
+    // Match table format: | **PRD Version** | v0.3 |
+    const tableMatch = content.match(/\|\s*\*\*PRD Version\*\*\s*\|\s*v?([0-9.]+)\s*\|/i);
+    if (tableMatch) {
+      activePrd = tableMatch[1];
+    } else {
+      // Match key-value format: PRD Version: v0.3
+      const kvMatch = content.match(/PRD Version:\s*v?([0-9.]+)/i);
+      if (kvMatch) {
+        activePrd = kvMatch[1];
+      }
+    }
+  }
+  
+  // Fallback to old single PRD.md location
+  if (!activePrd) {
+    activePrd = parsePrdVersion();
+  }
   
   if (!activePrd) {
-    fail('Could not parse PRD version from /docs/PRD.md.\n' +
+    fail(`Could not parse PRD version from /docs/PRD/${lane}/PRD.md.\n` +
          '   Expected format: | **PRD Version** | v0.3 | (in table)\n' +
          '   Or: PRD Version: v0.3');
   }
@@ -920,8 +1022,8 @@ function cmdRegister(opts) {
   
   const prd = activePrd;
   
-  console.log(`\n🎫 Registering run for PRD v${prd}\n`);
-  console.log(`  (Version auto-detected from /docs/PRD.md)\n`);
+  console.log(`\n🎫 Registering run for PRD v${prd} (lane: ${lane})\n`);
+  console.log(`  (Version auto-detected from /docs/PRD/${lane}/PRD.md)\n`);
   if (dryRun) console.log('  [DRY RUN MODE]\n');
   
   // ========================================
@@ -959,11 +1061,15 @@ function cmdRegister(opts) {
   // Generate provenance-aware branch name
   const targetBranch = generateBranchName(prd, agent, modelId, runId);
   
-  // Paths
-  const prdFolder = join(ROOT, 'attempts', `prd-v${prd}`);
+  // Lane-scoped paths
+  const laneRoot = `products/${lane}`;
+  const distDir = `products/${lane}/dist`;
+  
+  // Attempt artifact paths (lane-scoped)
+  const prdFolder = join(ROOT, 'attempts', lane, `prd-v${prd}`);
   const runsFolder = join(prdFolder, '_runs');
   const runFolder = join(runsFolder, runId);
-  const runsDir = `attempts/prd-v${prd}/_runs/${runId}`;
+  const runsDir = `attempts/${lane}/prd-v${prd}/_runs/${runId}`;
   
   console.log('1️⃣  Creating run folder...');
   if (!dryRun) {
@@ -975,8 +1081,13 @@ function cmdRegister(opts) {
   console.log('2️⃣  Writing .attempt.json...');
   const attemptMeta = {
     // IDENTITY
+    lane: lane,
     prd_version: `v${prd}`,
     run_id: runId,
+    
+    // LANE PATHS
+    lane_root: laneRoot,
+    dist_dir: distDir,
     
     // PROVENANCE (who/what made this)
     tool: tool,           // cursor, vscode, cli, etc.
@@ -1006,9 +1117,15 @@ function cmdRegister(opts) {
   console.log('3️⃣  Creating skeleton files...');
   const meta = {
     // IDENTITY
+    lane: lane,
     prd_version: `v${prd}`,
+    epoch_id: 'E0002-multi-lane-era',  // Current epoch
     run_id: runId,
     attempt: null, // Will be assigned during finalize
+    
+    // LANE PATHS
+    lane_root: laneRoot,
+    dist_dir: distDir,
     
     // PROVENANCE (who/what made this — this is the canonical record)
     tool: tool,           // cursor, vscode, cli, etc.
@@ -1043,8 +1160,14 @@ function cmdRegister(opts) {
   // Print summary
   console.log('═'.repeat(60));
   console.log('\n🎫 RUN REGISTERED\n');
+  console.log(`  Lane:          ${lane}`);
   console.log(`  PRD Version:   v${prd}`);
+  console.log(`  Epoch:         E0002-multi-lane-era`);
   console.log(`  Run ID:        ${runId}`);
+  console.log('');
+  console.log('  LANE PATHS:');
+  console.log(`    Source:      ${laneRoot}/src/`);
+  console.log(`    Build:       ${distDir}/`);
   console.log('');
   console.log('  PROVENANCE (canonical record in META.json):');
   console.log(`    Tool:        ${tool}`);
@@ -1897,23 +2020,29 @@ function main() {
       break;
     default:
       console.log(`
-ODD Attempt CLI — Environment Hardened
+ODD Attempt CLI — Lane-Scoped Implementation
 
 BRANCH ROLES:
   prod        → Live production (NEVER nuked)
   main        → Experiment aggregation + history
-  attempt/*   → Ephemeral agent workspaces (always nuked)
+  attempt/*   → Ephemeral agent workspaces
+  run/*       → Ephemeral agent workspaces (provenance-named)
+
+VALID LANES:
+  website, ai-navigation, agent-skill
 
 COMMANDS:
 
-  npm run attempt:nuke
-      Blank slate reset. Deletes /src, /app, config files.
+  npm run attempt:nuke -- --lane <lane>
+      Blank slate reset for a lane. Deletes products/<lane>/src/.
       ❌ Refuses on prod
       ⚠️  Requires --force on main
-      ✅ Allowed on attempt/* branches
+      ✅ Allowed on attempt/* and run/* branches
+      Other lanes are NOT affected.
 
-  npm run attempt:register -- --tool <tool> --agent <id> --model <model>
-      Register a new run with provenance (PRD version auto-detected)
+  npm run attempt:register -- --lane <lane> --tool <tool> --agent <id> --model <model>
+      Register a new run with lane + provenance (PRD version auto-detected from lane PRD)
+      --lane:  product lane (website, ai-navigation, agent-skill) [required]
       --tool:  development tool (cursor, vscode, cli, etc.) [default: cursor]
       --agent: agent ID within tool (a, b, cursor-a, etc.) [default: default]
       --model: AI model identifier (opus-4.5, gpt-4o, etc.) [required for good provenance]
@@ -1938,17 +2067,18 @@ COMMANDS:
       --force removes branch worktrees and orphan branches
 
 WORKFLOW:
-  1. nuke     → agent starts with blank slate
-  2. register → agent claims unique run_id
-  3. build    → agent implements from scratch
+  1. register → agent claims unique run_id with lane
+  2. nuke     → agent starts with blank slate (lane-scoped)
+  3. build    → agent implements in products/<lane>/src/
   4. submit   → agent pushes (CF preview)
   5. import   → pull all artifacts to main
   6. finalize → assign attempt numbers
-  7. promote  → ship winner to prod
+  7. promote  → ship lane champion to prod
 
 DEPLOY MAPPING:
-  prod branch  → klappy.dev (production)
-  other branches → preview URLs
+  Each lane is a separate Cloudflare Pages project
+  Root directory: products/<lane>
+  Build output: dist (relative to root)
 `);
       process.exit(1);
   }

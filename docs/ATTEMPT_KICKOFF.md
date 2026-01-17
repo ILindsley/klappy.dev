@@ -1,97 +1,82 @@
-# 🚀 Attempt Workflow
+# 🚀 Attempt Workflow (Human)
 
-## ⚠️ Before Starting (Human)
+This document describes the **human workflow** for running attempts.
 
-1. Checkout `main`
-2. Ensure repository is clean:
+**For agents:** Go directly to `/docs/AGENT_KICKOFF.md` — that is the canonical agent entry point.
+
+---
+
+## ⚠️ Before Starting
+
+1. **Identify which lane this attempt belongs to:**
+   - `website` — human-facing UI/UX
+   - `ai-navigation` — AI layer over documentation
+   - `agent-skill` — agent cognitive framework
+2. Checkout `main`
+3. Ensure repository is clean:
    - `git status` shows nothing to commit
-3. Commit all changes that define the experiment:
-   - PRD (`/docs/PRD.md`)
+4. Commit all changes that define the experiment:
+   - Lane PRD (e.g., `/docs/PRD/website/PRD.md`)
    - Contracts (`/infra/contracts/`)
    - Canon docs (if updated)
-4. (Optional) Create worktrees if running parallel agents
-5. (Optional) Run `npm run attempt:cleanup` to prune stale branches/worktrees
+5. (Optional) Create worktrees if running parallel agents
+6. (Optional) Run `npm run attempt:cleanup` to prune stale branches/worktrees
 
 **Rule:**  
 If it is not committed before Cursor starts, it does not exist.
 
----
+**Rule:**  
+Every attempt MUST declare a lane. Attempts without a lane are invalid.
 
-## 🤖 During Attempt (Agent)
+**Rule:**  
+Before registration, declare the current epoch. Epoch determines comparability of outcomes. If `epoch_id` is missing, results must not be compared to prior attempts.
 
-Each agent follows `/docs/PROMPT_ATTEMPT_KICKOFF.txt`.
-
-### Required Sequence
-
-1. **Register** (provenance first)
-   ```bash
-   npm run attempt:register -- --tool <tool> --agent <id> --model <model>
-   ```
-   - Creates `.attempt.json` with run_id and provenance
-   - Auto-reads PRD version from `/docs/PRD.md`
-   - Example: `npm run attempt:register -- --tool cursor --agent a --model "opus-4.5"`
-   - **Branch names are convenience. Provenance lives in META.json.**
-
-2. **Nuke**
-   ```bash
-   npm run attempt:nuke
-   ```
-   - Deletes `/src` and framework configs
-   - Start from a blank slate
-   - Choose any stack that satisfies the deploy contract
-
-3. **Build**
-   - Implement against `/docs/PRD.md` (active PRD)
-   - Ensure `npm run build` produces `/dist`
-
-4. **Push**
-   ```bash
-   git push
-   ```
-   - Triggers Cloudflare preview deploy automatically
-   - Preview URL: `https://<branch>.klappy-dev.pages.dev`
-
-5. **Evidence**
-   
-   Write to your `runs_dir` (path in `.attempt.json`):
-   - `ATTEMPT.md` — what was built, self-audit
-   - `EVIDENCE.md` — screenshot index
-   - `evidence/` — screenshots proving app works
-
-6. **Final Push** (optional helper)
-   ```bash
-   npm run attempt:submit
-   ```
-   - Commits and pushes evidence (if not already pushed manually)
-   - This is a convenience wrapper, not a gate
-
-**Agents may stop once evidence is complete and pushed.**
+See `/canon/odd/appendices/product-lanes.md` for the multi-lane architecture.  
+See `/canon/odd/appendices/epochs.md` for epoch semantics.
 
 ---
 
-## ✅ After All Agents Finish (Human)
+## 🤖 Starting Agents
+
+Point each agent at:
+
+**`/docs/AGENT_KICKOFF.md`**
+
+That file is the canonical, self-contained entry point. Do not paste external prompts.
+
+The file contains all instructions agents need:
+- Lane declaration
+- Registration
+- Nuke
+- Build
+- Evidence
+
+---
+
+## ✅ After All Agents Finish
 
 On `main` branch:
 
 ```bash
-# 1. Import artifact folders from all attempt branches
-npm run attempt:import -- --prd <active>
+# 1. Import artifact folders from all attempt branches for the lane
+npm run attempt:import -- --lane <lane> --prd <active>
 ```
 
-**Invariant:** This command **MUST NOT** merge application code (`/src`).  
+**Invariant:** This command **MUST NOT** merge application code (`products/<lane>/src`).  
 Only sealed attempt artifacts (`_runs/` folders) are imported.
 
 ```bash
 # 2. Finalize runs (assign attempt-001, 002…)
-npm run attempt:finalize -- --prd <active>
+npm run attempt:finalize -- --lane <lane> --prd <active>
 
 # 3. Review evidence + preview URLs in each attempt folder
 
 # 4. Promote winner to production
-npm run attempt:promote -- --prd <active> --attempt 001
+npm run attempt:promote -- --lane <lane> --prd <active> --attempt 001
 ```
 
-**Note:** `<active>` is the PRD version from `/docs/PRD.md` (e.g., `v0.3`).
+**Note:** `<lane>` is the product lane (e.g., `website`).  
+**Note:** `<active>` is the PRD version from the lane's PRD (e.g., `v1.0`).
 
 ---
 
@@ -99,13 +84,16 @@ npm run attempt:promote -- --prd <active> --attempt 001
 
 | Command | Purpose |
 |---------|---------|
-| `npm run attempt:nuke` | Blank slate — delete `/src`, configs |
-| `npm run attempt:register -- --tool <t> --agent <id> --model <m>` | Register run with provenance |
+| `npm run attempt:nuke -- --lane <l>` | Blank slate — delete `products/<lane>/src`, lane configs |
+| `npm run attempt:register -- --lane <l> --tool <t> --agent <id> --model <m>` | Register run with lane + provenance |
 | `npm run attempt:submit` | Commit + push (triggers CF preview) |
-| `npm run attempt:import -- --prd <v>` | Pull artifacts from branches to main |
-| `npm run attempt:finalize -- --prd <v>` | Assign attempt numbers |
-| `npm run attempt:promote -- --prd <v> --attempt <n>` | Merge champion → main → prod |
+| `npm run attempt:import -- --lane <l> --prd <v>` | Pull artifacts from branches to main |
+| `npm run attempt:finalize -- --lane <l> --prd <v>` | Assign attempt numbers for lane |
+| `npm run attempt:promote -- --lane <l> --prd <v> --attempt <n>` | Merge lane champion → main → prod |
 | `npm run attempt:cleanup` | Prune stale worktrees and branches |
+
+**Lane is required for register, import, finalize, and promote commands.**
+Valid lanes: `website`, `ai-navigation`, `agent-skill`
 
 ---
 
@@ -113,14 +101,16 @@ npm run attempt:promote -- --prd <active> --attempt 001
 
 **During attempt:**
 ```
-attempts/prd-<version>/_runs/<run_id>/
+attempts/<lane>/prd-<version>/_runs/<run_id>/
 ```
 
 **After finalize:**
 ```
-attempts/prd-<version>/attempt-001/
-attempts/prd-<version>/attempt-002/
+attempts/<lane>/prd-<version>/attempt-001/
+attempts/<lane>/prd-<version>/attempt-002/
 ```
+
+**Locked folder structure:** `/attempts/<lane>/prd-vX.Y/attempt-NNN/`
 
 ---
 
@@ -128,10 +118,12 @@ attempts/prd-<version>/attempt-002/
 
 See `/infra/contracts/build-output.md`
 
-- Output must be `/dist/index.html`
+- Output must be `products/<lane>/dist/index.html`
 - Must load `/public/content/manifest.json`
 - Stack choice is unrestricted
 - No client secrets
+
+See `/canon/odd/appendices/lane-implementation-surfaces.md` for the locked folder contract.
 
 ---
 
@@ -161,7 +153,8 @@ Preview URLs are evidence artifacts, not permanent guarantees.
 
 ## 🔗 Related Documents
 
-- Agent prompt: `/docs/PROMPT_ATTEMPT_KICKOFF.txt`
+- **Product Lanes Architecture: `/canon/odd/appendices/product-lanes.md`** (READ FIRST)
+- **Agent Entry Point: `/docs/AGENT_KICKOFF.md`** (canonical agent instructions)
 - Attempt lifecycle (deep): `/docs/ATTEMPTS.md`
 - Deploy contract: `/infra/contracts/build-output.md`
 - Decision log: `/canon/odd/decisions/`

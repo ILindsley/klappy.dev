@@ -54,11 +54,22 @@ This ensures:
 
 ## 🛠️ Build Configuration
 
+Each lane is deployed as a separate Cloudflare Pages project with lane-scoped paths:
+
 ```
-Build command:     npm run build
+Root directory:    products/<lane>
+Build command:     npm run build -- --lane <lane>
 Build output:      dist
-Root directory:    (leave empty)
 ```
+
+For example, the `website` lane:
+```
+Root directory:    products/website
+Build command:     npm run build -- --lane website
+Build output:      dist
+```
+
+See `/canon/odd/appendices/lane-implementation-surfaces.md` for the locked folder contract.
 
 ---
 
@@ -111,7 +122,7 @@ This configuration ensures:
 
 Cloudflare does not depend on specific branch naming conventions. Any branch that:
 - Is not `prod`
-- Produces a valid `/dist` on build
+- Produces a valid `dist/` in the lane root on build
 
 Will get a preview URL.
 

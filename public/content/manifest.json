@@ -26,6 +26,24 @@
       ]
     },
     {
+      "uri": "klappy://canon/odd/alignment-reviews",
+      "path": "/canon/odd/appendices/alignment-reviews.md",
+      "title": "Alignment Reviews",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "alignment",
+        "drift",
+        "hygiene",
+        "selection-pressure"
+      ]
+    },
+    {
       "uri": "klappy://canon/odd/attempt-lifecycle",
       "path": "/canon/odd/appendices/attempt-lifecycle.md",
       "title": "Attempt Lifecycle",
@@ -290,6 +308,60 @@
       ]
     },
     {
+      "uri": "klappy://canon/odd/decisions/D0009",
+      "path": "/canon/odd/decisions/D0009-multi-lane-prd-architecture.md",
+      "title": "D0009: Multi-Lane PRD Architecture",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "internal",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "decisions",
+        "lanes",
+        "prd",
+        "architecture"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/decisions/D0010",
+      "path": "/canon/odd/decisions/D0010-canonical-agent-kickoff.md",
+      "title": "D0010: Canonical Agent Kickoff",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "internal",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "decisions",
+        "agent",
+        "kickoff",
+        "entrypoint"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/decisions/D0011",
+      "path": "/canon/odd/decisions/D0011-odd-contract-2.0.0.md",
+      "title": "D0011: ODD System Contract 2.0.0",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "internal",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "decisions",
+        "contract",
+        "version",
+        "epoch"
+      ]
+    },
+    {
       "uri": "klappy://canon/decision-rules",
       "path": "/canon/decision-rules.md",
       "title": "Decision Rules",
@@ -317,6 +389,24 @@
       "tags": [
         "definition-of-done",
         "evidence"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/epochs",
+      "path": "/canon/odd/appendices/epochs.md",
+      "title": "Epochs",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "epochs",
+        "fitness-landscape",
+        "comparability",
+        "orientation"
       ]
     },
     {
@@ -366,6 +456,24 @@
       "tags": [
         "about",
         "faq"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/lane-implementation-surfaces",
+      "path": "/canon/odd/appendices/lane-implementation-surfaces.md",
+      "title": "Lane-Scoped Implementation Surfaces",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "lanes",
+        "deployment",
+        "contract",
+        "build"
       ]
     },
     {
@@ -446,6 +554,42 @@
         "odd",
         "misuse",
         "failure-modes"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/contract",
+      "path": "/canon/odd/contract.md",
+      "title": "ODD System Contract",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 1,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "contract",
+        "version",
+        "semver",
+        "compatibility"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/product-lanes",
+      "path": "/canon/odd/appendices/product-lanes.md",
+      "title": "Product Lanes in Outcome-Driven Development",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "hidden",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "prd",
+        "architecture",
+        "lanes",
+        "orientation"
       ]
     },
     {
