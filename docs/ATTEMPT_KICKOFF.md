@@ -154,8 +154,11 @@ Preview URLs are evidence artifacts, not permanent guarantees.
 ## 🔗 Related Documents
 
 - **Product Lanes Architecture: `/canon/odd/appendices/product-lanes.md`** (READ FIRST)
+- **Interface Contracts: `/interfaces/index.md`** (semver'd compatibility promises)
+- **Lane Build Layout: `/canon/odd/appendices/lane-build-layout.md`** (how lanes avoid /src and /dist collisions)
 - **Agent Entry Point: `/docs/AGENT_KICKOFF.md`** (canonical agent instructions)
 - Attempt lifecycle (deep): `/docs/ATTEMPTS.md`
 - Deploy contract: `/infra/contracts/build-output.md`
 - Decision log: `/canon/odd/decisions/`
 - Repo truth principle: `/canon/odd/appendices/repo-truth.md`
+- Drift Checks: `/canon/odd/appendices/drift-checks.md`

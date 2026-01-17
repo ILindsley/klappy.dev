@@ -10,6 +10,17 @@
 
 ---
 
+## Interface Contracts
+
+This lane MUST remain compatible with:
+
+- manifest >=2.0.0 <3.0.0
+- attempt-cli >=2.0.0 <3.0.0
+
+This lane is allowed to have no UI and is not required to satisfy build-output unless it produces a deployable artifact.
+
+---
+
 ## Objective
 
 Create a reusable agent cognitive framework that enables AI systems to:

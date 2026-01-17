@@ -135,4 +135,6 @@ This keeps the system antifragile — branch naming can drift without breaking p
 
 - Attempt workflow: `/docs/ATTEMPTS.md`
 - Deploy contract: `/infra/contracts/build-output.md`
+- **Interface Contracts: `/interfaces/index.md`** (semver'd compatibility promises)
+- **Lane Build Layout: `/canon/odd/appendices/lane-build-layout.md`** (how lanes avoid /src and /dist collisions)
 - Decision: `/canon/odd/decisions/D0001-prod-branch-is-production.md`

@@ -303,9 +303,12 @@ The attempt folder contains everything needed:
 ## 🔗 Related Documents
 
 - **Product Lanes Architecture: `/canon/odd/appendices/product-lanes.md`** (READ FIRST)
+- **Interface Contracts: `/interfaces/index.md`** (semver'd compatibility promises)
+- **Lane Build Layout: `/canon/odd/appendices/lane-build-layout.md`** (how lanes avoid /src and /dist collisions)
 - Step-by-step workflow: `/docs/ATTEMPT_KICKOFF.md`
 - Agent entry point: `/docs/AGENT_KICKOFF.md`
 - Deploy behavior: `/docs/CLOUDFLARE_CONFIG.md`
 - Decision log: `/canon/odd/decisions/`
 - Quantum Development: `/canon/odd/appendices/quantum-development.md`
 - Repo Truth: `/canon/odd/appendices/repo-truth.md`
+- Drift Checks: `/canon/odd/appendices/drift-checks.md`

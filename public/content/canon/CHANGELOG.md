@@ -18,6 +18,41 @@ Per-file versions are intentionally omitted to reduce ceremony and prevent metad
 
 ---
 
+## 0.4.1 — 2026-01-17
+
+**Interface Contracts + Semver Layer**
+
+This release introduces explicit interface contracts with semantic versioning, documenting the compatibility promises that lanes depend on.
+
+### Added
+
+- **Interface Contracts** (`/interfaces/index.md`) — Semver'd compatibility layer
+  - `manifest@2.0.0` — Manifest schema and semantics contract
+  - `build-output@1.0.0` — Deployment artifact shape contract
+  - `attempt-cli@2.0.0` — CLI surface and output artifacts contract
+  - `mcp@0.1.0` — Draft MCP surface contract (not yet enforced)
+- **Lane Build Layout** (`/canon/odd/appendices/lane-build-layout.md`) — How lanes avoid /src and /dist collisions
+- **Drift Checks** (`/canon/odd/appendices/drift-checks.md`) — Drift prevention mechanism and verify:contracts placeholder
+
+### Changed
+
+- **Lane PRDs** — Each PRD now declares required interface contracts:
+  - Website: manifest>=2.0.0, build-output>=1.0.0, attempt-cli>=2.0.0
+  - AI-Navigation: manifest>=2.0.0, build-output>=1.0.0, attempt-cli>=2.0.0, mcp@0.1.x (unstable)
+  - Agent-Skill: manifest>=2.0.0, attempt-cli>=2.0.0 (no build-output required)
+- **Docs** — Added interface contract and lane-build-layout links to:
+  - `/docs/ATTEMPTS.md`
+  - `/docs/ATTEMPT_KICKOFF.md`
+  - `/docs/CLOUDFLARE_CONFIG.md`
+
+### Notes
+
+- Interface contracts are the only documents that use semver by default
+- Lanes must remain compatible with declared contracts or bump major versions
+- `verify:contracts` command defined but not yet implemented
+
+---
+
 ## 0.4.0 — 2026-01-17
 
 **ODD Contract 2.0.0 — Multi-Lane Era**
