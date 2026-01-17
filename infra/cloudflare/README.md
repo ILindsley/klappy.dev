@@ -8,9 +8,13 @@
 
 ## Branch Deploys
 
-Every branch gets a preview URL:
-- `main` → production
-- `attempt/*` → `https://<branch-name>.klappy-dev.pages.dev`
+| Branch | Deploys To |
+|--------|------------|
+| `prod` | **Production** (klappy.dev) |
+| `main` | Preview only (experiment ledger) |
+| `*` (any other) | Preview (`https://<branch-name>.klappy-dev.pages.dev`) |
+
+> **Note:** See `/docs/CLOUDFLARE_CONFIG.md` for the authoritative deploy configuration.
 
 ## What This Means for Attempts
 

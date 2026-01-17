@@ -216,100 +216,78 @@ This plane **changes slowly and intentionally**.
 ```
 attempts/
   prd-vX.Y/
-    ATTEMPT_REGISTRY.json     # reserves attempt numbers (prevents collisions)
     PRD.md                    # frozen PRD for this version
-    attempt-001/
+    run-<run_id>/             # working directory (before finalization)
+    attempt-001/              # finalized attempts
       ATTEMPT.md              # closure record
-      META.json               # canonical pointers (commit SHA is truth)
+      META.json               # canonical pointers (provenance is truth)
       EVIDENCE.md             # evidence index
       evidence/               # screenshots, logs, etc.
     attempt-002/              # retry (if needed)
 ```
 
 **META.json** contains:
+- `tool` — which tool was used (Cursor, Claude, etc.)
+- `agent_id` — agent identifier
+- `model` — model used (e.g., "claude-opus-4-5-20250514")
+- `run_id` — unique run identifier
+- `branch` — branch name (convenience, not truth)
+- `prd_version` — PRD version being tested
 - `sealed_commit` — the commit SHA (truth)
 - `git_tag` — convenience pointer (optional)
 - `status` — CLOSED, ABANDONED, or CHAMPION
 - `deploy` — recorded URLs (production, preview) as evidence artifacts
-- `promoted_commit` — (Champion only) the merge commit SHA on `main`
-- `production_tag` — (Champion only) the production tag
-
-**ATTEMPT_REGISTRY.json** contains:
-- `next_attempt` — the next available attempt number
-- `reserved` — (optional) list of reserved but not yet sealed attempts
 
 The concrete sealing procedure is documented in `/docs/ATTEMPTS.md`.
 
 ---
 
-## Attempt Registry (Preventing Collisions)
+## Collision Avoidance (Current Model)
 
-When running parallel agents/worktrees, attempt numbers must be reserved to prevent collisions.
+Parallel agents don't reserve numbers upfront. Instead:
 
-### Registry File
+1. **Register** — Each agent runs `attempt:register` to capture provenance (creates `run-<run_id>/`)
+2. **Build** — Agent works in isolation
+3. **Finalize** — `attempt:finalize` sorts runs by completion time and assigns `attempt-001`, `attempt-002`, etc.
 
-Location: `/attempts/prd-vX.Y/ATTEMPT_REGISTRY.json`
+This prevents collisions because numbers are assigned deterministically at completion, not reserved upfront.
 
-```json
-{
-  "next_attempt": 5,
-  "reserved": [
-    { "attempt": 3, "reserved_at": "2026-01-16T10:00:00Z", "agent": "worktree-a" },
-    { "attempt": 4, "reserved_at": "2026-01-16T10:05:00Z", "agent": "worktree-b" }
-  ]
-}
-```
-
-### Allocation Rule
-
-1. Reserve attempt number by editing ATTEMPT_REGISTRY.json on `main` first
-2. Increment `next_attempt`
-3. Add entry to `reserved` array
-4. Commit and push before starting work
-5. Use the reserved number in folder/branch/tag names
-
-This prevents "who is attempt-001 vs 002" collisions even with parallel runs.
-
-### Tooling
-
-- `npm run attempt:reserve -- --prd v0.2` — reserves next attempt number
-- Returns the reserved number for use in branch/folder names
+> **Deprecated:** The `ATTEMPT_REGISTRY.json` / `attempt:reserve` model is no longer used.
 
 ---
 
-## Fresh Start Requirement
+## Blank Slate Requirement
 
 **Attempts must start from a clean slate to be independent.**
-
-Worktrees don't magically start from scratch — they inherit whatever commit they branched from. Without explicit purging, attempts become "variations of the same UI."
 
 ### The Problem
 
 If attempt-002 branches from attempt-001's code, it's not independent. The agent will see existing patterns and converge on similar solutions.
 
-### The Solution
+### The Solution: Register → Nuke
 
-Before an agent writes code, `/src` must be reset to a minimal baseline.
+The required sequence is:
 
-### Reset Strategies
+1. **`attempt:register`** — Captures provenance (who, with what model, from where)
+2. **`attempt:nuke`** — Deletes `/src` and framework configs (guarantees blank slate)
+3. **Only then** does implementation begin
 
-**Strategy 1: Baseline scaffold commit**
-- Tag a known-good infrastructure state: `scaffold-phase1`
-- Starting an attempt means: branch from that tag
-- Apply only stable infra scripts + content sync
-- Then build from PRD
+This preserves forensic traceability (we know who showed up) while guaranteeing experimental independence (no inherited code).
 
-**Strategy 2: Generated and disposable /src**
-- Stable infrastructure lives in `/infra` + `/public/content`
-- `/src` is always generated, never preserved
-- `npm run attempt:reset` deletes `/src` and recreates minimal shell
-- Every attempt begins with that reset commit
+### What Gets Nuked
 
-### Tooling
+- `/src/` — application code
+- `vite.config.js`, `tailwind.config.js`, etc. — framework configs
 
-- `npm run attempt:reset` — purges `/src`, creates minimal app shell, commits as starting point
+### What Survives
 
-The reset step must happen **before** the agent writes code.
+- `/infra/` — deployment scripts, contracts
+- `/canon/`, `/about/`, `/projects/` — content
+- `/docs/` — process documentation
+- `/attempts/` — sealed evidence
+- `package.json` — dependency manifest
+
+> **Decision:** See [D0008: Register Before Nuke](/canon/odd/decisions/D0008-register-before-nuke.md)
 
 ---
 
@@ -362,13 +340,14 @@ Quantum Development produces observations. Promotion converts one observation in
 
 - **Attempts** = competing candidates (separate branches / preview deploys)
 - **Champion** = the single candidate chosen to become production
-- **Production** = whatever is deployed from `main`
+- **`prod` branch** = production deployment (klappy.dev)
+- **`main` branch** = experiment ledger, history aggregation
 
 ### The Promotion Rule
 
 **Exactly one attempt becomes Champion for a PRD version.**
 
-The Champion is merged to `main`, tagged, and becomes the live site. Everything else stays sealed evidence.
+The Champion is merged to `main`, then `prod` is fast-forwarded to `main`. Everything else stays sealed evidence.
 
 ### Minimum Gate (must pass)
 
@@ -390,9 +369,10 @@ Pick one axis and declare it ahead of time:
 
 ### Promotion Procedure
 
-**Branches:**
-- Each attempt lives on: `attempt/prd-vX.Y/aNNN`
-- Production deploy comes from: `main`
+**Branch Roles:**
+- `prod` — **production** (only champions go here)
+- `main` — experiment ledger, artifact aggregation
+- `*` (any other) — attempt sandboxes (preview deploys)
 
 **When an attempt wins:**
 
@@ -403,27 +383,31 @@ Pick one axis and declare it ahead of time:
 2. **Tag it** (immutable pointer)
    - Tag: `prd-vX.Y-attempt-NNN`
 
-3. **Promote it**
-   - Merge the attempt branch into `main`
+3. **Merge artifacts to main**
+   - Attempt folder, evidence, PRD patches
 
-4. **Tag production**
-   - Tag on `main`: `production-vX.Y` (or `prod-YYYY-MM-DD`)
+4. **Promote code to main**
+   - Champion's `/src` merges to `main`
 
-5. **Cloudflare does the rest**
-   - `main` auto-deploys → becomes production
+5. **Fast-forward prod**
+   - `git checkout prod && git merge main --ff-only`
+   - Cloudflare deploys `prod` → production
 
 **What happens to other attempts?**
 - Seal them (ABANDONED or CLOSED-but-not-chosen)
 - Keep their preview URLs + evidence
-- Do not merge to `main`
+- Merge their artifacts to `main` (learnings persist)
+- Do NOT merge their code
 
 ### The One Rule That Prevents Chaos
 
-**Only `main` is allowed to be production.**
+**Only `prod` is allowed to be production.**
 
-Attempts can be preview deployments forever — but only `main` ships.
+`main` is for experiments and history. Attempts can be preview deployments forever.
 
 This makes "which one is live?" a non-question.
+
+> **Decision:** See [D0001: prod Branch Is Production](/canon/odd/decisions/D0001-prod-branch-is-production.md)
 
 ### Winner Declaration (ATTEMPT.md snippet)
 
@@ -512,4 +496,6 @@ Observations without promotion are incomplete experiments.
 
 ---
 
-**Status:** Appendix stable for v0.1.5
+**Status:** Updated 2026-01-16 — Aligned with D0001 (prod branch), D0008 (register before nuke)
+
+> **Authoritative source for attempt workflow:** `/docs/ATTEMPTS.md`

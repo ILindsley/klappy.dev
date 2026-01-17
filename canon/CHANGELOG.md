@@ -7,7 +7,44 @@ Per-file versions are intentionally omitted to reduce ceremony and prevent metad
 
 ---
 
-## 0.1.5 — 2026-01-16
+## 0.3.0 — 2026-01-17
+
+### Added
+
+- **Decision Log** (`/canon/odd/decisions/`) — ADR-lite structure for durable decisions
+  - D0001: `prod` branch is production
+  - D0002: Attempt provenance required (tool, agent, model)
+  - D0003: PRD version auto-detection
+  - D0004: Cleanup is mandatory
+  - D0005: Nuke command safety guards
+  - D0006: Dogfooding requirement
+  - D0007: Branch names are convenience
+  - D0008: Register before nuke
+- **Truth Map** (`/docs/TRUTH_MAP.md`) — authoritative source index
+
+### Changed
+
+- **Production model:** `prod` branch is production, `main` is experiment ledger (D0001)
+- **Attempt lifecycle:** Register → Nuke → Build → Finalize → Promote
+- **Provenance:** META.json now captures tool, agent_id, model, run_id, branch, prd_version
+- **Collision avoidance:** Numbers assigned at finalization, not reserved upfront
+
+### Deprecated
+
+- `ATTEMPT_REGISTRY.json` — replaced by `attempt:finalize` deterministic numbering
+- `attempt:reserve` — replaced by `attempt:register` (captures provenance)
+- `attempt:reset` — replaced by `attempt:nuke` (explicit blank slate)
+- "main is production" language — `prod` is now production
+
+### Notes
+
+- This release eliminates the "three eras" confusion and establishes one coherent model.
+- See `/docs/TRUTH_MAP.md` for authoritative source identification.
+- See `/canon/odd/decisions/` for the rationale behind each decision.
+
+---
+
+## 0.1.5 — 2026-01-16 (Superseded by 0.3.0)
 
 ### Added
 
@@ -17,26 +54,12 @@ Per-file versions are intentionally omitted to reduce ceremony and prevent metad
 - **Artifacts always merge rule**
   - Failed attempts contribute learnings via artifacts merge
   - Two merges: artifacts (always) + code (only Champion)
-- **Attempt registry mechanism** (`ATTEMPT_REGISTRY.json`)
-  - Prevents collision when running parallel agents/worktrees
-  - `npm run attempt:reserve -- --prd v0.2`
-- **Fresh start requirement** 
-  - `/src` must be reset between attempts for true independence
-  - `npm run attempt:reset` purges and creates minimal shell
-- **Scripts**
-  - `attempt:reserve` — reserve next attempt number
-  - `attempt:reset` — purge /src for fresh start
-
-### Changed
-
-- Attempt Lifecycle: worktrees, registry, fresh start, artifacts merge (`/canon/odd/appendices/attempt-lifecycle.md`)
-- ATTEMPTS.md: collision prevention, reset workflow, tooling summary (`/docs/ATTEMPTS.md`)
+- ~~**Attempt registry mechanism** (`ATTEMPT_REGISTRY.json`)~~ — **DEPRECATED in 0.3.0**
+- ~~**Fresh start requirement** (`attempt:reset`)~~ — **DEPRECATED in 0.3.0**, use `attempt:nuke`
 
 ### Notes
 
-- Worktrees don't share memory. They publish outputs.
-- Every attempt contributes learnings, regardless of whether its code ships.
-- The reset step ensures attempts are truly independent (no inherited UI patterns).
+- ⚠️ This version's registry/reserve model has been superseded by register/finalize in 0.3.0.
 
 ---
 
@@ -58,7 +81,7 @@ Per-file versions are intentionally omitted to reduce ceremony and prevent metad
 ### Notes
 
 - This release closes the loop on Quantum Development: observations without promotion are incomplete experiments.
-- Only `main` ships. Attempts can be preview deploys forever, but only the Champion merges to production.
+- ⚠️ Note: As of 0.3.0, `prod` is the production branch. `main` is the experiment ledger.
 
 ---
 

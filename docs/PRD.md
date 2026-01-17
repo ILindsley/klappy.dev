@@ -290,7 +290,8 @@ Not through heavy animation, novelty UI, or visual noise.
 
 **6.2 Production deploy**
 
-- Production deploy SHOULD be reproducible from `main`.
+- Production deploys from the `prod` branch (fast-forwarded from `main` after champion promotion).
+- Champion code lives on `main`; `prod` is the deploy target.
 
 **6.3 Infrastructure artifact (when deploy behavior is in scope)**
 
