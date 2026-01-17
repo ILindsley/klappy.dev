@@ -657,6 +657,24 @@
       ]
     },
     {
+      "uri": "klappy://canon/odd/repo-truth-audit",
+      "path": "/canon/odd/appendices/repo-truth-audit.md",
+      "title": "Repo Truth Audit (Epistemic Audit)",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "semi_stable",
+      "tags": [
+        "odd",
+        "repo-truth",
+        "epistemic",
+        "audit",
+        "drift"
+      ]
+    },
+    {
       "uri": "klappy://projects/repo-as-a-system",
       "path": "/projects/repo-as-a-system/README.md",
       "title": "Repo-as-a-System",

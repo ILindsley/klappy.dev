@@ -31,6 +31,7 @@ This release introduces visual interfaces as a first-class concept, allowing vis
   - `color-system@1.0.0` — Semantic color tokens and accessibility requirements
   - `typography@1.0.0` — Modular type scale and semantic roles
   - `spacing@1.0.0` — Base-8 spacing scale and application rules
+- **Repo Truth Audit** (`/canon/odd/appendices/repo-truth-audit.md`) — Prompt for self-referential drift detection across canon, docs, tooling, and structure
 - **Visual directory structure:**
   - `/visual/interfaces/` — Visual contracts
   - `/visual/assets/` — Generated outputs (disposable)
