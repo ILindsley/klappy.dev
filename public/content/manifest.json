@@ -362,6 +362,45 @@
       ]
     },
     {
+      "uri": "klappy://canon/odd/decisions/D0012",
+      "path": "/canon/odd/decisions/D0012-e0002-transition-interpretation.md",
+      "title": "D0012: E0002 Transition Interpretation (Truth vs Enforcement Lag)",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "internal",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "decisions",
+        "epochs",
+        "lanes",
+        "drift",
+        "interfaces",
+        "tooling"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/decisions/D0013",
+      "path": "/canon/odd/decisions/D0013-build-output-lane-scoped-dist.md",
+      "title": "D0013: Build Output Truth is Lane-Scoped (products/<lane>/dist)",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "internal",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "decisions",
+        "lanes",
+        "build",
+        "deploy",
+        "contracts"
+      ]
+    },
+    {
       "uri": "klappy://canon/decision-rules",
       "path": "/canon/decision-rules.md",
       "title": "Decision Rules",

@@ -43,6 +43,8 @@ This folder contains Architecture Decision Records (ADRs) for the ODD workflow a
 |----|----------|--------|
 | [D0009](./D0009-multi-lane-prd-architecture.md) | PRDs organized into independent product lanes | **Active** |
 | [D0011](./D0011-odd-contract-2.0.0.md) | ODD System Contract 2.0.0 (multi-lane era) | **Active** |
+| [D0012](./D0012-e0002-transition-interpretation.md) | E0002 transition interpretation (truth can lead enforcement; contradictions are tracked) | **Active** |
+| [D0013](./D0013-build-output-lane-scoped-dist.md) | Build output truth is lane-scoped (`products/<lane>/dist`) | **Active** |
 
 ### Repository Hygiene
 

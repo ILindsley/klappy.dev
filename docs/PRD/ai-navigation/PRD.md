@@ -15,7 +15,7 @@
 This lane MUST remain compatible with:
 
 - manifest >=2.0.0 <3.0.0
-- build-output >=1.0.0 <2.0.0
+- build-output >=3.0.0 <4.0.0
 - attempt-cli >=2.0.0 <3.0.0
 
 If MCP is used, it is currently draft (`mcp@0.1.x`) and MUST be treated as unstable.

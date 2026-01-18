@@ -16,6 +16,25 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.4.3 — 2026-01-18
+
+**E0002 Convergence: Lane-Scoped Build Output**
+
+This release locks and begins converging the canonical build output truth for E0002 lanes:
+
+> `products/<lane>/dist/` is canonical. Repo-root `/dist` is legacy/transitional.
+
+### Added
+
+- **D0012** — E0002 transition interpretation (truth may lead enforcement; contradictions are tracked)
+- **D0013** — Build output truth is lane-scoped (`products/<lane>/dist`)
+
+### Changed
+
+- **Build output interface contract** — MAJOR bump to `build-output@3.0.0` to require lane-scoped output and clarify runtime manifest path (`/content/manifest.json`)
+- **Repository topology** — Updated generated output surface to `products/<lane>/dist` (with legacy `/dist` mirror explicitly labeled)
+- **Lane build layout** — Updated build artifact references to lane-scoped output
+
 ---
 
 ## 0.4.2 — 2026-01-17

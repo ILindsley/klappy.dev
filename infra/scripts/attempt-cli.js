@@ -2077,8 +2077,8 @@ WORKFLOW:
 
 DEPLOY MAPPING:
   Each lane is a separate Cloudflare Pages project
-  Root directory: products/<lane>
-  Build output: dist (relative to root)
+  Root directory: .
+  Build output: products/<lane>/dist
 `);
       process.exit(1);
   }

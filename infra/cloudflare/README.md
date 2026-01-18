@@ -2,9 +2,11 @@
 
 ## Configuration
 
-- **Build command:** `npm run build`
-- **Output directory:** `dist`
-- **Root directory:** `/`
+- **Build command:** `npm run build -- --lane <lane>`
+- **Output directory:** `products/<lane>/dist`
+- **Root directory:** `.`
+
+> **Legacy / Transitional note (pre-D0013):** Some older configurations may still publish repo-root `/dist/`. That output is no longer canonical.
 
 ## Branch Deploys
 

@@ -4,7 +4,7 @@ This repository contains multiple **product lanes** that share Canon but must no
 
 The core collision surfaces are:
 - `/src` (implementation workspace)
-- `/dist` (deployment artifact)
+- `products/<lane>/dist` (deployment artifact)
 
 This document defines the lane-safe layout policy.
 
@@ -15,7 +15,7 @@ This document defines the lane-safe layout policy.
 Each attempt operates in its own branch/worktree. Within that sandbox:
 
 - `/src` is disposable and lane-specific for that attempt.
-- `/dist` is the output of that attempt's build.
+- `products/<lane>/dist` is the output of that lane's build.
 
 Because worktrees isolate filesystem state, lanes do not collide during development.
 

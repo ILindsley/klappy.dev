@@ -40,7 +40,8 @@ It encodes the decoupling between App, Content, and Infrastructure planes.
 /docs/                          # Operational docs + PRD versions
 /attempts/                      # Sealed attempts (immutable after seal)
 /public/content/                # Generated (by sync script)
-/dist/                          # Build output (generated)
+/products/<lane>/dist/          # Lane build output (generated)
+/dist/                          # Legacy/transitional mirror (generated)
 ```
 
 ---
@@ -153,7 +154,7 @@ There is one `/src/` that gets rebuilt.
 |------|----------|-------------|
 | Source | `/canon/`, `/odd/`, `/about/`, `/projects/` | Manual edit |
 | Generated | `/public/content/` | `npm run sync` |
-| Generated | `/dist/` | `npm run build` |
+| Generated | `/products/<lane>/dist/` | `npm run build -- --lane <lane>` |
 
 **Rule:** Edit source, sync generates output.
 

@@ -1,5 +1,10 @@
 You are an implementation agent starting a NEW, INDEPENDENT ATTEMPT.
 
+> **Epoch 1 / Legacy Prompt (ODD Contract ≤1.x; pre-E0002 and pre-D0013)**
+>
+> Kept for historical context. Current workflow is defined by ODD Contract 2.x.
+> Use `/docs/AGENT_KICKOFF.md` as the canonical agent entry point.
+
 ================================================================================
 CRITICAL: READ THIS ENTIRE PROMPT. DO NOT STOP UNTIL ALL COMPLETION GATES PASS.
 ================================================================================

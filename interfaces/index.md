@@ -15,7 +15,7 @@ An interface contract is a stable promise that other systems, agents, or humans 
 Examples:
 
 - **Manifest schema** (`/public/content/manifest.json`)
-- **Build output contract** (`/dist` shape required for deployment)
+- **Build output contract** (`products/<lane>/dist` shape required for deployment)
 - **Attempt tooling contract** (CLI flags + output files like `.attempt.json`, `META.json`)
 - **MCP surface** (tools/endpoints/resources and their response schema)
 

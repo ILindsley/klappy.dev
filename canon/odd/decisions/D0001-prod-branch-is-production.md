@@ -38,7 +38,7 @@ The `prod` branch is the sole source of production deployments. The `main` branc
 
 - Script: `/infra/scripts/attempt-cli.js` (`cmdPromote` merges to main, then fast-forwards prod)
 - Config: `/docs/CLOUDFLARE_CONFIG.md` documents the branch mapping
-- Contract: `/infra/contracts/build-output.md` defines what must be in `/dist`
+- Contract: `/infra/contracts/build-output.md` defines what must be in `products/<lane>/dist`
 
 ## Evidence
 
