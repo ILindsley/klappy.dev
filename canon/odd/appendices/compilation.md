@@ -126,3 +126,21 @@ Drift checks ensure the repo does not contradict itself.
 Compilation ensures the repo remains **usable** under memory limits.
 
 Both are required for scalability.
+
+---
+
+## Drift Audits
+
+The repository SHOULD provide a read-only drift audit that can be run at any time:
+
+- `npm run audit:drift`
+
+This command MUST NOT regenerate or modify derived outputs. It only verifies consistency.
+
+If regeneration is desired for wipeable derived outputs (compiled packs), the repository MAY also provide:
+
+- `npm run audit:repair`
+
+`audit:repair` may regenerate ONLY derived outputs under `/public/_compiled/**`, then MUST run `audit:drift`.
+
+Canon and PRDs MUST NOT be modified by either command.

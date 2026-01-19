@@ -1,8 +1,8 @@
 ---
 lane: website
 pack: author
-built_at: 2026-01-19T20:47:34.809Z
-git_commit: 36bca6919f1ecf2e36544c931e47f4cade41a5ad
+built_at: 2026-01-19T20:53:12.178Z
+git_commit: 19e264ac373ba8d5bc638e61de721750d1696920
 sources:
   - canon/index.md
   - canon/odd/appendices/product-lanes.md
@@ -14,7 +14,7 @@ source_hashes:
   canon/index.md: bae46a137e58066df21d89506f6ba63386d6684187aabc08a236c50150fcd8b4
   canon/odd/appendices/product-lanes.md: 977b29aa2e06eecb32419d967da590f4d851c3c9feb5e38269cfc094b6da3d09
   canon/odd/appendices/epochs.md: 62d38377f7b68c480628bf0bb89fe29478be3ac2dc2a886d0c67df538067ef7b
-  canon/odd/appendices/compilation.md: 7cca810928241bec30346826909f2d12e489a571acbc07a46ff6f430bb8b5924
+  canon/odd/appendices/compilation.md: f95da459f446bd2c63d664c997663f0c02bdb0852b0c46af0106c1750e559aef
   canon/odd/appendices/compilation-targets.md: 0de1cdbfc2df82a896d07b070c8b554bd05df6b30dae4325de1379550f9dcf24
   docs/PRD/website/PRD.md: 71ca26485617dc50f698aade67909d204074c7156ffd323e0f5138fc811c40b3
 ---
@@ -988,6 +988,24 @@ Drift checks ensure the repo does not contradict itself.
 Compilation ensures the repo remains **usable** under memory limits.
 
 Both are required for scalability.
+
+---
+
+## Drift Audits
+
+The repository SHOULD provide a read-only drift audit that can be run at any time:
+
+- `npm run audit:drift`
+
+This command MUST NOT regenerate or modify derived outputs. It only verifies consistency.
+
+If regeneration is desired for wipeable derived outputs (compiled packs), the repository MAY also provide:
+
+- `npm run audit:repair`
+
+`audit:repair` may regenerate ONLY derived outputs under `/public/_compiled/**`, then MUST run `audit:drift`.
+
+Canon and PRDs MUST NOT be modified by either command.
 
 
 ---

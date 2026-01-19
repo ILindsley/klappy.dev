@@ -12,6 +12,8 @@
     "verify:contracts": "node infra/scripts/verify-contracts.js",
     "lane:compile": "node infra/scripts/compile-pack.js",
     "verify:compiled": "node infra/scripts/verify-compiled.js",
+    "audit:drift": "node infra/scripts/audit-drift.js",
+    "audit:repair": "node infra/scripts/audit-repair.js",
     "attempt": "node infra/scripts/attempt-cli.js",
     "attempt:nuke": "node infra/scripts/attempt-cli.js nuke",
     "attempt:register": "node infra/scripts/attempt-cli.js register",

@@ -1,8 +1,8 @@
 {
   "lane": "website",
   "pack": "visitor",
-  "built_at": "2026-01-19T20:47:34.670Z",
-  "git_commit": "36bca6919f1ecf2e36544c931e47f4cade41a5ad",
+  "built_at": "2026-01-19T20:53:12.016Z",
+  "git_commit": "19e264ac373ba8d5bc638e61de721750d1696920",
   "sources": [
     "canon/index.md",
     "canon/odd/appendices/product-lanes.md",
@@ -14,7 +14,7 @@
     "canon/index.md": "bae46a137e58066df21d89506f6ba63386d6684187aabc08a236c50150fcd8b4",
     "canon/odd/appendices/product-lanes.md": "977b29aa2e06eecb32419d967da590f4d851c3c9feb5e38269cfc094b6da3d09",
     "canon/odd/appendices/epochs.md": "62d38377f7b68c480628bf0bb89fe29478be3ac2dc2a886d0c67df538067ef7b",
-    "canon/odd/appendices/compilation.md": "7cca810928241bec30346826909f2d12e489a571acbc07a46ff6f430bb8b5924",
+    "canon/odd/appendices/compilation.md": "f95da459f446bd2c63d664c997663f0c02bdb0852b0c46af0106c1750e559aef",
     "docs/PRD/website/PRD.md": "71ca26485617dc50f698aade67909d204074c7156ffd323e0f5138fc811c40b3"
   },
   "output": "public/_compiled/website/visitor-pack.md",

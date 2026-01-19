@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-19T20:47:41.201Z
-Total Files: 159
+Generated: 2026-01-19T20:53:20.175Z
+Total Files: 161
 
 This is a complete export of all documentation, code, and content files
 from the klappy.dev repository, organized by section.
@@ -23,7 +23,7 @@ from the klappy.dev repository, organized by section.
 - **Attempts** (14 files)
 - **Canon** (49 files)
 - **Documentation** (16 files)
-- **Infrastructure** (13 files)
+- **Infrastructure** (15 files)
 - **Interfaces & Contracts** (6 files)
 - **ODD (Outcomes-Driven Development)** (1 files)
 - **Products** (3 files)
@@ -275,6 +275,8 @@ The goal is better outcomes, not perfect artifacts.
     "verify:contracts": "node infra/scripts/verify-contracts.js",
     "lane:compile": "node infra/scripts/compile-pack.js",
     "verify:compiled": "node infra/scripts/verify-compiled.js",
+    "audit:drift": "node infra/scripts/audit-drift.js",
+    "audit:repair": "node infra/scripts/audit-repair.js",
     "attempt": "node infra/scripts/attempt-cli.js",
     "attempt:nuke": "node infra/scripts/attempt-cli.js nuke",
     "attempt:register": "node infra/scripts/attempt-cli.js register",
@@ -6409,6 +6411,24 @@ Drift checks ensure the repo does not contradict itself.
 Compilation ensures the repo remains **usable** under memory limits.
 
 Both are required for scalability.
+
+---
+
+## Drift Audits
+
+The repository SHOULD provide a read-only drift audit that can be run at any time:
+
+- `npm run audit:drift`
+
+This command MUST NOT regenerate or modify derived outputs. It only verifies consistency.
+
+If regeneration is desired for wipeable derived outputs (compiled packs), the repository MAY also provide:
+
+- `npm run audit:repair`
+
+`audit:repair` may regenerate ONLY derived outputs under `/public/_compiled/**`, then MUST run `audit:drift`.
+
+Canon and PRDs MUST NOT be modified by either command.
 
 
 
@@ -16292,6 +16312,185 @@ main();
 
 
 --------------------------------------------------------------------------------
+📄 File: infra/scripts/audit-drift.js
+--------------------------------------------------------------------------------
+
+#!/usr/bin/env node
+/**
+ * audit-drift.js
+ *
+ * Read-only repo drift audit.
+ *
+ * What it verifies:
+ * - content validity (manifest/resources)
+ * - contracts validity (if available)
+ * - compiled packs validity for every lane/pack plan found
+ *
+ * This script MUST NOT compile/regenerate anything.
+ */
+
+import { existsSync, readdirSync } from "node:fs";
+import { join } from "node:path";
+import { spawnSync } from "node:child_process";
+
+const ROOT = process.cwd();
+const PLANS_ROOT = join(ROOT, "infra", "compile", "plans");
+
+function fail(msg) {
+  console.error(msg);
+  process.exit(1);
+}
+
+function run(cmd, args, opts = {}) {
+  const res = spawnSync(cmd, args, {
+    stdio: "inherit",
+    shell: process.platform === "win32",
+    ...opts,
+  });
+  if (res.status !== 0) {
+    fail(`\n🛑 audit:drift failed: ${cmd} ${args.join(" ")}\n`);
+  }
+}
+
+function listDirs(path) {
+  if (!existsSync(path)) return [];
+  return readdirSync(path, { withFileTypes: true })
+    .filter((d) => d.isDirectory())
+    .map((d) => d.name);
+}
+
+function listJsonFiles(path) {
+  if (!existsSync(path)) return [];
+  return readdirSync(path, { withFileTypes: true })
+    .filter((d) => d.isFile() && d.name.endsWith(".json"))
+    .map((d) => d.name);
+}
+
+function discoverLanePacks() {
+  // Source of truth for "what compiled packs exist" is: infra/compile/plans/<lane>/*.json
+  const lanes = listDirs(PLANS_ROOT);
+  const matrix = [];
+  for (const lane of lanes) {
+    const planDir = join(PLANS_ROOT, lane);
+    const plans = listJsonFiles(planDir);
+    for (const planFile of plans) {
+      const pack = planFile.replace(/\.json$/, "");
+      matrix.push({ lane, pack, planPath: join("infra", "compile", "plans", lane, planFile) });
+    }
+  }
+  return matrix;
+}
+
+function main() {
+  console.log("🔎 audit:drift — starting\n");
+
+  // 1) Verify content
+  if (existsSync(join(ROOT, "infra", "scripts", "verify-content.js"))) {
+    console.log("1) verify:content");
+    run("node", ["infra/scripts/verify-content.js"]);
+    console.log("");
+  } else {
+    console.log("1) verify:content (skipped — missing infra/scripts/verify-content.js)\n");
+  }
+
+  // 2) Verify contracts (if present)
+  // We treat this as optional because some repos stage it in gradually.
+  if (existsSync(join(ROOT, "infra", "scripts", "verify-contracts.js"))) {
+    console.log("2) verify:contracts");
+    run("node", ["infra/scripts/verify-contracts.js"]);
+    console.log("");
+  } else {
+    console.log("2) verify:contracts (skipped — missing infra/scripts/verify-contracts.js)\n");
+  }
+
+  // 3) Verify compiled packs for every plan discovered
+  const packs = discoverLanePacks();
+  console.log(`3) verify:compiled — discovered ${packs.length} pack plan(s)\n`);
+
+  if (!existsSync(join(ROOT, "infra", "scripts", "verify-compiled.js"))) {
+    fail("Missing infra/scripts/verify-compiled.js — cannot verify compiled packs.");
+  }
+
+  for (const p of packs) {
+    console.log(`- verify compiled: lane=${p.lane} pack=${p.pack} (plan=${p.planPath})`);
+    run("node", ["infra/scripts/verify-compiled.js", "--lane", p.lane, "--pack", p.pack]);
+  }
+
+  console.log("\n✅ audit:drift passed — repo is consistent\n");
+}
+
+main();
+
+
+
+--------------------------------------------------------------------------------
+📄 File: infra/scripts/audit-repair.js
+--------------------------------------------------------------------------------
+
+#!/usr/bin/env node
+/**
+ * audit-repair.js
+ *
+ * Regenerates ONLY wipeable derived outputs (compiled packs),
+ * then runs audit:drift.
+ *
+ * This script MUST NOT touch Canon or PRDs.
+ */
+
+import { existsSync } from "node:fs";
+import { spawnSync } from "node:child_process";
+
+function fail(msg) {
+  console.error(msg);
+  process.exit(1);
+}
+
+function run(cmd, args, opts = {}) {
+  const res = spawnSync(cmd, args, {
+    stdio: "inherit",
+    shell: process.platform === "win32",
+    ...opts,
+  });
+  if (res.status !== 0) {
+    fail(`\n🛑 audit:repair failed: ${cmd} ${args.join(" ")}\n`);
+  }
+}
+
+function main() {
+  console.log("🧰 audit:repair — regenerating derived outputs, then auditing\n");
+
+  // Phase 0: compile packs from plans (lane + pack required)
+  if (!existsSync("infra/scripts/compile-pack.js")) {
+    fail("Missing infra/scripts/compile-pack.js — cannot compile packs.");
+  }
+
+  // Compile ALL packs by delegating to a single "compile all plans" mode,
+  // OR just call lane:compile repeatedly if that is the established contract.
+  // We do not assume a magic "--all" exists.
+  //
+  // Minimal safe approach: call `npm run lane:compile -- --lane <lane> --pack <pack>`
+  // by using audit:drift's discovery logic indirectly (audit:drift will fail if any pack missing).
+  //
+  // We keep repair very small: attempt to compile the two known website packs first,
+  // and users can expand later. (Avoid inventing lanes/packs here.)
+  //
+  // If you want full auto-discovery compilation, implement it inside compile-pack.js, not here.
+
+  console.log("1) compile known packs (safe, minimal)");
+  run("npm", ["run", "lane:compile", "--", "--lane", "website", "--pack", "visitor"]);
+  run("npm", ["run", "lane:compile", "--", "--lane", "website", "--pack", "author"]);
+
+  console.log("\n2) audit:drift");
+  run("npm", ["run", "audit:drift"]);
+
+  console.log("\n✅ audit:repair complete\n");
+}
+
+main();
+
+
+
+--------------------------------------------------------------------------------
 📄 File: infra/scripts/compile-pack.js
 --------------------------------------------------------------------------------
 
@@ -19201,8 +19400,8 @@ export const providerInfo = {
 {
   "lane": "website",
   "pack": "author",
-  "built_at": "2026-01-19T20:47:34.809Z",
-  "git_commit": "36bca6919f1ecf2e36544c931e47f4cade41a5ad",
+  "built_at": "2026-01-19T20:53:12.178Z",
+  "git_commit": "19e264ac373ba8d5bc638e61de721750d1696920",
   "sources": [
     "canon/index.md",
     "canon/odd/appendices/product-lanes.md",
@@ -19215,7 +19414,7 @@ export const providerInfo = {
     "canon/index.md": "bae46a137e58066df21d89506f6ba63386d6684187aabc08a236c50150fcd8b4",
     "canon/odd/appendices/product-lanes.md": "977b29aa2e06eecb32419d967da590f4d851c3c9feb5e38269cfc094b6da3d09",
     "canon/odd/appendices/epochs.md": "62d38377f7b68c480628bf0bb89fe29478be3ac2dc2a886d0c67df538067ef7b",
-    "canon/odd/appendices/compilation.md": "7cca810928241bec30346826909f2d12e489a571acbc07a46ff6f430bb8b5924",
+    "canon/odd/appendices/compilation.md": "f95da459f446bd2c63d664c997663f0c02bdb0852b0c46af0106c1750e559aef",
     "canon/odd/appendices/compilation-targets.md": "0de1cdbfc2df82a896d07b070c8b554bd05df6b30dae4325de1379550f9dcf24",
     "docs/PRD/website/PRD.md": "71ca26485617dc50f698aade67909d204074c7156ffd323e0f5138fc811c40b3"
   },
@@ -19231,8 +19430,8 @@ export const providerInfo = {
 {
   "lane": "website",
   "pack": "visitor",
-  "built_at": "2026-01-19T20:47:34.670Z",
-  "git_commit": "36bca6919f1ecf2e36544c931e47f4cade41a5ad",
+  "built_at": "2026-01-19T20:53:12.016Z",
+  "git_commit": "19e264ac373ba8d5bc638e61de721750d1696920",
   "sources": [
     "canon/index.md",
     "canon/odd/appendices/product-lanes.md",
@@ -19244,7 +19443,7 @@ export const providerInfo = {
     "canon/index.md": "bae46a137e58066df21d89506f6ba63386d6684187aabc08a236c50150fcd8b4",
     "canon/odd/appendices/product-lanes.md": "977b29aa2e06eecb32419d967da590f4d851c3c9feb5e38269cfc094b6da3d09",
     "canon/odd/appendices/epochs.md": "62d38377f7b68c480628bf0bb89fe29478be3ac2dc2a886d0c67df538067ef7b",
-    "canon/odd/appendices/compilation.md": "7cca810928241bec30346826909f2d12e489a571acbc07a46ff6f430bb8b5924",
+    "canon/odd/appendices/compilation.md": "f95da459f446bd2c63d664c997663f0c02bdb0852b0c46af0106c1750e559aef",
     "docs/PRD/website/PRD.md": "71ca26485617dc50f698aade67909d204074c7156ffd323e0f5138fc811c40b3"
   },
   "output": "public/_compiled/website/visitor-pack.md",
@@ -19259,8 +19458,8 @@ export const providerInfo = {
 ---
 lane: website
 pack: author
-built_at: 2026-01-19T20:47:34.809Z
-git_commit: 36bca6919f1ecf2e36544c931e47f4cade41a5ad
+built_at: 2026-01-19T20:53:12.178Z
+git_commit: 19e264ac373ba8d5bc638e61de721750d1696920
 sources:
   - canon/index.md
   - canon/odd/appendices/product-lanes.md
@@ -19272,7 +19471,7 @@ source_hashes:
   canon/index.md: bae46a137e58066df21d89506f6ba63386d6684187aabc08a236c50150fcd8b4
   canon/odd/appendices/product-lanes.md: 977b29aa2e06eecb32419d967da590f4d851c3c9feb5e38269cfc094b6da3d09
   canon/odd/appendices/epochs.md: 62d38377f7b68c480628bf0bb89fe29478be3ac2dc2a886d0c67df538067ef7b
-  canon/odd/appendices/compilation.md: 7cca810928241bec30346826909f2d12e489a571acbc07a46ff6f430bb8b5924
+  canon/odd/appendices/compilation.md: f95da459f446bd2c63d664c997663f0c02bdb0852b0c46af0106c1750e559aef
   canon/odd/appendices/compilation-targets.md: 0de1cdbfc2df82a896d07b070c8b554bd05df6b30dae4325de1379550f9dcf24
   docs/PRD/website/PRD.md: 71ca26485617dc50f698aade67909d204074c7156ffd323e0f5138fc811c40b3
 ---
@@ -20247,6 +20446,24 @@ Compilation ensures the repo remains **usable** under memory limits.
 
 Both are required for scalability.
 
+---
+
+## Drift Audits
+
+The repository SHOULD provide a read-only drift audit that can be run at any time:
+
+- `npm run audit:drift`
+
+This command MUST NOT regenerate or modify derived outputs. It only verifies consistency.
+
+If regeneration is desired for wipeable derived outputs (compiled packs), the repository MAY also provide:
+
+- `npm run audit:repair`
+
+`audit:repair` may regenerate ONLY derived outputs under `/public/_compiled/**`, then MUST run `audit:drift`.
+
+Canon and PRDs MUST NOT be modified by either command.
+
 
 ---
 
@@ -20507,7 +20724,7 @@ The website lane MUST support generating a wipeable "visitor pack" used for prog
 
 {
   "lane": "website",
-  "generated_at": "2026-01-19T20:47:34.811Z",
+  "generated_at": "2026-01-19T20:53:12.181Z",
   "packs": [
     {
       "pack": "author",
@@ -20534,8 +20751,8 @@ The website lane MUST support generating a wipeable "visitor pack" used for prog
 ---
 lane: website
 pack: visitor
-built_at: 2026-01-19T20:47:34.670Z
-git_commit: 36bca6919f1ecf2e36544c931e47f4cade41a5ad
+built_at: 2026-01-19T20:53:12.016Z
+git_commit: 19e264ac373ba8d5bc638e61de721750d1696920
 sources:
   - canon/index.md
   - canon/odd/appendices/product-lanes.md
@@ -20546,7 +20763,7 @@ source_hashes:
   canon/index.md: bae46a137e58066df21d89506f6ba63386d6684187aabc08a236c50150fcd8b4
   canon/odd/appendices/product-lanes.md: 977b29aa2e06eecb32419d967da590f4d851c3c9feb5e38269cfc094b6da3d09
   canon/odd/appendices/epochs.md: 62d38377f7b68c480628bf0bb89fe29478be3ac2dc2a886d0c67df538067ef7b
-  canon/odd/appendices/compilation.md: 7cca810928241bec30346826909f2d12e489a571acbc07a46ff6f430bb8b5924
+  canon/odd/appendices/compilation.md: f95da459f446bd2c63d664c997663f0c02bdb0852b0c46af0106c1750e559aef
   docs/PRD/website/PRD.md: 71ca26485617dc50f698aade67909d204074c7156ffd323e0f5138fc811c40b3
 ---
 
@@ -21519,6 +21736,24 @@ Drift checks ensure the repo does not contradict itself.
 Compilation ensures the repo remains **usable** under memory limits.
 
 Both are required for scalability.
+
+---
+
+## Drift Audits
+
+The repository SHOULD provide a read-only drift audit that can be run at any time:
+
+- `npm run audit:drift`
+
+This command MUST NOT regenerate or modify derived outputs. It only verifies consistency.
+
+If regeneration is desired for wipeable derived outputs (compiled packs), the repository MAY also provide:
+
+- `npm run audit:repair`
+
+`audit:repair` may regenerate ONLY derived outputs under `/public/_compiled/**`, then MUST run `audit:drift`.
+
+Canon and PRDs MUST NOT be modified by either command.
 
 
 ---
