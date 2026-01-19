@@ -31,6 +31,7 @@ This release adds automated content compilation via a pre-commit git hook, ensur
 ### Changed
 
 - **package.json** — Added `book` and `prepare` scripts
+- **Content frontmatter** — Added missing YAML frontmatter to ensure all intended docs are included in the generated content manifest (eliminates orphan warnings)
 
 ### Behavior
 

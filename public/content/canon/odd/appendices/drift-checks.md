@@ -1,3 +1,14 @@
+---
+uri: klappy://canon/odd/drift-checks
+title: "Drift Checks"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["odd", "drift", "verification", "contracts"]
+---
+
 # Drift Checks
 
 Drift is the primary failure mode of ODD systems.

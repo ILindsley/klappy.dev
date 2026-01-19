@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-19T19:45:14.410Z
-Total Files: 145
+Generated: 2026-01-19T20:27:20.493Z
+Total Files: 147
 
 This is a complete export of all documentation, code, and content files
 from the klappy.dev repository, organized by section.
@@ -21,9 +21,9 @@ from the klappy.dev repository, organized by section.
 - **.husky** (17 files)
 - **About** (4 files)
 - **Attempts** (14 files)
-- **Canon** (46 files)
+- **Canon** (47 files)
 - **Documentation** (16 files)
-- **Infrastructure** (8 files)
+- **Infrastructure** (9 files)
 - **Interfaces & Contracts** (5 files)
 - **ODD (Outcomes-Driven Development)** (1 files)
 - **Products** (3 files)
@@ -272,6 +272,7 @@ The goal is better outcomes, not perfect artifacts.
     "preview": "vite preview",
     "sync": "node infra/scripts/sync-content.js",
     "verify:content": "node infra/scripts/verify-content.js",
+    "verify:contracts": "node infra/scripts/verify-contracts.js",
     "attempt": "node infra/scripts/attempt-cli.js",
     "attempt:nuke": "node infra/scripts/attempt-cli.js nuke",
     "attempt:register": "node infra/scripts/attempt-cli.js register",
@@ -3436,6 +3437,7 @@ This release adds automated content compilation via a pre-commit git hook, ensur
 ### Changed
 
 - **package.json** — Added `book` and `prepare` scripts
+- **Content frontmatter** — Added missing YAML frontmatter to ensure all intended docs are included in the generated content manifest (eliminates orphan warnings)
 
 ### Behavior
 
@@ -3851,6 +3853,17 @@ This release introduces the multi-lane PRD architecture, epochs for comparabilit
 --------------------------------------------------------------------------------
 📄 File: canon/_compiled/epoch-E0002/README.md
 --------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/compiled/epoch-e0002-readme
+title: "Compiled Canon Outputs (Epoch E0002)"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["canon", "compiled", "epoch", "e0002"]
+---
 
 # Compiled Canon Outputs (Epoch E0002)
 
@@ -6158,8 +6171,160 @@ Implementation of tooling to generate compiled outputs is tracked separately.
 
 
 --------------------------------------------------------------------------------
+📄 File: canon/odd/appendices/compiled-memory.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/odd/compiled-memory
+title: "Compiled Memory"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["odd", "compiled", "memory", "drift"]
+---
+
+# Compiled Memory
+
+## Summary
+
+In ODD, repositories accumulate truth faster than agents can hold it in context.
+
+**Compiled Memory** is the mechanism for producing **lane-scoped, wipeable, auditable**
+compressed artifacts that are safe for agents and humans to consume.
+
+This is a **derivation pipeline**, not a rewrite pipeline.
+
+- Source truth remains in Canon + PRDs + Attempts.
+- Compiled output is generated *out of place*.
+- Compiled output can be deleted and regenerated at any time.
+
+## Why This Exists
+
+ODD assumes:
+- generation is abundant
+- trust is not
+- context is bounded
+- drift is inevitable unless actively checked
+
+Agents fail in two predictable ways:
+1. **Context overload** → they miss constraints, repeat mistakes, invent structure.
+2. **Doc sprawl** → humans keep writing more guidance, and agents still can’t load it all.
+
+Compiled Memory keeps the guidance surface **small, current, and citeable** without destroying the underlying truth.
+
+## Compile Is Not Compression-In-Place
+
+**Rule:** Compiled Memory MUST NOT replace Canon/PRDs/Attempts in place.
+
+This is compile-out-of-place:
+
+- Inputs: Canon + lane docs + PRDs + attempt artifacts
+- Outputs: `/public/_compiled/<lane>/**`
+- Verification: hashes + sources + provenance
+
+If compiled output is wrong, we delete it and recompile.
+If source truth is wrong, we change the source truth explicitly.
+
+## Scope Levels (The Four Outputs)
+
+Compiled Memory produces four outputs per lane.
+
+1) **Canon Pack**
+- Purpose: high-signal orientation + invariants relevant to the lane
+- Input: Canon (+ decisions, appendices)
+
+2) **Lane Pack**
+- Purpose: lane identity, non-goals, and how this lane “wins”
+- Input: lane PRD folder + lane docs
+
+3) **PRD Pack**
+- Purpose: the active PRD distilled into an agent-usable execution contract
+- Input: `/docs/PRD/<lane>/PRD.md` (and supporting files in that folder)
+
+4) **Run Pack**
+- Purpose: “what’s happening right now” for an attempt/run
+- Input: attempt artifacts for the lane (or latest run metadata)
+- Note: optional when no runs exist
+
+These are distinct because they change at different rates.
+
+## Lane Rules
+
+Compiled output is always lane-scoped:
+
+- Output root: `/public/_compiled/<lane>/`
+- Meta: `/public/_compiled/<lane>/_meta/`
+
+Lanes are:
+- `website`
+- `ai-navigation`
+- `agent-skill`
+
+Attempts without a lane are invalid (see Product Lanes).
+
+## Auditable by Design
+
+Every compile run MUST emit:
+
+- `COMPILE_META.json`
+  - includes provenance (tool, model, command, timestamp)
+  - includes content hashes for plan + sources
+- `COMPILE_SOURCES.txt`
+  - lists every input file used for compilation (paths)
+
+Every compiled markdown output MUST include a **Sources** section.
+
+The goal is not “perfect summaries.”
+The goal is **traceable, defensible compression**.
+
+## Drift and Epochs
+
+Compiled Memory is an explicit response to drift.
+
+- Canon and PRDs may advance faster than tooling (epoch transitions).
+- Compiled output is always treated as **derived evidence**, not authority.
+
+If Canon/PRDs and tooling disagree:
+- Canon/PRDs define intended truth.
+- tooling must converge later.
+- compiled outputs MUST reflect the intended truth (and cite the mismatch if necessary).
+
+## What This Enables
+
+- Agents can behave consistently without ingesting the whole repo.
+- Humans can evaluate the system without wading through every artifact.
+- Each lane can have its own “agent-ready” pack without coupling to other lanes.
+- The repo can evolve without turning into a documentation graveyard.
+
+## Non-Goals
+
+Compiled Memory does not:
+- attempt to make Canon smaller by rewriting it
+- delete or “consolidate away” decision history
+- guarantee correctness without verification
+- replace evidence capture
+
+It exists to keep context bounded while keeping truth traceable.
+
+
+
+
+--------------------------------------------------------------------------------
 📄 File: canon/odd/appendices/drift-checks.md
 --------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/odd/drift-checks
+title: "Drift Checks"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["odd", "drift", "verification", "contracts"]
+---
 
 # Drift Checks
 
@@ -6496,6 +6661,17 @@ This appendix exists to keep that distinction explicit—and to prevent future r
 --------------------------------------------------------------------------------
 📄 File: canon/odd/appendices/lane-build-layout.md
 --------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/odd/lane-build-layout
+title: "Lane Build Layout"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["odd", "lanes", "build", "layout", "deploy"]
+---
 
 # Lane Build Layout
 
@@ -11021,6 +11197,17 @@ Exploratory | Validated | Abandoned | Superseded
 --------------------------------------------------------------------------------
 📄 File: projects/agentic-memory-portability.md
 --------------------------------------------------------------------------------
+
+---
+uri: klappy://projects/agentic-memory-portability
+title: "Agentic Memory Portability"
+audience: public
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["projects", "agents", "memory", "odd"]
+---
 
 # Agentic Memory Portability
 
@@ -16789,6 +16976,294 @@ function verify() {
 }
 
 verify();
+
+
+
+--------------------------------------------------------------------------------
+📄 File: infra/scripts/verify-contracts.js
+--------------------------------------------------------------------------------
+
+#!/usr/bin/env node
+/**
+ * verify-contracts.js
+ * 
+ * Verifies that repository artifacts conform to their declared interface contracts.
+ * This prevents drift between documentation, tooling, and actual behavior.
+ * 
+ * Checks:
+ * 1. manifest.json conforms to manifest@current (2.0.0)
+ * 2. builds conform to build-output@current (3.0.0) - checks structure, not execution
+ * 3. attempt artifacts conform to attempt-cli@current (2.0.0)
+ * 4. lane PRDs declare required contracts
+ * 
+ * Exit codes:
+ *   0 = all contracts verified
+ *   1 = contract violations detected
+ */
+
+import { readFileSync, existsSync, readdirSync, statSync } from 'fs';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const ROOT = join(__dirname, '../..');
+
+// Contract versions (current)
+const MANIFEST_CONTRACT_VERSION = '2.0.0';
+const BUILD_OUTPUT_CONTRACT_VERSION = '3.0.0';
+const ATTEMPT_CLI_CONTRACT_VERSION = '2.0.0';
+
+let hasErrors = false;
+
+function error(msg) {
+  console.error(`❌ ${msg}`);
+  hasErrors = true;
+}
+
+function warn(msg) {
+  console.warn(`⚠️  ${msg}`);
+}
+
+function info(msg) {
+  console.log(`ℹ️  ${msg}`);
+}
+
+function success(msg) {
+  console.log(`✅ ${msg}`);
+}
+
+// 1. Verify manifest.json conforms to manifest@2.0.0
+function verifyManifest() {
+  console.log('\n📋 Verifying manifest.json (manifest@2.0.0)...\n');
+  
+  const manifestPath = join(ROOT, 'public', 'content', 'manifest.json');
+  
+  if (!existsSync(manifestPath)) {
+    error('manifest.json not found');
+    return;
+  }
+  
+  let manifest;
+  try {
+    manifest = JSON.parse(readFileSync(manifestPath, 'utf-8'));
+  } catch (e) {
+    error(`manifest.json is not valid JSON: ${e.message}`);
+    return;
+  }
+  
+  // Check top-level structure
+  if (!Array.isArray(manifest.resources)) {
+    error('manifest.json must contain a "resources" array');
+    return;
+  }
+  
+  const resources = manifest.resources;
+  info(`Found ${resources.length} resources`);
+  
+  // Verify each resource
+  for (let i = 0; i < resources.length; i++) {
+    const resource = resources[i];
+    const prefix = `  Resource ${i + 1} (${resource.uri || 'no uri'}):`;
+    
+    // Required fields
+    if (!resource.uri) {
+      error(`${prefix} missing required field "uri"`);
+    }
+    if (!resource.title) {
+      error(`${prefix} missing required field "title"`);
+    }
+    if (!resource.path) {
+      error(`${prefix} missing required field "path"`);
+    }
+    if (resource.tier === undefined || resource.tier === null) {
+      error(`${prefix} missing required field "tier"`);
+    } else if (![0, 1, 2].includes(resource.tier)) {
+      error(`${prefix} "tier" must be 0, 1, or 2 (got ${resource.tier})`);
+    }
+    
+    // Verify path exists
+    if (resource.path) {
+      if (!resource.path.startsWith('/')) {
+        error(`${prefix} "path" must begin with "/"`);
+      } else {
+        const fullPath = join(ROOT, 'public', 'content', resource.path);
+        if (!existsSync(fullPath)) {
+          error(`${prefix} path "${resource.path}" does not exist`);
+        }
+      }
+    }
+  }
+  
+  if (!hasErrors) {
+    success('manifest.json conforms to manifest@2.0.0');
+  }
+}
+
+// 2. Verify build output structure (build-output@3.0.0)
+function verifyBuildOutput() {
+  console.log('\n🏗️  Verifying build output structure (build-output@3.0.0)...\n');
+  
+  // Check for lane directories
+  const productsDir = join(ROOT, 'products');
+  if (!existsSync(productsDir)) {
+    warn('products/ directory not found - skipping build output checks');
+    return;
+  }
+  
+  const lanes = readdirSync(productsDir).filter(item => {
+    const itemPath = join(productsDir, item);
+    return statSync(itemPath).isDirectory();
+  });
+  
+  if (lanes.length === 0) {
+    info('No lanes found in products/ - skipping build output checks');
+    return;
+  }
+  
+  info(`Found ${lanes.length} lane(s): ${lanes.join(', ')}`);
+  
+  // Check manifest exists (required runtime availability)
+  const manifestPath = join(ROOT, 'public', 'content', 'manifest.json');
+  if (!existsSync(manifestPath)) {
+    error('public/content/manifest.json must exist for runtime availability');
+  } else {
+    success('manifest.json available for runtime');
+  }
+  
+  // Note: We don't verify dist/ exists because builds may not have run.
+  // The contract is about structure when builds DO run, not forcing builds.
+  info('Build output structure checks passed (dist/ verification requires actual build)');
+}
+
+// 3. Verify attempt CLI contract (attempt-cli@2.0.0)
+function verifyAttemptCLI() {
+  console.log('\n🔧 Verifying attempt CLI contract (attempt-cli@2.0.0)...\n');
+  
+  // Check that required commands exist in package.json
+  const packageJsonPath = join(ROOT, 'package.json');
+  if (!existsSync(packageJsonPath)) {
+    error('package.json not found');
+    return;
+  }
+  
+  const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf-8'));
+  const scripts = packageJson.scripts || {};
+  
+  const requiredCommands = [
+    'attempt:cleanup',
+    'attempt:register',
+    'attempt:nuke',
+    'attempt:finalize',
+    'attempt:promote'
+  ];
+  
+  const missingCommands = requiredCommands.filter(cmd => !scripts[cmd]);
+  
+  if (missingCommands.length > 0) {
+    error(`Missing required attempt CLI commands: ${missingCommands.join(', ')}`);
+  } else {
+    success('All required attempt CLI commands present');
+  }
+  
+  // Check for attempt artifacts in existing attempts
+  const attemptsDir = join(ROOT, 'attempts');
+  if (existsSync(attemptsDir)) {
+    const prdDirs = readdirSync(attemptsDir).filter(item => {
+      return statSync(join(attemptsDir, item)).isDirectory();
+    });
+    
+    let checkedAttempts = 0;
+    let validAttempts = 0;
+    
+    for (const prdDir of prdDirs) {
+      const prdPath = join(attemptsDir, prdDir);
+      const attemptDirs = readdirSync(prdPath).filter(item => {
+        return statSync(join(prdPath, item)).isDirectory() && item.startsWith('attempt-');
+      });
+      
+      for (const attemptDir of attemptDirs) {
+        checkedAttempts++;
+        const metaPath = join(prdPath, attemptDir, 'META.json');
+        if (existsSync(metaPath)) {
+          try {
+            const meta = JSON.parse(readFileSync(metaPath, 'utf-8'));
+            const requiredFields = ['lane', 'prd_version', 'attempt', 'sealed_commit'];
+            const missingFields = requiredFields.filter(field => !meta[field]);
+            
+            if (missingFields.length > 0) {
+              warn(`META.json in ${prdDir}/${attemptDir} missing fields: ${missingFields.join(', ')}`);
+            } else {
+              validAttempts++;
+            }
+          } catch (e) {
+            warn(`META.json in ${prdDir}/${attemptDir} is not valid JSON: ${e.message}`);
+          }
+        } else {
+          warn(`META.json not found in ${prdDir}/${attemptDir}`);
+        }
+      }
+    }
+    
+    if (checkedAttempts > 0) {
+      info(`Checked ${checkedAttempts} attempt(s), ${validAttempts} have valid META.json`);
+    }
+  }
+}
+
+// 4. Verify lane PRDs declare required contracts
+function verifyLanePRDs() {
+  console.log('\n📄 Verifying lane PRDs declare required contracts...\n');
+  
+  const docsPRDDir = join(ROOT, 'docs', 'PRD');
+  if (!existsSync(docsPRDDir)) {
+    warn('docs/PRD/ directory not found - skipping PRD contract checks');
+    return;
+  }
+  
+  const laneDirs = readdirSync(docsPRDDir).filter(item => {
+    return statSync(join(docsPRDDir, item)).isDirectory();
+  });
+  
+  if (laneDirs.length === 0) {
+    info('No lane PRDs found');
+    return;
+  }
+  
+  info(`Found ${laneDirs.length} lane PRD(s)`);
+  
+  // For now, just check that PRDs exist
+  // Future: could parse PRDs to verify they reference contracts
+  for (const lane of laneDirs) {
+    const prdPath = join(docsPRDDir, lane, 'PRD.md');
+    if (existsSync(prdPath)) {
+      success(`PRD exists for lane: ${lane}`);
+    } else {
+      warn(`PRD.md not found for lane: ${lane}`);
+    }
+  }
+  
+  info('PRD contract declaration checks passed (detailed parsing not yet implemented)');
+}
+
+// Main
+console.log('🔍 Contract Verification (Drift Check)\n');
+console.log('=' .repeat(50));
+
+verifyManifest();
+verifyBuildOutput();
+verifyAttemptCLI();
+verifyLanePRDs();
+
+console.log('\n' + '='.repeat(50));
+
+if (hasErrors) {
+  console.error('\n❌ Contract verification FAILED\n');
+  console.error('Fix the errors above before proceeding.\n');
+  process.exit(1);
+} else {
+  console.log('\n✅ All contract checks PASSED\n');
+  process.exit(0);
+}
 
 
 

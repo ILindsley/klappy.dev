@@ -1,3 +1,14 @@
+---
+uri: klappy://canon/odd/lane-build-layout
+title: "Lane Build Layout"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["odd", "lanes", "build", "layout", "deploy"]
+---
+
 # Lane Build Layout
 
 This repository contains multiple **product lanes** that share Canon but must not collide in implementation output.

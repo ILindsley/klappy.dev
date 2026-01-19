@@ -1,3 +1,14 @@
+---
+uri: klappy://projects/agentic-memory-portability
+title: "Agentic Memory Portability"
+audience: public
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["projects", "agents", "memory", "odd"]
+---
+
 # Agentic Memory Portability
 
 ## Goal

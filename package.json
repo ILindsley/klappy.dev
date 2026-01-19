@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "sync": "node infra/scripts/sync-content.js",
     "verify:content": "node infra/scripts/verify-content.js",
+    "verify:contracts": "node infra/scripts/verify-contracts.js",
     "attempt": "node infra/scripts/attempt-cli.js",
     "attempt:nuke": "node infra/scripts/attempt-cli.js nuke",
     "attempt:register": "node infra/scripts/attempt-cli.js register",

@@ -26,6 +26,23 @@
       ]
     },
     {
+      "uri": "klappy://projects/agentic-memory-portability",
+      "path": "/projects/agentic-memory-portability.md",
+      "title": "Agentic Memory Portability",
+      "type": "text/markdown",
+      "audience": "public",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": [
+        "projects",
+        "agents",
+        "memory",
+        "odd"
+      ]
+    },
+    {
       "uri": "klappy://canon/odd/alignment-reviews",
       "path": "/canon/odd/appendices/alignment-reviews.md",
       "title": "Alignment Reviews",
@@ -139,6 +156,40 @@
         "compression",
         "compiled",
         "epochs",
+        "drift"
+      ]
+    },
+    {
+      "uri": "klappy://canon/compiled/epoch-e0002-readme",
+      "path": "/canon/_compiled/epoch-E0002/README.md",
+      "title": "Compiled Canon Outputs (Epoch E0002)",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": [
+        "canon",
+        "compiled",
+        "epoch",
+        "e0002"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/compiled-memory",
+      "path": "/canon/odd/appendices/compiled-memory.md",
+      "title": "Compiled Memory",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": [
+        "odd",
+        "compiled",
+        "memory",
         "drift"
       ]
     },
@@ -449,6 +500,23 @@
       ]
     },
     {
+      "uri": "klappy://canon/odd/drift-checks",
+      "path": "/canon/odd/appendices/drift-checks.md",
+      "title": "Drift Checks",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": [
+        "odd",
+        "drift",
+        "verification",
+        "contracts"
+      ]
+    },
+    {
       "uri": "klappy://canon/odd/epochs",
       "path": "/canon/odd/appendices/epochs.md",
       "title": "Epochs",
@@ -513,6 +581,24 @@
       "tags": [
         "about",
         "faq"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/lane-build-layout",
+      "path": "/canon/odd/appendices/lane-build-layout.md",
+      "title": "Lane Build Layout",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": [
+        "odd",
+        "lanes",
+        "build",
+        "layout",
+        "deploy"
       ]
     },
     {
