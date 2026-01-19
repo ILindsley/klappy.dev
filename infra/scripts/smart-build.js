@@ -90,6 +90,72 @@ function mirrorLaneDistToLegacyRootDist() {
   console.log('  ⚠️  Mirrored lane dist to legacy repo-root /dist');
 }
 
+/**
+ * Copy attempt evidence into dist so Cloudflare Pages can serve it.
+ * 
+ * E0003 Evidence-First Era requires evidence to be externally reviewable.
+ * Cloudflare only serves the configured build output directory.
+ * Therefore, evidence must be copied into products/<lane>/dist/_evidence/
+ * 
+ * Phase 0 approach: Copy all _runs folders for all PRD versions.
+ * This makes evidence browseable without smart-build needing to know the current run_id.
+ */
+function copyEvidenceToDist() {
+  console.log('\n4️⃣  Copying evidence to dist (E0003)...');
+  
+  const attemptsLanePath = join(ROOT, 'attempts', lane);
+  const evidenceDestPath = join(DIST_PATH, '_evidence');
+  
+  if (!existsSync(attemptsLanePath)) {
+    console.log(`  ⚠️  No attempts folder for lane: ${lane}`);
+    return;
+  }
+  
+  // Find all PRD version folders
+  const prdFolders = readdirSync(attemptsLanePath, { withFileTypes: true })
+    .filter(d => d.isDirectory() && d.name.startsWith('prd-'))
+    .map(d => d.name);
+  
+  if (prdFolders.length === 0) {
+    console.log('  ⚠️  No PRD folders found');
+    return;
+  }
+  
+  let copiedCount = 0;
+  
+  for (const prdFolder of prdFolders) {
+    const runsPath = join(attemptsLanePath, prdFolder, '_runs');
+    
+    if (existsSync(runsPath)) {
+      const destPath = join(evidenceDestPath, prdFolder, '_runs');
+      mkdirSync(destPath, { recursive: true });
+      cpSync(runsPath, destPath, { recursive: true });
+      copiedCount++;
+      console.log(`  ✅ Copied ${prdFolder}/_runs/ to dist/_evidence/`);
+    }
+    
+    // Also copy finalized attempt folders (attempt-001, etc.)
+    const attemptFolders = readdirSync(join(attemptsLanePath, prdFolder), { withFileTypes: true })
+      .filter(d => d.isDirectory() && d.name.startsWith('attempt-'))
+      .map(d => d.name);
+    
+    for (const attemptFolder of attemptFolders) {
+      const attemptPath = join(attemptsLanePath, prdFolder, attemptFolder);
+      const destPath = join(evidenceDestPath, prdFolder, attemptFolder);
+      mkdirSync(destPath, { recursive: true });
+      cpSync(attemptPath, destPath, { recursive: true });
+      copiedCount++;
+      console.log(`  ✅ Copied ${prdFolder}/${attemptFolder}/ to dist/_evidence/`);
+    }
+  }
+  
+  if (copiedCount === 0) {
+    console.log('  ⚠️  No evidence folders found to copy');
+  } else {
+    console.log(`\n  ✅ Evidence copied (${copiedCount} folders)`);
+  }
+}
+
 function viteBuild() {
   console.log('\n🔨 Building with Vite...\n');
   // Canonical output: products/<lane>/dist
@@ -139,6 +205,9 @@ function main() {
     copyPublicToDist();
   }
 
+  // E0003: Copy evidence into dist so Cloudflare can serve it
+  copyEvidenceToDist();
+  
   // Transitional compatibility: keep /dist around for current deploys.
   if (lane === 'ai-navigation' && existsSync(DIST_PATH)) {
     mirrorLaneDistToLegacyRootDist();

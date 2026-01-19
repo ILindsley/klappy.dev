@@ -20,6 +20,23 @@ Bootstrap (optional): `/infra/prompts/attempt-kickoff/BOOTSTRAP.md`
 
 ---
 
+## E0003 Evidence-First Completion Rule
+
+If the intended outcome is an online deployment, an attempt is not complete until:
+
+1) Branch is pushed to origin
+2) Cloudflare Pages preview build succeeds
+3) Preview URL returns HTTP 200
+4) Evidence URL returns HTTP 200 at:
+
+`/_evidence/<run_id>/EVIDENCE.md`
+
+Do not mark attempts complete with local-only proof.
+
+See `/canon/odd/decisions/D0014-e0003-evidence-first-era.md` for the full decision.
+
+---
+
 ## ⚠️ Before Starting
 
 1. **Identify which lane this attempt belongs to:**

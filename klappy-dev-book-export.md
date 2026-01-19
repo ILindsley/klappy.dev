@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-19T23:41:36.417Z
-Total Files: 166
+Generated: 2026-01-19T23:52:49.412Z
+Total Files: 167
 
 This is a complete export of all documentation, code, and content files
 from the klappy.dev repository, organized by section.
@@ -21,7 +21,7 @@ from the klappy.dev repository, organized by section.
 - **.husky** (17 files)
 - **About** (4 files)
 - **Attempts** (14 files)
-- **Canon** (51 files)
+- **Canon** (52 files)
 - **Documentation** (17 files)
 - **Infrastructure** (17 files)
 - **Interfaces & Contracts** (6 files)
@@ -1140,6 +1140,23 @@ All attempts must start from the lane's canonical kickoff prompt:
 - Agent Skill: `/infra/prompts/attempt-kickoff/agent-skill.md`
 
 Bootstrap (optional): `/infra/prompts/attempt-kickoff/BOOTSTRAP.md`
+
+---
+
+## E0003 Evidence-First Completion Rule
+
+If the intended outcome is an online deployment, an attempt is not complete until:
+
+1) Branch is pushed to origin
+2) Cloudflare Pages preview build succeeds
+3) Preview URL returns HTTP 200
+4) Evidence URL returns HTTP 200 at:
+
+`/_evidence/<run_id>/EVIDENCE.md`
+
+Do not mark attempts complete with local-only proof.
+
+See `/canon/odd/decisions/D0014-e0003-evidence-first-era.md` for the full decision.
 
 ---
 
@@ -3606,6 +3623,42 @@ This changelog tracks changes to the **Canon pack** as a whole.
 
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
+
+## 0.5.0 — 2026-01-19
+
+**E0003 — Evidence-First Era**
+
+This release declares E0003, a new epoch where online deployment evidence is mandatory for attempt completion.
+
+### Added
+
+- **E0003 epoch declaration** in `/canon/odd/appendices/epochs.md`
+- **D0014 decision log** (`/canon/odd/decisions/D0014-e0003-evidence-first-era.md`) — Documents the epoch transition
+- **Evidence copying in smart-build.js** — Automatically copies `attempts/<lane>/prd-vX.Y/_runs/` and `attempt-NNN/` folders into `products/<lane>/dist/_evidence/`
+
+### Changed
+
+- **ATTEMPT_KICKOFF.md** — Added E0003 completion rule section at top
+- **attempt-cli.js** — Default epoch is now `E0003-evidence-first-era`
+
+### Breaking Changes (Epoch Transition)
+
+- Local builds are no longer sufficient proof for attempt completion
+- Attempts must provide HTTP 200 preview URL AND evidence URL
+- E0002 attempts are not comparable to E0003 attempts
+
+### Philosophy
+
+- The fitness landscape changed: success is now gated by deployment correctness
+- Evidence must be externally reviewable, not locally asserted
+- If a preview URL cannot be verified, stop
+
+### Notes
+
+- E0002 attempts remain valid within E0002
+- Cloudflare Pages must be configured with correct build command and output directory
+
+---
 
 ## 0.4.10 — 2026-01-19
 
@@ -7137,6 +7190,40 @@ Naming epochs makes those shifts explicit so we can:
 If the evaluation landscape changed, say so.
 That's what an epoch is for.
 
+---
+
+## E0003 — Evidence-First Era
+
+### What changed
+
+E0003 begins when online deployment evidence becomes mandatory for attempt completion.
+
+In this epoch, a local build is not sufficient proof when the intended outcome is an online deployment.
+
+### Binding rule (new fitness landscape)
+
+An attempt is not complete until all are true:
+
+1) The attempt branch is pushed to origin
+2) Cloudflare Pages preview deployment succeeds (build passes)
+3) The preview URL returns HTTP 200 and renders the site
+4) The evidence URL returns HTTP 200 and renders the evidence at:
+
+`/_evidence/<run_id>/EVIDENCE.md`
+
+### Why this is a new epoch
+
+This change alters the repository's selection pressure:
+
+- Success is now gated by deployment correctness, not just build correctness
+- Evidence must be externally reviewable, not locally asserted
+- Attempts become comparable only within the same deploy-evidence regime
+
+### Compatibility
+
+- E0002 attempts remain valid within E0002.
+- E0002 attempts are not comparable to E0003 attempts by default.
+
 
 
 --------------------------------------------------------------------------------
@@ -9877,6 +9964,86 @@ This decision does not prescribe:
 
 It defines only the canonical output location when a lane produces a deployable build artifact.
 
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/odd/decisions/D0014-e0003-evidence-first-era.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/odd/decisions/D0014
+title: "D0014: Declare E0003 Evidence-First Era"
+audience: canon
+exposure: internal
+tier: 2
+voice: first_person
+stability: stable
+tags: ["odd", "epochs", "evidence", "cloudflare", "attempts", "lanes"]
+---
+
+# D0014: Declare E0003 Evidence-First Era
+
+**Status:** Accepted  
+**Date:** 2026-01-19  
+**Decider:** Klappy  
+**Epoch:** E0003  
+**Related:** D0009 (Multi-lane PRDs), D0012 (Transition Interpretation), D0013 (Lane-scoped dist), Deploy Evidence (klappy://canon/odd/deploy-evidence)
+
+## Context
+
+Under E0002, attempts could claim success with local build proof and repository artifacts.
+
+In practice, this created invalid conclusions:
+
+- Cloudflare Pages serves only the configured build output directory
+- `/attempts/**` is not served by Pages by default
+- Agents completed "successful" attempts that never rendered online
+- Evidence URLs were often hypothetical or unverified
+
+The system incentivized local-only success and narrative closure instead of externally reviewable proof.
+
+## Decision
+
+We declare **E0003 — Evidence-First Era**.
+
+In E0003, an attempt is not complete unless:
+
+1) The attempt branch is pushed to origin
+2) Cloudflare Pages preview deployment succeeds
+3) The preview URL returns HTTP 200 and renders the site
+4) The evidence URL returns HTTP 200 and renders evidence at:
+
+`/_evidence/<run_id>/EVIDENCE.md`
+
+Additionally:
+
+- Evidence MUST be copied into the lane build output:
+  `products/<lane>/dist/_evidence/<run_id>/`
+- Attempts that cannot prove (2)-(4) MUST seal as failure
+
+## Consequences
+
+### Positive
+
+- Prevents "success without deployment"
+- Makes evidence externally reviewable and durable
+- Forces alignment between docs, tooling, and Cloudflare configuration
+
+### Negative
+
+- Adds operational friction (intentional)
+- Increases failure rate until tooling and CF projects are correctly configured
+
+## Compatibility
+
+- E0002 attempts remain valid within E0002.
+- E0002 attempts are not comparable to E0003 attempts by default.
+
+## Minimal operational rule
+
+If a preview URL cannot be verified, stop.
+No additional work is permitted under a false success state.
 
 
 
@@ -16062,7 +16229,7 @@ Options:
     // IDENTITY
     lane: lane,
     prd_version: `v${prd}`,
-    epoch_id: 'E0002-multi-lane-era',  // Current epoch
+    epoch_id: 'E0003-evidence-first-era',  // Current epoch
     run_id: runId,
     attempt: null, // Will be assigned during finalize
     
@@ -16105,7 +16272,7 @@ Options:
   console.log('\n🎫 RUN REGISTERED\n');
   console.log(`  Lane:          ${lane}`);
   console.log(`  PRD Version:   v${prd}`);
-  console.log(`  Epoch:         E0002-multi-lane-era`);
+  console.log(`  Epoch:         E0003-evidence-first-era`);
   console.log(`  Run ID:        ${runId}`);
   console.log('');
   console.log('  LANE PATHS:');
@@ -18044,6 +18211,72 @@ function mirrorLaneDistToLegacyRootDist() {
   console.log('  ⚠️  Mirrored lane dist to legacy repo-root /dist');
 }
 
+/**
+ * Copy attempt evidence into dist so Cloudflare Pages can serve it.
+ * 
+ * E0003 Evidence-First Era requires evidence to be externally reviewable.
+ * Cloudflare only serves the configured build output directory.
+ * Therefore, evidence must be copied into products/<lane>/dist/_evidence/
+ * 
+ * Phase 0 approach: Copy all _runs folders for all PRD versions.
+ * This makes evidence browseable without smart-build needing to know the current run_id.
+ */
+function copyEvidenceToDist() {
+  console.log('\n4️⃣  Copying evidence to dist (E0003)...');
+  
+  const attemptsLanePath = join(ROOT, 'attempts', lane);
+  const evidenceDestPath = join(DIST_PATH, '_evidence');
+  
+  if (!existsSync(attemptsLanePath)) {
+    console.log(`  ⚠️  No attempts folder for lane: ${lane}`);
+    return;
+  }
+  
+  // Find all PRD version folders
+  const prdFolders = readdirSync(attemptsLanePath, { withFileTypes: true })
+    .filter(d => d.isDirectory() && d.name.startsWith('prd-'))
+    .map(d => d.name);
+  
+  if (prdFolders.length === 0) {
+    console.log('  ⚠️  No PRD folders found');
+    return;
+  }
+  
+  let copiedCount = 0;
+  
+  for (const prdFolder of prdFolders) {
+    const runsPath = join(attemptsLanePath, prdFolder, '_runs');
+    
+    if (existsSync(runsPath)) {
+      const destPath = join(evidenceDestPath, prdFolder, '_runs');
+      mkdirSync(destPath, { recursive: true });
+      cpSync(runsPath, destPath, { recursive: true });
+      copiedCount++;
+      console.log(`  ✅ Copied ${prdFolder}/_runs/ to dist/_evidence/`);
+    }
+    
+    // Also copy finalized attempt folders (attempt-001, etc.)
+    const attemptFolders = readdirSync(join(attemptsLanePath, prdFolder), { withFileTypes: true })
+      .filter(d => d.isDirectory() && d.name.startsWith('attempt-'))
+      .map(d => d.name);
+    
+    for (const attemptFolder of attemptFolders) {
+      const attemptPath = join(attemptsLanePath, prdFolder, attemptFolder);
+      const destPath = join(evidenceDestPath, prdFolder, attemptFolder);
+      mkdirSync(destPath, { recursive: true });
+      cpSync(attemptPath, destPath, { recursive: true });
+      copiedCount++;
+      console.log(`  ✅ Copied ${prdFolder}/${attemptFolder}/ to dist/_evidence/`);
+    }
+  }
+  
+  if (copiedCount === 0) {
+    console.log('  ⚠️  No evidence folders found to copy');
+  } else {
+    console.log(`\n  ✅ Evidence copied (${copiedCount} folders)`);
+  }
+}
+
 function viteBuild() {
   console.log('\n🔨 Building with Vite...\n');
   // Canonical output: products/<lane>/dist
@@ -18093,6 +18326,9 @@ function main() {
     copyPublicToDist();
   }
 
+  // E0003: Copy evidence into dist so Cloudflare can serve it
+  copyEvidenceToDist();
+  
   // Transitional compatibility: keep /dist around for current deploys.
   if (lane === 'ai-navigation' && existsSync(DIST_PATH)) {
     mirrorLaneDistToLegacyRootDist();

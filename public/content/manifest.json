@@ -507,6 +507,25 @@
       ]
     },
     {
+      "uri": "klappy://canon/odd/decisions/D0014",
+      "path": "/canon/odd/decisions/D0014-e0003-evidence-first-era.md",
+      "title": "D0014: Declare E0003 Evidence-First Era",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "internal",
+      "tier": 2,
+      "voice": "first_person",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "epochs",
+        "evidence",
+        "cloudflare",
+        "attempts",
+        "lanes"
+      ]
+    },
+    {
       "uri": "klappy://canon/decision-rules",
       "path": "/canon/decision-rules.md",
       "title": "Decision Rules",

@@ -16,6 +16,42 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.5.0 — 2026-01-19
+
+**E0003 — Evidence-First Era**
+
+This release declares E0003, a new epoch where online deployment evidence is mandatory for attempt completion.
+
+### Added
+
+- **E0003 epoch declaration** in `/canon/odd/appendices/epochs.md`
+- **D0014 decision log** (`/canon/odd/decisions/D0014-e0003-evidence-first-era.md`) — Documents the epoch transition
+- **Evidence copying in smart-build.js** — Automatically copies `attempts/<lane>/prd-vX.Y/_runs/` and `attempt-NNN/` folders into `products/<lane>/dist/_evidence/`
+
+### Changed
+
+- **ATTEMPT_KICKOFF.md** — Added E0003 completion rule section at top
+- **attempt-cli.js** — Default epoch is now `E0003-evidence-first-era`
+
+### Breaking Changes (Epoch Transition)
+
+- Local builds are no longer sufficient proof for attempt completion
+- Attempts must provide HTTP 200 preview URL AND evidence URL
+- E0002 attempts are not comparable to E0003 attempts
+
+### Philosophy
+
+- The fitness landscape changed: success is now gated by deployment correctness
+- Evidence must be externally reviewable, not locally asserted
+- If a preview URL cannot be verified, stop
+
+### Notes
+
+- E0002 attempts remain valid within E0002
+- Cloudflare Pages must be configured with correct build command and output directory
+
+---
+
 ## 0.4.10 — 2026-01-19
 
 **Deploy Evidence — Evidence Must Be in Build Output**

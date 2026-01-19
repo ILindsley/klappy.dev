@@ -1222,7 +1222,7 @@ Options:
     // IDENTITY
     lane: lane,
     prd_version: `v${prd}`,
-    epoch_id: 'E0002-multi-lane-era',  // Current epoch
+    epoch_id: 'E0003-evidence-first-era',  // Current epoch
     run_id: runId,
     attempt: null, // Will be assigned during finalize
     
@@ -1265,7 +1265,7 @@ Options:
   console.log('\n🎫 RUN REGISTERED\n');
   console.log(`  Lane:          ${lane}`);
   console.log(`  PRD Version:   v${prd}`);
-  console.log(`  Epoch:         E0002-multi-lane-era`);
+  console.log(`  Epoch:         E0003-evidence-first-era`);
   console.log(`  Run ID:        ${runId}`);
   console.log('');
   console.log('  LANE PATHS:');

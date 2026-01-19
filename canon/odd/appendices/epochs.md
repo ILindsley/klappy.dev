@@ -158,3 +158,37 @@ Naming epochs makes those shifts explicit so we can:
 
 If the evaluation landscape changed, say so.
 That's what an epoch is for.
+
+---
+
+## E0003 — Evidence-First Era
+
+### What changed
+
+E0003 begins when online deployment evidence becomes mandatory for attempt completion.
+
+In this epoch, a local build is not sufficient proof when the intended outcome is an online deployment.
+
+### Binding rule (new fitness landscape)
+
+An attempt is not complete until all are true:
+
+1) The attempt branch is pushed to origin
+2) Cloudflare Pages preview deployment succeeds (build passes)
+3) The preview URL returns HTTP 200 and renders the site
+4) The evidence URL returns HTTP 200 and renders the evidence at:
+
+`/_evidence/<run_id>/EVIDENCE.md`
+
+### Why this is a new epoch
+
+This change alters the repository's selection pressure:
+
+- Success is now gated by deployment correctness, not just build correctness
+- Evidence must be externally reviewable, not locally asserted
+- Attempts become comparable only within the same deploy-evidence regime
+
+### Compatibility
+
+- E0002 attempts remain valid within E0002.
+- E0002 attempts are not comparable to E0003 attempts by default.
