@@ -16,6 +16,35 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.4.7 — 2026-01-19
+
+**Canonical Lane Kickoff Prompts**
+
+This release introduces reusable, in-repo prompt files for attempt kickoffs, eliminating one-off prompt drift.
+
+### Added
+
+- **Website Lane Kickoff** (`/infra/prompts/attempt-kickoff/website.md`) — Canonical kickoff prompt for website lane attempts with locked order, scope guards, and evidence requirements
+- **Bootstrap Prompt** (`/infra/prompts/attempt-kickoff/BOOTSTRAP.md`) — Minimal instructions for agents to read the lane kickoff file verbatim
+
+### Changed
+
+- **ATTEMPT_KICKOFF.md** — Added "Canonical Lane Kickoff Prompts" section documenting all lane prompt paths
+
+### Philosophy
+
+- Prompts live in-repo, not in chat history
+- One prompt per lane, no one-off variations
+- Bootstrap pattern keeps Cursor paste minimal: `Use /infra/prompts/attempt-kickoff/BOOTSTRAP.md, lane = website.`
+- Lane kickoff files are canonical and intentionally changed (decision log if needed)
+
+### Notes
+
+- AI-navigation and agent-skill lane kickoff files can be added later using the same pattern
+- This is infrastructure for prompt hygiene, not a behavioral change
+
+---
+
 ## 0.4.6 — 2026-01-19
 
 **Pre-commit Hook for Content Compilation**

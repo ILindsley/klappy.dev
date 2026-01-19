@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-19T20:53:20.175Z
-Total Files: 161
+Generated: 2026-01-19T21:01:27.811Z
+Total Files: 163
 
 This is a complete export of all documentation, code, and content files
 from the klappy.dev repository, organized by section.
@@ -23,7 +23,7 @@ from the klappy.dev repository, organized by section.
 - **Attempts** (14 files)
 - **Canon** (49 files)
 - **Documentation** (16 files)
-- **Infrastructure** (15 files)
+- **Infrastructure** (17 files)
 - **Interfaces & Contracts** (6 files)
 - **ODD (Outcomes-Driven Development)** (1 files)
 - **Products** (3 files)
@@ -1126,6 +1126,20 @@ The attempt folder contains everything needed:
 This document describes the **human workflow** for running attempts.
 
 **For agents:** Go directly to `/docs/AGENT_KICKOFF.md` — that is the canonical agent entry point.
+
+---
+
+## Canonical Lane Kickoff Prompts
+
+Agents do NOT use one-off prompts.
+
+All attempts must start from the lane's canonical kickoff prompt:
+
+- Website: `/infra/prompts/attempt-kickoff/website.md`
+- AI Navigation: `/infra/prompts/attempt-kickoff/ai-navigation.md`
+- Agent Skill: `/infra/prompts/attempt-kickoff/agent-skill.md`
+
+Bootstrap (optional): `/infra/prompts/attempt-kickoff/BOOTSTRAP.md`
 
 ---
 
@@ -3446,6 +3460,35 @@ This changelog tracks changes to the **Canon pack** as a whole.
 
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
+
+## 0.4.7 — 2026-01-19
+
+**Canonical Lane Kickoff Prompts**
+
+This release introduces reusable, in-repo prompt files for attempt kickoffs, eliminating one-off prompt drift.
+
+### Added
+
+- **Website Lane Kickoff** (`/infra/prompts/attempt-kickoff/website.md`) — Canonical kickoff prompt for website lane attempts with locked order, scope guards, and evidence requirements
+- **Bootstrap Prompt** (`/infra/prompts/attempt-kickoff/BOOTSTRAP.md`) — Minimal instructions for agents to read the lane kickoff file verbatim
+
+### Changed
+
+- **ATTEMPT_KICKOFF.md** — Added "Canonical Lane Kickoff Prompts" section documenting all lane prompt paths
+
+### Philosophy
+
+- Prompts live in-repo, not in chat history
+- One prompt per lane, no one-off variations
+- Bootstrap pattern keeps Cursor paste minimal: `Use /infra/prompts/attempt-kickoff/BOOTSTRAP.md, lane = website.`
+- Lane kickoff files are canonical and intentionally changed (decision log if needed)
+
+### Notes
+
+- AI-navigation and agent-skill lane kickoff files can be added later using the same pattern
+- This is infrastructure for prompt hygiene, not a behavioral change
+
+---
 
 ## 0.4.6 — 2026-01-19
 
@@ -14214,6 +14257,153 @@ Cloudflare configuration for lane deployments:
 If your build doesn't produce `products/<lane>/dist` with a working `index.html` that loads the manifest, **your attempt fails the deploy contract**.
 
 Fix the build. Don't modify this contract.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: infra/prompts/attempt-kickoff/BOOTSTRAP.md
+--------------------------------------------------------------------------------
+
+Copy/paste the contents of the lane kickoff file **verbatim** into this chat, then follow it exactly.
+
+Lane kickoff file:
+- `/infra/prompts/attempt-kickoff/<lane>.md`
+
+Rules:
+- Do not summarize it
+- Do not "improve" it
+- Do not merge it with other guidance
+- Treat it as the canonical instructions
+
+
+
+--------------------------------------------------------------------------------
+📄 File: infra/prompts/attempt-kickoff/website.md
+--------------------------------------------------------------------------------
+
+---
+id: attempt-kickoff-website
+lane: website
+status: canonical
+epoch: E0002
+audience: agents
+---
+
+# Attempt Kickoff — Website Lane (E0002)
+
+This document is the canonical kickoff prompt for **website** lane attempts.
+It is designed to be copy/pasted into an agent chat **without modification**.
+
+If this file changes, it must be changed intentionally (decision log if needed).
+No one-off prompts.
+
+---
+
+## Read First (in order)
+
+1) `/canon/odd/appendices/product-lanes.md`  
+2) `/docs/PRD/website/PRD.md`  
+3) `/docs/ATTEMPT_KICKOFF.md`  
+4) `/canon/constraints.md` (or the repo's canonical constraints doc)
+
+---
+
+## Lane Declaration (LOCKED)
+
+- **Lane:** `website`
+- **PRD:** `/docs/PRD/website/PRD.md`
+- **Attempt output:** `/attempts/website/prd-vX.Y/attempt-NNN/`
+- **Build output (canonical, D0013):** `products/website/dist/`
+
+**Invariant:** Attempts without a lane are invalid.
+
+---
+
+## Non-Negotiables (Scope Guard)
+
+You MUST NOT:
+
+- Modify `canon/**`
+- Modify other lanes (`ai-navigation`, `agent-skill`)
+- Touch root `/src/**` (treat as other-lane territory)
+- Add "helpful" infra, contracts, audits, compile packs, or refactors
+
+This attempt's only job is: **produce a working website in the website lane**.
+
+---
+
+## First Actions (LOCKED ORDER)
+
+1) Register provenance (no code changes before this):
+```bash
+npm run attempt:register -- --lane website --tool <tool> --agent <agent> --model "<model>"
+```
+
+2) Nuke the lane work area immediately after registration:
+```bash
+npm run attempt:nuke -- --lane website
+```
+
+---
+
+## Build Requirements (Website MVP)
+
+Implement a minimal website app in:
+- `products/website/src/**`
+
+It MUST:
+- Load `/content/manifest.json` at runtime
+- Render a home page with progressive disclosure (not overwhelming)
+- Provide navigation: list → detail view (internal state nav is fine)
+- Render markdown content from the manifest's paths
+- Be mobile-usable
+- Keep initial primary navigation ≤ 7 items (per PRD)
+- Never invent content: only display what exists in the manifest
+
+Implementation constraints:
+- Keep it minimal.
+- Prefer the repo's existing stack patterns (likely Vite + React), but do not introduce a new framework.
+- No router required if you can do a simple view switch.
+
+---
+
+## Evidence Requirements (STRICT)
+
+Write evidence under the run folder created by registration, e.g.:
+
+```
+attempts/website/prd-vX.Y/_runs/<run_id>/
+```
+
+Include:
+- `ATTEMPT.md` (what you did, what you did NOT do)
+- `EVIDENCE.md` (proof bullets + commands)
+- Screenshots:
+  - home (desktop)
+  - home (mobile viewport)
+  - detail page (any canon doc)
+
+Proof requirements:
+- `products/website/dist/index.html` exists after build
+- commands to reproduce locally are listed
+
+---
+
+## Completion
+
+You are not done until:
+- Build passes for the website lane
+- Evidence exists in the run folder
+- You have submitted (per attempt workflow)
+
+Do not promote unless explicitly instructed by the human.
+
+---
+
+## Before you touch code
+
+List the exact files you will create/modify and why.
+Then begin.
 
 
 

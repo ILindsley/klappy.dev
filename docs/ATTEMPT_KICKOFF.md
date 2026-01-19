@@ -6,6 +6,20 @@ This document describes the **human workflow** for running attempts.
 
 ---
 
+## Canonical Lane Kickoff Prompts
+
+Agents do NOT use one-off prompts.
+
+All attempts must start from the lane's canonical kickoff prompt:
+
+- Website: `/infra/prompts/attempt-kickoff/website.md`
+- AI Navigation: `/infra/prompts/attempt-kickoff/ai-navigation.md`
+- Agent Skill: `/infra/prompts/attempt-kickoff/agent-skill.md`
+
+Bootstrap (optional): `/infra/prompts/attempt-kickoff/BOOTSTRAP.md`
+
+---
+
 ## ⚠️ Before Starting
 
 1. **Identify which lane this attempt belongs to:**
