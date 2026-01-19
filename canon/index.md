@@ -308,6 +308,8 @@ The drift-prevention mechanism. When docs, prompts, and tooling diverge, truth b
 How lanes avoid /src and /dist collisions. Worktrees isolate, deployments are lane-scoped.
 • Online Evidence Requirement (odd/appendices/online-evidence.md)
 Why "works on my machine" is not evidence. Attempts are invalid without online preview URLs.
+• Deploy Evidence (odd/appendices/deploy-evidence.md)
+Why evidence must be in the build output. Cloudflare only serves products/<lane>/dist, not /attempts/**.
 
 ---
 

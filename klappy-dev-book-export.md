@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-19T22:58:51.157Z
-Total Files: 165
+Generated: 2026-01-19T23:41:36.417Z
+Total Files: 166
 
 This is a complete export of all documentation, code, and content files
 from the klappy.dev repository, organized by section.
@@ -21,7 +21,7 @@ from the klappy.dev repository, organized by section.
 - **.husky** (17 files)
 - **About** (4 files)
 - **Attempts** (14 files)
-- **Canon** (50 files)
+- **Canon** (51 files)
 - **Documentation** (17 files)
 - **Infrastructure** (17 files)
 - **Interfaces & Contracts** (6 files)
@@ -3607,6 +3607,34 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.4.10 — 2026-01-19
+
+**Deploy Evidence — Evidence Must Be in Build Output**
+
+This release clarifies that evidence must be copied into the build output so Cloudflare Pages can serve it.
+
+### Added
+
+- **Deploy Evidence** (`/canon/odd/appendices/deploy-evidence.md`) — Explains that Cloudflare only serves the build output directory, so evidence must be copied into `products/<lane>/dist/_evidence/<run_id>/`
+
+### Changed
+
+- **Website Kickoff Prompt** (`/infra/prompts/attempt-kickoff/website.md`) — Added "Completion Criteria (Non-Negotiable)" and "Evidence Publishing Rule" sections
+
+### Philosophy
+
+- Cloudflare Pages does NOT serve `/attempts/**` from the repo
+- Evidence URLs pointing to `/attempts/**` on a Pages domain are invalid
+- Evidence must be copied into `products/<lane>/dist/_evidence/<run_id>/` to be accessible
+- The evidence URL is then `/_evidence/<run_id>/EVIDENCE.md` on the preview site
+
+### Notes
+
+- This is an addendum to 0.4.9 (Online Evidence Requirement)
+- Together they enforce: push branch + build succeeds + preview URL works + evidence URL works
+
+---
+
 ## 0.4.9 — 2026-01-19
 
 **Online Evidence Requirement**
@@ -5491,6 +5519,8 @@ The drift-prevention mechanism. When docs, prompts, and tooling diverge, truth b
 How lanes avoid /src and /dist collisions. Worktrees isolate, deployments are lane-scoped.
 • Online Evidence Requirement (odd/appendices/online-evidence.md)
 Why "works on my machine" is not evidence. Attempts are invalid without online preview URLs.
+• Deploy Evidence (odd/appendices/deploy-evidence.md)
+Why evidence must be in the build output. Cloudflare only serves products/<lane>/dist, not /attempts/**.
 
 ---
 
@@ -6826,6 +6856,59 @@ Compiled Memory does not:
 
 It exists to keep context bounded while keeping truth traceable.
 
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/odd/appendices/deploy-evidence.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/odd/deploy-evidence
+title: "Deploy Evidence"
+audience: canon
+exposure: nav
+tier: 2
+voice: first_person
+stability: stable
+tags: ["odd", "deploy", "evidence", "cloudflare", "attempts"]
+---
+
+# Deploy Evidence
+
+## Summary
+
+In ODD, evidence is only valid if it is externally reviewable.
+
+Local builds are not sufficient proof when the intended outcome is an online deployment.
+
+## Cloudflare Pages Reality
+
+Cloudflare Pages serves only the configured build output directory.
+It does **not** serve arbitrary repo folders such as `/attempts/**`.
+
+Therefore, any "Evidence URL" that points to `/attempts/**` on a Pages domain is invalid.
+
+## Required Evidence Publication Path
+
+Evidence MUST be copied into the lane build output so it is served by Pages:
+
+`products/<lane>/dist/_evidence/<run_id>/EVIDENCE.md`
+
+This makes the evidence accessible from the preview deployment at:
+
+`/_evidence/<run_id>/EVIDENCE.md`
+
+## Completion Rule
+
+An attempt is not complete until all are true:
+
+1) The branch is pushed to origin  
+2) Cloudflare preview build succeeds  
+3) The preview URL renders (HTTP 200)  
+4) The evidence URL renders (HTTP 200)
+
+If (2)-(4) cannot be proven, the attempt must seal as failure.
 
 
 
@@ -14712,14 +14795,35 @@ Proof requirements:
 
 ---
 
-## Completion
+## Completion Criteria (Non-Negotiable)
 
-You are not done until:
-- Build passes for the website lane
-- Evidence exists in the run folder
-- You have submitted (per attempt workflow)
+An attempt is NOT complete until all are true:
 
-Do not promote unless explicitly instructed by the human.
+1) The attempt branch is pushed to origin.
+2) Cloudflare Pages preview deployment succeeds (build passes).
+3) The preview URL returns HTTP 200 and renders the site.
+4) Evidence is accessible on the preview site at:
+
+   `/_evidence/<run_id>/EVIDENCE.md`
+
+If any of these cannot be proven, the attempt MUST seal as FAILURE with an explanation and stop.
+
+---
+
+## Evidence Publishing Rule
+
+Cloudflare Pages serves only the configured build output directory.
+
+Therefore, attempt evidence MUST be copied into:
+
+`products/<lane>/dist/_evidence/<run_id>/`
+
+Minimum required files:
+- EVIDENCE.md
+- ATTEMPT.md
+- any screenshots/assets referenced by evidence
+
+See `/canon/odd/appendices/deploy-evidence.md` for the full requirement.
 
 ---
 

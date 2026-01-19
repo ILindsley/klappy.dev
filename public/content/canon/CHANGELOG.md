@@ -16,6 +16,34 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.4.10 — 2026-01-19
+
+**Deploy Evidence — Evidence Must Be in Build Output**
+
+This release clarifies that evidence must be copied into the build output so Cloudflare Pages can serve it.
+
+### Added
+
+- **Deploy Evidence** (`/canon/odd/appendices/deploy-evidence.md`) — Explains that Cloudflare only serves the build output directory, so evidence must be copied into `products/<lane>/dist/_evidence/<run_id>/`
+
+### Changed
+
+- **Website Kickoff Prompt** (`/infra/prompts/attempt-kickoff/website.md`) — Added "Completion Criteria (Non-Negotiable)" and "Evidence Publishing Rule" sections
+
+### Philosophy
+
+- Cloudflare Pages does NOT serve `/attempts/**` from the repo
+- Evidence URLs pointing to `/attempts/**` on a Pages domain are invalid
+- Evidence must be copied into `products/<lane>/dist/_evidence/<run_id>/` to be accessible
+- The evidence URL is then `/_evidence/<run_id>/EVIDENCE.md` on the preview site
+
+### Notes
+
+- This is an addendum to 0.4.9 (Online Evidence Requirement)
+- Together they enforce: push branch + build succeeds + preview URL works + evidence URL works
+
+---
+
 ## 0.4.9 — 2026-01-19
 
 **Online Evidence Requirement**

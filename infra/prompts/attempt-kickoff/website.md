@@ -106,14 +106,35 @@ Proof requirements:
 
 ---
 
-## Completion
+## Completion Criteria (Non-Negotiable)
 
-You are not done until:
-- Build passes for the website lane
-- Evidence exists in the run folder
-- You have submitted (per attempt workflow)
+An attempt is NOT complete until all are true:
 
-Do not promote unless explicitly instructed by the human.
+1) The attempt branch is pushed to origin.
+2) Cloudflare Pages preview deployment succeeds (build passes).
+3) The preview URL returns HTTP 200 and renders the site.
+4) Evidence is accessible on the preview site at:
+
+   `/_evidence/<run_id>/EVIDENCE.md`
+
+If any of these cannot be proven, the attempt MUST seal as FAILURE with an explanation and stop.
+
+---
+
+## Evidence Publishing Rule
+
+Cloudflare Pages serves only the configured build output directory.
+
+Therefore, attempt evidence MUST be copied into:
+
+`products/<lane>/dist/_evidence/<run_id>/`
+
+Minimum required files:
+- EVIDENCE.md
+- ATTEMPT.md
+- any screenshots/assets referenced by evidence
+
+See `/canon/odd/appendices/deploy-evidence.md` for the full requirement.
 
 ---
 

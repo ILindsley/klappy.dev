@@ -537,6 +537,24 @@
       ]
     },
     {
+      "uri": "klappy://canon/odd/deploy-evidence",
+      "path": "/canon/odd/appendices/deploy-evidence.md",
+      "title": "Deploy Evidence",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "first_person",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "deploy",
+        "evidence",
+        "cloudflare",
+        "attempts"
+      ]
+    },
+    {
       "uri": "klappy://canon/odd/drift-checks",
       "path": "/canon/odd/appendices/drift-checks.md",
       "title": "Drift Checks",
