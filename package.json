@@ -10,6 +10,8 @@
     "sync": "node infra/scripts/sync-content.js",
     "verify:content": "node infra/scripts/verify-content.js",
     "verify:contracts": "node infra/scripts/verify-contracts.js",
+    "lane:compile": "node infra/scripts/compile-pack.js",
+    "verify:compiled": "node infra/scripts/verify-compiled.js",
     "attempt": "node infra/scripts/attempt-cli.js",
     "attempt:nuke": "node infra/scripts/attempt-cli.js nuke",
     "attempt:register": "node infra/scripts/attempt-cli.js register",

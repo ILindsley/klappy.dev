@@ -1,0 +1,24 @@
+{
+  "lane": "website",
+  "pack": "author",
+  "built_at": "2026-01-19T20:43:48.761Z",
+  "git_commit": "644fb5fb282d7c27a990ae24d62badd1dd36c734",
+  "sources": [
+    "canon/index.md",
+    "canon/odd/appendices/product-lanes.md",
+    "canon/odd/appendices/epochs.md",
+    "canon/odd/appendices/compilation.md",
+    "canon/odd/appendices/compilation-targets.md",
+    "docs/PRD/website/PRD.md"
+  ],
+  "source_hashes": {
+    "canon/index.md": "bae46a137e58066df21d89506f6ba63386d6684187aabc08a236c50150fcd8b4",
+    "canon/odd/appendices/product-lanes.md": "977b29aa2e06eecb32419d967da590f4d851c3c9feb5e38269cfc094b6da3d09",
+    "canon/odd/appendices/epochs.md": "62d38377f7b68c480628bf0bb89fe29478be3ac2dc2a886d0c67df538067ef7b",
+    "canon/odd/appendices/compilation.md": "83442f41577832320e27a3538e66b78a6179c082cb065b7849e65c6ce03b3c70",
+    "canon/odd/appendices/compilation-targets.md": "0de1cdbfc2df82a896d07b070c8b554bd05df6b30dae4325de1379550f9dcf24",
+    "docs/PRD/website/PRD.md": "71ca26485617dc50f698aade67909d204074c7156ffd323e0f5138fc811c40b3"
+  },
+  "output": "public/_compiled/website/author-pack.md",
+  "plan": "infra/compile/plans/website/author.json"
+}

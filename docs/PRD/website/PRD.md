@@ -134,9 +134,30 @@ Attempts live at: `/attempts/website/prd-v1.0/attempt-NNN/`
 
 ---
 
+## Compiled Pack (Phase 0)
+
+The website lane MUST support generating a wipeable "visitor pack" used for progressive disclosure and AI-friendly context.
+
+### Command
+- `npm run lane:compile -- --lane website --pack visitor`
+
+### Output
+- `public/_compiled/website/visitor-pack.md`
+- `public/_compiled/website/_meta/COMPILE_META.json`
+
+### Verification
+- `npm run verify:compiled -- --lane website --pack visitor`
+
+### Contract
+- The compiled pack MUST include a provenance header as defined in:
+  - `klappy://canon/odd/compilation`
+
+---
+
 ## Related Documents
 
 - Lane architecture: `/canon/odd/appendices/product-lanes.md`
 - Canon constraints: `/canon/constraints.md`
 - Definition of Done: `/canon/definition-of-done.md`
 - Legacy PRD (v0.3): `/docs/PRD/website/PRD-legacy-v0.3.md`
+- Compilation: `/canon/odd/appendices/compilation.md`

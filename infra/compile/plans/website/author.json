@@ -1,0 +1,14 @@
+{
+  "lane": "website",
+  "pack": "author",
+  "mode": "concat",
+  "output": "author-pack.md",
+  "sources": [
+    "canon/index.md",
+    "canon/odd/appendices/product-lanes.md",
+    "canon/odd/appendices/epochs.md",
+    "canon/odd/appendices/compilation.md",
+    "canon/odd/appendices/compilation-targets.md",
+    "docs/PRD/website/PRD.md"
+  ]
+}

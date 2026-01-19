@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-19T20:27:20.493Z
-Total Files: 147
+Generated: 2026-01-19T20:45:09.356Z
+Total Files: 159
 
 This is a complete export of all documentation, code, and content files
 from the klappy.dev repository, organized by section.
@@ -21,14 +21,14 @@ from the klappy.dev repository, organized by section.
 - **.husky** (17 files)
 - **About** (4 files)
 - **Attempts** (14 files)
-- **Canon** (47 files)
+- **Canon** (49 files)
 - **Documentation** (16 files)
-- **Infrastructure** (9 files)
-- **Interfaces & Contracts** (5 files)
+- **Infrastructure** (13 files)
+- **Interfaces & Contracts** (6 files)
 - **ODD (Outcomes-Driven Development)** (1 files)
 - **Products** (3 files)
 - **Projects** (6 files)
-- **Public Content** (1 files)
+- **Public Content** (6 files)
 - **Source Code** (13 files)
 - **Visual Design System** (4 files)
 
@@ -273,6 +273,8 @@ The goal is better outcomes, not perfect artifacts.
     "sync": "node infra/scripts/sync-content.js",
     "verify:content": "node infra/scripts/verify-content.js",
     "verify:contracts": "node infra/scripts/verify-contracts.js",
+    "lane:compile": "node infra/scripts/compile-pack.js",
+    "verify:compiled": "node infra/scripts/verify-compiled.js",
     "attempt": "node infra/scripts/attempt-cli.js",
     "attempt:nuke": "node infra/scripts/attempt-cli.js nuke",
     "attempt:register": "node infra/scripts/attempt-cli.js register",
@@ -2719,12 +2721,33 @@ Attempts live at: `/attempts/website/prd-v1.0/attempt-NNN/`
 
 ---
 
+## Compiled Pack (Phase 0)
+
+The website lane MUST support generating a wipeable "visitor pack" used for progressive disclosure and AI-friendly context.
+
+### Command
+- `npm run lane:compile -- --lane website --pack visitor`
+
+### Output
+- `public/_compiled/website/visitor-pack.md`
+- `public/_compiled/website/_meta/COMPILE_META.json`
+
+### Verification
+- `npm run verify:compiled -- --lane website --pack visitor`
+
+### Contract
+- The compiled pack MUST include a provenance header as defined in:
+  - `klappy://canon/odd/compilation`
+
+---
+
 ## Related Documents
 
 - Lane architecture: `/canon/odd/appendices/product-lanes.md`
 - Canon constraints: `/canon/constraints.md`
 - Definition of Done: `/canon/definition-of-done.md`
 - Legacy PRD (v0.3): `/docs/PRD/website/PRD-legacy-v0.3.md`
+- Compilation: `/canon/odd/appendices/compilation.md`
 
 
 
@@ -6167,6 +6190,196 @@ Compiled Canon is written by synthesis and proven by usability.**
 
 This document defines the conceptual model.
 Implementation of tooling to generate compiled outputs is tracked separately.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/odd/appendices/compilation-targets.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/odd/compilation-targets
+title: "Compilation Targets"
+audience: canon
+exposure: public
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "compilation", "memory", "portability", "packs", "lanes"]
+---
+
+# Compilation Targets
+
+Compiled packs exist to make the corpus usable at constrained context sizes without rewriting source truth.
+
+A compiled pack is **derived output**. It can be deleted and regenerated at any time.
+
+## Key Idea
+
+Compilation is scoped by:
+
+- **Lane** (which product's PRD and user intent we're serving)
+- **Target** (which consumer needs the compressed view)
+
+A pack is always identified as:
+
+`(lane, target)`
+
+## Output Location (Wipeable)
+
+All compiled output MUST live under:
+
+`/public/_compiled/<lane>/`
+
+Example:
+
+- `/public/_compiled/website/visitor-pack.md`
+- `/public/_compiled/website/author-pack.md`
+
+## Compile Plans (Deterministic)
+
+Each pack MUST have a deterministic plan file:
+
+`/infra/compile/plans/<lane>/<target>.json`
+
+The plan defines:
+- ordered source files
+- compilation mode (Phase 0: concat)
+- output filename
+
+## Targets
+
+Targets are **not personas**. They are constrained consumer profiles.
+
+### Website Lane Targets
+
+- `visitor` — minimal orientation surface; progressive disclosure; "what is this?"
+- `author` — high-signal working pack for the repo owner; more depth; less onboarding
+
+### Future Targets (Defined When Needed)
+
+- `dev-peer` — evaluation / critique / contribution readiness
+- `agent-core` — operational pack for agents to follow process consistently
+
+These exist as names only until a lane PRD requires them.
+
+## Invariants
+
+- Packs are derived. Source docs are not overwritten.
+- Packs do not introduce new truth. They reference truth.
+- Packs must include provenance (lane, target, timestamp, git commit, source list + hashes).
+- Verification MUST be possible without an LLM (hashes + structure + required header).
+
+## Phase Policy
+
+- **Phase 0 (Concat):** deterministic concatenation only
+- **Phase 1 (LLM):** LLM may summarize/select, but output still must satisfy the same provenance + verification contract
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/odd/appendices/compilation.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/odd/compilation
+title: Compilation
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["odd", "compilation", "memory", "context", "packs"]
+---
+
+# Compilation
+
+## Summary
+
+Compilation is the process of producing a **derived, wipeable, portable pack** from higher-entropy source documents.
+
+It exists to solve a practical constraint:
+
+> Agents and humans cannot keep the entire repo in working memory at once.
+
+Compilation produces a **smaller, purpose-built context artifact** that can be regenerated at any time.
+
+---
+
+## Core Rule
+
+**Compilation never edits or replaces source.**
+
+- Source docs remain the truth.
+- Compiled packs are derived outputs.
+- Compiled outputs may be deleted at any time and rebuilt deterministically.
+
+This is compilation, not compression-in-place.
+
+---
+
+## Output Location (Wipeable)
+
+Compiled outputs MUST live under:
+
+`/public/_compiled/<lane>/`
+
+Example:
+
+`/public/_compiled/website/visitor-pack.md`
+
+Compiled outputs MUST NOT be stored inside:
+- `/canon/**`
+- `/docs/**`
+- `/attempts/**`
+
+Those are source-of-truth layers.
+
+---
+
+## Provenance Header (Required)
+
+Every compiled pack MUST begin with a provenance header containing:
+
+- `lane`
+- `pack`
+- `built_at` (ISO8601)
+- `git_commit`
+- `sources` (list of source file paths)
+- `source_hashes` (map of source path → sha256)
+
+If provenance is missing, the compiled pack is invalid.
+
+---
+
+## Why This Is ODD
+
+ODD treats "context" as a consumable.
+
+Compilation is the mechanism that makes context:
+
+- **portable** (shareable artifact)
+- **auditable** (provenance)
+- **regeneratable** (wipeable output)
+- **cheap** (smaller input than full repo)
+
+Compilation is not automation. It is an **evolutionary pressure** against doc sprawl.
+
+If compilation output grows bloated, the correct response is:
+- reduce scope
+- tighten selection rules
+- improve curation
+not "add more docs."
+
+---
+
+## Relationship to Drift Checks
+
+Drift checks ensure the repo does not contradict itself.
+
+Compilation ensures the repo remains **usable** under memory limits.
+
+Both are required for scalability.
 
 
 
@@ -13011,6 +13224,90 @@ A verifier for `build-output@3.0.0` MUST check (for a chosen `<lane>`):
 
 
 --------------------------------------------------------------------------------
+📄 File: interfaces/canon-frontmatter/CONTRACT.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://interfaces/canon-frontmatter/contract
+title: "Canon Frontmatter Contract"
+audience: internal
+exposure: public
+tier: 2
+voice: neutral
+stability: stable
+tags: ["interfaces", "canon", "frontmatter", "schema", "verification"]
+---
+
+# Canon Frontmatter Contract
+
+This contract defines the required YAML frontmatter for canonical markdown files so that
+verification tooling can reliably index, validate, and serve content without drift.
+
+## Scope
+
+Applies to markdown documents intended to be addressable content in the site corpus, including:
+
+- `/canon/**`
+- `/docs/**` (only when treated as addressable content)
+- Any content registered into `/public/content/manifest.json`
+
+This contract does **not** apply to:
+- generated output under `/public/_compiled/**`
+- attempt artifacts under `/attempts/**`
+
+## Required Fields (E0002+)
+
+All new canonical documents MUST include YAML frontmatter with at least:
+
+- `uri` (string) — stable, unique identifier
+- `title` (string)
+- `tier` (number) — progressive disclosure tier (1 = most prominent)
+- `tags` (array of strings)
+
+### Optional but Recommended Fields
+
+- `audience` (string) — e.g. `public | internal`
+- `exposure` (string) — e.g. `public | internal`
+- `voice` (string) — e.g. `neutral`
+- `stability` (string) — e.g. `stable | draft`
+- `category` (string)
+- `status` (string)
+- `version` (string)
+
+## Canonical Example (Minimum)
+
+```yaml
+---
+uri: klappy://canon/odd/example
+title: "Example Doc"
+tier: 2
+tags: ["odd", "example"]
+---
+```
+
+## Uniqueness Rules
+
+- `uri` MUST be globally unique across the repo's addressable corpus.
+- If two files claim the same `uri`, verification MUST fail.
+
+## Legacy
+
+Older docs may exist that predate this contract and use alternate frontmatter shapes.
+Legacy docs are permitted during epoch transitions, but:
+- Any doc modified or created in the E0002+ era MUST conform to this contract.
+- Tooling may warn on legacy shapes; warnings are acceptable until the migration is complete.
+
+## Relationship to Manifest
+
+`/public/content/manifest.json` is the published inventory.
+Frontmatter is the file's self-declaration.
+They must align (same identity, same title intent, no conflicting tags).
+
+If they diverge, frontmatter is the source-of-truth for the file, and the manifest must be updated to match.
+
+
+
+--------------------------------------------------------------------------------
 📄 File: interfaces/index.md
 --------------------------------------------------------------------------------
 
@@ -13744,6 +14041,45 @@ See `/infra/contracts/build-output.md` for what builds must produce.
 
 Cloudflare Pages remains perpetually deployable regardless of what stack (or no stack) is in `/src`.
 
+
+
+--------------------------------------------------------------------------------
+📄 File: infra/compile/plans/website/author.json
+--------------------------------------------------------------------------------
+
+{
+  "lane": "website",
+  "pack": "author",
+  "mode": "concat",
+  "output": "author-pack.md",
+  "sources": [
+    "canon/index.md",
+    "canon/odd/appendices/product-lanes.md",
+    "canon/odd/appendices/epochs.md",
+    "canon/odd/appendices/compilation.md",
+    "canon/odd/appendices/compilation-targets.md",
+    "docs/PRD/website/PRD.md"
+  ]
+}
+
+
+--------------------------------------------------------------------------------
+📄 File: infra/compile/plans/website/visitor.json
+--------------------------------------------------------------------------------
+
+{
+  "lane": "website",
+  "pack": "visitor",
+  "output": "public/_compiled/website/visitor-pack.md",
+  "sources": [
+    "canon/index.md",
+    "canon/odd/appendices/product-lanes.md",
+    "canon/odd/appendices/epochs.md",
+    "canon/odd/appendices/compilation.md",
+    "docs/PRD/website/PRD.md"
+  ],
+  "mode": "concat"
+}
 
 
 --------------------------------------------------------------------------------
@@ -15927,6 +16263,187 @@ main();
 
 
 --------------------------------------------------------------------------------
+📄 File: infra/scripts/compile-pack.js
+--------------------------------------------------------------------------------
+
+#!/usr/bin/env node
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { createHash } from "node:crypto";
+import { execSync } from "node:child_process";
+
+const ROOT = process.cwd();
+
+function fail(msg) {
+  console.error(msg);
+  process.exit(1);
+}
+
+function sha256(content) {
+  return createHash("sha256").update(content).digest("hex");
+}
+
+function readJson(path) {
+  return JSON.parse(readFileSync(path, "utf8"));
+}
+
+function getGitCommit() {
+  try {
+    return execSync("git rev-parse HEAD", { cwd: ROOT, stdio: ["ignore", "pipe", "ignore"] })
+      .toString()
+      .trim();
+  } catch {
+    return "UNKNOWN";
+  }
+}
+
+function parseArgs(argv) {
+  const args = { lane: null, pack: null };
+  for (let i = 0; i < argv.length; i++) {
+    if (argv[i] === "--lane") args.lane = argv[i + 1];
+    if (argv[i] === "--pack") args.pack = argv[i + 1];
+  }
+  if (!args.lane) fail("Missing --lane <lane>");
+  if (!args.pack) fail("Missing --pack <pack>");
+  return args;
+}
+
+function planPath(lane, pack) {
+  return join(ROOT, "infra", "compile", "plans", lane, `${pack}.json`);
+}
+
+function resolvePath(rel) {
+  return join(ROOT, rel);
+}
+
+function ensureDir(path) {
+  mkdirSync(path, { recursive: true });
+}
+
+function writeLaneIndex(lane) {
+  const plansDir = join(ROOT, "infra", "compile", "plans", lane);
+  const laneOutDir = join(ROOT, "public", "_compiled", lane);
+  const laneMetaDir = join(laneOutDir, "_meta");
+
+  const planFiles = existsSync(plansDir)
+    ? readdirSync(plansDir).filter(f => f.endsWith(".json"))
+    : [];
+
+  const packs = planFiles.map(file => {
+    const pPath = join(plansDir, file);
+    const plan = readJson(pPath);
+
+    // output can be relative (just filename) or full path
+    const outFile = plan.output.includes("/")
+      ? plan.output.split("/").pop()
+      : plan.output;
+    const outPath = `public/_compiled/${lane}/${outFile}`;
+    const metaPath = `public/_compiled/${lane}/_meta/${plan.pack}-COMPILE_META.json`;
+
+    return {
+      pack: plan.pack,
+      plan: `infra/compile/plans/${lane}/${file}`,
+      output: outPath,
+      meta: metaPath,
+      exists: existsSync(join(ROOT, outPath))
+    };
+  });
+
+  const index = {
+    lane,
+    generated_at: new Date().toISOString(),
+    packs
+  };
+
+  ensureDir(laneOutDir);
+  writeFileSync(join(laneOutDir, "index.json"), JSON.stringify(index, null, 2) + "\n");
+}
+
+function main() {
+  const { lane, pack } = parseArgs(process.argv.slice(2));
+  const pPath = planPath(lane, pack);
+  if (!existsSync(pPath)) fail(`Compile plan not found: ${pPath}`);
+
+  const plan = readJson(pPath);
+  if (plan.lane !== lane) fail(`Plan lane mismatch: expected ${lane}, got ${plan.lane}`);
+  if (plan.pack !== pack) fail(`Plan pack mismatch: expected ${pack}, got ${plan.pack}`);
+
+  if (plan.mode !== "concat") fail(`Unsupported mode (for now): ${plan.mode}`);
+
+  const git_commit = getGitCommit();
+  const built_at = new Date().toISOString();
+
+  const sources = plan.sources;
+  const source_hashes = {};
+  const parts = [];
+
+  for (const rel of sources) {
+    const abs = resolvePath(rel);
+    if (!existsSync(abs)) fail(`Source missing: ${rel}`);
+    const content = readFileSync(abs, "utf8");
+    source_hashes[rel] = sha256(content);
+
+    parts.push(`\n\n---\n\n## Source: \`${rel}\`\n\n`);
+    parts.push(content);
+  }
+
+  const header = [
+    "---",
+    `lane: ${lane}`,
+    `pack: ${pack}`,
+    `built_at: ${built_at}`,
+    `git_commit: ${git_commit}`,
+    "sources:",
+    ...sources.map(s => `  - ${s}`),
+    "source_hashes:",
+    ...Object.entries(source_hashes).map(([k, v]) => `  ${k}: ${v}`),
+    "---",
+    ""
+  ].join("\n");
+
+  // Determine output path - handle both relative and full paths in plan
+  const outFile = plan.output.includes("/")
+    ? plan.output.split("/").pop()
+    : plan.output;
+  const outRel = `public/_compiled/${lane}/${outFile}`;
+  const outAbs = resolvePath(outRel);
+
+  ensureDir(dirname(outAbs));
+  writeFileSync(outAbs, header + parts.join(""), "utf8");
+
+  // Write pack-specific meta for verification tooling
+  const metaDir = join(ROOT, "public", "_compiled", lane, "_meta");
+  ensureDir(metaDir);
+  writeFileSync(
+    join(metaDir, `${pack}-COMPILE_META.json`),
+    JSON.stringify(
+      {
+        lane,
+        pack,
+        built_at,
+        git_commit,
+        sources,
+        source_hashes,
+        output: outRel,
+        plan: `infra/compile/plans/${lane}/${pack}.json`
+      },
+      null,
+      2
+    ),
+    "utf8"
+  );
+
+  // Generate lane index
+  writeLaneIndex(lane);
+
+  console.log(`✅ Compiled pack written: ${outRel}`);
+}
+
+main();
+
+
+
+--------------------------------------------------------------------------------
 📄 File: infra/scripts/export-book.js
 --------------------------------------------------------------------------------
 
@@ -16849,6 +17366,85 @@ function sync() {
 }
 
 sync();
+
+
+
+--------------------------------------------------------------------------------
+📄 File: infra/scripts/verify-compiled.js
+--------------------------------------------------------------------------------
+
+#!/usr/bin/env node
+import { readFileSync, existsSync } from "node:fs";
+import { join } from "node:path";
+import { createHash } from "node:crypto";
+
+const ROOT = process.cwd();
+
+function fail(msg) {
+  console.error(msg);
+  process.exit(1);
+}
+
+function sha256(content) {
+  return createHash("sha256").update(content).digest("hex");
+}
+
+function parseArgs(argv) {
+  const args = { lane: null, pack: null };
+  for (let i = 0; i < argv.length; i++) {
+    if (argv[i] === "--lane") args.lane = argv[i + 1];
+    if (argv[i] === "--pack") args.pack = argv[i + 1];
+  }
+  if (!args.lane) fail("Missing --lane <lane>");
+  if (!args.pack) fail("Missing --pack <pack>");
+  return args;
+}
+
+function readJson(path) {
+  return JSON.parse(readFileSync(path, "utf8"));
+}
+
+function main() {
+  const { lane, pack } = parseArgs(process.argv.slice(2));
+  
+  // Pack-specific meta path
+  const metaPath = join(ROOT, "public", "_compiled", lane, "_meta", `${pack}-COMPILE_META.json`);
+  if (!existsSync(metaPath)) fail(`Missing meta: ${metaPath}`);
+
+  const meta = readJson(metaPath);
+  if (meta.lane !== lane) fail(`Meta lane mismatch: ${meta.lane}`);
+  if (meta.pack !== pack) fail(`Meta pack mismatch: ${meta.pack}`);
+
+  const required = ["built_at", "git_commit", "sources", "source_hashes", "output", "plan"];
+  for (const k of required) {
+    if (meta[k] === undefined) fail(`Missing required meta field: ${k}`);
+  }
+
+  // Verify hashes match current source files
+  for (const src of meta.sources) {
+    const abs = join(ROOT, src);
+    if (!existsSync(abs)) fail(`Missing source file referenced by meta: ${src}`);
+    const content = readFileSync(abs, "utf8");
+    const h = sha256(content);
+    const expected = meta.source_hashes[src];
+    if (!expected) fail(`Missing hash entry for source: ${src}`);
+    if (h !== expected) fail(`Hash mismatch for ${src}\nexpected: ${expected}\nactual:   ${h}`);
+  }
+
+  // Verify output exists
+  const outAbs = join(ROOT, meta.output);
+  if (!existsSync(outAbs)) fail(`Missing compiled output: ${meta.output}`);
+
+  // Optionally verify index.json exists
+  const indexPath = join(ROOT, "public", "_compiled", lane, "index.json");
+  if (!existsSync(indexPath)) {
+    console.log(`⚠️  Warning: Lane index missing: ${indexPath}`);
+  }
+
+  console.log(`✅ Compiled pack verified: ${lane}/${pack} (provenance + hashes)`);
+}
+
+main();
 
 
 
@@ -18566,6 +19162,2445 @@ export const providerInfo = {
 ================================================================================
 ## Public Content
 ================================================================================
+
+
+
+--------------------------------------------------------------------------------
+📄 File: public/_compiled/website/_meta/author-COMPILE_META.json
+--------------------------------------------------------------------------------
+
+{
+  "lane": "website",
+  "pack": "author",
+  "built_at": "2026-01-19T20:43:48.761Z",
+  "git_commit": "644fb5fb282d7c27a990ae24d62badd1dd36c734",
+  "sources": [
+    "canon/index.md",
+    "canon/odd/appendices/product-lanes.md",
+    "canon/odd/appendices/epochs.md",
+    "canon/odd/appendices/compilation.md",
+    "canon/odd/appendices/compilation-targets.md",
+    "docs/PRD/website/PRD.md"
+  ],
+  "source_hashes": {
+    "canon/index.md": "bae46a137e58066df21d89506f6ba63386d6684187aabc08a236c50150fcd8b4",
+    "canon/odd/appendices/product-lanes.md": "977b29aa2e06eecb32419d967da590f4d851c3c9feb5e38269cfc094b6da3d09",
+    "canon/odd/appendices/epochs.md": "62d38377f7b68c480628bf0bb89fe29478be3ac2dc2a886d0c67df538067ef7b",
+    "canon/odd/appendices/compilation.md": "83442f41577832320e27a3538e66b78a6179c082cb065b7849e65c6ce03b3c70",
+    "canon/odd/appendices/compilation-targets.md": "0de1cdbfc2df82a896d07b070c8b554bd05df6b30dae4325de1379550f9dcf24",
+    "docs/PRD/website/PRD.md": "71ca26485617dc50f698aade67909d204074c7156ffd323e0f5138fc811c40b3"
+  },
+  "output": "public/_compiled/website/author-pack.md",
+  "plan": "infra/compile/plans/website/author.json"
+}
+
+
+--------------------------------------------------------------------------------
+📄 File: public/_compiled/website/_meta/visitor-COMPILE_META.json
+--------------------------------------------------------------------------------
+
+{
+  "lane": "website",
+  "pack": "visitor",
+  "built_at": "2026-01-19T20:43:48.500Z",
+  "git_commit": "644fb5fb282d7c27a990ae24d62badd1dd36c734",
+  "sources": [
+    "canon/index.md",
+    "canon/odd/appendices/product-lanes.md",
+    "canon/odd/appendices/epochs.md",
+    "canon/odd/appendices/compilation.md",
+    "docs/PRD/website/PRD.md"
+  ],
+  "source_hashes": {
+    "canon/index.md": "bae46a137e58066df21d89506f6ba63386d6684187aabc08a236c50150fcd8b4",
+    "canon/odd/appendices/product-lanes.md": "977b29aa2e06eecb32419d967da590f4d851c3c9feb5e38269cfc094b6da3d09",
+    "canon/odd/appendices/epochs.md": "62d38377f7b68c480628bf0bb89fe29478be3ac2dc2a886d0c67df538067ef7b",
+    "canon/odd/appendices/compilation.md": "83442f41577832320e27a3538e66b78a6179c082cb065b7849e65c6ce03b3c70",
+    "docs/PRD/website/PRD.md": "71ca26485617dc50f698aade67909d204074c7156ffd323e0f5138fc811c40b3"
+  },
+  "output": "public/_compiled/website/visitor-pack.md",
+  "plan": "infra/compile/plans/website/visitor.json"
+}
+
+
+--------------------------------------------------------------------------------
+📄 File: public/_compiled/website/author-pack.md
+--------------------------------------------------------------------------------
+
+---
+lane: website
+pack: author
+built_at: 2026-01-19T20:43:48.761Z
+git_commit: 644fb5fb282d7c27a990ae24d62badd1dd36c734
+sources:
+  - canon/index.md
+  - canon/odd/appendices/product-lanes.md
+  - canon/odd/appendices/epochs.md
+  - canon/odd/appendices/compilation.md
+  - canon/odd/appendices/compilation-targets.md
+  - docs/PRD/website/PRD.md
+source_hashes:
+  canon/index.md: bae46a137e58066df21d89506f6ba63386d6684187aabc08a236c50150fcd8b4
+  canon/odd/appendices/product-lanes.md: 977b29aa2e06eecb32419d967da590f4d851c3c9feb5e38269cfc094b6da3d09
+  canon/odd/appendices/epochs.md: 62d38377f7b68c480628bf0bb89fe29478be3ac2dc2a886d0c67df538067ef7b
+  canon/odd/appendices/compilation.md: 83442f41577832320e27a3538e66b78a6179c082cb065b7849e65c6ce03b3c70
+  canon/odd/appendices/compilation-targets.md: 0de1cdbfc2df82a896d07b070c8b554bd05df6b30dae4325de1379550f9dcf24
+  docs/PRD/website/PRD.md: 71ca26485617dc50f698aade67909d204074c7156ffd323e0f5138fc811c40b3
+---
+
+
+---
+
+## Source: `canon/index.md`
+
+---
+uri: klappy://meta/canon-index
+title: "Canon Index"
+audience: canon
+exposure: nav
+tier: 1
+voice: neutral
+stability: semi_stable
+tags: ["canon", "index", "orientation"]
+---
+
+# 🧭 Canon Index v0.1
+
+**Scope, Structure, Intent, and Confidence**
+
+This document provides orientation to the Canon.
+It describes what exists, what each artifact is for, how they relate, and where the current design is strong vs fragile.
+
+It does not define workflows, agent loops, enforcement steps, or execution order.
+
+---
+
+## 📌 Purpose of the Canon
+
+The Canon is a curated set of documents that capture:
+• how decisions are made
+• what assumptions are held
+• how work is verified
+• how rigor changes as projects mature
+
+Its purpose is clarity, not control.
+
+PRDs are versioned and may be attempted multiple times; attempts are sealed records, not evolving workstreams.
+
+The Canon exists so that:
+• reasoning does not have to be repeated
+• principles remain stable while implementations change
+• future systems can reference intent without inheriting outdated instructions
+
+---
+
+## 🧠 What the Canon Is (and Is Not)
+
+**The Canon Is**
+• a shared reference
+• a source of assumptions and defaults
+• a way to encode thinking without enforcing execution
+
+**The Canon Is Not**
+
+• a workflow
+• a command system
+• a task list
+• a replacement for judgment
+
+Nothing in the Canon executes by itself.
+
+---
+
+## 🚀 Start Here
+
+**Constraints** — baseline assumptions and non-negotiables that shape every decision. What must be true for this work to make sense?
+
+**Definition of Done** — what qualifies as completed work and what evidence is required. When can work honestly be called done?
+
+These two documents anchor everything else.
+
+---
+
+## 🔍 If You Want the Philosophy
+
+**ODD Manifesto** — the philosophical and operational foundation of Outcomes-Driven Development. Why this approach exists.
+
+**Maturity Model** — how rigor changes as projects mature. When different expectations become binding.
+
+**Decision Rules** — default heuristics used when multiple valid options exist.
+
+---
+
+## 🧩 If You Want the Edge Cases
+
+The appendices extend understanding without introducing enforcement:
+
+• **Attempt Lifecycle** — how PRD versions, attempts, and evidence are preserved
+• **Quantum Development** — evaluating multiple paths before revising intent
+• **Repository Topology** — what lives where and what changes when
+• **Misuse Patterns** — common failure modes and how ODD gets misapplied
+
+These are diagnostic and orientation documents, not requirements.
+
+---
+
+## 🔒 Public vs Internal Boundary
+
+• `/odd/README.md` → public-facing ODD (shareable, human-friendly)
+• `/canon/**` → internal reference (governance artifacts, precise language)
+
+Public documents explain intent.
+Canon documents preserve precision.
+
+---
+
+## 📖 Precedence & Interpretation (Orientation Only)
+
+A useful mental model for reading:
+
+1. ODD Manifesto provides philosophical grounding
+2. Maturity Model explains when rigor increases
+3. Constraints shape the solution space
+4. Decision Rules guide choices
+5. Evidence Policies define completion
+
+If documents appear to conflict, maturity context and explicit tradeoffs usually explain why.
+
+---
+
+## 📁 Canon Structure
+
+```text
+
+/canon/
+  index.md
+  constraints.md
+  decision-rules.md
+  definition-of-done.md
+  self-audit.md
+  visual-proof.md
+  completion-report-template.md
+  odd/
+    contract.md
+    manifesto.md
+    maturity.md
+    misuse-patterns.md
+    prompt-architecture.md
+    orientation-map.md
+    appendices/
+      alignment-reviews.md
+      epochs.md
+      lane-implementation-surfaces.md
+      product-lanes.md
+      attempt-lifecycle.md
+      drift-checks.md
+      evolution-not-automation.md
+      lane-build-layout.md
+      quantum-development.md
+      repo-topology.md
+      repo-truth.md
+      visual-evolution.md
+    decisions/
+      D0001-prod-branch-is-production.md
+      ...
+```
+
+Each file addresses a different dimension of decision-making.
+
+---
+
+## 📎 Canon Components & Roles
+
+### Constraints
+
+**File:** `constraints.md`
+
+Defines baseline assumptions and non-negotiables that shape decisions.
+
+Answers:
+
+What must be true for this work to make sense?
+
+---
+
+### Decision Rules
+
+**File:** `decision-rules.md`
+
+Default heuristics used when multiple valid options exist.
+
+Answers:
+
+How do choices tend to be made?
+
+---
+
+### Evolution
+
+- [Failure-Driven Modularity](./evolution/failure-driven-modularity.md)
+
+---
+
+### Definition of Done & Evidence Policy
+
+**File:** `definition-of-done.md`
+
+Defines what qualifies as completed work and what evidence is required.
+
+Answers:
+
+When can work honestly be called done?
+
+---
+
+### Self-Audit Checklist
+
+**File:** `self-audit.md`
+
+A checklist for reviewing work before declaring completion.
+
+Answers:
+
+What should be reviewed before claiming success?
+
+---
+
+### Visual Proof Standards
+
+**File:** `visual-proof.md`
+
+Defines what qualifies as acceptable visual evidence.
+
+Answers:
+
+What does "prove it visually" mean?
+
+---
+
+### Completion Report Template
+
+**File:** `completion-report-template.md`
+
+Standard format for reporting completed work.
+
+Answers:
+
+How should completion be communicated?
+
+---
+
+### ODD System Contract
+
+**File:** `odd/contract.md`
+
+The single source of truth for ODD workflow contract versioning.
+
+Answers:
+
+What version of ODD is this repo compatible with?
+
+---
+
+### ODD Manifesto (Extended)
+
+**File:** `odd/manifesto.md`
+
+Philosophical and operational foundation of Outcomes-Driven Development.
+
+Answers:
+
+Why this approach exists.
+
+---
+
+### Project Maturity & Progressive Governance
+
+**File:** `odd/maturity.md`
+
+Defines how rigor changes as projects mature.
+
+Answers:
+
+When different expectations become binding.
+
+---
+
+### ODD Appendices (Orientation Only)
+
+These files extend understanding without introducing enforcement:
+• Alignment Reviews (odd/appendices/alignment-reviews.md)
+Periodic evaluation of the ODD system itself. Detects drift between stated intent, implemented process, and observed outcomes.
+• Epochs (odd/appendices/epochs.md)
+Named periods where the meaning of "success" is stable enough that outcomes can be compared. Prevents invalid cross-era comparisons.
+• Progressive Elevation & Decay (odd/appendices/progressive-elevation.md)
+The memory model: how artifacts move from ephemeral (attempts/PRDs) to durable (canon/contracts/decisions). Most artifacts decay; only proven patterns elevate.
+• Canonical Compression (odd/appendices/canonical-compression.md)
+The compilation model: how derived, minimal working models are produced from Source Canon without mutating source truth. Compiled outputs are disposable and epoch-scoped.
+• Lane-Scoped Implementation Surfaces (odd/appendices/lane-implementation-surfaces.md)
+Each lane owns its own `/products/<lane>/src` and `/products/<lane>/dist`. No shared repo-root surfaces.
+• Product Lanes (odd/appendices/product-lanes.md)
+Why multiple PRD lanes exist and how they relate. Each lane has its own PRD, attempts, and lifecycle. Lanes share canon, not lifecycle.
+• Misuse Patterns (odd/misuse-patterns.md)
+Common failure modes and how ODD is misapplied in practice. Diagnostic only.
+• Prompt Architecture (odd/prompt-architecture.md)
+How intent scales without giant prompts. Orientation only.
+• Orientation Map (odd/orientation-map.md)
+A one-page mental model of ODD, Canon, Evidence, and Outcomes.
+• Attempt Lifecycle (odd/appendices/attempt-lifecycle.md)
+How PRD versions, attempts, evidence, and deployments are preserved across iterations. PRDs can have multiple attempts; attempts are sealed records.
+• Quantum Development (odd/appendices/quantum-development.md)
+Evaluating multiple execution paths before revising intent. Explains why divergence is signal, not waste.
+• Repository Topology (odd/appendices/repo-topology.md)
+What lives where and what changes when. Encodes App/Content/Infrastructure decoupling.
+• Evolution, Not Automation (odd/appendices/evolution-not-automation.md)
+Why this system supports learning, not automatic execution. Humans stay in the loop.
+• Visual Evolution (odd/appendices/visual-evolution.md)
+Why visual systems evolve independently from products. Products consume visual interfaces, not raw design decisions.
+• Drift Checks (odd/appendices/drift-checks.md)
+The drift-prevention mechanism. When docs, prompts, and tooling diverge, truth becomes vibes.
+• Lane Build Layout (odd/appendices/lane-build-layout.md)
+How lanes avoid /src and /dist collisions. Worktrees isolate, deployments are lane-scoped.
+
+---
+
+## 📋 Meta Rules (Orientation Only)
+
+These are structural conventions for keeping the Canon coherent over time.
+They are not workflows or enforcement steps.
+
+**1. Single Inventory Source**
+If an inventory of Canon resources exists, there should be one authoritative source (e.g., a manifest). Other indexes should be derived or optional.
+
+**2. Stable Names Beat Clever Names**
+Prefer stable file and URI naming over clever branding. Rename rarely.
+
+**3. Audience Separation Matters**
+"Public" explains and invites. "Canon" defines and stabilizes.
+
+**4. Voice Is Labeled, Not Transformed**
+First-person documents may be consumed as-is or translated by clients. The Canon itself does not require a specific rendering voice.
+
+**5. Multi-Lane PRD Architecture**
+PRDs are organized into independent product lanes. Each lane has its own active PRD, attempts, and lifecycle. Lanes share canon, not lifecycle. See `/canon/odd/appendices/product-lanes.md` for the full model.
+
+---
+
+## 🔄 Stability & Change Philosophy
+
+Not all Canon documents are equally stable.
+
+Some are intended to remain largely fixed.
+Others are expected to evolve through use.
+
+Change is allowed, but should be:
+• intentional
+• versioned (at least informally)
+• documented somewhere discoverable
+
+---
+
+## ⚠️ Confidence & Drift Risk (Self-Assessment)
+
+This section expresses current confidence that the Canon and surrounding architecture align with the core pillars:
+KISS, DRY, Consistency, Maintainability, Antifragile, Scalable, Prompt-over-Code.
+
+These are not guarantees.
+They are a snapshot of perceived risk.
+
+Confidence scale
+• 0.9+ — robust
+• 0.7–0.85 — strong, but watch for drift
+• 0.5–0.7 — plausible, fragile under misuse
+• <0.5 — likely misaligned unless corrected
+
+Current scores (v0.1 snapshot)
+• Prompt-over-Code / Convention-over-Config: 0.80
+Strong fit due to stable addressing and canonical retrieval surfaces. Risk: schema sprawl or client-specific conventions.
+• KISS: 0.75
+Minimal primitives and no workflow semantics. Risk: meta-layer creep.
+• DRY (with isolation): 0.70
+Canon centralizes principles; manifest can become a single inventory. Risk: duplicate indices drifting.
+• Consistency: 0.65
+URI and metadata structure support consistency. Risk: naming drift across files and routes.
+• Maintainability: 0.70
+Separation of stable worldview vs evolving templates helps. Risk: manual inventory updates falling out of sync.
+• Antifragile: 0.60
+Recoverability improves if resources can be served statically and via MCP. Risk: hidden single points of failure.
+• Scalable: 0.70
+Schema supports growth. Risk: large manifests becoming manually brittle.
+
+Intended use of this section
+• Make risks explicit early
+• Prevent false confidence
+• Provide a stable baseline for future comparison
+
+---
+
+## 🚫 What Is Intentionally Undefined
+
+The Canon deliberately does not define:
+• specific tools
+• specific agents
+• specific workflows
+• specific automation loops
+
+These are left open to evolve without rewriting foundational thinking.
+
+---
+
+## 💡 Closing Note
+
+The Canon exists to preserve intent without freezing execution.
+
+It encodes how thinking works, not what must be done next.
+
+---
+
+## ✅ Status
+
+• Canon Index v0.1 complete
+• Orientation-only
+• Includes a confidence and drift snapshot
+
+---
+
+This Canon v0.1 is considered stable for initial builds. Revisions should be additive unless a documented failure requires change.
+
+
+---
+
+## Source: `canon/odd/appendices/product-lanes.md`
+
+---
+uri: klappy://canon/odd/product-lanes
+title: "Product Lanes in Outcome-Driven Development"
+audience: canon
+exposure: hidden
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "prd", "architecture", "lanes", "orientation"]
+---
+
+# Product Lanes in Outcome-Driven Development
+
+**Status:** Orientation  
+**Audience:** Internal / Canon  
+**Scope:** Why multiple PRD lanes exist and how they relate
+
+---
+
+## Summary
+
+ODD systems evolve across multiple independent product lanes.
+
+Each lane has its own PRD, attempts, and failure modes.
+
+Lanes share canon, not lifecycle.
+
+---
+
+## Why PRDs Must Be Decoupled
+
+A single PRD governing everything creates cognitive collapse:
+
+- **Different users**: Website serves humans exploring ODD. Agent skill serves AI systems executing ODD.
+- **Different success criteria**: "Mobile usable" vs "Can propose a PRD autonomously"
+- **Different rates of change**: Website can stagnate while agent skills evolve rapidly.
+- **Different evidence**: Screenshots vs decision quality metrics.
+
+Forcing these into one evolutionary track means:
+
+- Progress in one lane forces reruns in another
+- Evidence requirements conflict
+- Scope creep becomes structural
+
+---
+
+## The Three Lanes
+
+### Lane 1: Public Website (Humans)
+
+**Purpose:** A human-facing orientation surface for ODD.
+
+This is portfolio, explanation, credibility.
+It does not teach agents how to think.
+It does not execute ODD.
+It explains ODD progressively to humans.
+
+**PRD Location:** `/docs/PRD/website/PRD.md`
+
+**Primary User:** Human developers, peers, evaluators
+
+---
+
+### Lane 2: AI Navigation Interface (Humans talking to AI)
+
+**Purpose:** An AI layer over documentation that helps humans understand ODD.
+
+This enables humans to ask questions of the ODD corpus and be:
+
+- Answered accurately
+- Guided progressively
+- Linked to the right documents
+- Without reading everything
+
+This is NOT agent tooling. This is AI helping humans navigate.
+
+**PRD Location:** `/docs/PRD/ai-navigation/PRD.md`
+
+**Primary User:** Humans trying to understand and evaluate ODD
+
+---
+
+### Lane 3: Agent Cognitive Skill (Evolution Engine)
+
+**Purpose:** A reusable agent cognitive framework for ODD reasoning.
+
+This is about how agents think, not what they render.
+
+Enables AI systems to:
+
+- Reason using ODD principles
+- Structure PRDs
+- Define outcomes and evidence
+- Run evolutionary attempts
+- Improve their own process over time
+
+This is not tied to this website. It should work on any project.
+
+**PRD Location:** `/docs/PRD/agent-skill/PRD.md`
+
+**Primary User:** AI agents executing evolutionary development elsewhere
+
+---
+
+## Implementation Surfaces Are Lane-Scoped
+
+Each lane is an independent product.
+
+Implementation directories are lane-scoped:
+
+- `products/<lane>/src` (disposable)
+- `products/<lane>/dist` (build output)
+
+Repo-root `/src` is not a shared surface in the multi-lane model.
+
+See: `/canon/odd/appendices/lane-implementation-surfaces.md`
+
+---
+
+## Canon Is Not a Product
+
+Canon does not have a PRD.
+Canon does not have attempts.
+Canon evolves only through decision logs.
+
+Products may render, query, or reason over canon - but never modify it directly.
+
+| Layer    | Coupling                      |
+|----------|-------------------------------|
+| Canon    | Shared, slow, authoritative   |
+| PRDs     | Isolated, fast, disposable    |
+| Attempts | Ephemeral, lane-scoped        |
+| Tooling  | Canon-aware, lane-agnostic    |
+
+---
+
+## What Is Shared vs What Is Isolated
+
+| Artifact          | Shared Across Lanes? | Notes                                      |
+|-------------------|----------------------|--------------------------------------------|
+| Canon             | Yes                  | All lanes reference the same constraints   |
+| Decision logs     | Yes                  | Architectural decisions affect all lanes   |
+| PRDs              | No                   | Each lane has its own PRD                  |
+| Attempts          | No                   | Attempts are lane-scoped                   |
+| Evidence          | No                   | Success criteria differ per lane           |
+| Definition of Done| Partially            | Core DoD applies; lane-specific criteria extend it |
+
+---
+
+## Attempt Structure (Locked)
+
+Every attempt MUST declare a lane before registration.
+Attempts without a lane are invalid.
+
+**Folder structure:** `/attempts/<lane>/prd-vX.Y/attempt-NNN/`
+
+Valid examples:
+- `/attempts/website/prd-v1.0/attempt-001/`
+- `/attempts/ai-navigation/prd-v1.0/attempt-001/`
+- `/attempts/agent-skill/prd-v1.0/attempt-001/`
+
+Invalid (do not use):
+- `/attempts/prd-vX.Y/<lane>/`
+- `/attempts/<lane>/attempt-NNN/`
+- `/attempts/<lane>/<anything creative>/`
+
+---
+
+## Anti-Patterns
+
+### One PRD to Rule Them All
+
+Treating all work as variations of a single product forces:
+
+- Conflicting success criteria
+- Evidence that doesn't apply
+- Reruns across unrelated changes
+
+### Treating Agents as UI Features
+
+The AI navigation interface (Lane 2) is NOT the same as agent cognitive skill (Lane 3).
+
+- Lane 2: AI helps humans understand
+- Lane 3: AI executes ODD autonomously
+
+Mixing these creates scope confusion and evidence pollution.
+
+### Re-running Experiments Across Lanes
+
+A mobile navigation fix (Lane 1) should not invalidate agent skill experiments (Lane 3).
+
+Lane isolation prevents cascading reruns.
+
+---
+
+## Implications for Tooling and Docs
+
+### Where PRDs Live
+
+```
+/docs/PRD/
+  website/PRD.md
+  ai-navigation/PRD.md
+  agent-skill/PRD.md
+```
+
+### Where Attempts Live
+
+```
+/attempts/
+  website/prd-vX.Y/attempt-NNN/
+  ai-navigation/prd-vX.Y/attempt-NNN/
+  agent-skill/prd-vX.Y/attempt-NNN/
+```
+
+### How Evolution Propagates
+
+- Canon changes affect all lanes (but rarely change)
+- PRD changes affect only that lane
+- Attempt outcomes inform only that lane's PRD evolution
+- Cross-lane learnings are captured in decision logs, not PRD mutations
+
+---
+
+## Scalability
+
+This architecture is scalable because it is NOT interdependent.
+
+You do not get a monorepo of coupled PRDs.
+You get shared canon + independent evolutionary tracks.
+
+This lets you:
+
+- Freeze the website indefinitely
+- Rapidly evolve agent skills
+- Replace AI navigation entirely
+- Add a fourth lane later without touching the others
+
+---
+
+## Related Documents
+
+- Decision log: `/canon/odd/decisions/D0009-multi-lane-prd-architecture.md`
+- Attempt lifecycle: `/canon/odd/appendices/attempt-lifecycle.md`
+- Evolution philosophy: `/canon/odd/appendices/evolution-not-automation.md`
+
+
+---
+
+## Source: `canon/odd/appendices/epochs.md`
+
+---
+uri: klappy://canon/odd/epochs
+title: "Epochs"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "epochs", "fitness-landscape", "comparability", "orientation"]
+---
+
+# Epochs
+
+An **epoch** is a named period where the meaning of "success" is stable enough that outcomes can be compared.
+
+This is borrowed from evolutionary systems:
+
+- **Attempts** are individuals.
+- **PRDs** are fitness functions.
+- **Promotion** is selection.
+- **Canon** is inherited traits.
+- **Epochs** are shifts in the fitness landscape itself.
+
+If epochs are implicit, the system will compare results across incompatible standards and produce folklore.
+
+---
+
+## What an Epoch Is
+
+An epoch defines the **evaluation reality** for a period of work:
+
+- what "done" means (and what it does not)
+- what evidence is mandatory
+- what contracts are binding (build/deploy, provenance, etc.)
+- what risks are acceptable
+- what is treated as stable vs experimental infrastructure
+
+An epoch is *not* a PRD.  
+An epoch is the context in which PRDs are interpreted.
+
+---
+
+## What an Epoch Is Not
+
+Epochs are not:
+
+- a semantic version of the website
+- a replacement for product lanes
+- a reason to rebuild everything
+- a new folder taxonomy for creativity
+
+Epochs exist to prevent invalid comparisons, not to add structure.
+
+---
+
+## Relationship to Product Lanes
+
+**Product lanes** separate *simultaneous intent*.  
+**Epochs** separate *changes over time* in how intent is evaluated.
+
+- Lanes answer: "Which product are we evolving?"
+- Epochs answer: "What counts as truth *right now* across those products?"
+
+Lanes are parallel. Epochs are sequential.
+
+---
+
+## Relationship to PRDs and Attempts
+
+Within a lane:
+
+- A **PRD** specifies requirements for a specific capability.
+- An **attempt** is an observation (implementation + evidence) against that PRD.
+
+Across time:
+
+- An **epoch** determines whether two attempts are comparable.
+- If the evaluation rules changed, you are in a new epoch.
+
+Rule of thumb:
+
+> If you changed what evidence is required, or what contract is binding, you changed the fitness landscape. That is a new epoch.
+
+---
+
+## When to Start a New Epoch
+
+Start a new epoch when any of the following change in a way that would invalidate comparisons with prior attempts:
+
+- Evidence requirements (e.g., "preview URL required" becomes mandatory)
+- Provenance requirements (e.g., capturing tool/model becomes required)
+- Deployment topology (e.g., `prod` branch becomes the production branch)
+- Build/deploy contract semantics (`/dist` rules change materially)
+- Attempt lifecycle mechanics (e.g., reserve → register/finalize)
+- Evaluation method (e.g., manual review → scripted verification gates)
+
+If the change is "nice-to-have" and does not affect comparability, do not create an epoch.
+
+---
+
+## Naming Convention
+
+Epoch IDs should be boring and stable:
+
+- `E0001-<short-name>`
+- `E0002-<short-name>`
+
+Examples:
+- `E0001-single-prd-era`
+- `E0002-multi-lane-era`
+- `E0003-evidence-first-era`
+
+The ID is the canonical reference. The name is a hint.
+
+---
+
+## Minimal Epoch Metadata (Required)
+
+Every attempt's `META.json` MUST include:
+
+- `lane`
+- `prd_version`
+- `epoch_id`
+
+Example:
+
+```json
+{
+  "lane": "website",
+  "prd_version": "v1.0",
+  "epoch_id": "E0002-multi-lane-era"
+}
+```
+
+If epoch_id is missing, the attempt is not comparable by default.
+
+---
+
+## Anti-Patterns
+
+- **Epoch inflation**: Creating a new epoch for every PRD bump.
+- **Hidden epoch shifts**: Changing contracts or evidence rules without naming it.
+- **Epoch as marketing**: Treating epoch IDs like product versions.
+- **Cross-epoch comparisons**: Declaring "Attempt 003 is better than Attempt 001" when the evaluation rules changed.
+
+---
+
+## Why This Exists
+
+Evolutionary systems assume a stable fitness landscape per generation.
+
+Human + AI systems change the landscape constantly (tools, contracts, evidence standards, deployment topology).
+Naming epochs makes those shifts explicit so we can:
+
+- preserve honest comparisons
+- prevent "it worked because residue" confusion
+- keep learnings interpretable over time
+
+If the evaluation landscape changed, say so.
+That's what an epoch is for.
+
+
+---
+
+## Source: `canon/odd/appendices/compilation.md`
+
+---
+uri: klappy://canon/odd/compilation
+title: Compilation
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["odd", "compilation", "memory", "context", "packs"]
+---
+
+# Compilation
+
+## Summary
+
+Compilation is the process of producing a **derived, wipeable, portable pack** from higher-entropy source documents.
+
+It exists to solve a practical constraint:
+
+> Agents and humans cannot keep the entire repo in working memory at once.
+
+Compilation produces a **smaller, purpose-built context artifact** that can be regenerated at any time.
+
+---
+
+## Core Rule
+
+**Compilation never edits or replaces source.**
+
+- Source docs remain the truth.
+- Compiled packs are derived outputs.
+- Compiled outputs may be deleted at any time and rebuilt deterministically.
+
+This is compilation, not compression-in-place.
+
+---
+
+## Output Location (Wipeable)
+
+Compiled outputs MUST live under:
+
+`/public/_compiled/<lane>/`
+
+Example:
+
+`/public/_compiled/website/visitor-pack.md`
+
+Compiled outputs MUST NOT be stored inside:
+- `/canon/**`
+- `/docs/**`
+- `/attempts/**`
+
+Those are source-of-truth layers.
+
+---
+
+## Provenance Header (Required)
+
+Every compiled pack MUST begin with a provenance header containing:
+
+- `lane`
+- `pack`
+- `built_at` (ISO8601)
+- `git_commit`
+- `sources` (list of source file paths)
+- `source_hashes` (map of source path → sha256)
+
+If provenance is missing, the compiled pack is invalid.
+
+---
+
+## Why This Is ODD
+
+ODD treats "context" as a consumable.
+
+Compilation is the mechanism that makes context:
+
+- **portable** (shareable artifact)
+- **auditable** (provenance)
+- **regeneratable** (wipeable output)
+- **cheap** (smaller input than full repo)
+
+Compilation is not automation. It is an **evolutionary pressure** against doc sprawl.
+
+If compilation output grows bloated, the correct response is:
+- reduce scope
+- tighten selection rules
+- improve curation
+not "add more docs."
+
+---
+
+## Relationship to Drift Checks
+
+Drift checks ensure the repo does not contradict itself.
+
+Compilation ensures the repo remains **usable** under memory limits.
+
+Both are required for scalability.
+
+
+---
+
+## Source: `canon/odd/appendices/compilation-targets.md`
+
+---
+uri: klappy://canon/odd/compilation-targets
+title: "Compilation Targets"
+audience: canon
+exposure: public
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "compilation", "memory", "portability", "packs", "lanes"]
+---
+
+# Compilation Targets
+
+Compiled packs exist to make the corpus usable at constrained context sizes without rewriting source truth.
+
+A compiled pack is **derived output**. It can be deleted and regenerated at any time.
+
+## Key Idea
+
+Compilation is scoped by:
+
+- **Lane** (which product's PRD and user intent we're serving)
+- **Target** (which consumer needs the compressed view)
+
+A pack is always identified as:
+
+`(lane, target)`
+
+## Output Location (Wipeable)
+
+All compiled output MUST live under:
+
+`/public/_compiled/<lane>/`
+
+Example:
+
+- `/public/_compiled/website/visitor-pack.md`
+- `/public/_compiled/website/author-pack.md`
+
+## Compile Plans (Deterministic)
+
+Each pack MUST have a deterministic plan file:
+
+`/infra/compile/plans/<lane>/<target>.json`
+
+The plan defines:
+- ordered source files
+- compilation mode (Phase 0: concat)
+- output filename
+
+## Targets
+
+Targets are **not personas**. They are constrained consumer profiles.
+
+### Website Lane Targets
+
+- `visitor` — minimal orientation surface; progressive disclosure; "what is this?"
+- `author` — high-signal working pack for the repo owner; more depth; less onboarding
+
+### Future Targets (Defined When Needed)
+
+- `dev-peer` — evaluation / critique / contribution readiness
+- `agent-core` — operational pack for agents to follow process consistently
+
+These exist as names only until a lane PRD requires them.
+
+## Invariants
+
+- Packs are derived. Source docs are not overwritten.
+- Packs do not introduce new truth. They reference truth.
+- Packs must include provenance (lane, target, timestamp, git commit, source list + hashes).
+- Verification MUST be possible without an LLM (hashes + structure + required header).
+
+## Phase Policy
+
+- **Phase 0 (Concat):** deterministic concatenation only
+- **Phase 1 (LLM):** LLM may summarize/select, but output still must satisfy the same provenance + verification contract
+
+
+---
+
+## Source: `docs/PRD/website/PRD.md`
+
+# PRD: Public Website
+
+| Field           | Value            |
+|-----------------|------------------|
+| **PRD Version** | v1.0             |
+| **Lane**        | website          |
+| **Status**      | Active           |
+| **Created**     | 2026-01-17       |
+| **Author**      | Chris Klapp      |
+
+---
+
+## Interface Contracts
+
+This lane MUST remain compatible with:
+
+- manifest >=2.0.0 <3.0.0
+- build-output >=3.0.0 <4.0.0
+- attempt-cli >=2.0.0 <3.0.0
+
+---
+
+## Visual Interfaces
+
+This product MUST remain compatible with:
+
+- color-system >=1.0.0 <2.0.0
+- typography >=1.0.0 <2.0.0
+- spacing >=1.0.0 <2.0.0
+
+This product does NOT define colors, fonts, or spacing directly.
+It consumes visual interfaces.
+
+See `/canon/odd/appendices/visual-evolution.md` for the visual evolution model.
+
+---
+
+## Objective
+
+Create a public website that allows humans to:
+
+- Understand what ODD is
+- Explore it progressively without overwhelm
+- Verify credibility
+- Navigate to deeper material intentionally
+
+---
+
+## Background
+
+This is the human-facing orientation surface for ODD.
+
+It is portfolio, explanation, credibility layer.
+
+It does NOT teach agents how to think.
+It does NOT execute ODD.
+It explains ODD progressively to humans.
+
+---
+
+## In Scope
+
+- Progressive disclosure UX
+- Canon browsing
+- Essays / articles (including Medium content)
+- Clear entry points ("Start here", "Go deeper")
+- Mobile usability
+- Visual calm
+- Deep links / shareable URLs
+
+---
+
+## Explicitly Out of Scope
+
+- AI chat (belongs to ai-navigation lane)
+- Agent execution (belongs to agent-skill lane)
+- Process enforcement
+- MCP servers
+- "How to run ODD" instructions for agents
+
+---
+
+## Success Criteria
+
+- [ ] First load shows no more than 7 navigational items
+- [ ] Mobile usable without horizontal scrolling
+- [ ] Canon discoverable without file paths exposed
+- [ ] No agent instructions present in UI
+- [ ] No CLI/process language exposed to visitors
+- [ ] Deep links work (URL represents resource + section)
+- [ ] Progressive disclosure tiers respected (Tier 0/1/2)
+
+---
+
+## Definition of Done
+
+An attempt against this PRD is complete when:
+
+- [ ] Build output produced (`npm run build`)
+- [ ] Visual proof captured (desktop + mobile screenshots)
+- [ ] First load shows ≤7 nav items (verified via screenshot)
+- [ ] Mobile layout verified (no horizontal scroll)
+- [ ] Deep link round-trip tested
+- [ ] Self-audit completed with explicit tradeoffs
+
+---
+
+## Primary User
+
+Human developers, peers, evaluators exploring ODD.
+
+---
+
+## Constraints
+
+This PRD is shaped by Canon constraints:
+
+- Evidence over assertion
+- UX should carry the explanation (reduce text compensation)
+- Maintainability over cleverness
+- Progressive disclosure required
+
+---
+
+## Attempt Policy
+
+This PRD may be attempted multiple times.
+
+- Each attempt is evaluated independently
+- Failed attempts inform future attempts or PRD revisions
+- Attempts are sealed when CLOSED or ABANDONED
+
+Attempts live at: `/attempts/website/prd-v1.0/attempt-NNN/`
+
+---
+
+## Compiled Pack (Phase 0)
+
+The website lane MUST support generating a wipeable "visitor pack" used for progressive disclosure and AI-friendly context.
+
+### Command
+- `npm run lane:compile -- --lane website --pack visitor`
+
+### Output
+- `public/_compiled/website/visitor-pack.md`
+- `public/_compiled/website/_meta/COMPILE_META.json`
+
+### Verification
+- `npm run verify:compiled -- --lane website --pack visitor`
+
+### Contract
+- The compiled pack MUST include a provenance header as defined in:
+  - `klappy://canon/odd/compilation`
+
+---
+
+## Related Documents
+
+- Lane architecture: `/canon/odd/appendices/product-lanes.md`
+- Canon constraints: `/canon/constraints.md`
+- Definition of Done: `/canon/definition-of-done.md`
+- Legacy PRD (v0.3): `/docs/PRD/website/PRD-legacy-v0.3.md`
+- Compilation: `/canon/odd/appendices/compilation.md`
+
+
+
+--------------------------------------------------------------------------------
+📄 File: public/_compiled/website/index.json
+--------------------------------------------------------------------------------
+
+{
+  "lane": "website",
+  "generated_at": "2026-01-19T20:43:48.763Z",
+  "packs": [
+    {
+      "pack": "author",
+      "plan": "infra/compile/plans/website/author.json",
+      "output": "public/_compiled/website/author-pack.md",
+      "meta": "public/_compiled/website/_meta/author-COMPILE_META.json",
+      "exists": true
+    },
+    {
+      "pack": "visitor",
+      "plan": "infra/compile/plans/website/visitor.json",
+      "output": "public/_compiled/website/visitor-pack.md",
+      "meta": "public/_compiled/website/_meta/visitor-COMPILE_META.json",
+      "exists": true
+    }
+  ]
+}
+
+
+--------------------------------------------------------------------------------
+📄 File: public/_compiled/website/visitor-pack.md
+--------------------------------------------------------------------------------
+
+---
+lane: website
+pack: visitor
+built_at: 2026-01-19T20:43:48.500Z
+git_commit: 644fb5fb282d7c27a990ae24d62badd1dd36c734
+sources:
+  - canon/index.md
+  - canon/odd/appendices/product-lanes.md
+  - canon/odd/appendices/epochs.md
+  - canon/odd/appendices/compilation.md
+  - docs/PRD/website/PRD.md
+source_hashes:
+  canon/index.md: bae46a137e58066df21d89506f6ba63386d6684187aabc08a236c50150fcd8b4
+  canon/odd/appendices/product-lanes.md: 977b29aa2e06eecb32419d967da590f4d851c3c9feb5e38269cfc094b6da3d09
+  canon/odd/appendices/epochs.md: 62d38377f7b68c480628bf0bb89fe29478be3ac2dc2a886d0c67df538067ef7b
+  canon/odd/appendices/compilation.md: 83442f41577832320e27a3538e66b78a6179c082cb065b7849e65c6ce03b3c70
+  docs/PRD/website/PRD.md: 71ca26485617dc50f698aade67909d204074c7156ffd323e0f5138fc811c40b3
+---
+
+
+---
+
+## Source: `canon/index.md`
+
+---
+uri: klappy://meta/canon-index
+title: "Canon Index"
+audience: canon
+exposure: nav
+tier: 1
+voice: neutral
+stability: semi_stable
+tags: ["canon", "index", "orientation"]
+---
+
+# 🧭 Canon Index v0.1
+
+**Scope, Structure, Intent, and Confidence**
+
+This document provides orientation to the Canon.
+It describes what exists, what each artifact is for, how they relate, and where the current design is strong vs fragile.
+
+It does not define workflows, agent loops, enforcement steps, or execution order.
+
+---
+
+## 📌 Purpose of the Canon
+
+The Canon is a curated set of documents that capture:
+• how decisions are made
+• what assumptions are held
+• how work is verified
+• how rigor changes as projects mature
+
+Its purpose is clarity, not control.
+
+PRDs are versioned and may be attempted multiple times; attempts are sealed records, not evolving workstreams.
+
+The Canon exists so that:
+• reasoning does not have to be repeated
+• principles remain stable while implementations change
+• future systems can reference intent without inheriting outdated instructions
+
+---
+
+## 🧠 What the Canon Is (and Is Not)
+
+**The Canon Is**
+• a shared reference
+• a source of assumptions and defaults
+• a way to encode thinking without enforcing execution
+
+**The Canon Is Not**
+
+• a workflow
+• a command system
+• a task list
+• a replacement for judgment
+
+Nothing in the Canon executes by itself.
+
+---
+
+## 🚀 Start Here
+
+**Constraints** — baseline assumptions and non-negotiables that shape every decision. What must be true for this work to make sense?
+
+**Definition of Done** — what qualifies as completed work and what evidence is required. When can work honestly be called done?
+
+These two documents anchor everything else.
+
+---
+
+## 🔍 If You Want the Philosophy
+
+**ODD Manifesto** — the philosophical and operational foundation of Outcomes-Driven Development. Why this approach exists.
+
+**Maturity Model** — how rigor changes as projects mature. When different expectations become binding.
+
+**Decision Rules** — default heuristics used when multiple valid options exist.
+
+---
+
+## 🧩 If You Want the Edge Cases
+
+The appendices extend understanding without introducing enforcement:
+
+• **Attempt Lifecycle** — how PRD versions, attempts, and evidence are preserved
+• **Quantum Development** — evaluating multiple paths before revising intent
+• **Repository Topology** — what lives where and what changes when
+• **Misuse Patterns** — common failure modes and how ODD gets misapplied
+
+These are diagnostic and orientation documents, not requirements.
+
+---
+
+## 🔒 Public vs Internal Boundary
+
+• `/odd/README.md` → public-facing ODD (shareable, human-friendly)
+• `/canon/**` → internal reference (governance artifacts, precise language)
+
+Public documents explain intent.
+Canon documents preserve precision.
+
+---
+
+## 📖 Precedence & Interpretation (Orientation Only)
+
+A useful mental model for reading:
+
+1. ODD Manifesto provides philosophical grounding
+2. Maturity Model explains when rigor increases
+3. Constraints shape the solution space
+4. Decision Rules guide choices
+5. Evidence Policies define completion
+
+If documents appear to conflict, maturity context and explicit tradeoffs usually explain why.
+
+---
+
+## 📁 Canon Structure
+
+```text
+
+/canon/
+  index.md
+  constraints.md
+  decision-rules.md
+  definition-of-done.md
+  self-audit.md
+  visual-proof.md
+  completion-report-template.md
+  odd/
+    contract.md
+    manifesto.md
+    maturity.md
+    misuse-patterns.md
+    prompt-architecture.md
+    orientation-map.md
+    appendices/
+      alignment-reviews.md
+      epochs.md
+      lane-implementation-surfaces.md
+      product-lanes.md
+      attempt-lifecycle.md
+      drift-checks.md
+      evolution-not-automation.md
+      lane-build-layout.md
+      quantum-development.md
+      repo-topology.md
+      repo-truth.md
+      visual-evolution.md
+    decisions/
+      D0001-prod-branch-is-production.md
+      ...
+```
+
+Each file addresses a different dimension of decision-making.
+
+---
+
+## 📎 Canon Components & Roles
+
+### Constraints
+
+**File:** `constraints.md`
+
+Defines baseline assumptions and non-negotiables that shape decisions.
+
+Answers:
+
+What must be true for this work to make sense?
+
+---
+
+### Decision Rules
+
+**File:** `decision-rules.md`
+
+Default heuristics used when multiple valid options exist.
+
+Answers:
+
+How do choices tend to be made?
+
+---
+
+### Evolution
+
+- [Failure-Driven Modularity](./evolution/failure-driven-modularity.md)
+
+---
+
+### Definition of Done & Evidence Policy
+
+**File:** `definition-of-done.md`
+
+Defines what qualifies as completed work and what evidence is required.
+
+Answers:
+
+When can work honestly be called done?
+
+---
+
+### Self-Audit Checklist
+
+**File:** `self-audit.md`
+
+A checklist for reviewing work before declaring completion.
+
+Answers:
+
+What should be reviewed before claiming success?
+
+---
+
+### Visual Proof Standards
+
+**File:** `visual-proof.md`
+
+Defines what qualifies as acceptable visual evidence.
+
+Answers:
+
+What does "prove it visually" mean?
+
+---
+
+### Completion Report Template
+
+**File:** `completion-report-template.md`
+
+Standard format for reporting completed work.
+
+Answers:
+
+How should completion be communicated?
+
+---
+
+### ODD System Contract
+
+**File:** `odd/contract.md`
+
+The single source of truth for ODD workflow contract versioning.
+
+Answers:
+
+What version of ODD is this repo compatible with?
+
+---
+
+### ODD Manifesto (Extended)
+
+**File:** `odd/manifesto.md`
+
+Philosophical and operational foundation of Outcomes-Driven Development.
+
+Answers:
+
+Why this approach exists.
+
+---
+
+### Project Maturity & Progressive Governance
+
+**File:** `odd/maturity.md`
+
+Defines how rigor changes as projects mature.
+
+Answers:
+
+When different expectations become binding.
+
+---
+
+### ODD Appendices (Orientation Only)
+
+These files extend understanding without introducing enforcement:
+• Alignment Reviews (odd/appendices/alignment-reviews.md)
+Periodic evaluation of the ODD system itself. Detects drift between stated intent, implemented process, and observed outcomes.
+• Epochs (odd/appendices/epochs.md)
+Named periods where the meaning of "success" is stable enough that outcomes can be compared. Prevents invalid cross-era comparisons.
+• Progressive Elevation & Decay (odd/appendices/progressive-elevation.md)
+The memory model: how artifacts move from ephemeral (attempts/PRDs) to durable (canon/contracts/decisions). Most artifacts decay; only proven patterns elevate.
+• Canonical Compression (odd/appendices/canonical-compression.md)
+The compilation model: how derived, minimal working models are produced from Source Canon without mutating source truth. Compiled outputs are disposable and epoch-scoped.
+• Lane-Scoped Implementation Surfaces (odd/appendices/lane-implementation-surfaces.md)
+Each lane owns its own `/products/<lane>/src` and `/products/<lane>/dist`. No shared repo-root surfaces.
+• Product Lanes (odd/appendices/product-lanes.md)
+Why multiple PRD lanes exist and how they relate. Each lane has its own PRD, attempts, and lifecycle. Lanes share canon, not lifecycle.
+• Misuse Patterns (odd/misuse-patterns.md)
+Common failure modes and how ODD is misapplied in practice. Diagnostic only.
+• Prompt Architecture (odd/prompt-architecture.md)
+How intent scales without giant prompts. Orientation only.
+• Orientation Map (odd/orientation-map.md)
+A one-page mental model of ODD, Canon, Evidence, and Outcomes.
+• Attempt Lifecycle (odd/appendices/attempt-lifecycle.md)
+How PRD versions, attempts, evidence, and deployments are preserved across iterations. PRDs can have multiple attempts; attempts are sealed records.
+• Quantum Development (odd/appendices/quantum-development.md)
+Evaluating multiple execution paths before revising intent. Explains why divergence is signal, not waste.
+• Repository Topology (odd/appendices/repo-topology.md)
+What lives where and what changes when. Encodes App/Content/Infrastructure decoupling.
+• Evolution, Not Automation (odd/appendices/evolution-not-automation.md)
+Why this system supports learning, not automatic execution. Humans stay in the loop.
+• Visual Evolution (odd/appendices/visual-evolution.md)
+Why visual systems evolve independently from products. Products consume visual interfaces, not raw design decisions.
+• Drift Checks (odd/appendices/drift-checks.md)
+The drift-prevention mechanism. When docs, prompts, and tooling diverge, truth becomes vibes.
+• Lane Build Layout (odd/appendices/lane-build-layout.md)
+How lanes avoid /src and /dist collisions. Worktrees isolate, deployments are lane-scoped.
+
+---
+
+## 📋 Meta Rules (Orientation Only)
+
+These are structural conventions for keeping the Canon coherent over time.
+They are not workflows or enforcement steps.
+
+**1. Single Inventory Source**
+If an inventory of Canon resources exists, there should be one authoritative source (e.g., a manifest). Other indexes should be derived or optional.
+
+**2. Stable Names Beat Clever Names**
+Prefer stable file and URI naming over clever branding. Rename rarely.
+
+**3. Audience Separation Matters**
+"Public" explains and invites. "Canon" defines and stabilizes.
+
+**4. Voice Is Labeled, Not Transformed**
+First-person documents may be consumed as-is or translated by clients. The Canon itself does not require a specific rendering voice.
+
+**5. Multi-Lane PRD Architecture**
+PRDs are organized into independent product lanes. Each lane has its own active PRD, attempts, and lifecycle. Lanes share canon, not lifecycle. See `/canon/odd/appendices/product-lanes.md` for the full model.
+
+---
+
+## 🔄 Stability & Change Philosophy
+
+Not all Canon documents are equally stable.
+
+Some are intended to remain largely fixed.
+Others are expected to evolve through use.
+
+Change is allowed, but should be:
+• intentional
+• versioned (at least informally)
+• documented somewhere discoverable
+
+---
+
+## ⚠️ Confidence & Drift Risk (Self-Assessment)
+
+This section expresses current confidence that the Canon and surrounding architecture align with the core pillars:
+KISS, DRY, Consistency, Maintainability, Antifragile, Scalable, Prompt-over-Code.
+
+These are not guarantees.
+They are a snapshot of perceived risk.
+
+Confidence scale
+• 0.9+ — robust
+• 0.7–0.85 — strong, but watch for drift
+• 0.5–0.7 — plausible, fragile under misuse
+• <0.5 — likely misaligned unless corrected
+
+Current scores (v0.1 snapshot)
+• Prompt-over-Code / Convention-over-Config: 0.80
+Strong fit due to stable addressing and canonical retrieval surfaces. Risk: schema sprawl or client-specific conventions.
+• KISS: 0.75
+Minimal primitives and no workflow semantics. Risk: meta-layer creep.
+• DRY (with isolation): 0.70
+Canon centralizes principles; manifest can become a single inventory. Risk: duplicate indices drifting.
+• Consistency: 0.65
+URI and metadata structure support consistency. Risk: naming drift across files and routes.
+• Maintainability: 0.70
+Separation of stable worldview vs evolving templates helps. Risk: manual inventory updates falling out of sync.
+• Antifragile: 0.60
+Recoverability improves if resources can be served statically and via MCP. Risk: hidden single points of failure.
+• Scalable: 0.70
+Schema supports growth. Risk: large manifests becoming manually brittle.
+
+Intended use of this section
+• Make risks explicit early
+• Prevent false confidence
+• Provide a stable baseline for future comparison
+
+---
+
+## 🚫 What Is Intentionally Undefined
+
+The Canon deliberately does not define:
+• specific tools
+• specific agents
+• specific workflows
+• specific automation loops
+
+These are left open to evolve without rewriting foundational thinking.
+
+---
+
+## 💡 Closing Note
+
+The Canon exists to preserve intent without freezing execution.
+
+It encodes how thinking works, not what must be done next.
+
+---
+
+## ✅ Status
+
+• Canon Index v0.1 complete
+• Orientation-only
+• Includes a confidence and drift snapshot
+
+---
+
+This Canon v0.1 is considered stable for initial builds. Revisions should be additive unless a documented failure requires change.
+
+
+---
+
+## Source: `canon/odd/appendices/product-lanes.md`
+
+---
+uri: klappy://canon/odd/product-lanes
+title: "Product Lanes in Outcome-Driven Development"
+audience: canon
+exposure: hidden
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "prd", "architecture", "lanes", "orientation"]
+---
+
+# Product Lanes in Outcome-Driven Development
+
+**Status:** Orientation  
+**Audience:** Internal / Canon  
+**Scope:** Why multiple PRD lanes exist and how they relate
+
+---
+
+## Summary
+
+ODD systems evolve across multiple independent product lanes.
+
+Each lane has its own PRD, attempts, and failure modes.
+
+Lanes share canon, not lifecycle.
+
+---
+
+## Why PRDs Must Be Decoupled
+
+A single PRD governing everything creates cognitive collapse:
+
+- **Different users**: Website serves humans exploring ODD. Agent skill serves AI systems executing ODD.
+- **Different success criteria**: "Mobile usable" vs "Can propose a PRD autonomously"
+- **Different rates of change**: Website can stagnate while agent skills evolve rapidly.
+- **Different evidence**: Screenshots vs decision quality metrics.
+
+Forcing these into one evolutionary track means:
+
+- Progress in one lane forces reruns in another
+- Evidence requirements conflict
+- Scope creep becomes structural
+
+---
+
+## The Three Lanes
+
+### Lane 1: Public Website (Humans)
+
+**Purpose:** A human-facing orientation surface for ODD.
+
+This is portfolio, explanation, credibility.
+It does not teach agents how to think.
+It does not execute ODD.
+It explains ODD progressively to humans.
+
+**PRD Location:** `/docs/PRD/website/PRD.md`
+
+**Primary User:** Human developers, peers, evaluators
+
+---
+
+### Lane 2: AI Navigation Interface (Humans talking to AI)
+
+**Purpose:** An AI layer over documentation that helps humans understand ODD.
+
+This enables humans to ask questions of the ODD corpus and be:
+
+- Answered accurately
+- Guided progressively
+- Linked to the right documents
+- Without reading everything
+
+This is NOT agent tooling. This is AI helping humans navigate.
+
+**PRD Location:** `/docs/PRD/ai-navigation/PRD.md`
+
+**Primary User:** Humans trying to understand and evaluate ODD
+
+---
+
+### Lane 3: Agent Cognitive Skill (Evolution Engine)
+
+**Purpose:** A reusable agent cognitive framework for ODD reasoning.
+
+This is about how agents think, not what they render.
+
+Enables AI systems to:
+
+- Reason using ODD principles
+- Structure PRDs
+- Define outcomes and evidence
+- Run evolutionary attempts
+- Improve their own process over time
+
+This is not tied to this website. It should work on any project.
+
+**PRD Location:** `/docs/PRD/agent-skill/PRD.md`
+
+**Primary User:** AI agents executing evolutionary development elsewhere
+
+---
+
+## Implementation Surfaces Are Lane-Scoped
+
+Each lane is an independent product.
+
+Implementation directories are lane-scoped:
+
+- `products/<lane>/src` (disposable)
+- `products/<lane>/dist` (build output)
+
+Repo-root `/src` is not a shared surface in the multi-lane model.
+
+See: `/canon/odd/appendices/lane-implementation-surfaces.md`
+
+---
+
+## Canon Is Not a Product
+
+Canon does not have a PRD.
+Canon does not have attempts.
+Canon evolves only through decision logs.
+
+Products may render, query, or reason over canon - but never modify it directly.
+
+| Layer    | Coupling                      |
+|----------|-------------------------------|
+| Canon    | Shared, slow, authoritative   |
+| PRDs     | Isolated, fast, disposable    |
+| Attempts | Ephemeral, lane-scoped        |
+| Tooling  | Canon-aware, lane-agnostic    |
+
+---
+
+## What Is Shared vs What Is Isolated
+
+| Artifact          | Shared Across Lanes? | Notes                                      |
+|-------------------|----------------------|--------------------------------------------|
+| Canon             | Yes                  | All lanes reference the same constraints   |
+| Decision logs     | Yes                  | Architectural decisions affect all lanes   |
+| PRDs              | No                   | Each lane has its own PRD                  |
+| Attempts          | No                   | Attempts are lane-scoped                   |
+| Evidence          | No                   | Success criteria differ per lane           |
+| Definition of Done| Partially            | Core DoD applies; lane-specific criteria extend it |
+
+---
+
+## Attempt Structure (Locked)
+
+Every attempt MUST declare a lane before registration.
+Attempts without a lane are invalid.
+
+**Folder structure:** `/attempts/<lane>/prd-vX.Y/attempt-NNN/`
+
+Valid examples:
+- `/attempts/website/prd-v1.0/attempt-001/`
+- `/attempts/ai-navigation/prd-v1.0/attempt-001/`
+- `/attempts/agent-skill/prd-v1.0/attempt-001/`
+
+Invalid (do not use):
+- `/attempts/prd-vX.Y/<lane>/`
+- `/attempts/<lane>/attempt-NNN/`
+- `/attempts/<lane>/<anything creative>/`
+
+---
+
+## Anti-Patterns
+
+### One PRD to Rule Them All
+
+Treating all work as variations of a single product forces:
+
+- Conflicting success criteria
+- Evidence that doesn't apply
+- Reruns across unrelated changes
+
+### Treating Agents as UI Features
+
+The AI navigation interface (Lane 2) is NOT the same as agent cognitive skill (Lane 3).
+
+- Lane 2: AI helps humans understand
+- Lane 3: AI executes ODD autonomously
+
+Mixing these creates scope confusion and evidence pollution.
+
+### Re-running Experiments Across Lanes
+
+A mobile navigation fix (Lane 1) should not invalidate agent skill experiments (Lane 3).
+
+Lane isolation prevents cascading reruns.
+
+---
+
+## Implications for Tooling and Docs
+
+### Where PRDs Live
+
+```
+/docs/PRD/
+  website/PRD.md
+  ai-navigation/PRD.md
+  agent-skill/PRD.md
+```
+
+### Where Attempts Live
+
+```
+/attempts/
+  website/prd-vX.Y/attempt-NNN/
+  ai-navigation/prd-vX.Y/attempt-NNN/
+  agent-skill/prd-vX.Y/attempt-NNN/
+```
+
+### How Evolution Propagates
+
+- Canon changes affect all lanes (but rarely change)
+- PRD changes affect only that lane
+- Attempt outcomes inform only that lane's PRD evolution
+- Cross-lane learnings are captured in decision logs, not PRD mutations
+
+---
+
+## Scalability
+
+This architecture is scalable because it is NOT interdependent.
+
+You do not get a monorepo of coupled PRDs.
+You get shared canon + independent evolutionary tracks.
+
+This lets you:
+
+- Freeze the website indefinitely
+- Rapidly evolve agent skills
+- Replace AI navigation entirely
+- Add a fourth lane later without touching the others
+
+---
+
+## Related Documents
+
+- Decision log: `/canon/odd/decisions/D0009-multi-lane-prd-architecture.md`
+- Attempt lifecycle: `/canon/odd/appendices/attempt-lifecycle.md`
+- Evolution philosophy: `/canon/odd/appendices/evolution-not-automation.md`
+
+
+---
+
+## Source: `canon/odd/appendices/epochs.md`
+
+---
+uri: klappy://canon/odd/epochs
+title: "Epochs"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "epochs", "fitness-landscape", "comparability", "orientation"]
+---
+
+# Epochs
+
+An **epoch** is a named period where the meaning of "success" is stable enough that outcomes can be compared.
+
+This is borrowed from evolutionary systems:
+
+- **Attempts** are individuals.
+- **PRDs** are fitness functions.
+- **Promotion** is selection.
+- **Canon** is inherited traits.
+- **Epochs** are shifts in the fitness landscape itself.
+
+If epochs are implicit, the system will compare results across incompatible standards and produce folklore.
+
+---
+
+## What an Epoch Is
+
+An epoch defines the **evaluation reality** for a period of work:
+
+- what "done" means (and what it does not)
+- what evidence is mandatory
+- what contracts are binding (build/deploy, provenance, etc.)
+- what risks are acceptable
+- what is treated as stable vs experimental infrastructure
+
+An epoch is *not* a PRD.  
+An epoch is the context in which PRDs are interpreted.
+
+---
+
+## What an Epoch Is Not
+
+Epochs are not:
+
+- a semantic version of the website
+- a replacement for product lanes
+- a reason to rebuild everything
+- a new folder taxonomy for creativity
+
+Epochs exist to prevent invalid comparisons, not to add structure.
+
+---
+
+## Relationship to Product Lanes
+
+**Product lanes** separate *simultaneous intent*.  
+**Epochs** separate *changes over time* in how intent is evaluated.
+
+- Lanes answer: "Which product are we evolving?"
+- Epochs answer: "What counts as truth *right now* across those products?"
+
+Lanes are parallel. Epochs are sequential.
+
+---
+
+## Relationship to PRDs and Attempts
+
+Within a lane:
+
+- A **PRD** specifies requirements for a specific capability.
+- An **attempt** is an observation (implementation + evidence) against that PRD.
+
+Across time:
+
+- An **epoch** determines whether two attempts are comparable.
+- If the evaluation rules changed, you are in a new epoch.
+
+Rule of thumb:
+
+> If you changed what evidence is required, or what contract is binding, you changed the fitness landscape. That is a new epoch.
+
+---
+
+## When to Start a New Epoch
+
+Start a new epoch when any of the following change in a way that would invalidate comparisons with prior attempts:
+
+- Evidence requirements (e.g., "preview URL required" becomes mandatory)
+- Provenance requirements (e.g., capturing tool/model becomes required)
+- Deployment topology (e.g., `prod` branch becomes the production branch)
+- Build/deploy contract semantics (`/dist` rules change materially)
+- Attempt lifecycle mechanics (e.g., reserve → register/finalize)
+- Evaluation method (e.g., manual review → scripted verification gates)
+
+If the change is "nice-to-have" and does not affect comparability, do not create an epoch.
+
+---
+
+## Naming Convention
+
+Epoch IDs should be boring and stable:
+
+- `E0001-<short-name>`
+- `E0002-<short-name>`
+
+Examples:
+- `E0001-single-prd-era`
+- `E0002-multi-lane-era`
+- `E0003-evidence-first-era`
+
+The ID is the canonical reference. The name is a hint.
+
+---
+
+## Minimal Epoch Metadata (Required)
+
+Every attempt's `META.json` MUST include:
+
+- `lane`
+- `prd_version`
+- `epoch_id`
+
+Example:
+
+```json
+{
+  "lane": "website",
+  "prd_version": "v1.0",
+  "epoch_id": "E0002-multi-lane-era"
+}
+```
+
+If epoch_id is missing, the attempt is not comparable by default.
+
+---
+
+## Anti-Patterns
+
+- **Epoch inflation**: Creating a new epoch for every PRD bump.
+- **Hidden epoch shifts**: Changing contracts or evidence rules without naming it.
+- **Epoch as marketing**: Treating epoch IDs like product versions.
+- **Cross-epoch comparisons**: Declaring "Attempt 003 is better than Attempt 001" when the evaluation rules changed.
+
+---
+
+## Why This Exists
+
+Evolutionary systems assume a stable fitness landscape per generation.
+
+Human + AI systems change the landscape constantly (tools, contracts, evidence standards, deployment topology).
+Naming epochs makes those shifts explicit so we can:
+
+- preserve honest comparisons
+- prevent "it worked because residue" confusion
+- keep learnings interpretable over time
+
+If the evaluation landscape changed, say so.
+That's what an epoch is for.
+
+
+---
+
+## Source: `canon/odd/appendices/compilation.md`
+
+---
+uri: klappy://canon/odd/compilation
+title: Compilation
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["odd", "compilation", "memory", "context", "packs"]
+---
+
+# Compilation
+
+## Summary
+
+Compilation is the process of producing a **derived, wipeable, portable pack** from higher-entropy source documents.
+
+It exists to solve a practical constraint:
+
+> Agents and humans cannot keep the entire repo in working memory at once.
+
+Compilation produces a **smaller, purpose-built context artifact** that can be regenerated at any time.
+
+---
+
+## Core Rule
+
+**Compilation never edits or replaces source.**
+
+- Source docs remain the truth.
+- Compiled packs are derived outputs.
+- Compiled outputs may be deleted at any time and rebuilt deterministically.
+
+This is compilation, not compression-in-place.
+
+---
+
+## Output Location (Wipeable)
+
+Compiled outputs MUST live under:
+
+`/public/_compiled/<lane>/`
+
+Example:
+
+`/public/_compiled/website/visitor-pack.md`
+
+Compiled outputs MUST NOT be stored inside:
+- `/canon/**`
+- `/docs/**`
+- `/attempts/**`
+
+Those are source-of-truth layers.
+
+---
+
+## Provenance Header (Required)
+
+Every compiled pack MUST begin with a provenance header containing:
+
+- `lane`
+- `pack`
+- `built_at` (ISO8601)
+- `git_commit`
+- `sources` (list of source file paths)
+- `source_hashes` (map of source path → sha256)
+
+If provenance is missing, the compiled pack is invalid.
+
+---
+
+## Why This Is ODD
+
+ODD treats "context" as a consumable.
+
+Compilation is the mechanism that makes context:
+
+- **portable** (shareable artifact)
+- **auditable** (provenance)
+- **regeneratable** (wipeable output)
+- **cheap** (smaller input than full repo)
+
+Compilation is not automation. It is an **evolutionary pressure** against doc sprawl.
+
+If compilation output grows bloated, the correct response is:
+- reduce scope
+- tighten selection rules
+- improve curation
+not "add more docs."
+
+---
+
+## Relationship to Drift Checks
+
+Drift checks ensure the repo does not contradict itself.
+
+Compilation ensures the repo remains **usable** under memory limits.
+
+Both are required for scalability.
+
+
+---
+
+## Source: `docs/PRD/website/PRD.md`
+
+# PRD: Public Website
+
+| Field           | Value            |
+|-----------------|------------------|
+| **PRD Version** | v1.0             |
+| **Lane**        | website          |
+| **Status**      | Active           |
+| **Created**     | 2026-01-17       |
+| **Author**      | Chris Klapp      |
+
+---
+
+## Interface Contracts
+
+This lane MUST remain compatible with:
+
+- manifest >=2.0.0 <3.0.0
+- build-output >=3.0.0 <4.0.0
+- attempt-cli >=2.0.0 <3.0.0
+
+---
+
+## Visual Interfaces
+
+This product MUST remain compatible with:
+
+- color-system >=1.0.0 <2.0.0
+- typography >=1.0.0 <2.0.0
+- spacing >=1.0.0 <2.0.0
+
+This product does NOT define colors, fonts, or spacing directly.
+It consumes visual interfaces.
+
+See `/canon/odd/appendices/visual-evolution.md` for the visual evolution model.
+
+---
+
+## Objective
+
+Create a public website that allows humans to:
+
+- Understand what ODD is
+- Explore it progressively without overwhelm
+- Verify credibility
+- Navigate to deeper material intentionally
+
+---
+
+## Background
+
+This is the human-facing orientation surface for ODD.
+
+It is portfolio, explanation, credibility layer.
+
+It does NOT teach agents how to think.
+It does NOT execute ODD.
+It explains ODD progressively to humans.
+
+---
+
+## In Scope
+
+- Progressive disclosure UX
+- Canon browsing
+- Essays / articles (including Medium content)
+- Clear entry points ("Start here", "Go deeper")
+- Mobile usability
+- Visual calm
+- Deep links / shareable URLs
+
+---
+
+## Explicitly Out of Scope
+
+- AI chat (belongs to ai-navigation lane)
+- Agent execution (belongs to agent-skill lane)
+- Process enforcement
+- MCP servers
+- "How to run ODD" instructions for agents
+
+---
+
+## Success Criteria
+
+- [ ] First load shows no more than 7 navigational items
+- [ ] Mobile usable without horizontal scrolling
+- [ ] Canon discoverable without file paths exposed
+- [ ] No agent instructions present in UI
+- [ ] No CLI/process language exposed to visitors
+- [ ] Deep links work (URL represents resource + section)
+- [ ] Progressive disclosure tiers respected (Tier 0/1/2)
+
+---
+
+## Definition of Done
+
+An attempt against this PRD is complete when:
+
+- [ ] Build output produced (`npm run build`)
+- [ ] Visual proof captured (desktop + mobile screenshots)
+- [ ] First load shows ≤7 nav items (verified via screenshot)
+- [ ] Mobile layout verified (no horizontal scroll)
+- [ ] Deep link round-trip tested
+- [ ] Self-audit completed with explicit tradeoffs
+
+---
+
+## Primary User
+
+Human developers, peers, evaluators exploring ODD.
+
+---
+
+## Constraints
+
+This PRD is shaped by Canon constraints:
+
+- Evidence over assertion
+- UX should carry the explanation (reduce text compensation)
+- Maintainability over cleverness
+- Progressive disclosure required
+
+---
+
+## Attempt Policy
+
+This PRD may be attempted multiple times.
+
+- Each attempt is evaluated independently
+- Failed attempts inform future attempts or PRD revisions
+- Attempts are sealed when CLOSED or ABANDONED
+
+Attempts live at: `/attempts/website/prd-v1.0/attempt-NNN/`
+
+---
+
+## Compiled Pack (Phase 0)
+
+The website lane MUST support generating a wipeable "visitor pack" used for progressive disclosure and AI-friendly context.
+
+### Command
+- `npm run lane:compile -- --lane website --pack visitor`
+
+### Output
+- `public/_compiled/website/visitor-pack.md`
+- `public/_compiled/website/_meta/COMPILE_META.json`
+
+### Verification
+- `npm run verify:compiled -- --lane website --pack visitor`
+
+### Contract
+- The compiled pack MUST include a provenance header as defined in:
+  - `klappy://canon/odd/compilation`
+
+---
+
+## Related Documents
+
+- Lane architecture: `/canon/odd/appendices/product-lanes.md`
+- Canon constraints: `/canon/constraints.md`
+- Definition of Done: `/canon/definition-of-done.md`
+- Legacy PRD (v0.3): `/docs/PRD/website/PRD-legacy-v0.3.md`
+- Compilation: `/canon/odd/appendices/compilation.md`
 
 
 

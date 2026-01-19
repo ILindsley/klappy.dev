@@ -160,6 +160,43 @@
       ]
     },
     {
+      "uri": "klappy://canon/odd/compilation",
+      "path": "/canon/odd/appendices/compilation.md",
+      "title": "Compilation",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": [
+        "odd",
+        "compilation",
+        "memory",
+        "context",
+        "packs"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/compilation-targets",
+      "path": "/canon/odd/appendices/compilation-targets.md",
+      "title": "Compilation Targets",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "public",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "compilation",
+        "memory",
+        "portability",
+        "packs",
+        "lanes"
+      ]
+    },
+    {
       "uri": "klappy://canon/compiled/epoch-e0002-readme",
       "path": "/canon/_compiled/epoch-E0002/README.md",
       "title": "Compiled Canon Outputs (Epoch E0002)",

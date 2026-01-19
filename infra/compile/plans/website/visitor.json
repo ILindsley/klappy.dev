@@ -1,0 +1,13 @@
+{
+  "lane": "website",
+  "pack": "visitor",
+  "output": "public/_compiled/website/visitor-pack.md",
+  "sources": [
+    "canon/index.md",
+    "canon/odd/appendices/product-lanes.md",
+    "canon/odd/appendices/epochs.md",
+    "canon/odd/appendices/compilation.md",
+    "docs/PRD/website/PRD.md"
+  ],
+  "mode": "concat"
+}
