@@ -191,6 +191,28 @@ Endless optimization is a failure mode.
 
 ---
 
+## 🧠 Memory Is the Bottleneck
+
+AI didn't just make coding faster. It changed what's scarce.
+
+In ODD, generated artifacts are abundant, but **durable intent** is not.
+So the work shifts toward:
+
+- preserving what was learned,
+- verifying reality,
+- discarding what cannot be trusted,
+- and elevating only what repeatedly reduces future drag.
+
+ODD stays legible by using **Progressive Elevation & Decay**:
+most artifacts die at the Attempt/PRD layer; only proven patterns elevate into Contracts, Canon, and Decision Trace.
+
+See:
+- `/canon/odd/appendices/progressive-elevation.md`
+- `/canon/odd/appendices/product-lanes.md`
+- `/canon/odd/appendices/epochs.md`
+
+---
+
 ## 🔗 Relationship to Canon
 
 • ODD → why

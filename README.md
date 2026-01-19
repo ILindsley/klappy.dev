@@ -39,6 +39,9 @@ If you want to see the philosophy applied, browse the **Projects**.
 
 There is no required order. Follow your curiosity.
 
+- `/docs/WHAT_THIS_REPO_IS_NOT.md` — what this repository is intentionally not
+- `/projects/agentic-memory-portability.md` — the memory portability project
+
 ---
 
 ## About the Canon
