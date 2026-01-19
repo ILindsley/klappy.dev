@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-19T22:44:50.070Z
+Generated: 2026-01-19T22:45:34.069Z
 Total Files: 164
 
 This is a complete export of all documentation, code, and content files
@@ -3564,6 +3564,39 @@ This changelog tracks changes to the **Canon pack** as a whole.
 
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
+
+## 0.4.8 — 2026-01-19
+
+**Lane-Aware Branch Naming & Cloudflare-Compatible Builds**
+
+This release enforces lane-aware branch naming and fixes Vite build paths for Cloudflare compatibility.
+
+### Added
+
+- **Preview Guide** (`/docs/PREVIEW.md`) — Local and Cloudflare preview workflows with troubleshooting
+- **Branch validation** in `attempt:register` — Refuses invalid branch prefixes and validates lane inclusion
+
+### Changed
+
+- **smart-build.js** — Uses `cwd` instead of `vite --root` for lane builds (Cloudflare-compatible)
+- **attempt-cli.js** — Branch format now includes lane: `run/<lane>/prd-v<prd>/<tool>/<agent>/<model>/<run_id>`
+- **attempt:register** — Refuses on `main`/`prod` branches; refuses branches not starting with `run/` or `attempt/`
+- **attempt:nuke** — Now requires `.attempt.json` to exist (enforces register-before-nuke workflow)
+- **BOOTSTRAP.md** — Expanded with explicit branch format requirements and required reading list
+- **ATTEMPT_KICKOFF.md** — Added link to PREVIEW.md in Related Documents
+
+### Philosophy
+
+- Branch naming is no longer optional — tooling enforces lane inclusion
+- Build paths use `cwd` instead of `--root` to avoid Cloudflare path resolution issues
+- Registration must happen before nuke to ensure provenance is captured
+
+### Notes
+
+- Cloudflare Pages projects must set build command to `npm run build -- --lane <lane>`
+- Output directory must be `products/<lane>/dist`
+
+---
 
 ## 0.4.7 — 2026-01-19
 
