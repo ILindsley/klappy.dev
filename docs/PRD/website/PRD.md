@@ -96,12 +96,30 @@ It explains ODD progressively to humans.
 
 An attempt against this PRD is complete when:
 
-- [ ] Build output produced (`npm run build`)
+- [ ] Build output produced (`npm run build -- --lane website`)
 - [ ] Visual proof captured (desktop + mobile screenshots)
 - [ ] First load shows ≤7 nav items (verified via screenshot)
 - [ ] Mobile layout verified (no horizontal scroll)
 - [ ] Deep link round-trip tested
 - [ ] Self-audit completed with explicit tradeoffs
+- [ ] **Cloudflare Preview URL provided** (branch must be pushed)
+- [ ] **Evidence URL provided** (viewable online without local code)
+
+---
+
+## Online Evidence (Required)
+
+A website lane attempt is **not complete** unless:
+
+1. The attempt branch is pushed to `origin`.
+2. Cloudflare Pages generates a Preview Deployment URL for that branch.
+3. The attempt includes an Evidence URL viewable online without running code locally.
+
+Local preview instructions are allowed during development, but they **do not satisfy attempt completion**.
+
+If an agent cannot provide both URLs, the attempt is **INVALID**.
+
+See `/canon/odd/appendices/online-evidence.md` for the full requirement.
 
 ---
 

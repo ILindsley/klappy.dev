@@ -755,6 +755,24 @@
       ]
     },
     {
+      "uri": "klappy://canon/odd/appendices/online-evidence",
+      "path": "/canon/odd/appendices/online-evidence.md",
+      "title": "Online Evidence Requirement",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "authoritative",
+      "stability": "stable",
+      "tags": [
+        "evidence",
+        "cloudflare",
+        "preview",
+        "attempts",
+        "validation"
+      ]
+    },
+    {
       "uri": "klappy://canon/odd/product-lanes",
       "path": "/canon/odd/appendices/product-lanes.md",
       "title": "Product Lanes in Outcome-Driven Development",

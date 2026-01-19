@@ -1,59 +1,52 @@
+# BOOTSTRAP (Read Verbatim)
+
 You are an agent operating inside the klappy.dev repo.
 
-You MUST follow the repo process exactly.
+You MUST follow repo instructions. You MUST NOT invent process.
 
-## Required Reading (in order)
+## Required Reads (in order)
 
-1. Read: `/docs/ATTEMPT_KICKOFF.md`
-2. Read: `/canon/odd/appendices/product-lanes.md`
-3. Read: `/docs/PREVIEW.md`
+1. `/canon/odd/appendices/product-lanes.md`
+2. `/canon/odd/appendices/epochs.md`
+3. `/canon/odd/appendices/online-evidence.md`
+4. `/docs/ATTEMPT_KICKOFF.md`
+5. `/docs/ATTEMPTS.md`
+6. The lane PRD you are assigned (e.g., `/docs/PRD/website/PRD.md`)
 
-## Required Actions
+## Hard Invariants
 
-1. **Choose ONE lane** and declare it explicitly:
-   - `website` — human-facing UI/UX
-   - `ai-navigation` — AI layer over documentation
-   - `agent-skill` — agent cognitive framework
+1. You MUST declare a lane before registration.
+2. You MUST run `attempt:register` first, then `attempt:nuke` immediately after.
+3. You MUST NOT modify Canon unless explicitly instructed by the PRD.
+4. You MUST produce **ONLINE evidence**:
+   - Push the attempt branch to `origin`
+   - Report the Cloudflare Preview URL
+   - Report the Evidence URL
+   
+   **If you cannot do this, the attempt is INVALID.**
 
-2. **Create the correct branch** (enforced by tooling):
-   ```bash
-   git checkout -b run/<lane>/prd-v<version>/<tool>/<agent>/<model>/<run_id>
-   ```
-   Example: `run/website/prd-v1.0/cursor/a/claude-opus-4/e2c41bb5`
+## Branch Naming (Enforced by Tooling)
 
-3. **Run registration** (lane is required):
-   ```bash
-   npm run attempt:register -- --lane <lane> --tool cursor --agent a --model "your-model"
-   ```
+Branch format: `run/<lane>/prd-v<version>/<tool>/<agent>/<model>/<run_id>`
 
-4. **Run nuke** (only after registration):
-   ```bash
-   npm run attempt:nuke -- --lane <lane>
-   ```
+Example: `run/website/prd-v1.0/cursor/a/claude-opus-4/59bc9355`
 
-5. **Do not invent branch naming.** Branch naming rules are enforced by `attempt:register`.
+Do not invent branch names. Use what `attempt:register` suggests.
 
-6. **Do not claim anything is done** unless you can point to the exact file changes.
+## Your First Output
 
-## Lane Kickoff File
+After reading the required documents, print:
 
-After bootstrap, read the lane-specific kickoff:
+- **Lane:** (which lane you are targeting)
+- **PRD path:** (full path to the lane PRD)
+- **Planned branch name:** (following the format above)
+- **How you will produce the Cloudflare Preview URL:** (push branch, CF builds automatically)
+- **Where the Evidence URL will live:** (e.g., `attempts/<lane>/prd-vX.Y/_runs/<run_id>/EVIDENCE.md`)
+
+## Then Proceed
+
+After printing the above, follow the lane-specific kickoff prompt:
+
 - `/infra/prompts/attempt-kickoff/<lane>.md`
 
 Copy/paste its contents **verbatim** and follow it exactly.
-
-Rules:
-- Do not summarize it
-- Do not "improve" it
-- Do not merge it with other guidance
-- Treat it as the canonical instructions
-
----
-
-## Human Kickoff Template
-
-Paste this into your agent:
-
-```
-Use /infra/prompts/attempt-kickoff/BOOTSTRAP.md and proceed for lane = website.
-```

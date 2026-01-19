@@ -153,6 +153,29 @@ Preview URLs are evidence artifacts, not permanent guarantees.
 
 ---
 
+## 🚨 Online Evidence Requirement (Non-Negotiable)
+
+**An attempt is INVALID unless it provides online evidence.**
+
+Before an attempt can be marked complete, the agent MUST:
+
+1. **Push the attempt branch to `origin`**
+2. **Provide the Cloudflare Preview URL** for the branch
+3. **Provide the online Evidence URL** (where EVIDENCE.md is viewable)
+
+| Condition | Result |
+|-----------|--------|
+| Agent cannot push the branch | Attempt is **INVALID** |
+| Cloudflare Preview URL missing | Attempt is **INVALID** |
+| Evidence URL missing | Attempt is **INVALID** |
+| "Works on my machine" only | Attempt is **INVALID** |
+
+Local builds and previews are allowed during development, but they **do not satisfy** the Definition of Done.
+
+See `/canon/odd/appendices/online-evidence.md` for the full requirement.
+
+---
+
 ## 🔑 Key Mental Model
 
 | Principle | Meaning |
@@ -168,6 +191,7 @@ Preview URLs are evidence artifacts, not permanent guarantees.
 ## 🔗 Related Documents
 
 - **Product Lanes Architecture: `/canon/odd/appendices/product-lanes.md`** (READ FIRST)
+- **Online Evidence Requirement: `/canon/odd/appendices/online-evidence.md`** (no URL = invalid attempt)
 - **Preview Guide: `/docs/PREVIEW.md`** (local + Cloudflare preview how-to)
 - **Interface Contracts: `/interfaces/index.md`** (semver'd compatibility promises)
 - **Lane Build Layout: `/canon/odd/appendices/lane-build-layout.md`** (how lanes avoid /src and /dist collisions)

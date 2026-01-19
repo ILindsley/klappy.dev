@@ -306,6 +306,8 @@ Why visual systems evolve independently from products. Products consume visual i
 The drift-prevention mechanism. When docs, prompts, and tooling diverge, truth becomes vibes.
 • Lane Build Layout (odd/appendices/lane-build-layout.md)
 How lanes avoid /src and /dist collisions. Worktrees isolate, deployments are lane-scoped.
+• Online Evidence Requirement (odd/appendices/online-evidence.md)
+Why "works on my machine" is not evidence. Attempts are invalid without online preview URLs.
 
 ---
 

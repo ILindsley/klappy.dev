@@ -16,6 +16,38 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.4.9 — 2026-01-19
+
+**Online Evidence Requirement**
+
+This release makes online evidence a hard requirement for valid attempts. "Works on my machine" is no longer acceptable.
+
+### Added
+
+- **Online Evidence Requirement** (`/canon/odd/appendices/online-evidence.md`) — Defines why attempts without Cloudflare Preview URLs and Evidence URLs are invalid
+- **Online Evidence section in Website PRD** — DoD now includes preview URL and evidence URL requirements
+
+### Changed
+
+- **ATTEMPT_KICKOFF.md** — Added "Online Evidence Requirement (Non-Negotiable)" section with explicit invalid conditions
+- **BOOTSTRAP.md** — Rewritten to enforce online evidence requirement; agents must report URLs in their first output
+- **Website PRD Definition of Done** — Added Cloudflare Preview URL and Evidence URL as required checklist items
+- **Canon Index** — Added online-evidence.md to appendices list
+
+### Philosophy
+
+- Local builds are allowed during development but do not satisfy Definition of Done
+- If an agent cannot push and produce URLs, the attempt is invalid
+- "Works on my machine" is not evidence — it's a prayer
+- Evidence must be viewable online without the author running code locally
+
+### Notes
+
+- Cloudflare Pages must be configured with correct build command (`npm run build -- --lane <lane>`)
+- Branch naming now includes lane (enforced in 0.4.8) so preview URLs are traceable
+
+---
+
 ## 0.4.8 — 2026-01-19
 
 **Lane-Aware Branch Naming & Cloudflare-Compatible Builds**

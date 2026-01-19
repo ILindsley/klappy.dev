@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-19T22:45:34.069Z
-Total Files: 164
+Generated: 2026-01-19T22:58:51.157Z
+Total Files: 165
 
 This is a complete export of all documentation, code, and content files
 from the klappy.dev repository, organized by section.
@@ -21,7 +21,7 @@ from the klappy.dev repository, organized by section.
 - **.husky** (17 files)
 - **About** (4 files)
 - **Attempts** (14 files)
-- **Canon** (49 files)
+- **Canon** (50 files)
 - **Documentation** (17 files)
 - **Infrastructure** (17 files)
 - **Interfaces & Contracts** (6 files)
@@ -1276,6 +1276,29 @@ Preview URLs are evidence artifacts, not permanent guarantees.
 
 ---
 
+## 🚨 Online Evidence Requirement (Non-Negotiable)
+
+**An attempt is INVALID unless it provides online evidence.**
+
+Before an attempt can be marked complete, the agent MUST:
+
+1. **Push the attempt branch to `origin`**
+2. **Provide the Cloudflare Preview URL** for the branch
+3. **Provide the online Evidence URL** (where EVIDENCE.md is viewable)
+
+| Condition | Result |
+|-----------|--------|
+| Agent cannot push the branch | Attempt is **INVALID** |
+| Cloudflare Preview URL missing | Attempt is **INVALID** |
+| Evidence URL missing | Attempt is **INVALID** |
+| "Works on my machine" only | Attempt is **INVALID** |
+
+Local builds and previews are allowed during development, but they **do not satisfy** the Definition of Done.
+
+See `/canon/odd/appendices/online-evidence.md` for the full requirement.
+
+---
+
 ## 🔑 Key Mental Model
 
 | Principle | Meaning |
@@ -1291,6 +1314,7 @@ Preview URLs are evidence artifacts, not permanent guarantees.
 ## 🔗 Related Documents
 
 - **Product Lanes Architecture: `/canon/odd/appendices/product-lanes.md`** (READ FIRST)
+- **Online Evidence Requirement: `/canon/odd/appendices/online-evidence.md`** (no URL = invalid attempt)
 - **Preview Guide: `/docs/PREVIEW.md`** (local + Cloudflare preview how-to)
 - **Interface Contracts: `/interfaces/index.md`** (semver'd compatibility promises)
 - **Lane Build Layout: `/canon/odd/appendices/lane-build-layout.md`** (how lanes avoid /src and /dist collisions)
@@ -2701,12 +2725,30 @@ It explains ODD progressively to humans.
 
 An attempt against this PRD is complete when:
 
-- [ ] Build output produced (`npm run build`)
+- [ ] Build output produced (`npm run build -- --lane website`)
 - [ ] Visual proof captured (desktop + mobile screenshots)
 - [ ] First load shows ≤7 nav items (verified via screenshot)
 - [ ] Mobile layout verified (no horizontal scroll)
 - [ ] Deep link round-trip tested
 - [ ] Self-audit completed with explicit tradeoffs
+- [ ] **Cloudflare Preview URL provided** (branch must be pushed)
+- [ ] **Evidence URL provided** (viewable online without local code)
+
+---
+
+## Online Evidence (Required)
+
+A website lane attempt is **not complete** unless:
+
+1. The attempt branch is pushed to `origin`.
+2. Cloudflare Pages generates a Preview Deployment URL for that branch.
+3. The attempt includes an Evidence URL viewable online without running code locally.
+
+Local preview instructions are allowed during development, but they **do not satisfy attempt completion**.
+
+If an agent cannot provide both URLs, the attempt is **INVALID**.
+
+See `/canon/odd/appendices/online-evidence.md` for the full requirement.
 
 ---
 
@@ -3564,6 +3606,38 @@ This changelog tracks changes to the **Canon pack** as a whole.
 
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
+
+## 0.4.9 — 2026-01-19
+
+**Online Evidence Requirement**
+
+This release makes online evidence a hard requirement for valid attempts. "Works on my machine" is no longer acceptable.
+
+### Added
+
+- **Online Evidence Requirement** (`/canon/odd/appendices/online-evidence.md`) — Defines why attempts without Cloudflare Preview URLs and Evidence URLs are invalid
+- **Online Evidence section in Website PRD** — DoD now includes preview URL and evidence URL requirements
+
+### Changed
+
+- **ATTEMPT_KICKOFF.md** — Added "Online Evidence Requirement (Non-Negotiable)" section with explicit invalid conditions
+- **BOOTSTRAP.md** — Rewritten to enforce online evidence requirement; agents must report URLs in their first output
+- **Website PRD Definition of Done** — Added Cloudflare Preview URL and Evidence URL as required checklist items
+- **Canon Index** — Added online-evidence.md to appendices list
+
+### Philosophy
+
+- Local builds are allowed during development but do not satisfy Definition of Done
+- If an agent cannot push and produce URLs, the attempt is invalid
+- "Works on my machine" is not evidence — it's a prayer
+- Evidence must be viewable online without the author running code locally
+
+### Notes
+
+- Cloudflare Pages must be configured with correct build command (`npm run build -- --lane <lane>`)
+- Branch naming now includes lane (enforced in 0.4.8) so preview URLs are traceable
+
+---
 
 ## 0.4.8 — 2026-01-19
 
@@ -5415,6 +5489,8 @@ Why visual systems evolve independently from products. Products consume visual i
 The drift-prevention mechanism. When docs, prompts, and tooling diverge, truth becomes vibes.
 • Lane Build Layout (odd/appendices/lane-build-layout.md)
 How lanes avoid /src and /dist collisions. Worktrees isolate, deployments are lane-scoped.
+• Online Evidence Requirement (odd/appendices/online-evidence.md)
+Why "works on my machine" is not evidence. Attempts are invalid without online preview URLs.
 
 ---
 
@@ -7296,6 +7372,74 @@ If a lane succeeds, you cannot know whether it succeeded because:
 - residue from another lane made it work.
 
 Lane-scoped implementation surfaces restore epistemic independence.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/odd/appendices/online-evidence.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/odd/appendices/online-evidence
+title: Online Evidence Requirement
+audience: canon
+exposure: nav
+tier: 2
+voice: authoritative
+stability: stable
+tags: ["evidence", "cloudflare", "preview", "attempts", "validation"]
+---
+
+# Online Evidence Requirement
+
+## Summary
+
+An attempt is not considered valid unless its output and evidence are viewable online without the author running code locally.
+
+Local builds are allowed during development, but they do not satisfy the Definition of Done for an attempt.
+
+## Required Online Proof
+
+Every attempt MUST provide:
+
+1. **Cloudflare Preview URL** for the attempt branch.
+2. **Evidence URL** (an online URL that displays the attempt's evidence artifact).
+
+If either URL is missing, the attempt is **INVALID**.
+
+## Required Mechanism (Default)
+
+The default mechanism is Cloudflare Pages branch preview deployments:
+
+- Each attempt MUST push its branch to `origin`.
+- Cloudflare Pages MUST be configured to deploy preview builds for all branches.
+- The attempt branch name MUST include the lane so preview URLs are traceable.
+
+## Required Evidence Artifact
+
+Each attempt MUST produce an evidence markdown file:
+
+`/attempts/<lane>/prd-vX.Y/attempt-NNN/EVIDENCE.md` (or run-scoped equivalent during `_runs/`)
+
+The repo MUST expose evidence online via one of:
+
+- A static "evidence hub" path served by the lane site, OR
+- A dedicated Cloudflare Pages project serving `/attempts/**` as static content.
+
+The chosen mechanism must be documented in the lane PRD and enforced in kickoff.
+
+## Non-Goals
+
+- This does not require production promotion.
+- This does not require perfect UI polish.
+- It requires that a human can click a link and see the output and evidence.
+
+## Related Documents
+
+- Definition of Done: `/canon/definition-of-done.md`
+- Visual Proof Standards: `/canon/visual-proof.md`
+- Attempt Lifecycle: `/canon/odd/appendices/attempt-lifecycle.md`
+- Preview Guide: `/docs/PREVIEW.md`
 
 
 
@@ -14401,65 +14545,58 @@ Fix the build. Don't modify this contract.
 📄 File: infra/prompts/attempt-kickoff/BOOTSTRAP.md
 --------------------------------------------------------------------------------
 
+# BOOTSTRAP (Read Verbatim)
+
 You are an agent operating inside the klappy.dev repo.
 
-You MUST follow the repo process exactly.
+You MUST follow repo instructions. You MUST NOT invent process.
 
-## Required Reading (in order)
+## Required Reads (in order)
 
-1. Read: `/docs/ATTEMPT_KICKOFF.md`
-2. Read: `/canon/odd/appendices/product-lanes.md`
-3. Read: `/docs/PREVIEW.md`
+1. `/canon/odd/appendices/product-lanes.md`
+2. `/canon/odd/appendices/epochs.md`
+3. `/canon/odd/appendices/online-evidence.md`
+4. `/docs/ATTEMPT_KICKOFF.md`
+5. `/docs/ATTEMPTS.md`
+6. The lane PRD you are assigned (e.g., `/docs/PRD/website/PRD.md`)
 
-## Required Actions
+## Hard Invariants
 
-1. **Choose ONE lane** and declare it explicitly:
-   - `website` — human-facing UI/UX
-   - `ai-navigation` — AI layer over documentation
-   - `agent-skill` — agent cognitive framework
+1. You MUST declare a lane before registration.
+2. You MUST run `attempt:register` first, then `attempt:nuke` immediately after.
+3. You MUST NOT modify Canon unless explicitly instructed by the PRD.
+4. You MUST produce **ONLINE evidence**:
+   - Push the attempt branch to `origin`
+   - Report the Cloudflare Preview URL
+   - Report the Evidence URL
+   
+   **If you cannot do this, the attempt is INVALID.**
 
-2. **Create the correct branch** (enforced by tooling):
-   ```bash
-   git checkout -b run/<lane>/prd-v<version>/<tool>/<agent>/<model>/<run_id>
-   ```
-   Example: `run/website/prd-v1.0/cursor/a/claude-opus-4/e2c41bb5`
+## Branch Naming (Enforced by Tooling)
 
-3. **Run registration** (lane is required):
-   ```bash
-   npm run attempt:register -- --lane <lane> --tool cursor --agent a --model "your-model"
-   ```
+Branch format: `run/<lane>/prd-v<version>/<tool>/<agent>/<model>/<run_id>`
 
-4. **Run nuke** (only after registration):
-   ```bash
-   npm run attempt:nuke -- --lane <lane>
-   ```
+Example: `run/website/prd-v1.0/cursor/a/claude-opus-4/59bc9355`
 
-5. **Do not invent branch naming.** Branch naming rules are enforced by `attempt:register`.
+Do not invent branch names. Use what `attempt:register` suggests.
 
-6. **Do not claim anything is done** unless you can point to the exact file changes.
+## Your First Output
 
-## Lane Kickoff File
+After reading the required documents, print:
 
-After bootstrap, read the lane-specific kickoff:
+- **Lane:** (which lane you are targeting)
+- **PRD path:** (full path to the lane PRD)
+- **Planned branch name:** (following the format above)
+- **How you will produce the Cloudflare Preview URL:** (push branch, CF builds automatically)
+- **Where the Evidence URL will live:** (e.g., `attempts/<lane>/prd-vX.Y/_runs/<run_id>/EVIDENCE.md`)
+
+## Then Proceed
+
+After printing the above, follow the lane-specific kickoff prompt:
+
 - `/infra/prompts/attempt-kickoff/<lane>.md`
 
 Copy/paste its contents **verbatim** and follow it exactly.
-
-Rules:
-- Do not summarize it
-- Do not "improve" it
-- Do not merge it with other guidance
-- Treat it as the canonical instructions
-
----
-
-## Human Kickoff Template
-
-Paste this into your agent:
-
-```
-Use /infra/prompts/attempt-kickoff/BOOTSTRAP.md and proceed for lane = website.
-```
 
 
 
