@@ -57,9 +57,10 @@ function srcHasCode(path) {
   );
 }
 
-function run(cmd) {
+function run(cmd, opts = {}) {
+  const { cwd = ROOT } = opts;
   console.log(`  $ ${cmd}`);
-  execSync(cmd, { cwd: ROOT, stdio: 'inherit' });
+  execSync(cmd, { cwd, stdio: 'inherit' });
 }
 
 function copyPublicToDist() {
@@ -93,12 +94,15 @@ function viteBuild() {
   console.log('\n🔨 Building with Vite...\n');
   // Canonical output: products/<lane>/dist
   //
-  // If the lane has its own Vite root (products/<lane>/index.html), build lane-root.
+  // If the lane has its own Vite root (products/<lane>/index.html), build from lane cwd.
   // Otherwise, treat repo-root app as ai-navigation (transitional).
   const laneIndex = join(LANE_ROOT, 'index.html');
   if (existsSync(laneIndex)) {
-    run(`npx vite build --root "products/${lane}" --outDir dist --emptyOutDir`);
+    // Run vite from lane root directory — outputs to products/<lane>/dist
+    // Do NOT use --root flag; cwd is the correct approach for Cloudflare compatibility
+    run(`npx vite build --outDir dist --emptyOutDir`, { cwd: LANE_ROOT });
   } else if (lane === 'ai-navigation' && existsSync(join(ROOT, 'index.html'))) {
+    // Transitional: repo-root app builds to lane dist for ai-navigation
     run(`npx vite build --outDir "products/${lane}/dist" --emptyOutDir`);
   } else {
     copyPublicToDist();

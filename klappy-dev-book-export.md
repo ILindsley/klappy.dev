@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-19T21:01:27.811Z
-Total Files: 163
+Generated: 2026-01-19T22:44:50.070Z
+Total Files: 164
 
 This is a complete export of all documentation, code, and content files
 from the klappy.dev repository, organized by section.
@@ -22,7 +22,7 @@ from the klappy.dev repository, organized by section.
 - **About** (4 files)
 - **Attempts** (14 files)
 - **Canon** (49 files)
-- **Documentation** (16 files)
+- **Documentation** (17 files)
 - **Infrastructure** (17 files)
 - **Interfaces & Contracts** (6 files)
 - **ODD (Outcomes-Driven Development)** (1 files)
@@ -1291,11 +1291,13 @@ Preview URLs are evidence artifacts, not permanent guarantees.
 ## 🔗 Related Documents
 
 - **Product Lanes Architecture: `/canon/odd/appendices/product-lanes.md`** (READ FIRST)
+- **Preview Guide: `/docs/PREVIEW.md`** (local + Cloudflare preview how-to)
 - **Interface Contracts: `/interfaces/index.md`** (semver'd compatibility promises)
 - **Lane Build Layout: `/canon/odd/appendices/lane-build-layout.md`** (how lanes avoid /src and /dist collisions)
 - **Agent Entry Point: `/docs/AGENT_KICKOFF.md`** (canonical agent instructions)
 - Attempt lifecycle (deep): `/docs/ATTEMPTS.md`
 - Deploy contract: `/infra/contracts/build-output.md`
+- Cloudflare config: `/docs/CLOUDFLARE_CONFIG.md`
 - Decision log: `/canon/odd/decisions/`
 - Repo truth principle: `/canon/odd/appendices/repo-truth.md`
 - Drift Checks: `/canon/odd/appendices/drift-checks.md`
@@ -2764,6 +2766,108 @@ The website lane MUST support generating a wipeable "visitor pack" used for prog
 - Definition of Done: `/canon/definition-of-done.md`
 - Legacy PRD (v0.3): `/docs/PRD/website/PRD-legacy-v0.3.md`
 - Compilation: `/canon/odd/appendices/compilation.md`
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/PREVIEW.md
+--------------------------------------------------------------------------------
+
+# Previewing Lanes and Attempts
+
+> **Scope:** Local + Cloudflare preview workflows for lanes and attempts.
+
+## Local Preview (Any Lane)
+
+Build the lane:
+
+```bash
+npm run build -- --lane <lane>
+```
+
+Preview the built output:
+
+```bash
+npx wrangler pages dev products/<lane>/dist --port 8788
+```
+
+Open: http://localhost:8788
+
+---
+
+## Cloudflare Pages Preview
+
+Each lane is deployed as its own Cloudflare Pages project.
+
+**Build configuration (REQUIRED):**
+
+| Setting | Value |
+|---------|-------|
+| Build command | `npm run build -- --lane <lane>` |
+| Output directory | `products/<lane>/dist` |
+| Root directory | `.` (repo root) |
+
+**Examples:**
+
+| Lane | Build Command | Output Directory |
+|------|--------------|------------------|
+| `website` | `npm run build -- --lane website` | `products/website/dist` |
+| `ai-navigation` | `npm run build -- --lane ai-navigation` | `products/ai-navigation/dist` |
+| `agent-skill` | `npm run build -- --lane agent-skill` | `products/agent-skill/dist` |
+
+---
+
+## Troubleshooting
+
+### Wrong lane building
+
+If a Cloudflare Pages build log shows the wrong lane (e.g., `Lane: ai-navigation` when you expected `website`):
+
+1. **Check the build command** — Must explicitly pass `--lane <lane>`
+2. **Check the output directory** — Must match `products/<lane>/dist`
+3. **Verify smart-build.js** — Should NOT use `vite --root` flag
+
+### Build succeeds but site shows wrong content
+
+1. Verify the output directory in Cloudflare Pages settings
+2. Check that `products/<lane>/dist/index.html` exists after build
+3. Ensure `products/<lane>/index.html` exists as the Vite entry point
+
+### Local preview differs from Cloudflare
+
+1. Clear local dist: `rm -rf products/<lane>/dist`
+2. Rebuild: `npm run build -- --lane <lane>`
+3. Use wrangler for local preview (matches Cloudflare environment)
+
+---
+
+## Preview URLs
+
+### Branch previews (automatic)
+
+Any `git push` to an attempt/run branch creates a preview:
+
+```
+https://<branch-slug>.klappy-dev.pages.dev
+```
+
+Branch names are slugified (slashes become dashes).
+
+Example:
+- Branch: `run/website/prd-v1.0/cursor/a/claude-opus-4/e2c41bb5`
+- Preview: `https://run-website-prd-v1-0-cursor-a-claude-opus-4-e2c41bb5.klappy-dev.pages.dev`
+
+### Production
+
+Production deploys from the `prod` branch to the primary domain.
+
+---
+
+## Related Documents
+
+- Build contract: `/infra/contracts/build-output.md`
+- Lane architecture: `/canon/odd/appendices/product-lanes.md`
+- Cloudflare config: `/docs/CLOUDFLARE_CONFIG.md`
 
 
 
@@ -14264,16 +14368,65 @@ Fix the build. Don't modify this contract.
 📄 File: infra/prompts/attempt-kickoff/BOOTSTRAP.md
 --------------------------------------------------------------------------------
 
-Copy/paste the contents of the lane kickoff file **verbatim** into this chat, then follow it exactly.
+You are an agent operating inside the klappy.dev repo.
 
-Lane kickoff file:
+You MUST follow the repo process exactly.
+
+## Required Reading (in order)
+
+1. Read: `/docs/ATTEMPT_KICKOFF.md`
+2. Read: `/canon/odd/appendices/product-lanes.md`
+3. Read: `/docs/PREVIEW.md`
+
+## Required Actions
+
+1. **Choose ONE lane** and declare it explicitly:
+   - `website` — human-facing UI/UX
+   - `ai-navigation` — AI layer over documentation
+   - `agent-skill` — agent cognitive framework
+
+2. **Create the correct branch** (enforced by tooling):
+   ```bash
+   git checkout -b run/<lane>/prd-v<version>/<tool>/<agent>/<model>/<run_id>
+   ```
+   Example: `run/website/prd-v1.0/cursor/a/claude-opus-4/e2c41bb5`
+
+3. **Run registration** (lane is required):
+   ```bash
+   npm run attempt:register -- --lane <lane> --tool cursor --agent a --model "your-model"
+   ```
+
+4. **Run nuke** (only after registration):
+   ```bash
+   npm run attempt:nuke -- --lane <lane>
+   ```
+
+5. **Do not invent branch naming.** Branch naming rules are enforced by `attempt:register`.
+
+6. **Do not claim anything is done** unless you can point to the exact file changes.
+
+## Lane Kickoff File
+
+After bootstrap, read the lane-specific kickoff:
 - `/infra/prompts/attempt-kickoff/<lane>.md`
+
+Copy/paste its contents **verbatim** and follow it exactly.
 
 Rules:
 - Do not summarize it
 - Do not "improve" it
 - Do not merge it with other guidance
 - Treat it as the canonical instructions
+
+---
+
+## Human Kickoff Template
+
+Paste this into your agent:
+
+```
+Use /infra/prompts/attempt-kickoff/BOOTSTRAP.md and proceed for lane = website.
+```
 
 
 
@@ -14596,13 +14749,52 @@ function generateModelSlug(model) {
 
 /**
  * Generate a provenance-aware branch name.
- * Format: run/<prd_version>/<agent_id>/<model_slug>/<run_id>
+ * Format: run/<lane>/prd-v<prd>/<tool>/<agent>/<model_slug>/<run_id>
  * 
- * Example: run/v0.3/cursor-a/opus45/a1b2c3d4
+ * Example: run/website/prd-v1.0/cursor/a/claude-opus-4/e2c41bb5
+ * 
+ * INVARIANT: Lane is REQUIRED in branch name to prevent cross-lane confusion.
  */
-function generateBranchName(prd, agent, model, runId) {
+function generateBranchName(lane, prd, tool, agent, model, runId) {
   const modelSlug = generateModelSlug(model);
-  return `run/v${prd}/${agent}/${modelSlug}/${runId}`;
+  return `run/${lane}/prd-v${prd}/${tool}/${agent}/${modelSlug}/${runId}`;
+}
+
+/**
+ * Validate that a branch name matches the canonical format.
+ * Returns { valid: boolean, errors: string[] }
+ */
+function validateBranchName(branch, expectedLane) {
+  const errors = [];
+  
+  // Check prefix
+  if (!branch.startsWith('run/') && !branch.startsWith('attempt/')) {
+    errors.push(`Branch must start with run/ or attempt/. Got: ${branch}`);
+    return { valid: false, errors };
+  }
+  
+  // For run/* branches, enforce full format
+  if (branch.startsWith('run/')) {
+    const parts = branch.split('/');
+    // run/<lane>/prd-v<prd>/<tool>/<agent>/<model>/<run_id>
+    if (parts.length < 7) {
+      errors.push(`Branch format incomplete. Expected: run/<lane>/prd-v<prd>/<tool>/<agent>/<model>/<run_id>`);
+      errors.push(`Got: ${branch}`);
+    }
+    
+    // Check lane is present and matches expected
+    const branchLane = parts[1];
+    if (!branchLane || !VALID_LANES.includes(branchLane)) {
+      errors.push(`Branch must include valid lane. Got: ${branchLane || '(empty)'}`);
+      errors.push(`Valid lanes: ${VALID_LANES.join(', ')}`);
+    }
+    
+    if (expectedLane && branchLane !== expectedLane) {
+      errors.push(`Branch lane (${branchLane}) does not match --lane (${expectedLane})`);
+    }
+  }
+  
+  return { valid: errors.length === 0, errors };
 }
 
 // ============================================================
@@ -14954,6 +15146,31 @@ Options:
   
   if (!VALID_LANES.includes(lane)) {
     fail(`Invalid lane: ${lane}\n   Valid lanes: ${VALID_LANES.join(', ')}`);
+  }
+  
+  // ========================================
+  // REGISTRATION CHECK (Enforced)
+  // ========================================
+  // Nuke requires .attempt.json to exist (proves registration happened)
+  const attemptJsonPath = join(ROOT, '.attempt.json');
+  if (!existsSync(attemptJsonPath) && !force) {
+    console.log(`\n  ⚠️  No .attempt.json found.\n`);
+    console.log('  You must register before nuking:');
+    console.log(`    npm run attempt:register -- --lane ${lane} --tool cursor --agent a --model "your-model"\n`);
+    console.log('  This ensures provenance is captured before work begins.');
+    console.log('  Use --force to override (not recommended).\n');
+    fail('Run attempt:register first, then attempt:nuke.');
+  }
+  
+  // If .attempt.json exists, validate lane matches
+  if (existsSync(attemptJsonPath)) {
+    const registeredMeta = JSON.parse(readFileSync(attemptJsonPath, 'utf8'));
+    if (registeredMeta.lane && registeredMeta.lane !== lane) {
+      fail(`Lane mismatch!\n` +
+           `   .attempt.json says: ${registeredMeta.lane}\n` +
+           `   --lane argument:    ${lane}\n\n` +
+           `   Use the lane you registered with, or re-register.`);
+    }
   }
   
   console.log(`\n💥 NUKE — Blank Slate Reset for lane: ${lane}\n`);
@@ -15471,8 +15688,47 @@ Options:
   // Capture worktree path
   const worktreePath = ROOT;
   
-  // Generate provenance-aware branch name
-  const targetBranch = generateBranchName(prd, agent, modelId, runId);
+  // Generate provenance-aware branch name (MUST include lane)
+  const targetBranch = generateBranchName(lane, prd, tool, agent, modelId, runId);
+  
+  // ========================================
+  // BRANCH VALIDATION (Critical - enforced by repo rules)
+  // ========================================
+  // Refuse to register if on main or prod
+  if (currentBranch === 'main') {
+    fail('Cannot register on main branch.\n' +
+         '   Create an attempt branch first:\n' +
+         `   git checkout -b ${targetBranch}`);
+  }
+  if (currentBranch === 'prod') {
+    fail('Cannot register on prod branch.\n' +
+         '   prod is the live production deployment. Use an attempt branch.');
+  }
+  
+  // Refuse if branch doesn't start with run/ or attempt/
+  const isValidBranchType = currentBranch && 
+    (currentBranch.startsWith('run/') || currentBranch.startsWith('attempt/'));
+  
+  if (currentBranch && !isValidBranchType) {
+    console.log(`\n  ⚠️  INVALID BRANCH TYPE: ${currentBranch}\n`);
+    console.log('  Branches must start with run/ or attempt/');
+    console.log('  This enforces provenance tracking and prevents branch chaos.\n');
+    console.log(`  Create the correct branch:\n     git checkout -b ${targetBranch}\n`);
+    fail('Branch must start with run/ or attempt/');
+  }
+  
+  // If on a run/* branch, validate it includes lane in the correct position
+  if (currentBranch && currentBranch.startsWith('run/')) {
+    const validation = validateBranchName(currentBranch, lane);
+    if (!validation.valid) {
+      console.log('\n  ⚠️  BRANCH NAMING ERROR:\n');
+      validation.errors.forEach(e => console.log(`     ${e}`));
+      console.log('\n  Your branch name is missing required components.');
+      console.log(`  Expected format: run/<lane>/prd-v<prd>/<tool>/<agent>/<model>/<run_id>`);
+      console.log(`\n  Suggested branch name:\n     ${targetBranch}\n`);
+      fail('Branch name does not match required format. Rename your branch or create a new one.');
+    }
+  }
   
   // Lane-scoped paths
   const laneRoot = `products/${lane}`;
@@ -17481,9 +17737,10 @@ function srcHasCode(path) {
   );
 }
 
-function run(cmd) {
+function run(cmd, opts = {}) {
+  const { cwd = ROOT } = opts;
   console.log(`  $ ${cmd}`);
-  execSync(cmd, { cwd: ROOT, stdio: 'inherit' });
+  execSync(cmd, { cwd, stdio: 'inherit' });
 }
 
 function copyPublicToDist() {
@@ -17517,12 +17774,15 @@ function viteBuild() {
   console.log('\n🔨 Building with Vite...\n');
   // Canonical output: products/<lane>/dist
   //
-  // If the lane has its own Vite root (products/<lane>/index.html), build lane-root.
+  // If the lane has its own Vite root (products/<lane>/index.html), build from lane cwd.
   // Otherwise, treat repo-root app as ai-navigation (transitional).
   const laneIndex = join(LANE_ROOT, 'index.html');
   if (existsSync(laneIndex)) {
-    run(`npx vite build --root "products/${lane}" --outDir dist --emptyOutDir`);
+    // Run vite from lane root directory — outputs to products/<lane>/dist
+    // Do NOT use --root flag; cwd is the correct approach for Cloudflare compatibility
+    run(`npx vite build --outDir dist --emptyOutDir`, { cwd: LANE_ROOT });
   } else if (lane === 'ai-navigation' && existsSync(join(ROOT, 'index.html'))) {
+    // Transitional: repo-root app builds to lane dist for ai-navigation
     run(`npx vite build --outDir "products/${lane}/dist" --emptyOutDir`);
   } else {
     copyPublicToDist();
