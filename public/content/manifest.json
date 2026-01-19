@@ -125,6 +125,24 @@
       ]
     },
     {
+      "uri": "klappy://canon/odd/canonical-compression",
+      "path": "/canon/odd/appendices/canonical-compression.md",
+      "title": "Canonical Compression",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "compression",
+        "compiled",
+        "epochs",
+        "drift"
+      ]
+    },
+    {
       "uri": "klappy://canon/completion-report-template",
       "path": "/canon/completion-report-template.md",
       "title": "Completion Report Template",
@@ -629,6 +647,24 @@
         "architecture",
         "lanes",
         "orientation"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/progressive-elevation",
+      "path": "/canon/odd/appendices/progressive-elevation.md",
+      "title": "Progressive Elevation & Decay",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "memory",
+        "portability",
+        "elevation",
+        "decay"
       ]
     },
     {

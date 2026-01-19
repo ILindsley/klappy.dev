@@ -16,6 +16,37 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.4.5 — 2026-01-18
+
+**Canonical Compression Model**
+
+This release introduces the compilation model for producing derived, minimal working models from Source Canon without mutating source truth.
+
+### Added
+
+- **Canonical Compression** (`/canon/odd/appendices/canonical-compression.md`) — Defines how compiled outputs are produced as derived artifacts that are disposable and epoch-scoped
+- **Compiled output directory** (`/canon/_compiled/epoch-E0002/`) — Prepared structure for future compilation tooling with warning README
+- **Progressive Elevation frontmatter** — Fixed missing frontmatter fields to ensure proper manifest inclusion
+
+### Changed
+
+- **Canon Index** — Added canonical-compression to ODD Appendices list
+- **Manifest** — Added canonical-compression and progressive-elevation resource entries
+
+### Philosophy
+
+- Source Canon remains authoritative and unchanged
+- Compiled outputs are derived artifacts that can be deleted without loss of truth
+- Compression is compilation, not mutation
+- Epoch-scoping prevents "half-updated working models" from lingering
+
+### Notes
+
+- Implementation of `canon:compile` tooling is tracked separately
+- Compiled outputs live in `_compiled/` and are intentionally wipeable
+
+---
+
 ## 0.4.4 — 2026-01-18
 
 **Memory & Portability Model**

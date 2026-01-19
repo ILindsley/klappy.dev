@@ -1,5 +1,12 @@
 ---
+uri: klappy://canon/odd/progressive-elevation
 title: Progressive Elevation & Decay
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "memory", "portability", "elevation", "decay"]
 status: canonical
 category: odd-appendix
 version: 1.0

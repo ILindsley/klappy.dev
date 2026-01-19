@@ -280,6 +280,8 @@ Periodic evaluation of the ODD system itself. Detects drift between stated inten
 Named periods where the meaning of "success" is stable enough that outcomes can be compared. Prevents invalid cross-era comparisons.
 • Progressive Elevation & Decay (odd/appendices/progressive-elevation.md)
 The memory model: how artifacts move from ephemeral (attempts/PRDs) to durable (canon/contracts/decisions). Most artifacts decay; only proven patterns elevate.
+• Canonical Compression (odd/appendices/canonical-compression.md)
+The compilation model: how derived, minimal working models are produced from Source Canon without mutating source truth. Compiled outputs are disposable and epoch-scoped.
 • Lane-Scoped Implementation Surfaces (odd/appendices/lane-implementation-surfaces.md)
 Each lane owns its own `/products/<lane>/src` and `/products/<lane>/dist`. No shared repo-root surfaces.
 • Product Lanes (odd/appendices/product-lanes.md)

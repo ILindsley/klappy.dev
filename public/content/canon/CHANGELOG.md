@@ -16,6 +16,64 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.4.5 — 2026-01-18
+
+**Canonical Compression Model**
+
+This release introduces the compilation model for producing derived, minimal working models from Source Canon without mutating source truth.
+
+### Added
+
+- **Canonical Compression** (`/canon/odd/appendices/canonical-compression.md`) — Defines how compiled outputs are produced as derived artifacts that are disposable and epoch-scoped
+- **Compiled output directory** (`/canon/_compiled/epoch-E0002/`) — Prepared structure for future compilation tooling with warning README
+- **Progressive Elevation frontmatter** — Fixed missing frontmatter fields to ensure proper manifest inclusion
+
+### Changed
+
+- **Canon Index** — Added canonical-compression to ODD Appendices list
+- **Manifest** — Added canonical-compression and progressive-elevation resource entries
+
+### Philosophy
+
+- Source Canon remains authoritative and unchanged
+- Compiled outputs are derived artifacts that can be deleted without loss of truth
+- Compression is compilation, not mutation
+- Epoch-scoping prevents "half-updated working models" from lingering
+
+### Notes
+
+- Implementation of `canon:compile` tooling is tracked separately
+- Compiled outputs live in `_compiled/` and are intentionally wipeable
+
+---
+
+## 0.4.4 — 2026-01-18
+
+**Memory & Portability Model**
+
+This release makes the progressive elevation and decay model explicit, documenting how artifacts move from ephemeral to durable layers.
+
+### Added
+
+- **Progressive Elevation & Decay** (`/canon/odd/appendices/progressive-elevation.md`) — The five layers of portability (Conversation/Attempt, PRD, Contracts, Canon, Decision Trace) and strict elevation criteria
+- **Memory Is the Bottleneck** section in ODD Manifesto — Explains how ODD treats durable thinking as scarce and generated artifacts as abundant
+- **WHAT_THIS_REPO_IS_NOT.md** (`/docs/WHAT_THIS_REPO_IS_NOT.md`) — Human-facing clarification about what this repository intentionally is not
+- **Agentic Memory Portability** project (`/projects/agentic-memory-portability.md`) — Project entry describing the memory portability goal
+
+### Changed
+
+- **ODD Manifesto** — Added "Memory Is the Bottleneck" section before "Relationship to Canon"
+- **Canon Index** — Added progressive-elevation.md to ODD Appendices list
+- **README** — Added links to WHAT_THIS_REPO_IS_NOT.md and agentic-memory-portability.md under "If You Want to Explore"
+
+### Philosophy
+
+- Most artifacts should decay; only proven patterns that repeatedly reduce drag should elevate
+- Documentation sprawl is avoided by intentional decay at the Attempt/PRD layer
+- Portability across time, people, and agents requires strict elevation criteria (recurrence, portability, drag reduction, testability)
+
+---
+
 ## 0.4.3 — 2026-01-18
 
 **E0002 Convergence: Lane-Scoped Build Output**
