@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+# Sync content to public folder and generate manifest
+npm run sync
+
+# Generate the klappy book export
+npm run book
+
+# Stage the generated files so they are included in the commit
+git add public/content/
+git add public/content/manifest.json
+git add klappy-dev-book-export.md

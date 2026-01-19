@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-18T00:22:32.241Z
-Total Files: 123
+Generated: 2026-01-19T19:45:14.410Z
+Total Files: 145
 
 This is a complete export of all documentation, code, and content files
 from the klappy.dev repository, organized by section.
@@ -18,15 +18,16 @@ from the klappy.dev repository, organized by section.
 
 - **Root** (6 files)
 - **.cursor** (1 files)
+- **.husky** (17 files)
 - **About** (4 files)
 - **Attempts** (14 files)
-- **Canon** (43 files)
-- **Documentation** (15 files)
+- **Canon** (46 files)
+- **Documentation** (16 files)
 - **Infrastructure** (8 files)
 - **Interfaces & Contracts** (5 files)
 - **ODD (Outcomes-Driven Development)** (1 files)
 - **Products** (3 files)
-- **Projects** (5 files)
+- **Projects** (6 files)
 - **Public Content** (1 files)
 - **Source Code** (13 files)
 - **Visual Design System** (4 files)
@@ -145,6 +146,9 @@ If that resonates, the **Canon** contains the principles, constraints, and verif
 If you want to see the philosophy applied, browse the **Projects**.
 
 There is no required order. Follow your curiosity.
+
+- `/docs/WHAT_THIS_REPO_IS_NOT.md` — what this repository is intentionally not
+- `/projects/agentic-memory-portability.md` — the memory portability project
 
 ---
 
@@ -276,7 +280,9 @@ The goal is better outcomes, not perfect artifacts.
     "attempt:finalize": "node infra/scripts/attempt-cli.js finalize",
     "attempt:reset": "node infra/scripts/attempt-cli.js reset",
     "attempt:promote": "node infra/scripts/attempt-cli.js promote",
-    "attempt:cleanup": "node infra/scripts/attempt-cli.js cleanup"
+    "attempt:cleanup": "node infra/scripts/attempt-cli.js cleanup",
+    "book": "node infra/scripts/export-book.js",
+    "prepare": "husky"
   },
   "dependencies": {
     "marked": "^17.0.1",
@@ -285,6 +291,7 @@ The goal is better outcomes, not perfect artifacts.
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
+    "husky": "^9.1.7",
     "vite": "^6.0.7"
   }
 }
@@ -3073,6 +3080,73 @@ Begin by:
 
 
 --------------------------------------------------------------------------------
+📄 File: docs/WHAT_THIS_REPO_IS_NOT.md
+--------------------------------------------------------------------------------
+
+# What This Repo Is Not
+
+This repository is intentionally not optimized for "everything in one place."
+
+It is optimized for **portability of thinking** without creating documentation sprawl.
+
+## This Is Not a Knowledge Base of Everything
+
+If a detail is not durable, it should not be immortalized.
+
+Most artifacts decay by design:
+- branches die,
+- attempts seal evidence then stop,
+- PRDs churn,
+- and only proven patterns elevate.
+
+See: `/canon/odd/appendices/progressive-elevation.md`
+
+## This Is Not a Framework You Must Adopt
+
+ODD is not a prescriptive methodology.
+
+It is a set of lenses and constraints for keeping outcomes and evidence reliable in an environment where generation is abundant and confidence is cheap.
+
+## This Is Not a Promise of Stability Everywhere
+
+Some parts are intentionally unstable:
+
+- Attempts are ephemeral
+- PRDs evolve rapidly
+- Tooling may lag during epoch transitions
+
+What is stable:
+- Canon (curated)
+- Interface contracts (semver)
+- Decision logs (traceability)
+
+## This Is Not "Documentation Completeness"
+
+Completeness is a trap.
+
+The goal is:
+- minimal orientation for humans,
+- and reliable navigation for agents,
+without drowning either in uncurated files.
+
+If it feels "unfinished," that may be intentional:
+unfinished is often more honest than prematurely sealed truth.
+
+## This Is Not Code-Centric
+
+The primary artifact is not the codebase.
+
+The durable artifact is:
+- intent,
+- constraints,
+- decisions,
+- and evidence.
+
+Code is allowed to be disposable when regeneration is cheaper than understanding.
+
+
+
+--------------------------------------------------------------------------------
 📄 File: docs/concept.md
 --------------------------------------------------------------------------------
 
@@ -3346,6 +3420,90 @@ This changelog tracks changes to the **Canon pack** as a whole.
 
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
+
+## 0.4.6 — 2026-01-19
+
+**Pre-commit Hook for Content Compilation**
+
+This release adds automated content compilation via a pre-commit git hook, ensuring synced content and book exports stay current with every commit.
+
+### Added
+
+- **Husky** (`husky@9.1.7`) — Git hook management as dev dependency
+- **Pre-commit hook** (`.husky/pre-commit`) — Runs content sync and book export before each commit
+- **Book export script** (`npm run book`) — Generates `klappy-dev-book-export.md` from all documentation
+
+### Changed
+
+- **package.json** — Added `book` and `prepare` scripts
+
+### Behavior
+
+On every `git commit`:
+1. `npm run sync` runs (copies content to `/public/content/`, generates `manifest.json`)
+2. `npm run book` runs (generates `klappy-dev-book-export.md`)
+3. Generated files are auto-staged for inclusion in the commit
+4. If either script fails, the commit is blocked
+
+---
+
+## 0.4.5 — 2026-01-18
+
+**Canonical Compression Model**
+
+This release introduces the compilation model for producing derived, minimal working models from Source Canon without mutating source truth.
+
+### Added
+
+- **Canonical Compression** (`/canon/odd/appendices/canonical-compression.md`) — Defines how compiled outputs are produced as derived artifacts that are disposable and epoch-scoped
+- **Compiled output directory** (`/canon/_compiled/epoch-E0002/`) — Prepared structure for future compilation tooling with warning README
+- **Progressive Elevation frontmatter** — Fixed missing frontmatter fields to ensure proper manifest inclusion
+
+### Changed
+
+- **Canon Index** — Added canonical-compression to ODD Appendices list
+- **Manifest** — Added canonical-compression and progressive-elevation resource entries
+
+### Philosophy
+
+- Source Canon remains authoritative and unchanged
+- Compiled outputs are derived artifacts that can be deleted without loss of truth
+- Compression is compilation, not mutation
+- Epoch-scoping prevents "half-updated working models" from lingering
+
+### Notes
+
+- Implementation of `canon:compile` tooling is tracked separately
+- Compiled outputs live in `_compiled/` and are intentionally wipeable
+
+---
+
+## 0.4.4 — 2026-01-18
+
+**Memory & Portability Model**
+
+This release makes the progressive elevation and decay model explicit, documenting how artifacts move from ephemeral to durable layers.
+
+### Added
+
+- **Progressive Elevation & Decay** (`/canon/odd/appendices/progressive-elevation.md`) — The five layers of portability (Conversation/Attempt, PRD, Contracts, Canon, Decision Trace) and strict elevation criteria
+- **Memory Is the Bottleneck** section in ODD Manifesto — Explains how ODD treats durable thinking as scarce and generated artifacts as abundant
+- **WHAT_THIS_REPO_IS_NOT.md** (`/docs/WHAT_THIS_REPO_IS_NOT.md`) — Human-facing clarification about what this repository intentionally is not
+- **Agentic Memory Portability** project (`/projects/agentic-memory-portability.md`) — Project entry describing the memory portability goal
+
+### Changed
+
+- **ODD Manifesto** — Added "Memory Is the Bottleneck" section before "Relationship to Canon"
+- **Canon Index** — Added progressive-elevation.md to ODD Appendices list
+- **README** — Added links to WHAT_THIS_REPO_IS_NOT.md and agentic-memory-portability.md under "If You Want to Explore"
+
+### Philosophy
+
+- Most artifacts should decay; only proven patterns that repeatedly reduce drag should elevate
+- Documentation sprawl is avoided by intentional decay at the Attempt/PRD layer
+- Portability across time, people, and agents requires strict elevation criteria (recurrence, portability, drag reduction, testability)
+
+---
 
 ## 0.4.3 — 2026-01-18
 
@@ -3687,6 +3845,23 @@ This release introduces the multi-lane PRD architecture, epochs for comparabilit
 
 - The manifest is inventory-only: it declares what exists and how it may be addressed.
 - Any future workflow semantics belong in clients or tools, not in this pack.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/_compiled/epoch-E0002/README.md
+--------------------------------------------------------------------------------
+
+# Compiled Canon Outputs (Epoch E0002)
+
+⚠️ **This folder contains derived output.**
+
+- This folder is derived output
+- It may be deleted anytime
+- Do not edit compiled files by hand
+- Regenerate from source Canon
+
+See `/canon/odd/appendices/canonical-compression.md` for the compilation model.
 
 
 
@@ -4994,6 +5169,10 @@ These files extend understanding without introducing enforcement:
 Periodic evaluation of the ODD system itself. Detects drift between stated intent, implemented process, and observed outcomes.
 • Epochs (odd/appendices/epochs.md)
 Named periods where the meaning of "success" is stable enough that outcomes can be compared. Prevents invalid cross-era comparisons.
+• Progressive Elevation & Decay (odd/appendices/progressive-elevation.md)
+The memory model: how artifacts move from ephemeral (attempts/PRDs) to durable (canon/contracts/decisions). Most artifacts decay; only proven patterns elevate.
+• Canonical Compression (odd/appendices/canonical-compression.md)
+The compilation model: how derived, minimal working models are produced from Source Canon without mutating source truth. Compiled outputs are disposable and epoch-scoped.
 • Lane-Scoped Implementation Surfaces (odd/appendices/lane-implementation-surfaces.md)
 Each lane owns its own `/products/<lane>/src` and `/products/<lane>/dist`. No shared repo-root surfaces.
 • Product Lanes (odd/appendices/product-lanes.md)
@@ -5791,6 +5970,194 @@ Observations without promotion are incomplete experiments.
 
 
 --------------------------------------------------------------------------------
+📄 File: canon/odd/appendices/canonical-compression.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/odd/canonical-compression
+title: Canonical Compression
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "compression", "compiled", "epochs", "drift"]
+status: canonical
+category: odd
+version: 1.0
+epoch: E0002
+---
+
+# Canonical Compression
+
+## Summary
+
+As the Canon grows, agents and humans cannot hold the entire system in working memory.
+
+Canonical Compression solves this by producing a **derived, minimal working model** of the Canon that fits into limited context windows without sacrificing the source of truth.
+
+**Canonical Compression is compilation, not mutation.**
+
+- Source Canon remains authoritative and unchanged.
+- Compressed outputs are derived artifacts.
+- Derived artifacts are disposable and regenerable.
+- Any compression output can be deleted without loss of truth.
+
+---
+
+## The Problem It Addresses
+
+Agents drift for reasons beyond contradiction:
+
+- The total doc surface becomes too large for a single context window.
+- Important rules are duplicated across files, creating divergence.
+- Low-signal history (old decisions, obsolete guidance) consumes attention.
+- "More documentation" paradoxically makes behavior less consistent.
+
+Drift checks detect inconsistency.
+Canonical Compression reduces the size of the reasoning surface so consistency becomes feasible.
+
+---
+
+## Two Classes of Canon Artifacts
+
+### 1) Source Canon (Authoritative, Slow)
+
+Examples:
+
+- `/canon/**`
+- `/canon/odd/appendices/**`
+- `/canon/odd/decisions/**`
+
+Properties:
+
+- Curated and human-owned
+- Evidence-backed
+- Traceable
+- Evolves slowly
+- Never rewritten by synthesis
+
+Source Canon is **truth storage**.
+
+### 2) Compiled Canon (Derived, Fast)
+
+Canonical Compression produces **Compiled Canon** outputs.
+
+Properties:
+
+- Derived and lossy (summaries, collapsed checklists, working models)
+- Replaceable and disposable
+- Epoch-scoped
+- Designed for agent working memory
+- Must include links back to Source Canon
+
+Compiled Canon is **truth projection**, not truth itself.
+
+---
+
+## Compilation Model
+
+Canonical Compression produces **derived artifacts**.
+
+- Source Canon is never modified
+- Compressed outputs live in `_compiled/`
+- Outputs are epoch-scoped and disposable
+- Regeneration is always preferred to editing
+
+Compression is compilation, not mutation.
+
+---
+
+## Where Compiled Canon Lives (Exact)
+
+Compiled outputs MUST NOT be written into `/canon/` as source documents.
+
+They live here:
+
+/canon/_compiled/
+epoch-E0002/
+agent-working-model.md
+reasoning-checklist.md
+failure-patterns-collapsed.md
+
+Notes:
+
+- `_compiled/` is derived output (wipeable).
+- Outputs are organized by epoch to preserve comparability.
+- If the entire folder is deleted, no truth is lost — only convenience.
+
+---
+
+## What Compression Produces
+
+Canonical Compression generates a small set of artifacts (exact list may evolve):
+
+- **Agent Working Model**: minimal worldview for correct behavior
+- **Reasoning Checklist**: step-by-step constraints + invariants
+- **Failure Patterns (Collapsed)**: common pitfalls distilled into triggers + tests
+- **Doc Map (Progressive Links)**: what to read next when confidence drops
+
+Each output MUST:
+
+- Be marked as derived/compiled
+- Declare its epoch
+- Link back to source documents for traceability
+
+---
+
+## What Compression Must Never Do
+
+- Rewrite or replace Source Canon files
+- Delete decision logs
+- "Optimize" by removing nuance from the source
+- Invent new rules (compression may restate, not legislate)
+
+If a compression output implies a new rule, that rule must be introduced via:
+- a decision log, or
+- a PRD + attempt process in the relevant lane
+
+---
+
+## Relationship to Drift Checks
+
+Drift checks answer: **"Do these documents contradict?"**
+
+Canonical Compression answers: **"Can a bounded context window hold the rules needed to behave correctly?"**
+
+Drift checks prevent incoherence.
+Compression prevents overload.
+
+Both are required.
+
+---
+
+## Relationship to Epochs
+
+Compression outputs are epoch-scoped.
+
+- If epoch changes, compiled outputs must be regenerated
+- Comparability across epochs is not assumed
+- Old compiled outputs may be archived or deleted
+
+Epoch scoping prevents "half-updated working models" from lingering.
+
+---
+
+## The Rule (One Sentence)
+
+**Canon is written by humans and proven by outcomes.  
+Compiled Canon is written by synthesis and proven by usability.**
+
+---
+
+## Status
+
+This document defines the conceptual model.
+Implementation of tooling to generate compiled outputs is tracked separately.
+
+
+
+--------------------------------------------------------------------------------
 📄 File: canon/odd/appendices/drift-checks.md
 --------------------------------------------------------------------------------
 
@@ -6563,6 +6930,147 @@ This lets you:
 - Decision log: `/canon/odd/decisions/D0009-multi-lane-prd-architecture.md`
 - Attempt lifecycle: `/canon/odd/appendices/attempt-lifecycle.md`
 - Evolution philosophy: `/canon/odd/appendices/evolution-not-automation.md`
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/odd/appendices/progressive-elevation.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/odd/progressive-elevation
+title: Progressive Elevation & Decay
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "memory", "portability", "elevation", "decay"]
+status: canonical
+category: odd-appendix
+version: 1.0
+---
+
+# Progressive Elevation & Decay
+
+## Summary
+
+ODD treats **durable thinking** as scarce and **generated artifacts** as abundant.
+
+Most artifacts should **decay** (be discarded or sealed as evidence).
+Only patterns that repeatedly reduce future drag should **elevate** into more durable layers.
+
+This is how the repository avoids documentation sprawl while remaining portable across:
+- time (future-you),
+- people (collaborators),
+- and agents (tooling that reasons over the corpus).
+
+---
+
+## The Five Layers of Portability
+
+### 1) Conversation / Attempt (Ephemeral)
+
+**What it is:** raw chats, prompts, branches, quick experiments, and run folders.  
+**Default fate:** extract value → seal evidence → discard everything else.
+
+**Lives in:**
+- `/attempts/<lane>/prd-vX.Y/_runs/<run_id>/`
+- transient branches / worktrees
+- PRD patches produced by failure
+
+**Elevate when:** a failure mode repeats and you can state it as a stable rule, constraint, or test.
+
+---
+
+### 2) Product Lane / PRD (Project-Local)
+
+**What it is:** current intent for a specific product lane.  
+**Default fate:** churn freely. PRDs are disposable and should change as reality is observed.
+
+**Lives in:**
+- `/docs/PRD/<lane>/PRD.md`
+
+**Elevate when:** a requirement becomes reusable across lanes/projects, or becomes an interface boundary.
+
+---
+
+### 3) Interoperability / Contracts (Portability Bridge)
+
+**What it is:** explicit interfaces that allow portability across tools, agents, and products.
+
+Contracts are where compatibility becomes real.
+
+**Lives in:**
+- `/interfaces/**` (semver'd contracts)
+- shared inputs/outputs, schemas, stable runtime paths
+
+**Elevate when:** multiple projects repeatedly need the same boundary and drift becomes expensive.
+
+---
+
+### 4) Canon (Durable, Lean)
+
+**What it is:** curated, high-signal rules and lenses that survive multiple contexts.
+
+Canon is intentionally small. If it bloats, that is a signal to curate harder, not to add more.
+
+**Lives in:**
+- `/canon/**`
+
+**Elevate when:** a pattern recurs across multiple projects/lenses and stays true even when tooling changes.
+
+---
+
+### 5) Decision Trace (Why It Changed)
+
+**What it is:** lightweight records explaining why the system moved.
+
+Decisions preserve context without polluting Canon with history.
+
+**Lives in:**
+- `/canon/odd/decisions/**`
+
+**Elevate when:** a change affects interpretation, compatibility, or the "rules of the game."
+
+---
+
+## Elevation Criteria (Strict)
+
+Something may be elevated only if it satisfies all of the following:
+
+1. **Recurrence**: it appears across multiple attempts or projects (not a one-off).
+2. **Portability**: it remains true across different stacks/models/tools.
+3. **Drag Reduction**: it prevents repeated confusion, re-explanation, or failure.
+4. **Testability**: it can be expressed as a check, constraint, or falsifiable claim.
+
+If any criterion fails, the artifact stays local (Attempt/PRD) or dies.
+
+---
+
+## Decay Rule (Default)
+
+Most artifacts should not be preserved.
+
+ODD assumes:
+- generation is abundant,
+- maintenance is the tax you pay forever,
+- and residue creates epistemic drift.
+
+Discarding is not nihilism. It is how the system stays legible.
+
+---
+
+## Where This Fits With Lanes and Epochs
+
+- **Product lanes** isolate intent and success criteria so that unrelated surfaces do not drift together.
+- **Epochs** define comparability boundaries when the "rules of the game" change.
+
+This document explains the memory model underneath both.
+
+See also:
+- `/canon/odd/appendices/product-lanes.md`
+- `/canon/odd/appendices/epochs.md`
 
 
 
@@ -8838,6 +9346,28 @@ Endless optimization is a failure mode.
 
 ---
 
+## 🧠 Memory Is the Bottleneck
+
+AI didn't just make coding faster. It changed what's scarce.
+
+In ODD, generated artifacts are abundant, but **durable intent** is not.
+So the work shifts toward:
+
+- preserving what was learned,
+- verifying reality,
+- discarding what cannot be trusted,
+- and elevating only what repeatedly reduces future drag.
+
+ODD stays legible by using **Progressive Elevation & Decay**:
+most artifacts die at the Attempt/PRD layer; only proven patterns elevate into Contracts, Canon, and Decision Trace.
+
+See:
+- `/canon/odd/appendices/progressive-elevation.md`
+- `/canon/odd/appendices/product-lanes.md`
+- `/canon/odd/appendices/epochs.md`
+
+---
+
 ## 🔗 Relationship to Canon
 
 • ODD → why
@@ -10485,6 +11015,57 @@ Explicit limits of what should _not_ be inferred.
 ## Status
 
 Exploratory | Validated | Abandoned | Superseded
+
+
+
+--------------------------------------------------------------------------------
+📄 File: projects/agentic-memory-portability.md
+--------------------------------------------------------------------------------
+
+# Agentic Memory Portability
+
+## Goal
+
+Turn klappy.dev into a reusable system that can carry intent forward across:
+- sessions,
+- collaborators,
+- and AI agents,
+
+without requiring the author (or any agent) to reread the entire corpus or rebuild the same mental models from scratch.
+
+This is not "automation."
+It is **evolutionary portability**: preserve learning, verify outcomes, discard residue, and elevate only what keeps working.
+
+## What This Is Testing
+
+This project tests whether ODD can be operationalized as a portable cognitive system:
+
+1. **Ingest** canon + docs + articles as a queryable corpus
+2. **Navigate** humans to the right references progressively (not "dump everything")
+3. **Guide** agents to run ODD-like attempts without reinventing the workflow per project
+4. **Elevate** recurring patterns into contracts/canon/decisions
+5. **Prove** that reasoning transfers across new projects without re-explaining the worldview
+
+## Non-Goals
+
+- Building a perfect chatbot
+- Turning Canon into a rigid framework
+- Replacing human judgment
+- Preserving every artifact
+
+## Success Signals
+
+- A human can ask a question and get a correct answer with citations and links, without reading the whole site.
+- An agent can start a brand-new project using the ODD workflow with minimal bootstrapping.
+- Drift decreases over time because contradictions are detected and resolved via decisions/contracts.
+- The system improves by elevating only patterns that survive repeated attempts.
+
+## Where This Fits
+
+- Memory model: `/canon/odd/appendices/progressive-elevation.md`
+- Multi-lane intent isolation: `/canon/odd/appendices/product-lanes.md`
+- Comparability boundaries: `/canon/odd/appendices/epochs.md`
+- Decisions: `/canon/odd/decisions/`
 
 
 
@@ -17574,6 +18155,179 @@ export const providerInfo = {
     "npm runcli"
   ]
 }
+
+
+================================================================================
+## .husky
+================================================================================
+
+
+
+--------------------------------------------------------------------------------
+📄 File: .husky/_/.gitignore
+--------------------------------------------------------------------------------
+
+*
+
+
+--------------------------------------------------------------------------------
+📄 File: .husky/_/applypatch-msg
+--------------------------------------------------------------------------------
+
+#!/usr/bin/env sh
+. "$(dirname "$0")/h"
+
+
+--------------------------------------------------------------------------------
+📄 File: .husky/_/commit-msg
+--------------------------------------------------------------------------------
+
+#!/usr/bin/env sh
+. "$(dirname "$0")/h"
+
+
+--------------------------------------------------------------------------------
+📄 File: .husky/_/h
+--------------------------------------------------------------------------------
+
+#!/usr/bin/env sh
+[ "$HUSKY" = "2" ] && set -x
+n=$(basename "$0")
+s=$(dirname "$(dirname "$0")")/$n
+
+[ ! -f "$s" ] && exit 0
+
+if [ -f "$HOME/.huskyrc" ]; then
+	echo "husky - '~/.huskyrc' is DEPRECATED, please move your code to ~/.config/husky/init.sh"
+fi
+i="${XDG_CONFIG_HOME:-$HOME/.config}/husky/init.sh"
+[ -f "$i" ] && . "$i"
+
+[ "${HUSKY-}" = "0" ] && exit 0
+
+export PATH="node_modules/.bin:$PATH"
+sh -e "$s" "$@"
+c=$?
+
+[ $c != 0 ] && echo "husky - $n script failed (code $c)"
+[ $c = 127 ] && echo "husky - command not found in PATH=$PATH"
+exit $c
+
+
+
+--------------------------------------------------------------------------------
+📄 File: .husky/_/post-applypatch
+--------------------------------------------------------------------------------
+
+#!/usr/bin/env sh
+. "$(dirname "$0")/h"
+
+
+--------------------------------------------------------------------------------
+📄 File: .husky/_/post-checkout
+--------------------------------------------------------------------------------
+
+#!/usr/bin/env sh
+. "$(dirname "$0")/h"
+
+
+--------------------------------------------------------------------------------
+📄 File: .husky/_/post-commit
+--------------------------------------------------------------------------------
+
+#!/usr/bin/env sh
+. "$(dirname "$0")/h"
+
+
+--------------------------------------------------------------------------------
+📄 File: .husky/_/post-merge
+--------------------------------------------------------------------------------
+
+#!/usr/bin/env sh
+. "$(dirname "$0")/h"
+
+
+--------------------------------------------------------------------------------
+📄 File: .husky/_/post-rewrite
+--------------------------------------------------------------------------------
+
+#!/usr/bin/env sh
+. "$(dirname "$0")/h"
+
+
+--------------------------------------------------------------------------------
+📄 File: .husky/_/pre-applypatch
+--------------------------------------------------------------------------------
+
+#!/usr/bin/env sh
+. "$(dirname "$0")/h"
+
+
+--------------------------------------------------------------------------------
+📄 File: .husky/_/pre-auto-gc
+--------------------------------------------------------------------------------
+
+#!/usr/bin/env sh
+. "$(dirname "$0")/h"
+
+
+--------------------------------------------------------------------------------
+📄 File: .husky/_/pre-commit
+--------------------------------------------------------------------------------
+
+#!/usr/bin/env sh
+. "$(dirname "$0")/h"
+
+
+--------------------------------------------------------------------------------
+📄 File: .husky/_/pre-merge-commit
+--------------------------------------------------------------------------------
+
+#!/usr/bin/env sh
+. "$(dirname "$0")/h"
+
+
+--------------------------------------------------------------------------------
+📄 File: .husky/_/pre-push
+--------------------------------------------------------------------------------
+
+#!/usr/bin/env sh
+. "$(dirname "$0")/h"
+
+
+--------------------------------------------------------------------------------
+📄 File: .husky/_/pre-rebase
+--------------------------------------------------------------------------------
+
+#!/usr/bin/env sh
+. "$(dirname "$0")/h"
+
+
+--------------------------------------------------------------------------------
+📄 File: .husky/_/prepare-commit-msg
+--------------------------------------------------------------------------------
+
+#!/usr/bin/env sh
+. "$(dirname "$0")/h"
+
+
+--------------------------------------------------------------------------------
+📄 File: .husky/pre-commit
+--------------------------------------------------------------------------------
+
+#!/usr/bin/env sh
+
+# Sync content to public folder and generate manifest
+npm run sync
+
+# Generate the klappy book export
+npm run book
+
+# Stage the generated files so they are included in the commit
+git add public/content/
+git add public/content/manifest.json
+git add klappy-dev-book-export.md
+
 
 
 ================================================================================

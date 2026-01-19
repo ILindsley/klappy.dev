@@ -16,6 +16,32 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.4.6 — 2026-01-19
+
+**Pre-commit Hook for Content Compilation**
+
+This release adds automated content compilation via a pre-commit git hook, ensuring synced content and book exports stay current with every commit.
+
+### Added
+
+- **Husky** (`husky@9.1.7`) — Git hook management as dev dependency
+- **Pre-commit hook** (`.husky/pre-commit`) — Runs content sync and book export before each commit
+- **Book export script** (`npm run book`) — Generates `klappy-dev-book-export.md` from all documentation
+
+### Changed
+
+- **package.json** — Added `book` and `prepare` scripts
+
+### Behavior
+
+On every `git commit`:
+1. `npm run sync` runs (copies content to `/public/content/`, generates `manifest.json`)
+2. `npm run book` runs (generates `klappy-dev-book-export.md`)
+3. Generated files are auto-staged for inclusion in the commit
+4. If either script fails, the commit is blocked
+
+---
+
 ## 0.4.5 — 2026-01-18
 
 **Canonical Compression Model**

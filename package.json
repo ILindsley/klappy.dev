@@ -17,7 +17,9 @@
     "attempt:finalize": "node infra/scripts/attempt-cli.js finalize",
     "attempt:reset": "node infra/scripts/attempt-cli.js reset",
     "attempt:promote": "node infra/scripts/attempt-cli.js promote",
-    "attempt:cleanup": "node infra/scripts/attempt-cli.js cleanup"
+    "attempt:cleanup": "node infra/scripts/attempt-cli.js cleanup",
+    "book": "node infra/scripts/export-book.js",
+    "prepare": "husky"
   },
   "dependencies": {
     "marked": "^17.0.1",
@@ -26,6 +28,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
+    "husky": "^9.1.7",
     "vite": "^6.0.7"
   }
 }
