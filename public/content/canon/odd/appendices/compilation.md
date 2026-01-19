@@ -90,6 +90,35 @@ not "add more docs."
 
 ---
 
+## Multi-Pack Output (E0002+)
+
+When a lane has more than one pack, output MUST be structured as:
+
+```
+/public/_compiled/<lane>/
+  index.json
+  <pack>-pack.md
+  _meta/
+    <pack>-COMPILE_META.json
+```
+
+### index.json
+
+Each lane MUST emit `/public/_compiled/<lane>/index.json` listing all known packs from
+`/infra/compile/plans/<lane>/*.json` and whether each output exists.
+
+### Meta filenames are pack-scoped
+
+`COMPILE_META.json` MUST NOT be shared across packs.
+
+Meta MUST be written as:
+
+`/public/_compiled/<lane>/_meta/<pack>-COMPILE_META.json`
+
+This prevents clobbering and preserves provenance per target.
+
+---
+
 ## Relationship to Drift Checks
 
 Drift checks ensure the repo does not contradict itself.

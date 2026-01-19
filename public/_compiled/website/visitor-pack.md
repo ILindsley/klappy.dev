@@ -1,8 +1,8 @@
 ---
 lane: website
 pack: visitor
-built_at: 2026-01-19T20:43:48.500Z
-git_commit: 644fb5fb282d7c27a990ae24d62badd1dd36c734
+built_at: 2026-01-19T20:47:34.670Z
+git_commit: 36bca6919f1ecf2e36544c931e47f4cade41a5ad
 sources:
   - canon/index.md
   - canon/odd/appendices/product-lanes.md
@@ -13,7 +13,7 @@ source_hashes:
   canon/index.md: bae46a137e58066df21d89506f6ba63386d6684187aabc08a236c50150fcd8b4
   canon/odd/appendices/product-lanes.md: 977b29aa2e06eecb32419d967da590f4d851c3c9feb5e38269cfc094b6da3d09
   canon/odd/appendices/epochs.md: 62d38377f7b68c480628bf0bb89fe29478be3ac2dc2a886d0c67df538067ef7b
-  canon/odd/appendices/compilation.md: 83442f41577832320e27a3538e66b78a6179c082cb065b7849e65c6ce03b3c70
+  canon/odd/appendices/compilation.md: 7cca810928241bec30346826909f2d12e489a571acbc07a46ff6f430bb8b5924
   docs/PRD/website/PRD.md: 71ca26485617dc50f698aade67909d204074c7156ffd323e0f5138fc811c40b3
 ---
 
@@ -947,6 +947,35 @@ If compilation output grows bloated, the correct response is:
 - tighten selection rules
 - improve curation
 not "add more docs."
+
+---
+
+## Multi-Pack Output (E0002+)
+
+When a lane has more than one pack, output MUST be structured as:
+
+```
+/public/_compiled/<lane>/
+  index.json
+  <pack>-pack.md
+  _meta/
+    <pack>-COMPILE_META.json
+```
+
+### index.json
+
+Each lane MUST emit `/public/_compiled/<lane>/index.json` listing all known packs from
+`/infra/compile/plans/<lane>/*.json` and whether each output exists.
+
+### Meta filenames are pack-scoped
+
+`COMPILE_META.json` MUST NOT be shared across packs.
+
+Meta MUST be written as:
+
+`/public/_compiled/<lane>/_meta/<pack>-COMPILE_META.json`
+
+This prevents clobbering and preserves provenance per target.
 
 ---
 
