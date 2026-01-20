@@ -41,7 +41,7 @@ After reading the required documents, print:
 - **PRD path:** (full path to the lane PRD)
 - **Planned branch name:** (following the format above)
 - **How you will produce the Cloudflare Preview URL:** (push branch, CF builds automatically)
-- **Where the Evidence URL will live:** (e.g., `attempts/<lane>/prd-vX.Y/_runs/<run_id>/EVIDENCE.md`)
+- **Where the Evidence URL will live:** (e.g., `products/<lane>/attempts/prd-vX.Y/_runs/<run_id>/EVIDENCE.md`)
 
 ## Then Proceed
 

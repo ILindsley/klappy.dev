@@ -16,6 +16,48 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.5.2 — 2026-01-20
+
+**Lane-Contained Attempts**
+
+This release consolidates attempt artifacts under the product lane directory, eliminating the dual-location ambiguity between `/attempts/<lane>/` and `/products/<lane>/attempts/`.
+
+### Changed
+
+- **Canonical attempt location** is now `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/`
+- **attempt-cli.js** — All path constructions updated to lane-contained format
+- **product-lanes.md** — Attempt structure section updated
+- **online-evidence.md** — Evidence artifact path updated
+- **progressive-elevation.md** — Ephemeral layer path updated
+- **repo-topology.md** — Core topology and source of truth tables updated
+- **attempt-lifecycle.md** — Multiple sections updated to lane-contained paths
+- **contract.md** — Breaking changes list updated
+- **D0009** — Constraints section updated
+- **D0011** — Breaking changes table updated
+- **ATTEMPTS.md** — Folder structure section rewritten
+- **ATTEMPT_KICKOFF.md** — Artifact locations updated with completion gates
+- **AGENT_KICKOFF.md** — Evidence path updated
+- **BOOTSTRAP.md** — Evidence URL example updated
+- **Website kickoff prompt** — Explicit lane-contained rule added
+
+### Added
+
+- **attempts/README.md** — Legacy marker explaining root `/attempts/**` is read-only
+- **products/website/attempts/README.md** — Lane-contained structure documentation
+
+### Philosophy
+
+- **KISS:** One place per lane, no scavenger hunts
+- **Lane-contained:** Everything for a lane lives under `/products/<lane>/`
+- **Legacy preserved:** Root `/attempts/**` remains for historical provenance (read-only)
+
+### Notes
+
+- Generated files (`/public/content/**`, `klappy-dev-book-export.md`) will update on next sync
+- Tooling now writes exclusively to `/products/<lane>/attempts/...`
+
+---
+
 ## 0.5.1 — 2026-01-20
 
 **Media as a Learning Layer**
@@ -55,7 +97,7 @@ This release declares E0003, a new epoch where online deployment evidence is man
 
 - **E0003 epoch declaration** in `/canon/odd/appendices/epochs.md`
 - **D0014 decision log** (`/canon/odd/decisions/D0014-e0003-evidence-first-era.md`) — Documents the epoch transition
-- **Evidence copying in smart-build.js** — Automatically copies `attempts/<lane>/prd-vX.Y/_runs/` and `attempt-NNN/` folders into `products/<lane>/dist/_evidence/`
+- **Evidence copying in smart-build.js** — Automatically copies `products/<lane>/attempts/prd-vX.Y/_runs/` and `attempt-NNN/` folders into `products/<lane>/dist/_evidence/`
 
 ### Changed
 
@@ -427,7 +469,7 @@ This release introduces the multi-lane PRD architecture, epochs for comparabilit
 - Lane declaration required for all attempts
 - Epoch declaration required in META.json
 - Repo-root `/src` and `/dist` are no longer product surfaces
-- Attempts stored under `/attempts/<lane>/prd-vX.Y/attempt-NNN/`
+- Attempts stored under `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/` (lane-contained)
 
 ### Notes
 

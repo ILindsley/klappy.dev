@@ -92,13 +92,15 @@ If the PRD is ambiguous, note the ambiguity in your ATTEMPT.md. Do not guess.
 Write to your runs directory (path is in `.attempt.json`):
 
 ```
-attempts/<lane>/prd-vX.Y/_runs/<run_id>/
+products/<lane>/attempts/prd-vX.Y/_runs/<run_id>/
   ATTEMPT.md    — what you built, decisions made, self-audit
   EVIDENCE.md   — screenshot index, test results
   evidence/     — actual screenshots, logs
 ```
 
 Evidence must prove the PRD success criteria are met.
+
+Note: Attempts are lane-contained. Root `/attempts/**` is legacy.
 
 ---
 

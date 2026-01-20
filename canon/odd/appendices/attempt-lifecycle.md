@@ -100,20 +100,22 @@ You do not try to "share memory" between worktree agents. You publish outputs.
 
 These paths live in the main repo (not inside a worktree only):
 
-- `/attempts/prd-vX.Y/attempt-NNN/**` — sealed record + evidence
-- `/docs/PRD.md` — living PRD (single active)
+- `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/**` — sealed record + evidence (lane-contained)
+- `/docs/PRD/<lane>/PRD.md` — living PRD per lane
 - `/docs/learnings/prd-vX.Y.md` — (optional) rolling "what we learned" log
 
 Anything in those paths is real. Anything else is temporary.
+
+Note: Root `/attempts/**` is legacy (read-only). All new attempts are lane-contained.
 
 ### Learnings Payload (Required)
 
 At the end of each attempt, the agent must produce:
 
-1. `attempts/prd-vX.Y/attempt-NNN/ATTEMPT.md` — closure record
-2. `attempts/prd-vX.Y/attempt-NNN/META.json` — commit SHA, preview URL, status
-3. `attempts/prd-vX.Y/attempt-NNN/evidence/*` — screenshots, logs
-4. PRD patch (if learnings exist): updates to `/docs/PRD.md` in a dedicated section:
+1. `products/<lane>/attempts/prd-vX.Y/attempt-NNN/ATTEMPT.md` — closure record
+2. `products/<lane>/attempts/prd-vX.Y/attempt-NNN/META.json` — commit SHA, preview URL, status
+3. `products/<lane>/attempts/prd-vX.Y/attempt-NNN/evidence/*` — screenshots, logs
+4. PRD patch (if learnings exist): updates to `/docs/PRD/<lane>/PRD.md` in a dedicated section:
    - "Observed failure modes"
    - "Clarifications / constraints added"
    - "New DoD checks"
@@ -224,11 +226,13 @@ This plane **changes slowly and intentionally**.
 
 ## Canonical Structure
 
+Attempts are **lane-contained**. All attempt artifacts live under the product lane:
+
 ```
-attempts/
+products/<lane>/attempts/
   prd-vX.Y/
     PRD.md                    # frozen PRD for this version
-    run-<run_id>/             # working directory (before finalization)
+    _runs/<run_id>/           # working directory (before finalization)
     attempt-001/              # finalized attempts
       ATTEMPT.md              # closure record
       META.json               # canonical pointers (provenance is truth)
@@ -236,6 +240,8 @@ attempts/
       evidence/               # screenshots, logs, etc.
     attempt-002/              # retry (if needed)
 ```
+
+Note: Root `/attempts/**` is legacy (read-only). See `/attempts/README.md`.
 
 **META.json** contains:
 - `tool` — which tool was used (Cursor, Claude, etc.)
@@ -297,7 +303,8 @@ This preserves forensic traceability (we know who showed up) while guaranteeing 
 - `/infra/` — deployment scripts, contracts
 - `/canon/`, `/about/`, `/projects/` — content
 - `/docs/` — process documentation
-- `/attempts/` — sealed evidence
+- `/products/<lane>/attempts/` — sealed evidence (lane-contained)
+- `/attempts/` — legacy sealed evidence (read-only)
 - `package.json` — dependency manifest
 - Other lanes (`products/<other-lane>/src/`) — only the target lane is nuked
 
@@ -391,7 +398,7 @@ Pick one axis and declare it ahead of time:
 **When an attempt wins:**
 
 1. **Seal it**
-   - `attempts/prd-vX.Y/attempt-NNN/` has: ATTEMPT.md, META.json, evidence folder, preview URL.
+   - `products/<lane>/attempts/prd-vX.Y/attempt-NNN/` has: ATTEMPT.md, META.json, evidence folder, preview URL.
    - Status: CHAMPION
 
 2. **Tag it** (immutable pointer)

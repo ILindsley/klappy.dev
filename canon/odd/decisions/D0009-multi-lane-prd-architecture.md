@@ -48,7 +48,7 @@ PRDs are now organized into independent product lanes.
 
 Each lane has:
 - Its own PRD at `/docs/PRD/<lane>/PRD.md`
-- Its own attempts at `/attempts/<lane>/prd-vX.Y/attempt-NNN/`
+- Its own attempts at `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/` (lane-contained)
 - Its own lifecycle, success criteria, and evidence
 
 The three initial lanes are:
@@ -88,8 +88,9 @@ Canon remains the shared gravity — constraints, decision rules, and definition
 
 - Every attempt MUST declare a lane before registration
 - Attempts without a lane are invalid
-- Folder structure is locked: `/attempts/<lane>/prd-vX.Y/attempt-NNN/`
+- Folder structure is locked: `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/`
 - No creative variations on attempt folder structure allowed
+- Root `/attempts/**` is legacy (read-only)
 
 ---
 

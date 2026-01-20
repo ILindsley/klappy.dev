@@ -144,18 +144,40 @@ Valid lanes: `website`, `ai-navigation`, `agent-skill`
 
 ## 📁 Artifact Locations
 
+Attempt artifacts live at (lane-contained):
+
+```
+/products/<lane>/attempts/prd-vX.Y/attempt-NNN/
+```
+
 **During attempt:**
 ```
-attempts/<lane>/prd-<version>/_runs/<run_id>/
+products/<lane>/attempts/prd-<version>/_runs/<run_id>/
 ```
 
 **After finalize:**
 ```
-attempts/<lane>/prd-<version>/attempt-001/
-attempts/<lane>/prd-<version>/attempt-002/
+products/<lane>/attempts/prd-<version>/attempt-001/
+products/<lane>/attempts/prd-<version>/attempt-002/
 ```
 
-**Locked folder structure:** `/attempts/<lane>/prd-vX.Y/attempt-NNN/`
+**Locked folder structure:** `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/`
+
+**Note:** Root `/attempts/**` is legacy and read-only. See `/attempts/README.md`.
+
+**Completion gates (E0003+):**
+- Branch pushed to origin
+- Cloudflare preview deployment is live
+- HTTP 200 for:
+  - `/`
+  - `/_evidence/`
+- `/_evidence/` includes:
+  - index.html
+  - index.json
+  - ATTEMPT.md
+  - EVIDENCE.md
+  - META.json
+  - proof assets (screenshots/recording per contract)
 
 ---
 

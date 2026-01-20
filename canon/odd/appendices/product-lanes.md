@@ -152,17 +152,19 @@ Products may render, query, or reason over canon - but never modify it directly.
 Every attempt MUST declare a lane before registration.
 Attempts without a lane are invalid.
 
-**Folder structure:** `/attempts/<lane>/prd-vX.Y/attempt-NNN/`
+**Folder structure:** `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/`
+
+Attempts are **lane-contained** — all artifacts live under the product lane directory.
 
 Valid examples:
-- `/attempts/website/prd-v1.0/attempt-001/`
-- `/attempts/ai-navigation/prd-v1.0/attempt-001/`
-- `/attempts/agent-skill/prd-v1.0/attempt-001/`
+- `/products/website/attempts/prd-v1.0/attempt-001/`
+- `/products/ai-navigation/attempts/prd-v1.0/attempt-001/`
+- `/products/agent-skill/attempts/prd-v1.0/attempt-001/`
 
 Invalid (do not use):
+- `/attempts/<lane>/prd-vX.Y/attempt-NNN/` (legacy, read-only)
 - `/attempts/prd-vX.Y/<lane>/`
-- `/attempts/<lane>/attempt-NNN/`
-- `/attempts/<lane>/<anything creative>/`
+- `/products/<lane>/attempts/attempt-NNN/` (missing PRD version)
 
 ---
 
@@ -206,12 +208,16 @@ Lane isolation prevents cascading reruns.
 
 ### Where Attempts Live
 
+Attempts are lane-contained:
+
 ```
-/attempts/
-  website/prd-vX.Y/attempt-NNN/
-  ai-navigation/prd-vX.Y/attempt-NNN/
-  agent-skill/prd-vX.Y/attempt-NNN/
+/products/
+  website/attempts/prd-vX.Y/attempt-NNN/
+  ai-navigation/attempts/prd-vX.Y/attempt-NNN/
+  agent-skill/attempts/prd-vX.Y/attempt-NNN/
 ```
+
+Note: Root `/attempts/**` is legacy (read-only). See `/attempts/README.md`.
 
 ### How Evolution Propagates
 

@@ -91,7 +91,7 @@ See `/canon/odd/appendices/lane-implementation-surfaces.md` for the locked folde
    npm run attempt:nuke -- --lane website
    ```
 3. **Build from lane PRD** — implement against the lane's PRD (e.g., `/docs/PRD/website/PRD.md`)
-4. **Write artifacts** to `attempts/<lane>/prd-vX.Y/_runs/<run_id>/`
+4. **Write artifacts** to `products/<lane>/attempts/prd-vX.Y/_runs/<run_id>/`
 5. **Push** — triggers Cloudflare preview
 
 ### After All Agents Finish
@@ -114,53 +114,65 @@ Attempt numbers are assigned **after** work completes, not before.
 ## 📁 Folder Structure
 
 ```
-/products/                      # lane implementation surfaces
+/products/                      # lane implementation surfaces (self-contained)
   website/
     src/                        # website source (disposable)
     dist/                       # website build output (not committed)
+    attempts/                   # website lane attempts (CANONICAL)
+      prd-v1.0/
+        PRD.md                  # frozen PRD for this version
+        _runs/                  # in-progress runs (before finalize)
+          <run_id>/
+            META.json
+            ATTEMPT.md
+            EVIDENCE.md
+            evidence/
+        attempt-001/            # finalized attempts
+          META.json             # canonical pointers + provenance + lane
+          ATTEMPT.md
+          EVIDENCE.md
+          evidence/
+        attempt-002/
+          ...
   ai-navigation/
     src/                        # ai-navigation source (disposable)
     dist/                       # ai-navigation build output (not committed)
+    attempts/                   # ai-navigation lane attempts
+      prd-v1.0/
+        ...
   agent-skill/
     src/                        # agent-skill source (disposable)
     dist/                       # agent-skill build output (not committed)
+    attempts/                   # agent-skill lane attempts
+      prd-v1.0/
+        ...
 /infra/scripts/                 # build scripts (persist across attempts)
 /docs/PRD/                      # active PRDs organized by lane
   website/PRD.md                # website lane PRD
   ai-navigation/PRD.md          # ai-navigation lane PRD
   agent-skill/PRD.md            # agent-skill lane PRD
-/attempts/                      # sealed attempts (immutable after seal)
-  website/                      # website lane attempts
-    prd-v1.0/
-      PRD.md                    # frozen PRD for this version
-      _runs/                    # in-progress runs (before finalize)
-        <run_id>/
-          META.json
-          ATTEMPT.md
-          EVIDENCE.md
-          evidence/
-      attempt-001/              # finalized attempts
-        META.json               # canonical pointers + provenance + lane
-        ATTEMPT.md
-        EVIDENCE.md
-        evidence/
-      attempt-002/
-        ...
-  ai-navigation/                # ai-navigation lane attempts
-    prd-v1.0/
-      ...
-  agent-skill/                  # agent-skill lane attempts
-    prd-v1.0/
-      ...
+/attempts/                      # LEGACY (read-only, see /attempts/README.md)
 /public/content/                # generated (by sync script)
 ```
 
-**Locked folder structure:** `/attempts/<lane>/prd-vX.Y/attempt-NNN/`
+## Attempt Location (Canonical)
+
+All attempt artifacts are lane-contained:
+
+```
+/products/<lane>/attempts/prd-vX.Y/attempt-NNN/
+```
+
+**Notes:**
+- Root `/attempts/**` is legacy and read-only
+- Evidence for public verification is always served from the deployed build at: `/_evidence/`
+
+**Locked folder structure:** `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/`
 
 Do NOT use:
+- `/attempts/<lane>/prd-vX.Y/attempt-NNN/` (legacy)
 - `/attempts/prd-vX.Y/<lane>/`
-- `/attempts/<lane>/attempt-NNN/`
-- `/attempts/<lane>/<anything creative>/`
+- `/products/<lane>/attempts/attempt-NNN/` (missing PRD version)
 
 ---
 
@@ -236,8 +248,8 @@ This ensures every attempt contributes to the knowledge base.
 |----------|----------|-------|
 | `/canon/**` | ✅ Yes | Living orientation docs (shared across lanes) |
 | `/docs/PRD/<lane>/PRD.md` | ✅ Yes | Active PRD per lane |
-| `/attempts/<lane>/prd-vX.Y/PRD.md` | ❌ No | Frozen snapshot |
-| `/attempts/<lane>/*/attempt-NNN/*` | ❌ No | Sealed record + evidence |
+| `/products/<lane>/attempts/prd-vX.Y/PRD.md` | ❌ No | Frozen snapshot |
+| `/products/<lane>/attempts/*/attempt-NNN/*` | ❌ No | Sealed record + evidence |
 
 **Note:** Each lane evolves independently. Changes to the website PRD do not affect agent-skill attempts.
 

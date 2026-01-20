@@ -1,5 +1,17 @@
 # Website Lane — Attempt Kickoff (Canonical)
 
+## Attempt Artifacts Location
+
+All attempt artifacts MUST be written under:
+
+```
+/products/website/attempts/
+```
+
+Never under repo-root `/attempts/` (legacy, read-only).
+
+---
+
 ## Non-Negotiables (Evidence-First)
 
 This attempt is NOT complete unless all items below are true.

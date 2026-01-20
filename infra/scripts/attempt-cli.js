@@ -894,16 +894,16 @@ function cmdReset(opts) {
       }
     }
     
-    // Clean up _runs folder
-    const runsPath = join(ROOT, 'attempts', `prd-v${prd}`, '_runs');
+    // Clean up _runs folder (lane-contained path)
+    const runsPath = join(ROOT, 'products', lane, 'attempts', `prd-v${prd}`, '_runs');
     if (existsSync(runsPath)) {
       console.log(`\n  🗑️  Deleting _runs folder...`);
       if (!dryRun) rmSync(runsPath, { recursive: true });
       console.log('  ✅ Deleted _runs/');
     }
     
-    // Reset registry
-    const registryPath = join(ROOT, 'attempts', `prd-v${prd}`, 'ATTEMPT_REGISTRY.json');
+    // Reset registry (lane-contained path)
+    const registryPath = join(ROOT, 'products', lane, 'attempts', `prd-v${prd}`, 'ATTEMPT_REGISTRY.json');
     if (existsSync(registryPath)) {
       console.log(`\n  🔄 Resetting attempt registry...`);
       if (!dryRun) {
@@ -1183,11 +1183,11 @@ Options:
   const laneRoot = `products/${lane}`;
   const distDir = `products/${lane}/dist`;
   
-  // Attempt artifact paths (lane-scoped)
-  const prdFolder = join(ROOT, 'attempts', lane, `prd-v${prd}`);
+  // Attempt artifact paths (lane-contained: /products/<lane>/attempts/...)
+  const prdFolder = join(ROOT, 'products', lane, 'attempts', `prd-v${prd}`);
   const runsFolder = join(prdFolder, '_runs');
   const runFolder = join(runsFolder, runId);
-  const runsDir = `attempts/${lane}/prd-v${prd}/_runs/${runId}`;
+  const runsDir = `products/${lane}/attempts/prd-v${prd}/_runs/${runId}`;
   
   console.log('1️⃣  Creating run folder...');
   if (!dryRun) {
@@ -1325,26 +1325,34 @@ ${branchHint}`);
  * This is run once on main after all agents have completed.
  */
 function cmdFinalize(opts) {
-  const { prd, dryRun } = opts;
+  const { prd, lane, dryRun } = opts;
   
-  if (!prd) {
+  if (!prd || !lane) {
     console.log(`
-Usage: npm run attempt:finalize -- --prd <version>
+Usage: npm run attempt:finalize -- --lane <lane> --prd <version>
 
 Example:
-  npm run attempt:finalize -- --prd v0.2
+  npm run attempt:finalize -- --lane website --prd v1.0
+
+Valid lanes: ${VALID_LANES.join(', ')}
 
 Options:
+  --lane <lane>     Product lane (required)
   --prd <version>   PRD version (required)
   --dry-run         Show what would happen
 `);
     process.exit(1);
   }
   
-  console.log(`\n🏁 Finalizing runs for PRD v${prd}\n`);
+  if (!VALID_LANES.includes(lane)) {
+    fail(`Invalid lane: ${lane}\n   Valid lanes: ${VALID_LANES.join(', ')}`);
+  }
+  
+  console.log(`\n🏁 Finalizing runs for PRD v${prd} (lane: ${lane})\n`);
   if (dryRun) console.log('  [DRY RUN MODE]\n');
   
-  const prdFolder = join(ROOT, 'attempts', `prd-v${prd}`);
+  // Lane-contained path: /products/<lane>/attempts/prd-vX.Y/
+  const prdFolder = join(ROOT, 'products', lane, 'attempts', `prd-v${prd}`);
   const runsFolder = join(prdFolder, '_runs');
   const registryPath = join(prdFolder, 'ATTEMPT_REGISTRY.json');
   
@@ -1465,10 +1473,10 @@ Options:
   console.log(`
 📋 Next steps:
 
-   1. Review each attempt's artifacts in attempts/prd-v${prd}/
+   1. Review each attempt's artifacts in products/${lane}/attempts/prd-v${prd}/
    2. Pick champion based on evidence
    3. Promote winner:
-      npm run attempt:promote -- --prd v${prd} --attempt <number>
+      npm run attempt:promote -- --lane ${lane} --prd v${prd} --attempt <number>
 `);
 }
 
@@ -1487,16 +1495,19 @@ Options:
  *   - history preserved
  */
 function cmdPromote(opts) {
-  const { prd, attempt, dryRun, force } = opts;
+  const { prd, attempt, lane, dryRun, force } = opts;
   
-  if (!prd || !attempt) {
+  if (!prd || !attempt || !lane) {
     console.log(`
-Usage: npm run attempt:promote -- --prd <version> --attempt <number>
+Usage: npm run attempt:promote -- --lane <lane> --prd <version> --attempt <number>
 
 Example:
-  npm run attempt:promote -- --prd v0.2 --attempt 001
+  npm run attempt:promote -- --lane website --prd v1.0 --attempt 001
+
+Valid lanes: ${VALID_LANES.join(', ')}
 
 Options:
+  --lane <lane>       Product lane (required)
   --prd <version>     PRD version (required)
   --attempt <number>  Attempt number (required)
   --dry-run           Show what would happen
@@ -1505,7 +1516,12 @@ Options:
     process.exit(1);
   }
   
+  if (!VALID_LANES.includes(lane)) {
+    fail(`Invalid lane: ${lane}\n   Valid lanes: ${VALID_LANES.join(', ')}`);
+  }
+  
   console.log(`\n🏆 PROMOTING CHAMPION\n`);
+  console.log(`  Lane:    ${lane}`);
   console.log(`  PRD:     v${prd}`);
   console.log(`  Attempt: ${attempt}\n`);
   if (dryRun) console.log('  [DRY RUN MODE]\n');
@@ -1514,7 +1530,8 @@ Options:
   // 1. Validate attempt exists
   // ========================================
   console.log('1️⃣  Validating attempt...');
-  const attemptFolder = join(ROOT, 'attempts', `prd-v${prd}`, `attempt-${attempt}`);
+  // Lane-contained path: /products/<lane>/attempts/prd-vX.Y/attempt-NNN/
+  const attemptFolder = join(ROOT, 'products', lane, 'attempts', `prd-v${prd}`, `attempt-${attempt}`);
   const metaPath = join(attemptFolder, 'META.json');
   
   if (!existsSync(metaPath)) {
@@ -1988,25 +2005,32 @@ function cmdCleanup(opts) {
 }
 
 function cmdImport(opts) {
-  const { prd, dryRun } = opts;
+  const { prd, lane, dryRun } = opts;
   
-  if (!prd) {
+  if (!prd || !lane) {
     console.log(`
-Usage: npm run attempt:import -- --prd <version>
+Usage: npm run attempt:import -- --lane <lane> --prd <version>
 
 Example:
-  npm run attempt:import -- --prd v0.2
+  npm run attempt:import -- --lane website --prd v1.0
 
 This imports all _runs/ artifacts from attempt branches back to main.
 
+Valid lanes: ${VALID_LANES.join(', ')}
+
 Options:
+  --lane <lane>     Product lane (required)
   --prd <version>   PRD version (required)
   --dry-run         Show what would happen
 `);
     process.exit(1);
   }
   
-  console.log(`\n📥 IMPORTING ARTIFACTS for PRD v${prd}\n`);
+  if (!VALID_LANES.includes(lane)) {
+    fail(`Invalid lane: ${lane}\n   Valid lanes: ${VALID_LANES.join(', ')}`);
+  }
+  
+  console.log(`\n📥 IMPORTING ARTIFACTS for PRD v${prd} (lane: ${lane})\n`);
   if (dryRun) console.log('  [DRY RUN MODE]\n');
   
   // Check we're on main
@@ -2021,10 +2045,11 @@ Options:
   run('git pull origin main', { dryRun });
   console.log('  ✅ Main up to date\n');
   
-  // Find all attempt branches for this PRD
+  // Find all attempt branches for this PRD and lane
   console.log('2️⃣  Finding attempt branches...');
   const branchOutput = run('git branch -r', { silent: true, dryRun: false });
-  const branchPattern = new RegExp(`origin/attempt/prd-v${prd}/a\\d+`);
+  // Match run/<lane>/prd-v<prd>/... branches
+  const branchPattern = new RegExp(`origin/run/${lane}/prd-v${prd}/`);
   const branches = branchOutput
     .split('\n')
     .map(b => b.trim())
@@ -2045,7 +2070,8 @@ Options:
   
   // Import artifacts from each branch
   console.log('4️⃣  Importing artifacts from each branch...\n');
-  const runsPath = `attempts/prd-v${prd}/_runs`;
+  // Lane-contained path
+  const runsPath = `products/${lane}/attempts/prd-v${prd}/_runs`;
   let imported = 0;
   
   for (const branch of branches) {
@@ -2089,10 +2115,10 @@ Options:
 📋 Next steps:
 
    1. Finalize runs to assign attempt numbers:
-      npm run attempt:finalize -- --prd v${prd}
+      npm run attempt:finalize -- --lane ${lane} --prd v${prd}
 
    2. Review and promote champion:
-      npm run attempt:promote -- --prd v${prd} --attempt <number>
+      npm run attempt:promote -- --lane ${lane} --prd v${prd} --attempt <number>
 `);
 }
 
@@ -2183,6 +2209,11 @@ COMMANDS:
   npm run attempt:cleanup
       Prune stale worktrees and branches (run after PRD cycles)
       --force removes branch worktrees and orphan branches
+
+ARTIFACT LOCATION (Lane-Contained):
+  /products/<lane>/attempts/prd-vX.Y/attempt-NNN/
+
+  Root /attempts/** is LEGACY (read-only). See /attempts/README.md
 
 WORKFLOW:
   1. register → agent claims unique run_id with lane

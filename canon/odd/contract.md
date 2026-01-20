@@ -58,8 +58,10 @@ This version introduces structural changes that are not backwards-compatible:
 - **Lane declaration required** for all attempts
 - **Epoch declaration required** in META.json
 - PRDs stored under `/docs/PRD/<lane>/PRD.md`
-- Attempts stored under `/attempts/<lane>/prd-vX.Y/attempt-NNN/`
+- Attempts stored under `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/` (lane-contained)
 - Tooling requires `--lane` flag for register, finalize, promote
+
+Note: Root `/attempts/**` is legacy (read-only). All new attempts are lane-contained.
 
 ### Changed
 - Mental model: products decoupled, canon shared

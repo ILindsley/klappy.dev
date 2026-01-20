@@ -38,14 +38,16 @@ The default mechanism is Cloudflare Pages branch preview deployments:
 
 Each attempt MUST produce an evidence markdown file:
 
-`/attempts/<lane>/prd-vX.Y/attempt-NNN/EVIDENCE.md` (or run-scoped equivalent during `_runs/`)
+`/products/<lane>/attempts/prd-vX.Y/attempt-NNN/EVIDENCE.md` (or run-scoped equivalent during `_runs/`)
 
 The repo MUST expose evidence online via one of:
 
-- A static "evidence hub" path served by the lane site, OR
-- A dedicated Cloudflare Pages project serving `/attempts/**` as static content.
+- A static "evidence hub" path served by the lane site at `/_evidence/`, OR
+- A dedicated Cloudflare Pages project serving the lane's attempts as static content.
 
 The chosen mechanism must be documented in the lane PRD and enforced in kickoff.
+
+Note: Attempts are lane-contained. Root `/attempts/**` is legacy (read-only).
 
 ## Non-Goals
 
