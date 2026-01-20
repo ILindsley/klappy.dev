@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-20T01:26:51.550Z
-Total Files: 168
+Generated: 2026-01-20T03:12:55.110Z
+Total Files: 161
 
 This is a complete export of all documentation, code, and content files
 from the klappy.dev repository, organized by section.
@@ -26,7 +26,7 @@ from the klappy.dev repository, organized by section.
 - **Infrastructure** (18 files)
 - **Interfaces & Contracts** (6 files)
 - **ODD (Outcomes-Driven Development)** (1 files)
-- **Products** (10 files)
+- **Products** (7 files)
 - **Projects** (6 files)
 - **Public Content** (6 files)
 - **Visual Design System** (4 files)
@@ -22494,7 +22494,159 @@ git add klappy-dev-book-export.md
 
 
 --------------------------------------------------------------------------------
-📄 File: products/website/index.html
+📄 File: products/website/LEDGER.md
+--------------------------------------------------------------------------------
+
+# Website Lane Ledger
+
+Append-only product memory for the `website` lane.
+Records outcomes (champions, merges, deployments) without turning them into canon.
+
+---
+
+## Entry — PRD v1.0 Champion (PENDING PROMOTION)
+
+- Date: 2026-01-19
+- PRD: v1.0
+- Epoch: E0003 (evidence-first)
+- Champion: SELECTED
+- Champion branch: `run/website/prd-v1.0/cursor/a/claude-opus-4/71c6fdc7`
+- Head commit SHA: `1fb713dcbd4158325f48e6842806016a208a7ee7`
+- Merge commit SHA: TBD (update after promotion merge)
+- Cloudflare Pages project: `klappy-dev-website`
+- App URL: https://website-attempt-test.klappy-dev-website.pages.dev
+- Evidence URL: https://website-attempt-test.klappy-dev-website.pages.dev/_evidence/
+- Promotion PR: https://github.com/klappy/klappy.dev/pull/1
+
+> **Note:** This Promotion PR existed prior to rule formalization. From this point forward, all champions require an explicit Promotion PR per `products/website/prompts/ATTEMPT_KICKOFF.md`.
+
+### What worked
+- Evidence-first requirement produced real, observable artifacts online.
+- `/_evidence/` as a stable convention is discoverable.
+- Website lane build path is viable and can produce a deployed app + evidence.
+
+### What didn't
+- Local build succeeded but branch not pushed → no CF preview → unverifiable attempt.
+- Wrangler deploy used → ad-hoc URL breaks branch-based audit trail.
+- Lane/build-output mismatch caused CF to look for wrong dist path.
+
+### Learnings (1–3 bullets)
+- "Public" is not enough — discoverable is required.
+- The system needs one blessed deployment path: push branch → CF Pages preview → verify 200.
+- Failed attempts should preserve evidence URLs + notes when they reveal patterns.
+
+### Follow-up (one next action)
+- Kickoff prompt now enforces origin push + HTTP 200 checks + bans wrangler deploy.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/website/attempts/README.md
+--------------------------------------------------------------------------------
+
+# Website Attempts
+
+Attempts are proven via the deployed evidence endpoint:
+
+- `/_evidence/` must return HTTP 200 for a completed attempt.
+- Champion outcomes are recorded in `products/website/LEDGER.md`.
+- Kickoff prompt lives at `products/website/prompts/ATTEMPT_KICKOFF.md`.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/website/prompts/ATTEMPT_KICKOFF.md
+--------------------------------------------------------------------------------
+
+# Website Lane — Attempt Kickoff (Canonical)
+
+## Non-Negotiables (Evidence-First)
+
+This attempt is NOT complete unless all items below are true.
+
+### Required outcome
+1) The attempt branch is pushed to `origin` (Cloudflare must be able to build it).
+2) Cloudflare Pages serves BOTH endpoints with HTTP 200:
+   - `/` (the app)
+   - `/_evidence/` (the evidence index)
+3) Proof assets are present in the deployed build under `/_evidence/`:
+   - At least 3 screenshots OR 1 recording (video).
+
+### Forbidden
+- DO NOT use `wrangler pages deploy` (or any wrangler deploy command). Ever.
+- DO NOT claim "pending" completion. If the Cloudflare preview is not reachable, the attempt is FAILED.
+
+### Evidence check (required)
+After pushing, verify HTTP 200:
+- `curl -I https://<preview>/`
+- `curl -I https://<preview>/_evidence/`
+
+If either is not 200, the attempt is not complete.
+
+---
+
+## Attempt Workflow (Minimal)
+
+1) Register the attempt (provenance) using the repo attempt CLI.
+2) Nuke the website lane work area.
+3) Implement the website PRD (in `products/website/src`).
+4) Build using lane build:
+   - `npm run build -- --lane website`
+5) Ensure deployed evidence exists at:
+   - `/_evidence/` (and contains index + proof assets)
+6) Push branch to origin.
+7) Confirm Cloudflare preview URLs return HTTP 200.
+8) Write final notes to the run evidence folder.
+
+---
+
+## Champion Promotion (REQUIRED)
+
+After a champion is selected and recorded in `products/website/LEDGER.md`:
+
+1. A **Promotion PR** MUST be created.
+2. The PR MUST:
+   - Target `main`
+   - Contain only:
+     - The champion's `products/website/src/**`
+     - Any required config changes for production
+   - Reference:
+     - Champion commit SHA
+     - Evidence URL
+     - Ledger entry
+3. No other PR may be merged to promote a champion.
+4. Merging this PR is the moment the product enters production.
+
+**If no Promotion PR exists, production has not occurred, even if previews exist.**
+
+---
+
+## Lifecycle Summary
+
+```
+Attempt → Evidence → Champion Selection → Promotion PR → Production
+                                              ↑
+                                    (This is the gate)
+```
+
+- Attempts are experiments.
+- Champion selection is evaluation.
+- Promotion is the explicit, human-approved action that makes code production.
+
+These phases are distinct. None may be skipped.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/website/prompts/ONE_LINER.md
+--------------------------------------------------------------------------------
+
+Use /products/website/prompts/ATTEMPT_KICKOFF.md verbatim.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/website/src/.gitkeep
 --------------------------------------------------------------------------------
 
 <!DOCTYPE html>
