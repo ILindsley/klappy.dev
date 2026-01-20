@@ -1,8 +1,8 @@
 ---
 lane: website
 pack: author
-built_at: 2026-01-19T20:53:12.178Z
-git_commit: 19e264ac373ba8d5bc638e61de721750d1696920
+built_at: 2026-01-20T05:23:25.940Z
+git_commit: c8e732941363a3edd7a564ad7e5f0e1fceea66aa
 sources:
   - canon/index.md
   - canon/odd/appendices/product-lanes.md
@@ -11,12 +11,12 @@ sources:
   - canon/odd/appendices/compilation-targets.md
   - docs/PRD/website/PRD.md
 source_hashes:
-  canon/index.md: bae46a137e58066df21d89506f6ba63386d6684187aabc08a236c50150fcd8b4
+  canon/index.md: 8bf3004d7c204693562db1c4206a7736efafdb85b05c299f60366a460d3125dc
   canon/odd/appendices/product-lanes.md: 977b29aa2e06eecb32419d967da590f4d851c3c9feb5e38269cfc094b6da3d09
-  canon/odd/appendices/epochs.md: 62d38377f7b68c480628bf0bb89fe29478be3ac2dc2a886d0c67df538067ef7b
+  canon/odd/appendices/epochs.md: 59099c36270436e7e095d3acaa9161c75d7ae72b8bd500c51dc2145260c743dc
   canon/odd/appendices/compilation.md: f95da459f446bd2c63d664c997663f0c02bdb0852b0c46af0106c1750e559aef
   canon/odd/appendices/compilation-targets.md: 0de1cdbfc2df82a896d07b070c8b554bd05df6b30dae4325de1379550f9dcf24
-  docs/PRD/website/PRD.md: 71ca26485617dc50f698aade67909d204074c7156ffd323e0f5138fc811c40b3
+  docs/PRD/website/PRD.md: 7177542662a88a87277d7bcb6cde9fd4376a32e971a30d42af5ffa813d8ddca1
 ---
 
 
@@ -111,6 +111,7 @@ The appendices extend understanding without introducing enforcement:
 • **Quantum Development** — evaluating multiple paths before revising intent
 • **Repository Topology** — what lives where and what changes when
 • **Misuse Patterns** — common failure modes and how ODD gets misapplied
+• **Media as a Learning Layer** — media is optional, regenerable, and progressively disclosed; text remains canonical
 
 These are diagnostic and orientation documents, not requirements.
 
@@ -163,6 +164,7 @@ If documents appear to conflict, maturity context and explicit tradeoffs usually
       alignment-reviews.md
       epochs.md
       lane-implementation-surfaces.md
+      media-as-learning-layer.md
       product-lanes.md
       attempt-lifecycle.md
       drift-checks.md
@@ -332,6 +334,10 @@ Why visual systems evolve independently from products. Products consume visual i
 The drift-prevention mechanism. When docs, prompts, and tooling diverge, truth becomes vibes.
 • Lane Build Layout (odd/appendices/lane-build-layout.md)
 How lanes avoid /src and /dist collisions. Worktrees isolate, deployments are lane-scoped.
+• Online Evidence Requirement (odd/appendices/online-evidence.md)
+Why "works on my machine" is not evidence. Attempts are invalid without online preview URLs.
+• Deploy Evidence (odd/appendices/deploy-evidence.md)
+Why evidence must be in the build output. Cloudflare only serves products/<lane>/dist, not /attempts/**.
 
 ---
 
@@ -855,6 +861,40 @@ Naming epochs makes those shifts explicit so we can:
 If the evaluation landscape changed, say so.
 That's what an epoch is for.
 
+---
+
+## E0003 — Evidence-First Era
+
+### What changed
+
+E0003 begins when online deployment evidence becomes mandatory for attempt completion.
+
+In this epoch, a local build is not sufficient proof when the intended outcome is an online deployment.
+
+### Binding rule (new fitness landscape)
+
+An attempt is not complete until all are true:
+
+1) The attempt branch is pushed to origin
+2) Cloudflare Pages preview deployment succeeds (build passes)
+3) The preview URL returns HTTP 200 and renders the site
+4) The evidence URL returns HTTP 200 and renders the evidence at:
+
+`/_evidence/<run_id>/EVIDENCE.md`
+
+### Why this is a new epoch
+
+This change alters the repository's selection pressure:
+
+- Success is now gated by deployment correctness, not just build correctness
+- Evidence must be externally reviewable, not locally asserted
+- Attempts become comparable only within the same deploy-evidence regime
+
+### Compatibility
+
+- E0002 attempts remain valid within E0002.
+- E0002 attempts are not comparable to E0003 attempts by default.
+
 
 ---
 
@@ -1099,7 +1139,7 @@ These exist as names only until a lane PRD requires them.
 
 | Field           | Value            |
 |-----------------|------------------|
-| **PRD Version** | v1.0             |
+| **PRD Version** | v1.1             |
 | **Lane**        | website          |
 | **Status**      | Active           |
 | **Created**     | 2026-01-17       |
@@ -1193,12 +1233,30 @@ It explains ODD progressively to humans.
 
 An attempt against this PRD is complete when:
 
-- [ ] Build output produced (`npm run build`)
+- [ ] Build output produced (`npm run build -- --lane website`)
 - [ ] Visual proof captured (desktop + mobile screenshots)
 - [ ] First load shows ≤7 nav items (verified via screenshot)
 - [ ] Mobile layout verified (no horizontal scroll)
 - [ ] Deep link round-trip tested
 - [ ] Self-audit completed with explicit tradeoffs
+- [ ] **Cloudflare Preview URL provided** (branch must be pushed)
+- [ ] **Evidence URL provided** (viewable online without local code)
+
+---
+
+## Online Evidence (Required)
+
+A website lane attempt is **not complete** unless:
+
+1. The attempt branch is pushed to `origin`.
+2. Cloudflare Pages generates a Preview Deployment URL for that branch.
+3. The attempt includes an Evidence URL viewable online without running code locally.
+
+Local preview instructions are allowed during development, but they **do not satisfy attempt completion**.
+
+If an agent cannot provide both URLs, the attempt is **INVALID**.
+
+See `/canon/odd/appendices/online-evidence.md` for the full requirement.
 
 ---
 
@@ -1216,6 +1274,37 @@ This PRD is shaped by Canon constraints:
 - UX should carry the explanation (reduce text compensation)
 - Maintainability over cleverness
 - Progressive disclosure required
+
+---
+
+## Media (Learning Layer)
+
+This lane follows: `/canon/odd/appendices/media-as-learning-layer.md`
+
+Media is:
+- optional (progressive disclosure)
+- non-blocking (site must work with media collapsed)
+- never autoplayed
+- attached to stable pages only
+
+### Initial Assets (Phase 0)
+
+**Home (`/`)**
+- Hero diagram (image): `/assets/home/hero-odd-diagram.png`
+- Orientation map (image): `/assets/home/orientation-map-diagram.png`
+- ODD explainer (video): `/assets/home/outcomes-driven_development.mp4`
+
+**ODD (`/odd/...`)**
+- ODD in practice (video): `/assets/odd/odd-in-practice.mp4`
+- ODD is not a framework (image): `/assets/odd/odd-is-not-a-framework.png`
+- Why evidence beats confidence (audio): `/assets/odd/why-evidence-beats-confidence.m4a`
+
+### Requirements
+
+- The default experience must not require media consumption to understand the page.
+- Media must be user-initiated (explicit Watch/Listen/View affordances).
+- No autoplay video or audio.
+- Media must not add to the primary navigation item count.
 
 ---
 
@@ -1258,3 +1347,4 @@ The website lane MUST support generating a wipeable "visitor pack" used for prog
 - Definition of Done: `/canon/definition-of-done.md`
 - Legacy PRD (v0.3): `/docs/PRD/website/PRD-legacy-v0.3.md`
 - Compilation: `/canon/odd/appendices/compilation.md`
+- Media philosophy: `/canon/odd/appendices/media-as-learning-layer.md`
