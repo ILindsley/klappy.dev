@@ -9,7 +9,7 @@
  * This ensures Cloudflare can always deploy, even on "nuked" branches.
  */
 
-import { existsSync, readdirSync, cpSync, mkdirSync, rmSync } from 'fs';
+import { existsSync, readdirSync, cpSync, mkdirSync, rmSync, readFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
@@ -91,69 +91,76 @@ function mirrorLaneDistToLegacyRootDist() {
 }
 
 /**
- * Copy attempt evidence into dist so Cloudflare Pages can serve it.
+ * E0003 KISS Evidence Exposure
  * 
- * E0003 Evidence-First Era requires evidence to be externally reviewable.
- * Cloudflare only serves the configured build output directory.
- * Therefore, evidence must be copied into products/<lane>/dist/_evidence/
+ * Every deployed build MUST expose evidence at: /_evidence/
  * 
- * Phase 0 approach: Copy all _runs folders for all PRD versions.
- * This makes evidence browseable without smart-build needing to know the current run_id.
+ * Required files:
+ *   /_evidence/EVIDENCE.md
+ *   /_evidence/ATTEMPT.md
+ *   /_evidence/META.json
+ * 
+ * If .attempt.json exists (we're in an attempt), evidence is MANDATORY.
+ * If .attempt.json doesn't exist (building on main), skip silently.
+ * 
+ * NO run IDs. NO indexes. NO config flags.
  */
 function copyEvidenceToDist() {
   console.log('\n4️⃣  Copying evidence to dist (E0003)...');
   
-  const attemptsLanePath = join(ROOT, 'attempts', lane);
-  const evidenceDestPath = join(DIST_PATH, '_evidence');
+  const attemptJsonPath = join(ROOT, '.attempt.json');
+  const distEvidenceDir = join(DIST_PATH, '_evidence');
   
-  if (!existsSync(attemptsLanePath)) {
-    console.log(`  ⚠️  No attempts folder for lane: ${lane}`);
+  // If no .attempt.json, we're not in an attempt — skip silently
+  if (!existsSync(attemptJsonPath)) {
+    console.log('  ℹ️  No .attempt.json found — not in an active attempt');
+    console.log('  ⚠️  Skipping evidence copy (build will not have /_evidence/)');
     return;
   }
   
-  // Find all PRD version folders
-  const prdFolders = readdirSync(attemptsLanePath, { withFileTypes: true })
-    .filter(d => d.isDirectory() && d.name.startsWith('prd-'))
-    .map(d => d.name);
+  // Read attempt metadata
+  const attemptMeta = JSON.parse(readFileSync(attemptJsonPath, 'utf8'));
+  const { lane: attemptLane, prd_version, run_id, runs_dir } = attemptMeta;
   
-  if (prdFolders.length === 0) {
-    console.log('  ⚠️  No PRD folders found');
-    return;
+  // Verify lane matches
+  if (attemptLane !== lane) {
+    throw new Error(
+      `E0003 violation: .attempt.json lane (${attemptLane}) does not match build lane (${lane})`
+    );
   }
   
-  let copiedCount = 0;
+  // Build path to attempt evidence
+  const prd = prd_version.replace(/^v/, '');
+  const attemptEvidenceDir = join(ROOT, 'attempts', lane, `prd-v${prd}`, '_runs', run_id);
   
-  for (const prdFolder of prdFolders) {
-    const runsPath = join(attemptsLanePath, prdFolder, '_runs');
-    
-    if (existsSync(runsPath)) {
-      const destPath = join(evidenceDestPath, prdFolder, '_runs');
-      mkdirSync(destPath, { recursive: true });
-      cpSync(runsPath, destPath, { recursive: true });
-      copiedCount++;
-      console.log(`  ✅ Copied ${prdFolder}/_runs/ to dist/_evidence/`);
+  console.log(`  Lane:    ${lane}`);
+  console.log(`  PRD:     v${prd}`);
+  console.log(`  Run ID:  ${run_id}`);
+  console.log(`  Source:  ${attemptEvidenceDir}`);
+  
+  // Verify evidence source exists
+  if (!existsSync(attemptEvidenceDir)) {
+    throw new Error(
+      `E0003 violation: attempt evidence not found at ${attemptEvidenceDir}`
+    );
+  }
+  
+  // Copy evidence to dist/_evidence/
+  mkdirSync(distEvidenceDir, { recursive: true });
+  cpSync(attemptEvidenceDir, distEvidenceDir, { recursive: true });
+  
+  console.log('  📎 Evidence copied to dist/_evidence/');
+  
+  // Verify required files exist
+  const requiredFiles = ['EVIDENCE.md', 'ATTEMPT.md', 'META.json'];
+  for (const file of requiredFiles) {
+    const filePath = join(distEvidenceDir, file);
+    if (!existsSync(filePath)) {
+      throw new Error(`E0003 violation: missing ${file} in dist/_evidence/`);
     }
-    
-    // Also copy finalized attempt folders (attempt-001, etc.)
-    const attemptFolders = readdirSync(join(attemptsLanePath, prdFolder), { withFileTypes: true })
-      .filter(d => d.isDirectory() && d.name.startsWith('attempt-'))
-      .map(d => d.name);
-    
-    for (const attemptFolder of attemptFolders) {
-      const attemptPath = join(attemptsLanePath, prdFolder, attemptFolder);
-      const destPath = join(evidenceDestPath, prdFolder, attemptFolder);
-      mkdirSync(destPath, { recursive: true });
-      cpSync(attemptPath, destPath, { recursive: true });
-      copiedCount++;
-      console.log(`  ✅ Copied ${prdFolder}/${attemptFolder}/ to dist/_evidence/`);
-    }
   }
   
-  if (copiedCount === 0) {
-    console.log('  ⚠️  No evidence folders found to copy');
-  } else {
-    console.log(`\n  ✅ Evidence copied (${copiedCount} folders)`);
-  }
+  console.log('  ✅ Evidence verified: EVIDENCE.md, ATTEMPT.md, META.json');
 }
 
 function viteBuild() {

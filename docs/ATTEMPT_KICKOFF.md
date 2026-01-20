@@ -20,18 +20,17 @@ Bootstrap (optional): `/infra/prompts/attempt-kickoff/BOOTSTRAP.md`
 
 ---
 
-## E0003 Evidence-First Completion Rule
+## E0003 Completion Rule (Evidence-First)
 
-If the intended outcome is an online deployment, an attempt is not complete until:
+An attempt is NOT complete unless its deployed build exposes evidence publicly.
 
-1) Branch is pushed to origin
-2) Cloudflare Pages preview build succeeds
-3) Preview URL returns HTTP 200
-4) Evidence URL returns HTTP 200 at:
+Required verification:
 
-`/_evidence/<run_id>/EVIDENCE.md`
+- Visiting `/_evidence/EVIDENCE.md` on the deployed site returns HTTP 200
+- The evidence corresponds to the attempt that produced the build
 
-Do not mark attempts complete with local-only proof.
+If the evidence is not publicly accessible, the attempt is INVALID,
+even if the build succeeds locally.
 
 See `/canon/odd/decisions/D0014-e0003-evidence-first-era.md` for the full decision.
 
