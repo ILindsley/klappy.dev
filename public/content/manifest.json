@@ -709,6 +709,24 @@
       ]
     },
     {
+      "uri": "klappy://canon/odd/media-as-learning-layer",
+      "path": "/canon/odd/appendices/media-as-learning-layer.md",
+      "title": "Media as a Learning Layer",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "media",
+        "learning",
+        "progressive-disclosure",
+        "website"
+      ]
+    },
+    {
       "uri": "klappy://canon/odd/orientation-map",
       "path": "/canon/odd/orientation-map.md",
       "title": "ODD + Canon + Evidence — Orientation Map",

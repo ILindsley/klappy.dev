@@ -16,6 +16,35 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.5.1 — 2026-01-20
+
+**Media as a Learning Layer**
+
+This release introduces the media philosophy appendix and integrates it into the Website PRD.
+
+### Added
+
+- **Media as a Learning Layer** (`/canon/odd/appendices/media-as-learning-layer.md`) — Defines media as optional, regenerable, and progressively disclosed; text remains canonical
+
+### Changed
+
+- **Canon Index** — Added media-as-learning-layer to Edge Cases bullet list and appendices structure tree
+- **Website PRD** — Bumped to v1.1; added Media (Learning Layer) section with initial asset scope and requirements; added media philosophy to Related Documents
+
+### Philosophy
+
+- Canonical truth lives in text; media supports understanding but does not define it
+- Clarity is the default, not any specific media format
+- Media is opt-in (progressive disclosure), never autoplayed
+- Media is created only for stable content to prevent re-record churn
+
+### Notes
+
+- This pass is canon + PRD only; UI implementation is a separate attempt
+- Initial media assets declared for Home and ODD pages
+
+---
+
 ## 0.5.0 — 2026-01-19
 
 **E0003 — Evidence-First Era**

@@ -2,7 +2,7 @@
 
 | Field           | Value            |
 |-----------------|------------------|
-| **PRD Version** | v1.0             |
+| **PRD Version** | v1.1             |
 | **Lane**        | website          |
 | **Status**      | Active           |
 | **Created**     | 2026-01-17       |
@@ -140,6 +140,37 @@ This PRD is shaped by Canon constraints:
 
 ---
 
+## Media (Learning Layer)
+
+This lane follows: `/canon/odd/appendices/media-as-learning-layer.md`
+
+Media is:
+- optional (progressive disclosure)
+- non-blocking (site must work with media collapsed)
+- never autoplayed
+- attached to stable pages only
+
+### Initial Assets (Phase 0)
+
+**Home (`/`)**
+- Hero diagram (image): `/assets/home/hero-odd-diagram.png`
+- Orientation map (image): `/assets/home/orientation-map-diagram.png`
+- ODD explainer (video): `/assets/home/outcomes-driven_development.mp4`
+
+**ODD (`/odd/...`)**
+- ODD in practice (video): `/assets/odd/odd-in-practice.mp4`
+- ODD is not a framework (image): `/assets/odd/odd-is-not-a-framework.png`
+- Why evidence beats confidence (audio): `/assets/odd/why-evidence-beats-confidence.m4a`
+
+### Requirements
+
+- The default experience must not require media consumption to understand the page.
+- Media must be user-initiated (explicit Watch/Listen/View affordances).
+- No autoplay video or audio.
+- Media must not add to the primary navigation item count.
+
+---
+
 ## Attempt Policy
 
 This PRD may be attempted multiple times.
@@ -179,3 +210,4 @@ The website lane MUST support generating a wipeable "visitor pack" used for prog
 - Definition of Done: `/canon/definition-of-done.md`
 - Legacy PRD (v0.3): `/docs/PRD/website/PRD-legacy-v0.3.md`
 - Compilation: `/canon/odd/appendices/compilation.md`
+- Media philosophy: `/canon/odd/appendices/media-as-learning-layer.md`

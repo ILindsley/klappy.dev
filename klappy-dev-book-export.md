@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-20T03:20:40.685Z
-Total Files: 171
+Generated: 2026-01-20T05:20:38.531Z
+Total Files: 172
 
 This is a complete export of all documentation, code, and content files
 from the klappy.dev repository, organized by section.
@@ -21,7 +21,7 @@ from the klappy.dev repository, organized by section.
 - **.husky** (17 files)
 - **About** (4 files)
 - **Attempts** (17 files)
-- **Canon** (53 files)
+- **Canon** (54 files)
 - **Documentation** (18 files)
 - **Infrastructure** (18 files)
 - **Interfaces & Contracts** (6 files)
@@ -2707,7 +2707,7 @@ See: `/canon/odd/appendices/attempt-lifecycle.md`
 
 | Field           | Value            |
 |-----------------|------------------|
-| **PRD Version** | v1.0             |
+| **PRD Version** | v1.1             |
 | **Lane**        | website          |
 | **Status**      | Active           |
 | **Created**     | 2026-01-17       |
@@ -2845,6 +2845,37 @@ This PRD is shaped by Canon constraints:
 
 ---
 
+## Media (Learning Layer)
+
+This lane follows: `/canon/odd/appendices/media-as-learning-layer.md`
+
+Media is:
+- optional (progressive disclosure)
+- non-blocking (site must work with media collapsed)
+- never autoplayed
+- attached to stable pages only
+
+### Initial Assets (Phase 0)
+
+**Home (`/`)**
+- Hero diagram (image): `/assets/home/hero-odd-diagram.png`
+- Orientation map (image): `/assets/home/orientation-map-diagram.png`
+- ODD explainer (video): `/assets/home/outcomes-driven_development.mp4`
+
+**ODD (`/odd/...`)**
+- ODD in practice (video): `/assets/odd/odd-in-practice.mp4`
+- ODD is not a framework (image): `/assets/odd/odd-is-not-a-framework.png`
+- Why evidence beats confidence (audio): `/assets/odd/why-evidence-beats-confidence.m4a`
+
+### Requirements
+
+- The default experience must not require media consumption to understand the page.
+- Media must be user-initiated (explicit Watch/Listen/View affordances).
+- No autoplay video or audio.
+- Media must not add to the primary navigation item count.
+
+---
+
 ## Attempt Policy
 
 This PRD may be attempted multiple times.
@@ -2884,6 +2915,7 @@ The website lane MUST support generating a wipeable "visitor pack" used for prog
 - Definition of Done: `/canon/definition-of-done.md`
 - Legacy PRD (v0.3): `/docs/PRD/website/PRD-legacy-v0.3.md`
 - Compilation: `/canon/odd/appendices/compilation.md`
+- Media philosophy: `/canon/odd/appendices/media-as-learning-layer.md`
 
 
 
@@ -3682,6 +3714,35 @@ This changelog tracks changes to the **Canon pack** as a whole.
 
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
+
+## 0.5.1 — 2026-01-20
+
+**Media as a Learning Layer**
+
+This release introduces the media philosophy appendix and integrates it into the Website PRD.
+
+### Added
+
+- **Media as a Learning Layer** (`/canon/odd/appendices/media-as-learning-layer.md`) — Defines media as optional, regenerable, and progressively disclosed; text remains canonical
+
+### Changed
+
+- **Canon Index** — Added media-as-learning-layer to Edge Cases bullet list and appendices structure tree
+- **Website PRD** — Bumped to v1.1; added Media (Learning Layer) section with initial asset scope and requirements; added media philosophy to Related Documents
+
+### Philosophy
+
+- Canonical truth lives in text; media supports understanding but does not define it
+- Clarity is the default, not any specific media format
+- Media is opt-in (progressive disclosure), never autoplayed
+- Media is created only for stable content to prevent re-record churn
+
+### Notes
+
+- This pass is canon + PRD only; UI implementation is a separate attempt
+- Initial media assets declared for Home and ODD pages
+
+---
 
 ## 0.5.0 — 2026-01-19
 
@@ -5408,6 +5469,7 @@ The appendices extend understanding without introducing enforcement:
 • **Quantum Development** — evaluating multiple paths before revising intent
 • **Repository Topology** — what lives where and what changes when
 • **Misuse Patterns** — common failure modes and how ODD gets misapplied
+• **Media as a Learning Layer** — media is optional, regenerable, and progressively disclosed; text remains canonical
 
 These are diagnostic and orientation documents, not requirements.
 
@@ -5460,6 +5522,7 @@ If documents appear to conflict, maturity context and explicit tradeoffs usually
       alignment-reviews.md
       epochs.md
       lane-implementation-surfaces.md
+      media-as-learning-layer.md
       product-lanes.md
       attempt-lifecycle.md
       drift-checks.md
@@ -7669,6 +7732,151 @@ If a lane succeeds, you cannot know whether it succeeded because:
 - residue from another lane made it work.
 
 Lane-scoped implementation surfaces restore epistemic independence.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/odd/appendices/media-as-learning-layer.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/odd/media-as-learning-layer
+title: "Media as a Learning Layer"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "media", "learning", "progressive-disclosure", "website"]
+---
+
+# Media as a Learning Layer
+
+## Summary
+
+Media exists to **reduce cognitive load**, not increase it.
+
+Media is a **learning layer** over stable written content.
+It is optional, contextual, and regenerable.
+
+**Canonical truth lives in text.**
+Media supports understanding — it does not define it.
+
+---
+
+## Core Rules
+
+### 1) Clarity is the default
+Text is not the default.
+Video is not the default.
+Audio is not the default.
+
+**Clarity is the default.**
+
+Media is used only when it teaches faster or better than text alone.
+
+---
+
+### 2) Media is not Canon
+Canonical truth is preserved in:
+- markdown content
+- frontmatter
+- decision records
+- evidence policies
+
+Media assets are:
+- supporting artifacts
+- replaceable / regenerable
+- optional
+
+**The ownership and placement of media is canonical.**
+The media itself is not.
+
+---
+
+### 3) Progressive disclosure is mandatory
+All media must be **opt-in**.
+
+Allowed interactions:
+- Watch
+- Listen
+- View diagram
+- Download
+
+Disallowed patterns:
+- autoplay (anywhere)
+- background video
+- forced consumption
+- media that blocks navigation or comprehension
+
+The default experience must remain:
+- readable
+- navigable
+- understandable
+- usable without media
+
+---
+
+### 4) Match media to learning intent
+Media must be chosen based on the learning outcome:
+
+- **Images / diagrams**
+  - Establish mental models
+  - Replace multi-paragraph explanations
+- **Short video (≤ 90 seconds)**
+  - Orientation and framing
+  - Not exhaustive detail
+- **Audio**
+  - Reflection and deeper thinking
+  - Always optional
+- **PDF**
+  - Reference, synthesis, offline use
+  - Never required for basic understanding
+
+Each asset must answer:
+> What does this teach faster or better than text?
+
+If it cannot answer, it does not belong.
+
+---
+
+### 5) Stability before production
+Media is created only for **stable content**.
+
+Draft or evolving ideas remain text-first until:
+- the concept stabilizes
+- the page stops churn
+- the narrative is unlikely to drift
+
+This prevents:
+- outdated explainers
+- conflicting narratives
+- re-record churn
+
+Media follows clarity — not the other way around.
+
+---
+
+## Anti-Patterns (Explicitly Rejected)
+
+The system intentionally avoids:
+- media-first pages
+- content dumps / galleries
+- redundant explanations across formats
+- "just in case" assets
+- polish media used to compensate for unclear thinking
+
+If removing a piece of media would break understanding, that is a design failure.
+
+---
+
+## Compliance Note
+
+Product PRDs may reference this appendix.
+They should not re-litigate the philosophy.
+
+PRDs define **how** the lane applies this principle.
+This appendix defines the governing constraint.
 
 
 

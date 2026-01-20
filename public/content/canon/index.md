@@ -85,6 +85,7 @@ The appendices extend understanding without introducing enforcement:
 • **Quantum Development** — evaluating multiple paths before revising intent
 • **Repository Topology** — what lives where and what changes when
 • **Misuse Patterns** — common failure modes and how ODD gets misapplied
+• **Media as a Learning Layer** — media is optional, regenerable, and progressively disclosed; text remains canonical
 
 These are diagnostic and orientation documents, not requirements.
 
@@ -137,6 +138,7 @@ If documents appear to conflict, maturity context and explicit tradeoffs usually
       alignment-reviews.md
       epochs.md
       lane-implementation-surfaces.md
+      media-as-learning-layer.md
       product-lanes.md
       attempt-lifecycle.md
       drift-checks.md
