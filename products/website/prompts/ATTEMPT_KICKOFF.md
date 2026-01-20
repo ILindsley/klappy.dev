@@ -37,3 +37,40 @@ If either is not 200, the attempt is not complete.
 6) Push branch to origin.
 7) Confirm Cloudflare preview URLs return HTTP 200.
 8) Write final notes to the run evidence folder.
+
+---
+
+## Champion Promotion (REQUIRED)
+
+After a champion is selected and recorded in `products/website/LEDGER.md`:
+
+1. A **Promotion PR** MUST be created.
+2. The PR MUST:
+   - Target `main`
+   - Contain only:
+     - The champion's `products/website/src/**`
+     - Any required config changes for production
+   - Reference:
+     - Champion commit SHA
+     - Evidence URL
+     - Ledger entry
+3. No other PR may be merged to promote a champion.
+4. Merging this PR is the moment the product enters production.
+
+**If no Promotion PR exists, production has not occurred, even if previews exist.**
+
+---
+
+## Lifecycle Summary
+
+```
+Attempt → Evidence → Champion Selection → Promotion PR → Production
+                                              ↑
+                                    (This is the gate)
+```
+
+- Attempts are experiments.
+- Champion selection is evaluation.
+- Promotion is the explicit, human-approved action that makes code production.
+
+These phases are distinct. None may be skipped.

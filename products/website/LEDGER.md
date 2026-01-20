@@ -5,7 +5,7 @@ Records outcomes (champions, merges, deployments) without turning them into cano
 
 ---
 
-## Entry — PRD v1.0 Champion (MERGED)
+## Entry — PRD v1.0 Champion (PENDING PROMOTION)
 
 - Date: 2026-01-19
 - PRD: v1.0
@@ -13,11 +13,13 @@ Records outcomes (champions, merges, deployments) without turning them into cano
 - Champion: SELECTED
 - Champion branch: `run/website/prd-v1.0/cursor/a/claude-opus-4/71c6fdc7`
 - Head commit SHA: `1fb713dcbd4158325f48e6842806016a208a7ee7`
-- Merge commit SHA: TBD (update after merge)
+- Merge commit SHA: TBD (update after promotion merge)
 - Cloudflare Pages project: `klappy-dev-website`
 - App URL: https://website-attempt-test.klappy-dev-website.pages.dev
 - Evidence URL: https://website-attempt-test.klappy-dev-website.pages.dev/_evidence/
-- PR link: https://github.com/klappy/klappy.dev/pull/1
+- Promotion PR: https://github.com/klappy/klappy.dev/pull/1
+
+> **Note:** This Promotion PR existed prior to rule formalization. From this point forward, all champions require an explicit Promotion PR per `products/website/prompts/ATTEMPT_KICKOFF.md`.
 
 ### What worked
 - Evidence-first requirement produced real, observable artifacts online.

@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-20T03:05:06.933Z
+Generated: 2026-01-20T03:12:55.110Z
 Total Files: 161
 
 This is a complete export of all documentation, code, and content files
@@ -22315,7 +22315,7 @@ Records outcomes (champions, merges, deployments) without turning them into cano
 
 ---
 
-## Entry — PRD v1.0 Champion (MERGED)
+## Entry — PRD v1.0 Champion (PENDING PROMOTION)
 
 - Date: 2026-01-19
 - PRD: v1.0
@@ -22323,11 +22323,13 @@ Records outcomes (champions, merges, deployments) without turning them into cano
 - Champion: SELECTED
 - Champion branch: `run/website/prd-v1.0/cursor/a/claude-opus-4/71c6fdc7`
 - Head commit SHA: `1fb713dcbd4158325f48e6842806016a208a7ee7`
-- Merge commit SHA: TBD (update after merge)
+- Merge commit SHA: TBD (update after promotion merge)
 - Cloudflare Pages project: `klappy-dev-website`
 - App URL: https://website-attempt-test.klappy-dev-website.pages.dev
 - Evidence URL: https://website-attempt-test.klappy-dev-website.pages.dev/_evidence/
-- PR link: https://github.com/klappy/klappy.dev/pull/1
+- Promotion PR: https://github.com/klappy/klappy.dev/pull/1
+
+> **Note:** This Promotion PR existed prior to rule formalization. From this point forward, all champions require an explicit Promotion PR per `products/website/prompts/ATTEMPT_KICKOFF.md`.
 
 ### What worked
 - Evidence-first requirement produced real, observable artifacts online.
@@ -22406,6 +22408,43 @@ If either is not 200, the attempt is not complete.
 6) Push branch to origin.
 7) Confirm Cloudflare preview URLs return HTTP 200.
 8) Write final notes to the run evidence folder.
+
+---
+
+## Champion Promotion (REQUIRED)
+
+After a champion is selected and recorded in `products/website/LEDGER.md`:
+
+1. A **Promotion PR** MUST be created.
+2. The PR MUST:
+   - Target `main`
+   - Contain only:
+     - The champion's `products/website/src/**`
+     - Any required config changes for production
+   - Reference:
+     - Champion commit SHA
+     - Evidence URL
+     - Ledger entry
+3. No other PR may be merged to promote a champion.
+4. Merging this PR is the moment the product enters production.
+
+**If no Promotion PR exists, production has not occurred, even if previews exist.**
+
+---
+
+## Lifecycle Summary
+
+```
+Attempt → Evidence → Champion Selection → Promotion PR → Production
+                                              ↑
+                                    (This is the gate)
+```
+
+- Attempts are experiments.
+- Champion selection is evaluation.
+- Promotion is the explicit, human-approved action that makes code production.
+
+These phases are distinct. None may be skipped.
 
 
 
