@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-20T01:12:27.589Z
+Generated: 2026-01-20T01:18:07.114Z
 Total Files: 168
 
 This is a complete export of all documentation, code, and content files
@@ -18961,7 +18961,8 @@ function main() {
   copyEvidenceToDist();
   
   // Transitional compatibility: keep /dist around for current deploys.
-  if (lane === 'ai-navigation' && existsSync(DIST_PATH)) {
+  // Extended to include website lane until Cloudflare project is properly configured.
+  if ((lane === 'ai-navigation' || lane === 'website') && existsSync(DIST_PATH)) {
     mirrorLaneDistToLegacyRootDist();
   }
   
