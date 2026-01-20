@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-20T01:18:07.114Z
+Generated: 2026-01-20T01:26:51.550Z
 Total Files: 168
 
 This is a complete export of all documentation, code, and content files
@@ -13929,10 +13929,21 @@ Home page on mobile viewport (375x812). Shows:
 
 ## Deployment URLs
 
-*(To be filled after Cloudflare deployment)*
+**LIVE DEPLOYMENT VERIFIED:**
 
-- Preview URL: TBD
-- Evidence URL: TBD/_evidence/
+- Preview URL: https://website-attempt-test.klappy-dev-website.pages.dev/
+- Evidence URL: https://website-attempt-test.klappy-dev-website.pages.dev/_evidence/
+- Cloudflare Project: `klappy-dev-website`
+
+### Verification Results
+
+| Requirement | Status | Details |
+|-------------|--------|---------|
+| Branch pushed | ✅ PASS | Commit d1be3bd pushed to origin |
+| Cloudflare builds | ✅ PASS | klappy-dev-website project deployed |
+| App loads | ✅ PASS | HTTP 200 at preview URL |
+| /_evidence/ works | ✅ PASS | HTTP 200, index.html/json served |
+| Screenshots present | ✅ PASS | 3 screenshots in evidence |
 
 
 
