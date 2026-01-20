@@ -91,22 +91,24 @@ function mirrorLaneDistToLegacyRootDist() {
 }
 
 /**
- * E0003 KISS Evidence Exposure
+ * E0003.1 Evidence Discoverability
  * 
- * Every deployed build MUST expose evidence at: /_evidence/
+ * Every deployed build MUST expose discoverable evidence at: /_evidence/
  * 
- * Required files:
- *   /_evidence/EVIDENCE.md
- *   /_evidence/ATTEMPT.md
- *   /_evidence/META.json
+ * Required structure:
+ *   /_evidence/index.html    — human-browsable index
+ *   /_evidence/index.json    — machine inventory
+ *   /_evidence/EVIDENCE.md   — summary + links
+ *   /_evidence/ATTEMPT.md    — what was done
+ *   /_evidence/META.json     — provenance
+ *   /_evidence/screenshots/  — at least 1 image
+ *   /_evidence/recordings/   — at least 1 video OR 3 screenshots total
  * 
  * If .attempt.json exists (we're in an attempt), evidence is MANDATORY.
  * If .attempt.json doesn't exist (building on main), skip silently.
- * 
- * NO run IDs. NO indexes. NO config flags.
  */
 function copyEvidenceToDist() {
-  console.log('\n4️⃣  Copying evidence to dist (E0003)...');
+  console.log('\n4️⃣  Copying evidence to dist (E0003.1)...');
   
   const attemptJsonPath = join(ROOT, '.attempt.json');
   const distEvidenceDir = join(DIST_PATH, '_evidence');
@@ -120,12 +122,12 @@ function copyEvidenceToDist() {
   
   // Read attempt metadata
   const attemptMeta = JSON.parse(readFileSync(attemptJsonPath, 'utf8'));
-  const { lane: attemptLane, prd_version, run_id, runs_dir } = attemptMeta;
+  const { lane: attemptLane, prd_version, run_id } = attemptMeta;
   
   // Verify lane matches
   if (attemptLane !== lane) {
     throw new Error(
-      `E0003 violation: .attempt.json lane (${attemptLane}) does not match build lane (${lane})`
+      `E0003.1 violation: .attempt.json lane (${attemptLane}) does not match build lane (${lane})`
     );
   }
   
@@ -141,7 +143,7 @@ function copyEvidenceToDist() {
   // Verify evidence source exists
   if (!existsSync(attemptEvidenceDir)) {
     throw new Error(
-      `E0003 violation: attempt evidence not found at ${attemptEvidenceDir}`
+      `E0003.1 violation: attempt evidence not found at ${attemptEvidenceDir}`
     );
   }
   
@@ -151,16 +153,68 @@ function copyEvidenceToDist() {
   
   console.log('  📎 Evidence copied to dist/_evidence/');
   
-  // Verify required files exist
-  const requiredFiles = ['EVIDENCE.md', 'ATTEMPT.md', 'META.json'];
-  for (const file of requiredFiles) {
+  // Verify required document files exist
+  const requiredDocs = ['EVIDENCE.md', 'ATTEMPT.md', 'META.json'];
+  for (const file of requiredDocs) {
     const filePath = join(distEvidenceDir, file);
     if (!existsSync(filePath)) {
-      throw new Error(`E0003 violation: missing ${file} in dist/_evidence/`);
+      throw new Error(`E0003.1 violation: missing ${file} in dist/_evidence/`);
     }
   }
+  console.log('  ✅ Documents verified: EVIDENCE.md, ATTEMPT.md, META.json');
   
-  console.log('  ✅ Evidence verified: EVIDENCE.md, ATTEMPT.md, META.json');
+  // Count proof assets
+  const screenshotsDir = join(distEvidenceDir, 'screenshots');
+  const recordingsDir = join(distEvidenceDir, 'recordings');
+  
+  let screenshotCount = 0;
+  let recordingCount = 0;
+  
+  if (existsSync(screenshotsDir)) {
+    screenshotCount = readdirSync(screenshotsDir).filter(f => 
+      f.endsWith('.png') || f.endsWith('.jpg') || f.endsWith('.jpeg') || f.endsWith('.gif') || f.endsWith('.webp')
+    ).length;
+  }
+  
+  if (existsSync(recordingsDir)) {
+    recordingCount = readdirSync(recordingsDir).filter(f => 
+      f.endsWith('.mp4') || f.endsWith('.webm') || f.endsWith('.mov') || f.endsWith('.gif')
+    ).length;
+  }
+  
+  console.log(`  📸 Screenshots: ${screenshotCount}`);
+  console.log(`  🎬 Recordings:  ${recordingCount}`);
+  
+  // Enforce minimum proof rule:
+  // At least 1 screenshot AND (1 recording OR 3 screenshots total)
+  if (screenshotCount < 1) {
+    throw new Error(
+      `E0003.1 violation: at least 1 screenshot required. Found: ${screenshotCount}`
+    );
+  }
+  
+  if (recordingCount < 1 && screenshotCount < 3) {
+    throw new Error(
+      `E0003.1 violation: need 1 recording OR 3 screenshots. ` +
+      `Found: ${screenshotCount} screenshots, ${recordingCount} recordings`
+    );
+  }
+  
+  console.log('  ✅ Proof assets verified');
+  
+  // Generate index.html and index.json
+  console.log('  📋 Generating evidence index...');
+  run(`node infra/scripts/generate-evidence-index.js "${distEvidenceDir}" "${attemptJsonPath}"`);
+  
+  // Verify index files were created
+  if (!existsSync(join(distEvidenceDir, 'index.html'))) {
+    throw new Error('E0003.1 violation: index.html generation failed');
+  }
+  if (!existsSync(join(distEvidenceDir, 'index.json'))) {
+    throw new Error('E0003.1 violation: index.json generation failed');
+  }
+  
+  console.log('  ✅ Evidence index generated');
 }
 
 function viteBuild() {

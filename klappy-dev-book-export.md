@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-20T00:03:21.479Z
-Total Files: 167
+Generated: 2026-01-20T00:27:27.725Z
+Total Files: 155
 
 This is a complete export of all documentation, code, and content files
 from the klappy.dev repository, organized by section.
@@ -23,13 +23,12 @@ from the klappy.dev repository, organized by section.
 - **Attempts** (14 files)
 - **Canon** (52 files)
 - **Documentation** (17 files)
-- **Infrastructure** (17 files)
+- **Infrastructure** (18 files)
 - **Interfaces & Contracts** (6 files)
 - **ODD (Outcomes-Driven Development)** (1 files)
 - **Products** (3 files)
 - **Projects** (6 files)
 - **Public Content** (6 files)
-- **Source Code** (13 files)
 - **Visual Design System** (4 files)
 
 
@@ -1143,19 +1142,34 @@ Bootstrap (optional): `/infra/prompts/attempt-kickoff/BOOTSTRAP.md`
 
 ---
 
-## E0003 Completion Rule (Evidence-First)
+## E0003.1 Completion Rule (Evidence Discoverable)
 
-An attempt is NOT complete unless its deployed build exposes evidence publicly.
+An attempt is NOT complete unless its deployed build exposes **discoverable** evidence.
 
-Required verification:
+**Required URLs (must return HTTP 200):**
 
-- Visiting `/_evidence/EVIDENCE.md` on the deployed site returns HTTP 200
-- The evidence corresponds to the attempt that produced the build
+- `/_evidence/index.html` — human-browsable evidence index
+- `/_evidence/index.json` — machine inventory
+- `/_evidence/EVIDENCE.md` — summary + links
 
-If the evidence is not publicly accessible, the attempt is INVALID,
-even if the build succeeds locally.
+**Required proof assets:**
 
-See `/canon/odd/decisions/D0014-e0003-evidence-first-era.md` for the full decision.
+- At least **1 screenshot** in `/_evidence/screenshots/`
+- AND at least **1 recording** in `/_evidence/recordings/` OR **3 screenshots total**
+
+Markdown alone does not count as proof.
+
+**Build enforcement:**
+
+When `.attempt.json` exists:
+- Build FAILS if evidence folder is missing
+- Build FAILS if required documents are missing
+- Build FAILS if proof assets are insufficient
+- Build FAILS if index generation fails
+
+**If `/_evidence/index.html` returns 404, the attempt is INVALID.**
+
+See `/canon/odd/decisions/D0014-e0003-evidence-first-era.md` for the epoch decision.
 
 ---
 
@@ -17908,6 +17922,307 @@ exportBook().catch(err => {
 
 
 --------------------------------------------------------------------------------
+📄 File: infra/scripts/generate-evidence-index.js
+--------------------------------------------------------------------------------
+
+#!/usr/bin/env node
+/**
+ * generate-evidence-index.js
+ * 
+ * Generates index.html and index.json for an evidence folder.
+ * Part of E0003.1 — Evidence must be discoverable, not just public.
+ * 
+ * Usage:
+ *   node generate-evidence-index.js <evidence-folder-path> [attempt-json-path]
+ * 
+ * Output:
+ *   <evidence-folder>/index.html  — human-browsable index
+ *   <evidence-folder>/index.json  — machine inventory
+ */
+
+import { existsSync, readdirSync, statSync, writeFileSync, readFileSync } from 'fs';
+import { join, basename, relative } from 'path';
+
+const args = process.argv.slice(2);
+const evidenceDir = args[0];
+const attemptJsonPath = args[1];
+
+if (!evidenceDir) {
+  console.error('Usage: generate-evidence-index.js <evidence-folder-path> [attempt-json-path]');
+  process.exit(1);
+}
+
+if (!existsSync(evidenceDir)) {
+  console.error(`Evidence folder not found: ${evidenceDir}`);
+  process.exit(1);
+}
+
+// ============================================================
+// Enumerate files
+// ============================================================
+
+function enumerateFolder(folderPath, basePath = folderPath) {
+  if (!existsSync(folderPath)) return [];
+  
+  const files = [];
+  const entries = readdirSync(folderPath, { withFileTypes: true });
+  
+  for (const entry of entries) {
+    const fullPath = join(folderPath, entry.name);
+    const relativePath = relative(basePath, fullPath);
+    
+    if (entry.isDirectory()) {
+      files.push(...enumerateFolder(fullPath, basePath));
+    } else {
+      const stats = statSync(fullPath);
+      files.push({
+        name: entry.name,
+        path: relativePath,
+        size: stats.size,
+        modified: stats.mtime.toISOString()
+      });
+    }
+  }
+  
+  return files;
+}
+
+// Enumerate evidence assets
+const screenshots = enumerateFolder(join(evidenceDir, 'screenshots'), evidenceDir);
+const recordings = enumerateFolder(join(evidenceDir, 'recordings'), evidenceDir);
+const outputs = enumerateFolder(join(evidenceDir, 'outputs'), evidenceDir);
+
+// Find markdown files at root
+const rootFiles = readdirSync(evidenceDir, { withFileTypes: true })
+  .filter(e => e.isFile())
+  .map(e => {
+    const fullPath = join(evidenceDir, e.name);
+    const stats = statSync(fullPath);
+    return {
+      name: e.name,
+      path: e.name,
+      size: stats.size,
+      modified: stats.mtime.toISOString()
+    };
+  });
+
+const evidenceMd = rootFiles.find(f => f.name === 'EVIDENCE.md');
+const attemptMd = rootFiles.find(f => f.name === 'ATTEMPT.md');
+const metaJson = rootFiles.find(f => f.name === 'META.json');
+
+// ============================================================
+// Load provenance
+// ============================================================
+
+let provenance = {
+  lane: 'unknown',
+  prd_version: 'unknown',
+  epoch_id: 'unknown',
+  run_id: 'unknown',
+  tool: 'unknown',
+  agent: 'unknown',
+  model: 'unknown',
+  git_head: 'unknown',
+  registered_at: null
+};
+
+// Try META.json in evidence folder first
+const metaPath = join(evidenceDir, 'META.json');
+if (existsSync(metaPath)) {
+  try {
+    const meta = JSON.parse(readFileSync(metaPath, 'utf8'));
+    provenance = { ...provenance, ...meta };
+  } catch (e) {
+    console.warn('Warning: Could not parse META.json');
+  }
+}
+
+// Override with .attempt.json if provided
+if (attemptJsonPath && existsSync(attemptJsonPath)) {
+  try {
+    const attempt = JSON.parse(readFileSync(attemptJsonPath, 'utf8'));
+    provenance = { ...provenance, ...attempt };
+  } catch (e) {
+    console.warn('Warning: Could not parse .attempt.json');
+  }
+}
+
+// ============================================================
+// Generate index.json
+// ============================================================
+
+const indexJson = {
+  version: '1.0',
+  generated_at: new Date().toISOString(),
+  provenance: {
+    lane: provenance.lane,
+    prd_version: provenance.prd_version,
+    epoch_id: provenance.epoch_id,
+    run_id: provenance.run_id,
+    tool: provenance.tool,
+    agent: provenance.agent,
+    model: provenance.model,
+    git_head: provenance.git_head,
+    registered_at: provenance.registered_at
+  },
+  assets: {
+    documents: rootFiles.filter(f => f.name.endsWith('.md') || f.name.endsWith('.json')),
+    screenshots: screenshots,
+    recordings: recordings,
+    outputs: outputs
+  },
+  counts: {
+    screenshots: screenshots.length,
+    recordings: recordings.length,
+    outputs: outputs.length
+  },
+  app_entry: '/'
+};
+
+writeFileSync(join(evidenceDir, 'index.json'), JSON.stringify(indexJson, null, 2));
+console.log('  ✅ Generated index.json');
+
+// ============================================================
+// Generate index.html
+// ============================================================
+
+function formatBytes(bytes) {
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+  return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+}
+
+function fileLink(file) {
+  return `<li><a href="${file.path}">${file.name}</a> <span class="size">(${formatBytes(file.size)})</span></li>`;
+}
+
+const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evidence — ${provenance.lane} / ${provenance.prd_version}</title>
+  <style>
+    :root {
+      --bg: #fafafa;
+      --fg: #1a1a1a;
+      --muted: #666;
+      --border: #e0e0e0;
+      --accent: #0066cc;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1a1a;
+        --fg: #f0f0f0;
+        --muted: #999;
+        --border: #333;
+        --accent: #4da6ff;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      background: var(--bg);
+      color: var(--fg);
+      padding: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    h2 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; color: var(--fg); }
+    .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+    .meta code { background: var(--border); padding: 0.1rem 0.3rem; border-radius: 3px; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+    th, td { text-align: left; padding: 0.5rem; border-bottom: 1px solid var(--border); }
+    th { color: var(--muted); font-weight: normal; }
+    ul { list-style: none; }
+    li { padding: 0.3rem 0; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .size { color: var(--muted); font-size: 0.85rem; }
+    .section { margin-bottom: 2rem; }
+    .empty { color: var(--muted); font-style: italic; }
+    .app-link { 
+      display: inline-block; 
+      margin-top: 1rem; 
+      padding: 0.5rem 1rem; 
+      background: var(--accent); 
+      color: white; 
+      border-radius: 4px; 
+    }
+    .app-link:hover { opacity: 0.9; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <h1>📋 Evidence</h1>
+  <p class="meta">
+    Lane: <code>${provenance.lane}</code> · 
+    PRD: <code>${provenance.prd_version}</code> · 
+    Epoch: <code>${provenance.epoch_id}</code>
+  </p>
+
+  <table>
+    <tr><th>Run ID</th><td><code>${provenance.run_id}</code></td></tr>
+    <tr><th>Tool</th><td>${provenance.tool}</td></tr>
+    <tr><th>Agent</th><td>${provenance.agent}</td></tr>
+    <tr><th>Model</th><td>${provenance.model}</td></tr>
+    <tr><th>Git HEAD</th><td><code>${typeof provenance.git_head === 'string' ? provenance.git_head.substring(0, 8) : 'unknown'}</code></td></tr>
+    <tr><th>Registered</th><td>${provenance.registered_at || 'unknown'}</td></tr>
+  </table>
+
+  <a href="/" class="app-link">→ View App</a>
+
+  <div class="section">
+    <h2>📄 Documents</h2>
+    ${evidenceMd ? `<ul>${fileLink(evidenceMd)}</ul>` : ''}
+    ${attemptMd ? `<ul>${fileLink(attemptMd)}</ul>` : ''}
+    ${metaJson ? `<ul>${fileLink(metaJson)}</ul>` : ''}
+  </div>
+
+  <div class="section">
+    <h2>📸 Screenshots (${screenshots.length})</h2>
+    ${screenshots.length > 0 
+      ? `<ul>${screenshots.map(fileLink).join('\n      ')}</ul>` 
+      : '<p class="empty">No screenshots</p>'}
+  </div>
+
+  <div class="section">
+    <h2>🎬 Recordings (${recordings.length})</h2>
+    ${recordings.length > 0 
+      ? `<ul>${recordings.map(fileLink).join('\n      ')}</ul>` 
+      : '<p class="empty">No recordings</p>'}
+  </div>
+
+  <div class="section">
+    <h2>📁 Outputs (${outputs.length})</h2>
+    ${outputs.length > 0 
+      ? `<ul>${outputs.map(fileLink).join('\n      ')}</ul>` 
+      : '<p class="empty">No additional outputs</p>'}
+  </div>
+
+  <p class="meta" style="margin-top: 2rem;">
+    <a href="index.json">index.json</a> · 
+    Generated: ${new Date().toISOString()}
+  </p>
+</body>
+</html>`;
+
+writeFileSync(join(evidenceDir, 'index.html'), html);
+console.log('  ✅ Generated index.html');
+
+// ============================================================
+// Report
+// ============================================================
+
+console.log(`\n  Evidence Index Generated:`);
+console.log(`    Screenshots: ${screenshots.length}`);
+console.log(`    Recordings:  ${recordings.length}`);
+console.log(`    Outputs:     ${outputs.length}`);
+
+
+
+--------------------------------------------------------------------------------
 📄 File: infra/scripts/promote-attempt.js
 --------------------------------------------------------------------------------
 
@@ -18211,22 +18526,24 @@ function mirrorLaneDistToLegacyRootDist() {
 }
 
 /**
- * E0003 KISS Evidence Exposure
+ * E0003.1 Evidence Discoverability
  * 
- * Every deployed build MUST expose evidence at: /_evidence/
+ * Every deployed build MUST expose discoverable evidence at: /_evidence/
  * 
- * Required files:
- *   /_evidence/EVIDENCE.md
- *   /_evidence/ATTEMPT.md
- *   /_evidence/META.json
+ * Required structure:
+ *   /_evidence/index.html    — human-browsable index
+ *   /_evidence/index.json    — machine inventory
+ *   /_evidence/EVIDENCE.md   — summary + links
+ *   /_evidence/ATTEMPT.md    — what was done
+ *   /_evidence/META.json     — provenance
+ *   /_evidence/screenshots/  — at least 1 image
+ *   /_evidence/recordings/   — at least 1 video OR 3 screenshots total
  * 
  * If .attempt.json exists (we're in an attempt), evidence is MANDATORY.
  * If .attempt.json doesn't exist (building on main), skip silently.
- * 
- * NO run IDs. NO indexes. NO config flags.
  */
 function copyEvidenceToDist() {
-  console.log('\n4️⃣  Copying evidence to dist (E0003)...');
+  console.log('\n4️⃣  Copying evidence to dist (E0003.1)...');
   
   const attemptJsonPath = join(ROOT, '.attempt.json');
   const distEvidenceDir = join(DIST_PATH, '_evidence');
@@ -18240,12 +18557,12 @@ function copyEvidenceToDist() {
   
   // Read attempt metadata
   const attemptMeta = JSON.parse(readFileSync(attemptJsonPath, 'utf8'));
-  const { lane: attemptLane, prd_version, run_id, runs_dir } = attemptMeta;
+  const { lane: attemptLane, prd_version, run_id } = attemptMeta;
   
   // Verify lane matches
   if (attemptLane !== lane) {
     throw new Error(
-      `E0003 violation: .attempt.json lane (${attemptLane}) does not match build lane (${lane})`
+      `E0003.1 violation: .attempt.json lane (${attemptLane}) does not match build lane (${lane})`
     );
   }
   
@@ -18261,7 +18578,7 @@ function copyEvidenceToDist() {
   // Verify evidence source exists
   if (!existsSync(attemptEvidenceDir)) {
     throw new Error(
-      `E0003 violation: attempt evidence not found at ${attemptEvidenceDir}`
+      `E0003.1 violation: attempt evidence not found at ${attemptEvidenceDir}`
     );
   }
   
@@ -18271,16 +18588,68 @@ function copyEvidenceToDist() {
   
   console.log('  📎 Evidence copied to dist/_evidence/');
   
-  // Verify required files exist
-  const requiredFiles = ['EVIDENCE.md', 'ATTEMPT.md', 'META.json'];
-  for (const file of requiredFiles) {
+  // Verify required document files exist
+  const requiredDocs = ['EVIDENCE.md', 'ATTEMPT.md', 'META.json'];
+  for (const file of requiredDocs) {
     const filePath = join(distEvidenceDir, file);
     if (!existsSync(filePath)) {
-      throw new Error(`E0003 violation: missing ${file} in dist/_evidence/`);
+      throw new Error(`E0003.1 violation: missing ${file} in dist/_evidence/`);
     }
   }
+  console.log('  ✅ Documents verified: EVIDENCE.md, ATTEMPT.md, META.json');
   
-  console.log('  ✅ Evidence verified: EVIDENCE.md, ATTEMPT.md, META.json');
+  // Count proof assets
+  const screenshotsDir = join(distEvidenceDir, 'screenshots');
+  const recordingsDir = join(distEvidenceDir, 'recordings');
+  
+  let screenshotCount = 0;
+  let recordingCount = 0;
+  
+  if (existsSync(screenshotsDir)) {
+    screenshotCount = readdirSync(screenshotsDir).filter(f => 
+      f.endsWith('.png') || f.endsWith('.jpg') || f.endsWith('.jpeg') || f.endsWith('.gif') || f.endsWith('.webp')
+    ).length;
+  }
+  
+  if (existsSync(recordingsDir)) {
+    recordingCount = readdirSync(recordingsDir).filter(f => 
+      f.endsWith('.mp4') || f.endsWith('.webm') || f.endsWith('.mov') || f.endsWith('.gif')
+    ).length;
+  }
+  
+  console.log(`  📸 Screenshots: ${screenshotCount}`);
+  console.log(`  🎬 Recordings:  ${recordingCount}`);
+  
+  // Enforce minimum proof rule:
+  // At least 1 screenshot AND (1 recording OR 3 screenshots total)
+  if (screenshotCount < 1) {
+    throw new Error(
+      `E0003.1 violation: at least 1 screenshot required. Found: ${screenshotCount}`
+    );
+  }
+  
+  if (recordingCount < 1 && screenshotCount < 3) {
+    throw new Error(
+      `E0003.1 violation: need 1 recording OR 3 screenshots. ` +
+      `Found: ${screenshotCount} screenshots, ${recordingCount} recordings`
+    );
+  }
+  
+  console.log('  ✅ Proof assets verified');
+  
+  // Generate index.html and index.json
+  console.log('  📋 Generating evidence index...');
+  run(`node infra/scripts/generate-evidence-index.js "${distEvidenceDir}" "${attemptJsonPath}"`);
+  
+  // Verify index files were created
+  if (!existsSync(join(distEvidenceDir, 'index.html'))) {
+    throw new Error('E0003.1 violation: index.html generation failed');
+  }
+  if (!existsSync(join(distEvidenceDir, 'index.json'))) {
+    throw new Error('E0003.1 violation: index.json generation failed');
+  }
+  
+  console.log('  ✅ Evidence index generated');
 }
 
 function viteBuild() {
@@ -19054,1302 +19423,6 @@ if (hasErrors) {
   console.log('\n✅ All contract checks PASSED\n');
   process.exit(0);
 }
-
-
-
-================================================================================
-## Source Code
-================================================================================
-
-
-
---------------------------------------------------------------------------------
-📄 File: src/components/App.jsx
---------------------------------------------------------------------------------
-
-/**
- * Main App component
- * This code runs in the browser + Cloudflare Pages. Do not use Node-only APIs.
- */
-
-import { useState, useEffect, useCallback } from 'react';
-import { loadManifest, findResourceByUri, groupByAudience, fetchResourceContent } from '../lib/manifest.js';
-import { parseMarkdown } from '../lib/markdown.js';
-import { executeActions } from '../lib/actions.js';
-import { respond as mockRespond } from '../providers/mock.js';
-import Sidebar from './Sidebar.jsx';
-import ReadingPane from './ReadingPane.jsx';
-import ChatPanel from './ChatPanel.jsx';
-
-export default function App() {
-  // Manifest state
-  const [resources, setResources] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  
-  // Current document state
-  const [currentResource, setCurrentResource] = useState(null);
-  const [markdownHtml, setMarkdownHtml] = useState('');
-  const [headings, setHeadings] = useState([]);
-  
-  // Chat state
-  const [messages, setMessages] = useState([]);
-  const [suggestedQuestions, setSuggestedQuestions] = useState([
-    "What is ODD?",
-    "Show me the constraints",
-    "Who are you?",
-    "What projects are here?"
-  ]);
-  
-  // Load manifest on mount
-  useEffect(() => {
-    loadManifest()
-      .then(data => {
-        setResources(data.resources);
-        setLoading(false);
-        
-        // Load public entrypoint by default
-        const entrypoint = findResourceByUri(data.resources, data.pack.public_entrypoint);
-        if (entrypoint) {
-          handleOpenResource(entrypoint.uri, data.resources);
-        }
-      })
-      .catch(err => {
-        setError(err.message);
-        setLoading(false);
-      });
-  }, []);
-  
-  // Open a resource by URI
-  const handleOpenResource = useCallback(async (uri, resourceList = resources) => {
-    const resource = findResourceByUri(resourceList, uri);
-    if (!resource) {
-      console.warn('Resource not found:', uri);
-      return;
-    }
-    
-    try {
-      const content = await fetchResourceContent(resource);
-      const { html, headings: docHeadings } = parseMarkdown(content);
-      setCurrentResource(resource);
-      setMarkdownHtml(html);
-      setHeadings(docHeadings);
-    } catch (err) {
-      console.error('Failed to load resource:', err);
-    }
-  }, [resources]);
-  
-  // Action handlers for the interpreter
-  const actionHandlers = {
-    onOpen: (uri) => handleOpenResource(uri),
-    onSuggestQuestions: (questions) => setSuggestedQuestions(questions),
-    onAskFollowup: (question) => handleSendMessage(question)
-  };
-  
-  // Send a message to the mock provider
-  const handleSendMessage = useCallback(async (text) => {
-    // Add user message
-    const userMessage = { role: 'user', text };
-    setMessages(prev => [...prev, userMessage]);
-    
-    // Get response from mock provider
-    const context = { resources, currentResource, currentSectionId: null };
-    const response = await mockRespond(text, context);
-    
-    // Add assistant message
-    const assistantMessage = { role: 'assistant', text: response.text, actions: response.actions };
-    setMessages(prev => [...prev, assistantMessage]);
-    
-    // Execute actions
-    if (response.actions && response.actions.length > 0) {
-      // Small delay to let the message render first
-      setTimeout(() => {
-        executeActions(response.actions, actionHandlers);
-      }, 100);
-    }
-  }, [resources, currentResource, actionHandlers]);
-  
-  // Handle suggested question click
-  const handleQuestionClick = useCallback((question) => {
-    handleSendMessage(question);
-  }, [handleSendMessage]);
-  
-  if (loading) {
-    return <div className="app"><div className="loading">Loading...</div></div>;
-  }
-  
-  if (error) {
-    return <div className="app"><div className="error">Error: {error}</div></div>;
-  }
-  
-  const grouped = groupByAudience(resources);
-  
-  return (
-    <div className="app">
-      <Sidebar
-        publicResources={grouped.public}
-        canonResources={grouped.canon}
-        currentUri={currentResource?.uri}
-        onSelect={handleOpenResource}
-      />
-      <ReadingPane
-        html={markdownHtml}
-        title={currentResource?.title}
-      />
-      <ChatPanel
-        messages={messages}
-        suggestedQuestions={suggestedQuestions}
-        onSendMessage={handleSendMessage}
-        onQuestionClick={handleQuestionClick}
-      />
-    </div>
-  );
-}
-
-
-
---------------------------------------------------------------------------------
-📄 File: src/components/ChatMessage.jsx
---------------------------------------------------------------------------------
-
-/**
- * Individual chat message component
- */
-
-export default function ChatMessage({ message }) {
-  const { role, text } = message;
-  
-  return (
-    <div className={`chat-message ${role}`}>
-      {text}
-    </div>
-  );
-}
-
-
-
---------------------------------------------------------------------------------
-📄 File: src/components/ChatPanel.jsx
---------------------------------------------------------------------------------
-
-/**
- * Chat panel component - conversation interface
- */
-
-import { useState, useRef, useEffect } from 'react';
-import ChatMessage from './ChatMessage.jsx';
-import SuggestedQuestions from './SuggestedQuestions.jsx';
-
-export default function ChatPanel({ messages, suggestedQuestions, onSendMessage, onQuestionClick }) {
-  const [input, setInput] = useState('');
-  const messagesEndRef = useRef(null);
-  
-  // Auto-scroll to bottom when new messages arrive
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
-  
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (input.trim()) {
-      onSendMessage(input.trim());
-      setInput('');
-    }
-  };
-  
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSubmit(e);
-    }
-  };
-  
-  return (
-    <aside className="chat-panel">
-      <div className="chat-header">Chat</div>
-      
-      <div className="chat-messages">
-        {messages.length === 0 && (
-          <div className="chat-message assistant">
-            Welcome! Ask me anything about this site.
-          </div>
-        )}
-        
-        {messages.map((msg, i) => (
-          <ChatMessage key={i} message={msg} />
-        ))}
-        
-        <div ref={messagesEndRef} />
-      </div>
-      
-      {suggestedQuestions.length > 0 && (
-        <SuggestedQuestions 
-          questions={suggestedQuestions} 
-          onSelect={onQuestionClick}
-        />
-      )}
-      
-      <form className="chat-input-container" onSubmit={handleSubmit}>
-        <textarea
-          className="chat-input"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={handleKeyDown}
-          placeholder="Ask a question..."
-          rows={2}
-        />
-      </form>
-    </aside>
-  );
-}
-
-
-
---------------------------------------------------------------------------------
-📄 File: src/components/ReadingPane.jsx
---------------------------------------------------------------------------------
-
-/**
- * Reading pane component - displays markdown content
- */
-
-export default function ReadingPane({ html, title }) {
-  if (!html) {
-    return (
-      <main className="reading-pane">
-        <div className="reading-pane-empty">
-          Select a document to begin reading
-        </div>
-      </main>
-    );
-  }
-  
-  return (
-    <main className="reading-pane">
-      <article 
-        className="markdown-content"
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
-    </main>
-  );
-}
-
-
-
---------------------------------------------------------------------------------
-📄 File: src/components/Sidebar.jsx
---------------------------------------------------------------------------------
-
-/**
- * Sidebar component - resource navigation
- * Split by audience: Public vs Canon
- */
-
-export default function Sidebar({ publicResources, canonResources, currentUri, onSelect }) {
-  return (
-    <aside className="sidebar">
-      <div className="sidebar-header">klappy.dev</div>
-      
-      {publicResources.length > 0 && (
-        <section className="sidebar-section">
-          <h3 className="sidebar-section-title">Public</h3>
-          {publicResources.map(resource => (
-            <button
-              key={resource.uri}
-              className={`sidebar-item ${currentUri === resource.uri ? 'active' : ''}`}
-              onClick={() => onSelect(resource.uri)}
-            >
-              {resource.title}
-            </button>
-          ))}
-        </section>
-      )}
-      
-      {canonResources.length > 0 && (
-        <section className="sidebar-section">
-          <h3 className="sidebar-section-title">Canon</h3>
-          {canonResources.map(resource => (
-            <button
-              key={resource.uri}
-              className={`sidebar-item ${currentUri === resource.uri ? 'active' : ''}`}
-              onClick={() => onSelect(resource.uri)}
-            >
-              {resource.title}
-            </button>
-          ))}
-        </section>
-      )}
-    </aside>
-  );
-}
-
-
-
---------------------------------------------------------------------------------
-📄 File: src/components/SuggestedQuestions.jsx
---------------------------------------------------------------------------------
-
-/**
- * Suggested questions component - quick action buttons
- */
-
-export default function SuggestedQuestions({ questions, onSelect }) {
-  if (!questions || questions.length === 0) {
-    return null;
-  }
-  
-  return (
-    <div className="suggested-questions">
-      {questions.map((q, i) => (
-        <button
-          key={i}
-          className="suggested-question"
-          onClick={() => onSelect(q)}
-        >
-          {q}
-        </button>
-      ))}
-    </div>
-  );
-}
-
-
-
---------------------------------------------------------------------------------
-📄 File: src/index.css
---------------------------------------------------------------------------------
-
-/* 
- * klappy.dev - Phase 1 Styles
- * Semantic CSS with variables. No Tailwind.
- * This code runs in the browser + Cloudflare Pages. No server-side rendering.
- */
-
-:root {
-  /* Colors - warm, readable palette */
-  --color-bg: #fafaf9;
-  --color-bg-alt: #f5f5f4;
-  --color-surface: #ffffff;
-  --color-border: #e7e5e4;
-  --color-text: #1c1917;
-  --color-text-muted: #78716c;
-  --color-accent: #0d9488;
-  --color-accent-soft: #ccfbf1;
-  --color-highlight: #fef08a;
-  
-  /* Spacing */
-  --space-xs: 0.25rem;
-  --space-sm: 0.5rem;
-  --space-md: 1rem;
-  --space-lg: 1.5rem;
-  --space-xl: 2rem;
-  
-  /* Typography */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.25rem;
-  --font-size-2xl: 1.5rem;
-  
-  /* Layout */
-  --sidebar-width: 280px;
-  --chat-width: 380px;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html, body, #root {
-  height: 100%;
-}
-
-body {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-base);
-  color: var(--color-text);
-  background: var(--color-bg);
-  line-height: 1.6;
-}
-
-/* App Layout - Three Column */
-.app {
-  display: grid;
-  grid-template-columns: var(--sidebar-width) 1fr var(--chat-width);
-  height: 100%;
-}
-
-/* Sidebar */
-.sidebar {
-  background: var(--color-surface);
-  border-right: 1px solid var(--color-border);
-  overflow-y: auto;
-  padding: var(--space-md);
-}
-
-.sidebar-header {
-  font-size: var(--font-size-lg);
-  font-weight: 600;
-  padding-bottom: var(--space-md);
-  border-bottom: 1px solid var(--color-border);
-  margin-bottom: var(--space-md);
-}
-
-.sidebar-section {
-  margin-bottom: var(--space-lg);
-}
-
-.sidebar-section-title {
-  font-size: var(--font-size-sm);
-  font-weight: 600;
-  color: var(--color-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: var(--space-sm);
-}
-
-.sidebar-item {
-  display: block;
-  padding: var(--space-sm) var(--space-md);
-  border-radius: 6px;
-  color: var(--color-text);
-  text-decoration: none;
-  cursor: pointer;
-  transition: background 0.15s ease;
-}
-
-.sidebar-item:hover {
-  background: var(--color-bg-alt);
-}
-
-.sidebar-item.active {
-  background: var(--color-accent-soft);
-  color: var(--color-accent);
-}
-
-/* Reading Pane */
-.reading-pane {
-  overflow-y: auto;
-  padding: var(--space-xl);
-  background: var(--color-bg);
-}
-
-.reading-pane-empty {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  color: var(--color-text-muted);
-  font-size: var(--font-size-lg);
-}
-
-/* Markdown Content */
-.markdown-content {
-  max-width: 720px;
-  margin: 0 auto;
-}
-
-.markdown-content h1,
-.markdown-content h2,
-.markdown-content h3,
-.markdown-content h4 {
-  margin-top: var(--space-xl);
-  margin-bottom: var(--space-md);
-  font-weight: 600;
-  line-height: 1.3;
-}
-
-.markdown-content h1 { font-size: var(--font-size-2xl); }
-.markdown-content h2 { font-size: var(--font-size-xl); }
-.markdown-content h3 { font-size: var(--font-size-lg); }
-
-.markdown-content p {
-  margin-bottom: var(--space-md);
-}
-
-.markdown-content ul,
-.markdown-content ol {
-  margin-bottom: var(--space-md);
-  padding-left: var(--space-lg);
-}
-
-.markdown-content li {
-  margin-bottom: var(--space-xs);
-}
-
-.markdown-content code {
-  font-family: var(--font-mono);
-  font-size: 0.9em;
-  background: var(--color-bg-alt);
-  padding: 0.1em 0.3em;
-  border-radius: 3px;
-}
-
-.markdown-content pre {
-  background: var(--color-bg-alt);
-  padding: var(--space-md);
-  border-radius: 6px;
-  overflow-x: auto;
-  margin-bottom: var(--space-md);
-}
-
-.markdown-content pre code {
-  background: none;
-  padding: 0;
-}
-
-.markdown-content a {
-  color: var(--color-accent);
-  text-decoration: none;
-}
-
-.markdown-content a:hover {
-  text-decoration: underline;
-}
-
-/* Highlight animation for scroll_to / highlight actions */
-.markdown-content .highlight {
-  background: var(--color-highlight);
-  animation: highlight-fade 2s ease-out forwards;
-}
-
-@keyframes highlight-fade {
-  0% { background: var(--color-highlight); }
-  100% { background: transparent; }
-}
-
-/* Chat Panel */
-.chat-panel {
-  display: flex;
-  flex-direction: column;
-  background: var(--color-surface);
-  border-left: 1px solid var(--color-border);
-}
-
-.chat-header {
-  padding: var(--space-md);
-  border-bottom: 1px solid var(--color-border);
-  font-weight: 600;
-}
-
-.chat-messages {
-  flex: 1;
-  overflow-y: auto;
-  padding: var(--space-md);
-}
-
-.chat-message {
-  margin-bottom: var(--space-md);
-  padding: var(--space-md);
-  border-radius: 8px;
-  max-width: 90%;
-}
-
-.chat-message.user {
-  background: var(--color-accent);
-  color: white;
-  margin-left: auto;
-}
-
-.chat-message.assistant {
-  background: var(--color-bg-alt);
-}
-
-.chat-input-container {
-  padding: var(--space-md);
-  border-top: 1px solid var(--color-border);
-}
-
-.chat-input {
-  width: 100%;
-  padding: var(--space-sm) var(--space-md);
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  font-family: inherit;
-  font-size: var(--font-size-base);
-  resize: none;
-}
-
-.chat-input:focus {
-  outline: none;
-  border-color: var(--color-accent);
-}
-
-/* Suggested Questions */
-.suggested-questions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
-  padding: var(--space-sm) 0;
-}
-
-.suggested-question {
-  padding: var(--space-xs) var(--space-sm);
-  background: var(--color-bg-alt);
-  border: 1px solid var(--color-border);
-  border-radius: 16px;
-  font-size: var(--font-size-sm);
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.suggested-question:hover {
-  background: var(--color-accent-soft);
-  border-color: var(--color-accent);
-}
-
-/* Loading state */
-.loading {
-  color: var(--color-text-muted);
-  font-style: italic;
-}
-
-
-
---------------------------------------------------------------------------------
-📄 File: src/lib/actions.js
---------------------------------------------------------------------------------
-
-/**
- * UI Action interpreter
- * This code runs in the browser + Cloudflare Pages. Do not use Node-only APIs.
- * 
- * Canonical UIAction schema: { action: string, params?: Record<string, any> }
- * 
- * All actions are executed deterministically against the app state and DOM.
- */
-
-import { scrollToSection, highlightSection } from './markdown.js';
-
-/**
- * Execute a single UI action
- * @param {import('./types').UIAction} action - Action to execute
- * @param {Object} handlers - Action handlers from app state
- * @param {function(string): void} handlers.onOpen - Handle open action
- * @param {function(string[]): void} handlers.onSuggestQuestions - Handle suggested questions
- * @param {function(string): void} handlers.onAskFollowup - Handle followup question
- */
-export function executeAction(action, handlers) {
-  const { action: actionType, params = {} } = action;
-  
-  switch (actionType) {
-    case 'open':
-      if (params.uri && handlers.onOpen) {
-        handlers.onOpen(params.uri);
-      }
-      break;
-      
-    case 'scroll_to':
-      if (params.sectionId) {
-        scrollToSection(params.sectionId, false);
-      }
-      break;
-      
-    case 'highlight':
-      if (params.sectionId) {
-        highlightSection(params.sectionId);
-      }
-      break;
-      
-    case 'scroll_to_and_highlight':
-      // Convenience action: scroll then highlight
-      if (params.sectionId) {
-        scrollToSection(params.sectionId, true);
-      }
-      break;
-      
-    case 'expand':
-      // Minimal implementation for Phase 1 - just scroll to make visible
-      if (params.sectionId) {
-        scrollToSection(params.sectionId, false);
-      }
-      break;
-      
-    case 'collapse':
-      // Minimal implementation for Phase 1 - no-op
-      console.log('collapse action (no-op for Phase 1):', params.sectionId);
-      break;
-      
-    case 'preview':
-      // Minimal implementation for Phase 1 - treat as open
-      if (params.itemId && handlers.onOpen) {
-        handlers.onOpen(params.itemId);
-      }
-      break;
-      
-    case 'show_related':
-      // Minimal implementation for Phase 1 - log items
-      console.log('show_related action (minimal for Phase 1):', params.items);
-      break;
-      
-    case 'pin':
-      // Minimal implementation for Phase 1 - no-op
-      console.log('pin action (no-op for Phase 1):', params.itemId);
-      break;
-      
-    case 'ask_followup':
-      if (params.question && handlers.onAskFollowup) {
-        handlers.onAskFollowup(params.question);
-      }
-      break;
-      
-    case 'suggest_questions':
-      if (params.questions && handlers.onSuggestQuestions) {
-        handlers.onSuggestQuestions(params.questions);
-      }
-      break;
-      
-    default:
-      console.warn('Unknown action type:', actionType);
-  }
-}
-
-/**
- * Execute a sequence of UI actions
- * @param {import('./types').UIAction[]} actions - Actions to execute
- * @param {Object} handlers - Action handlers from app state
- */
-export function executeActions(actions, handlers) {
-  for (const action of actions) {
-    executeAction(action, handlers);
-  }
-}
-
-
-
---------------------------------------------------------------------------------
-📄 File: src/lib/manifest.js
---------------------------------------------------------------------------------
-
-/**
- * Manifest loading and path normalization
- * This code runs in the browser + Cloudflare Pages. Do not use Node-only APIs.
- * 
- * Content loading convention:
- * - Manifest paths are relative to /content with a leading slash
- * - Example: path "/canon/constraints.md" -> fetch "/content/canon/constraints.md"
- * - All fetches go through getContentUrl() for consistent normalization
- */
-
-/**
- * Base URL for content files served from /public/content
- */
-const CONTENT_BASE = '/content';
-
-/**
- * Normalize a manifest path to a fetchable URL
- * @param {string} path - Path from manifest (e.g., "/canon/constraints.md")
- * @returns {string} Full URL to fetch (e.g., "/content/canon/constraints.md")
- */
-export function getContentUrl(path) {
-  // Ensure path starts with /
-  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
-  return `${CONTENT_BASE}${normalizedPath}`;
-}
-
-/**
- * Load and parse the manifest.json
- * @returns {Promise<{pack: Object, resources: import('./types').ManifestResource[]}>}
- */
-export async function loadManifest() {
-  const response = await fetch(getContentUrl('/manifest.json'));
-  if (!response.ok) {
-    throw new Error(`Failed to load manifest: ${response.status}`);
-  }
-  return response.json();
-}
-
-/**
- * Find a resource by its canonical URI
- * @param {import('./types').ManifestResource[]} resources 
- * @param {string} uri - Canonical URI (e.g., "klappy://canon/constraints")
- * @returns {import('./types').ManifestResource|undefined}
- */
-export function findResourceByUri(resources, uri) {
-  return resources.find(r => r.uri === uri);
-}
-
-/**
- * Find a resource by its file path
- * @param {import('./types').ManifestResource[]} resources 
- * @param {string} path - File path (e.g., "/canon/constraints.md")
- * @returns {import('./types').ManifestResource|undefined}
- */
-export function findResourceByPath(resources, path) {
-  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
-  return resources.find(r => r.path === normalizedPath);
-}
-
-/**
- * Group resources by audience (Public vs Canon)
- * Only includes resources with exposure === "nav" (or no exposure field, for backwards compatibility)
- * @param {import('./types').ManifestResource[]} resources
- * @returns {{ public: import('./types').ManifestResource[], canon: import('./types').ManifestResource[] }}
- */
-export function groupByAudience(resources) {
-  // Filter to only nav-exposed resources (default to nav if exposure not set)
-  const navResources = resources.filter(r => !r.exposure || r.exposure === 'nav');
-  return {
-    public: navResources.filter(r => r.audience === 'public'),
-    canon: navResources.filter(r => r.audience === 'canon')
-  };
-}
-
-/**
- * Fetch markdown content for a resource
- * @param {import('./types').ManifestResource} resource
- * @returns {Promise<string>}
- */
-export async function fetchResourceContent(resource) {
-  const url = getContentUrl(resource.path);
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error(`Failed to load ${resource.path}: ${response.status}`);
-  }
-  return response.text();
-}
-
-
-
---------------------------------------------------------------------------------
-📄 File: src/lib/markdown.js
---------------------------------------------------------------------------------
-
-/**
- * Markdown rendering with stable heading IDs
- * This code runs in the browser + Cloudflare Pages. Do not use Node-only APIs.
- * 
- * Heading ID stability:
- * - Same heading text -> same ID
- * - Duplicate headings get deterministic suffixes (-1, -2, etc.)
- * - IDs are URL-safe slugs
- */
-
-import { marked } from 'marked';
-
-/**
- * Strip YAML frontmatter from markdown content.
- * Frontmatter is treated as metadata and should not be rendered.
- * @param {string} markdown
- * @returns {string}
- */
-function stripFrontmatter(markdown) {
-  // Only treat a leading frontmatter block as metadata.
-  if (!markdown.startsWith('---')) return markdown;
-  const normalized = markdown.replace(/\r\n/g, '\n');
-  if (!normalized.startsWith('---\n')) return markdown;
-
-  const endIdx = normalized.indexOf('\n---\n', 4);
-  if (endIdx === -1) return markdown;
-
-  return normalized.slice(endIdx + '\n---\n'.length);
-}
-
-/**
- * Create a deterministic slug from text
- * @param {string} text - Heading text
- * @returns {string} URL-safe slug
- */
-function slugify(text) {
-  return text
-    .toLowerCase()
-    .trim()
-    .replace(/[^\w\s-]/g, '')  // Remove non-word chars except spaces and hyphens
-    .replace(/\s+/g, '-')       // Replace spaces with hyphens
-    .replace(/-+/g, '-')        // Collapse multiple hyphens
-    .replace(/^-|-$/g, '');     // Trim leading/trailing hyphens
-}
-
-/**
- * Create a slugger that tracks used IDs for collision handling
- * @returns {{ slug: (text: string) => string, reset: () => void }}
- */
-export function createSlugger() {
-  const used = new Map();
-  
-  return {
-    /**
-     * Generate a unique slug for heading text
-     * @param {string} text - Heading text
-     * @returns {string} Unique slug (with suffix if collision)
-     */
-    slug(text) {
-      const base = slugify(text);
-      const count = used.get(base) || 0;
-      used.set(base, count + 1);
-      
-      // First occurrence: use base slug
-      // Subsequent occurrences: add suffix
-      return count === 0 ? base : `${base}-${count}`;
-    },
-    
-    /**
-     * Reset the slugger for a new document
-     */
-    reset() {
-      used.clear();
-    }
-  };
-}
-
-/**
- * Parse markdown and return HTML with stable heading IDs
- * @param {string} markdown - Raw markdown content
- * @returns {{ html: string, headings: Array<{id: string, text: string, level: number}> }}
- */
-export function parseMarkdown(markdown) {
-  const content = stripFrontmatter(markdown);
-  const slugger = createSlugger();
-  const headings = [];
-  
-  // Configure marked with custom renderer for headings
-  const renderer = new marked.Renderer();
-  
-  renderer.heading = function({ tokens, depth }) {
-    const text = tokens.map(t => t.raw || t.text || '').join('');
-    const id = slugger.slug(text);
-    headings.push({ id, text, level: depth });
-    return `<h${depth} id="${id}">${this.parser.parseInline(tokens)}</h${depth}>\n`;
-  };
-  
-  const html = marked(content, { 
-    renderer,
-    gfm: true,
-    breaks: false
-  });
-  
-  return { html, headings };
-}
-
-/**
- * Scroll to a heading by ID with optional highlight
- * @param {string} sectionId - Heading ID to scroll to
- * @param {boolean} [highlight=false] - Whether to add highlight class
- */
-export function scrollToSection(sectionId, highlight = false) {
-  const element = document.getElementById(sectionId);
-  if (!element) {
-    console.warn(`Section not found: ${sectionId}`);
-    return;
-  }
-  
-  element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  
-  if (highlight) {
-    highlightSection(sectionId);
-  }
-}
-
-/**
- * Add highlight class to a section (with auto-remove after animation)
- * @param {string} sectionId - Heading ID to highlight
- */
-export function highlightSection(sectionId) {
-  const element = document.getElementById(sectionId);
-  if (!element) {
-    console.warn(`Section not found: ${sectionId}`);
-    return;
-  }
-  
-  // Remove existing highlight if present
-  element.classList.remove('highlight');
-  
-  // Force reflow to restart animation
-  void element.offsetWidth;
-  
-  // Add highlight class
-  element.classList.add('highlight');
-  
-  // Remove after animation completes (matches CSS animation duration)
-  setTimeout(() => {
-    element.classList.remove('highlight');
-  }, 2000);
-}
-
-
-
---------------------------------------------------------------------------------
-📄 File: src/lib/types.js
---------------------------------------------------------------------------------
-
-/**
- * Type definitions for klappy.dev
- * This code runs in the browser + Cloudflare Pages. Do not use Node-only APIs.
- */
-
-/**
- * Canonical UIAction schema
- * All action interpreters and providers MUST use this shape.
- * 
- * @typedef {Object} UIAction
- * @property {string} action - The action type (open, scroll_to, highlight, etc.)
- * @property {Object} [params] - Action parameters (varies by action type)
- * 
- * Supported actions:
- * - { action: "open", params: { uri: string } }
- * - { action: "scroll_to", params: { sectionId: string } }
- * - { action: "highlight", params: { sectionId: string } }
- * - { action: "expand", params: { sectionId: string } }
- * - { action: "collapse", params: { sectionId: string } }
- * - { action: "preview", params: { itemId: string } }
- * - { action: "show_related", params: { items: string[] } }
- * - { action: "pin", params: { itemId: string } }
- * - { action: "ask_followup", params: { question: string } }
- * - { action: "suggest_questions", params: { questions: string[] } }
- */
-
-/**
- * Manifest resource from manifest.json
- * 
- * @typedef {Object} ManifestResource
- * @property {string} uri - Canonical URI (e.g., "klappy://canon/constraints")
- * @property {string} path - File path relative to content root (e.g., "/canon/constraints.md")
- * @property {string} title - Human-readable title
- * @property {string} type - MIME type (e.g., "text/markdown")
- * @property {string} audience - "public", "canon", or "internal"
- * @property {string} [exposure] - "nav" (sidebar), "hidden" (addressable but not listed), or "internal" (tools only)
- * @property {string} voice - "first_person" or "neutral"
- * @property {string} stability - "stable", "semi_stable", "evolving", or "frozen"
- * @property {string[]} tags - Categorization tags
- */
-
-/**
- * Chat message
- * 
- * @typedef {Object} ChatMessage
- * @property {string} role - "user" or "assistant"
- * @property {string} text - Message content
- * @property {UIAction[]} [actions] - UI actions to execute (assistant only)
- */
-
-/**
- * App context passed to providers
- * 
- * @typedef {Object} AppContext
- * @property {ManifestResource[]} resources - All available resources
- * @property {ManifestResource|null} currentResource - Currently displayed resource
- * @property {string|null} currentSectionId - Currently highlighted section
- */
-
-// Export empty object to make this a module
-export {};
-
-
-
---------------------------------------------------------------------------------
-📄 File: src/main.jsx
---------------------------------------------------------------------------------
-
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './components/App';
-import './index.css';
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
-
-
-
---------------------------------------------------------------------------------
-📄 File: src/providers/mock.js
---------------------------------------------------------------------------------
-
-/**
- * Mock LLM provider for Phase 1
- * This code runs in the browser + Cloudflare Pages. Do not use Node-only APIs.
- * 
- * Returns short responses + UI actions based on keyword matching.
- * Demonstrates navigation without real LLM calls.
- */
-
-/**
- * Pattern-based response generator
- * @param {string} userMessage - User's input message
- * @param {import('../lib/types').AppContext} context - Current app context
- * @returns {Promise<{text: string, actions: import('../lib/types').UIAction[]}>}
- */
-export async function respond(userMessage, context) {
-  const input = userMessage.toLowerCase().trim();
-  
-  // Pattern matching for common queries
-  if (matchesAny(input, ['hello', 'hi', 'hey', 'start', 'help'])) {
-    return {
-      text: "Welcome to klappy.dev. I can help you explore the canon and projects.",
-      actions: [
-        { action: 'suggest_questions', params: { 
-          questions: [
-            "What is ODD?",
-            "Show me the constraints",
-            "Who are you?",
-            "What projects are here?"
-          ]
-        }}
-      ]
-    };
-  }
-  
-  if (matchesAny(input, ['who', 'about', 'bio', 'you'])) {
-    return {
-      text: "Opening the bio.",
-      actions: [
-        { action: 'open', params: { uri: 'klappy://about/bio' } },
-        { action: 'suggest_questions', params: { 
-          questions: ["What's your credibility?", "Show me projects"]
-        }}
-      ]
-    };
-  }
-  
-  if (matchesAny(input, ['constraint', 'principles', 'rules'])) {
-    return {
-      text: "Jumping you to the constraints.",
-      actions: [
-        { action: 'open', params: { uri: 'klappy://canon/constraints' } }
-      ]
-    };
-  }
-  
-  if (matchesAny(input, ['odd', 'outcome', 'driven'])) {
-    return {
-      text: "Here's the ODD manifesto.",
-      actions: [
-        { action: 'open', params: { uri: 'klappy://public/odd' } },
-        { action: 'suggest_questions', params: { 
-          questions: ["What are the misuse patterns?", "Show me the maturity model"]
-        }}
-      ]
-    };
-  }
-  
-  if (matchesAny(input, ['project', 'work', 'portfolio'])) {
-    return {
-      text: "Here are the projects.",
-      actions: [
-        { action: 'open', params: { uri: 'klappy://projects/index' } }
-      ]
-    };
-  }
-  
-  if (matchesAny(input, ['decision', 'heuristic'])) {
-    return {
-      text: "Opening decision rules.",
-      actions: [
-        { action: 'open', params: { uri: 'klappy://canon/decision-rules' } }
-      ]
-    };
-  }
-  
-  if (matchesAny(input, ['done', 'evidence', 'complete', 'proof'])) {
-    return {
-      text: "Here's the definition of done.",
-      actions: [
-        { action: 'open', params: { uri: 'klappy://canon/definition-of-done' } },
-        { action: 'suggest_questions', params: { 
-          questions: ["What about visual proof?", "Show me the self-audit checklist"]
-        }}
-      ]
-    };
-  }
-  
-  if (matchesAny(input, ['audit', 'check', 'verify'])) {
-    return {
-      text: "Here's the self-audit checklist.",
-      actions: [
-        { action: 'open', params: { uri: 'klappy://canon/self-audit' } }
-      ]
-    };
-  }
-  
-  if (matchesAny(input, ['visual', 'screenshot', 'recording'])) {
-    return {
-      text: "Visual proof standards.",
-      actions: [
-        { action: 'open', params: { uri: 'klappy://canon/visual-proof' } }
-      ]
-    };
-  }
-  
-  if (matchesAny(input, ['faq', 'question', 'ask'])) {
-    return {
-      text: "Opening the FAQ.",
-      actions: [
-        { action: 'open', params: { uri: 'klappy://about/faq' } }
-      ]
-    };
-  }
-  
-  if (matchesAny(input, ['credib', 'trust', 'background'])) {
-    return {
-      text: "Here's the credibility page.",
-      actions: [
-        { action: 'open', params: { uri: 'klappy://about/credibility' } }
-      ]
-    };
-  }
-  
-  if (matchesAny(input, ['index', 'canon', 'overview', 'all'])) {
-    return {
-      text: "Here's the canon index.",
-      actions: [
-        { action: 'open', params: { uri: 'klappy://meta/canon-index' } }
-      ]
-    };
-  }
-  
-  if (matchesAny(input, ['scroll', 'section', 'heading'])) {
-    // Demo scroll functionality if we have a current document
-    if (context.currentResource) {
-      return {
-        text: "Scrolling to the first heading I find.",
-        actions: [
-          { action: 'scroll_to', params: { sectionId: 'purpose' } },
-          { action: 'highlight', params: { sectionId: 'purpose' } }
-        ]
-      };
-    }
-  }
-  
-  // Default: offer suggestions
-  return {
-    text: "I'm not sure what you're looking for. Try one of these:",
-    actions: [
-      { action: 'suggest_questions', params: { 
-        questions: [
-          "What is ODD?",
-          "Show me the constraints",
-          "Who are you?",
-          "What projects are here?"
-        ]
-      }}
-    ]
-  };
-}
-
-/**
- * Check if input matches any of the patterns
- * @param {string} input - Lowercase user input
- * @param {string[]} patterns - Patterns to match
- * @returns {boolean}
- */
-function matchesAny(input, patterns) {
-  return patterns.some(p => input.includes(p));
-}
-
-/**
- * Provider metadata
- */
-export const providerInfo = {
-  name: 'mock',
-  description: 'Mock provider for Phase 1 - pattern matching without real LLM',
-  supportsStreaming: false
-};
 
 
 

@@ -20,19 +20,34 @@ Bootstrap (optional): `/infra/prompts/attempt-kickoff/BOOTSTRAP.md`
 
 ---
 
-## E0003 Completion Rule (Evidence-First)
+## E0003.1 Completion Rule (Evidence Discoverable)
 
-An attempt is NOT complete unless its deployed build exposes evidence publicly.
+An attempt is NOT complete unless its deployed build exposes **discoverable** evidence.
 
-Required verification:
+**Required URLs (must return HTTP 200):**
 
-- Visiting `/_evidence/EVIDENCE.md` on the deployed site returns HTTP 200
-- The evidence corresponds to the attempt that produced the build
+- `/_evidence/index.html` — human-browsable evidence index
+- `/_evidence/index.json` — machine inventory
+- `/_evidence/EVIDENCE.md` — summary + links
 
-If the evidence is not publicly accessible, the attempt is INVALID,
-even if the build succeeds locally.
+**Required proof assets:**
 
-See `/canon/odd/decisions/D0014-e0003-evidence-first-era.md` for the full decision.
+- At least **1 screenshot** in `/_evidence/screenshots/`
+- AND at least **1 recording** in `/_evidence/recordings/` OR **3 screenshots total**
+
+Markdown alone does not count as proof.
+
+**Build enforcement:**
+
+When `.attempt.json` exists:
+- Build FAILS if evidence folder is missing
+- Build FAILS if required documents are missing
+- Build FAILS if proof assets are insufficient
+- Build FAILS if index generation fails
+
+**If `/_evidence/index.html` returns 404, the attempt is INVALID.**
+
+See `/canon/odd/decisions/D0014-e0003-evidence-first-era.md` for the epoch decision.
 
 ---
 
