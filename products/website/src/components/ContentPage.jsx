@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { marked } from 'marked';
+import MediaShelf from './MediaShelf';
 
 /**
  * Content Page Component
@@ -85,6 +86,9 @@ export default function ContentPage({ resource }) {
             <span className="meta-badge">{resource.audience}</span>
           )}
         </div>
+
+        {/* Learning Layer Media (optional, opt-in) */}
+        <MediaShelf assets={resource.assets} />
 
         {/* Rendered markdown content */}
         <div 

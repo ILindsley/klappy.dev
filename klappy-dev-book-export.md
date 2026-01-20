@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-20T05:39:18.805Z
-Total Files: 170
+Generated: 2026-01-20T19:15:16.462Z
+Total Files: 174
 
 This is a complete export of all documentation, code, and content files
 from the klappy.dev repository, organized by section.
@@ -19,14 +19,14 @@ from the klappy.dev repository, organized by section.
 - **Root** (4 files)
 - **.cursor** (1 files)
 - **.husky** (17 files)
-- **About** (4 files)
-- **Attempts** (17 files)
+- **About** (5 files)
+- **Attempts** (18 files)
 - **Canon** (54 files)
 - **Documentation** (18 files)
 - **Infrastructure** (18 files)
 - **Interfaces & Contracts** (6 files)
 - **ODD (Outcomes-Driven Development)** (1 files)
-- **Products** (14 files)
+- **Products** (16 files)
 - **Projects** (6 files)
 - **Public Content** (6 files)
 - **Visual Design System** (4 files)
@@ -414,6 +414,30 @@ Because in non-deterministic systems, one outcome isn't enough to judge an idea.
 
 
 --------------------------------------------------------------------------------
+📄 File: about/home.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://public/home
+title: "Home"
+audience: public
+exposure: hidden
+tier: 0
+voice: neutral
+stability: stable
+tags: ["home", "orientation", "media"]
+assets: {"hero_image":"/assets/home/hero-odd-diagram.png","orientation_map":"/assets/home/orientation-map-diagram.png","explainer_video":"/assets/home/outcomes-driven_development.mp4"}
+---
+
+# Home
+
+This document exists to declare **home page media assets** as a learning layer.
+
+The Home route (`/`) is implemented as a component (not markdown), but it should still discover media via the canonical manifest rather than scanning folders.
+
+
+
+--------------------------------------------------------------------------------
 📄 File: about/why-this-exists.md
 --------------------------------------------------------------------------------
 
@@ -693,13 +717,15 @@ If the PRD is ambiguous, note the ambiguity in your ATTEMPT.md. Do not guess.
 Write to your runs directory (path is in `.attempt.json`):
 
 ```
-attempts/<lane>/prd-vX.Y/_runs/<run_id>/
+products/<lane>/attempts/prd-vX.Y/_runs/<run_id>/
   ATTEMPT.md    — what you built, decisions made, self-audit
   EVIDENCE.md   — screenshot index, test results
   evidence/     — actual screenshots, logs
 ```
 
 Evidence must prove the PRD success criteria are met.
+
+Note: Attempts are lane-contained. Root `/attempts/**` is legacy.
 
 ---
 
@@ -858,7 +884,7 @@ See `/canon/odd/appendices/lane-implementation-surfaces.md` for the locked folde
    npm run attempt:nuke -- --lane website
    ```
 3. **Build from lane PRD** — implement against the lane's PRD (e.g., `/docs/PRD/website/PRD.md`)
-4. **Write artifacts** to `attempts/<lane>/prd-vX.Y/_runs/<run_id>/`
+4. **Write artifacts** to `products/<lane>/attempts/prd-vX.Y/_runs/<run_id>/`
 5. **Push** — triggers Cloudflare preview
 
 ### After All Agents Finish
@@ -881,53 +907,65 @@ Attempt numbers are assigned **after** work completes, not before.
 ## 📁 Folder Structure
 
 ```
-/products/                      # lane implementation surfaces
+/products/                      # lane implementation surfaces (self-contained)
   website/
     src/                        # website source (disposable)
     dist/                       # website build output (not committed)
+    attempts/                   # website lane attempts (CANONICAL)
+      prd-v1.0/
+        PRD.md                  # frozen PRD for this version
+        _runs/                  # in-progress runs (before finalize)
+          <run_id>/
+            META.json
+            ATTEMPT.md
+            EVIDENCE.md
+            evidence/
+        attempt-001/            # finalized attempts
+          META.json             # canonical pointers + provenance + lane
+          ATTEMPT.md
+          EVIDENCE.md
+          evidence/
+        attempt-002/
+          ...
   ai-navigation/
     src/                        # ai-navigation source (disposable)
     dist/                       # ai-navigation build output (not committed)
+    attempts/                   # ai-navigation lane attempts
+      prd-v1.0/
+        ...
   agent-skill/
     src/                        # agent-skill source (disposable)
     dist/                       # agent-skill build output (not committed)
+    attempts/                   # agent-skill lane attempts
+      prd-v1.0/
+        ...
 /infra/scripts/                 # build scripts (persist across attempts)
 /docs/PRD/                      # active PRDs organized by lane
   website/PRD.md                # website lane PRD
   ai-navigation/PRD.md          # ai-navigation lane PRD
   agent-skill/PRD.md            # agent-skill lane PRD
-/attempts/                      # sealed attempts (immutable after seal)
-  website/                      # website lane attempts
-    prd-v1.0/
-      PRD.md                    # frozen PRD for this version
-      _runs/                    # in-progress runs (before finalize)
-        <run_id>/
-          META.json
-          ATTEMPT.md
-          EVIDENCE.md
-          evidence/
-      attempt-001/              # finalized attempts
-        META.json               # canonical pointers + provenance + lane
-        ATTEMPT.md
-        EVIDENCE.md
-        evidence/
-      attempt-002/
-        ...
-  ai-navigation/                # ai-navigation lane attempts
-    prd-v1.0/
-      ...
-  agent-skill/                  # agent-skill lane attempts
-    prd-v1.0/
-      ...
+/attempts/                      # LEGACY (read-only, see /attempts/README.md)
 /public/content/                # generated (by sync script)
 ```
 
-**Locked folder structure:** `/attempts/<lane>/prd-vX.Y/attempt-NNN/`
+## Attempt Location (Canonical)
+
+All attempt artifacts are lane-contained:
+
+```
+/products/<lane>/attempts/prd-vX.Y/attempt-NNN/
+```
+
+**Notes:**
+- Root `/attempts/**` is legacy and read-only
+- Evidence for public verification is always served from the deployed build at: `/_evidence/`
+
+**Locked folder structure:** `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/`
 
 Do NOT use:
+- `/attempts/<lane>/prd-vX.Y/attempt-NNN/` (legacy)
 - `/attempts/prd-vX.Y/<lane>/`
-- `/attempts/<lane>/attempt-NNN/`
-- `/attempts/<lane>/<anything creative>/`
+- `/products/<lane>/attempts/attempt-NNN/` (missing PRD version)
 
 ---
 
@@ -1003,8 +1041,8 @@ This ensures every attempt contributes to the knowledge base.
 |----------|----------|-------|
 | `/canon/**` | ✅ Yes | Living orientation docs (shared across lanes) |
 | `/docs/PRD/<lane>/PRD.md` | ✅ Yes | Active PRD per lane |
-| `/attempts/<lane>/prd-vX.Y/PRD.md` | ❌ No | Frozen snapshot |
-| `/attempts/<lane>/*/attempt-NNN/*` | ❌ No | Sealed record + evidence |
+| `/products/<lane>/attempts/prd-vX.Y/PRD.md` | ❌ No | Frozen snapshot |
+| `/products/<lane>/attempts/*/attempt-NNN/*` | ❌ No | Sealed record + evidence |
 
 **Note:** Each lane evolves independently. Changes to the website PRD do not affect agent-skill attempts.
 
@@ -1232,18 +1270,40 @@ Valid lanes: `website`, `ai-navigation`, `agent-skill`
 
 ## 📁 Artifact Locations
 
+Attempt artifacts live at (lane-contained):
+
+```
+/products/<lane>/attempts/prd-vX.Y/attempt-NNN/
+```
+
 **During attempt:**
 ```
-attempts/<lane>/prd-<version>/_runs/<run_id>/
+products/<lane>/attempts/prd-<version>/_runs/<run_id>/
 ```
 
 **After finalize:**
 ```
-attempts/<lane>/prd-<version>/attempt-001/
-attempts/<lane>/prd-<version>/attempt-002/
+products/<lane>/attempts/prd-<version>/attempt-001/
+products/<lane>/attempts/prd-<version>/attempt-002/
 ```
 
-**Locked folder structure:** `/attempts/<lane>/prd-vX.Y/attempt-NNN/`
+**Locked folder structure:** `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/`
+
+**Note:** Root `/attempts/**` is legacy and read-only. See `/attempts/README.md`.
+
+**Completion gates (E0003+):**
+- Branch pushed to origin
+- Cloudflare preview deployment is live
+- HTTP 200 for:
+  - `/`
+  - `/_evidence/`
+- `/_evidence/` includes:
+  - index.html
+  - index.json
+  - ATTEMPT.md
+  - EVIDENCE.md
+  - META.json
+  - proof assets (screenshots/recording per contract)
 
 ---
 
@@ -3680,6 +3740,48 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.5.2 — 2026-01-20
+
+**Lane-Contained Attempts**
+
+This release consolidates attempt artifacts under the product lane directory, eliminating the dual-location ambiguity between `/attempts/<lane>/` and `/products/<lane>/attempts/`.
+
+### Changed
+
+- **Canonical attempt location** is now `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/`
+- **attempt-cli.js** — All path constructions updated to lane-contained format
+- **product-lanes.md** — Attempt structure section updated
+- **online-evidence.md** — Evidence artifact path updated
+- **progressive-elevation.md** — Ephemeral layer path updated
+- **repo-topology.md** — Core topology and source of truth tables updated
+- **attempt-lifecycle.md** — Multiple sections updated to lane-contained paths
+- **contract.md** — Breaking changes list updated
+- **D0009** — Constraints section updated
+- **D0011** — Breaking changes table updated
+- **ATTEMPTS.md** — Folder structure section rewritten
+- **ATTEMPT_KICKOFF.md** — Artifact locations updated with completion gates
+- **AGENT_KICKOFF.md** — Evidence path updated
+- **BOOTSTRAP.md** — Evidence URL example updated
+- **Website kickoff prompt** — Explicit lane-contained rule added
+
+### Added
+
+- **attempts/README.md** — Legacy marker explaining root `/attempts/**` is read-only
+- **products/website/attempts/README.md** — Lane-contained structure documentation
+
+### Philosophy
+
+- **KISS:** One place per lane, no scavenger hunts
+- **Lane-contained:** Everything for a lane lives under `/products/<lane>/`
+- **Legacy preserved:** Root `/attempts/**` remains for historical provenance (read-only)
+
+### Notes
+
+- Generated files (`/public/content/**`, `klappy-dev-book-export.md`) will update on next sync
+- Tooling now writes exclusively to `/products/<lane>/attempts/...`
+
+---
+
 ## 0.5.1 — 2026-01-20
 
 **Media as a Learning Layer**
@@ -3719,7 +3821,7 @@ This release declares E0003, a new epoch where online deployment evidence is man
 
 - **E0003 epoch declaration** in `/canon/odd/appendices/epochs.md`
 - **D0014 decision log** (`/canon/odd/decisions/D0014-e0003-evidence-first-era.md`) — Documents the epoch transition
-- **Evidence copying in smart-build.js** — Automatically copies `attempts/<lane>/prd-vX.Y/_runs/` and `attempt-NNN/` folders into `products/<lane>/dist/_evidence/`
+- **Evidence copying in smart-build.js** — Automatically copies `products/<lane>/attempts/prd-vX.Y/_runs/` and `attempt-NNN/` folders into `products/<lane>/dist/_evidence/`
 
 ### Changed
 
@@ -4091,7 +4193,7 @@ This release introduces the multi-lane PRD architecture, epochs for comparabilit
 - Lane declaration required for all attempts
 - Epoch declaration required in META.json
 - Repo-root `/src` and `/dist` are no longer product surfaces
-- Attempts stored under `/attempts/<lane>/prd-vX.Y/attempt-NNN/`
+- Attempts stored under `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/` (lane-contained)
 
 ### Notes
 
@@ -6020,20 +6122,22 @@ You do not try to "share memory" between worktree agents. You publish outputs.
 
 These paths live in the main repo (not inside a worktree only):
 
-- `/attempts/prd-vX.Y/attempt-NNN/**` — sealed record + evidence
-- `/docs/PRD.md` — living PRD (single active)
+- `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/**` — sealed record + evidence (lane-contained)
+- `/docs/PRD/<lane>/PRD.md` — living PRD per lane
 - `/docs/learnings/prd-vX.Y.md` — (optional) rolling "what we learned" log
 
 Anything in those paths is real. Anything else is temporary.
+
+Note: Root `/attempts/**` is legacy (read-only). All new attempts are lane-contained.
 
 ### Learnings Payload (Required)
 
 At the end of each attempt, the agent must produce:
 
-1. `attempts/prd-vX.Y/attempt-NNN/ATTEMPT.md` — closure record
-2. `attempts/prd-vX.Y/attempt-NNN/META.json` — commit SHA, preview URL, status
-3. `attempts/prd-vX.Y/attempt-NNN/evidence/*` — screenshots, logs
-4. PRD patch (if learnings exist): updates to `/docs/PRD.md` in a dedicated section:
+1. `products/<lane>/attempts/prd-vX.Y/attempt-NNN/ATTEMPT.md` — closure record
+2. `products/<lane>/attempts/prd-vX.Y/attempt-NNN/META.json` — commit SHA, preview URL, status
+3. `products/<lane>/attempts/prd-vX.Y/attempt-NNN/evidence/*` — screenshots, logs
+4. PRD patch (if learnings exist): updates to `/docs/PRD/<lane>/PRD.md` in a dedicated section:
    - "Observed failure modes"
    - "Clarifications / constraints added"
    - "New DoD checks"
@@ -6144,11 +6248,13 @@ This plane **changes slowly and intentionally**.
 
 ## Canonical Structure
 
+Attempts are **lane-contained**. All attempt artifacts live under the product lane:
+
 ```
-attempts/
+products/<lane>/attempts/
   prd-vX.Y/
     PRD.md                    # frozen PRD for this version
-    run-<run_id>/             # working directory (before finalization)
+    _runs/<run_id>/           # working directory (before finalization)
     attempt-001/              # finalized attempts
       ATTEMPT.md              # closure record
       META.json               # canonical pointers (provenance is truth)
@@ -6156,6 +6262,8 @@ attempts/
       evidence/               # screenshots, logs, etc.
     attempt-002/              # retry (if needed)
 ```
+
+Note: Root `/attempts/**` is legacy (read-only). See `/attempts/README.md`.
 
 **META.json** contains:
 - `tool` — which tool was used (Cursor, Claude, etc.)
@@ -6217,7 +6325,8 @@ This preserves forensic traceability (we know who showed up) while guaranteeing 
 - `/infra/` — deployment scripts, contracts
 - `/canon/`, `/about/`, `/projects/` — content
 - `/docs/` — process documentation
-- `/attempts/` — sealed evidence
+- `/products/<lane>/attempts/` — sealed evidence (lane-contained)
+- `/attempts/` — legacy sealed evidence (read-only)
 - `package.json` — dependency manifest
 - Other lanes (`products/<other-lane>/src/`) — only the target lane is nuked
 
@@ -6311,7 +6420,7 @@ Pick one axis and declare it ahead of time:
 **When an attempt wins:**
 
 1. **Seal it**
-   - `attempts/prd-vX.Y/attempt-NNN/` has: ATTEMPT.md, META.json, evidence folder, preview URL.
+   - `products/<lane>/attempts/prd-vX.Y/attempt-NNN/` has: ATTEMPT.md, META.json, evidence folder, preview URL.
    - Status: CHAMPION
 
 2. **Tag it** (immutable pointer)
@@ -7892,14 +8001,16 @@ The default mechanism is Cloudflare Pages branch preview deployments:
 
 Each attempt MUST produce an evidence markdown file:
 
-`/attempts/<lane>/prd-vX.Y/attempt-NNN/EVIDENCE.md` (or run-scoped equivalent during `_runs/`)
+`/products/<lane>/attempts/prd-vX.Y/attempt-NNN/EVIDENCE.md` (or run-scoped equivalent during `_runs/`)
 
 The repo MUST expose evidence online via one of:
 
-- A static "evidence hub" path served by the lane site, OR
-- A dedicated Cloudflare Pages project serving `/attempts/**` as static content.
+- A static "evidence hub" path served by the lane site at `/_evidence/`, OR
+- A dedicated Cloudflare Pages project serving the lane's attempts as static content.
 
 The chosen mechanism must be documented in the lane PRD and enforced in kickoff.
+
+Note: Attempts are lane-contained. Root `/attempts/**` is legacy (read-only).
 
 ## Non-Goals
 
@@ -8074,17 +8185,19 @@ Products may render, query, or reason over canon - but never modify it directly.
 Every attempt MUST declare a lane before registration.
 Attempts without a lane are invalid.
 
-**Folder structure:** `/attempts/<lane>/prd-vX.Y/attempt-NNN/`
+**Folder structure:** `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/`
+
+Attempts are **lane-contained** — all artifacts live under the product lane directory.
 
 Valid examples:
-- `/attempts/website/prd-v1.0/attempt-001/`
-- `/attempts/ai-navigation/prd-v1.0/attempt-001/`
-- `/attempts/agent-skill/prd-v1.0/attempt-001/`
+- `/products/website/attempts/prd-v1.0/attempt-001/`
+- `/products/ai-navigation/attempts/prd-v1.0/attempt-001/`
+- `/products/agent-skill/attempts/prd-v1.0/attempt-001/`
 
 Invalid (do not use):
+- `/attempts/<lane>/prd-vX.Y/attempt-NNN/` (legacy, read-only)
 - `/attempts/prd-vX.Y/<lane>/`
-- `/attempts/<lane>/attempt-NNN/`
-- `/attempts/<lane>/<anything creative>/`
+- `/products/<lane>/attempts/attempt-NNN/` (missing PRD version)
 
 ---
 
@@ -8128,12 +8241,16 @@ Lane isolation prevents cascading reruns.
 
 ### Where Attempts Live
 
+Attempts are lane-contained:
+
 ```
-/attempts/
-  website/prd-vX.Y/attempt-NNN/
-  ai-navigation/prd-vX.Y/attempt-NNN/
-  agent-skill/prd-vX.Y/attempt-NNN/
+/products/
+  website/attempts/prd-vX.Y/attempt-NNN/
+  ai-navigation/attempts/prd-vX.Y/attempt-NNN/
+  agent-skill/attempts/prd-vX.Y/attempt-NNN/
 ```
+
+Note: Root `/attempts/**` is legacy (read-only). See `/attempts/README.md`.
 
 ### How Evolution Propagates
 
@@ -8210,7 +8327,7 @@ This is how the repository avoids documentation sprawl while remaining portable 
 **Default fate:** extract value → seal evidence → discard everything else.
 
 **Lives in:**
-- `/attempts/<lane>/prd-vX.Y/_runs/<run_id>/`
+- `/products/<lane>/attempts/prd-vX.Y/_runs/<run_id>/`
 - transient branches / worktrees
 - PRD patches produced by failure
 
@@ -8569,18 +8686,19 @@ It encodes the decoupling between App, Content, and Infrastructure planes.
 ```
 /products/<lane>/src/           # Lane application (disposable per attempt)
 /products/<lane>/dist/          # Lane build output (generated)
+/products/<lane>/attempts/      # Lane attempts (sealed, immutable after seal)
 /canon/                         # Canon documents (evolves independently)
 /odd/                           # ODD public docs (evolves independently)
 /about/                         # About docs (evolves independently)
 /projects/                      # Project docs (evolves independently)
 /infra/                         # Infrastructure (persists across attempts)
 /docs/                          # Operational docs + PRD versions
-/attempts/                      # Sealed attempts (immutable after seal)
+/attempts/                      # LEGACY (read-only, see /attempts/README.md)
 /public/content/                # Generated (by sync script)
 /dist/                          # Legacy/transitional mirror (generated)
 ```
 
-> **Lane-scoped architecture:** Each product lane owns its own app plane under `products/<lane>/src/`. There is no root-level `/src/` directory.
+> **Lane-contained architecture:** Each product lane owns its own app plane under `products/<lane>/src/` and its attempts under `products/<lane>/attempts/`. There is no root-level `/src/` directory. Root `/attempts/` is legacy.
 
 ---
 
@@ -8639,9 +8757,9 @@ Contains:
 
 These are editable until frozen into an attempt.
 
-### Sealed Attempts (`/attempts/`)
+### Sealed Attempts (`/products/<lane>/attempts/`)
 
-**Immutable after seal.**
+**Lane-contained. Immutable after seal.**
 
 Contains:
 - Frozen PRD per version (`prd-vX.Y/PRD.md`)
@@ -8649,6 +8767,8 @@ Contains:
 - Evidence bundles
 
 Once sealed, these folders are not modified.
+
+Note: Root `/attempts/**` is legacy (read-only). New attempts are lane-contained.
 
 ---
 
@@ -8672,8 +8792,8 @@ Once sealed, these folders are not modified.
 |-------|--------|-----------|
 | Content manifest | per-file frontmatter in `/canon/`, `/odd/`, `/about/`, `/projects/` | `/public/content/manifest.json` |
 | Markdown content | `/canon/`, `/odd/`, `/about/`, `/projects/` | `/public/content/` |
-| PRD (frozen) | `/attempts/prd-vX.Y/PRD.md` | N/A (immutable) |
-| Evidence | `/attempts/prd-vX.Y/attempt-NNN/evidence/` | N/A (immutable) |
+| PRD (frozen) | `/products/<lane>/attempts/prd-vX.Y/PRD.md` | N/A (immutable) |
+| Evidence | `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/evidence/` | N/A (immutable) |
 
 ---
 
@@ -8683,7 +8803,7 @@ Each lane contains **one active app implementation** in `products/<lane>/src/`.
 
 Prior attempts are preserved by:
 - Git history
-- Sealed attempt records in `/attempts/<lane>/`
+- Sealed attempt records in `/products/<lane>/attempts/`
 - Commit SHAs in `META.json`
 
 There are no `/app-v1`, `/app-v2` folders.  
@@ -9227,8 +9347,10 @@ This version introduces structural changes that are not backwards-compatible:
 - **Lane declaration required** for all attempts
 - **Epoch declaration required** in META.json
 - PRDs stored under `/docs/PRD/<lane>/PRD.md`
-- Attempts stored under `/attempts/<lane>/prd-vX.Y/attempt-NNN/`
+- Attempts stored under `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/` (lane-contained)
 - Tooling requires `--lane` flag for register, finalize, promote
+
+Note: Root `/attempts/**` is legacy (read-only). All new attempts are lane-contained.
 
 ### Changed
 - Mental model: products decoupled, canon shared
@@ -9879,7 +10001,7 @@ PRDs are now organized into independent product lanes.
 
 Each lane has:
 - Its own PRD at `/docs/PRD/<lane>/PRD.md`
-- Its own attempts at `/attempts/<lane>/prd-vX.Y/attempt-NNN/`
+- Its own attempts at `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/` (lane-contained)
 - Its own lifecycle, success criteria, and evidence
 
 The three initial lanes are:
@@ -9919,8 +10041,9 @@ Canon remains the shared gravity — constraints, decision rules, and definition
 
 - Every attempt MUST declare a lane before registration
 - Attempts without a lane are invalid
-- Folder structure is locked: `/attempts/<lane>/prd-vX.Y/attempt-NNN/`
+- Folder structure is locked: `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/`
 - No creative variations on attempt folder structure allowed
+- Root `/attempts/**` is legacy (read-only)
 
 ---
 
@@ -10109,10 +10232,12 @@ The system needed:
 | Category | 1.x | 2.x |
 |----------|-----|-----|
 | PRD location | `/docs/PRD.md` | `/docs/PRD/<lane>/PRD.md` |
-| Attempt location | `/attempts/prd-vX.Y/attempt-NNN/` | `/attempts/<lane>/prd-vX.Y/attempt-NNN/` |
+| Attempt location | `/attempts/prd-vX.Y/attempt-NNN/` | `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/` |
 | Lane declaration | N/A | Required |
 | Epoch declaration | N/A | Required |
 | Tooling flags | None | `--lane` required |
+
+Note: Root `/attempts/**` is legacy (read-only). All new attempts are lane-contained under `/products/<lane>/attempts/`.
 
 ## Epoch 1 Document Header (Standard)
 
@@ -11964,6 +12089,7 @@ tier: 0
 voice: neutral
 stability: semi_stable
 tags: ["odd", "public", "overview"]
+assets: {"practice_video":"/assets/odd/odd-in-practice.mp4","misconception_image":"/assets/odd/odd-is-not-a-framework.png","deep_dive_audio":"/assets/odd/why-evidence-beats-confidence.m4a"}
 ---
 
 # 🧠 Outcomes-Driven Development (ODD)
@@ -12718,6 +12844,45 @@ See [BUILD_PROMPT_PHASE1.md](BUILD_PROMPT_PHASE1.md) for the kickoff prompt.
 ================================================================================
 ## Attempts
 ================================================================================
+
+
+
+--------------------------------------------------------------------------------
+📄 File: attempts/README.md
+--------------------------------------------------------------------------------
+
+# Legacy Attempts (Deprecated)
+
+This folder is **legacy** from the pre-lane-contained era.
+
+## Canonical Location (Current)
+
+All attempts are now lane-contained:
+
+```
+/products/<lane>/attempts/prd-vX.Y/attempt-NNN/
+```
+
+## Why
+
+ODD requires lane-contained artifacts to prevent drift and scavenger hunts.
+
+- **KISS:** One place per lane
+- **No scavenger hunts:** Everything for a lane lives under `/products/<lane>/`
+- **Repeatable + automatable:** Tooling writes to one canonical location
+- **Evidence discoverable:** Production evidence stays at `/_evidence/`
+
+## Migration
+
+- Root `/attempts/**` remains as legacy (read-only)
+- New attempts are lane-contained
+- Do NOT write new attempts here
+- Historical attempts remain for provenance
+
+---
+
+**Decision date:** 2026-01-20
+**Supersedes:** Pre-lane attempt structure at `/attempts/<lane>/...`
 
 
 
@@ -15312,7 +15477,7 @@ After reading the required documents, print:
 - **PRD path:** (full path to the lane PRD)
 - **Planned branch name:** (following the format above)
 - **How you will produce the Cloudflare Preview URL:** (push branch, CF builds automatically)
-- **Where the Evidence URL will live:** (e.g., `attempts/<lane>/prd-vX.Y/_runs/<run_id>/EVIDENCE.md`)
+- **Where the Evidence URL will live:** (e.g., `products/<lane>/attempts/prd-vX.Y/_runs/<run_id>/EVIDENCE.md`)
 
 ## Then Proceed
 
@@ -16341,16 +16506,16 @@ function cmdReset(opts) {
       }
     }
     
-    // Clean up _runs folder
-    const runsPath = join(ROOT, 'attempts', `prd-v${prd}`, '_runs');
+    // Clean up _runs folder (lane-contained path)
+    const runsPath = join(ROOT, 'products', lane, 'attempts', `prd-v${prd}`, '_runs');
     if (existsSync(runsPath)) {
       console.log(`\n  🗑️  Deleting _runs folder...`);
       if (!dryRun) rmSync(runsPath, { recursive: true });
       console.log('  ✅ Deleted _runs/');
     }
     
-    // Reset registry
-    const registryPath = join(ROOT, 'attempts', `prd-v${prd}`, 'ATTEMPT_REGISTRY.json');
+    // Reset registry (lane-contained path)
+    const registryPath = join(ROOT, 'products', lane, 'attempts', `prd-v${prd}`, 'ATTEMPT_REGISTRY.json');
     if (existsSync(registryPath)) {
       console.log(`\n  🔄 Resetting attempt registry...`);
       if (!dryRun) {
@@ -16630,11 +16795,11 @@ Options:
   const laneRoot = `products/${lane}`;
   const distDir = `products/${lane}/dist`;
   
-  // Attempt artifact paths (lane-scoped)
-  const prdFolder = join(ROOT, 'attempts', lane, `prd-v${prd}`);
+  // Attempt artifact paths (lane-contained: /products/<lane>/attempts/...)
+  const prdFolder = join(ROOT, 'products', lane, 'attempts', `prd-v${prd}`);
   const runsFolder = join(prdFolder, '_runs');
   const runFolder = join(runsFolder, runId);
-  const runsDir = `attempts/${lane}/prd-v${prd}/_runs/${runId}`;
+  const runsDir = `products/${lane}/attempts/prd-v${prd}/_runs/${runId}`;
   
   console.log('1️⃣  Creating run folder...');
   if (!dryRun) {
@@ -16772,26 +16937,34 @@ ${branchHint}`);
  * This is run once on main after all agents have completed.
  */
 function cmdFinalize(opts) {
-  const { prd, dryRun } = opts;
+  const { prd, lane, dryRun } = opts;
   
-  if (!prd) {
+  if (!prd || !lane) {
     console.log(`
-Usage: npm run attempt:finalize -- --prd <version>
+Usage: npm run attempt:finalize -- --lane <lane> --prd <version>
 
 Example:
-  npm run attempt:finalize -- --prd v0.2
+  npm run attempt:finalize -- --lane website --prd v1.0
+
+Valid lanes: ${VALID_LANES.join(', ')}
 
 Options:
+  --lane <lane>     Product lane (required)
   --prd <version>   PRD version (required)
   --dry-run         Show what would happen
 `);
     process.exit(1);
   }
   
-  console.log(`\n🏁 Finalizing runs for PRD v${prd}\n`);
+  if (!VALID_LANES.includes(lane)) {
+    fail(`Invalid lane: ${lane}\n   Valid lanes: ${VALID_LANES.join(', ')}`);
+  }
+  
+  console.log(`\n🏁 Finalizing runs for PRD v${prd} (lane: ${lane})\n`);
   if (dryRun) console.log('  [DRY RUN MODE]\n');
   
-  const prdFolder = join(ROOT, 'attempts', `prd-v${prd}`);
+  // Lane-contained path: /products/<lane>/attempts/prd-vX.Y/
+  const prdFolder = join(ROOT, 'products', lane, 'attempts', `prd-v${prd}`);
   const runsFolder = join(prdFolder, '_runs');
   const registryPath = join(prdFolder, 'ATTEMPT_REGISTRY.json');
   
@@ -16912,10 +17085,10 @@ Options:
   console.log(`
 📋 Next steps:
 
-   1. Review each attempt's artifacts in attempts/prd-v${prd}/
+   1. Review each attempt's artifacts in products/${lane}/attempts/prd-v${prd}/
    2. Pick champion based on evidence
    3. Promote winner:
-      npm run attempt:promote -- --prd v${prd} --attempt <number>
+      npm run attempt:promote -- --lane ${lane} --prd v${prd} --attempt <number>
 `);
 }
 
@@ -16934,16 +17107,19 @@ Options:
  *   - history preserved
  */
 function cmdPromote(opts) {
-  const { prd, attempt, dryRun, force } = opts;
+  const { prd, attempt, lane, dryRun, force } = opts;
   
-  if (!prd || !attempt) {
+  if (!prd || !attempt || !lane) {
     console.log(`
-Usage: npm run attempt:promote -- --prd <version> --attempt <number>
+Usage: npm run attempt:promote -- --lane <lane> --prd <version> --attempt <number>
 
 Example:
-  npm run attempt:promote -- --prd v0.2 --attempt 001
+  npm run attempt:promote -- --lane website --prd v1.0 --attempt 001
+
+Valid lanes: ${VALID_LANES.join(', ')}
 
 Options:
+  --lane <lane>       Product lane (required)
   --prd <version>     PRD version (required)
   --attempt <number>  Attempt number (required)
   --dry-run           Show what would happen
@@ -16952,7 +17128,12 @@ Options:
     process.exit(1);
   }
   
+  if (!VALID_LANES.includes(lane)) {
+    fail(`Invalid lane: ${lane}\n   Valid lanes: ${VALID_LANES.join(', ')}`);
+  }
+  
   console.log(`\n🏆 PROMOTING CHAMPION\n`);
+  console.log(`  Lane:    ${lane}`);
   console.log(`  PRD:     v${prd}`);
   console.log(`  Attempt: ${attempt}\n`);
   if (dryRun) console.log('  [DRY RUN MODE]\n');
@@ -16961,7 +17142,8 @@ Options:
   // 1. Validate attempt exists
   // ========================================
   console.log('1️⃣  Validating attempt...');
-  const attemptFolder = join(ROOT, 'attempts', `prd-v${prd}`, `attempt-${attempt}`);
+  // Lane-contained path: /products/<lane>/attempts/prd-vX.Y/attempt-NNN/
+  const attemptFolder = join(ROOT, 'products', lane, 'attempts', `prd-v${prd}`, `attempt-${attempt}`);
   const metaPath = join(attemptFolder, 'META.json');
   
   if (!existsSync(metaPath)) {
@@ -17435,25 +17617,32 @@ function cmdCleanup(opts) {
 }
 
 function cmdImport(opts) {
-  const { prd, dryRun } = opts;
+  const { prd, lane, dryRun } = opts;
   
-  if (!prd) {
+  if (!prd || !lane) {
     console.log(`
-Usage: npm run attempt:import -- --prd <version>
+Usage: npm run attempt:import -- --lane <lane> --prd <version>
 
 Example:
-  npm run attempt:import -- --prd v0.2
+  npm run attempt:import -- --lane website --prd v1.0
 
 This imports all _runs/ artifacts from attempt branches back to main.
 
+Valid lanes: ${VALID_LANES.join(', ')}
+
 Options:
+  --lane <lane>     Product lane (required)
   --prd <version>   PRD version (required)
   --dry-run         Show what would happen
 `);
     process.exit(1);
   }
   
-  console.log(`\n📥 IMPORTING ARTIFACTS for PRD v${prd}\n`);
+  if (!VALID_LANES.includes(lane)) {
+    fail(`Invalid lane: ${lane}\n   Valid lanes: ${VALID_LANES.join(', ')}`);
+  }
+  
+  console.log(`\n📥 IMPORTING ARTIFACTS for PRD v${prd} (lane: ${lane})\n`);
   if (dryRun) console.log('  [DRY RUN MODE]\n');
   
   // Check we're on main
@@ -17468,10 +17657,11 @@ Options:
   run('git pull origin main', { dryRun });
   console.log('  ✅ Main up to date\n');
   
-  // Find all attempt branches for this PRD
+  // Find all attempt branches for this PRD and lane
   console.log('2️⃣  Finding attempt branches...');
   const branchOutput = run('git branch -r', { silent: true, dryRun: false });
-  const branchPattern = new RegExp(`origin/attempt/prd-v${prd}/a\\d+`);
+  // Match run/<lane>/prd-v<prd>/... branches
+  const branchPattern = new RegExp(`origin/run/${lane}/prd-v${prd}/`);
   const branches = branchOutput
     .split('\n')
     .map(b => b.trim())
@@ -17492,7 +17682,8 @@ Options:
   
   // Import artifacts from each branch
   console.log('4️⃣  Importing artifacts from each branch...\n');
-  const runsPath = `attempts/prd-v${prd}/_runs`;
+  // Lane-contained path
+  const runsPath = `products/${lane}/attempts/prd-v${prd}/_runs`;
   let imported = 0;
   
   for (const branch of branches) {
@@ -17536,10 +17727,10 @@ Options:
 📋 Next steps:
 
    1. Finalize runs to assign attempt numbers:
-      npm run attempt:finalize -- --prd v${prd}
+      npm run attempt:finalize -- --lane ${lane} --prd v${prd}
 
    2. Review and promote champion:
-      npm run attempt:promote -- --prd v${prd} --attempt <number>
+      npm run attempt:promote -- --lane ${lane} --prd v${prd} --attempt <number>
 `);
 }
 
@@ -17630,6 +17821,11 @@ COMMANDS:
   npm run attempt:cleanup
       Prune stale worktrees and branches (run after PRD cycles)
       --force removes branch worktrees and orphan branches
+
+ARTIFACT LOCATION (Lane-Contained):
+  /products/<lane>/attempts/prd-vX.Y/attempt-NNN/
+
+  Root /attempts/** is LEGACY (read-only). See /attempts/README.md
 
 WORKFLOW:
   1. register → agent claims unique run_id with lane
@@ -19304,7 +19500,10 @@ function buildManifest() {
         voice: fm.voice || 'neutral',
         stability: fm.stability || 'evolving',
         tags: Array.isArray(fm.tags) ? fm.tags : [],
-        order: typeof fm.order === 'number' ? fm.order : undefined
+        order: typeof fm.order === 'number' ? fm.order : undefined,
+
+        // Optional learning-layer media (must remain non-canonical)
+        assets: (fm.assets && typeof fm.assets === 'object') ? fm.assets : undefined
       });
     }
   }
@@ -22897,16 +23096,279 @@ Records outcomes (champions, merges, deployments) without turning them into cano
 
 
 --------------------------------------------------------------------------------
+📄 File: products/website/PRD.md
+--------------------------------------------------------------------------------
+
+# PRD: Public Website
+
+| Field           | Value            |
+|-----------------|------------------|
+| **PRD Version** | v1.2             |
+| **Lane**        | website          |
+| **Status**      | Active           |
+| **Created**     | 2026-01-17       |
+| **Updated**     | 2026-01-20       |
+| **Author**      | Chris Klapp      |
+
+---
+
+## Interface Contracts
+
+This lane MUST remain compatible with:
+
+- manifest >=2.0.0 <3.0.0
+- build-output >=3.0.0 <4.0.0
+- attempt-cli >=2.0.0 <3.0.0
+
+---
+
+## Visual Interfaces
+
+This product MUST remain compatible with:
+
+- color-system >=1.0.0 <2.0.0
+- typography >=1.0.0 <2.0.0
+- spacing >=1.0.0 <2.0.0
+
+This product does NOT define colors, fonts, or spacing directly.
+It consumes visual interfaces.
+
+See `/canon/odd/appendices/visual-evolution.md` for the visual evolution model.
+
+---
+
+## Objective
+
+Create a public website that allows humans to:
+
+- Understand what ODD is
+- Explore it progressively without overwhelm
+- Verify credibility
+- Navigate to deeper material intentionally
+
+---
+
+## Background
+
+This is the human-facing orientation surface for ODD.
+
+It is portfolio, explanation, credibility layer.
+
+It does NOT teach agents how to think.
+It does NOT execute ODD.
+It explains ODD progressively to humans.
+
+---
+
+## In Scope
+
+- Progressive disclosure UX
+- Canon browsing
+- Essays / articles (including Medium content)
+- Clear entry points ("Start here", "Go deeper")
+- Mobile usability
+- Visual calm
+- Deep links / shareable URLs
+
+---
+
+## Explicitly Out of Scope
+
+- AI chat (belongs to ai-navigation lane)
+- Agent execution (belongs to agent-skill lane)
+- Process enforcement
+- MCP servers
+- "How to run ODD" instructions for agents
+
+---
+
+## Success Criteria
+
+- [ ] First load shows no more than 7 navigational items
+- [ ] Mobile usable without horizontal scrolling
+- [ ] Canon discoverable without file paths exposed
+- [ ] No agent instructions present in UI
+- [ ] No CLI/process language exposed to visitors
+- [ ] Deep links work (URL represents resource + section)
+- [ ] Progressive disclosure tiers respected (Tier 0/1/2)
+
+---
+
+## Definition of Done
+
+An attempt against this PRD is complete when:
+
+- [ ] Build output produced (`npm run build -- --lane website`)
+- [ ] Visual proof captured (desktop + mobile screenshots)
+- [ ] First load shows ≤7 nav items (verified via screenshot)
+- [ ] Mobile layout verified (no horizontal scroll)
+- [ ] Deep link round-trip tested
+- [ ] Self-audit completed with explicit tradeoffs
+- [ ] **Cloudflare Preview URL provided** (branch must be pushed)
+- [ ] **Evidence URL provided** (viewable online without local code)
+
+---
+
+## Online Evidence (Required)
+
+A website lane attempt is **not complete** unless:
+
+1. The attempt branch is pushed to `origin`.
+2. Cloudflare Pages generates a Preview Deployment URL for that branch.
+3. The attempt includes an Evidence URL viewable online without running code locally.
+
+Local preview instructions are allowed during development, but they **do not satisfy attempt completion**.
+
+If an agent cannot provide both URLs, the attempt is **INVALID**.
+
+See `/canon/odd/appendices/online-evidence.md` for the full requirement.
+
+---
+
+## Primary User
+
+Human developers, peers, evaluators exploring ODD.
+
+---
+
+## Constraints
+
+This PRD is shaped by Canon constraints:
+
+- Evidence over assertion
+- UX should carry the explanation (reduce text compensation)
+- Maintainability over cleverness
+- Progressive disclosure required
+
+---
+
+## Media (Learning Layer)
+
+This lane supports optional media assets (images/video/audio/PDF) as a **learning layer**.
+
+This lane follows: `/canon/odd/appendices/media-as-learning-layer.md`
+
+### Discovery Mechanism (Required)
+
+Media assets MUST be discovered through canonical ownership:
+
+1. The owning markdown resource declares assets in frontmatter using a single-line JSON object:
+   - `assets: {"key":"/assets/...","key2":"/assets/..."}`
+2. `npm run sync` compiles these into `public/content/manifest.json` as `resource.assets`.
+3. The website renders media only from `resource.assets` (not by scanning folders).
+
+### Behavior Rules
+
+- Media is opt-in (progressive disclosure).
+- No autoplay video or audio.
+- The page remains complete and usable without opening media.
+- Media must attach only to stable content.
+
+### Initial Media Scope (Phase 0)
+
+**Home (`/`)**
+- `/assets/home/hero-odd-diagram.png`
+- `/assets/home/orientation-map-diagram.png`
+- `/assets/home/outcomes-driven_development.mp4`
+
+**ODD (`/odd/README.md`)**
+- `/assets/odd/odd-in-practice.mp4`
+- `/assets/odd/odd-is-not-a-framework.png`
+- `/assets/odd/why-evidence-beats-confidence.m4a`
+
+### Requirements
+
+- The default experience must not require media consumption to understand the page.
+- Media must be user-initiated (explicit Watch/Listen/View affordances).
+- No autoplay video or audio.
+- Media must not add to the primary navigation item count.
+
+---
+
+## Attempt Policy
+
+This PRD may be attempted multiple times.
+
+- Each attempt is evaluated independently
+- Failed attempts inform future attempts or PRD revisions
+- Attempts are sealed when CLOSED or ABANDONED
+
+Attempts live at: `/products/website/attempts/`
+
+---
+
+## Compiled Pack (Phase 0)
+
+The website lane MUST support generating a wipeable "visitor pack" used for progressive disclosure and AI-friendly context.
+
+### Command
+- `npm run lane:compile -- --lane website --pack visitor`
+
+### Output
+- `public/_compiled/website/visitor-pack.md`
+- `public/_compiled/website/_meta/COMPILE_META.json`
+
+### Verification
+- `npm run verify:compiled -- --lane website --pack visitor`
+
+### Contract
+- The compiled pack MUST include a provenance header as defined in:
+  - `klappy://canon/odd/compilation`
+
+---
+
+## Related Documents
+
+- Lane architecture: `/canon/odd/appendices/product-lanes.md`
+- Canon constraints: `/canon/constraints.md`
+- Definition of Done: `/canon/definition-of-done.md`
+- Legacy PRD (v0.3): `/docs/PRD/website/PRD-legacy-v0.3.md`
+- Compilation: `/canon/odd/appendices/compilation.md`
+- Media philosophy: `/canon/odd/appendices/media-as-learning-layer.md`
+
+
+
+--------------------------------------------------------------------------------
 📄 File: products/website/attempts/README.md
 --------------------------------------------------------------------------------
 
-# Website Attempts
+# Website Lane Attempts
 
-Attempts are proven via the deployed evidence endpoint:
+Canonical attempt artifacts live here:
 
-- `/_evidence/` must return HTTP 200 for a completed attempt.
-- Champion outcomes are recorded in `products/website/LEDGER.md`.
-- Kickoff prompt lives at `products/website/prompts/ATTEMPT_KICKOFF.md`.
+```
+/products/website/attempts/prd-vX.Y/attempt-NNN/
+```
+
+## Structure
+
+```
+attempts/
+  prd-v1.0/
+    PRD.md              # frozen PRD snapshot
+    _runs/              # in-progress runs (before finalize)
+      <run_id>/
+        META.json
+        ATTEMPT.md
+        EVIDENCE.md
+        evidence/
+    attempt-001/        # finalized attempts
+    attempt-002/
+```
+
+## Evidence
+
+Public verification evidence is always deployed at:
+
+```
+/_evidence/
+```
+
+## Related
+
+- Champion outcomes: `products/website/LEDGER.md`
+- Kickoff prompt: `products/website/prompts/ATTEMPT_KICKOFF.md`
+- Legacy attempts: `/attempts/README.md` (read-only)
 
 
 
@@ -22936,6 +23398,18 @@ Attempts are proven via the deployed evidence endpoint:
 --------------------------------------------------------------------------------
 
 # Website Lane — Attempt Kickoff (Canonical)
+
+## Attempt Artifacts Location
+
+All attempt artifacts MUST be written under:
+
+```
+/products/website/attempts/
+```
+
+Never under repo-root `/attempts/` (legacy, read-only).
+
+---
 
 ## Non-Negotiables (Evidence-First)
 
@@ -23179,6 +23653,7 @@ export default function App() {
 
 import { useState, useEffect } from 'react';
 import { marked } from 'marked';
+import MediaShelf from './MediaShelf';
 
 /**
  * Content Page Component
@@ -23264,6 +23739,9 @@ export default function ContentPage({ resource }) {
             <span className="meta-badge">{resource.audience}</span>
           )}
         </div>
+
+        {/* Learning Layer Media (optional, opt-in) */}
+        <MediaShelf assets={resource.assets} />
 
         {/* Rendered markdown content */}
         <div 
@@ -23455,6 +23933,7 @@ export default function ContentPage({ resource }) {
 --------------------------------------------------------------------------------
 
 import { useMemo } from 'react';
+import MediaShelf from './MediaShelf';
 
 /**
  * Home Page Component
@@ -23465,6 +23944,11 @@ import { useMemo } from 'react';
  * - Visual calm
  */
 export default function Home({ manifest, resources, onNavigate }) {
+  // Find the home resource for media assets
+  const homeResource = useMemo(() => {
+    return resources.find(r => r.uri === 'klappy://public/home') || null;
+  }, [resources]);
+
   // Get featured content by tier
   const featured = useMemo(() => {
     // Tier 0: Entry points
@@ -23510,7 +23994,28 @@ export default function Home({ manifest, resources, onNavigate }) {
             Why This Exists
           </a>
         </div>
+        {homeResource?.assets?.hero_image && (
+          <div className="hero-media">
+            <img
+              src={homeResource.assets.hero_image}
+              alt="ODD hero diagram"
+              className="hero-image"
+            />
+          </div>
+        )}
       </section>
+
+      {/* Orientation Layer Media (optional, opt-in) */}
+      {homeResource?.assets && (
+        <MediaShelf
+          title="Orientation Layer"
+          subtitle="Optional media to orient quickly. You can ignore this and still navigate successfully."
+          assets={{
+            orientation_map: homeResource.assets.orientation_map,
+            explainer_video: homeResource.assets.explainer_video,
+          }}
+        />
+      )}
 
       {/* Start Here Section */}
       <section className="section">
@@ -23600,6 +24105,20 @@ export default function Home({ manifest, resources, onNavigate }) {
           gap: var(--space-4);
           justify-content: center;
           flex-wrap: wrap;
+        }
+
+        .hero-media {
+          margin: var(--space-6) auto 0;
+          max-width: 980px;
+          padding: 0 var(--space-4);
+        }
+
+        .hero-image {
+          width: 100%;
+          height: auto;
+          border-radius: 14px;
+          border: 1px solid var(--color-border-primary);
+          background: var(--color-bg-primary);
         }
 
         .button {
@@ -23713,6 +24232,151 @@ export default function Home({ manifest, resources, onNavigate }) {
         }
       `}</style>
     </div>
+  );
+}
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/website/src/components/MediaShelf.jsx
+--------------------------------------------------------------------------------
+
+import React from "react";
+
+/**
+ * MediaShelf (Learning Layer)
+ * - opt-in only (progressive disclosure)
+ * - no autoplay
+ * - non-blocking (page remains usable without opening)
+ */
+
+function labelFor(key) {
+  const map = {
+    hero_image: "Hero Diagram",
+    orientation_map: "View: Orientation Map",
+    explainer_video: "Watch: ODD Explainer",
+    practice_video: "Watch: ODD in Practice",
+    misconception_image: "View: ODD Is Not a Framework",
+    deep_dive_audio: "Listen: Why Evidence Beats Confidence",
+  };
+  return map[key] || key.replace(/_/g, " ");
+}
+
+function inferType(path) {
+  const p = String(path || "").toLowerCase();
+  if (p.endsWith(".mp4") || p.endsWith(".webm") || p.endsWith(".mov")) return "video";
+  if (p.endsWith(".mp3") || p.endsWith(".m4a") || p.endsWith(".wav") || p.endsWith(".ogg")) return "audio";
+  if (p.endsWith(".pdf")) return "pdf";
+  if (p.endsWith(".png") || p.endsWith(".jpg") || p.endsWith(".jpeg") || p.endsWith(".webp") || p.endsWith(".gif")) return "image";
+  return "link";
+}
+
+export default function MediaShelf({ assets, title = "Learning Layer", subtitle }) {
+  if (!assets || typeof assets !== "object") return null;
+
+  const entries = Object.entries(assets)
+    .filter(([_, v]) => typeof v === "string" && v.trim().length > 0);
+
+  if (!entries.length) return null;
+
+  return (
+    <section className="media-shelf" aria-label="Learning Media">
+      <h2 className="media-title">{title}</h2>
+      <p className="media-subtitle">
+        {subtitle || "Optional media that may reduce reading time. The page remains complete without it."}
+      </p>
+
+      <div className="media-items">
+        {entries.map(([key, path]) => {
+          const type = inferType(path);
+          const label = labelFor(key);
+
+          if (type === "video") {
+            return (
+              <details key={key} className="media-item">
+                <summary>{label}</summary>
+                <div className="media-body">
+                  <video controls preload="metadata" className="media-video">
+                    <source src={path} />
+                    Your browser does not support the video element.
+                  </video>
+                </div>
+              </details>
+            );
+          }
+
+          if (type === "audio") {
+            return (
+              <details key={key} className="media-item">
+                <summary>{label}</summary>
+                <div className="media-body">
+                  <audio controls preload="metadata" className="media-audio">
+                    <source src={path} />
+                    Your browser does not support the audio element.
+                  </audio>
+                </div>
+              </details>
+            );
+          }
+
+          if (type === "image") {
+            return (
+              <details key={key} className="media-item">
+                <summary>{label}</summary>
+                <div className="media-body">
+                  <img className="media-image" src={path} alt={label} />
+                </div>
+              </details>
+            );
+          }
+
+          if (type === "pdf") {
+            return (
+              <details key={key} className="media-item">
+                <summary>{label}</summary>
+                <div className="media-body">
+                  <a className="media-link" href={path} target="_blank" rel="noreferrer">
+                    Open PDF
+                  </a>
+                </div>
+              </details>
+            );
+          }
+
+          return (
+            <details key={key} className="media-item">
+              <summary>{label}</summary>
+              <div className="media-body">
+                <a className="media-link" href={path} target="_blank" rel="noreferrer">
+                  Open
+                </a>
+              </div>
+            </details>
+          );
+        })}
+      </div>
+
+      <style>{`
+        .media-shelf {
+          margin: var(--space-8) 0 var(--space-6);
+          padding: var(--space-6);
+          border: 1px solid var(--color-border-primary);
+          border-radius: 12px;
+          background: var(--color-bg-secondary);
+        }
+        .media-title { margin: 0 0 var(--space-2); font-size: var(--font-size-xl); }
+        .media-subtitle { margin: 0 0 var(--space-5); color: var(--color-text-secondary); max-width: 700px; }
+        .media-items { display: grid; gap: var(--space-3); }
+        .media-item { border: 1px solid var(--color-border-primary); border-radius: 10px; background: var(--color-bg-primary); overflow: hidden; }
+        .media-item summary { cursor: pointer; padding: var(--space-4); font-weight: var(--font-weight-medium); list-style: none; }
+        .media-item summary::-webkit-details-marker { display: none; }
+        .media-body { padding: var(--space-4); border-top: 1px solid var(--color-border-primary); }
+        .media-video, .media-audio { width: 100%; }
+        .media-image { width: 100%; height: auto; border-radius: 10px; }
+        .media-link { color: var(--color-accent); text-decoration: none; }
+        .media-link:hover { text-decoration: underline; }
+      `}</style>
+    </section>
   );
 }
 

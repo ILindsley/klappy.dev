@@ -63,10 +63,12 @@ The system needed:
 | Category | 1.x | 2.x |
 |----------|-----|-----|
 | PRD location | `/docs/PRD.md` | `/docs/PRD/<lane>/PRD.md` |
-| Attempt location | `/attempts/prd-vX.Y/attempt-NNN/` | `/attempts/<lane>/prd-vX.Y/attempt-NNN/` |
+| Attempt location | `/attempts/prd-vX.Y/attempt-NNN/` | `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/` |
 | Lane declaration | N/A | Required |
 | Epoch declaration | N/A | Required |
 | Tooling flags | None | `--lane` required |
+
+Note: Root `/attempts/**` is legacy (read-only). All new attempts are lane-contained under `/products/<lane>/attempts/`.
 
 ## Epoch 1 Document Header (Standard)
 

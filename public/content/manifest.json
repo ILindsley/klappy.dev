@@ -673,6 +673,27 @@
       ]
     },
     {
+      "uri": "klappy://public/home",
+      "path": "/about/home.md",
+      "title": "Home",
+      "type": "text/markdown",
+      "audience": "public",
+      "exposure": "hidden",
+      "tier": 0,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "home",
+        "orientation",
+        "media"
+      ],
+      "assets": {
+        "hero_image": "/assets/home/hero-odd-diagram.png",
+        "orientation_map": "/assets/home/orientation-map-diagram.png",
+        "explainer_video": "/assets/home/outcomes-driven_development.mp4"
+      }
+    },
+    {
       "uri": "klappy://canon/odd/lane-build-layout",
       "path": "/canon/odd/appendices/lane-build-layout.md",
       "title": "Lane Build Layout",
@@ -788,7 +809,12 @@
         "odd",
         "public",
         "overview"
-      ]
+      ],
+      "assets": {
+        "practice_video": "/assets/odd/odd-in-practice.mp4",
+        "misconception_image": "/assets/odd/odd-is-not-a-framework.png",
+        "deep_dive_audio": "/assets/odd/why-evidence-beats-confidence.m4a"
+      }
     },
     {
       "uri": "klappy://canon/odd/misuse-patterns",

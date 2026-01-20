@@ -137,7 +137,10 @@ function buildManifest() {
         voice: fm.voice || 'neutral',
         stability: fm.stability || 'evolving',
         tags: Array.isArray(fm.tags) ? fm.tags : [],
-        order: typeof fm.order === 'number' ? fm.order : undefined
+        order: typeof fm.order === 'number' ? fm.order : undefined,
+
+        // Optional learning-layer media (must remain non-canonical)
+        assets: (fm.assets && typeof fm.assets === 'object') ? fm.assets : undefined
       });
     }
   }

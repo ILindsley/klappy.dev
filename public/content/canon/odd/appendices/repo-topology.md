@@ -33,18 +33,19 @@ It encodes the decoupling between App, Content, and Infrastructure planes.
 ```
 /products/<lane>/src/           # Lane application (disposable per attempt)
 /products/<lane>/dist/          # Lane build output (generated)
+/products/<lane>/attempts/      # Lane attempts (sealed, immutable after seal)
 /canon/                         # Canon documents (evolves independently)
 /odd/                           # ODD public docs (evolves independently)
 /about/                         # About docs (evolves independently)
 /projects/                      # Project docs (evolves independently)
 /infra/                         # Infrastructure (persists across attempts)
 /docs/                          # Operational docs + PRD versions
-/attempts/                      # Sealed attempts (immutable after seal)
+/attempts/                      # LEGACY (read-only, see /attempts/README.md)
 /public/content/                # Generated (by sync script)
 /dist/                          # Legacy/transitional mirror (generated)
 ```
 
-> **Lane-scoped architecture:** Each product lane owns its own app plane under `products/<lane>/src/`. There is no root-level `/src/` directory.
+> **Lane-contained architecture:** Each product lane owns its own app plane under `products/<lane>/src/` and its attempts under `products/<lane>/attempts/`. There is no root-level `/src/` directory. Root `/attempts/` is legacy.
 
 ---
 
@@ -103,9 +104,9 @@ Contains:
 
 These are editable until frozen into an attempt.
 
-### Sealed Attempts (`/attempts/`)
+### Sealed Attempts (`/products/<lane>/attempts/`)
 
-**Immutable after seal.**
+**Lane-contained. Immutable after seal.**
 
 Contains:
 - Frozen PRD per version (`prd-vX.Y/PRD.md`)
@@ -113,6 +114,8 @@ Contains:
 - Evidence bundles
 
 Once sealed, these folders are not modified.
+
+Note: Root `/attempts/**` is legacy (read-only). New attempts are lane-contained.
 
 ---
 
@@ -136,8 +139,8 @@ Once sealed, these folders are not modified.
 |-------|--------|-----------|
 | Content manifest | per-file frontmatter in `/canon/`, `/odd/`, `/about/`, `/projects/` | `/public/content/manifest.json` |
 | Markdown content | `/canon/`, `/odd/`, `/about/`, `/projects/` | `/public/content/` |
-| PRD (frozen) | `/attempts/prd-vX.Y/PRD.md` | N/A (immutable) |
-| Evidence | `/attempts/prd-vX.Y/attempt-NNN/evidence/` | N/A (immutable) |
+| PRD (frozen) | `/products/<lane>/attempts/prd-vX.Y/PRD.md` | N/A (immutable) |
+| Evidence | `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/evidence/` | N/A (immutable) |
 
 ---
 
@@ -147,7 +150,7 @@ Each lane contains **one active app implementation** in `products/<lane>/src/`.
 
 Prior attempts are preserved by:
 - Git history
-- Sealed attempt records in `/attempts/<lane>/`
+- Sealed attempt records in `/products/<lane>/attempts/`
 - Commit SHAs in `META.json`
 
 There are no `/app-v1`, `/app-v2` folders.  

@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import MediaShelf from './MediaShelf';
 
 /**
  * Home Page Component
@@ -9,6 +10,11 @@ import { useMemo } from 'react';
  * - Visual calm
  */
 export default function Home({ manifest, resources, onNavigate }) {
+  // Find the home resource for media assets
+  const homeResource = useMemo(() => {
+    return resources.find(r => r.uri === 'klappy://public/home') || null;
+  }, [resources]);
+
   // Get featured content by tier
   const featured = useMemo(() => {
     // Tier 0: Entry points
@@ -54,7 +60,28 @@ export default function Home({ manifest, resources, onNavigate }) {
             Why This Exists
           </a>
         </div>
+        {homeResource?.assets?.hero_image && (
+          <div className="hero-media">
+            <img
+              src={homeResource.assets.hero_image}
+              alt="ODD hero diagram"
+              className="hero-image"
+            />
+          </div>
+        )}
       </section>
+
+      {/* Orientation Layer Media (optional, opt-in) */}
+      {homeResource?.assets && (
+        <MediaShelf
+          title="Orientation Layer"
+          subtitle="Optional media to orient quickly. You can ignore this and still navigate successfully."
+          assets={{
+            orientation_map: homeResource.assets.orientation_map,
+            explainer_video: homeResource.assets.explainer_video,
+          }}
+        />
+      )}
 
       {/* Start Here Section */}
       <section className="section">
@@ -144,6 +171,20 @@ export default function Home({ manifest, resources, onNavigate }) {
           gap: var(--space-4);
           justify-content: center;
           flex-wrap: wrap;
+        }
+
+        .hero-media {
+          margin: var(--space-6) auto 0;
+          max-width: 980px;
+          padding: 0 var(--space-4);
+        }
+
+        .hero-image {
+          width: 100%;
+          height: auto;
+          border-radius: 14px;
+          border: 1px solid var(--color-border-primary);
+          background: var(--color-bg-primary);
         }
 
         .button {

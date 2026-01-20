@@ -36,7 +36,7 @@ This is how the repository avoids documentation sprawl while remaining portable 
 **Default fate:** extract value → seal evidence → discard everything else.
 
 **Lives in:**
-- `/attempts/<lane>/prd-vX.Y/_runs/<run_id>/`
+- `/products/<lane>/attempts/prd-vX.Y/_runs/<run_id>/`
 - transient branches / worktrees
 - PRD patches produced by failure
 
