@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-20T03:12:55.110Z
-Total Files: 161
+Generated: 2026-01-20T03:20:40.685Z
+Total Files: 171
 
 This is a complete export of all documentation, code, and content files
 from the klappy.dev repository, organized by section.
@@ -16,7 +16,7 @@ from the klappy.dev repository, organized by section.
 ## Table of Contents
 ================================================================================
 
-- **Root** (7 files)
+- **Root** (6 files)
 - **.cursor** (1 files)
 - **.husky** (17 files)
 - **About** (4 files)
@@ -26,7 +26,7 @@ from the klappy.dev repository, organized by section.
 - **Infrastructure** (18 files)
 - **Interfaces & Contracts** (6 files)
 - **ODD (Outcomes-Driven Development)** (1 files)
-- **Products** (7 files)
+- **Products** (14 files)
 - **Projects** (6 files)
 - **Public Content** (6 files)
 - **Visual Design System** (4 files)
@@ -36,29 +36,6 @@ from the klappy.dev repository, organized by section.
 ## Root
 ================================================================================
 
-
-
---------------------------------------------------------------------------------
-📄 File: .attempt.json
---------------------------------------------------------------------------------
-
-{
-  "lane": "website",
-  "prd_version": "v1.0",
-  "run_id": "71c6fdc7",
-  "lane_root": "products/website",
-  "dist_dir": "products/website/dist",
-  "tool": "cursor",
-  "agent": "a",
-  "model": "claude-opus-4",
-  "worktree_path": "/Users/chrisklapp/.cursor/worktrees/klappy.dev/edj",
-  "branch": "run/website/prd-v1.0/cursor/a/claude-opus-4/temp",
-  "target_branch": "run/website/prd-v1.0/cursor/a/claude-opus-4/71c6fdc7",
-  "git_head": "165b100f30491448e3cc173eca671cbc485cbd72",
-  "is_detached": false,
-  "registered_at": "2026-01-20T01:05:26.581Z",
-  "runs_dir": "attempts/website/prd-v1.0/_runs/71c6fdc7"
-}
 
 
 --------------------------------------------------------------------------------
@@ -22504,19 +22481,20 @@ Records outcomes (champions, merges, deployments) without turning them into cano
 
 ---
 
-## Entry — PRD v1.0 Champion (PENDING PROMOTION)
+## Entry — PRD v1.0 Champion (PROMOTED)
 
 - Date: 2026-01-19
 - PRD: v1.0
 - Epoch: E0003 (evidence-first)
-- Champion: SELECTED
+- Champion: PROMOTED
 - Champion branch: `run/website/prd-v1.0/cursor/a/claude-opus-4/71c6fdc7`
 - Head commit SHA: `1fb713dcbd4158325f48e6842806016a208a7ee7`
-- Merge commit SHA: TBD (update after promotion merge)
+- Merge commit SHA: `97394e2480421345b82682f9365c8e5ed414ecb1`
 - Cloudflare Pages project: `klappy-dev-website`
 - App URL: https://website-attempt-test.klappy-dev-website.pages.dev
 - Evidence URL: https://website-attempt-test.klappy-dev-website.pages.dev/_evidence/
 - Promotion PR: https://github.com/klappy/klappy.dev/pull/1
+- Promoted at: 2026-01-19
 
 > **Note:** This Promotion PR existed prior to rule formalization. From this point forward, all champions require an explicit Promotion PR per `products/website/prompts/ATTEMPT_KICKOFF.md`.
 
@@ -22551,6 +22529,27 @@ Attempts are proven via the deployed evidence endpoint:
 - `/_evidence/` must return HTTP 200 for a completed attempt.
 - Champion outcomes are recorded in `products/website/LEDGER.md`.
 - Kickoff prompt lives at `products/website/prompts/ATTEMPT_KICKOFF.md`.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/website/index.html
+--------------------------------------------------------------------------------
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>klappy.dev — Outcome-Driven Development</title>
+  <meta name="description" content="Explore ODD: a methodology for building with AI agents through evidence, constraints, and progressive disclosure.">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+</html>
 
 
 
@@ -22642,27 +22641,6 @@ These phases are distinct. None may be skipped.
 --------------------------------------------------------------------------------
 
 Use /products/website/prompts/ATTEMPT_KICKOFF.md verbatim.
-
-
-
---------------------------------------------------------------------------------
-📄 File: products/website/src/.gitkeep
---------------------------------------------------------------------------------
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>klappy.dev — Outcome-Driven Development</title>
-  <meta name="description" content="Explore ODD: a methodology for building with AI agents through evidence, constraints, and progressive disclosure.">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-</head>
-<body>
-  <div id="root"></div>
-  <script type="module" src="/src/main.jsx"></script>
-</body>
-</html>
 
 
 
