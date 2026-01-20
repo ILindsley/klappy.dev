@@ -2,143 +2,109 @@
 id: attempt-kickoff-website
 lane: website
 status: canonical
-epoch: E0002
+epoch: E0003
 audience: agents
 ---
 
-# Attempt Kickoff — Website Lane (E0002)
+# Attempt Kickoff — Website Lane
 
-This document is the canonical kickoff prompt for **website** lane attempts.
-It is designed to be copy/pasted into an agent chat **without modification**.
-
-If this file changes, it must be changed intentionally (decision log if needed).
-No one-off prompts.
+This is the ONLY instruction needed to start a website attempt.
+Copy/paste into agent chat WITHOUT modification.
 
 ---
 
-## Read First (in order)
+## Read First
 
-1) `/canon/odd/appendices/product-lanes.md`  
-2) `/docs/PRD/website/PRD.md`  
-3) `/docs/ATTEMPT_KICKOFF.md`  
-4) `/canon/constraints.md` (or the repo's canonical constraints doc)
+1. `/canon/odd/appendices/evidence.md`
+2. `/docs/PRD/website/PRD.md`
+3. `/canon/constraints.md`
 
 ---
 
-## Lane Declaration (LOCKED)
+## Lane (LOCKED)
 
 - **Lane:** `website`
 - **PRD:** `/docs/PRD/website/PRD.md`
-- **Attempt output:** `/attempts/website/prd-vX.Y/attempt-NNN/`
-- **Build output (canonical, D0013):** `products/website/dist/`
-
-**Invariant:** Attempts without a lane are invalid.
+- **Build output:** `products/website/dist/`
+- **Evidence URL:** `/_evidence/`
 
 ---
 
-## Non-Negotiables (Scope Guard)
+## First Actions (EXACT ORDER)
 
-You MUST NOT:
-
-- Modify `canon/**`
-- Modify other lanes (`ai-navigation`, `agent-skill`)
-- Touch root `/src/**` (treat as other-lane territory)
-- Add "helpful" infra, contracts, audits, compile packs, or refactors
-
-This attempt's only job is: **produce a working website in the website lane**.
-
----
-
-## First Actions (LOCKED ORDER)
-
-1) Register provenance (no code changes before this):
+1) Register:
 ```bash
-npm run attempt:register -- --lane website --tool <tool> --agent <agent> --model "<model>"
+npm run attempt:register -- --lane website --tool cursor --agent a --model "<your-model>"
 ```
 
-2) Nuke the lane work area immediately after registration:
+2) Nuke:
 ```bash
 npm run attempt:nuke -- --lane website
 ```
 
----
-
-## Build Requirements (Website MVP)
-
-Implement a minimal website app in:
-- `products/website/src/**`
-
-It MUST:
-- Load `/content/manifest.json` at runtime
-- Render a home page with progressive disclosure (not overwhelming)
-- Provide navigation: list → detail view (internal state nav is fine)
-- Render markdown content from the manifest's paths
-- Be mobile-usable
-- Keep initial primary navigation ≤ 7 items (per PRD)
-- Never invent content: only display what exists in the manifest
-
-Implementation constraints:
-- Keep it minimal.
-- Prefer the repo's existing stack patterns (likely Vite + React), but do not introduce a new framework.
-- No router required if you can do a simple view switch.
-
----
-
-## Evidence Requirements (STRICT)
-
-Write evidence under the run folder created by registration, e.g.:
-
-```
-attempts/website/prd-vX.Y/_runs/<run_id>/
+3) Create evidence folder:
+```bash
+mkdir -p attempts/website/prd-v1.0/_runs/<run_id>/screenshots
+mkdir -p attempts/website/prd-v1.0/_runs/<run_id>/recordings
 ```
 
-Include:
-- `ATTEMPT.md` (what you did, what you did NOT do)
-- `EVIDENCE.md` (proof bullets + commands)
-- Screenshots:
-  - home (desktop)
-  - home (mobile viewport)
-  - detail page (any canon doc)
-
-Proof requirements:
-- `products/website/dist/index.html` exists after build
-- commands to reproduce locally are listed
+Use the run_id from step 1.
 
 ---
 
-## Completion Criteria (Non-Negotiable)
+## Build
 
-An attempt is NOT complete until all are true:
+Implement in `products/website/src/`:
 
-1) The attempt branch is pushed to origin.
-2) Cloudflare Pages preview deployment succeeds (build passes).
-3) The preview URL returns HTTP 200 and renders the site.
-4) Evidence is accessible on the preview site at:
-
-   `/_evidence/<run_id>/EVIDENCE.md`
-
-If any of these cannot be proven, the attempt MUST seal as FAILURE with an explanation and stop.
+- Load `/content/manifest.json`
+- Render home page with ≤7 nav items
+- Render markdown content
+- Mobile-usable
 
 ---
 
-## Evidence Publishing Rule
+## Evidence (MANDATORY)
 
-Cloudflare Pages serves only the configured build output directory.
+Write to `attempts/website/prd-v1.0/_runs/<run_id>/`:
 
-Therefore, attempt evidence MUST be copied into:
-
-`products/<lane>/dist/_evidence/<run_id>/`
-
-Minimum required files:
-- EVIDENCE.md
-- ATTEMPT.md
-- any screenshots/assets referenced by evidence
-
-See `/canon/odd/appendices/deploy-evidence.md` for the full requirement.
+- `ATTEMPT.md` — what you did
+- `EVIDENCE.md` — proof links
+- `META.json` — provenance (auto-created by register)
+- `screenshots/` — at least 1 image
+- `recordings/` — at least 1 video OR 3 screenshots total
 
 ---
 
-## Before you touch code
+## Completion (NON-NEGOTIABLE)
 
-List the exact files you will create/modify and why.
+An attempt is **INVALID** unless ALL are true:
+
+1. Branch pushed to origin
+2. Cloudflare Pages builds successfully
+3. App loads at preview URL
+4. `/_evidence/` returns HTTP 200
+5. Screenshots/video present in evidence
+
+**Local preview is NOT acceptable as completion.**
+
+If `/_evidence/` returns 404 → STOP. Attempt is INVALID.
+
+---
+
+## Scope Guard
+
+You MUST NOT:
+
+- Modify `canon/**`
+- Modify other lanes
+- Add infra, contracts, audits
+- Invent workflows
+
+Your ONLY job: **produce a working website with public evidence**.
+
+---
+
+## Before Coding
+
+List exact files you will create/modify.
 Then begin.

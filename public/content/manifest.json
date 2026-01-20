@@ -609,6 +609,21 @@
       ]
     },
     {
+      "uri": "klappy://canon/evidence",
+      "path": "/canon/odd/appendices/evidence.md",
+      "title": "Evidence",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 1,
+      "voice": "first_person",
+      "stability": "stable",
+      "tags": [
+        "evidence",
+        "verification"
+      ]
+    },
+    {
       "uri": "klappy://canon/odd/evolution-not-automation",
       "path": "/canon/odd/appendices/evolution-not-automation.md",
       "title": "Evolution, Not Automation",
