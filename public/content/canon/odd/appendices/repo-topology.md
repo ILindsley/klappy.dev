@@ -31,7 +31,8 @@ It encodes the decoupling between App, Content, and Infrastructure planes.
 ## Core Topology
 
 ```
-/src/                           # Application (disposable per attempt)
+/products/<lane>/src/           # Lane application (disposable per attempt)
+/products/<lane>/dist/          # Lane build output (generated)
 /canon/                         # Canon documents (evolves independently)
 /odd/                           # ODD public docs (evolves independently)
 /about/                         # About docs (evolves independently)
@@ -40,17 +41,23 @@ It encodes the decoupling between App, Content, and Infrastructure planes.
 /docs/                          # Operational docs + PRD versions
 /attempts/                      # Sealed attempts (immutable after seal)
 /public/content/                # Generated (by sync script)
-/products/<lane>/dist/          # Lane build output (generated)
 /dist/                          # Legacy/transitional mirror (generated)
 ```
+
+> **Lane-scoped architecture:** Each product lane owns its own app plane under `products/<lane>/src/`. There is no root-level `/src/` directory.
 
 ---
 
 ## What Lives Where
 
-### Application Plane (`/src/`)
+### Application Plane (`products/<lane>/src/`)
 
-**Disposable per attempt.**
+**Disposable per attempt. Lane-scoped.**
+
+Each product lane (website, ai-navigation, agent-skill) has its own application plane:
+- `products/website/src/`
+- `products/ai-navigation/src/`
+- `products/agent-skill/src/`
 
 Contains:
 - UI components
@@ -58,7 +65,7 @@ Contains:
 - State management
 - Rendering code
 
-This folder can be deleted and rebuilt from scratch for each attempt.
+This folder can be deleted and rebuilt from scratch for each attempt via `attempt:nuke --lane <lane>`.
 
 ### Content Plane (`/canon/`, `/odd/`, `/about/`, `/projects/`)
 
@@ -116,8 +123,8 @@ Once sealed, these folders are not modified.
 | Fix a typo in Canon | `/canon/` | No |
 | Add a new ODD appendix | `/canon/odd/` | No |
 | Update build script | `/infra/` | No |
-| Redesign the UI | `/src/` | Yes (same or new PRD) |
-| Add new feature | `/src/` | Yes (requires PRD) |
+| Redesign the UI | `products/<lane>/src/` | Yes (same or new PRD) |
+| Add new feature | `products/<lane>/src/` | Yes (requires PRD) |
 | Add new content doc | `/about/`, `/projects/` | No |
 | Change manifest schema | `/canon/meta/` | No (but may affect app) |
 
@@ -134,17 +141,17 @@ Once sealed, these folders are not modified.
 
 ---
 
-## One Active App
+## One Active App Per Lane
 
-The repository contains **one active app implementation** in `/src/`.
+Each lane contains **one active app implementation** in `products/<lane>/src/`.
 
 Prior attempts are preserved by:
 - Git history
-- Sealed attempt records in `/attempts/`
+- Sealed attempt records in `/attempts/<lane>/`
 - Commit SHAs in `META.json`
 
 There are no `/app-v1`, `/app-v2` folders.  
-There is one `/src/` that gets rebuilt.
+There is one `products/<lane>/src/` per lane that gets rebuilt.
 
 ---
 

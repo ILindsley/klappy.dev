@@ -316,7 +316,7 @@ export default function App() {
       <ul>
         <li>PRD: <code>/docs/PRD.md</code></li>
         <li>Manifest: <code>/public/content/manifest.json</code></li>
-        <li>This file: <code>/src/components/App.jsx</code></li>
+        <li>This file: <code>products/&lt;lane&gt;/src/components/App.jsx</code></li>
       </ul>
     </div>
   );
@@ -324,18 +324,20 @@ export default function App() {
 `
 };
 
-// SAFETY: Only these paths may be purged during nuke
+// SAFETY: Ephemeral paths are lane-scoped. Root should remain clean.
+// NOTE: cmdNuke() handles lane-scoped deletion directly via laneEphemeralPaths.
+// This list is kept for reference/documentation only.
 const EPHEMERAL_PATHS = [
-  'src',
-  'app',
-  'index.html',       // App entry (if not in public)
-  'vite.config.js',
-  'vite.config.ts',
-  'tsconfig.json',
-  'tailwind.config.js',
-  'postcss.config.js',
-  // NOTE: package.json intentionally NOT nuked to preserve scripts
-  // Agents can modify package.json but the scripts should remain
+  // Lane-scoped paths (template: products/<lane>/...)
+  // 'products/<lane>/src',
+  // 'products/<lane>/dist',
+  // 'products/<lane>/vite.config.js',
+  // 'products/<lane>/vite.config.ts',
+  // 'products/<lane>/tsconfig.json',
+  // 'products/<lane>/tailwind.config.js',
+  // 'products/<lane>/postcss.config.js',
+  // NOTE: Root-level src, app, index.html, vite.config.js are NO LONGER valid.
+  // All ephemeral paths must be under products/<lane>/.
 ];
 
 // These are NEVER touched during nuke (the contract)
@@ -450,28 +452,33 @@ function createAttemptBranch(prd, attemptPadded, opts) {
 }
 
 /**
- * Reset /src to minimal shell.
+ * Reset lane src to minimal shell.
+ * Lane-scoped: operates on products/<lane>/src, not repo root.
  * Can operate in current directory or a specific cwd (for worktrees).
+ * 
+ * NOTE: This function is legacy. Prefer cmdNuke() for lane-scoped resets.
+ * Default lane is 'website' for backwards compatibility.
  */
-function resetSrc(opts, targetDir = ROOT) {
+function resetSrc(opts, targetDir = ROOT, lane = 'website') {
   const { dryRun, noCommit } = opts;
   
-  console.log('4️⃣  Resetting /src to minimal shell...');
+  const laneRoot = join(targetDir, 'products', lane);
+  const srcPath = join(laneRoot, 'src');
+  const appPath = join(laneRoot, 'app');
   
-  const srcPath = join(targetDir, 'src');
-  const appPath = join(targetDir, 'app');
+  console.log(`4️⃣  Resetting products/${lane}/src to minimal shell...`);
   
-  // Delete /src
+  // Delete lane src
   if (existsSync(srcPath) && !dryRun) {
     rmSync(srcPath, { recursive: true });
   }
   
-  // Delete /app if present
+  // Delete lane app if present
   if (existsSync(appPath) && !dryRun) {
     rmSync(appPath, { recursive: true });
   }
   
-  // Create minimal shell
+  // Create minimal shell in lane
   if (!dryRun) {
     mkdirSync(join(srcPath, 'components'), { recursive: true });
     for (const [filename, content] of Object.entries(SHELL_FILES)) {
@@ -481,11 +488,11 @@ function resetSrc(opts, targetDir = ROOT) {
   
   // Commit reset (unless --no-commit)
   if (!noCommit) {
-    run('git add src/', { dryRun, cwd: targetDir });
-    run('git commit -m "chore: reset /src to minimal shell for fresh attempt"', { dryRun, cwd: targetDir });
+    run(`git add products/${lane}/src/`, { dryRun, cwd: targetDir });
+    run(`git commit -m "chore: reset products/${lane}/src to minimal shell for fresh attempt"`, { dryRun, cwd: targetDir });
   }
   
-  console.log('  ✅ /src reset and committed\n');
+  console.log(`  ✅ products/${lane}/src reset and committed\n`);
 }
 
 function printStartSummary(prd, attemptPadded, branchName, prdSha) {
@@ -757,16 +764,27 @@ Options:
 }
 
 /**
- * Nuclear reset: Nuke + clean up attempt branches for a PRD.
+ * Nuclear reset: Nuke lane src + clean up attempt branches for a PRD.
  * 
  * This is the "hard reset" for starting a fresh PRD cycle.
  * Combines nuke with branch cleanup.
+ * 
+ * Lane-scoped: Only affects products/<lane>/src, not repo root.
+ * Default lane is 'website' for backwards compatibility.
  */
 function cmdReset(opts) {
   const { dryRun, noCommit, prd, force } = opts;
+  const lane = opts.lane || 'website';  // Default to website lane
   
   console.log('\n💥 NUCLEAR RESET\n');
+  console.log(`  Lane: ${lane}`);
   if (dryRun) console.log('  [DRY RUN MODE]\n');
+  
+  // Lane-scoped paths
+  const laneRoot = join(ROOT, 'products', lane);
+  const laneSrcPath = join(laneRoot, 'src');
+  const laneAppPath = join(laneRoot, 'app');
+  const laneViteConfig = join(laneRoot, 'vite.config.js');
   
   // Check if we're on main - warn about production
   const currentBranch = run('git branch --show-current', { silent: true, dryRun: false });
@@ -774,61 +792,57 @@ function cmdReset(opts) {
   
   if (isMain && !force) {
     console.log('  ⚠️  WARNING: You are on main branch!');
-    console.log('  ⚠️  Nuking /src on main will break production.');
+    console.log(`  ⚠️  Nuking products/${lane}/src on main will break production.`);
     console.log('');
     console.log('  If you ONLY want to clean up attempt branches (recommended):');
-    console.log('    npm run attempt:reset -- --prd v0.2 --no-nuke');
+    console.log(`    npm run attempt:reset -- --lane ${lane} --prd v0.2 --no-nuke`);
     console.log('');
     console.log('  If you really want to nuke production too:');
-    console.log('    npm run attempt:reset -- --prd v0.2 --force');
+    console.log(`    npm run attempt:reset -- --lane ${lane} --prd v0.2 --force`);
     console.log('');
     
     // Only do branch cleanup if --prd was provided
     if (prd) {
-      console.log('  Proceeding with branch cleanup only (not nuking /src)...\n');
+      console.log(`  Proceeding with branch cleanup only (not nuking products/${lane}/src)...\n`);
       opts.noNuke = true;
     } else {
-      fail('Use --force to nuke /src on main, or run from an attempt branch.');
+      fail(`Use --force to nuke products/${lane}/src on main, or run from an attempt branch.`);
     }
   }
   
   // ========================================
-  // Part 1: Nuke /src (unless --no-nuke or on main without --force)
+  // Part 1: Nuke lane src (unless --no-nuke or on main without --force)
   // ========================================
   if (!opts.noNuke) {
-    console.log('1️⃣  Nuking /src...\n');
-  console.log('  Will delete:');
-  console.log('    - /src (entire directory)');
-  console.log('    - /app (if exists)');
-  console.log('    - vite.config.js (framework-specific)');
-  console.log('');
+    console.log(`1️⃣  Nuking products/${lane}/src...\n`);
+    console.log('  Will delete:');
+    console.log(`    - products/${lane}/src (entire directory)`);
+    console.log(`    - products/${lane}/app (if exists)`);
+    console.log(`    - products/${lane}/vite.config.js (framework-specific)`);
+    console.log('');
   } else {
-    console.log('1️⃣  Skipping /src nuke (production protected)\n');
+    console.log(`1️⃣  Skipping products/${lane}/src nuke (production protected)\n`);
   }
   
   if (!opts.noNuke) {
-  const srcPath = join(ROOT, 'src');
-  const appPath = join(ROOT, 'app');
-  const viteConfig = join(ROOT, 'vite.config.js');
-  
-  // Delete /src
-  if (existsSync(srcPath)) {
-    if (!dryRun) rmSync(srcPath, { recursive: true });
-    console.log('  ✅ Deleted /src');
-  } else {
-    console.log('  ⚠️  /src does not exist');
-  }
-  
-  // Delete /app if present
-  if (existsSync(appPath)) {
-    if (!dryRun) rmSync(appPath, { recursive: true });
-    console.log('  ✅ Deleted /app');
-  }
-  
-  // Delete vite.config.js (framework-specific)
-  if (existsSync(viteConfig)) {
-    if (!dryRun) rmSync(viteConfig);
-    console.log('  ✅ Deleted vite.config.js');
+    // Delete lane src
+    if (existsSync(laneSrcPath)) {
+      if (!dryRun) rmSync(laneSrcPath, { recursive: true });
+      console.log(`  ✅ Deleted products/${lane}/src`);
+    } else {
+      console.log(`  ⚠️  products/${lane}/src does not exist`);
+    }
+    
+    // Delete lane app if present
+    if (existsSync(laneAppPath)) {
+      if (!dryRun) rmSync(laneAppPath, { recursive: true });
+      console.log(`  ✅ Deleted products/${lane}/app`);
+    }
+    
+    // Delete lane vite.config.js (framework-specific)
+    if (existsSync(laneViteConfig)) {
+      if (!dryRun) rmSync(laneViteConfig);
+      console.log(`  ✅ Deleted products/${lane}/vite.config.js`);
     }
   }
   
@@ -914,8 +928,8 @@ function cmdReset(opts) {
     console.log('\n3️⃣  Committing nuke...');
     run('git add -A', { dryRun });
     const msg = prd 
-      ? `chore: nuclear reset for PRD v${prd} - nuked src and cleared attempt branches`
-      : 'chore: nuke /src for fresh attempt (stack-agnostic)';
+      ? `chore: nuclear reset for PRD v${prd} lane ${lane} - nuked src and cleared attempt branches`
+      : `chore: nuke products/${lane}/src for fresh attempt (stack-agnostic)`;
     run(`git commit -m "${msg}" --allow-empty`, { dryRun });
     console.log('  ✅ Committed\n');
   } else {
@@ -924,12 +938,13 @@ function cmdReset(opts) {
   
   console.log('═'.repeat(60));
   console.log('\n💥 NUCLEAR RESET COMPLETE\n');
-  console.log('  /src is gone. Choose any stack for your attempt.');
+  console.log(`  Lane: ${lane}`);
+  console.log(`  products/${lane}/src is gone. Choose any stack for your attempt.`);
   if (prd) {
     console.log(`  All attempt branches for PRD v${prd} have been deleted.`);
     console.log('  Registry reset - next attempt will be attempt-001.');
   }
-  console.log('  Deploy contract preserved: /public/index.html serves as fallback.');
+  console.log(`  Deploy contract preserved: products/${lane}/dist/index.html after build.`);
   console.log('\n' + '═'.repeat(60));
   
   if (prd) {

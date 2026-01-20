@@ -279,16 +279,18 @@ If attempt-002 branches from attempt-001's code, it's not independent. The agent
 
 The required sequence is:
 
-1. **`attempt:register`** — Captures provenance (who, with what model, from where)
-2. **`attempt:nuke`** — Deletes `/src` and framework configs (guarantees blank slate)
+1. **`attempt:register --lane <lane>`** — Captures provenance (who, with what model, from where)
+2. **`attempt:nuke --lane <lane>`** — Deletes lane src and framework configs (guarantees blank slate)
 3. **Only then** does implementation begin
 
 This preserves forensic traceability (we know who showed up) while guaranteeing experimental independence (no inherited code).
 
-### What Gets Nuked
+### What Gets Nuked (Lane-Scoped)
 
-- `/src/` — application code
-- `vite.config.js`, `tailwind.config.js`, etc. — framework configs
+- `products/<lane>/src/` — lane application code
+- `products/<lane>/vite.config.js`, `products/<lane>/tailwind.config.js`, etc. — lane framework configs
+
+> **Note:** Root-level `/src/` no longer exists. All app code is lane-scoped.
 
 ### What Survives
 
@@ -297,6 +299,7 @@ This preserves forensic traceability (we know who showed up) while guaranteeing 
 - `/docs/` — process documentation
 - `/attempts/` — sealed evidence
 - `package.json` — dependency manifest
+- Other lanes (`products/<other-lane>/src/`) — only the target lane is nuked
 
 > **Decision:** See [D0008: Register Before Nuke](/canon/odd/decisions/D0008-register-before-nuke.md)
 
@@ -398,7 +401,7 @@ Pick one axis and declare it ahead of time:
    - Attempt folder, evidence, PRD patches
 
 4. **Promote code to main**
-   - Champion's `/src` merges to `main`
+   - Champion's `products/<lane>/src` merges to `main`
 
 5. **Fast-forward prod**
    - `git checkout prod && git merge main --ff-only`

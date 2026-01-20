@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-20T05:20:38.531Z
-Total Files: 172
+Generated: 2026-01-20T05:39:18.805Z
+Total Files: 170
 
 This is a complete export of all documentation, code, and content files
 from the klappy.dev repository, organized by section.
@@ -16,7 +16,7 @@ from the klappy.dev repository, organized by section.
 ## Table of Contents
 ================================================================================
 
-- **Root** (6 files)
+- **Root** (4 files)
 - **.cursor** (1 files)
 - **.husky** (17 files)
 - **About** (4 files)
@@ -238,25 +238,6 @@ The goal is better outcomes, not perfect artifacts.
 
 
 --------------------------------------------------------------------------------
-📄 File: index.html
---------------------------------------------------------------------------------
-
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>klappy.dev</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
-</html>
-
-
-
---------------------------------------------------------------------------------
 📄 File: package.json
 --------------------------------------------------------------------------------
 
@@ -300,22 +281,6 @@ The goal is better outcomes, not perfect artifacts.
     "vite": "^6.0.7"
   }
 }
-
-
---------------------------------------------------------------------------------
-📄 File: vite.config.js
---------------------------------------------------------------------------------
-
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-
-// https://vite.dev/config/
-export default defineConfig({
-  plugins: [react()],
-  // Root is project root, /public is served as static
-  // Content lives at /public/content/* and is fetched via /content/*
-});
-
 
 
 ================================================================================
@@ -6234,16 +6199,18 @@ If attempt-002 branches from attempt-001's code, it's not independent. The agent
 
 The required sequence is:
 
-1. **`attempt:register`** — Captures provenance (who, with what model, from where)
-2. **`attempt:nuke`** — Deletes `/src` and framework configs (guarantees blank slate)
+1. **`attempt:register --lane <lane>`** — Captures provenance (who, with what model, from where)
+2. **`attempt:nuke --lane <lane>`** — Deletes lane src and framework configs (guarantees blank slate)
 3. **Only then** does implementation begin
 
 This preserves forensic traceability (we know who showed up) while guaranteeing experimental independence (no inherited code).
 
-### What Gets Nuked
+### What Gets Nuked (Lane-Scoped)
 
-- `/src/` — application code
-- `vite.config.js`, `tailwind.config.js`, etc. — framework configs
+- `products/<lane>/src/` — lane application code
+- `products/<lane>/vite.config.js`, `products/<lane>/tailwind.config.js`, etc. — lane framework configs
+
+> **Note:** Root-level `/src/` no longer exists. All app code is lane-scoped.
 
 ### What Survives
 
@@ -6252,6 +6219,7 @@ This preserves forensic traceability (we know who showed up) while guaranteeing 
 - `/docs/` — process documentation
 - `/attempts/` — sealed evidence
 - `package.json` — dependency manifest
+- Other lanes (`products/<other-lane>/src/`) — only the target lane is nuked
 
 > **Decision:** See [D0008: Register Before Nuke](/canon/odd/decisions/D0008-register-before-nuke.md)
 
@@ -6353,7 +6321,7 @@ Pick one axis and declare it ahead of time:
    - Attempt folder, evidence, PRD patches
 
 4. **Promote code to main**
-   - Champion's `/src` merges to `main`
+   - Champion's `products/<lane>/src` merges to `main`
 
 5. **Fast-forward prod**
    - `git checkout prod && git merge main --ff-only`
@@ -8599,7 +8567,8 @@ It encodes the decoupling between App, Content, and Infrastructure planes.
 ## Core Topology
 
 ```
-/src/                           # Application (disposable per attempt)
+/products/<lane>/src/           # Lane application (disposable per attempt)
+/products/<lane>/dist/          # Lane build output (generated)
 /canon/                         # Canon documents (evolves independently)
 /odd/                           # ODD public docs (evolves independently)
 /about/                         # About docs (evolves independently)
@@ -8608,17 +8577,23 @@ It encodes the decoupling between App, Content, and Infrastructure planes.
 /docs/                          # Operational docs + PRD versions
 /attempts/                      # Sealed attempts (immutable after seal)
 /public/content/                # Generated (by sync script)
-/products/<lane>/dist/          # Lane build output (generated)
 /dist/                          # Legacy/transitional mirror (generated)
 ```
+
+> **Lane-scoped architecture:** Each product lane owns its own app plane under `products/<lane>/src/`. There is no root-level `/src/` directory.
 
 ---
 
 ## What Lives Where
 
-### Application Plane (`/src/`)
+### Application Plane (`products/<lane>/src/`)
 
-**Disposable per attempt.**
+**Disposable per attempt. Lane-scoped.**
+
+Each product lane (website, ai-navigation, agent-skill) has its own application plane:
+- `products/website/src/`
+- `products/ai-navigation/src/`
+- `products/agent-skill/src/`
 
 Contains:
 - UI components
@@ -8626,7 +8601,7 @@ Contains:
 - State management
 - Rendering code
 
-This folder can be deleted and rebuilt from scratch for each attempt.
+This folder can be deleted and rebuilt from scratch for each attempt via `attempt:nuke --lane <lane>`.
 
 ### Content Plane (`/canon/`, `/odd/`, `/about/`, `/projects/`)
 
@@ -8684,8 +8659,8 @@ Once sealed, these folders are not modified.
 | Fix a typo in Canon | `/canon/` | No |
 | Add a new ODD appendix | `/canon/odd/` | No |
 | Update build script | `/infra/` | No |
-| Redesign the UI | `/src/` | Yes (same or new PRD) |
-| Add new feature | `/src/` | Yes (requires PRD) |
+| Redesign the UI | `products/<lane>/src/` | Yes (same or new PRD) |
+| Add new feature | `products/<lane>/src/` | Yes (requires PRD) |
 | Add new content doc | `/about/`, `/projects/` | No |
 | Change manifest schema | `/canon/meta/` | No (but may affect app) |
 
@@ -8702,17 +8677,17 @@ Once sealed, these folders are not modified.
 
 ---
 
-## One Active App
+## One Active App Per Lane
 
-The repository contains **one active app implementation** in `/src/`.
+Each lane contains **one active app implementation** in `products/<lane>/src/`.
 
 Prior attempts are preserved by:
 - Git history
-- Sealed attempt records in `/attempts/`
+- Sealed attempt records in `/attempts/<lane>/`
 - Commit SHAs in `META.json`
 
 There are no `/app-v1`, `/app-v2` folders.  
-There is one `/src/` that gets rebuilt.
+There is one `products/<lane>/src/` per lane that gets rebuilt.
 
 ---
 
@@ -15788,7 +15763,7 @@ export default function App() {
       <ul>
         <li>PRD: <code>/docs/PRD.md</code></li>
         <li>Manifest: <code>/public/content/manifest.json</code></li>
-        <li>This file: <code>/src/components/App.jsx</code></li>
+        <li>This file: <code>products/&lt;lane&gt;/src/components/App.jsx</code></li>
       </ul>
     </div>
   );
@@ -15796,18 +15771,20 @@ export default function App() {
 `
 };
 
-// SAFETY: Only these paths may be purged during nuke
+// SAFETY: Ephemeral paths are lane-scoped. Root should remain clean.
+// NOTE: cmdNuke() handles lane-scoped deletion directly via laneEphemeralPaths.
+// This list is kept for reference/documentation only.
 const EPHEMERAL_PATHS = [
-  'src',
-  'app',
-  'index.html',       // App entry (if not in public)
-  'vite.config.js',
-  'vite.config.ts',
-  'tsconfig.json',
-  'tailwind.config.js',
-  'postcss.config.js',
-  // NOTE: package.json intentionally NOT nuked to preserve scripts
-  // Agents can modify package.json but the scripts should remain
+  // Lane-scoped paths (template: products/<lane>/...)
+  // 'products/<lane>/src',
+  // 'products/<lane>/dist',
+  // 'products/<lane>/vite.config.js',
+  // 'products/<lane>/vite.config.ts',
+  // 'products/<lane>/tsconfig.json',
+  // 'products/<lane>/tailwind.config.js',
+  // 'products/<lane>/postcss.config.js',
+  // NOTE: Root-level src, app, index.html, vite.config.js are NO LONGER valid.
+  // All ephemeral paths must be under products/<lane>/.
 ];
 
 // These are NEVER touched during nuke (the contract)
@@ -15922,28 +15899,33 @@ function createAttemptBranch(prd, attemptPadded, opts) {
 }
 
 /**
- * Reset /src to minimal shell.
+ * Reset lane src to minimal shell.
+ * Lane-scoped: operates on products/<lane>/src, not repo root.
  * Can operate in current directory or a specific cwd (for worktrees).
+ * 
+ * NOTE: This function is legacy. Prefer cmdNuke() for lane-scoped resets.
+ * Default lane is 'website' for backwards compatibility.
  */
-function resetSrc(opts, targetDir = ROOT) {
+function resetSrc(opts, targetDir = ROOT, lane = 'website') {
   const { dryRun, noCommit } = opts;
   
-  console.log('4️⃣  Resetting /src to minimal shell...');
+  const laneRoot = join(targetDir, 'products', lane);
+  const srcPath = join(laneRoot, 'src');
+  const appPath = join(laneRoot, 'app');
   
-  const srcPath = join(targetDir, 'src');
-  const appPath = join(targetDir, 'app');
+  console.log(`4️⃣  Resetting products/${lane}/src to minimal shell...`);
   
-  // Delete /src
+  // Delete lane src
   if (existsSync(srcPath) && !dryRun) {
     rmSync(srcPath, { recursive: true });
   }
   
-  // Delete /app if present
+  // Delete lane app if present
   if (existsSync(appPath) && !dryRun) {
     rmSync(appPath, { recursive: true });
   }
   
-  // Create minimal shell
+  // Create minimal shell in lane
   if (!dryRun) {
     mkdirSync(join(srcPath, 'components'), { recursive: true });
     for (const [filename, content] of Object.entries(SHELL_FILES)) {
@@ -15953,11 +15935,11 @@ function resetSrc(opts, targetDir = ROOT) {
   
   // Commit reset (unless --no-commit)
   if (!noCommit) {
-    run('git add src/', { dryRun, cwd: targetDir });
-    run('git commit -m "chore: reset /src to minimal shell for fresh attempt"', { dryRun, cwd: targetDir });
+    run(`git add products/${lane}/src/`, { dryRun, cwd: targetDir });
+    run(`git commit -m "chore: reset products/${lane}/src to minimal shell for fresh attempt"`, { dryRun, cwd: targetDir });
   }
   
-  console.log('  ✅ /src reset and committed\n');
+  console.log(`  ✅ products/${lane}/src reset and committed\n`);
 }
 
 function printStartSummary(prd, attemptPadded, branchName, prdSha) {
@@ -16229,16 +16211,27 @@ Options:
 }
 
 /**
- * Nuclear reset: Nuke + clean up attempt branches for a PRD.
+ * Nuclear reset: Nuke lane src + clean up attempt branches for a PRD.
  * 
  * This is the "hard reset" for starting a fresh PRD cycle.
  * Combines nuke with branch cleanup.
+ * 
+ * Lane-scoped: Only affects products/<lane>/src, not repo root.
+ * Default lane is 'website' for backwards compatibility.
  */
 function cmdReset(opts) {
   const { dryRun, noCommit, prd, force } = opts;
+  const lane = opts.lane || 'website';  // Default to website lane
   
   console.log('\n💥 NUCLEAR RESET\n');
+  console.log(`  Lane: ${lane}`);
   if (dryRun) console.log('  [DRY RUN MODE]\n');
+  
+  // Lane-scoped paths
+  const laneRoot = join(ROOT, 'products', lane);
+  const laneSrcPath = join(laneRoot, 'src');
+  const laneAppPath = join(laneRoot, 'app');
+  const laneViteConfig = join(laneRoot, 'vite.config.js');
   
   // Check if we're on main - warn about production
   const currentBranch = run('git branch --show-current', { silent: true, dryRun: false });
@@ -16246,61 +16239,57 @@ function cmdReset(opts) {
   
   if (isMain && !force) {
     console.log('  ⚠️  WARNING: You are on main branch!');
-    console.log('  ⚠️  Nuking /src on main will break production.');
+    console.log(`  ⚠️  Nuking products/${lane}/src on main will break production.`);
     console.log('');
     console.log('  If you ONLY want to clean up attempt branches (recommended):');
-    console.log('    npm run attempt:reset -- --prd v0.2 --no-nuke');
+    console.log(`    npm run attempt:reset -- --lane ${lane} --prd v0.2 --no-nuke`);
     console.log('');
     console.log('  If you really want to nuke production too:');
-    console.log('    npm run attempt:reset -- --prd v0.2 --force');
+    console.log(`    npm run attempt:reset -- --lane ${lane} --prd v0.2 --force`);
     console.log('');
     
     // Only do branch cleanup if --prd was provided
     if (prd) {
-      console.log('  Proceeding with branch cleanup only (not nuking /src)...\n');
+      console.log(`  Proceeding with branch cleanup only (not nuking products/${lane}/src)...\n`);
       opts.noNuke = true;
     } else {
-      fail('Use --force to nuke /src on main, or run from an attempt branch.');
+      fail(`Use --force to nuke products/${lane}/src on main, or run from an attempt branch.`);
     }
   }
   
   // ========================================
-  // Part 1: Nuke /src (unless --no-nuke or on main without --force)
+  // Part 1: Nuke lane src (unless --no-nuke or on main without --force)
   // ========================================
   if (!opts.noNuke) {
-    console.log('1️⃣  Nuking /src...\n');
-  console.log('  Will delete:');
-  console.log('    - /src (entire directory)');
-  console.log('    - /app (if exists)');
-  console.log('    - vite.config.js (framework-specific)');
-  console.log('');
+    console.log(`1️⃣  Nuking products/${lane}/src...\n`);
+    console.log('  Will delete:');
+    console.log(`    - products/${lane}/src (entire directory)`);
+    console.log(`    - products/${lane}/app (if exists)`);
+    console.log(`    - products/${lane}/vite.config.js (framework-specific)`);
+    console.log('');
   } else {
-    console.log('1️⃣  Skipping /src nuke (production protected)\n');
+    console.log(`1️⃣  Skipping products/${lane}/src nuke (production protected)\n`);
   }
   
   if (!opts.noNuke) {
-  const srcPath = join(ROOT, 'src');
-  const appPath = join(ROOT, 'app');
-  const viteConfig = join(ROOT, 'vite.config.js');
-  
-  // Delete /src
-  if (existsSync(srcPath)) {
-    if (!dryRun) rmSync(srcPath, { recursive: true });
-    console.log('  ✅ Deleted /src');
-  } else {
-    console.log('  ⚠️  /src does not exist');
-  }
-  
-  // Delete /app if present
-  if (existsSync(appPath)) {
-    if (!dryRun) rmSync(appPath, { recursive: true });
-    console.log('  ✅ Deleted /app');
-  }
-  
-  // Delete vite.config.js (framework-specific)
-  if (existsSync(viteConfig)) {
-    if (!dryRun) rmSync(viteConfig);
-    console.log('  ✅ Deleted vite.config.js');
+    // Delete lane src
+    if (existsSync(laneSrcPath)) {
+      if (!dryRun) rmSync(laneSrcPath, { recursive: true });
+      console.log(`  ✅ Deleted products/${lane}/src`);
+    } else {
+      console.log(`  ⚠️  products/${lane}/src does not exist`);
+    }
+    
+    // Delete lane app if present
+    if (existsSync(laneAppPath)) {
+      if (!dryRun) rmSync(laneAppPath, { recursive: true });
+      console.log(`  ✅ Deleted products/${lane}/app`);
+    }
+    
+    // Delete lane vite.config.js (framework-specific)
+    if (existsSync(laneViteConfig)) {
+      if (!dryRun) rmSync(laneViteConfig);
+      console.log(`  ✅ Deleted products/${lane}/vite.config.js`);
     }
   }
   
@@ -16386,8 +16375,8 @@ function cmdReset(opts) {
     console.log('\n3️⃣  Committing nuke...');
     run('git add -A', { dryRun });
     const msg = prd 
-      ? `chore: nuclear reset for PRD v${prd} - nuked src and cleared attempt branches`
-      : 'chore: nuke /src for fresh attempt (stack-agnostic)';
+      ? `chore: nuclear reset for PRD v${prd} lane ${lane} - nuked src and cleared attempt branches`
+      : `chore: nuke products/${lane}/src for fresh attempt (stack-agnostic)`;
     run(`git commit -m "${msg}" --allow-empty`, { dryRun });
     console.log('  ✅ Committed\n');
   } else {
@@ -16396,12 +16385,13 @@ function cmdReset(opts) {
   
   console.log('═'.repeat(60));
   console.log('\n💥 NUCLEAR RESET COMPLETE\n');
-  console.log('  /src is gone. Choose any stack for your attempt.');
+  console.log(`  Lane: ${lane}`);
+  console.log(`  products/${lane}/src is gone. Choose any stack for your attempt.`);
   if (prd) {
     console.log(`  All attempt branches for PRD v${prd} have been deleted.`);
     console.log('  Registry reset - next attempt will be attempt-001.');
   }
-  console.log('  Deploy contract preserved: /public/index.html serves as fallback.');
+  console.log(`  Deploy contract preserved: products/${lane}/dist/index.html after build.`);
   console.log('\n' + '═'.repeat(60));
   
   if (prd) {
@@ -19892,8 +19882,8 @@ if (hasErrors) {
 {
   "lane": "website",
   "pack": "author",
-  "built_at": "2026-01-19T20:53:12.178Z",
-  "git_commit": "19e264ac373ba8d5bc638e61de721750d1696920",
+  "built_at": "2026-01-20T05:23:25.940Z",
+  "git_commit": "c8e732941363a3edd7a564ad7e5f0e1fceea66aa",
   "sources": [
     "canon/index.md",
     "canon/odd/appendices/product-lanes.md",
@@ -19903,12 +19893,12 @@ if (hasErrors) {
     "docs/PRD/website/PRD.md"
   ],
   "source_hashes": {
-    "canon/index.md": "bae46a137e58066df21d89506f6ba63386d6684187aabc08a236c50150fcd8b4",
+    "canon/index.md": "8bf3004d7c204693562db1c4206a7736efafdb85b05c299f60366a460d3125dc",
     "canon/odd/appendices/product-lanes.md": "977b29aa2e06eecb32419d967da590f4d851c3c9feb5e38269cfc094b6da3d09",
-    "canon/odd/appendices/epochs.md": "62d38377f7b68c480628bf0bb89fe29478be3ac2dc2a886d0c67df538067ef7b",
+    "canon/odd/appendices/epochs.md": "59099c36270436e7e095d3acaa9161c75d7ae72b8bd500c51dc2145260c743dc",
     "canon/odd/appendices/compilation.md": "f95da459f446bd2c63d664c997663f0c02bdb0852b0c46af0106c1750e559aef",
     "canon/odd/appendices/compilation-targets.md": "0de1cdbfc2df82a896d07b070c8b554bd05df6b30dae4325de1379550f9dcf24",
-    "docs/PRD/website/PRD.md": "71ca26485617dc50f698aade67909d204074c7156ffd323e0f5138fc811c40b3"
+    "docs/PRD/website/PRD.md": "7177542662a88a87277d7bcb6cde9fd4376a32e971a30d42af5ffa813d8ddca1"
   },
   "output": "public/_compiled/website/author-pack.md",
   "plan": "infra/compile/plans/website/author.json"
@@ -19922,8 +19912,8 @@ if (hasErrors) {
 {
   "lane": "website",
   "pack": "visitor",
-  "built_at": "2026-01-19T20:53:12.016Z",
-  "git_commit": "19e264ac373ba8d5bc638e61de721750d1696920",
+  "built_at": "2026-01-20T05:23:25.798Z",
+  "git_commit": "c8e732941363a3edd7a564ad7e5f0e1fceea66aa",
   "sources": [
     "canon/index.md",
     "canon/odd/appendices/product-lanes.md",
@@ -19932,11 +19922,11 @@ if (hasErrors) {
     "docs/PRD/website/PRD.md"
   ],
   "source_hashes": {
-    "canon/index.md": "bae46a137e58066df21d89506f6ba63386d6684187aabc08a236c50150fcd8b4",
+    "canon/index.md": "8bf3004d7c204693562db1c4206a7736efafdb85b05c299f60366a460d3125dc",
     "canon/odd/appendices/product-lanes.md": "977b29aa2e06eecb32419d967da590f4d851c3c9feb5e38269cfc094b6da3d09",
-    "canon/odd/appendices/epochs.md": "62d38377f7b68c480628bf0bb89fe29478be3ac2dc2a886d0c67df538067ef7b",
+    "canon/odd/appendices/epochs.md": "59099c36270436e7e095d3acaa9161c75d7ae72b8bd500c51dc2145260c743dc",
     "canon/odd/appendices/compilation.md": "f95da459f446bd2c63d664c997663f0c02bdb0852b0c46af0106c1750e559aef",
-    "docs/PRD/website/PRD.md": "71ca26485617dc50f698aade67909d204074c7156ffd323e0f5138fc811c40b3"
+    "docs/PRD/website/PRD.md": "7177542662a88a87277d7bcb6cde9fd4376a32e971a30d42af5ffa813d8ddca1"
   },
   "output": "public/_compiled/website/visitor-pack.md",
   "plan": "infra/compile/plans/website/visitor.json"
@@ -19950,8 +19940,8 @@ if (hasErrors) {
 ---
 lane: website
 pack: author
-built_at: 2026-01-19T20:53:12.178Z
-git_commit: 19e264ac373ba8d5bc638e61de721750d1696920
+built_at: 2026-01-20T05:23:25.940Z
+git_commit: c8e732941363a3edd7a564ad7e5f0e1fceea66aa
 sources:
   - canon/index.md
   - canon/odd/appendices/product-lanes.md
@@ -19960,12 +19950,12 @@ sources:
   - canon/odd/appendices/compilation-targets.md
   - docs/PRD/website/PRD.md
 source_hashes:
-  canon/index.md: bae46a137e58066df21d89506f6ba63386d6684187aabc08a236c50150fcd8b4
+  canon/index.md: 8bf3004d7c204693562db1c4206a7736efafdb85b05c299f60366a460d3125dc
   canon/odd/appendices/product-lanes.md: 977b29aa2e06eecb32419d967da590f4d851c3c9feb5e38269cfc094b6da3d09
-  canon/odd/appendices/epochs.md: 62d38377f7b68c480628bf0bb89fe29478be3ac2dc2a886d0c67df538067ef7b
+  canon/odd/appendices/epochs.md: 59099c36270436e7e095d3acaa9161c75d7ae72b8bd500c51dc2145260c743dc
   canon/odd/appendices/compilation.md: f95da459f446bd2c63d664c997663f0c02bdb0852b0c46af0106c1750e559aef
   canon/odd/appendices/compilation-targets.md: 0de1cdbfc2df82a896d07b070c8b554bd05df6b30dae4325de1379550f9dcf24
-  docs/PRD/website/PRD.md: 71ca26485617dc50f698aade67909d204074c7156ffd323e0f5138fc811c40b3
+  docs/PRD/website/PRD.md: 7177542662a88a87277d7bcb6cde9fd4376a32e971a30d42af5ffa813d8ddca1
 ---
 
 
@@ -20060,6 +20050,7 @@ The appendices extend understanding without introducing enforcement:
 • **Quantum Development** — evaluating multiple paths before revising intent
 • **Repository Topology** — what lives where and what changes when
 • **Misuse Patterns** — common failure modes and how ODD gets misapplied
+• **Media as a Learning Layer** — media is optional, regenerable, and progressively disclosed; text remains canonical
 
 These are diagnostic and orientation documents, not requirements.
 
@@ -20112,6 +20103,7 @@ If documents appear to conflict, maturity context and explicit tradeoffs usually
       alignment-reviews.md
       epochs.md
       lane-implementation-surfaces.md
+      media-as-learning-layer.md
       product-lanes.md
       attempt-lifecycle.md
       drift-checks.md
@@ -20281,6 +20273,10 @@ Why visual systems evolve independently from products. Products consume visual i
 The drift-prevention mechanism. When docs, prompts, and tooling diverge, truth becomes vibes.
 • Lane Build Layout (odd/appendices/lane-build-layout.md)
 How lanes avoid /src and /dist collisions. Worktrees isolate, deployments are lane-scoped.
+• Online Evidence Requirement (odd/appendices/online-evidence.md)
+Why "works on my machine" is not evidence. Attempts are invalid without online preview URLs.
+• Deploy Evidence (odd/appendices/deploy-evidence.md)
+Why evidence must be in the build output. Cloudflare only serves products/<lane>/dist, not /attempts/**.
 
 ---
 
@@ -20803,6 +20799,40 @@ Naming epochs makes those shifts explicit so we can:
 
 If the evaluation landscape changed, say so.
 That's what an epoch is for.
+
+---
+
+## E0003 — Evidence-First Era
+
+### What changed
+
+E0003 begins when online deployment evidence becomes mandatory for attempt completion.
+
+In this epoch, a local build is not sufficient proof when the intended outcome is an online deployment.
+
+### Binding rule (new fitness landscape)
+
+An attempt is not complete until all are true:
+
+1) The attempt branch is pushed to origin
+2) Cloudflare Pages preview deployment succeeds (build passes)
+3) The preview URL returns HTTP 200 and renders the site
+4) The evidence URL returns HTTP 200 and renders the evidence at:
+
+`/_evidence/<run_id>/EVIDENCE.md`
+
+### Why this is a new epoch
+
+This change alters the repository's selection pressure:
+
+- Success is now gated by deployment correctness, not just build correctness
+- Evidence must be externally reviewable, not locally asserted
+- Attempts become comparable only within the same deploy-evidence regime
+
+### Compatibility
+
+- E0002 attempts remain valid within E0002.
+- E0002 attempts are not comparable to E0003 attempts by default.
 
 
 ---
@@ -21048,7 +21078,7 @@ These exist as names only until a lane PRD requires them.
 
 | Field           | Value            |
 |-----------------|------------------|
-| **PRD Version** | v1.0             |
+| **PRD Version** | v1.1             |
 | **Lane**        | website          |
 | **Status**      | Active           |
 | **Created**     | 2026-01-17       |
@@ -21142,12 +21172,30 @@ It explains ODD progressively to humans.
 
 An attempt against this PRD is complete when:
 
-- [ ] Build output produced (`npm run build`)
+- [ ] Build output produced (`npm run build -- --lane website`)
 - [ ] Visual proof captured (desktop + mobile screenshots)
 - [ ] First load shows ≤7 nav items (verified via screenshot)
 - [ ] Mobile layout verified (no horizontal scroll)
 - [ ] Deep link round-trip tested
 - [ ] Self-audit completed with explicit tradeoffs
+- [ ] **Cloudflare Preview URL provided** (branch must be pushed)
+- [ ] **Evidence URL provided** (viewable online without local code)
+
+---
+
+## Online Evidence (Required)
+
+A website lane attempt is **not complete** unless:
+
+1. The attempt branch is pushed to `origin`.
+2. Cloudflare Pages generates a Preview Deployment URL for that branch.
+3. The attempt includes an Evidence URL viewable online without running code locally.
+
+Local preview instructions are allowed during development, but they **do not satisfy attempt completion**.
+
+If an agent cannot provide both URLs, the attempt is **INVALID**.
+
+See `/canon/odd/appendices/online-evidence.md` for the full requirement.
 
 ---
 
@@ -21165,6 +21213,37 @@ This PRD is shaped by Canon constraints:
 - UX should carry the explanation (reduce text compensation)
 - Maintainability over cleverness
 - Progressive disclosure required
+
+---
+
+## Media (Learning Layer)
+
+This lane follows: `/canon/odd/appendices/media-as-learning-layer.md`
+
+Media is:
+- optional (progressive disclosure)
+- non-blocking (site must work with media collapsed)
+- never autoplayed
+- attached to stable pages only
+
+### Initial Assets (Phase 0)
+
+**Home (`/`)**
+- Hero diagram (image): `/assets/home/hero-odd-diagram.png`
+- Orientation map (image): `/assets/home/orientation-map-diagram.png`
+- ODD explainer (video): `/assets/home/outcomes-driven_development.mp4`
+
+**ODD (`/odd/...`)**
+- ODD in practice (video): `/assets/odd/odd-in-practice.mp4`
+- ODD is not a framework (image): `/assets/odd/odd-is-not-a-framework.png`
+- Why evidence beats confidence (audio): `/assets/odd/why-evidence-beats-confidence.m4a`
+
+### Requirements
+
+- The default experience must not require media consumption to understand the page.
+- Media must be user-initiated (explicit Watch/Listen/View affordances).
+- No autoplay video or audio.
+- Media must not add to the primary navigation item count.
 
 ---
 
@@ -21207,6 +21286,7 @@ The website lane MUST support generating a wipeable "visitor pack" used for prog
 - Definition of Done: `/canon/definition-of-done.md`
 - Legacy PRD (v0.3): `/docs/PRD/website/PRD-legacy-v0.3.md`
 - Compilation: `/canon/odd/appendices/compilation.md`
+- Media philosophy: `/canon/odd/appendices/media-as-learning-layer.md`
 
 
 
@@ -21216,7 +21296,7 @@ The website lane MUST support generating a wipeable "visitor pack" used for prog
 
 {
   "lane": "website",
-  "generated_at": "2026-01-19T20:53:12.181Z",
+  "generated_at": "2026-01-20T05:23:25.943Z",
   "packs": [
     {
       "pack": "author",
@@ -21243,8 +21323,8 @@ The website lane MUST support generating a wipeable "visitor pack" used for prog
 ---
 lane: website
 pack: visitor
-built_at: 2026-01-19T20:53:12.016Z
-git_commit: 19e264ac373ba8d5bc638e61de721750d1696920
+built_at: 2026-01-20T05:23:25.798Z
+git_commit: c8e732941363a3edd7a564ad7e5f0e1fceea66aa
 sources:
   - canon/index.md
   - canon/odd/appendices/product-lanes.md
@@ -21252,11 +21332,11 @@ sources:
   - canon/odd/appendices/compilation.md
   - docs/PRD/website/PRD.md
 source_hashes:
-  canon/index.md: bae46a137e58066df21d89506f6ba63386d6684187aabc08a236c50150fcd8b4
+  canon/index.md: 8bf3004d7c204693562db1c4206a7736efafdb85b05c299f60366a460d3125dc
   canon/odd/appendices/product-lanes.md: 977b29aa2e06eecb32419d967da590f4d851c3c9feb5e38269cfc094b6da3d09
-  canon/odd/appendices/epochs.md: 62d38377f7b68c480628bf0bb89fe29478be3ac2dc2a886d0c67df538067ef7b
+  canon/odd/appendices/epochs.md: 59099c36270436e7e095d3acaa9161c75d7ae72b8bd500c51dc2145260c743dc
   canon/odd/appendices/compilation.md: f95da459f446bd2c63d664c997663f0c02bdb0852b0c46af0106c1750e559aef
-  docs/PRD/website/PRD.md: 71ca26485617dc50f698aade67909d204074c7156ffd323e0f5138fc811c40b3
+  docs/PRD/website/PRD.md: 7177542662a88a87277d7bcb6cde9fd4376a32e971a30d42af5ffa813d8ddca1
 ---
 
 
@@ -21351,6 +21431,7 @@ The appendices extend understanding without introducing enforcement:
 • **Quantum Development** — evaluating multiple paths before revising intent
 • **Repository Topology** — what lives where and what changes when
 • **Misuse Patterns** — common failure modes and how ODD gets misapplied
+• **Media as a Learning Layer** — media is optional, regenerable, and progressively disclosed; text remains canonical
 
 These are diagnostic and orientation documents, not requirements.
 
@@ -21403,6 +21484,7 @@ If documents appear to conflict, maturity context and explicit tradeoffs usually
       alignment-reviews.md
       epochs.md
       lane-implementation-surfaces.md
+      media-as-learning-layer.md
       product-lanes.md
       attempt-lifecycle.md
       drift-checks.md
@@ -21572,6 +21654,10 @@ Why visual systems evolve independently from products. Products consume visual i
 The drift-prevention mechanism. When docs, prompts, and tooling diverge, truth becomes vibes.
 • Lane Build Layout (odd/appendices/lane-build-layout.md)
 How lanes avoid /src and /dist collisions. Worktrees isolate, deployments are lane-scoped.
+• Online Evidence Requirement (odd/appendices/online-evidence.md)
+Why "works on my machine" is not evidence. Attempts are invalid without online preview URLs.
+• Deploy Evidence (odd/appendices/deploy-evidence.md)
+Why evidence must be in the build output. Cloudflare only serves products/<lane>/dist, not /attempts/**.
 
 ---
 
@@ -22095,6 +22181,40 @@ Naming epochs makes those shifts explicit so we can:
 If the evaluation landscape changed, say so.
 That's what an epoch is for.
 
+---
+
+## E0003 — Evidence-First Era
+
+### What changed
+
+E0003 begins when online deployment evidence becomes mandatory for attempt completion.
+
+In this epoch, a local build is not sufficient proof when the intended outcome is an online deployment.
+
+### Binding rule (new fitness landscape)
+
+An attempt is not complete until all are true:
+
+1) The attempt branch is pushed to origin
+2) Cloudflare Pages preview deployment succeeds (build passes)
+3) The preview URL returns HTTP 200 and renders the site
+4) The evidence URL returns HTTP 200 and renders the evidence at:
+
+`/_evidence/<run_id>/EVIDENCE.md`
+
+### Why this is a new epoch
+
+This change alters the repository's selection pressure:
+
+- Success is now gated by deployment correctness, not just build correctness
+- Evidence must be externally reviewable, not locally asserted
+- Attempts become comparable only within the same deploy-evidence regime
+
+### Compatibility
+
+- E0002 attempts remain valid within E0002.
+- E0002 attempts are not comparable to E0003 attempts by default.
+
 
 ---
 
@@ -22256,7 +22376,7 @@ Canon and PRDs MUST NOT be modified by either command.
 
 | Field           | Value            |
 |-----------------|------------------|
-| **PRD Version** | v1.0             |
+| **PRD Version** | v1.1             |
 | **Lane**        | website          |
 | **Status**      | Active           |
 | **Created**     | 2026-01-17       |
@@ -22350,12 +22470,30 @@ It explains ODD progressively to humans.
 
 An attempt against this PRD is complete when:
 
-- [ ] Build output produced (`npm run build`)
+- [ ] Build output produced (`npm run build -- --lane website`)
 - [ ] Visual proof captured (desktop + mobile screenshots)
 - [ ] First load shows ≤7 nav items (verified via screenshot)
 - [ ] Mobile layout verified (no horizontal scroll)
 - [ ] Deep link round-trip tested
 - [ ] Self-audit completed with explicit tradeoffs
+- [ ] **Cloudflare Preview URL provided** (branch must be pushed)
+- [ ] **Evidence URL provided** (viewable online without local code)
+
+---
+
+## Online Evidence (Required)
+
+A website lane attempt is **not complete** unless:
+
+1. The attempt branch is pushed to `origin`.
+2. Cloudflare Pages generates a Preview Deployment URL for that branch.
+3. The attempt includes an Evidence URL viewable online without running code locally.
+
+Local preview instructions are allowed during development, but they **do not satisfy attempt completion**.
+
+If an agent cannot provide both URLs, the attempt is **INVALID**.
+
+See `/canon/odd/appendices/online-evidence.md` for the full requirement.
 
 ---
 
@@ -22373,6 +22511,37 @@ This PRD is shaped by Canon constraints:
 - UX should carry the explanation (reduce text compensation)
 - Maintainability over cleverness
 - Progressive disclosure required
+
+---
+
+## Media (Learning Layer)
+
+This lane follows: `/canon/odd/appendices/media-as-learning-layer.md`
+
+Media is:
+- optional (progressive disclosure)
+- non-blocking (site must work with media collapsed)
+- never autoplayed
+- attached to stable pages only
+
+### Initial Assets (Phase 0)
+
+**Home (`/`)**
+- Hero diagram (image): `/assets/home/hero-odd-diagram.png`
+- Orientation map (image): `/assets/home/orientation-map-diagram.png`
+- ODD explainer (video): `/assets/home/outcomes-driven_development.mp4`
+
+**ODD (`/odd/...`)**
+- ODD in practice (video): `/assets/odd/odd-in-practice.mp4`
+- ODD is not a framework (image): `/assets/odd/odd-is-not-a-framework.png`
+- Why evidence beats confidence (audio): `/assets/odd/why-evidence-beats-confidence.m4a`
+
+### Requirements
+
+- The default experience must not require media consumption to understand the page.
+- Media must be user-initiated (explicit Watch/Listen/View affordances).
+- No autoplay video or audio.
+- Media must not add to the primary navigation item count.
 
 ---
 
@@ -22415,6 +22584,7 @@ The website lane MUST support generating a wipeable "visitor pack" used for prog
 - Definition of Done: `/canon/definition-of-done.md`
 - Legacy PRD (v0.3): `/docs/PRD/website/PRD-legacy-v0.3.md`
 - Compilation: `/canon/odd/appendices/compilation.md`
+- Media philosophy: `/canon/odd/appendices/media-as-learning-layer.md`
 
 
 
