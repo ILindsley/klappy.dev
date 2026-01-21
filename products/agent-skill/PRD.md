@@ -1,13 +1,13 @@
-# PRD: ODD Agent Skill
+# PRD: ODD Agent Skill — Canon Refresh + ODD Compliance
 
-| Field           | Value       |
-| --------------- | ----------- |
-| **PRD Version** | v1.2        |
-| **Lane**        | agent-skill |
-| **Status**      | Active      |
-| **Created**     | 2026-01-17  |
-| **Updated**     | 2026-01-20  |
-| **Author**      | Chris Klapp |
+| Field             | Value       |
+| ----------------- | ----------- |
+| **PRD Version**   | v1.2.3      |
+| **Lane**          | agent-skill |
+| **Status**        | Draft       |
+| **Created**       | 2026-01-21  |
+| **Author**        | Chris Klapp |
+| **Canon Version** | 0.5.4       |
 
 ---
 
@@ -18,85 +18,72 @@ This lane MUST remain compatible with:
 - manifest >=2.0.0 <3.0.0
 - attempt-cli >=2.0.0 <3.0.0
 
-This lane is allowed to have no UI and is not required to satisfy build-output unless it produces a deployable artifact.
-
 ---
 
 ## Objective
 
-Deliver a compiled pack (`prd-guide-pack.md`) that enables AI agents to interactively guide humans through creating ODD-aligned PRDs.
-
-**v1.2 addition**: The compiled pack is publicly accessible at a stable URL without requiring clone or build.
+Recompile the PRD guide pack against canon v0.5.4 with proper ODD compliance: ephemeral artifacts generated per-attempt, compile plans lane-owned, and strict adherence to the ODD formula (Pack + CONTRACT + PRD = Attempt).
 
 ---
 
 ## Background
 
-This is the whole point.
+**v1.2.1 delivered**: Lane-owned Cloudflare Pages deployment with versioned, immutable asset URLs.
 
-This PRD is about how agents think, not what they render.
+**v1.2.2 failed** (see [H0005](./history/H0005-v1.2.2-failed.md)): Attempt exposed fundamental ODD violations:
 
-This is not tied to this website. This should work on any project.
+- INSTRUCTIONS.md was being persisted when it should be ephemeral
+- Compile plans lived in central `infra/compile/plans/` instead of lane
+- ODD formula (Pack + CONTRACT + PRD = Attempt) was violated
+- Attempted to steer a miss instead of failing clean
 
-Once this succeeds, any future PoC can start without rebuilding process.
+**v1.2.3 patches v1.2.2** with ODD compliance + canon content:
 
-**V1.1 delivered**: A portable, compiled pack that any LLM can use to guide PRD creation using ODD principles.
-
-**V1.2 adds**: Zero-friction public distribution so anyone can grab the pack from a URL.
-
----
-
-## In Scope (v1.2)
-
-### From v1.1 (retained)
-
-- Compiled pack for PRD creation guidance
-- Distilled ODD philosophy (manifesto, constraints, decision rules)
-- PRD template structure
-- Interactive conversation flow instructions
-- Questions to probe for outcomes, evidence, and constraints
-- Anti-pattern detection (feature-first thinking, untestable criteria)
-
-### New in v1.2
-
-- Public URL for pack distribution
-- Integration with existing Cloudflare Pages deployment
-- Automated build-and-deploy (no manual upload)
+- Canon bumped to v0.5.4 (README Index Pattern)
+- Pack includes folder READMEs for scannable summaries
+- INSTRUCTIONS.md treated as ephemeral (generated per-attempt)
+- Compile plan lives in lane (`src/compile-plan.json`)
+- Clean restart with corrected architecture
 
 ---
 
-## Explicitly Out of Scope (v1.2)
+## In Scope (v1.2.3)
 
-- UI rendering (belongs to website lane)
-- Website styling or navigation
-- Human onboarding (belongs to website lane)
-- Content authoring for humans
-- Helping humans understand ODD (belongs to ai-navigation lane)
-- MCP server integration (future)
-- Cursor SKILL.md format (future)
-- Attempt execution guidance (future)
-- Failure detection / self-improvement (future)
-- Multi-project orchestration (future)
+### From v1.2.1 (retained)
+
+- Lane-owned Cloudflare Pages deployment
+- Versioned asset URLs
+- README.md per version folder
+- No website lane dependency
+
+### New in v1.2.3
+
+- Recompiled pack against canon v0.5.4
+- Includes folder READMEs (canon, odd, appendices, decisions)
+- Updated source hashes in provenance header
+- Updated `/latest/` to point to v1.2.3 pack
+- INSTRUCTIONS.md as ephemeral artifact (generated per-attempt, not persisted)
+- Compile plan in lane (`src/compile-plan.json`)
+
+---
+
+## Explicitly Out of Scope (v1.2.3)
+
+- Changes to distribution architecture (Cloudflare Pages setup unchanged)
+- New features or workflow stages
+- Persisting generated artifacts (INSTRUCTIONS.md stays ephemeral)
 
 ---
 
 ## Success Criteria
 
-### v1.1 Criteria (retained)
-
-- [ ] Pack can be consumed by any LLM with 100K+ context window
-- [ ] Agent using pack asks clarifying questions about outcomes (not features)
-- [ ] Agent using pack identifies untestable success criteria
-- [ ] Agent using pack suggests missing constraints or non-goals
-- [ ] Resulting PRD follows ODD template structure
-- [ ] No dependency on this repo's UI or tooling
-
-### v1.2 Criteria (new)
-
-- [ ] Pack available at stable public URL (e.g., `https://klappy.dev/packs/agent-skill/prd-guide-pack.md`)
-- [ ] URL returns HTTP 200 with correct pack content
-- [ ] No clone or build required for consumers to access pack
-- [ ] URL documented in lane README
+- [ ] Pack recompiled with canon v0.5.4 sources
+- [ ] Provenance header shows updated source hashes
+- [ ] Pack available at versioned URL
+- [ ] `/latest/` updated to serve v1.2.3 pack
+- [ ] No behavioral changes to pack guidance
+- [ ] INSTRUCTIONS.md generated per-attempt (not persisted in src/)
+- [ ] Compile plan located in lane (`src/compile-plan.json`)
 
 ---
 
@@ -104,109 +91,70 @@ Once this succeeds, any future PoC can start without rebuilding process.
 
 An attempt against this PRD is complete when:
 
-### v1.1 Requirements (retained)
+### Compilation
 
-- [ ] Compile plan exists at `infra/compile/plans/agent-skill/prd-guide.json`
-- [ ] Interactive guidance exists at `products/agent-skill/src/INSTRUCTIONS.md`
-- [ ] Pack generated at `products/agent-skill/dist/prd-guide-pack.md`
-- [ ] Pack includes valid provenance header (lane, pack, built_at, git_commit, sources, source_hashes)
+- [ ] Compile succeeds using lane-owned `src/compile-plan.json`
+- [ ] Output written to attempt's `evidence/` folder
+- [ ] Provenance header shows canon v0.5.4 source hashes
+- [ ] INSTRUCTIONS.md generated fresh (not copied from persisted source)
 
-### v1.2 Requirements (new)
+### Distribution
 
-- [ ] Distribution mechanism implemented (build script copies pack to website dist)
-- [ ] Public URL verified with HTTP 200 after deployment
-- [ ] Pack content at URL matches local build output
-- [ ] `products/agent-skill/src/README.md` updated with public URL
-
-### Evidence Required
-
-- [ ] Screenshot of pack URL returning 200
-- [ ] Diff showing pack content matches local build
-- [ ] Self-audit completed with explicit tradeoffs
-
----
-
-## Primary User
-
-AI agents (Claude Opus 4.5 or similar) operating in Claude Code, Cursor, or any IDE with LLM context injection.
-
----
-
-## Target Use Case
-
-A developer wants to create a V1 PRD for their product using ODD principles.
-
-**v1.1 flow**: Clone repo, build pack, paste into AI context.
-
-**v1.2 flow**: Copy pack from public URL, paste into AI context. No clone or build required.
-
-The AI guides them through:
-
-1. Clarifying the outcome (not features)
-2. Defining testable success criteria
-3. Establishing constraints and non-goals
-4. Specifying evidence requirements
-5. Completing a self-audit
-
----
-
-## Compiled Pack
-
-### Source
-
-- `products/agent-skill/src/INSTRUCTIONS.md` - Interactive guidance
-- `products/agent-skill/src/compile-plan.json` - Build configuration
-
-### Build Command
-
-- `npm run lane:compile -- --lane agent-skill --pack prd-guide`
-
-### Output
-
-- `products/agent-skill/dist/prd-guide-pack.md`
-- `products/agent-skill/dist/_meta/prd-guide-COMPILE_META.json`
-
-### Distribution (v1.2)
-
-- Deployed to: `https://klappy.dev/packs/agent-skill/prd-guide-pack.md`
-- Automated via website build process
+- [ ] `public/agent-skill/v1.2.3/prd-guide-pack.md` created
+- [ ] `public/agent-skill/latest/prd-guide-pack.md` updated
+- [ ] Public URL verified with HTTP 200
 
 ### Verification
 
-- `npm run verify:compiled -- --lane agent-skill --pack prd-guide`
+- [ ] Source hashes differ from v1.2.1 (canon changed)
+- [ ] Pack content includes folder READMEs with scannable summaries
+- [ ] No persisted INSTRUCTIONS.md in `src/` or version folder
 
-### Contract
+### Evidence Required
 
-- The compiled pack MUST include a provenance header as defined in:
-  - `klappy://canon/odd/compilation`
+- [ ] Screenshot of successful compile output
+- [ ] Diff showing updated source hashes
+- [ ] Self-audit completed
 
-### Sources (in order)
+---
 
-1. `canon/odd/manifesto.md` - Philosophy foundation
-2. `canon/constraints.md` - Baseline assumptions
-3. `canon/decision-rules.md` - Decision heuristics
-4. `canon/definition-of-done.md` - Completion criteria
-5. `canon/self-audit.md` - Review checklist
-6. `docs/PRD/PRD_TEMPLATE.md` - PRD structure
-7. `products/agent-skill/src/INSTRUCTIONS.md` - Interactive guidance
+## Pack Sources
+
+The compiled pack concatenates these files:
+
+### Canon Sources (persisted)
+
+| #   | Source                           | Purpose                                          |
+| --- | -------------------------------- | ------------------------------------------------ |
+| 1   | `canon/README.md`                | Canon orientation, meta rules, confidence scores |
+| 2   | `canon/odd/README.md`            | ODD folder index, core thesis                    |
+| 3   | `canon/odd/manifesto.md`         | Full ODD philosophy                              |
+| 4   | `canon/odd/appendices/README.md` | 24 appendices summarized                         |
+| 5   | `canon/odd/decisions/README.md`  | 14 decisions summarized                          |
+| 6   | `canon/constraints.md`           | Baseline assumptions                             |
+| 7   | `canon/decision-rules.md`        | Decision heuristics                              |
+| 8   | `canon/definition-of-done.md`    | Completion criteria                              |
+| 9   | `canon/self-audit.md`            | Review checklist                                 |
+| 10  | `docs/PRD/PRD_TEMPLATE.md`       | PRD structure                                    |
+
+### Generated Sources (ephemeral)
+
+| #   | Source           | Purpose                                     |
+| --- | ---------------- | ------------------------------------------- |
+| 11  | `INSTRUCTIONS.md` | Interactive guidance (generated by attempt) |
+
+**Note:** INSTRUCTIONS.md is a **generated artifact**, not persisted input. Each attempt generates it fresh based on PRD requirements. It is ephemeral like code — it lives only in the attempt's evidence folder, never in `src/` or version folders.
 
 ---
 
 ## Constraints
 
-This PRD is shaped by Canon constraints:
-
-- Evidence over assertion
-- Evolution, not automation (humans stay in the loop)
-- Explicit tradeoffs required
-- Bounded evolution (no self-modifying goals)
-- Portability: pack must work outside this repository
-
-### v1.2 Constraints
-
-- Must integrate with existing Cloudflare Pages deployment
-- Must not require manual steps after merge to main
-- Pack must be regeneratable (not manually uploaded)
+- **No functional changes**: This is a content refresh only
+- **Same distribution**: Uses existing Cloudflare Pages setup
+- **Traceability**: Canon version documented in PRD metadata
+- **ODD formula**: Pack + CONTRACT + PRD = Attempt (nothing else)
+- **Ephemeral artifacts**: Generated code (INSTRUCTIONS.md) not persisted
+- **Lane isolation**: Compile plans and version-specific assets stay in lane
 
 ---
 
@@ -218,16 +166,13 @@ This PRD may be attempted multiple times.
 - Failed attempts inform future attempts or PRD revisions
 - Attempts are sealed when CLOSED or ABANDONED
 
-Attempts live at: `products/agent-skill/attempts/prd-v1.2/attempt-NNN/`
+Attempts live at: `v1.2.3/attempts/attempt-NNN/`
 
 ---
 
 ## Related Documents
 
-- Lane architecture: `/canon/odd/appendices/product-lanes.md`
-- Canon constraints: `/canon/constraints.md`
-- Definition of Done: `/canon/definition-of-done.md`
-- Evolution philosophy: `/canon/odd/appendices/evolution-not-automation.md`
-- Compilation: `/canon/odd/appendices/compilation.md`
-- Compilation targets: `/canon/odd/appendices/compilation-targets.md`
-- v1.1 Champion: `products/agent-skill/attempts/prd-v1.1/attempt-001/`
+- v1.2.2 Failure: [H0005](./history/H0005-v1.2.2-failed.md)
+- v1.2.1 Champion: `v1.2.1/attempts/attempt-001/`
+- Canon Changelog: `/public/content/canon/CHANGELOG.md`
+- Canon 0.5.4: `/canon/CHANGELOG.md` (README Index Pattern)

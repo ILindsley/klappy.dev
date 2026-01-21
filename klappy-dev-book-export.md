@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-21T03:10:07.410Z
-Total Files: 238
+Generated: 2026-01-21T03:17:48.517Z
+Total Files: 228
 
 This is a complete export of all documentation, code, and content files
 from the klappy.dev repository, organized by section.
@@ -25,7 +25,7 @@ from the klappy.dev repository, organized by section.
 - **Infrastructure** (19 files)
 - **Interfaces & Contracts** (6 files)
 - **ODD (Outcomes-Driven Development)** (1 files)
-- **Products** (84 files)
+- **Products** (74 files)
 - **Projects** (6 files)
 - **Public Content** (17 files)
 - **Visual Design System** (4 files)
@@ -28258,16 +28258,16 @@ Don't bend rules to make it work.
 📄 File: products/agent-skill/PRD.md
 --------------------------------------------------------------------------------
 
-# PRD: ODD Agent Skill
+# PRD: ODD Agent Skill — Canon Refresh + ODD Compliance
 
-| Field           | Value       |
-| --------------- | ----------- |
-| **PRD Version** | v1.2        |
-| **Lane**        | agent-skill |
-| **Status**      | Active      |
-| **Created**     | 2026-01-17  |
-| **Updated**     | 2026-01-20  |
-| **Author**      | Chris Klapp |
+| Field             | Value       |
+| ----------------- | ----------- |
+| **PRD Version**   | v1.2.3      |
+| **Lane**          | agent-skill |
+| **Status**        | Draft       |
+| **Created**       | 2026-01-21  |
+| **Author**        | Chris Klapp |
+| **Canon Version** | 0.5.4       |
 
 ---
 
@@ -28278,85 +28278,72 @@ This lane MUST remain compatible with:
 - manifest >=2.0.0 <3.0.0
 - attempt-cli >=2.0.0 <3.0.0
 
-This lane is allowed to have no UI and is not required to satisfy build-output unless it produces a deployable artifact.
-
 ---
 
 ## Objective
 
-Deliver a compiled pack (`prd-guide-pack.md`) that enables AI agents to interactively guide humans through creating ODD-aligned PRDs.
-
-**v1.2 addition**: The compiled pack is publicly accessible at a stable URL without requiring clone or build.
+Recompile the PRD guide pack against canon v0.5.4 with proper ODD compliance: ephemeral artifacts generated per-attempt, compile plans lane-owned, and strict adherence to the ODD formula (Pack + CONTRACT + PRD = Attempt).
 
 ---
 
 ## Background
 
-This is the whole point.
+**v1.2.1 delivered**: Lane-owned Cloudflare Pages deployment with versioned, immutable asset URLs.
 
-This PRD is about how agents think, not what they render.
+**v1.2.2 failed** (see [H0005](./history/H0005-v1.2.2-failed.md)): Attempt exposed fundamental ODD violations:
 
-This is not tied to this website. This should work on any project.
+- INSTRUCTIONS.md was being persisted when it should be ephemeral
+- Compile plans lived in central `infra/compile/plans/` instead of lane
+- ODD formula (Pack + CONTRACT + PRD = Attempt) was violated
+- Attempted to steer a miss instead of failing clean
 
-Once this succeeds, any future PoC can start without rebuilding process.
+**v1.2.3 patches v1.2.2** with ODD compliance + canon content:
 
-**V1.1 delivered**: A portable, compiled pack that any LLM can use to guide PRD creation using ODD principles.
-
-**V1.2 adds**: Zero-friction public distribution so anyone can grab the pack from a URL.
-
----
-
-## In Scope (v1.2)
-
-### From v1.1 (retained)
-
-- Compiled pack for PRD creation guidance
-- Distilled ODD philosophy (manifesto, constraints, decision rules)
-- PRD template structure
-- Interactive conversation flow instructions
-- Questions to probe for outcomes, evidence, and constraints
-- Anti-pattern detection (feature-first thinking, untestable criteria)
-
-### New in v1.2
-
-- Public URL for pack distribution
-- Integration with existing Cloudflare Pages deployment
-- Automated build-and-deploy (no manual upload)
+- Canon bumped to v0.5.4 (README Index Pattern)
+- Pack includes folder READMEs for scannable summaries
+- INSTRUCTIONS.md treated as ephemeral (generated per-attempt)
+- Compile plan lives in lane (`src/compile-plan.json`)
+- Clean restart with corrected architecture
 
 ---
 
-## Explicitly Out of Scope (v1.2)
+## In Scope (v1.2.3)
 
-- UI rendering (belongs to website lane)
-- Website styling or navigation
-- Human onboarding (belongs to website lane)
-- Content authoring for humans
-- Helping humans understand ODD (belongs to ai-navigation lane)
-- MCP server integration (future)
-- Cursor SKILL.md format (future)
-- Attempt execution guidance (future)
-- Failure detection / self-improvement (future)
-- Multi-project orchestration (future)
+### From v1.2.1 (retained)
+
+- Lane-owned Cloudflare Pages deployment
+- Versioned asset URLs
+- README.md per version folder
+- No website lane dependency
+
+### New in v1.2.3
+
+- Recompiled pack against canon v0.5.4
+- Includes folder READMEs (canon, odd, appendices, decisions)
+- Updated source hashes in provenance header
+- Updated `/latest/` to point to v1.2.3 pack
+- INSTRUCTIONS.md as ephemeral artifact (generated per-attempt, not persisted)
+- Compile plan in lane (`src/compile-plan.json`)
+
+---
+
+## Explicitly Out of Scope (v1.2.3)
+
+- Changes to distribution architecture (Cloudflare Pages setup unchanged)
+- New features or workflow stages
+- Persisting generated artifacts (INSTRUCTIONS.md stays ephemeral)
 
 ---
 
 ## Success Criteria
 
-### v1.1 Criteria (retained)
-
-- [ ] Pack can be consumed by any LLM with 100K+ context window
-- [ ] Agent using pack asks clarifying questions about outcomes (not features)
-- [ ] Agent using pack identifies untestable success criteria
-- [ ] Agent using pack suggests missing constraints or non-goals
-- [ ] Resulting PRD follows ODD template structure
-- [ ] No dependency on this repo's UI or tooling
-
-### v1.2 Criteria (new)
-
-- [ ] Pack available at stable public URL (e.g., `https://klappy.dev/packs/agent-skill/prd-guide-pack.md`)
-- [ ] URL returns HTTP 200 with correct pack content
-- [ ] No clone or build required for consumers to access pack
-- [ ] URL documented in lane README
+- [ ] Pack recompiled with canon v0.5.4 sources
+- [ ] Provenance header shows updated source hashes
+- [ ] Pack available at versioned URL
+- [ ] `/latest/` updated to serve v1.2.3 pack
+- [ ] No behavioral changes to pack guidance
+- [ ] INSTRUCTIONS.md generated per-attempt (not persisted in src/)
+- [ ] Compile plan located in lane (`src/compile-plan.json`)
 
 ---
 
@@ -28364,109 +28351,70 @@ Once this succeeds, any future PoC can start without rebuilding process.
 
 An attempt against this PRD is complete when:
 
-### v1.1 Requirements (retained)
+### Compilation
 
-- [ ] Compile plan exists at `infra/compile/plans/agent-skill/prd-guide.json`
-- [ ] Interactive guidance exists at `products/agent-skill/src/INSTRUCTIONS.md`
-- [ ] Pack generated at `products/agent-skill/dist/prd-guide-pack.md`
-- [ ] Pack includes valid provenance header (lane, pack, built_at, git_commit, sources, source_hashes)
+- [ ] Compile succeeds using lane-owned `src/compile-plan.json`
+- [ ] Output written to attempt's `evidence/` folder
+- [ ] Provenance header shows canon v0.5.4 source hashes
+- [ ] INSTRUCTIONS.md generated fresh (not copied from persisted source)
 
-### v1.2 Requirements (new)
+### Distribution
 
-- [ ] Distribution mechanism implemented (build script copies pack to website dist)
-- [ ] Public URL verified with HTTP 200 after deployment
-- [ ] Pack content at URL matches local build output
-- [ ] `products/agent-skill/src/README.md` updated with public URL
-
-### Evidence Required
-
-- [ ] Screenshot of pack URL returning 200
-- [ ] Diff showing pack content matches local build
-- [ ] Self-audit completed with explicit tradeoffs
-
----
-
-## Primary User
-
-AI agents (Claude Opus 4.5 or similar) operating in Claude Code, Cursor, or any IDE with LLM context injection.
-
----
-
-## Target Use Case
-
-A developer wants to create a V1 PRD for their product using ODD principles.
-
-**v1.1 flow**: Clone repo, build pack, paste into AI context.
-
-**v1.2 flow**: Copy pack from public URL, paste into AI context. No clone or build required.
-
-The AI guides them through:
-
-1. Clarifying the outcome (not features)
-2. Defining testable success criteria
-3. Establishing constraints and non-goals
-4. Specifying evidence requirements
-5. Completing a self-audit
-
----
-
-## Compiled Pack
-
-### Source
-
-- `products/agent-skill/src/INSTRUCTIONS.md` - Interactive guidance
-- `products/agent-skill/src/compile-plan.json` - Build configuration
-
-### Build Command
-
-- `npm run lane:compile -- --lane agent-skill --pack prd-guide`
-
-### Output
-
-- `products/agent-skill/dist/prd-guide-pack.md`
-- `products/agent-skill/dist/_meta/prd-guide-COMPILE_META.json`
-
-### Distribution (v1.2)
-
-- Deployed to: `https://klappy.dev/packs/agent-skill/prd-guide-pack.md`
-- Automated via website build process
+- [ ] `public/agent-skill/v1.2.3/prd-guide-pack.md` created
+- [ ] `public/agent-skill/latest/prd-guide-pack.md` updated
+- [ ] Public URL verified with HTTP 200
 
 ### Verification
 
-- `npm run verify:compiled -- --lane agent-skill --pack prd-guide`
+- [ ] Source hashes differ from v1.2.1 (canon changed)
+- [ ] Pack content includes folder READMEs with scannable summaries
+- [ ] No persisted INSTRUCTIONS.md in `src/` or version folder
 
-### Contract
+### Evidence Required
 
-- The compiled pack MUST include a provenance header as defined in:
-  - `klappy://canon/odd/compilation`
+- [ ] Screenshot of successful compile output
+- [ ] Diff showing updated source hashes
+- [ ] Self-audit completed
 
-### Sources (in order)
+---
 
-1. `canon/odd/manifesto.md` - Philosophy foundation
-2. `canon/constraints.md` - Baseline assumptions
-3. `canon/decision-rules.md` - Decision heuristics
-4. `canon/definition-of-done.md` - Completion criteria
-5. `canon/self-audit.md` - Review checklist
-6. `docs/PRD/PRD_TEMPLATE.md` - PRD structure
-7. `products/agent-skill/src/INSTRUCTIONS.md` - Interactive guidance
+## Pack Sources
+
+The compiled pack concatenates these files:
+
+### Canon Sources (persisted)
+
+| #   | Source                           | Purpose                                          |
+| --- | -------------------------------- | ------------------------------------------------ |
+| 1   | `canon/README.md`                | Canon orientation, meta rules, confidence scores |
+| 2   | `canon/odd/README.md`            | ODD folder index, core thesis                    |
+| 3   | `canon/odd/manifesto.md`         | Full ODD philosophy                              |
+| 4   | `canon/odd/appendices/README.md` | 24 appendices summarized                         |
+| 5   | `canon/odd/decisions/README.md`  | 14 decisions summarized                          |
+| 6   | `canon/constraints.md`           | Baseline assumptions                             |
+| 7   | `canon/decision-rules.md`        | Decision heuristics                              |
+| 8   | `canon/definition-of-done.md`    | Completion criteria                              |
+| 9   | `canon/self-audit.md`            | Review checklist                                 |
+| 10  | `docs/PRD/PRD_TEMPLATE.md`       | PRD structure                                    |
+
+### Generated Sources (ephemeral)
+
+| #   | Source           | Purpose                                     |
+| --- | ---------------- | ------------------------------------------- |
+| 11  | `INSTRUCTIONS.md` | Interactive guidance (generated by attempt) |
+
+**Note:** INSTRUCTIONS.md is a **generated artifact**, not persisted input. Each attempt generates it fresh based on PRD requirements. It is ephemeral like code — it lives only in the attempt's evidence folder, never in `src/` or version folders.
 
 ---
 
 ## Constraints
 
-This PRD is shaped by Canon constraints:
-
-- Evidence over assertion
-- Evolution, not automation (humans stay in the loop)
-- Explicit tradeoffs required
-- Bounded evolution (no self-modifying goals)
-- Portability: pack must work outside this repository
-
-### v1.2 Constraints
-
-- Must integrate with existing Cloudflare Pages deployment
-- Must not require manual steps after merge to main
-- Pack must be regeneratable (not manually uploaded)
+- **No functional changes**: This is a content refresh only
+- **Same distribution**: Uses existing Cloudflare Pages setup
+- **Traceability**: Canon version documented in PRD metadata
+- **ODD formula**: Pack + CONTRACT + PRD = Attempt (nothing else)
+- **Ephemeral artifacts**: Generated code (INSTRUCTIONS.md) not persisted
+- **Lane isolation**: Compile plans and version-specific assets stay in lane
 
 ---
 
@@ -28478,19 +28426,16 @@ This PRD may be attempted multiple times.
 - Failed attempts inform future attempts or PRD revisions
 - Attempts are sealed when CLOSED or ABANDONED
 
-Attempts live at: `products/agent-skill/attempts/prd-v1.2/attempt-NNN/`
+Attempts live at: `v1.2.3/attempts/attempt-NNN/`
 
 ---
 
 ## Related Documents
 
-- Lane architecture: `/canon/odd/appendices/product-lanes.md`
-- Canon constraints: `/canon/constraints.md`
-- Definition of Done: `/canon/definition-of-done.md`
-- Evolution philosophy: `/canon/odd/appendices/evolution-not-automation.md`
-- Compilation: `/canon/odd/appendices/compilation.md`
-- Compilation targets: `/canon/odd/appendices/compilation-targets.md`
-- v1.1 Champion: `products/agent-skill/attempts/prd-v1.1/attempt-001/`
+- v1.2.2 Failure: [H0005](./history/H0005-v1.2.2-failed.md)
+- v1.2.1 Champion: `v1.2.1/attempts/attempt-001/`
+- Canon Changelog: `/public/content/canon/CHANGELOG.md`
+- Canon 0.5.4: `/canon/CHANGELOG.md` (README Index Pattern)
 
 
 
@@ -28755,1284 +28700,6 @@ Captured here so we don't forget, not committed to any version:
 4. **Periodically**: Review and prune ideas that no longer make sense
 
 This roadmap informs PRDs but does not replace them. PRDs are the contract; this is the vision.
-
-
-
---------------------------------------------------------------------------------
-📄 File: products/agent-skill/attempts/README.md
---------------------------------------------------------------------------------
-
-# Agent Skill Lane Attempts
-
-Canonical attempt artifacts live here:
-
-```
-/products/agent-skill/attempts/prd-vX.Y/attempt-NNN/
-```
-
-## Structure
-
-```
-attempts/
-  prd-v1.1/
-    attempt-001/        # first attempt at V1.1
-      META.json
-      INSTRUCTIONS.md   # interactive guidance content
-      compile-plan.json # compilation plan
-      evidence/
-        prd-guide-pack.md
-        COMPILE_META.json
-```
-
-## Evidence
-
-Attempt evidence includes:
-
-- Compiled pack (the deliverable)
-- Compile metadata (provenance)
-- Interactive guidance instructions
-
-## Related
-
-- PRD: `products/agent-skill/PRD.md`
-
-
-
---------------------------------------------------------------------------------
-📄 File: products/agent-skill/attempts/prd-v1.1/attempt-001/ATTEMPT.md
---------------------------------------------------------------------------------
-
-# Attempt 001 — PRD v1.1 Closure Record
-
-## Status: CHAMPION (Sealed)
-
-| Field           | Value                    |
-| --------------- | ------------------------ |
-| **Lane**        | agent-skill              |
-| **PRD Version** | v1.1                     |
-| **Attempt**     | 001                      |
-| **Status**      | CHAMPION                 |
-| **Epoch**       | E0003-evidence-first-era |
-| **Created**     | 2026-01-20               |
-| **Sealed**      | 2026-01-20               |
-
----
-
-## Objective (from PRD)
-
-Deliver a compiled pack (`prd-guide-pack.md`) that enables AI agents to interactively guide humans through creating ODD-aligned PRDs.
-
----
-
-## Outcome
-
-**SUCCESS** — Pack created and verified.
-
-The attempt produced a compiled pack containing:
-
-- ODD Manifesto (philosophy foundation)
-- Constraints (10 baseline assumptions)
-- Decision Rules (14 heuristics)
-- Definition of Done (completion criteria)
-- Self-Audit Checklist (9-point review)
-- PRD Template (structure)
-- Interactive Instructions (conversation flow)
-
-**Pack metrics:**
-
-- ~12,000 tokens
-- 1,838 lines
-- 45KB
-
----
-
-## Evidence
-
-| Artifact             | Location                     |
-| -------------------- | ---------------------------- |
-| Compiled pack        | `evidence/prd-guide-pack.md` |
-| Compile metadata     | `evidence/COMPILE_META.json` |
-| Interactive guidance | `INSTRUCTIONS.md`            |
-| Compile plan         | `compile-plan.json`          |
-
----
-
-## Verification Performed
-
-- [x] Pack compiled successfully (`npm run lane:compile`)
-- [x] Pack verified (`npm run verify:compiled`)
-- [x] Provenance header present with source hashes
-- [x] All 7 sources included in correct order
-- [ ] Real-world test with Claude Code (deferred to iteration)
-
----
-
-## Self-Audit
-
-### Intended Outcome
-
-Create a portable context artifact that any LLM can use to guide PRD creation.
-
-### Constraints Applied
-
-- Evidence over assertion (pack includes verification metadata)
-- Maintainability (everything contained in products/agent-skill/)
-- Portability (single file, no dependencies)
-
-### Decision Rules Followed
-
-- Outcomes Before Implementation (focused on "guide PRD creation" not "build tooling")
-- Simplicity Wins (concat mode, not LLM summarization)
-- Borrow→Bend→Break→Build (reused existing compile infrastructure)
-
-### Tradeoffs
-
-- **Included full manifesto** — verbose but complete; could be trimmed in future iteration
-- **Concat mode only** — deterministic but larger; LLM summarization could reduce size
-- **No real-world test** — shipped without Claude Code validation; will iterate based on feedback
-
-### Risks
-
-- Pack may be too verbose for smaller context windows
-- Interactive instructions may need tuning after real usage
-
-### Confidence Level
-
-0.75 — Strong foundation, but untested in real PRD creation session.
-
----
-
-## Learnings
-
-1. **Lane isolation matters**: Initial implementation scattered files across repo; consolidated to products/agent-skill/.
-2. **PRD-first prevents scope creep**: Creating just the PRD before building clarifies intent.
-3. **Attempt structure works**: Evidence and artifacts are contained and traceable.
-
----
-
-## Follow-up
-
-- Test pack with Claude Code on a real PRD creation session
-- Iterate based on feedback (attempt-002 if needed)
-- Consider trimming manifesto confidence section to reduce token count
-
----
-
-## Closure
-
-This attempt is **SEALED** as CHAMPION for PRD v1.1.
-
-No further work will be done on this attempt. Future improvements require attempt-002 or a new PRD version.
-
-
-
---------------------------------------------------------------------------------
-📄 File: products/agent-skill/attempts/prd-v1.1/attempt-001/META.json
---------------------------------------------------------------------------------
-
-{
-  "lane": "agent-skill",
-  "prd_version": "v1.1",
-  "attempt": "001",
-  "status": "CHAMPION",
-  "epoch_id": "E0003-evidence-first-era",
-  "created_at": "2026-01-20T21:10:00.000Z",
-  "sealed_at": "2026-01-20T21:45:00.000Z",
-  "sealed_commit": "PENDING_COMMIT",
-  "description": "First attempt at PRD creation guidance pack",
-  "artifacts": [
-    "ATTEMPT.md",
-    "INSTRUCTIONS.md",
-    "compile-plan.json",
-    "evidence/prd-guide-pack.md",
-    "evidence/COMPILE_META.json"
-  ],
-  "evidence": {
-    "pack_tokens": "~12000",
-    "pack_lines": 1838,
-    "pack_bytes": 45270,
-    "sources_count": 7,
-    "verified": true
-  },
-  "notes": "Sealed as champion. sealed_commit to be updated after git commit."
-}
-
-
---------------------------------------------------------------------------------
-📄 File: products/agent-skill/attempts/prd-v1.2/attempt-001/ATTEMPT.md
---------------------------------------------------------------------------------
-
-# Attempt 001 — PRD v1.2 Closure Record
-
-## Status: FAILED
-
-| Field              | Value                                |
-| ------------------ | ------------------------------------ |
-| **Lane**           | agent-skill                          |
-| **PRD Version**    | v1.2                                 |
-| **Attempt**        | 001                                  |
-| **Status**         | FAILED                               |
-| **Epoch**          | E0003-evidence-first-era             |
-| **Created**        | 2026-01-20                           |
-| **Sealed**         | 2026-01-20                           |
-| **Failure Reason** | PRD requires cross-lane modification |
-
----
-
-## Objective (from PRD)
-
-Add zero-friction public access to the compiled pack via a stable URL.
-
-**Target URL:** `https://klappy.dev/packs/agent-skill/prd-guide-pack.md`
-
----
-
-## Approach
-
-This attempt proposes modifications to `infra/scripts/smart-build.js` that:
-
-1. Compile the agent-skill pack during website build
-2. Copy the pack to `products/website/dist/packs/agent-skill/`
-3. Result: pack served at public URL after Cloudflare deployment
-
-All proposed changes are contained in this attempt folder, mirroring the repo structure for easy promotion.
-
----
-
-## Outcome
-
-**SUCCESS** — Distribution mechanism proven to work locally.
-
-The attempt produced:
-
-- A self-contained distribution test script (`scripts/distribute.js`)
-- A modified `smart-build.js` that integrates pack distribution into website build
-- Documentation for champion promotion
-
-**Test results:**
-
-- Pack compiled: 44,327 bytes, 1,839 lines
-- Pack copied to MOCK dist within attempt folder (lane-contained)
-- Content verified: 100% match (diff exit code 0)
-
-**Lane isolation:** Test does NOT touch `products/website/dist/` — mock structure created within attempt folder.
-
----
-
-## Evidence
-
-| Artifact                 | Location                         | Status                       |
-| ------------------------ | -------------------------------- | ---------------------------- |
-| Distribution test script | `scripts/distribute.js`          | Created                      |
-| Modified smart-build.js  | `infra/scripts/smart-build.js`   | Created                      |
-| Proposed README          | `src/README.md`                  | Created                      |
-| Promotion instructions   | `PROMOTION.md`                   | Created                      |
-| Test output              | `evidence/local-test-output.txt` | Captured                     |
-| Content diff             | `evidence/content-diff.txt`      | Captured (empty = identical) |
-
----
-
-## Verification Performed
-
-- [x] Distribution script runs successfully
-- [x] Pack appears in `products/website/dist/packs/agent-skill/`
-- [x] Pack content matches source exactly (diff exit code 0)
-- [x] Proposed smart-build.js changes are correct
-
----
-
-## Self-Audit
-
-### Intended Outcome
-
-Enable zero-friction access to the PRD guidance pack via a public URL.
-
-### Constraints Applied
-
-- Lane isolation (all changes contained in attempt folder)
-- Evidence over assertion (local testing proves mechanism works)
-- Portability (pack remains a standalone file)
-
-### Decision Rules Followed
-
-- Outcomes Before Implementation (focused on "public URL" not "build tooling")
-- Simplicity Wins (copy mechanism, not complex routing)
-- Borrow→Bend→Break→Build (extending existing smart-build.js)
-
-### Tradeoffs
-
-- **Compile during website build**: Adds ~0.5s to website build time, but ensures pack is always fresh
-- **Website lane carries agent-skill artifact**: Cross-lane dependency, but necessary for single-domain hosting
-- **Full smart-build.js replacement**: Easier to review than a patch, but requires careful merge if original changes
-
-### Risks
-
-- **Website build fails if pack compilation fails**: Acceptable — fail-fast is correct behavior
-- **Pack URL is website-dependent**: If website lane changes, URL might break; mitigated by stable path convention
-- **Cross-lane coupling**: agent-skill pack depends on website deployment; acceptable for v1.2 simplicity
-
-### Confidence Level
-
-**0.85** — Local testing proves mechanism works. Remaining uncertainty is Cloudflare deployment behavior, which can only be verified after champion promotion.
-
----
-
-## Learnings
-
-1. **Lane isolation requires mirroring repo structure**: By creating `infra/scripts/` within the attempt folder, promotion becomes a simple copy operation.
-2. **Path calculations are tricky in nested scripts**: Initial ROOT calculation was off by one level; always verify paths with actual output.
-3. **Empty diff is valid evidence**: A diff that produces no output (exit code 0) is proof of identical content.
-4. **Tests must be fully contained**: Distribution test must use a MOCK structure within the attempt folder, NOT write to actual website dist (that would cross lane boundaries).
-
----
-
-## Follow-up
-
-- Deploy to production and verify public URL returns HTTP 200
-- Test that pack content at URL matches local build
-- Consider adding pack versioning or cache headers in future iteration
-
----
-
-## Closure
-
-This attempt is **FAILED** due to PRD design conflict with lane isolation constraints.
-
-### Why This Attempt Failed
-
-The PRD v1.2 requires:
-
-- "Distribution mechanism implemented (build script copies pack to website dist)" (line 116)
-- "Automated via website build process" (line 172)
-- "Must integrate with existing Cloudflare Pages deployment" (line 207)
-
-This means the PRD requires modifying the **website lane's build process**. But attempts cannot modify files outside their lane. The PRD itself is asking for something that violates fundamental constraints.
-
-### What This Attempt Proved
-
-- The distribution **mechanism works** (tested via mock-website-dist)
-- The proposed smart-build.js changes are correct
-- Lane-contained testing is possible via mock structures
-
-### What Needs to Happen
-
-The PRD v1.2 needs revision to address the cross-lane conflict. See `LEARNINGS.md` for detailed analysis and options.
-
-### Artifacts Preserved
-
-All work is preserved in this attempt folder for reference:
-
-- `LEARNINGS.md` — Full analysis of what happened and why
-- `scripts/distribute.js` — Working test script (lane-contained)
-- `infra/scripts/smart-build.js` — Proposed changes (would work if allowed)
-- `mock-website-dist/` — Proof that mechanism works
-
-
-
---------------------------------------------------------------------------------
-📄 File: products/agent-skill/attempts/prd-v1.2/attempt-001/LEARNINGS.md
---------------------------------------------------------------------------------
-
-# Learnings: Agent-Skill v1.2 Attempt-001
-
-## What We Were Trying to Do
-
-Implement PRD v1.2 for the agent-skill lane — add public URL distribution for the compiled pack at `https://klappy.dev/packs/agent-skill/prd-guide-pack.md`.
-
----
-
-## Timeline of Events
-
-### 1. Initial Plan (Wrong Approach)
-
-Created a plan that proposed **directly modifying** `infra/scripts/smart-build.js` to add pack distribution.
-
-**Problem:** This file is outside the agent-skill lane. Attempts can't modify files outside their lane.
-
-### 2. First Correction — Lane Isolation Violation (Planning Phase)
-
-**Feedback:** "WE MUST move all code we need to create/update/modify/run all in the PRODUCT LANE ATTEMPT folder!!! We can't go outside of our lane to go change the world around us!"
-
-**Why this was wrong:** Planning to violate lane isolation — the fundamental rule that attempts are contained experiments.
-
-**Resolution:** Revised the plan to mirror the repo structure INSIDE the attempt folder:
-
-- `attempt-001/infra/scripts/smart-build.js` (proposed changes)
-- `attempt-001/src/README.md` (proposed changes)
-- `attempt-001/PROMOTION.md` (instructions for what to copy when championed)
-
-### 3. Execution
-
-Created all files within the attempt folder:
-
-- META.json, ATTEMPT.md, PROMOTION.md
-- `scripts/distribute.js` — test script
-- `infra/scripts/smart-build.js` — proposed build changes
-- `src/README.md` — proposed README update
-- `evidence/` folder
-
-### 4. Path Bug
-
-The `distribute.js` script had wrong ROOT calculation — went up 5 directories instead of 6. Fixed by updating path calculation.
-
-### 5. Second Correction — Lane Isolation Violation (Execution Phase)
-
-**Feedback:** "DID YOU FREAKING CROSS LANE BOUNDARIES?!?!?!?"
-
-**What went wrong:** Even though all the _proposal_ files were in the attempt folder, the `distribute.js` test script **actually wrote files** to `products/website/dist/packs/`. Crossed into the website lane during test execution.
-
-**Why this was wrong:** The test was supposed to PROVE the mechanism works, not actually GO DO IT outside the sandbox.
-
-**Resolution:**
-
-1. Deleted the files created in `products/website/dist/packs/`
-2. Rewrote `distribute.js` to create a `mock-website-dist/` structure WITHIN the attempt folder
-3. Re-ran the test, now fully contained
-
-### 6. The Final Discovery — PRD Conflict
-
-**Question asked:** "Did you make up the URL path or did you get it from the PRD?"
-
-**Finding:** The URL IS in the PRD (line 171). But the PRD also requires:
-
-- "Distribution mechanism implemented (build script copies pack to website dist)" (line 116)
-- "Automated via website build process" (line 172)
-- "Must integrate with existing Cloudflare Pages deployment" (line 207)
-
-**The fundamental problem:** The PRD itself requires modifying the website build process. But that's the WEBSITE lane. The PRD is asking for something that violates lane isolation.
-
-**Why attempt was abandoned:** The PRD v1.2 requirements are incompatible with the lane isolation constraint. No matter how cleverly implemented within the attempt folder, the actual PROMOTION would require cross-lane modification — which means the PRD needs revision before any attempt can succeed.
-
----
-
-## What Worked
-
-| Thing                                      | Why It Worked                                                |
-| ------------------------------------------ | ------------------------------------------------------------ |
-| Mirroring repo structure in attempt folder | Made promotion path clear — just copy the structure          |
-| Mock website dist for testing              | Proved the mechanism without crossing boundaries             |
-| PROMOTION.md document                      | Clear instructions for what happens after champion selection |
-| Evidence capture                           | Test outputs, diff files all in attempt folder               |
-
----
-
-## What Didn't Work
-
-| Thing                                 | Why It Didn't Work                           |
-| ------------------------------------- | -------------------------------------------- |
-| Initial plan to modify infra directly | Violated lane isolation                      |
-| Running test that wrote outside lane  | Violated lane isolation (even during "test") |
-| The PRD itself                        | Requires cross-lane modification by design   |
-
----
-
-## Key Learnings
-
-1. **Lane isolation is absolute during attempts** — not just for proposals, but for TEST EXECUTION too
-
-2. **Mock structures prove mechanisms** — don't actually touch other lanes, create mock versions within your sandbox
-
-3. **PRDs can have design flaws** — the PRD author may not have considered all constraints
-
-4. **Check PRD feasibility before implementing** — if the PRD requires things that violate constraints, flag it immediately
-
-5. **Path calculations are tricky** — always verify with actual output before assuming
-
-6. **Test execution must stay contained** — even a "test" that writes outside the attempt folder is a violation
-
----
-
-## What Needs to Happen Next
-
-The PRD v1.2 needs revision to address the cross-lane conflict. Options:
-
-1. **Give agent-skill its own deployment** — separate Cloudflare Pages project, no website dependency
-
-2. **Create explicit cross-lane exception** — document when lanes can modify shared infrastructure
-
-3. **Change distribution approach entirely** — maybe packs are served from a different mechanism (e.g., GitHub raw URL, separate static host)
-
-4. **Redefine "distribution"** — maybe v1.2 just documents HOW to distribute, and actual distribution is a separate lane's responsibility
-
----
-
-## Attempt Status
-
-**FAILED** — not due to implementation quality, but due to PRD design conflict with lane isolation constraints.
-
-The attempt folder contains valid work that proves the _mechanism_ works:
-
-- `scripts/distribute.js` — fully contained test that works
-- `infra/scripts/smart-build.js` — proposed changes that would work if applied
-- `mock-website-dist/` — proof that copy mechanism works
-
-But the PRD cannot be satisfied without violating fundamental rules. The PRD needs revision.
-
----
-
-## Artifacts Produced
-
-```
-attempt-001/
-├── ATTEMPT.md              # Closure record
-├── LEARNINGS.md            # This document
-├── META.json               # Provenance
-├── PROMOTION.md            # Would-be promotion instructions
-├── scripts/
-│   └── distribute.js       # Lane-contained test script
-├── infra/
-│   └── scripts/
-│       └── smart-build.js  # Proposed build changes
-├── src/
-│   └── README.md           # Proposed README update
-├── mock-website-dist/      # Test output (proves mechanism)
-│   └── packs/
-│       └── agent-skill/
-│           └── prd-guide-pack.md
-└── evidence/
-    ├── local-test-output.txt
-    └── content-diff.txt
-```
-
----
-
-## Recommendation for PRD Revision
-
-The v1.2 PRD should be revised to either:
-
-1. Remove the requirement for website build integration (find lane-independent distribution)
-2. Explicitly define a "cross-lane promotion" mechanism that is allowed
-3. Split distribution into a separate lane that owns the integration concern
-
-The core insight: **A lane cannot require modification of another lane's build process as part of its PRD.** Distribution that depends on website deployment belongs to the website lane or a shared infrastructure concern, not the agent-skill lane.
-
-
-
---------------------------------------------------------------------------------
-📄 File: products/agent-skill/attempts/prd-v1.2/attempt-001/META.json
---------------------------------------------------------------------------------
-
-{
-  "lane": "agent-skill",
-  "prd_version": "v1.2",
-  "attempt": "001",
-  "status": "FAILED",
-  "epoch_id": "E0003-evidence-first-era",
-  "created_at": "2026-01-20T22:00:00.000Z",
-  "sealed_at": "2026-01-20T23:00:00.000Z",
-  "sealed_commit": "PENDING_COMMIT",
-  "description": "Distribution mechanism for agent-skill pack via website build",
-  "failure_reason": "PRD requires cross-lane modification (website build process) which violates lane isolation constraint",
-  "artifacts": [
-    "ATTEMPT.md",
-    "LEARNINGS.md",
-    "PROMOTION.md",
-    "scripts/distribute.js",
-    "infra/scripts/smart-build.js",
-    "src/README.md",
-    "mock-website-dist/",
-    "evidence/local-test-output.txt",
-    "evidence/content-diff.txt"
-  ],
-  "evidence": {
-    "local_test_passed": true,
-    "pack_copied_to_mock_dist": true,
-    "content_verified": true,
-    "pack_size_bytes": 44327,
-    "pack_lines": 1839,
-    "mechanism_proven": true,
-    "prd_implementable": false
-  },
-  "notes": "Attempt FAILED due to PRD design conflict. The PRD requires modifying website build process, which violates lane isolation. Mechanism was proven to work via mock testing, but PRD cannot be satisfied without cross-lane modification. PRD needs revision."
-}
-
-
---------------------------------------------------------------------------------
-📄 File: products/agent-skill/attempts/prd-v1.2/attempt-001/PROMOTION.md
---------------------------------------------------------------------------------
-
-# Champion Promotion Checklist
-
-When this attempt is selected as champion for PRD v1.2:
-
----
-
-## Files to Copy
-
-### 1. Update lane source README
-
-```bash
-cp products/agent-skill/attempts/prd-v1.2/attempt-001/src/README.md \
-   products/agent-skill/src/README.md
-```
-
-This adds the public URL documentation.
-
----
-
-## Code to Apply
-
-### 2. Update infra/scripts/smart-build.js
-
-Replace the existing `infra/scripts/smart-build.js` with the modified version:
-
-```bash
-cp products/agent-skill/attempts/prd-v1.2/attempt-001/infra/scripts/smart-build.js \
-   infra/scripts/smart-build.js
-```
-
-**Changes in the modified version:**
-
-1. Added `copyPacksToWebsiteDist()` function (lines ~248-270)
-2. Added call to `copyPacksToWebsiteDist()` in `main()` after `copyEvidenceToDist()`
-
-**The new function:**
-
-```javascript
-function copyPacksToWebsiteDist() {
-  if (lane !== "website") return;
-
-  console.log("\n5️⃣  Copying packs to website dist (v1.2)...");
-
-  // Compile agent-skill pack first
-  console.log("  Compiling agent-skill pack...");
-  run("npm run lane:compile -- --lane agent-skill --pack prd-guide");
-
-  // Copy to website dist
-  const packSrc = join(ROOT, "products/agent-skill/dist/prd-guide-pack.md");
-  const packDest = join(DIST_PATH, "packs/agent-skill/prd-guide-pack.md");
-
-  if (!existsSync(packSrc)) {
-    throw new Error(`Pack not found: ${packSrc}`);
-  }
-
-  mkdirSync(dirname(packDest), { recursive: true });
-  cpSync(packSrc, packDest);
-
-  console.log("  ✅ Pack copied to dist/packs/agent-skill/");
-}
-```
-
----
-
-## Verification After Promotion
-
-### 3. Local verification
-
-```bash
-# Build the website
-npm run build -- --lane website
-
-# Verify pack exists in output
-ls -la products/website/dist/packs/agent-skill/
-
-# Verify content matches
-diff products/agent-skill/dist/prd-guide-pack.md \
-     products/website/dist/packs/agent-skill/prd-guide-pack.md
-```
-
-### 4. Deploy and verify public URL
-
-```bash
-# Commit and push to main
-git add .
-git commit -m "feat(agent-skill): add pack distribution to website build (v1.2)"
-git push origin main
-
-# Fast-forward prod to trigger deployment
-git checkout prod
-git merge main --ff-only
-git push origin prod
-
-# Wait for Cloudflare deployment (~2-3 minutes)
-
-# Verify public URL
-curl -I https://klappy.dev/packs/agent-skill/prd-guide-pack.md
-# Should return HTTP 200
-
-# Verify content
-curl https://klappy.dev/packs/agent-skill/prd-guide-pack.md | head -20
-# Should show pack header with provenance
-```
-
----
-
-## Ledger Update
-
-### 5. Add entry to LEDGER.md
-
-Add to `products/agent-skill/LEDGER.md`:
-
-```markdown
-## Entry — PRD v1.2 Champion
-
-- Date: YYYY-MM-DD
-- PRD: v1.2
-- Epoch: E0003 (evidence-first)
-- Champion: attempt-001
-- Attempt path: `products/agent-skill/attempts/prd-v1.2/attempt-001/`
-
-### Deliverable
-
-- **Public URL**: https://klappy.dev/packs/agent-skill/prd-guide-pack.md
-- **Mechanism**: Website build compiles and copies pack automatically
-
-### What worked
-
-- Lane isolation: all changes contained in attempt folder
-- Simple copy mechanism, no complex routing
-
-### What didn't
-
-- (fill in if applicable)
-
-### Learnings
-
-- (fill in)
-
-### Follow-up
-
-- (fill in)
-```
-
----
-
-## Roadmap Update
-
-### 6. Update ROADMAP.md
-
-Update the v1.2 section in `products/agent-skill/ROADMAP.md`:
-
-```markdown
-## v1.2 - Distribution (CHAMPION)
-
-**Status**: Complete
-**Attempt**: `attempts/prd-v1.2/attempt-001/`
-
-Added zero-friction public access to the pack via a stable URL.
-
-**Outcome**: Pack available at `https://klappy.dev/packs/agent-skill/prd-guide-pack.md`
-
-**Friction level**: Copy from URL
-```
-
-Add learnings to the Learnings Log section.
-
----
-
-## Summary
-
-| Step | Action                                       | Status |
-| ---- | -------------------------------------------- | ------ |
-| 1    | Copy `src/README.md` to lane src             | [ ]    |
-| 2    | Copy `infra/scripts/smart-build.js` to infra | [ ]    |
-| 3    | Run local build verification                 | [ ]    |
-| 4    | Deploy and verify public URL                 | [ ]    |
-| 5    | Update LEDGER.md                             | [ ]    |
-| 6    | Update ROADMAP.md                            | [ ]    |
-
-
-
---------------------------------------------------------------------------------
-📄 File: products/agent-skill/attempts/prd-v1.2/attempt-001/infra/scripts/smart-build.js
---------------------------------------------------------------------------------
-
-#!/usr/bin/env node
-/**
- * smart-build.js
- *
- * PROPOSED MODIFICATION FOR PRD v1.2
- *
- * Changes from original:
- * - Added copyPacksToWebsiteDist() function
- * - Called in main() after copyEvidenceToDist() when lane === 'website'
- *
- * This version compiles and distributes the agent-skill pack to the website
- * dist folder, enabling public URL access at:
- *   https://klappy.dev/packs/agent-skill/prd-guide-pack.md
- *
- * Handles build regardless of whether /src exists.
- * - If /src exists with app code: runs vite build
- * - If /src is empty/missing: copies /public to products/<lane>/dist as fallback
- *
- * This ensures Cloudflare can always deploy, even on "nuked" branches.
- */
-
-import { existsSync, readdirSync, cpSync, mkdirSync, rmSync, readFileSync } from "fs";
-import { join, dirname } from "path";
-import { fileURLToPath } from "url";
-import { execSync } from "child_process";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = join(__dirname, "../..");
-
-const VALID_LANES = ["website", "ai-navigation", "agent-skill"];
-
-function parseLaneArg(argv) {
-  const idx = argv.indexOf("--lane");
-  if (idx !== -1 && argv[idx + 1]) return argv[idx + 1];
-  return null;
-}
-
-const lane = parseLaneArg(process.argv) || "ai-navigation";
-if (!VALID_LANES.includes(lane)) {
-  console.error(`\n❌ Invalid lane: ${lane}\n   Valid lanes: ${VALID_LANES.join(", ")}\n`);
-  process.exit(1);
-}
-
-const LANE_ROOT = join(ROOT, "products", lane);
-
-// Transitional note:
-// - lane builds are canonical output (D0013): products/<lane>/dist
-// - current repo-root /src app is treated as ai-navigation until migrated
-const ROOT_SRC_PATH = join(ROOT, "src");
-const LANE_SRC_PATH = join(LANE_ROOT, "src");
-const PUBLIC_PATH = join(ROOT, "public");
-const DIST_PATH = join(LANE_ROOT, "dist");
-const LEGACY_ROOT_DIST_PATH = join(ROOT, "dist");
-
-function srcHasCode(path) {
-  if (!existsSync(path)) return false;
-
-  const files = readdirSync(path, { recursive: true });
-  // Check for actual code files (not just empty directories)
-  return files.some(
-    (f) =>
-      f.endsWith(".js") ||
-      f.endsWith(".jsx") ||
-      f.endsWith(".ts") ||
-      f.endsWith(".tsx") ||
-      f.endsWith(".svelte") ||
-      f.endsWith(".vue"),
-  );
-}
-
-function run(cmd, opts = {}) {
-  const { cwd = ROOT } = opts;
-  console.log(`  $ ${cmd}`);
-  execSync(cmd, { cwd, stdio: "inherit" });
-}
-
-function copyPublicToDist() {
-  console.log("\n📦 No /src code found — using fallback build\n");
-
-  // Clean dist
-  if (existsSync(DIST_PATH)) {
-    rmSync(DIST_PATH, { recursive: true });
-  }
-  mkdirSync(DIST_PATH, { recursive: true });
-
-  // Copy public to dist
-  cpSync(PUBLIC_PATH, DIST_PATH, { recursive: true });
-
-  console.log(`  ✅ Copied /public to products/${lane}/dist`);
-  console.log("  ✅ Fallback build complete\n");
-}
-
-function mirrorLaneDistToLegacyRootDist() {
-  // Transitional: keep repo-root /dist deployable until all infra
-  // and Cloudflare projects are aligned to lane outputs.
-  if (existsSync(LEGACY_ROOT_DIST_PATH)) {
-    rmSync(LEGACY_ROOT_DIST_PATH, { recursive: true });
-  }
-  mkdirSync(LEGACY_ROOT_DIST_PATH, { recursive: true });
-  cpSync(DIST_PATH, LEGACY_ROOT_DIST_PATH, { recursive: true });
-  console.log("  ⚠️  Mirrored lane dist to legacy repo-root /dist");
-}
-
-/**
- * E0003.1 Evidence Discoverability
- *
- * Every deployed build MUST expose discoverable evidence at: /_evidence/
- *
- * Required structure:
- *   /_evidence/index.html    — human-browsable index
- *   /_evidence/index.json    — machine inventory
- *   /_evidence/EVIDENCE.md   — summary + links
- *   /_evidence/ATTEMPT.md    — what was done
- *   /_evidence/META.json     — provenance
- *   /_evidence/screenshots/  — at least 1 image
- *   /_evidence/recordings/   — at least 1 video OR 3 screenshots total
- *
- * If .attempt.json exists (we're in an attempt), evidence is MANDATORY.
- * If .attempt.json doesn't exist (building on main), skip silently.
- */
-function copyEvidenceToDist() {
-  console.log("\n4️⃣  Copying evidence to dist (E0003.1)...");
-
-  const attemptJsonPath = join(ROOT, ".attempt.json");
-  const distEvidenceDir = join(DIST_PATH, "_evidence");
-
-  // If no .attempt.json, we're not in an attempt — skip silently
-  if (!existsSync(attemptJsonPath)) {
-    console.log("  ℹ️  No .attempt.json found — not in an active attempt");
-    console.log("  ⚠️  Skipping evidence copy (build will not have /_evidence/)");
-    return;
-  }
-
-  // Read attempt metadata
-  const attemptMeta = JSON.parse(readFileSync(attemptJsonPath, "utf8"));
-  const { lane: attemptLane, prd_version, run_id } = attemptMeta;
-
-  // Verify lane matches
-  if (attemptLane !== lane) {
-    throw new Error(
-      `E0003.1 violation: .attempt.json lane (${attemptLane}) does not match build lane (${lane})`,
-    );
-  }
-
-  // Build path to attempt evidence
-  const prd = prd_version.replace(/^v/, "");
-  const attemptEvidenceDir = join(ROOT, "attempts", lane, `prd-v${prd}`, "_runs", run_id);
-
-  console.log(`  Lane:    ${lane}`);
-  console.log(`  PRD:     v${prd}`);
-  console.log(`  Run ID:  ${run_id}`);
-  console.log(`  Source:  ${attemptEvidenceDir}`);
-
-  // Verify evidence source exists
-  if (!existsSync(attemptEvidenceDir)) {
-    throw new Error(`E0003.1 violation: attempt evidence not found at ${attemptEvidenceDir}`);
-  }
-
-  // Copy evidence to dist/_evidence/
-  mkdirSync(distEvidenceDir, { recursive: true });
-  cpSync(attemptEvidenceDir, distEvidenceDir, { recursive: true });
-
-  console.log("  📎 Evidence copied to dist/_evidence/");
-
-  // Verify required document files exist
-  const requiredDocs = ["EVIDENCE.md", "ATTEMPT.md", "META.json"];
-  for (const file of requiredDocs) {
-    const filePath = join(distEvidenceDir, file);
-    if (!existsSync(filePath)) {
-      throw new Error(`E0003.1 violation: missing ${file} in dist/_evidence/`);
-    }
-  }
-  console.log("  ✅ Documents verified: EVIDENCE.md, ATTEMPT.md, META.json");
-
-  // Count proof assets
-  const screenshotsDir = join(distEvidenceDir, "screenshots");
-  const recordingsDir = join(distEvidenceDir, "recordings");
-
-  let screenshotCount = 0;
-  let recordingCount = 0;
-
-  if (existsSync(screenshotsDir)) {
-    screenshotCount = readdirSync(screenshotsDir).filter(
-      (f) =>
-        f.endsWith(".png") ||
-        f.endsWith(".jpg") ||
-        f.endsWith(".jpeg") ||
-        f.endsWith(".gif") ||
-        f.endsWith(".webp"),
-    ).length;
-  }
-
-  if (existsSync(recordingsDir)) {
-    recordingCount = readdirSync(recordingsDir).filter(
-      (f) => f.endsWith(".mp4") || f.endsWith(".webm") || f.endsWith(".mov") || f.endsWith(".gif"),
-    ).length;
-  }
-
-  console.log(`  📸 Screenshots: ${screenshotCount}`);
-  console.log(`  🎬 Recordings:  ${recordingCount}`);
-
-  // Enforce minimum proof rule:
-  // At least 1 screenshot AND (1 recording OR 3 screenshots total)
-  if (screenshotCount < 1) {
-    throw new Error(`E0003.1 violation: at least 1 screenshot required. Found: ${screenshotCount}`);
-  }
-
-  if (recordingCount < 1 && screenshotCount < 3) {
-    throw new Error(
-      `E0003.1 violation: need 1 recording OR 3 screenshots. ` +
-        `Found: ${screenshotCount} screenshots, ${recordingCount} recordings`,
-    );
-  }
-
-  console.log("  ✅ Proof assets verified");
-
-  // Generate index.html and index.json
-  console.log("  📋 Generating evidence index...");
-  run(`node infra/scripts/generate-evidence-index.js "${distEvidenceDir}" "${attemptJsonPath}"`);
-
-  // Verify index files were created
-  if (!existsSync(join(distEvidenceDir, "index.html"))) {
-    throw new Error("E0003.1 violation: index.html generation failed");
-  }
-  if (!existsSync(join(distEvidenceDir, "index.json"))) {
-    throw new Error("E0003.1 violation: index.json generation failed");
-  }
-
-  console.log("  ✅ Evidence index generated");
-}
-
-/**
- * NEW IN v1.2: Copy compiled packs to website dist
- *
- * When building the website lane, compile and copy the agent-skill pack
- * to the website dist folder for public URL access.
- *
- * This enables: https://klappy.dev/packs/agent-skill/prd-guide-pack.md
- */
-function copyPacksToWebsiteDist() {
-  if (lane !== "website") return;
-
-  console.log("\n5️⃣  Copying packs to website dist (v1.2)...");
-
-  // Compile agent-skill pack first
-  console.log("  Compiling agent-skill pack...");
-  run("npm run lane:compile -- --lane agent-skill --pack prd-guide");
-
-  // Copy to website dist
-  const packSrc = join(ROOT, "products/agent-skill/dist/prd-guide-pack.md");
-  const packDest = join(DIST_PATH, "packs/agent-skill/prd-guide-pack.md");
-
-  if (!existsSync(packSrc)) {
-    throw new Error(`Pack not found: ${packSrc}`);
-  }
-
-  mkdirSync(dirname(packDest), { recursive: true });
-  cpSync(packSrc, packDest);
-
-  console.log("  ✅ Pack copied to dist/packs/agent-skill/");
-}
-
-function viteBuild() {
-  console.log("\n🔨 Building with Vite...\n");
-  // Canonical output: products/<lane>/dist
-  //
-  // If the lane has its own Vite root (products/<lane>/index.html), build from lane cwd.
-  // Otherwise, treat repo-root app as ai-navigation (transitional).
-  const laneIndex = join(LANE_ROOT, "index.html");
-  if (existsSync(laneIndex)) {
-    // Run vite from lane root directory — outputs to products/<lane>/dist
-    // Do NOT use --root flag; cwd is the correct approach for Cloudflare compatibility
-    run(`npx vite build --outDir dist --emptyOutDir`, { cwd: LANE_ROOT });
-  } else if (lane === "ai-navigation" && existsSync(join(ROOT, "index.html"))) {
-    // Transitional: repo-root app builds to lane dist for ai-navigation
-    run(`npx vite build --outDir "products/${lane}/dist" --emptyOutDir`);
-  } else {
-    copyPublicToDist();
-    return;
-  }
-  console.log("\n  ✅ Vite build complete\n");
-}
-
-function main() {
-  console.log("\n🏗️  Smart Build\n");
-  console.log(`Lane: ${lane}\n`);
-
-  // Always run sync and verify first
-  console.log("1️⃣  Syncing content...");
-  run("npm run sync");
-
-  console.log("\n2️⃣  Verifying content...");
-  run("npm run verify:content");
-
-  // Check if we have app code for this lane
-  console.log("\n3️⃣  Checking lane source...");
-
-  const hasLaneCode = srcHasCode(LANE_SRC_PATH);
-  const hasRootCode = srcHasCode(ROOT_SRC_PATH);
-
-  if (hasLaneCode) {
-    console.log(`  ✅ Found app code in products/${lane}/src`);
-    viteBuild();
-  } else if (lane === "ai-navigation" && hasRootCode) {
-    console.log("  ✅ Found app code in /src (transitional ai-navigation)");
-    viteBuild();
-  } else {
-    console.log(`  ⚠️  No app code found for lane: ${lane}`);
-    copyPublicToDist();
-  }
-
-  // E0003: Copy evidence into dist so Cloudflare can serve it
-  copyEvidenceToDist();
-
-  // NEW IN v1.2: Copy packs to website dist for public URL access
-  copyPacksToWebsiteDist();
-
-  // Transitional compatibility: keep /dist around for current deploys.
-  // Extended to include website lane until Cloudflare project is properly configured.
-  if ((lane === "ai-navigation" || lane === "website") && existsSync(DIST_PATH)) {
-    mirrorLaneDistToLegacyRootDist();
-  }
-
-  console.log("═".repeat(50));
-  console.log(`✅ Build complete. Output in products/${lane}/dist`);
-  console.log("═".repeat(50));
-}
-
-main();
-
-
-
---------------------------------------------------------------------------------
-📄 File: products/agent-skill/attempts/prd-v1.2/attempt-001/scripts/distribute.js
---------------------------------------------------------------------------------
-
-#!/usr/bin/env node
-/**
- * distribute.js
- *
- * Self-contained distribution test for agent-skill pack.
- * Proves the distribution mechanism works WITHOUT crossing lane boundaries.
- *
- * This script:
- * 1. Compiles the pack (within agent-skill lane)
- * 2. Creates a MOCK website dist structure WITHIN the attempt folder
- * 3. Copies the pack to the mock structure
- * 4. Verifies the copy
- *
- * This proves the mechanism works without touching the actual website lane.
- *
- * Usage: node products/agent-skill/attempts/prd-v1.2/attempt-001/scripts/distribute.js
- */
-
-import { cpSync, mkdirSync, existsSync, readFileSync } from "fs";
-import { execSync } from "child_process";
-import { join, dirname } from "path";
-import { fileURLToPath } from "url";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-// Script is at: products/agent-skill/attempts/prd-v1.2/attempt-001/scripts/
-// Need to go up 6 levels to reach repo root
-const ROOT = join(__dirname, "../../../../../..");
-const ATTEMPT_ROOT = join(__dirname, "..");
-
-console.log("=".repeat(50));
-console.log("Agent-Skill Distribution Test (Lane-Contained)");
-console.log("=".repeat(50));
-console.log(`\nRepo root: ${ROOT}`);
-console.log(`Attempt root: ${ATTEMPT_ROOT}\n`);
-
-// Step 1: Compile the pack (within agent-skill lane - allowed)
-console.log("1️⃣  Compiling agent-skill pack...\n");
-try {
-  execSync("npm run lane:compile -- --lane agent-skill --pack prd-guide", {
-    cwd: ROOT,
-    stdio: "inherit",
-  });
-  console.log("\n   ✅ Pack compiled successfully\n");
-} catch (error) {
-  console.error("\n   ❌ Pack compilation failed");
-  process.exit(1);
-}
-
-// Step 2: Create MOCK website dist structure WITHIN the attempt folder
-// This proves the mechanism works without crossing lane boundaries
-const mockWebsiteDist = join(ATTEMPT_ROOT, "mock-website-dist");
-const mockPackDest = join(mockWebsiteDist, "packs/agent-skill/prd-guide-pack.md");
-
-console.log("2️⃣  Creating mock website dist (within attempt folder)...\n");
-console.log(`   Mock dist: ${mockWebsiteDist}\n`);
-
-mkdirSync(dirname(mockPackDest), { recursive: true });
-
-// Step 3: Copy pack to mock dist
-const packSrc = join(ROOT, "products/agent-skill/dist/prd-guide-pack.md");
-
-if (!existsSync(packSrc)) {
-  console.error(`\n❌ ERROR: Pack not found at ${packSrc}`);
-  process.exit(1);
-}
-
-console.log("3️⃣  Copying pack to mock website dist...\n");
-console.log(`   Source: ${packSrc}`);
-console.log(`   Dest:   ${mockPackDest}\n`);
-
-cpSync(packSrc, mockPackDest);
-
-console.log("   ✅ Pack copied to mock dist\n");
-
-// Step 4: Verify copy
-console.log("4️⃣  Verifying content match...\n");
-const srcContent = readFileSync(packSrc, "utf8");
-const destContent = readFileSync(mockPackDest, "utf8");
-
-if (srcContent === destContent) {
-  console.log("   ✅ Content matches exactly");
-  console.log(`   Size: ${srcContent.length} bytes`);
-  console.log(`   Lines: ${srcContent.split("\n").length}`);
-} else {
-  console.error("   ❌ Content mismatch!");
-  console.error(`   Source size: ${srcContent.length}`);
-  console.error(`   Dest size: ${destContent.length}`);
-  process.exit(1);
-}
-
-// Summary
-console.log("\n" + "=".repeat(50));
-console.log("✅ Distribution Test Complete (Lane-Contained)");
-console.log("=".repeat(50));
-console.log(`
-This test proved:
-1. Pack can be compiled
-2. Pack can be copied to a dist/packs/agent-skill/ structure
-3. Content is preserved exactly
-
-What this DOES NOT do:
-- Does NOT touch products/website/dist/ (that would cross lane boundaries)
-- Does NOT deploy anything
-
-Mock dist location (within attempt folder):
-  ${mockPackDest}
-
-After CHAMPION PROMOTION, the real pack will be at:
-  https://klappy.dev/packs/agent-skill/prd-guide-pack.md
-`);
-
-
-
---------------------------------------------------------------------------------
-📄 File: products/agent-skill/attempts/prd-v1.2/attempt-001/src/README.md
---------------------------------------------------------------------------------
-
-# Agent Skill — Source
-
-This lane produces compiled packs for AI agent consumption.
-
-## Public URL
-
-The compiled pack is publicly available at:
-
-**https://klappy.dev/packs/agent-skill/prd-guide-pack.md**
-
-No clone or build required - just copy the content from the URL.
-
-## Source Files
-
-| File                | Purpose                               |
-| ------------------- | ------------------------------------- |
-| `INSTRUCTIONS.md`   | Interactive guidance for PRD creation |
-| `compile-plan.json` | Defines sources and compilation mode  |
-
-## Build
-
-To compile the pack:
-
-```bash
-# From repo root
-npm run lane:compile -- --lane agent-skill --pack prd-guide
-```
-
-This produces:
-
-- `products/agent-skill/dist/prd-guide-pack.md`
-- `products/agent-skill/dist/_meta/prd-guide-COMPILE_META.json`
-
-## Usage
-
-The compiled pack can be:
-
-1. Copied from the public URL (no build required)
-2. Pasted into any LLM context (Claude Code, Cursor, etc.)
-3. Used as a system prompt foundation
-4. Included in CLAUDE.md or similar config files
-
-The pack guides AI agents through interactive PRD creation using ODD principles.
 
 
 
