@@ -148,7 +148,7 @@ This site reflects that reality. Ideas are tested, observed, and sometimes retri
 
 If you want to explore further:
 
-- Read the **extended ODD Manifesto** in `/canon/odd/manifesto.md`
+- Read the **extended ODD Manifesto** in `/odd/manifesto.md`
 - See how rigor scales in **Project Maturity & Progressive Governance**
 - Browse the **Canon Index** to understand how decisions and verification are structured
 

@@ -271,4 +271,4 @@ This lets you:
 
 - Decision log: `/docs/decisions/D0009-multi-lane-prd-architecture.md`
 - Attempt lifecycle: `/docs/appendices/attempt-lifecycle.md`
-- Evolution philosophy: `/canon/odd/appendices/evolution-not-automation.md`
+- Evolution philosophy: `/odd/appendices/evolution-not-automation.md`

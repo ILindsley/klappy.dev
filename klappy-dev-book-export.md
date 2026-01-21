@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-21T05:33:45.875Z
+Generated: 2026-01-21T05:39:07.495Z
 Total Files: 142
 
 This is a documentation export of all markdown files from the klappy.dev
@@ -19,11 +19,11 @@ details (attempts, version folders, source code).
 
 - **Root** (1 files)
 - **About** (5 files)
-- **Canon** (25 files)
+- **Canon** (9 files)
 - **Documentation** (51 files)
 - **Infrastructure** (4 files)
 - **Interfaces & Contracts** (6 files)
-- **ODD (Outcomes-Driven Development)** (1 files)
+- **ODD (Outcomes-Driven Development)** (17 files)
 - **Products** (28 files)
 - **Projects** (6 files)
 - **Public Content** (11 files)
@@ -131,7 +131,7 @@ If you're new and want a concrete path, here's a reasonable order:
 2. **ODD (Outcomes-Driven Development)** — the core philosophy
 
    - `/odd/README.md` (public-facing)
-   - `/canon/odd/manifesto.md` (extended)
+   - `/odd/manifesto.md` (extended)
 
 3. **Canon** — how decisions and verification are shaped
 
@@ -485,7 +485,7 @@ If you want to understand the system before acting:
 
 1. `/docs/appendices/product-lanes.md` — multi-lane PRD architecture
 2. `/canon/index.md` — Canon orientation, precedence, stability
-3. `/canon/odd/manifesto.md` — philosophy and intent
+3. `/odd/manifesto.md` — philosophy and intent
 4. `/docs/ATTEMPTS.md` — attempt lifecycle orientation
 
 ---
@@ -742,7 +742,7 @@ Attempts may originate from different sources while targeting the same PRD:
 
 Parallel agent runs are treated as distinct attempts. Provenance tracking ensures they can be compared meaningfully.
 
-See `/canon/odd/appendices/quantum-development.md` for the orientation model behind this practice.
+See `/odd/appendices/quantum-development.md` for the orientation model behind this practice.
 
 ---
 
@@ -1002,8 +1002,8 @@ The attempt folder contains everything needed:
 - Step-by-step workflow: `/docs/ATTEMPT_KICKOFF.md`
 - Agent entry point: `/docs/AGENT_KICKOFF.md`
 - Deploy behavior: `/docs/CLOUDFLARE_CONFIG.md`
-- Decision log: `/canon/odd/decisions/`
-- Quantum Development: `/canon/odd/appendices/quantum-development.md`
+- Decision log: `/odd/decisions/`
+- Quantum Development: `/odd/appendices/quantum-development.md`
 - Repo Truth: `/docs/appendices/repo-truth.md`
 - Drift Checks: `/docs/appendices/drift-checks.md`
 
@@ -2647,7 +2647,7 @@ This product MUST remain compatible with:
 This product does NOT define colors, fonts, or spacing directly.
 It consumes visual interfaces.
 
-See `/canon/odd/appendices/visual-evolution.md` for the visual evolution model.
+See `/odd/appendices/visual-evolution.md` for the visual evolution model.
 
 ---
 
@@ -2758,7 +2758,7 @@ This PRD is shaped by Canon constraints:
 
 ## Media (Learning Layer)
 
-This lane follows: `/canon/odd/appendices/media-as-learning-layer.md`
+This lane follows: `/odd/appendices/media-as-learning-layer.md`
 
 Media is:
 - optional (progressive disclosure)
@@ -2815,7 +2815,7 @@ The website lane MUST support generating a wipeable "visitor pack" used for prog
 
 ### Contract
 - The compiled pack MUST include a provenance header as defined in:
-  - `klappy://canon/odd/compilation`
+  - `klappy://docs/appendices/compilation`
 
 ---
 
@@ -2826,7 +2826,7 @@ The website lane MUST support generating a wipeable "visitor pack" used for prog
 - Definition of Done: `/canon/definition-of-done.md`
 - Legacy PRD (v0.3): `/docs/PRD/website/PRD-legacy-v0.3.md`
 - Compilation: `/docs/appendices/compilation.md`
-- Media philosophy: `/canon/odd/appendices/media-as-learning-layer.md`
+- Media philosophy: `/odd/appendices/media-as-learning-layer.md`
 
 
 
@@ -2951,7 +2951,7 @@ Production deploys from the `prod` branch to the primary domain.
 | **Agent kickoff** | `/docs/PROMPT_ATTEMPT_KICKOFF.txt` | The contract agents receive |
 | **Active PRD** | `/docs/PRD.md` | Current hypothesis being tested |
 | **Content manifest** | `/public/content/manifest.json` | Generated from per-file frontmatter; what exists, disclosure tiers, UI spine |
-| **Decision log** | `/canon/odd/decisions/index.md` | Durable decisions (ADR-lite) |
+| **Decision log** | `/odd/decisions/` | Durable decisions (ADR-lite) |
 
 ---
 
@@ -3094,7 +3094,7 @@ tags: ["docs", "appendices", "implementation", "reference", "index"]
 
 Implementation-specific appendices that document how klappy.dev applies ODD concepts. These are reference implementation details, not portable methodology.
 
-> **Relationship to Canon:** Portable concepts live in `/canon/odd/appendices/`. This folder contains the klappy.dev-specific implementation of those concepts.
+> **Relationship to ODD:** Portable concepts live in `/odd/appendices/`. This folder contains the klappy.dev-specific implementation of those concepts.
 
 ---
 
@@ -3816,8 +3816,8 @@ Canonical Compression reduces the size of the reasoning surface so consistency b
 Examples:
 
 - `/canon/**`
-- `/canon/odd/appendices/**`
-- `/canon/odd/decisions/**`
+- `/odd/appendices/**`
+- `/odd/decisions/**`
 
 Properties:
 
@@ -5701,7 +5701,7 @@ This lets you:
 
 - Decision log: `/docs/decisions/D0009-multi-lane-prd-architecture.md`
 - Attempt lifecycle: `/docs/appendices/attempt-lifecycle.md`
-- Evolution philosophy: `/canon/odd/appendices/evolution-not-automation.md`
+- Evolution philosophy: `/odd/appendices/evolution-not-automation.md`
 
 
 
@@ -5819,7 +5819,7 @@ Canon is intentionally small. If it bloats, that is a signal to curate harder, n
 Decisions preserve context without polluting Canon with history.
 
 **Lives in:**
-- `/canon/odd/decisions/**`
+- `/odd/decisions/**`
 
 **Elevate when:** a change affects interpretation, compatibility, or the "rules of the game."
 
@@ -6016,7 +6016,7 @@ Note: Root `/attempts/**` is legacy (read-only). New attempts are lane-contained
 | Change Type | Location | Triggers New Attempt? |
 |-------------|----------|----------------------|
 | Fix a typo in Canon | `/canon/` | No |
-| Add a new ODD appendix | `/canon/odd/` | No |
+| Add a new ODD appendix | `/odd/` | No |
 | Update build script | `/infra/` | No |
 | Redesign the UI | `products/<lane>/src/` | Yes (same or new PRD) |
 | Add new feature | `products/<lane>/src/` | Yes (requires PRD) |
@@ -7558,7 +7558,7 @@ tags: ["odd", "decisions", "contract", "version", "epoch"]
 
 ## Description
 
-This decision formalizes ODD Contract 2.0.0 with the multi-lane architecture, declaring two epochs: E0001-single-prd-era and E0002-multi-lane-era. The contract lives at `/canon/odd/contract.md` and requires epoch_id in META.json for all new attempts. Breaking changes include lane-scoped PRD locations, lane-scoped attempt locations, and required `--lane` tooling flags.
+This decision formalizes ODD Contract 2.0.0 with the multi-lane architecture, declaring two epochs: E0001-single-prd-era and E0002-multi-lane-era. The contract lives at `/odd/contract.md` and requires epoch_id in META.json for all new attempts. Breaking changes include lane-scoped PRD locations, lane-scoped attempt locations, and required `--lane` tooling flags.
 
 ## Outline
 
@@ -7597,7 +7597,7 @@ The system needed:
 
 ## Decision
 
-1. **Create `/canon/odd/contract.md`** as the single source of ODD system versioning.
+1. **Create `/odd/contract.md`** as the single source of ODD system versioning.
 2. **Declare contract version 2.0.0** with the multi-lane architecture.
 3. **Define two epochs:**
    - E0001-single-prd-era (contract 1.x)
@@ -7642,12 +7642,12 @@ For documents kept for historical reference that describe 1.x workflows:
 > **Epoch 1 Document** (ODD Contract ≤1.x)
 >
 > Kept for historical context. Current workflow is defined by ODD Contract 2.x.
-> See `/canon/odd/contract.md` for the current contract.
+> See `/odd/contract.md` for the current contract.
 ```
 
 ## Related
 
-- `/canon/odd/contract.md` — the contract itself
+- `/odd/contract.md` — the contract itself
 - `/docs/appendices/epochs.md` — epoch semantics
 - `/docs/appendices/product-lanes.md` — lane architecture
 - `/docs/decisions/D0009-multi-lane-prd-architecture.md` — the architectural decision
@@ -7881,7 +7881,7 @@ This decision declares E0003 — Evidence-First Era, requiring attempts to prove
 **Date:** 2026-01-19  
 **Decider:** Klappy  
 **Epoch:** E0003  
-**Related:** D0009 (Multi-lane PRDs), D0012 (Transition Interpretation), D0013 (Lane-scoped dist), Deploy Evidence (klappy://canon/odd/deploy-evidence)
+**Related:** D0009 (Multi-lane PRDs), D0012 (Transition Interpretation), D0013 (Lane-scoped dist), Deploy Evidence (klappy://docs/appendices/deploy-evidence)
 
 ## Context
 
@@ -8072,7 +8072,7 @@ Canon contains portable methodology. These decisions are the klappy.dev-specific
 
 | Canon Document | Related Decisions |
 |----------------|-------------------|
-| `/canon/odd/contract.md` | D0009, D0011, D0012 |
+| `/odd/contract.md` | D0009, D0011, D0012 |
 | `/docs/appendices/epochs.md` | D0012, D0014 |
 | `/canon/constraints.md` | All decisions respect constraints |
 
@@ -9120,7 +9120,7 @@ tags: ["canon", "compiled", "epoch", "e0002"]
 - Do not edit compiled files by hand
 - Regenerate from source Canon
 
-See `/canon/odd/appendices/canonical-compression.md` for the compilation model.
+See `/docs/appendices/canonical-compression.md` for the compilation model.
 
 
 
@@ -10135,2756 +10135,6 @@ It is meant to stop work from being incorrectly declared finished.
 
 
 --------------------------------------------------------------------------------
-📄 File: canon/odd/README.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd
-title: "Outcomes-Driven Development"
-audience: canon
-exposure: nav
-tier: 1
-voice: neutral
-stability: stable
-tags: ["odd", "index"]
----
-
-# 🎯 Outcomes-Driven Development (ODD)
-
-The philosophical and operational foundation for this repository. ODD treats outcomes as primary, artifacts as ephemeral, and verification as mandatory.
-
----
-
-## 📁 Contents
-
-| File | Title | Summary |
-|------|-------|---------|
-| `manifesto.md` | ODD Manifesto | The core philosophy: defining outcomes, enforcing constraints, verifying reality. AI accelerates execution; governance preserves trust. |
-| `maturity.md` | Project Maturity | How rigor changes as projects mature. PoC → Pilot → Production. |
-| `contract.md` | ODD System Contract | Version contract for ODD compatibility. Currently v2.0.0 (multi-lane era). |
-| `misuse-patterns.md` | Misuse Patterns | Common failure modes and how ODD gets misapplied in practice. |
-| `prompt-architecture.md` | Prompt Architecture | How intent scales without giant prompts. |
-| `orientation-map.md` | Orientation Map | One-page mental model of ODD, Canon, Evidence, and Outcomes. |
-
-### Subfolders
-
-| Folder | Purpose |
-|--------|---------|
-| `appendices/` | Extended concepts (23 files). See [appendices/README.md](./appendices/README.md) |
-| `decisions/` | Architecture Decision Records. See [decisions/README.md](./decisions/README.md) |
-
----
-
-## 🚀 Start Here
-
-1. **`manifesto.md`** — Understand the philosophy
-2. **`maturity.md`** — Know when rigor increases
-3. **`appendices/attempt-lifecycle.md`** — See how work flows
-
----
-
-## 💡 Core Thesis
-
-The primary job of development is not writing code. It is:
-- Defining outcomes
-- Enforcing constraints
-- Verifying reality
-
-AI accelerates execution. Governance preserves trust.
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/appendices/README.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/appendices
-title: "ODD Appendices (Portable)"
-audience: canon
-exposure: nav
-tier: 2
-voice: neutral
-stability: evolving
-tags: ["odd", "appendices", "index", "portable"]
----
-
-# ODD Appendices (Portable)
-
-Extended concepts that deepen understanding without introducing enforcement. These are diagnostic and orientation documents, not requirements.
-
-> **Note:** Implementation-specific appendices have been moved to `/docs/appendices/`. This folder contains only portable methodology that can apply to any ODD-following repository.
-
----
-
-## Contents
-
-| File | Title | Summary |
-|------|-------|---------|
-| `alignment-reviews.md` | Alignment Reviews | Periodic evaluation of the ODD system itself to detect drift between stated intent, implemented process, and observed outcomes. |
-| `evolution-not-automation.md` | Evolution, Not Automation | This system optimizes learning, not execution. Humans stay in the loop. |
-| `failure-driven-modularity.md` | Failure-Driven Modularity | Modular boundaries are introduced only after repeated failure to regenerate from spec. Modularity is an outcome of failure, not a prerequisite. |
-| `media-as-learning-layer.md` | Media as a Learning Layer | Media reduces cognitive load over stable written content. Canonical truth lives in text. |
-| `quantum-development.md` | Quantum Development | Why multiple attempts against the same PRD are sometimes necessary before changing the PRD itself. |
-| `visual-evolution.md` | Visual Evolution | Visual systems evolve independently from products through versioned visual interfaces. |
-
----
-
-## Implementation-Specific Appendices
-
-The following have been moved to `/docs/appendices/` as they contain klappy.dev-specific implementation details:
-
-- `attempt-lifecycle.md` — Attempt folder structure, CLI commands, META.json schema
-- `compilation.md`, `compiled-memory.md`, `compilation-targets.md` — Compilation paths and tooling
-- `epochs.md` — E0003 evidence requirements with Cloudflare specifics
-- `evidence.md`, `deploy-evidence.md`, `online-evidence.md` — Evidence path structure
-- `lane-build-layout.md`, `lane-implementation-surfaces.md` — Lane-specific paths
-- `product-lanes.md` — Specific lane names (website, ai-navigation, agent-skill)
-- `repo-topology.md`, `repo-truth.md`, `repo-truth-audit.md` — Specific folder structures
-- `progressive-elevation.md` — Path-specific elevation rules
-- `canonical-compression.md`, `memory-architecture.proposed.md` — Compilation and memory paths
-
----
-
-## When to Read What
-
-**Understanding ODD methodology?** Start with these portable appendices.
-
-**Implementing ODD in your own repo?** Use these as the conceptual foundation.
-
-**Understanding klappy.dev specifics?** Read `/docs/appendices/` instead.
-
----
-
-## Relationship to Canon
-
-These appendices extend the core canon documents:
-
-- `constraints.md` → appendices explain edge cases
-- `definition-of-done.md` → evidence philosophy here, evidence procedures in docs
-- `odd/manifesto.md` → appendices operationalize philosophy
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/appendices/alignment-reviews.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/alignment-reviews
-title: "Alignment Reviews"
-audience: canon
-exposure: nav
-tier: 2
-voice: neutral
-stability: stable
-tags: ["odd", "alignment", "drift", "hygiene", "selection-pressure"]
----
-
-# Alignment Reviews
-
-> Periodic evaluation of the ODD system itself to detect drift.
-
-## Description
-
-Alignment Reviews are periodic evaluations that detect and correct drift between stated intent, implemented process, and observed outcomes. They apply to content, process, and tooling equally. Reviews evaluate Canon (contradicted rules, obsolete references, undocumented invariants), PRDs (actual decision criteria, implicit patching, lane bleeding), Attempts (incompatible comparisons, ignored failures, insufficient evidence), and Tooling (enforced invariants, accidental drift, silent compensation). Reviews are triggered by events (epoch transitions, repeated failures, PRD rewrites) not schedules. They produce corrections, not features.
-
-## Outline
-
-- Summary
-- Why This Exists
-- What Is Reviewed (Canon, PRDs, Attempts, Tooling)
-- When Reviews Occur
-- What Reviews Produce
-- Non-Goals
-- Core Invariant
-
----
-
-## Content
-
-Its purpose is to detect and correct **drift** between:
-- stated intent
-- implemented process
-- observed outcomes
-
-Alignment Reviews apply to **content, process, and tooling** equally.
-
-They do not produce features.
-They produce corrections.
-
----
-
-## Why This Exists
-
-Outcome-Driven Development assumes:
-- rapid iteration
-- parallel attempts
-- evolving intent
-
-These conditions create drift by default.
-
-Without an explicit alignment mechanism:
-- outdated rules persist
-- assumptions fossilize
-- successful outcomes are misattributed
-- failed outcomes are rationalized
-
-Alignment Reviews introduce **selection pressure against incoherence**.
-
----
-
-## What Is Reviewed
-
-An Alignment Review evaluates:
-
-### Canon
-- Are any canon rules contradicted by current practice?
-- Are obsolete rules still referenced?
-- Are new invariants emerging without documentation?
-
-### PRDs (Per Lane)
-- Do PRDs still reflect actual decision criteria?
-- Are PRDs being patched implicitly via attempts?
-- Are lanes bleeding into each other?
-
-### Attempts
-- Are outcomes being compared across incompatible contexts?
-- Are failures producing learning, or being ignored?
-- Is evidence sufficient to justify promotion?
-
-### Tooling
-- Does tooling enforce stated invariants?
-- Does tooling encourage accidental drift?
-- Are humans compensating for tooling gaps silently?
-
----
-
-## When Reviews Occur
-
-Alignment Reviews are triggered by **events**, not schedules.
-
-Typical triggers include:
-- Epoch transitions
-- Repeated unexplained failures
-- Major PRD rewrites
-- Tooling changes that affect workflow
-- Persistent disagreement about outcomes
-
-They may also be run opportunistically.
-
----
-
-## What Reviews Produce
-
-An Alignment Review may result in:
-- Canon updates (via decision logs)
-- PRD clarification or split
-- Epoch declaration
-- Tooling constraints
-- Explicit deprecation of rules or documents
-
-Reviews **do not**:
-- retroactively invalidate evidence
-- rewrite history
-- assign blame
-
----
-
-## Non-Goals
-
-Alignment Reviews are not:
-- performance reviews
-- approval gates
-- compliance checklists
-- automation requirements
-
-They exist to preserve **truthfulness**, not control.
-
----
-
-## Core Invariant
-
-If alignment cannot be explained clearly,
-it does not exist.
-
-Drift that is invisible is more dangerous than failure.
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/appendices/evolution-not-automation.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/evolution-not-automation
-title: "Evolution, Not Automation"
-audience: canon
-exposure: hidden
-tier: 2
-voice: neutral
-stability: semi_stable
-tags: ["odd", "evolution", "automation", "orientation"]
----
-
-# Evolution, Not Automation
-
-> This system optimizes learning, not execution.
-
-## Description
-
-ODD is often mistaken for an attempt to automate software development. It is not. Automation optimizes execution; evolution optimizes learning. ODD is designed for disciplined evolution: humans define intent (PRDs, constraints, DoD), agents generate variation (independent attempts), reality provides feedback (evidence), humans perform selection (promotion/rejection), and learnings are retained. Humans stay in the loop because fully automated selection optimizes for what is easy to measure rather than what actually matters. All evolution is discrete, auditable, reversible, and bounded.
-
-## Outline
-
-- Why This Appendix Exists
-- What We Are Not Doing
-- What We Are Doing Instead
-- Why Humans Stay in the Loop
-- Evolutionary Scope
-- Controlled, Not Runaway
-- The Core Principle
-
----
-
-## Content
-
-**Status:** Orientation  
-**Audience:** Internal / Canon  
-**Scope:** Keep learning/evolution distinct from automation
-
----
-
-## Why This Appendix Exists
-
-This system is often mistaken for an attempt to automate software development.
-
-It is not.
-
-Automation optimizes execution.  
-Evolution optimizes learning.
-
-The difference matters.
-
----
-
-## What We Are Not Doing
-
-We are not building a system that:
-
-- automatically decides what to build
-- automatically selects winners
-- automatically rewrites its own goals
-- optimizes hidden metrics without human review
-
-Those paths tend to collapse into proxy optimization, confidence theater, or silent drift.
-
----
-
-## What We Are Doing Instead
-
-We are designing a system that supports disciplined evolution:
-
-- Humans define intent (PRDs, constraints, Definition of Done)
-- Agents generate variation (independent attempts)
-- Reality provides feedback (evidence, behavior, performance)
-- Humans perform selection (promotion or rejection)
-- Learnings are retained (PRD patches, decision logs, sealed artifacts)
-
-This mirrors evolutionary systems without surrendering judgment.
-
----
-
-## Why Humans Stay in the Loop
-
-Fully automated selection optimizes for what is easiest to measure.
-
-Human review optimizes for what actually matters.
-
-By keeping humans responsible for:
-
-- approving PRD changes
-- evaluating evidence
-- selecting champions
-
-we prevent the system from drifting toward shallow success criteria or self-reinforcing errors.
-
----
-
-## Evolutionary Scope
-
-Evolution in this system applies to:
-
-- problem definitions (PRDs)
-- success criteria (DoD)
-- constraints (performance, usability, deployability)
-- measurement methods (what counts as evidence)
-
-Implementation code is disposable.  
-Learning is not.
-
----
-
-## Controlled, Not Runaway
-
-All evolution is:
-
-- discrete (versioned PRDs, sealed attempts)
-- auditable (evidence over explanation)
-- reversible (commit SHAs are truth)
-- bounded (no self-modifying goals)
-
-If a change cannot be explained, evidenced, and reviewed, it does not propagate.
-
----
-
-## The Core Principle
-
-We are not trying to make software build itself.
-
-We are trying to make truth accumulate faster than mistakes.
-
-Automation accelerates output.  
-Evolution, done carefully, accelerates understanding.
-
-This appendix exists to keep that distinction explicit—and to prevent future readers (human or AI) from optimizing the wrong thing.
-
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/appendices/failure-driven-modularity.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/appendices/failure-driven-modularity
-title: "Failure-Driven Modularity"
-audience: canon
-exposure: nav
-tier: 2
-voice: neutral
-stability: stable
-tags: ["canon", "evolution", "modularity", "regenerability"]
----
-
-# Failure-Driven Modularity
-
-> Modular boundaries emerge from repeated failure, not upfront design.
-
-## Description
-
-In ODD, modular boundaries are introduced only after repeated, documented failure to regenerate a system from its specification. Successful regeneration proves the system remains cognitively tractable as a single unit. A failure is when the generated system diverges materially, constraints are repeatedly omitted, specifications need ad hoc re-explanation, or attempts converge inconsistently. Only patterned failure justifies decomposition. The evolution rule: begin with the smallest viable specification, attempt regeneration, do not modularize if it succeeds, extract the smallest region of cognitive overload if it fails repeatedly.
-
-## Outline
-
-- Summary
-- Definition of Failure
-- The Evolution Rule
-- Rationale
-- Implications
-- Non-Goals
-- Related Canon
-
----
-
-## Content
-
-Successful regeneration is evidence that the system remains cognitively tractable as a single unit.
-Repeated failure is evidence that the boundary is incorrect and must be revised.
-
-Modularity is therefore an *outcome of failure*, not a prerequisite for success.
-
----
-
-## Definition of Failure
-
-A regeneration attempt is considered a **failure** when one or more of the following occur
-despite reasonable effort:
-
-- The generated system diverges materially from the intended behavior.
-- Critical constraints are repeatedly omitted or misapplied.
-- The specification must be re-explained in ad hoc or situational ways.
-- Multiple regeneration attempts converge inconsistently.
-
-Single failures are not sufficient.
-Only **patterned failure** justifies decomposition.
-
----
-
-## The Evolution Rule
-
-1. Begin with the smallest viable specification that expresses the desired outcome.
-2. Attempt full regeneration from that specification.
-3. If regeneration succeeds, **do not modularize**.
-4. If regeneration fails repeatedly:
-   - Identify the smallest region of cognitive overload.
-   - Extract that region into its own independently regenerable specification.
-5. Repeat recursively.
-
-This process continues until each module can be regenerated reliably and independently.
-
----
-
-## Rationale
-
-Traditional software architecture encourages early modularization based on anticipated reuse.
-This introduces speculative boundaries, premature abstractions, and unnecessary coordination cost.
-
-ODD replaces prediction with evidence.
-
-A boundary is justified **only when failure proves it necessary**.
-
----
-
-## Implications
-
-- Architectural structure emerges empirically.
-- Teams do not need shared architectural taste, only shared failure criteria.
-- Systems evolve without centralized design authority.
-- Regeneration remains feasible as complexity increases.
-
----
-
-## Non-Goals
-
-Failure-Driven Modularity does **not** claim that:
-
-- All systems should be maximally decomposed.
-- Regeneration will always succeed.
-- Existing stable systems must be restructured.
-
-It applies only to systems being actively evolved under ODD.
-
----
-
-## Related Canon
-
-- Reproducibility Test
-- Outcome Promotion vs Artifact Preservation
-- Regenerability as a First-Class Constraint
-
----
-
-## Derivation
-
-For historical and conceptual motivation, see:
-
-> **From Reusability to Regenerability**  
-> Canonical Derivation, `/canon/derivations/reusability-to-regenerability.md`
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/appendices/media-as-learning-layer.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/media-as-learning-layer
-title: "Media as a Learning Layer"
-audience: canon
-exposure: nav
-tier: 2
-voice: neutral
-stability: stable
-tags: ["odd", "media", "learning", "progressive-disclosure", "website"]
----
-
-# Media as a Learning Layer
-
-> Media reduces cognitive load over stable written content.
-
-## Description
-
-Media exists to reduce cognitive load, not increase it. It is a learning layer over stable written content—optional, contextual, and regenerable. Canonical truth lives in text; media supports understanding but does not define it. Core rules: clarity is the default (not any specific medium), media is not canon, progressive disclosure is mandatory (opt-in only, no autoplay), media must match learning intent (diagrams for mental models, short video for orientation, audio for reflection), and media is created only for stable content. The system rejects media-first pages, content dumps, and redundant explanations.
-
-## Outline
-
-- Summary
-- Core Rules
-  - Clarity is the default
-  - Media is not Canon
-  - Progressive disclosure is mandatory
-  - Match media to learning intent
-  - Stability before production
-- Anti-Patterns (Explicitly Rejected)
-- Compliance Note
-
----
-
-## Content
-
-Media is a **learning layer** over stable written content.
-It is optional, contextual, and regenerable.
-
-**Canonical truth lives in text.**
-Media supports understanding — it does not define it.
-
----
-
-## Core Rules
-
-### 1) Clarity is the default
-Text is not the default.
-Video is not the default.
-Audio is not the default.
-
-**Clarity is the default.**
-
-Media is used only when it teaches faster or better than text alone.
-
----
-
-### 2) Media is not Canon
-Canonical truth is preserved in:
-- markdown content
-- frontmatter
-- decision records
-- evidence policies
-
-Media assets are:
-- supporting artifacts
-- replaceable / regenerable
-- optional
-
-**The ownership and placement of media is canonical.**
-The media itself is not.
-
----
-
-### 3) Progressive disclosure is mandatory
-All media must be **opt-in**.
-
-Allowed interactions:
-- Watch
-- Listen
-- View diagram
-- Download
-
-Disallowed patterns:
-- autoplay (anywhere)
-- background video
-- forced consumption
-- media that blocks navigation or comprehension
-
-The default experience must remain:
-- readable
-- navigable
-- understandable
-- usable without media
-
----
-
-### 4) Match media to learning intent
-Media must be chosen based on the learning outcome:
-
-- **Images / diagrams**
-  - Establish mental models
-  - Replace multi-paragraph explanations
-- **Short video (≤ 90 seconds)**
-  - Orientation and framing
-  - Not exhaustive detail
-- **Audio**
-  - Reflection and deeper thinking
-  - Always optional
-- **PDF**
-  - Reference, synthesis, offline use
-  - Never required for basic understanding
-
-Each asset must answer:
-> What does this teach faster or better than text?
-
-If it cannot answer, it does not belong.
-
----
-
-### 5) Stability before production
-Media is created only for **stable content**.
-
-Draft or evolving ideas remain text-first until:
-- the concept stabilizes
-- the page stops churn
-- the narrative is unlikely to drift
-
-This prevents:
-- outdated explainers
-- conflicting narratives
-- re-record churn
-
-Media follows clarity — not the other way around.
-
----
-
-## Anti-Patterns (Explicitly Rejected)
-
-The system intentionally avoids:
-- media-first pages
-- content dumps / galleries
-- redundant explanations across formats
-- "just in case" assets
-- polish media used to compensate for unclear thinking
-
-If removing a piece of media would break understanding, that is a design failure.
-
----
-
-## Compliance Note
-
-Product PRDs may reference this appendix.
-They should not re-litigate the philosophy.
-
-PRDs define **how** the lane applies this principle.
-This appendix defines the governing constraint.
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/appendices/quantum-development.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/quantum-development
-title: "Quantum Development"
-audience: canon
-exposure: nav
-tier: 2
-voice: neutral
-stability: semi_stable
-tags: ["odd", "quantum", "attempts", "uncertainty", "orientation"]
----
-
-# Quantum Development
-
-> Why multiple attempts against the same PRD are sometimes necessary.
-
-## Description
-
-Quantum Development is a way of reasoning about uncertainty in AI-assisted development. Given the same PRD, different agents, prompts, and execution paths can produce meaningfully different results. Each attempt is an independent observation of the same specification. The goal is to distinguish specification failure from execution-path variance. A PRD is a hypothesis, an attempt is an experimental run, an outcome is an observation. Multiple attempts allow patterns to emerge and prevent premature convergence. Quantum Development is appropriate when the PRD is clear but failure is ambiguous. It ends when one candidate is promoted.
-
-## Outline
-
-- Purpose
-- Core Idea
-- PRD vs Attempt (Clarified)
-- Why This Matters
-- When Quantum Development Is Appropriate
-- When to Change the PRD Instead
-- Independence Requirement
-- Outcome Interpretation
-- On Timing and Observation
-- Relationship to ODD
-- What This Appendix Is Not
-- Summary
-
----
-
-## Content
-
-## Purpose
-
-This appendix formalizes Quantum Development as a way of reasoning about uncertainty in AI-assisted software development.
-
-It explains why multiple attempts against the same PRD are sometimes necessary before changing the PRD itself.
-
-This is an orientation model, not a workflow.
-
----
-
-## Core Idea
-
-In AI-assisted development, outcomes are non-deterministic.
-
-Given the same PRD:
-
-- different agents,
-- different prompts,
-- different execution paths,
-
-can produce meaningfully different results.
-
-Quantum Development treats each implementation attempt as an independent observation of the same specification.
-
-The goal is to distinguish:
-
-- specification failure from
-- execution-path variance.
-
----
-
-## PRD vs Attempt (Clarified)
-
-- **PRD** = hypothesis
-- **Attempt** = experimental run
-- **Outcome** = observation
-
-A single attempt provides insufficient evidence to judge the PRD.
-
-Multiple attempts allow patterns to emerge.
-
----
-
-## Why This Matters
-
-Without multiple attempts, teams risk:
-
-- **False negatives**
-  Declaring a PRD "bad" when a single execution path failed.
-
-- **False positives**
-  Declaring a PRD "good" because one attempt happened to succeed.
-
-Both lead to premature convergence.
-
-Quantum Development exists to delay collapse of the PRD until enough signal exists.
-
----
-
-## When Quantum Development Is Appropriate
-
-Multiple attempts against the same PRD are appropriate when:
-
-- The PRD is clear and internally consistent
-- Failure is ambiguous (not obviously caused by missing requirements)
-- The system involves AI agents or probabilistic behavior
-- Execution choices materially affect outcomes
-
-This is common in:
-
-- agentic workflows
-- prompt-driven systems
-- generative UI
-- complex orchestration logic
-
----
-
-## When to Change the PRD Instead
-
-Changing the PRD is appropriate when:
-
-- Attempts fail due to missing constraints or goals
-- Success criteria are unclear or contradictory
-- Attempts stall due to underspecification
-- New information invalidates the original intent
-
-Quantum Development is not an excuse to avoid revising a bad PRD.
-
----
-
-## Independence Requirement (Clarified)
-
-Independence in Quantum Development is epistemic, not intrinsic to any specific tool or infrastructure.
-
-An attempt is independent if:
-
-- decisions are not steered by prior outcomes,
-- implementation state is fresh,
-- and the approach represents a genuine re-instantiation of the PRD.
-
-Independence is therefore a property of decision-making and state, not of deployment mechanics.
-
-### Infrastructure for Observability (Supporting, Not Defining)
-
-Version control systems, isolated branches, and preview deployments do not create independence.
-
-They support independence by:
-
-- preventing accidental state leakage,
-- enabling parallel observation of outcomes,
-- and preserving each attempt as an inspectable artifact.
-
-Infrastructure exists to protect and surface independence, not to define it.
-
-Confusing infrastructural isolation with epistemic independence is a common failure mode in AI-assisted development.
-
-See `/docs/appendices/attempt-lifecycle.md` for the attempt model and the “PRD as the unit of test” framing.
-
----
-
-## Outcome Interpretation (Conceptual)
-
-Observed outcomes across attempts can be interpreted as follows:
-
-| Pattern                              | Implication                |
-| ------------------------------------ | -------------------------- |
-| Multiple failures, same failure mode | PRD likely flawed          |
-| Failure → success                    | Execution-path sensitivity |
-| Multiple successes                   | PRD likely robust          |
-| Divergent behaviors                  | PRD underspecified         |
-
-These interpretations are signals, not proofs.
-
-Judgment is still required.
-
----
-
-## On Timing and Observation
-
-Quantum Development does not require attempts to run simultaneously.
-
-Attempts may be:
-
-- sequential or parallel
-- human-driven or agent-driven
-- observed over time rather than at once
-
-The key requirement is not simultaneity, but comparability.
-
----
-
-## Relationship to ODD
-
-Quantum Development reinforces core ODD principles:
-
-- **Outcomes over artifacts**
-  Success is judged by results, not by effort or code reuse.
-
-- **Prompt over code**
-  Execution paths vary; intent must be tested across them.
-
-- **Antifragility**
-  Variance is not noise to eliminate but signal to observe.
-
-- **Restartability**
-  Clean restarts are a feature, not a failure.
-
----
-
-## What This Appendix Is Not
-
-Quantum Development is not:
-
-- a requirement to always run multiple attempts
-- a mandate to avoid PRD changes
-- a replacement for engineering judgment
-- a statistical guarantee
-
-It is a lens for reasoning about uncertainty.
-
----
-
-## Summary
-
-Quantum Development acknowledges a reality of modern software:
-
-> The same intent can produce multiple valid (or invalid) realities.
-
-By observing more than one, teams reduce the risk of mistaking chance for truth.
-
-**Quantum Development ends when one candidate is promoted.**
-
-Observations without promotion are incomplete experiments. See the Champion selection and promotion procedure in `/docs/appendices/attempt-lifecycle.md`.
-
----
-
-## Status
-
-- Orientation-only
-- Non-prescriptive
-- Applies primarily to AI-assisted systems
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/appendices/visual-evolution.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/visual-evolution
-title: "Visual Evolution"
-audience: canon
-exposure: nav
-tier: 2
-voice: neutral
-stability: semi_stable
-tags: ["odd", "visual", "evolution", "interfaces"]
----
-
-# Visual Evolution
-
-> Visual systems evolve independently through versioned interfaces.
-
-## Description
-
-In ODD, visual systems evolve independently from products. Visual consistency is enforced through versioned visual interfaces and evolutionary selection of visual assets, not shared components or frozen style guides. Products consume visual systems as contracts. Visual decisions are explicit, versioned, testable, and replaceable—treated like API decisions. Three layers exist: Visual Interfaces (compatibility contracts, slow, versioned), Visual Assets (generated outputs, disposable), and Visual Attempts (evolutionary exploration, ephemeral). Visual evolution follows the same promotion rules as code. Products declare compatibility; they do not own visuals.
-
-## Outline
-
-- Summary
-- The Core Principle
-- Visual Layers
-- Visual Interfaces
-- Visual Assets
-- Visual Attempts
-- Promotion Model
-- Separation from Product Lanes
-- Relationship to Evolutionary Development
-- Non-Goals
-- Related Canon
-
----
-
-## Content
-
-Visual consistency is not enforced through shared components or frozen style guides.
-It is enforced through **versioned visual interfaces** and **evolutionary selection of visual assets**.
-
-Products consume visual systems as contracts.
-Visual systems are not embedded inside product PRDs.
-
----
-
-## The Core Principle
-
-> **Visual consistency is a property of contracts, not code.**
-
-Visual decisions are treated the same way as API decisions:
-- Explicit
-- Versioned
-- Testable
-- Replaceable
-
-A product does not "own" its visuals.
-It declares compatibility with a visual interface.
-
----
-
-## Visual Layers
-
-Visual concerns are split into three distinct layers:
-
-| Layer | Purpose | Mutability |
-|-------|---------|------------|
-| Visual Interfaces | Compatibility contracts | Slow, versioned |
-| Visual Assets | Generated outputs | Disposable |
-| Visual Attempts | Evolutionary exploration | Ephemeral |
-
----
-
-## Visual Interfaces
-
-Visual interfaces define **what consumers may rely on**, not how visuals are implemented.
-
-They include:
-- Color systems
-- Typography systems
-- Spacing scales
-- Motion primitives
-- Iconography rules
-
-Visual interfaces:
-- Are versioned using semantic versioning
-- Define breaking vs additive changes
-- Contain no implementation code
-- Are required for product compatibility
-
-Example declaration (in a product PRD):
-
-```markdown
-## Visual Interfaces
-
-This product MUST remain compatible with:
-- color-system >=1.0.0 <2.0.0
-- typography >=1.0.0 <2.0.0
-```
-
----
-
-## Visual Assets
-
-Visual assets are outputs, not sources of truth.
-
-They may include:
-- CSS token files
-- JSON theme descriptors
-- Generated previews
-- Screenshots
-
-Rules:
-- Assets may be regenerated
-- Assets may be deleted
-- Assets are always downstream of interfaces
-- Assets are never authoritative
-
----
-
-## Visual Attempts
-
-Visual attempts are bounded experiments that propose changes to a visual interface or generate candidate assets.
-
-They:
-- Compete against each other
-- Are evaluated on evidence, not taste
-- Produce screenshots, recordings, and artifacts
-- Do not directly modify products
-
-Only a championed visual attempt may advance an interface version.
-
----
-
-## Promotion Model
-
-Visual evolution follows the same promotion rules as code:
-
-| Stage | Result |
-|-------|--------|
-| Attempt | Exploration |
-| Evidence | Observable comparison |
-| Champion | Selected outcome |
-| Promotion | Interface version update |
-
-Products may upgrade visual compatibility only after promotion.
-
----
-
-## Separation from Product Lanes
-
-Visual evolution MUST NOT be embedded in product PRDs.
-
-Products:
-- Declare compatibility
-- Consume visual interfaces
-- Do not define colors, fonts, or spacing directly
-
-Visual systems:
-- Evolve independently
-- May be AI-driven
-- May change faster than products
-
-This separation prevents visual churn from invalidating product experiments.
-
----
-
-## Relationship to Evolutionary Development
-
-Visual evolution is an explicit application of evolutionary principles:
-- Variation via attempts
-- Selection via evidence
-- Retention via contracts
-
-Visual systems form their own fitness landscape.
-Products adapt to stable interfaces, not raw experimentation.
-
----
-
-## Non-Goals
-
-Visual Evolution does NOT claim:
-- That one global style must exist
-- That visuals must be AI-generated
-- That products must share identical appearance
-
-It exists to preserve compatibility, comparability, and reversibility.
-
----
-
-## Related Canon
-
-- [Product Lanes](./product-lanes.md)
-- [Attempt Lifecycle](./attempt-lifecycle.md)
-- [Interface Contracts](/interfaces/index.md)
-- [Epochs](./epochs.md)
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/contract.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/contract
-title: "ODD System Contract"
-audience: canon
-exposure: nav
-tier: 1
-voice: neutral
-stability: stable
-tags: ["odd", "contract", "version", "semver", "compatibility"]
----
-
-# ODD System Contract
-
-> The single source of truth for ODD workflow compatibility.
-
-## Description
-
-The ODD System Contract versions repo structure, PRD lanes, attempt lifecycle, tooling invariants, required paths, provenance requirements (META.json), and evidence standards. Current version is 2.0.0 (multi-lane architecture). Epochs mark shifts in the evaluation landscape: E0001 (single-PRD era, contract 1.x) and E0002 (multi-lane era, contract 2.x). Contract 2.0.0 breaking changes include lane declaration required, epoch declaration in META.json, PRDs under `/docs/PRD/<lane>/PRD.md`, and attempts under `/products/<lane>/attempts/`. Do not compare outcomes across epochs without explicit adjustment.
-
-## Outline
-
-- What This Versions
-- Epochs (E0001, E0002)
-- Contract 2.0.0 Breaking Changes
-- Compatibility (Forward and Backward)
-- Version History
-
----
-
-## Content
-
-**Current Version:** 2.0.0
-
-This document is the single source of truth for the ODD workflow contract version.
-
-All other documents reference this version. Individual PRDs, attempts, and content packs have their own versioning schemes, but compatibility with the ODD system is determined by this contract.
-
----
-
-## What This Versions
-
-The ODD System Contract covers:
-
-- **Repo structure** required for ODD workflow
-- **PRD lanes** and attempt lifecycle contracts
-- **Tooling invariants** (register/nuke/finalize/promote)
-- **Required paths** and naming conventions
-- **Provenance requirements** (META.json schema)
-- **Evidence standards** (what counts as proof)
-
----
-
-## Epochs
-
-Epochs mark shifts in the evaluation landscape. Contract versions and epochs are related but distinct:
-
-| Epoch | Contract Version | Description |
-|-------|------------------|-------------|
-| E0001-single-prd-era | 1.x | Single PRD world (`/docs/PRD.md`) |
-| E0002-multi-lane-era | 2.x | Multi-lane world (`/docs/PRD/<lane>/PRD.md`) |
-
-**Rule:** Do not compare outcomes across epochs without explicit adjustment.
-
-See `/docs/appendices/epochs.md` for epoch semantics.
-
----
-
-## Contract 2.0.0 — Breaking Changes
-
-This version introduces structural changes that are not backwards-compatible:
-
-### Removed
-- Single active PRD rule (`/docs/PRD.md` as sole PRD location)
-
-### Added
-- **Lane declaration required** for all attempts
-- **Epoch declaration required** in META.json
-- PRDs stored under `/docs/PRD/<lane>/PRD.md`
-- Attempts stored under `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/` (lane-contained)
-- Tooling requires `--lane` flag for register, finalize, promote
-
-Note: Root `/attempts/**` is legacy (read-only). All new attempts are lane-contained.
-
-### Changed
-- Mental model: products decoupled, canon shared
-- Comparison validity: same lane + same PRD + same epoch required
-
----
-
-## Compatibility
-
-### Forward Compatibility
-Documents written for contract 2.x will not work correctly in a 1.x environment.
-
-### Backward Compatibility
-Epoch 1 artifacts (pre-lanes) remain valid historical records. They are not "wrong" — they are from a different evaluation context.
-
-Epoch 1 documents should be marked with an epoch header if they remain in the repo for historical reference.
-
----
-
-## Version History
-
-| Version | Date | Summary |
-|---------|------|---------|
-| 2.0.0 | 2026-01-17 | Multi-lane architecture, epoch requirements |
-| 1.x | Pre-2026-01-17 | Single PRD era (implicit, never formally versioned) |
-
----
-
-## Related Documents
-
-- Decision log: `/docs/decisions/D0011-odd-contract-2.0.0.md`
-- Epochs: `/docs/appendices/epochs.md`
-- Product Lanes: `/docs/appendices/product-lanes.md`
-- Alignment Reviews: `/canon/odd/appendices/alignment-reviews.md`
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/decisions/D0001-three-tier-conceptual-hierarchy.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/decisions/D0001
-title: "Three-Tier Conceptual Hierarchy"
-audience: canon
-exposure: nav
-tier: 1
-voice: neutral
-stability: stable
-tags: ["odd", "architecture", "conceptual-model", "philosophy"]
----
-
-# Three-Tier Conceptual Hierarchy
-
-> ODD separates universal principles from program constraints from implementation details.
-
-## Description
-
-ODD is organized as a three-tier conceptual hierarchy where each layer absorbs different pressure and has different decay rates. ODD contains universal principles (timeless, product-agnostic), Canon contains program-level constraints (shared rules across products), and Docs contains implementation details (how this instance works). This separation allows ODD to outgrow any single repository without losing coherence.
-
-## Outline
-
-- Decision
-- Status
-- The Three Tiers
-- The Litmus Test
-- Why This Matters
-- Consequences
-- Evidence
-
----
-
-## Content
-
-## Decision
-
-ODD is a three-tier conceptual hierarchy, not a single monolithic philosophy:
-
-| Tier | Contains | Answers | Decay Rate |
-|------|----------|---------|------------|
-| **ODD** | Universal principles | "What is always true about building well?" | Almost never |
-| **Canon** | Program-level constraints | "What rules do we share across products?" | Carefully |
-| **Docs** | Implementation details | "How does this instance work?" | Freely |
-
-## Status
-
-**Active**
-
-## The Three Tiers
-
-### Tier 1: ODD (Universal Principles)
-
-ODD is the root. It is:
-
-- Not a framework
-- Not a product philosophy
-- Not owned by any single implementation
-
-ODD contains:
-
-- Progressive distillation
-- Failure-driven modularity
-- Visual proof > narrative confidence
-- Evidence over assertion
-- Elevation before optimization
-
-**The test:** Would this still be true if klappy.dev didn't exist? If Cloudflare vanished? If LLMs were replaced?
-
-If yes → it's ODD.
-
-### Tier 2: Canon (Program-Level Constraints)
-
-Canon is shared contract, not universal truth.
-
-Canon answers: *"If you are building within this program, these are the rules we agree to."*
-
-Canon contains:
-
-- decision-rules
-- definition-of-done
-- self-audit
-- misuse-patterns
-- completion-report-template
-- constraints (scoped to this program)
-
-**The test:** Should all products in this program obey it?
-
-If yes → it's Canon.
-
-Crucially:
-- Canon can change without invalidating ODD
-- Two programs could share ODD but diverge in Canon
-
-### Tier 3: Docs (Implementation Details)
-
-Docs are the reference implementation.
-
-Docs contain:
-
-- Infrastructure decisions
-- CLI paths
-- Cloudflare specifics
-- Repo structure
-- Tooling affordances
-- Branch naming conventions
-
-**The test:** Is this about how *we* do it *here*?
-
-If yes → it's Docs.
-
-## The Litmus Test
-
-For any file, ask:
-
-1. **Would this still be true in 10 years?**
-   - Yes → ODD
-   - No → keep going
-
-2. **Should all products in this program obey it?**
-   - Yes → Canon
-   - No → keep going
-
-3. **Is this about how we do it here?**
-   - Yes → Docs
-
-If something fails all three, it probably doesn't belong at all.
-
-## Why This Matters
-
-This separation:
-
-- Allows publishing ODD as a standalone essay/site
-- Lets other teams adopt ODD without adopting your Canon
-- Supports running multiple Canons under the same ODD
-- Explains why "ODD isn't a framework"
-
-Frameworks conflate all three layers. ODD separates them.
-
-Different decay rates give real systems what they need:
-
-- ODD should almost never change
-- Canon is allowed to evolve carefully
-- Docs are allowed to rot and be rebuilt
-
-## Consequences
-
-### Enables
-
-- ODD can outgrow any single repository
-- Teams can fork Canon while keeping ODD
-- Implementation can be completely replaced without touching philosophy
-- Clear criteria for file placement
-
-### Prevents
-
-- Conflating philosophy with plumbing
-- Breaking universal principles when fixing implementation bugs
-- Vendor lock-in at the conceptual level
-
-### Costs
-
-- Requires discipline to classify correctly
-- Three places to look instead of one
-- Harder to explain to newcomers (until they get it)
-
-## Evidence
-
-- D0015 (this decision) - formalizing the separation
-- Canon progressive distillation effort - moved implementation decisions to docs/
-- `/docs/appendices/` - now contains implementation-specific appendices
-- `/docs/decisions/` - now contains implementation-specific decisions
-- `/canon/odd/appendices/` - retains only portable philosophy
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/decisions/README.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/decisions
-title: "ODD Conceptual Decisions"
-audience: canon
-exposure: nav
-tier: 1
-voice: neutral
-stability: stable
-tags: ["odd", "decisions", "conceptual", "philosophy"]
----
-
-# ODD Conceptual Decisions
-
-> Decisions about ODD's mental model and conceptual architecture.
-
-This folder contains decisions about ODD itself — the philosophy, not any specific implementation.
-
----
-
-## Conceptual Decisions (This Folder)
-
-| ID | Decision | Summary |
-|----|----------|---------|
-| [D0001](./D0001-three-tier-conceptual-hierarchy.md) | Three-Tier Conceptual Hierarchy | ODD separates universal principles → program constraints → implementation details |
-
----
-
-## Two Types of Decisions
-
-| Location | Contains | Example |
-|----------|----------|---------|
-| `/canon/odd/decisions/` | Decisions about ODD's conceptual architecture | "ODD is a three-tier hierarchy" |
-| `/docs/decisions/` | Decisions about this implementation | "prod branch is production" |
-
----
-
-## The Principle
-
-> **Conceptual architecture lives in canon. Implementation decisions live in docs.**
-
-The three-tier model (ODD → Canon → Docs) is itself captured in D0001.
-
----
-
-## See Also
-
-- [D0001: Three-Tier Conceptual Hierarchy](./D0001-three-tier-conceptual-hierarchy.md)
-- `/docs/decisions/README.md` — Implementation decision index
-- `/canon/odd/contract.md` — ODD System Contract
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/manifesto.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/manifesto
-title: "ODD Manifesto — Extended"
-audience: canon
-exposure: nav
-tier: 2
-voice: neutral
-stability: stable
-tags: ["odd", "philosophy"]
----
-
-# ODD Manifesto v1.1 (Extended)
-
-> A governance framework for human-AI collaboration that optimizes learning, not execution.
-
-## Description
-
-Outcomes-Driven Development (ODD) operationalizes governance for human-AI collaboration. The core thesis: development is about defining outcomes, enforcing constraints, and verifying reality—not writing code. AI accelerates execution; governance preserves trust. The pillars include Prompt Over Code, KISS, DRY with Isolation, Consistency, Maintainability, Antifragile design, and Scalability. ODD treats restartability as a feature, applies progressive governance based on maturity (PoC → Pilot → Production), requires evidence over assertion, treats AI as accelerator not authority, demands falsifiable outcomes, prefers reversibility, and requires stop conditions. Memory is the bottleneck, not computation.
-
-## Outline
-
-- Purpose and Core Thesis
-- Pillars (Operational Interpretation)
-- Restartability Over Salvage
-- Progressive Governance (Maturity-Aware)
-- Evidence as the Gate
-- Trust, Authority, and AI
-- Outcomes Must Be Falsifiable
-- Reversibility and Cost Awareness
-- Stop Conditions
-- Memory Is the Bottleneck
-- Confidence, Risks, and Known Failure Modes
-
----
-
-## Content
-
-> ODD v1.1 — Extended (Internal / Agent-Governance) → for canon, MCP, agents (this file)
-
----
-
-## 📌 Purpose
-
-This document operationalizes Outcomes-Driven Development as a governance framework for human–AI collaboration.
-
-It is designed to:
-• guide autonomous agents
-• enforce verification and evidence
-• scale judgment without repeating it
-• adapt rigor as projects mature
-
-This version is not optimized for persuasion.
-It is optimized for execution and enforcement.
-
----
-
-## 🎯 Core Thesis
-
-The primary job of development is not writing code.
-It is defining outcomes, enforcing constraints, and verifying reality.
-
-AI accelerates execution.
-Governance preserves trust.
-
----
-
-## 📌 Pillars (Operational Interpretation)
-
-### Prompt Over Code
-• Intent is expressed declaratively.
-• Code is treated as ephemeral.
-• Regeneration is cheaper than preservation.
-
-### KISS
-
-• Complexity is a liability.
-• Escalation requires evidence of failure.
-
-### DRY (With Isolation)
-
-• Duplication is tolerated across bounded contexts.
-• Shared abstractions require proven reuse.
-
-### Consistency
-
-• Behavioral predictability matters more than visual uniformity.
-• Consistency is scoped, not global.
-
-### Maintainability
-
-• Systems must survive creator turnover.
-• Documentation and explicit tradeoffs are part of the product.
-
-### Antifragile
-
-• Failure is assumed.
-• Recovery paths are preferred over prevention.
-• Learning velocity is a design constraint.
-
-### Scalable
-
-• Growth must be bounded in:
-• cost
-• complexity
-• human attention
-• Scalability includes cognitive and operational load.
-
----
-
-## 🔄 Restartability Over Salvage
-
-ODD assumes that restarting from refined intent is often more effective than steering a system that has already drifted.
-
-As systems grow, prompts accrete, assumptions harden, and local fixes compound. At a certain point, continued steering optimizes for preserving effort rather than improving outcomes.
-
-Restarting is not failure.
-Restarting is a recognition that:
-• intent has become clearer
-• constraints are better understood
-• evidence from prior attempts now exists
-
-In an AI-accelerated environment, restarting is cheap.
-Misalignment is expensive.
-
-ODD therefore treats restartability as a design feature:
-• prompts are disposable
-• implementations are ephemeral
-• canon and intent persist
-
-The goal is not to preserve artifacts, but to preserve learning.
-
-A clean restart with better constraints is progress.
-
----
-
-## 📊 Progressive Governance (Maturity-Aware ODD)
-
-ODD enforcement depends on project maturity.
-
-Level 0 — PoC / Exploration
-• Goal: learn quickly
-• Artifacts are non-authoritative
-• Verification demonstrates possibility
-• Over-governance is prohibited
-
-Level 1 — Pilot / Product
-• Goal: deliver value safely
-• Evidence and visual proof required
-• Tradeoffs must be explicit
-• Silent failure is unacceptable
-
-Level 2 — Production / Long-Term
-• Goal: sustain trust
-• Outcomes must be measurable
-• Observability, reversibility, and security are mandatory
-• Autonomous actions require stop conditions and human gates
-
-Maturity must be stated explicitly.
-
----
-
-## 📎 Evidence as the Gate
-
-Completion requires:
-• observed behavior
-• produced evidence
-• self-audit against constraints
-• explicit declaration of confidence and gaps
-
-Assertions do not count as completion.
-
----
-
-## 🤖 Trust, Authority, and AI
-
-AI is an accelerator, not an authority.
-• AI may propose and generate
-• AI may self-audit and verify
-• AI may not silently assume trust
-
-Authority boundaries and escalation points must be explicit.
-
----
-
-## 🔬 Outcomes Must Be Falsifiable
-
-Outcomes are only valid if they can be:
-• observed
-• tested
-• disproven
-
-Non-falsifiable outcomes are treated as goals, not success criteria.
-
----
-
-## ⚠️ Reversibility and Cost Awareness
-
-Prefer decisions that are:
-• cheap to undo
-• bounded in cost
-• limited in blast radius
-
-Irreversible decisions require human approval.
-
----
-
-## 🛑 Stop Conditions
-
-Every autonomous loop must define:
-• success criteria
-• failure criteria
-• exit conditions
-
-Endless optimization is a failure mode.
-
----
-
-## 🧠 Memory Is the Bottleneck
-
-AI didn't just make coding faster. It changed what's scarce.
-
-In ODD, generated artifacts are abundant, but **durable intent** is not.
-So the work shifts toward:
-
-- preserving what was learned,
-- verifying reality,
-- discarding what cannot be trusted,
-- and elevating only what repeatedly reduces future drag.
-
-ODD stays legible by using **Progressive Elevation & Decay**:
-most artifacts die at the Attempt/PRD layer; only proven patterns elevate into Contracts, Canon, and Decision Trace.
-
-See:
-- `/docs/appendices/progressive-elevation.md`
-- `/docs/appendices/product-lanes.md`
-- `/docs/appendices/epochs.md`
-
----
-
-## 🔗 Relationship to Canon
-
-• ODD → why
-• Constraints → assumptions
-• Decision Rules → how
-• Maturity Model → when
-• Evidence Policies → proof
-
-Together, these form a complete governance layer.
-
----
-
-## 💡 Closing (Internal)
-
-ODD is not a philosophy of optimism.
-
-It is a discipline of restraint, verification, and curation—
-designed for a world where generation is infinite, but trust is not.
-
----
-
-## ✅ Status
-
-- ODD v1.1 finalized
-- Public and internal views aligned
-- Ready for MCP exposure and agent enforcement
-
----
-
-## ⚠️ Confidence, Risks, and Known Failure Modes
-
-(ODD v1.1 — Internal Self-Assessment)
-
-This section captures a snapshot assessment of how well Outcomes-Driven Development (ODD), as currently defined, aligns with its stated principles and where it is most vulnerable.
-
-This is not a guarantee of correctness.
-It is an explicit acknowledgment of uncertainty.
-
----
-
-### Confidence Model
-
-Confidence scores express current belief that ODD will behave as intended when applied thoughtfully.
-
-Scale: 0.0–1.0
-• 0.9+ — robust under most conditions
-• 0.7–0.85 — strong, but watch for drift
-• 0.5–0.7 — plausible, fragile under misuse
-• <0.5 — likely misaligned without correction
-
-Scores are expected to change as ODD is applied in practice.
-
----
-
-### Principle-Level Confidence Snapshot
-
-**Prompt Over Code / Convention Over Configuration**
-Confidence: 0.80
-
-Why this is strong
-• ODD treats intent, constraints, and outcomes as first-class artifacts.
-• Canonical resources replace brittle, repeated prompts with stable conventions.
-
-Primary risks
-• Conventions silently becoming configuration sprawl.
-• Clients inventing ad hoc mappings instead of using shared conventions.
-
-Failure mode
-• “Prompt over code” degenerates into “prompt + hidden config everywhere.”
-
----
-
-**KISS (Keep It Simple, Stupid)**
-Confidence: 0.75
-
-Why this is strong
-• ODD avoids embedding workflows or agent loops.
-• Complexity is deferred intentionally.
-
-Primary risks
-• Meta-layers (manifests, indices, maturity flags) accumulating unchecked.
-• Over-abstracting governance before it proves necessary.
-
-Failure mode
-• Governance becomes heavier than the systems it governs.
-
----
-
-**DRY (With Isolation)**
-Confidence: 0.70
-
-Why this is strong
-• Canon centralizes worldview and defaults.
-• Single-inventory patterns reduce duplication.
-
-Primary risks
-• Multiple parallel indices drifting out of sync.
-• Reuse pressure creating brittle shared abstractions too early.
-
-Failure mode
-• “One source of truth” becomes “many partial truths.”
-
----
-
-**Consistency**
-Confidence: 0.65
-
-Why this is weaker
-• Consistency depends on discipline, not tooling.
-• Naming, casing, and URI patterns are easy to drift over time.
-
-Primary risks
-• Small inconsistencies compounding across resources and clients.
-• Human tolerance masking slow degradation.
-
-Failure mode
-• The system remains logically sound but ergonomically frustrating.
-
----
-
-**Maintainability**
-Confidence: 0.70
-
-Why this is strong
-• Separation of stable principles from evolving operations.
-• Explicit maturity model prevents premature hardening.
-
-Primary risks
-• Manual maintenance of inventories becoming burdensome.
-• Version semantics implied but not enforced.
-
-Failure mode
-• Canon becomes respected but stale.
-
----
-
-**Antifragile**
-Confidence: 0.60
-
-Why this is intentionally cautious
-• Antifragility depends on real-world stress, not theory.
-• Recovery paths are assumed, not yet proven.
-
-Primary risks
-• MCP or tooling layers becoming hidden single points of failure.
-• Ephemerality mistaken for disposability of meaning.
-
-Failure mode
-• System recovers technically but loses trust socially.
-
----
-
-**Scalable**
-Confidence: 0.70
-
-Why this is strong
-• ODD scales conceptually: more resources do not require new rules.
-• Governance grows linearly, not exponentially.
-
-Primary risks
-• Human cognitive load becoming the true bottleneck.
-• Discovery/search degrading without deliberate tooling later.
-
-Failure mode
-• System scales in size but not in usability.
-
----
-
-### Cross-Cutting Risks
-
-**Premature Formalization**
-
-ODD is vulnerable to being “locked in” too early, reducing exploration.
-
-**False Authority**
-
-Well-written governance can be mistaken for correctness without evidence.
-
-**Silent Drift**
-
-Small deviations, left unnamed, can erode trust over time.
-
----
-
-### Intended Use of This Section
-
-This section exists to:
-• prevent ideological hardening
-• make risks discussable
-• encourage re-evaluation
-• model intellectual humility
-
-It is expected to change.
-
----
-
-### Re-evaluation Philosophy
-
-ODD should be reassessed when:
-• it is applied to real production systems
-• autonomous agents operate for extended periods
-• failure modes surface that are not addressed here
-
-Confidence should be updated based on evidence, not optimism.
-
----
-
-Closing (Internal)
-
-ODD is not complete.
-
-It is a living attempt to govern creativity, autonomy, and trust in a world where generation is cheap and certainty is not.
-
-Its strength is not that it claims to be right—
-but that it makes being wrong visible early.
-
-For common failure modes and practical misapplications of ODD, see _Misuse Patterns_ and _Prompt Architecture_ in the ODD appendices.
-
----
-
-Status
-• ODD v1.1 Extended updated
-• Confidence scoring and failure modes explicitly documented
-• Fully aligned with Canon Index confidence model
-
----
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/maturity.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/maturity
-title: "Project Maturity & Progressive Governance"
-audience: canon
-exposure: nav
-tier: 2
-voice: first_person
-stability: semi_stable
-tags: ["maturity", "governance"]
----
-
-# Project Maturity & Progressive Governance
-
-> When to apply rigor, not just what rigor exists.
-
-## Description
-
-Project maturity defines how constraints and policies change as a project matures. Three levels exist: Level 0 (PoC/Exploration) focuses on learning quickly with non-authoritative artifacts; Level 1 (Pilot/Product) delivers value safely with evidence, visual proof, and explicit tradeoffs; Level 2 (Production/Long-Term) sustains trust with measurable outcomes, observability, security, and explicit stop conditions. Rigor increases with maturity. Projects should move up when others depend on them, artifacts persist, decisions become costly to reverse, or trust is implicitly assumed.
-
-## Outline
-
-- Core Principle: Rigor increases with maturity
-- Level 0 — PoC / Exploration
-- Level 1 — Pilot / Product
-- Level 2 — Production / Long-Term
-- Relationship to Other Canon Documents
-- Agent Expectations
-- Escalation Rules
-
----
-
-## Content
-
-**Canon v0.1**
-
-> This governance axis tells agents *when* to apply rigor, not just what rigor exists.
-
-This page defines how my principles, constraints, and policies change as a project matures.
-
-Not every project needs the same level of rigor on day one.
-Applying production-level governance to exploratory work kills learning.
-Failing to apply it later destroys trust.
-
-This model exists to activate the right constraints at the right time.
-
----
-
-## 📌 Core Principle
-
-I do not apply all rules equally at all times.
-
-Rigor increases with maturity.
-Exploration comes first. Governance comes later.
-
-Every project must explicitly state its current maturity level.
-
----
-
-## 📋 Maturity Levels Overview
-
-I use three maturity levels:
-
-1. PoC / Exploration
-2. Pilot / Product
-3. Production / Long-Term
-
-These levels are not about importance.
-They are about risk, trust, and dependency.
-
----
-
-## 🔬 Level 0 — PoC / Exploration
-
-**Goal:** Learn quickly and discard freely.
-
-**Characteristics**
-• Short-lived or experimental
-• Ephemeral artifacts
-• Low dependency from others
-• High uncertainty tolerated
-
-What applies
-• Prompt over code
-• KISS (loosely)
-• DRY (lightly)
-• Consistency (local only)
-• Evidence of possibility (not correctness)
-
-What does not apply yet
-• Formal observability
-• Cost optimization
-• Trust or authority boundaries
-• Production security guarantees
-• Long-term reversibility planning
-
-Required labeling
-
-“This is a PoC. Outputs are exploratory and non-authoritative.”
-
-Critical rule
-
-Nothing at this level is considered final or trusted.
-
----
-
-## 🚀 Level 1 — Pilot / Product
-
-**Goal:** Deliver real value safely to real users.
-
-**Characteristics**
-• Repeated use
-• Growing user expectations
-• Shared ownership begins
-• Partial persistence
-
-What turns on
-• Definition of Done & Evidence Policy
-• Visual proof for UI behavior
-• Explicit tradeoffs
-• Basic observability
-• Reversibility for major decisions
-• Defined human approval points
-
-New obligation
-
-If users depend on it, it must be verifiable.
-
-Risk posture
-
-Failure is acceptable, but silent failure is not.
-
----
-
-## ✅ Level 2 — Production / Long-Term
-
-**Goal:** Sustain trust over time.
-
-**Characteristics**
-• Canonical or authoritative data
-• External dependencies
-• Organizational or reputational risk
-• Long timelines
-
-What becomes mandatory
-• Measurable outcomes with metrics
-• Continuous feedback loops
-• Full observability
-• Trust & authority boundaries
-• Cost predictability
-• Security and privacy defaults
-• Explicit stop conditions for autonomy
-
-Critical rule
-
-Nothing enters production without:
-• a named owner
-• an undo path
-• an audit trail
-
-At this level, correctness and trust outweigh speed.
-
----
-
-## 🔗 Relationship to Other Canon Documents
-
-This maturity model modulates the following:
-• Constraints
-Some constraints are optional at PoC and mandatory later.
-• Decision Rules
-Rules like KISS and Borrow→Build apply at all levels, but escalation thresholds change.
-• Definition of Done
-Evidence requirements increase with maturity.
-• Self-Audit Checklist
-More items become non-optional as maturity increases.
-• Visual Proof Standards
-Optional for PoCs, required for Pilot and Production.
-
----
-
-## 🤖 Agent Expectations
-
-Agents and collaborators are expected to:
-• explicitly state the project’s maturity level
-• apply only the rules required for that level
-• refuse to over-govern PoCs
-• refuse to under-govern Production systems
-
-If maturity is unclear, the correct action is to ask.
-
----
-
-## ⚠️ Escalation Rules
-
-A project should move up a maturity level when:
-• others begin depending on it
-• artifacts persist beyond initial intent
-• decisions become costly to reverse
-• trust is implicitly assumed
-
-A project may move down only with explicit acknowledgment.
-
----
-
-## 💡 Closing Note
-
-This model exists to protect both:
-• exploration, and
-• trust.
-
-Rigor too early kills creativity.
-Rigor too late kills credibility.
-
-Progressive governance keeps both alive.
-
----
-
-Status
-• Canon v0.1 — Project Maturity complete
-• Canon now supports lifecycle-aware enforcement
-
----
-
-What This Unlocks (Important)
-
-With this file added, agents can now:
-• ask for or infer maturity
-• activate the correct checks automatically
-• avoid overbuilding PoCs
-• avoid underbuilding production systems
-
-This completes the missing dimension you identified.
-
----
-
-Suggested Next Moves (Choose One) 1. Update ODD Manifesto → ODD + Maturity 2. Agent Handoff Instruction (now maturity-aware) 3. MCP schema that exposes maturity as a first-class field 4. Refactor existing canon docs to reference maturity thresholds
-
-Say which you want next, and we’ll continue cleanly.
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/misuse-patterns.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/misuse-patterns
-title: "ODD Misuse Patterns"
-audience: canon
-exposure: nav
-tier: 2
-voice: neutral
-stability: evolving
-tags: ["odd", "misuse", "failure-modes"]
----
-
-# ODD Misuse Patterns
-
-> Predictable failure modes when ODD is applied incorrectly.
-
-## Description
-
-This appendix documents predictable ways ODD fails: Outcome Theater (saying outcomes but measuring artifacts), Prompt Maximalism (one huge prompt replacing thinking), Premature Governance (locking down before patterns stabilize), Evidence Substitution (assertions replacing demonstrations), Consistency Absolutism (treating early conventions as immutable), and Antifragility as Optimism (assuming recovery without testing it). These are human failure modes under real constraints, not violations of intent. The purpose is early recognition through shared language, not prevention through rules.
-
-## Outline
-
-- Outcome Theater
-- Prompt Maximalism
-- Premature Governance
-- Evidence Substitution
-- Consistency Absolutism
-- Antifragility as Optimism
-- Maturity Note
-- How to Use This Appendix
-
----
-
-## Content
-
-**(Appendix to ODD Manifesto — Internal)**
-
-This section documents predictable ways Outcomes-Driven Development (ODD) fails when applied incorrectly.
-These are not violations of intent; they are human failure modes under real constraints.
-
-The purpose is not prevention through rules, but early recognition through shared language.
-
----
-
-## Misuse Pattern 1: Outcome Theater
-
-> "We say outcomes, but still worship artifacts."
-
-What it looks like
-• Outcomes are stated, but success is still measured by:
-• shipped code
-• completed tickets
-• deployed features
-• Evidence is implied, not demonstrated.
-
-Why it happens
-• Artifact-based metrics feel concrete.
-• Outcomes feel abstract until proven.
-
-Where it shows up
-• Early PoCs that never re-anchor to real user value.
-• Pilots that quietly revert to velocity metrics.
-
-Risk
-• ODD becomes rebranded output-driven development.
-
----
-
-## Misuse Pattern 2: Prompt Maximalism
-
-> "If one prompt is good, ten must be better."
-
-What it looks like
-• Large, ornate prompts replace thinking.
-• Slight prompt changes cause wildly different outcomes.
-• Prompts are curated like fragile artifacts.
-
-Why it happens
-• Early AI success feels magical.
-• Teams mistake correlation for control.
-
-Where it shows up
-• PoCs experimenting rapidly.
-• Teams hopping between tools without stabilizing conventions.
-
-Risk
-• Prompt over code collapses into prompt over judgment.
-
----
-
-## Misuse Pattern 3: Premature Governance
-
-> "Let's lock this down before it breaks."
-
-What it looks like
-• Rules introduced before patterns stabilize.
-• Heavy definitions of “done” applied too early.
-• Checklists used as gates instead of lenses.
-
-Why it happens
-• Fear of chaos.
-• Desire for predictability before understanding.
-
-Where it shows up
-• Pilots transitioning too quickly to “production thinking.”
-• Teams scaling before learning.
-
-Risk
-• Innovation slows before it has a chance to inform governance.
-
----
-
-## Misuse Pattern 4: Evidence Substitution
-
-> "Trust me, it works."
-
-What it looks like
-• Assertions replace demonstrations.
-• Logs, explanations, or screenshots stand in for proof.
-• Visual verification is deferred indefinitely.
-
-Why it happens
-• Evidence takes effort.
-• Verifying your own work is uncomfortable.
-
-Where it shows up
-• Autonomous agent workflows.
-• Systems that “should” work but haven’t been observed.
-
-Risk
-• Trust becomes social instead of empirical.
-
----
-
-## Misuse Pattern 5: Consistency Absolutism
-
-> "One way forever."
-
-What it looks like
-• Early conventions treated as immutable.
-• Divergence framed as error instead of signal.
-• Local context ignored for global uniformity.
-
-Why it happens
-• Consistency reduces cognitive load.
-• Change feels like regression.
-
-Where it shows up
-• Mature systems resisting evolution.
-• Teams optimizing for internal harmony over external reality.
-
-Risk
-• The system becomes brittle under real-world variation.
-
----
-
-## Misuse Pattern 6: Antifragility as Optimism
-
-> "It'll recover."
-
-What it looks like
-• Failure assumed to be harmless.
-• Recovery paths untested.
-• Learning deferred until “later.”
-
-Why it happens
-• Antifragility sounds resilient.
-• Testing failure is inconvenient.
-
-Where it shows up
-• Distributed systems.
-• Autonomous or semi-autonomous agents.
-
-Risk
-• Systems degrade silently until trust collapses.
-
----
-
-A note on maturity (intentionally light)
-
-These patterns tend to:
-• appear early as curiosity and speed
-• persist silently through pilots
-• cause real damage in production if unexamined
-
-The solution is not stricter rules, but timely awareness.
-
----
-
-How this appendix should be used
-• As a diagnostic lens
-• As shared language for course correction
-• As a reminder that misuse is normal — and fixable
-
-This list is expected to grow as real failures are observed.
-
----
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/orientation-map.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/orientation-map
-title: "ODD + Canon + Evidence — Orientation Map"
-audience: canon
-exposure: nav
-tier: 2
-voice: neutral
-stability: semi_stable
-tags: ["odd", "orientation", "mental-model"]
----
-
-# ODD + Canon + Evidence — Orientation Map
-
-> A one-page mental model for the ODD system.
-
-## Description
-
-This orientation map provides a single-page mental model of how Intent flows through ODD Manifesto to Canon to Decisions to Evidence to Outcomes. ODD is organized as a three-tier conceptual hierarchy: ODD contains universal principles (timeless), Canon contains program-level constraints (shared rules), and Docs contains implementation details (how this instance works). Maturity moves from Exploration through Validation to Commitment. The map explicitly rejects "if it compiles, it's done" and "governance replaces judgment."
-
-## Outline
-
-- The Core Idea (Intent → ODD → Canon → Decisions → Evidence → Outcomes)
-- How to Read This Map
-- The Three-Tier Hierarchy (ODD → Canon → Docs)
-- Where Maturity Lives
-- What This Map Explicitly Rejects
-- Why This Map Exists
-
----
-
-## Content
-
-> This is not a workflow. It is a mental model.
-
----
-
-## 🎯 The Core Idea
-
-```
-        Intent
-          |
-          v
-      ODD Manifesto
-          |
-          v
-        Canon
-
-(Constraints & Rules)
-|
-v
-Decisions
-|
-v
-Evidence
-        |
-        v
-      Outcomes
-```
-
----
-
-## 📖 How to Read This Map
-• ODD explains why and what we care about
-• Canon explains how decisions tend to be shaped
-• Decisions are local, contextual, and human
-• Evidence grounds claims in reality
-• Outcomes are the only thing that matters long-term
-
-Nothing here enforces anything.
-Everything here informs something.
-
-**Canon may reference Docs. Docs must never redefine Canon.**
-
----
-
-## 🏗️ The Three-Tier Hierarchy
-
-ODD is a conceptual hierarchy, not a monolithic philosophy:
-
-| Tier | Contains | Decay Rate |
-|------|----------|------------|
-| **ODD** | Universal principles (timeless, product-agnostic) | Almost never |
-| **Canon** | Program-level constraints (shared rules across products) | Carefully |
-| **Docs** | Implementation details (how this instance works) | Freely |
-
-**The litmus test:**
-
-1. Would this still be true in 10 years? → **ODD**
-2. Should all products in this program obey it? → **Canon**
-3. Is this about how *we* do it *here*? → **Docs**
-
-This separation allows ODD to outgrow any single repository.
-
-See [D0001: Three-Tier Conceptual Hierarchy](/canon/odd/decisions/D0001-three-tier-conceptual-hierarchy.md).
-
----
-
-## 📊 Where Maturity Lives (Not Gates)
-
-```
-Exploration ──────→ Validation ──────→ Commitment
-   (PoC)            (Pilot)         (Production)
-```
-
-Rigor increases →
-Evidence expectations increase →
-Governance tightens →
-
-    •	Early: bias toward learning
-    •	Middle: bias toward validation
-    •	Later: bias toward trust and durability
-
-No sharp lines. No ceremony required.
-
----
-
-## 🚫 What This Map Explicitly Rejects
-• “If it compiles, it’s done.”
-• “Trust the explanation.”
-• “One true workflow.”
-• “Governance replaces judgment.”
-
----
-
-## 💡 Why This Map Exists
-• To explain the system in under 60 seconds
-• To anchor conversations without debate
-• To keep humans oriented while tools change
-
----
-
-## ✅ Why These Two Artifacts Are Enough for Now
-• They surface risk without prescribing control
-• They encode wisdom without freezing behavior
-• They respect maturity without formalizing it
-
-This keeps you aligned with:
-• KISS
-• Antifragility
-• Prompt over code
-• Convention over configuration
-
-And most importantly:
-
-They make misuse discussable instead of shameful.
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/prompt-architecture.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/prompt-architecture
-title: "Prompt Architecture"
-audience: canon
-exposure: nav
-tier: 2
-voice: neutral
-stability: semi_stable
-tags: ["odd", "prompt-architecture", "orchestration"]
----
-
-# Prompt Architecture (Orientation)
-
-> How intent scales without collapsing into a monolithic prompt.
-
-## Description
-
-Prompt architecture addresses the God Prompt anti-pattern: as scope grows, prompts become monolithic, unmaintainable, sensitive to small edits, context-bloated, and inconsistent. The alternative is Orchestrated Intent: keep stable intent in canonical artifacts, construct task prompts dynamically, use smaller focused agents for bounded tasks, pass results through shared constraints and evidence standards. Intent is layered: Worldview (rarely changes), Project Intent (changes occasionally), Task Intent (changes constantly). Only the bottom layer should enter the working prompt in full detail. Context budgeting treats every token like a limited resource.
-
-## Outline
-
-- The Anti-Pattern: Prompt Maximalism (God Prompt)
-- The Alternative: Orchestrated Intent
-- Intent Graph (Mental Model)
-- Context Budgeting
-- Maturity Note
-- Failure Mode of Orchestration
-
----
-
-## Content
-
-**Canon / ODD Appendix v0.1**
-
-This appendix names a common scaling failure mode: the God Prompt.
-
-As an app’s scope grows, prompts tend to grow into a single monolith that becomes:
-• unmaintainable
-• difficult to reason about
-• sensitive to small edits
-• context-bloated
-• increasingly inconsistent
-
-This is rarely intentional. It is a natural default.
-
----
-
-## ⚠️ The Anti-Pattern: Prompt Maximalism ("God Prompt")
-
-What it looks like
-• One prompt tries to cover:
-• product requirements
-• system constraints
-• UI conventions
-• coding standards
-• edge cases
-• release steps
-• testing expectations
-• The prompt becomes the “real system,” and code becomes an artifact of that prompt.
-
-Why it fails
-• Cognitive load explodes
-• Context bloat crowds out task-relevant details
-• Small edits have unpredictable consequences
-• The prompt becomes a fragile dependency
-
----
-
-## ✅ The Alternative: Orchestrated Intent
-
-Instead of one prompt that does everything:
-• keep stable intent in canonical artifacts (ODD + Canon)
-• construct task prompts dynamically
-• use smaller focused agents for bounded tasks
-• pass results through shared constraints and evidence standards
-
-In this model:
-• the Canon is the constitution
-• the task prompt is a temporary work order
-• the output is verified by evidence, not confidence
-
----
-
-## 🧭 Intent Graph (Mental Model)
-
-Think of intent as layered:
-
-1. **Worldview** (rarely changes) — ODD, constraints, decision rules
-2. **Project intent** (changes occasionally) — PRD, scope, priorities, maturity level
-3. **Task intent** (changes constantly) — the specific job to be done right now
-
-Only the bottom layer should enter the working prompt in full detail.
-
----
-
-## 💰 Context Budgeting (A Simple Heuristic)
-
-Treat context like a budget:
-• Every token spent on generic policy reduces tokens available for task specifics.
-• The goal is not “more context,” but “relevant context.”
-
-A healthy system prefers:
-• small, precise context
-• stable references by URI
-• on-demand retrieval
-
----
-
-## 📊 Maturity Note (Intentionally Light)
-
-- **PoC:** A larger prompt may be acceptable for speed, as long as it is treated as disposable.
-• Pilot: Prompt growth becomes a risk. Begin splitting tasks and referencing canonical resources.
-• Production: Monolithic prompts become a liability. Orchestrated intent and bounded sub-tasks become the default.
-
-This is not a rule. It is a scaling reality.
-
----
-
-## ⚠️ Failure Mode of Orchestration (So We Don't Romanticize It)
-
-Orchestration can fail too.
-
-Common orchestration failure modes:
-• semantic drift across sub-agents
-• inconsistent assumptions
-• extra coordination overhead
-• loss of a single coherent narrative
-
-The mitigation is not “more instructions,” but:
-• shared canonical references
-• explicit evidence requirements
-• clear boundaries between tasks
-
----
-
-## 💡 Closing
-
-When prompts grow without bound, the system becomes fragile.
-
-ODD favors:
-• stable intent captured in canonical artifacts
-• small prompts constructed for the task at hand
-• verification through evidence rather than explanation
-
----
-
-## ✅ Status
-
-- Appendix v0.1 complete
-- Orientation-only
-- No enforcement semantics
-
----
-
-## 🔗 Why This Fits Your Pillars
-• KISS: It discourages giant prompts; encourages small bounded contexts.
-• DRY: Canonical references prevent repeating the same boilerplate in every prompt.
-• Consistency: Canon provides a stable “source of truth” across sub-agents.
-• Maintainability: Prompts become smaller, modular, and replaceable.
-• Antifragile: Smaller tasks fail faster and recover easier.
-• Scalable: Orchestration scales better than monoliths.
-• Prompt-over-code: This is the application of that principle at scale.
-
----
-
-
-
---------------------------------------------------------------------------------
 📄 File: canon/self-audit.md
 --------------------------------------------------------------------------------
 
@@ -13449,7 +10699,7 @@ This site reflects that reality. Ideas are tested, observed, and sometimes retri
 
 If you want to explore further:
 
-- Read the **extended ODD Manifesto** in `/canon/odd/manifesto.md`
+- Read the **extended ODD Manifesto** in `/odd/manifesto.md`
 - See how rigor scales in **Project Maturity & Progressive Governance**
 - Browse the **Canon Index** to understand how decisions and verification are structured
 
@@ -13459,6 +10709,2756 @@ Or skip the theory and look at projects as they are added over time.
 
 > ODD is about preserving intent without freezing execution.
 > The measure of success is not how elegant the artifact is, but whether the outcome holds up in the real world.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: odd/appendices/README.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://odd/appendices
+title: "ODD Appendices (Portable)"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["odd", "appendices", "index", "portable"]
+---
+
+# ODD Appendices (Portable)
+
+Extended concepts that deepen understanding without introducing enforcement. These are diagnostic and orientation documents, not requirements.
+
+> **Note:** Implementation-specific appendices have been moved to `/docs/appendices/`. This folder contains only portable methodology that can apply to any ODD-following repository.
+
+---
+
+## Contents
+
+| File | Title | Summary |
+|------|-------|---------|
+| `alignment-reviews.md` | Alignment Reviews | Periodic evaluation of the ODD system itself to detect drift between stated intent, implemented process, and observed outcomes. |
+| `evolution-not-automation.md` | Evolution, Not Automation | This system optimizes learning, not execution. Humans stay in the loop. |
+| `failure-driven-modularity.md` | Failure-Driven Modularity | Modular boundaries are introduced only after repeated failure to regenerate from spec. Modularity is an outcome of failure, not a prerequisite. |
+| `media-as-learning-layer.md` | Media as a Learning Layer | Media reduces cognitive load over stable written content. Canonical truth lives in text. |
+| `quantum-development.md` | Quantum Development | Why multiple attempts against the same PRD are sometimes necessary before changing the PRD itself. |
+| `visual-evolution.md` | Visual Evolution | Visual systems evolve independently from products through versioned visual interfaces. |
+
+---
+
+## Implementation-Specific Appendices
+
+The following have been moved to `/docs/appendices/` as they contain klappy.dev-specific implementation details:
+
+- `attempt-lifecycle.md` — Attempt folder structure, CLI commands, META.json schema
+- `compilation.md`, `compiled-memory.md`, `compilation-targets.md` — Compilation paths and tooling
+- `epochs.md` — E0003 evidence requirements with Cloudflare specifics
+- `evidence.md`, `deploy-evidence.md`, `online-evidence.md` — Evidence path structure
+- `lane-build-layout.md`, `lane-implementation-surfaces.md` — Lane-specific paths
+- `product-lanes.md` — Specific lane names (website, ai-navigation, agent-skill)
+- `repo-topology.md`, `repo-truth.md`, `repo-truth-audit.md` — Specific folder structures
+- `progressive-elevation.md` — Path-specific elevation rules
+- `canonical-compression.md`, `memory-architecture.proposed.md` — Compilation and memory paths
+
+---
+
+## When to Read What
+
+**Understanding ODD methodology?** Start with these portable appendices.
+
+**Implementing ODD in your own repo?** Use these as the conceptual foundation.
+
+**Understanding klappy.dev specifics?** Read `/docs/appendices/` instead.
+
+---
+
+## Relationship to Canon
+
+These appendices extend the core canon documents:
+
+- `constraints.md` → appendices explain edge cases
+- `definition-of-done.md` → evidence philosophy here, evidence procedures in docs
+- `odd/manifesto.md` → appendices operationalize philosophy
+
+
+
+--------------------------------------------------------------------------------
+📄 File: odd/appendices/alignment-reviews.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://odd/alignment-reviews
+title: "Alignment Reviews"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "alignment", "drift", "hygiene", "selection-pressure"]
+---
+
+# Alignment Reviews
+
+> Periodic evaluation of the ODD system itself to detect drift.
+
+## Description
+
+Alignment Reviews are periodic evaluations that detect and correct drift between stated intent, implemented process, and observed outcomes. They apply to content, process, and tooling equally. Reviews evaluate Canon (contradicted rules, obsolete references, undocumented invariants), PRDs (actual decision criteria, implicit patching, lane bleeding), Attempts (incompatible comparisons, ignored failures, insufficient evidence), and Tooling (enforced invariants, accidental drift, silent compensation). Reviews are triggered by events (epoch transitions, repeated failures, PRD rewrites) not schedules. They produce corrections, not features.
+
+## Outline
+
+- Summary
+- Why This Exists
+- What Is Reviewed (Canon, PRDs, Attempts, Tooling)
+- When Reviews Occur
+- What Reviews Produce
+- Non-Goals
+- Core Invariant
+
+---
+
+## Content
+
+Its purpose is to detect and correct **drift** between:
+- stated intent
+- implemented process
+- observed outcomes
+
+Alignment Reviews apply to **content, process, and tooling** equally.
+
+They do not produce features.
+They produce corrections.
+
+---
+
+## Why This Exists
+
+Outcome-Driven Development assumes:
+- rapid iteration
+- parallel attempts
+- evolving intent
+
+These conditions create drift by default.
+
+Without an explicit alignment mechanism:
+- outdated rules persist
+- assumptions fossilize
+- successful outcomes are misattributed
+- failed outcomes are rationalized
+
+Alignment Reviews introduce **selection pressure against incoherence**.
+
+---
+
+## What Is Reviewed
+
+An Alignment Review evaluates:
+
+### Canon
+- Are any canon rules contradicted by current practice?
+- Are obsolete rules still referenced?
+- Are new invariants emerging without documentation?
+
+### PRDs (Per Lane)
+- Do PRDs still reflect actual decision criteria?
+- Are PRDs being patched implicitly via attempts?
+- Are lanes bleeding into each other?
+
+### Attempts
+- Are outcomes being compared across incompatible contexts?
+- Are failures producing learning, or being ignored?
+- Is evidence sufficient to justify promotion?
+
+### Tooling
+- Does tooling enforce stated invariants?
+- Does tooling encourage accidental drift?
+- Are humans compensating for tooling gaps silently?
+
+---
+
+## When Reviews Occur
+
+Alignment Reviews are triggered by **events**, not schedules.
+
+Typical triggers include:
+- Epoch transitions
+- Repeated unexplained failures
+- Major PRD rewrites
+- Tooling changes that affect workflow
+- Persistent disagreement about outcomes
+
+They may also be run opportunistically.
+
+---
+
+## What Reviews Produce
+
+An Alignment Review may result in:
+- Canon updates (via decision logs)
+- PRD clarification or split
+- Epoch declaration
+- Tooling constraints
+- Explicit deprecation of rules or documents
+
+Reviews **do not**:
+- retroactively invalidate evidence
+- rewrite history
+- assign blame
+
+---
+
+## Non-Goals
+
+Alignment Reviews are not:
+- performance reviews
+- approval gates
+- compliance checklists
+- automation requirements
+
+They exist to preserve **truthfulness**, not control.
+
+---
+
+## Core Invariant
+
+If alignment cannot be explained clearly,
+it does not exist.
+
+Drift that is invisible is more dangerous than failure.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: odd/appendices/evolution-not-automation.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://odd/evolution-not-automation
+title: "Evolution, Not Automation"
+audience: canon
+exposure: hidden
+tier: 2
+voice: neutral
+stability: semi_stable
+tags: ["odd", "evolution", "automation", "orientation"]
+---
+
+# Evolution, Not Automation
+
+> This system optimizes learning, not execution.
+
+## Description
+
+ODD is often mistaken for an attempt to automate software development. It is not. Automation optimizes execution; evolution optimizes learning. ODD is designed for disciplined evolution: humans define intent (PRDs, constraints, DoD), agents generate variation (independent attempts), reality provides feedback (evidence), humans perform selection (promotion/rejection), and learnings are retained. Humans stay in the loop because fully automated selection optimizes for what is easy to measure rather than what actually matters. All evolution is discrete, auditable, reversible, and bounded.
+
+## Outline
+
+- Why This Appendix Exists
+- What We Are Not Doing
+- What We Are Doing Instead
+- Why Humans Stay in the Loop
+- Evolutionary Scope
+- Controlled, Not Runaway
+- The Core Principle
+
+---
+
+## Content
+
+**Status:** Orientation  
+**Audience:** Internal / Canon  
+**Scope:** Keep learning/evolution distinct from automation
+
+---
+
+## Why This Appendix Exists
+
+This system is often mistaken for an attempt to automate software development.
+
+It is not.
+
+Automation optimizes execution.  
+Evolution optimizes learning.
+
+The difference matters.
+
+---
+
+## What We Are Not Doing
+
+We are not building a system that:
+
+- automatically decides what to build
+- automatically selects winners
+- automatically rewrites its own goals
+- optimizes hidden metrics without human review
+
+Those paths tend to collapse into proxy optimization, confidence theater, or silent drift.
+
+---
+
+## What We Are Doing Instead
+
+We are designing a system that supports disciplined evolution:
+
+- Humans define intent (PRDs, constraints, Definition of Done)
+- Agents generate variation (independent attempts)
+- Reality provides feedback (evidence, behavior, performance)
+- Humans perform selection (promotion or rejection)
+- Learnings are retained (PRD patches, decision logs, sealed artifacts)
+
+This mirrors evolutionary systems without surrendering judgment.
+
+---
+
+## Why Humans Stay in the Loop
+
+Fully automated selection optimizes for what is easiest to measure.
+
+Human review optimizes for what actually matters.
+
+By keeping humans responsible for:
+
+- approving PRD changes
+- evaluating evidence
+- selecting champions
+
+we prevent the system from drifting toward shallow success criteria or self-reinforcing errors.
+
+---
+
+## Evolutionary Scope
+
+Evolution in this system applies to:
+
+- problem definitions (PRDs)
+- success criteria (DoD)
+- constraints (performance, usability, deployability)
+- measurement methods (what counts as evidence)
+
+Implementation code is disposable.  
+Learning is not.
+
+---
+
+## Controlled, Not Runaway
+
+All evolution is:
+
+- discrete (versioned PRDs, sealed attempts)
+- auditable (evidence over explanation)
+- reversible (commit SHAs are truth)
+- bounded (no self-modifying goals)
+
+If a change cannot be explained, evidenced, and reviewed, it does not propagate.
+
+---
+
+## The Core Principle
+
+We are not trying to make software build itself.
+
+We are trying to make truth accumulate faster than mistakes.
+
+Automation accelerates output.  
+Evolution, done carefully, accelerates understanding.
+
+This appendix exists to keep that distinction explicit—and to prevent future readers (human or AI) from optimizing the wrong thing.
+
+
+
+
+--------------------------------------------------------------------------------
+📄 File: odd/appendices/failure-driven-modularity.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://odd/appendices/failure-driven-modularity
+title: "Failure-Driven Modularity"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["canon", "evolution", "modularity", "regenerability"]
+---
+
+# Failure-Driven Modularity
+
+> Modular boundaries emerge from repeated failure, not upfront design.
+
+## Description
+
+In ODD, modular boundaries are introduced only after repeated, documented failure to regenerate a system from its specification. Successful regeneration proves the system remains cognitively tractable as a single unit. A failure is when the generated system diverges materially, constraints are repeatedly omitted, specifications need ad hoc re-explanation, or attempts converge inconsistently. Only patterned failure justifies decomposition. The evolution rule: begin with the smallest viable specification, attempt regeneration, do not modularize if it succeeds, extract the smallest region of cognitive overload if it fails repeatedly.
+
+## Outline
+
+- Summary
+- Definition of Failure
+- The Evolution Rule
+- Rationale
+- Implications
+- Non-Goals
+- Related Canon
+
+---
+
+## Content
+
+Successful regeneration is evidence that the system remains cognitively tractable as a single unit.
+Repeated failure is evidence that the boundary is incorrect and must be revised.
+
+Modularity is therefore an *outcome of failure*, not a prerequisite for success.
+
+---
+
+## Definition of Failure
+
+A regeneration attempt is considered a **failure** when one or more of the following occur
+despite reasonable effort:
+
+- The generated system diverges materially from the intended behavior.
+- Critical constraints are repeatedly omitted or misapplied.
+- The specification must be re-explained in ad hoc or situational ways.
+- Multiple regeneration attempts converge inconsistently.
+
+Single failures are not sufficient.
+Only **patterned failure** justifies decomposition.
+
+---
+
+## The Evolution Rule
+
+1. Begin with the smallest viable specification that expresses the desired outcome.
+2. Attempt full regeneration from that specification.
+3. If regeneration succeeds, **do not modularize**.
+4. If regeneration fails repeatedly:
+   - Identify the smallest region of cognitive overload.
+   - Extract that region into its own independently regenerable specification.
+5. Repeat recursively.
+
+This process continues until each module can be regenerated reliably and independently.
+
+---
+
+## Rationale
+
+Traditional software architecture encourages early modularization based on anticipated reuse.
+This introduces speculative boundaries, premature abstractions, and unnecessary coordination cost.
+
+ODD replaces prediction with evidence.
+
+A boundary is justified **only when failure proves it necessary**.
+
+---
+
+## Implications
+
+- Architectural structure emerges empirically.
+- Teams do not need shared architectural taste, only shared failure criteria.
+- Systems evolve without centralized design authority.
+- Regeneration remains feasible as complexity increases.
+
+---
+
+## Non-Goals
+
+Failure-Driven Modularity does **not** claim that:
+
+- All systems should be maximally decomposed.
+- Regeneration will always succeed.
+- Existing stable systems must be restructured.
+
+It applies only to systems being actively evolved under ODD.
+
+---
+
+## Related Canon
+
+- Reproducibility Test
+- Outcome Promotion vs Artifact Preservation
+- Regenerability as a First-Class Constraint
+
+---
+
+## Derivation
+
+For historical and conceptual motivation, see:
+
+> **From Reusability to Regenerability**  
+> Canonical Derivation, `/canon/derivations/reusability-to-regenerability.md`
+
+
+
+--------------------------------------------------------------------------------
+📄 File: odd/appendices/media-as-learning-layer.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://odd/media-as-learning-layer
+title: "Media as a Learning Layer"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "media", "learning", "progressive-disclosure", "website"]
+---
+
+# Media as a Learning Layer
+
+> Media reduces cognitive load over stable written content.
+
+## Description
+
+Media exists to reduce cognitive load, not increase it. It is a learning layer over stable written content—optional, contextual, and regenerable. Canonical truth lives in text; media supports understanding but does not define it. Core rules: clarity is the default (not any specific medium), media is not canon, progressive disclosure is mandatory (opt-in only, no autoplay), media must match learning intent (diagrams for mental models, short video for orientation, audio for reflection), and media is created only for stable content. The system rejects media-first pages, content dumps, and redundant explanations.
+
+## Outline
+
+- Summary
+- Core Rules
+  - Clarity is the default
+  - Media is not Canon
+  - Progressive disclosure is mandatory
+  - Match media to learning intent
+  - Stability before production
+- Anti-Patterns (Explicitly Rejected)
+- Compliance Note
+
+---
+
+## Content
+
+Media is a **learning layer** over stable written content.
+It is optional, contextual, and regenerable.
+
+**Canonical truth lives in text.**
+Media supports understanding — it does not define it.
+
+---
+
+## Core Rules
+
+### 1) Clarity is the default
+Text is not the default.
+Video is not the default.
+Audio is not the default.
+
+**Clarity is the default.**
+
+Media is used only when it teaches faster or better than text alone.
+
+---
+
+### 2) Media is not Canon
+Canonical truth is preserved in:
+- markdown content
+- frontmatter
+- decision records
+- evidence policies
+
+Media assets are:
+- supporting artifacts
+- replaceable / regenerable
+- optional
+
+**The ownership and placement of media is canonical.**
+The media itself is not.
+
+---
+
+### 3) Progressive disclosure is mandatory
+All media must be **opt-in**.
+
+Allowed interactions:
+- Watch
+- Listen
+- View diagram
+- Download
+
+Disallowed patterns:
+- autoplay (anywhere)
+- background video
+- forced consumption
+- media that blocks navigation or comprehension
+
+The default experience must remain:
+- readable
+- navigable
+- understandable
+- usable without media
+
+---
+
+### 4) Match media to learning intent
+Media must be chosen based on the learning outcome:
+
+- **Images / diagrams**
+  - Establish mental models
+  - Replace multi-paragraph explanations
+- **Short video (≤ 90 seconds)**
+  - Orientation and framing
+  - Not exhaustive detail
+- **Audio**
+  - Reflection and deeper thinking
+  - Always optional
+- **PDF**
+  - Reference, synthesis, offline use
+  - Never required for basic understanding
+
+Each asset must answer:
+> What does this teach faster or better than text?
+
+If it cannot answer, it does not belong.
+
+---
+
+### 5) Stability before production
+Media is created only for **stable content**.
+
+Draft or evolving ideas remain text-first until:
+- the concept stabilizes
+- the page stops churn
+- the narrative is unlikely to drift
+
+This prevents:
+- outdated explainers
+- conflicting narratives
+- re-record churn
+
+Media follows clarity — not the other way around.
+
+---
+
+## Anti-Patterns (Explicitly Rejected)
+
+The system intentionally avoids:
+- media-first pages
+- content dumps / galleries
+- redundant explanations across formats
+- "just in case" assets
+- polish media used to compensate for unclear thinking
+
+If removing a piece of media would break understanding, that is a design failure.
+
+---
+
+## Compliance Note
+
+Product PRDs may reference this appendix.
+They should not re-litigate the philosophy.
+
+PRDs define **how** the lane applies this principle.
+This appendix defines the governing constraint.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: odd/appendices/quantum-development.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://odd/quantum-development
+title: "Quantum Development"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: semi_stable
+tags: ["odd", "quantum", "attempts", "uncertainty", "orientation"]
+---
+
+# Quantum Development
+
+> Why multiple attempts against the same PRD are sometimes necessary.
+
+## Description
+
+Quantum Development is a way of reasoning about uncertainty in AI-assisted development. Given the same PRD, different agents, prompts, and execution paths can produce meaningfully different results. Each attempt is an independent observation of the same specification. The goal is to distinguish specification failure from execution-path variance. A PRD is a hypothesis, an attempt is an experimental run, an outcome is an observation. Multiple attempts allow patterns to emerge and prevent premature convergence. Quantum Development is appropriate when the PRD is clear but failure is ambiguous. It ends when one candidate is promoted.
+
+## Outline
+
+- Purpose
+- Core Idea
+- PRD vs Attempt (Clarified)
+- Why This Matters
+- When Quantum Development Is Appropriate
+- When to Change the PRD Instead
+- Independence Requirement
+- Outcome Interpretation
+- On Timing and Observation
+- Relationship to ODD
+- What This Appendix Is Not
+- Summary
+
+---
+
+## Content
+
+## Purpose
+
+This appendix formalizes Quantum Development as a way of reasoning about uncertainty in AI-assisted software development.
+
+It explains why multiple attempts against the same PRD are sometimes necessary before changing the PRD itself.
+
+This is an orientation model, not a workflow.
+
+---
+
+## Core Idea
+
+In AI-assisted development, outcomes are non-deterministic.
+
+Given the same PRD:
+
+- different agents,
+- different prompts,
+- different execution paths,
+
+can produce meaningfully different results.
+
+Quantum Development treats each implementation attempt as an independent observation of the same specification.
+
+The goal is to distinguish:
+
+- specification failure from
+- execution-path variance.
+
+---
+
+## PRD vs Attempt (Clarified)
+
+- **PRD** = hypothesis
+- **Attempt** = experimental run
+- **Outcome** = observation
+
+A single attempt provides insufficient evidence to judge the PRD.
+
+Multiple attempts allow patterns to emerge.
+
+---
+
+## Why This Matters
+
+Without multiple attempts, teams risk:
+
+- **False negatives**
+  Declaring a PRD "bad" when a single execution path failed.
+
+- **False positives**
+  Declaring a PRD "good" because one attempt happened to succeed.
+
+Both lead to premature convergence.
+
+Quantum Development exists to delay collapse of the PRD until enough signal exists.
+
+---
+
+## When Quantum Development Is Appropriate
+
+Multiple attempts against the same PRD are appropriate when:
+
+- The PRD is clear and internally consistent
+- Failure is ambiguous (not obviously caused by missing requirements)
+- The system involves AI agents or probabilistic behavior
+- Execution choices materially affect outcomes
+
+This is common in:
+
+- agentic workflows
+- prompt-driven systems
+- generative UI
+- complex orchestration logic
+
+---
+
+## When to Change the PRD Instead
+
+Changing the PRD is appropriate when:
+
+- Attempts fail due to missing constraints or goals
+- Success criteria are unclear or contradictory
+- Attempts stall due to underspecification
+- New information invalidates the original intent
+
+Quantum Development is not an excuse to avoid revising a bad PRD.
+
+---
+
+## Independence Requirement (Clarified)
+
+Independence in Quantum Development is epistemic, not intrinsic to any specific tool or infrastructure.
+
+An attempt is independent if:
+
+- decisions are not steered by prior outcomes,
+- implementation state is fresh,
+- and the approach represents a genuine re-instantiation of the PRD.
+
+Independence is therefore a property of decision-making and state, not of deployment mechanics.
+
+### Infrastructure for Observability (Supporting, Not Defining)
+
+Version control systems, isolated branches, and preview deployments do not create independence.
+
+They support independence by:
+
+- preventing accidental state leakage,
+- enabling parallel observation of outcomes,
+- and preserving each attempt as an inspectable artifact.
+
+Infrastructure exists to protect and surface independence, not to define it.
+
+Confusing infrastructural isolation with epistemic independence is a common failure mode in AI-assisted development.
+
+See `/docs/appendices/attempt-lifecycle.md` for the attempt model and the “PRD as the unit of test” framing.
+
+---
+
+## Outcome Interpretation (Conceptual)
+
+Observed outcomes across attempts can be interpreted as follows:
+
+| Pattern                              | Implication                |
+| ------------------------------------ | -------------------------- |
+| Multiple failures, same failure mode | PRD likely flawed          |
+| Failure → success                    | Execution-path sensitivity |
+| Multiple successes                   | PRD likely robust          |
+| Divergent behaviors                  | PRD underspecified         |
+
+These interpretations are signals, not proofs.
+
+Judgment is still required.
+
+---
+
+## On Timing and Observation
+
+Quantum Development does not require attempts to run simultaneously.
+
+Attempts may be:
+
+- sequential or parallel
+- human-driven or agent-driven
+- observed over time rather than at once
+
+The key requirement is not simultaneity, but comparability.
+
+---
+
+## Relationship to ODD
+
+Quantum Development reinforces core ODD principles:
+
+- **Outcomes over artifacts**
+  Success is judged by results, not by effort or code reuse.
+
+- **Prompt over code**
+  Execution paths vary; intent must be tested across them.
+
+- **Antifragility**
+  Variance is not noise to eliminate but signal to observe.
+
+- **Restartability**
+  Clean restarts are a feature, not a failure.
+
+---
+
+## What This Appendix Is Not
+
+Quantum Development is not:
+
+- a requirement to always run multiple attempts
+- a mandate to avoid PRD changes
+- a replacement for engineering judgment
+- a statistical guarantee
+
+It is a lens for reasoning about uncertainty.
+
+---
+
+## Summary
+
+Quantum Development acknowledges a reality of modern software:
+
+> The same intent can produce multiple valid (or invalid) realities.
+
+By observing more than one, teams reduce the risk of mistaking chance for truth.
+
+**Quantum Development ends when one candidate is promoted.**
+
+Observations without promotion are incomplete experiments. See the Champion selection and promotion procedure in `/docs/appendices/attempt-lifecycle.md`.
+
+---
+
+## Status
+
+- Orientation-only
+- Non-prescriptive
+- Applies primarily to AI-assisted systems
+
+
+
+--------------------------------------------------------------------------------
+📄 File: odd/appendices/visual-evolution.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://odd/visual-evolution
+title: "Visual Evolution"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: semi_stable
+tags: ["odd", "visual", "evolution", "interfaces"]
+---
+
+# Visual Evolution
+
+> Visual systems evolve independently through versioned interfaces.
+
+## Description
+
+In ODD, visual systems evolve independently from products. Visual consistency is enforced through versioned visual interfaces and evolutionary selection of visual assets, not shared components or frozen style guides. Products consume visual systems as contracts. Visual decisions are explicit, versioned, testable, and replaceable—treated like API decisions. Three layers exist: Visual Interfaces (compatibility contracts, slow, versioned), Visual Assets (generated outputs, disposable), and Visual Attempts (evolutionary exploration, ephemeral). Visual evolution follows the same promotion rules as code. Products declare compatibility; they do not own visuals.
+
+## Outline
+
+- Summary
+- The Core Principle
+- Visual Layers
+- Visual Interfaces
+- Visual Assets
+- Visual Attempts
+- Promotion Model
+- Separation from Product Lanes
+- Relationship to Evolutionary Development
+- Non-Goals
+- Related Canon
+
+---
+
+## Content
+
+Visual consistency is not enforced through shared components or frozen style guides.
+It is enforced through **versioned visual interfaces** and **evolutionary selection of visual assets**.
+
+Products consume visual systems as contracts.
+Visual systems are not embedded inside product PRDs.
+
+---
+
+## The Core Principle
+
+> **Visual consistency is a property of contracts, not code.**
+
+Visual decisions are treated the same way as API decisions:
+- Explicit
+- Versioned
+- Testable
+- Replaceable
+
+A product does not "own" its visuals.
+It declares compatibility with a visual interface.
+
+---
+
+## Visual Layers
+
+Visual concerns are split into three distinct layers:
+
+| Layer | Purpose | Mutability |
+|-------|---------|------------|
+| Visual Interfaces | Compatibility contracts | Slow, versioned |
+| Visual Assets | Generated outputs | Disposable |
+| Visual Attempts | Evolutionary exploration | Ephemeral |
+
+---
+
+## Visual Interfaces
+
+Visual interfaces define **what consumers may rely on**, not how visuals are implemented.
+
+They include:
+- Color systems
+- Typography systems
+- Spacing scales
+- Motion primitives
+- Iconography rules
+
+Visual interfaces:
+- Are versioned using semantic versioning
+- Define breaking vs additive changes
+- Contain no implementation code
+- Are required for product compatibility
+
+Example declaration (in a product PRD):
+
+```markdown
+## Visual Interfaces
+
+This product MUST remain compatible with:
+- color-system >=1.0.0 <2.0.0
+- typography >=1.0.0 <2.0.0
+```
+
+---
+
+## Visual Assets
+
+Visual assets are outputs, not sources of truth.
+
+They may include:
+- CSS token files
+- JSON theme descriptors
+- Generated previews
+- Screenshots
+
+Rules:
+- Assets may be regenerated
+- Assets may be deleted
+- Assets are always downstream of interfaces
+- Assets are never authoritative
+
+---
+
+## Visual Attempts
+
+Visual attempts are bounded experiments that propose changes to a visual interface or generate candidate assets.
+
+They:
+- Compete against each other
+- Are evaluated on evidence, not taste
+- Produce screenshots, recordings, and artifacts
+- Do not directly modify products
+
+Only a championed visual attempt may advance an interface version.
+
+---
+
+## Promotion Model
+
+Visual evolution follows the same promotion rules as code:
+
+| Stage | Result |
+|-------|--------|
+| Attempt | Exploration |
+| Evidence | Observable comparison |
+| Champion | Selected outcome |
+| Promotion | Interface version update |
+
+Products may upgrade visual compatibility only after promotion.
+
+---
+
+## Separation from Product Lanes
+
+Visual evolution MUST NOT be embedded in product PRDs.
+
+Products:
+- Declare compatibility
+- Consume visual interfaces
+- Do not define colors, fonts, or spacing directly
+
+Visual systems:
+- Evolve independently
+- May be AI-driven
+- May change faster than products
+
+This separation prevents visual churn from invalidating product experiments.
+
+---
+
+## Relationship to Evolutionary Development
+
+Visual evolution is an explicit application of evolutionary principles:
+- Variation via attempts
+- Selection via evidence
+- Retention via contracts
+
+Visual systems form their own fitness landscape.
+Products adapt to stable interfaces, not raw experimentation.
+
+---
+
+## Non-Goals
+
+Visual Evolution does NOT claim:
+- That one global style must exist
+- That visuals must be AI-generated
+- That products must share identical appearance
+
+It exists to preserve compatibility, comparability, and reversibility.
+
+---
+
+## Related Canon
+
+- [Product Lanes](./product-lanes.md)
+- [Attempt Lifecycle](./attempt-lifecycle.md)
+- [Interface Contracts](/interfaces/index.md)
+- [Epochs](./epochs.md)
+
+
+
+--------------------------------------------------------------------------------
+📄 File: odd/contract.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://odd/contract
+title: "ODD System Contract"
+audience: canon
+exposure: nav
+tier: 1
+voice: neutral
+stability: stable
+tags: ["odd", "contract", "version", "semver", "compatibility"]
+---
+
+# ODD System Contract
+
+> The single source of truth for ODD workflow compatibility.
+
+## Description
+
+The ODD System Contract versions repo structure, PRD lanes, attempt lifecycle, tooling invariants, required paths, provenance requirements (META.json), and evidence standards. Current version is 2.0.0 (multi-lane architecture). Epochs mark shifts in the evaluation landscape: E0001 (single-PRD era, contract 1.x) and E0002 (multi-lane era, contract 2.x). Contract 2.0.0 breaking changes include lane declaration required, epoch declaration in META.json, PRDs under `/docs/PRD/<lane>/PRD.md`, and attempts under `/products/<lane>/attempts/`. Do not compare outcomes across epochs without explicit adjustment.
+
+## Outline
+
+- What This Versions
+- Epochs (E0001, E0002)
+- Contract 2.0.0 Breaking Changes
+- Compatibility (Forward and Backward)
+- Version History
+
+---
+
+## Content
+
+**Current Version:** 2.0.0
+
+This document is the single source of truth for the ODD workflow contract version.
+
+All other documents reference this version. Individual PRDs, attempts, and content packs have their own versioning schemes, but compatibility with the ODD system is determined by this contract.
+
+---
+
+## What This Versions
+
+The ODD System Contract covers:
+
+- **Repo structure** required for ODD workflow
+- **PRD lanes** and attempt lifecycle contracts
+- **Tooling invariants** (register/nuke/finalize/promote)
+- **Required paths** and naming conventions
+- **Provenance requirements** (META.json schema)
+- **Evidence standards** (what counts as proof)
+
+---
+
+## Epochs
+
+Epochs mark shifts in the evaluation landscape. Contract versions and epochs are related but distinct:
+
+| Epoch | Contract Version | Description |
+|-------|------------------|-------------|
+| E0001-single-prd-era | 1.x | Single PRD world (`/docs/PRD.md`) |
+| E0002-multi-lane-era | 2.x | Multi-lane world (`/docs/PRD/<lane>/PRD.md`) |
+
+**Rule:** Do not compare outcomes across epochs without explicit adjustment.
+
+See `/docs/appendices/epochs.md` for epoch semantics.
+
+---
+
+## Contract 2.0.0 — Breaking Changes
+
+This version introduces structural changes that are not backwards-compatible:
+
+### Removed
+- Single active PRD rule (`/docs/PRD.md` as sole PRD location)
+
+### Added
+- **Lane declaration required** for all attempts
+- **Epoch declaration required** in META.json
+- PRDs stored under `/docs/PRD/<lane>/PRD.md`
+- Attempts stored under `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/` (lane-contained)
+- Tooling requires `--lane` flag for register, finalize, promote
+
+Note: Root `/attempts/**` is legacy (read-only). All new attempts are lane-contained.
+
+### Changed
+- Mental model: products decoupled, canon shared
+- Comparison validity: same lane + same PRD + same epoch required
+
+---
+
+## Compatibility
+
+### Forward Compatibility
+Documents written for contract 2.x will not work correctly in a 1.x environment.
+
+### Backward Compatibility
+Epoch 1 artifacts (pre-lanes) remain valid historical records. They are not "wrong" — they are from a different evaluation context.
+
+Epoch 1 documents should be marked with an epoch header if they remain in the repo for historical reference.
+
+---
+
+## Version History
+
+| Version | Date | Summary |
+|---------|------|---------|
+| 2.0.0 | 2026-01-17 | Multi-lane architecture, epoch requirements |
+| 1.x | Pre-2026-01-17 | Single PRD era (implicit, never formally versioned) |
+
+---
+
+## Related Documents
+
+- Decision log: `/docs/decisions/D0011-odd-contract-2.0.0.md`
+- Epochs: `/docs/appendices/epochs.md`
+- Product Lanes: `/docs/appendices/product-lanes.md`
+- Alignment Reviews: `/odd/appendices/alignment-reviews.md`
+
+
+
+--------------------------------------------------------------------------------
+📄 File: odd/decisions/D0001-three-tier-conceptual-hierarchy.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://odd/decisions/D0001
+title: "Three-Tier Conceptual Hierarchy"
+audience: canon
+exposure: nav
+tier: 1
+voice: neutral
+stability: stable
+tags: ["odd", "architecture", "conceptual-model", "philosophy"]
+---
+
+# Three-Tier Conceptual Hierarchy
+
+> ODD separates universal principles from program constraints from implementation details.
+
+## Description
+
+ODD is organized as a three-tier conceptual hierarchy where each layer absorbs different pressure and has different decay rates. ODD contains universal principles (timeless, product-agnostic), Canon contains program-level constraints (shared rules across products), and Docs contains implementation details (how this instance works). This separation allows ODD to outgrow any single repository without losing coherence.
+
+## Outline
+
+- Decision
+- Status
+- The Three Tiers
+- The Litmus Test
+- Why This Matters
+- Consequences
+- Evidence
+
+---
+
+## Content
+
+## Decision
+
+ODD is a three-tier conceptual hierarchy, not a single monolithic philosophy:
+
+| Tier | Contains | Answers | Decay Rate |
+|------|----------|---------|------------|
+| **ODD** | Universal principles | "What is always true about building well?" | Almost never |
+| **Canon** | Program-level constraints | "What rules do we share across products?" | Carefully |
+| **Docs** | Implementation details | "How does this instance work?" | Freely |
+
+## Status
+
+**Active**
+
+## The Three Tiers
+
+### Tier 1: ODD (Universal Principles)
+
+ODD is the root. It is:
+
+- Not a framework
+- Not a product philosophy
+- Not owned by any single implementation
+
+ODD contains:
+
+- Progressive distillation
+- Failure-driven modularity
+- Visual proof > narrative confidence
+- Evidence over assertion
+- Elevation before optimization
+
+**The test:** Would this still be true if klappy.dev didn't exist? If Cloudflare vanished? If LLMs were replaced?
+
+If yes → it's ODD.
+
+### Tier 2: Canon (Program-Level Constraints)
+
+Canon is shared contract, not universal truth.
+
+Canon answers: *"If you are building within this program, these are the rules we agree to."*
+
+Canon contains:
+
+- decision-rules
+- definition-of-done
+- self-audit
+- misuse-patterns
+- completion-report-template
+- constraints (scoped to this program)
+
+**The test:** Should all products in this program obey it?
+
+If yes → it's Canon.
+
+Crucially:
+- Canon can change without invalidating ODD
+- Two programs could share ODD but diverge in Canon
+
+### Tier 3: Docs (Implementation Details)
+
+Docs are the reference implementation.
+
+Docs contain:
+
+- Infrastructure decisions
+- CLI paths
+- Cloudflare specifics
+- Repo structure
+- Tooling affordances
+- Branch naming conventions
+
+**The test:** Is this about how *we* do it *here*?
+
+If yes → it's Docs.
+
+## The Litmus Test
+
+For any file, ask:
+
+1. **Would this still be true in 10 years?**
+   - Yes → ODD
+   - No → keep going
+
+2. **Should all products in this program obey it?**
+   - Yes → Canon
+   - No → keep going
+
+3. **Is this about how we do it here?**
+   - Yes → Docs
+
+If something fails all three, it probably doesn't belong at all.
+
+## Why This Matters
+
+This separation:
+
+- Allows publishing ODD as a standalone essay/site
+- Lets other teams adopt ODD without adopting your Canon
+- Supports running multiple Canons under the same ODD
+- Explains why "ODD isn't a framework"
+
+Frameworks conflate all three layers. ODD separates them.
+
+Different decay rates give real systems what they need:
+
+- ODD should almost never change
+- Canon is allowed to evolve carefully
+- Docs are allowed to rot and be rebuilt
+
+## Consequences
+
+### Enables
+
+- ODD can outgrow any single repository
+- Teams can fork Canon while keeping ODD
+- Implementation can be completely replaced without touching philosophy
+- Clear criteria for file placement
+
+### Prevents
+
+- Conflating philosophy with plumbing
+- Breaking universal principles when fixing implementation bugs
+- Vendor lock-in at the conceptual level
+
+### Costs
+
+- Requires discipline to classify correctly
+- Three places to look instead of one
+- Harder to explain to newcomers (until they get it)
+
+## Evidence
+
+- D0015 (this decision) - formalizing the separation
+- Canon progressive distillation effort - moved implementation decisions to docs/
+- `/docs/appendices/` - now contains implementation-specific appendices
+- `/docs/decisions/` - now contains implementation-specific decisions
+- `/odd/appendices/` - retains only portable philosophy
+
+
+
+--------------------------------------------------------------------------------
+📄 File: odd/decisions/README.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://odd/decisions
+title: "ODD Conceptual Decisions"
+audience: canon
+exposure: nav
+tier: 1
+voice: neutral
+stability: stable
+tags: ["odd", "decisions", "conceptual", "philosophy"]
+---
+
+# ODD Conceptual Decisions
+
+> Decisions about ODD's mental model and conceptual architecture.
+
+This folder contains decisions about ODD itself — the philosophy, not any specific implementation.
+
+---
+
+## Conceptual Decisions (This Folder)
+
+| ID | Decision | Summary |
+|----|----------|---------|
+| [D0001](./D0001-three-tier-conceptual-hierarchy.md) | Three-Tier Conceptual Hierarchy | ODD separates universal principles → program constraints → implementation details |
+
+---
+
+## Two Types of Decisions
+
+| Location | Contains | Example |
+|----------|----------|---------|
+| `/odd/decisions/` | Decisions about ODD's conceptual architecture | "ODD is a three-tier hierarchy" |
+| `/docs/decisions/` | Decisions about this implementation | "prod branch is production" |
+
+---
+
+## The Principle
+
+> **Conceptual architecture lives in canon. Implementation decisions live in docs.**
+
+The three-tier model (ODD → Canon → Docs) is itself captured in D0001.
+
+---
+
+## See Also
+
+- [D0001: Three-Tier Conceptual Hierarchy](./D0001-three-tier-conceptual-hierarchy.md)
+- `/docs/decisions/README.md` — Implementation decision index
+- `/odd/contract.md` — ODD System Contract
+
+
+
+--------------------------------------------------------------------------------
+📄 File: odd/index.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://odd
+title: "Outcomes-Driven Development"
+audience: canon
+exposure: nav
+tier: 1
+voice: neutral
+stability: stable
+tags: ["odd", "index"]
+---
+
+# 🎯 Outcomes-Driven Development (ODD)
+
+The philosophical and operational foundation for this repository. ODD treats outcomes as primary, artifacts as ephemeral, and verification as mandatory.
+
+---
+
+## 📁 Contents
+
+| File | Title | Summary |
+|------|-------|---------|
+| `manifesto.md` | ODD Manifesto | The core philosophy: defining outcomes, enforcing constraints, verifying reality. AI accelerates execution; governance preserves trust. |
+| `maturity.md` | Project Maturity | How rigor changes as projects mature. PoC → Pilot → Production. |
+| `contract.md` | ODD System Contract | Version contract for ODD compatibility. Currently v2.0.0 (multi-lane era). |
+| `misuse-patterns.md` | Misuse Patterns | Common failure modes and how ODD gets misapplied in practice. |
+| `prompt-architecture.md` | Prompt Architecture | How intent scales without giant prompts. |
+| `orientation-map.md` | Orientation Map | One-page mental model of ODD, Canon, Evidence, and Outcomes. |
+
+### Subfolders
+
+| Folder | Purpose |
+|--------|---------|
+| `appendices/` | Extended concepts (23 files). See [appendices/README.md](./appendices/README.md) |
+| `decisions/` | Architecture Decision Records. See [decisions/README.md](./decisions/README.md) |
+
+---
+
+## 🚀 Start Here
+
+1. **`manifesto.md`** — Understand the philosophy
+2. **`maturity.md`** — Know when rigor increases
+3. **`appendices/attempt-lifecycle.md`** — See how work flows
+
+---
+
+## 💡 Core Thesis
+
+The primary job of development is not writing code. It is:
+- Defining outcomes
+- Enforcing constraints
+- Verifying reality
+
+AI accelerates execution. Governance preserves trust.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: odd/manifesto.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://odd/manifesto
+title: "ODD Manifesto — Extended"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "philosophy"]
+---
+
+# ODD Manifesto v1.1 (Extended)
+
+> A governance framework for human-AI collaboration that optimizes learning, not execution.
+
+## Description
+
+Outcomes-Driven Development (ODD) operationalizes governance for human-AI collaboration. The core thesis: development is about defining outcomes, enforcing constraints, and verifying reality—not writing code. AI accelerates execution; governance preserves trust. The pillars include Prompt Over Code, KISS, DRY with Isolation, Consistency, Maintainability, Antifragile design, and Scalability. ODD treats restartability as a feature, applies progressive governance based on maturity (PoC → Pilot → Production), requires evidence over assertion, treats AI as accelerator not authority, demands falsifiable outcomes, prefers reversibility, and requires stop conditions. Memory is the bottleneck, not computation.
+
+## Outline
+
+- Purpose and Core Thesis
+- Pillars (Operational Interpretation)
+- Restartability Over Salvage
+- Progressive Governance (Maturity-Aware)
+- Evidence as the Gate
+- Trust, Authority, and AI
+- Outcomes Must Be Falsifiable
+- Reversibility and Cost Awareness
+- Stop Conditions
+- Memory Is the Bottleneck
+- Confidence, Risks, and Known Failure Modes
+
+---
+
+## Content
+
+> ODD v1.1 — Extended (Internal / Agent-Governance) → for canon, MCP, agents (this file)
+
+---
+
+## 📌 Purpose
+
+This document operationalizes Outcomes-Driven Development as a governance framework for human–AI collaboration.
+
+It is designed to:
+• guide autonomous agents
+• enforce verification and evidence
+• scale judgment without repeating it
+• adapt rigor as projects mature
+
+This version is not optimized for persuasion.
+It is optimized for execution and enforcement.
+
+---
+
+## 🎯 Core Thesis
+
+The primary job of development is not writing code.
+It is defining outcomes, enforcing constraints, and verifying reality.
+
+AI accelerates execution.
+Governance preserves trust.
+
+---
+
+## 📌 Pillars (Operational Interpretation)
+
+### Prompt Over Code
+• Intent is expressed declaratively.
+• Code is treated as ephemeral.
+• Regeneration is cheaper than preservation.
+
+### KISS
+
+• Complexity is a liability.
+• Escalation requires evidence of failure.
+
+### DRY (With Isolation)
+
+• Duplication is tolerated across bounded contexts.
+• Shared abstractions require proven reuse.
+
+### Consistency
+
+• Behavioral predictability matters more than visual uniformity.
+• Consistency is scoped, not global.
+
+### Maintainability
+
+• Systems must survive creator turnover.
+• Documentation and explicit tradeoffs are part of the product.
+
+### Antifragile
+
+• Failure is assumed.
+• Recovery paths are preferred over prevention.
+• Learning velocity is a design constraint.
+
+### Scalable
+
+• Growth must be bounded in:
+• cost
+• complexity
+• human attention
+• Scalability includes cognitive and operational load.
+
+---
+
+## 🔄 Restartability Over Salvage
+
+ODD assumes that restarting from refined intent is often more effective than steering a system that has already drifted.
+
+As systems grow, prompts accrete, assumptions harden, and local fixes compound. At a certain point, continued steering optimizes for preserving effort rather than improving outcomes.
+
+Restarting is not failure.
+Restarting is a recognition that:
+• intent has become clearer
+• constraints are better understood
+• evidence from prior attempts now exists
+
+In an AI-accelerated environment, restarting is cheap.
+Misalignment is expensive.
+
+ODD therefore treats restartability as a design feature:
+• prompts are disposable
+• implementations are ephemeral
+• canon and intent persist
+
+The goal is not to preserve artifacts, but to preserve learning.
+
+A clean restart with better constraints is progress.
+
+---
+
+## 📊 Progressive Governance (Maturity-Aware ODD)
+
+ODD enforcement depends on project maturity.
+
+Level 0 — PoC / Exploration
+• Goal: learn quickly
+• Artifacts are non-authoritative
+• Verification demonstrates possibility
+• Over-governance is prohibited
+
+Level 1 — Pilot / Product
+• Goal: deliver value safely
+• Evidence and visual proof required
+• Tradeoffs must be explicit
+• Silent failure is unacceptable
+
+Level 2 — Production / Long-Term
+• Goal: sustain trust
+• Outcomes must be measurable
+• Observability, reversibility, and security are mandatory
+• Autonomous actions require stop conditions and human gates
+
+Maturity must be stated explicitly.
+
+---
+
+## 📎 Evidence as the Gate
+
+Completion requires:
+• observed behavior
+• produced evidence
+• self-audit against constraints
+• explicit declaration of confidence and gaps
+
+Assertions do not count as completion.
+
+---
+
+## 🤖 Trust, Authority, and AI
+
+AI is an accelerator, not an authority.
+• AI may propose and generate
+• AI may self-audit and verify
+• AI may not silently assume trust
+
+Authority boundaries and escalation points must be explicit.
+
+---
+
+## 🔬 Outcomes Must Be Falsifiable
+
+Outcomes are only valid if they can be:
+• observed
+• tested
+• disproven
+
+Non-falsifiable outcomes are treated as goals, not success criteria.
+
+---
+
+## ⚠️ Reversibility and Cost Awareness
+
+Prefer decisions that are:
+• cheap to undo
+• bounded in cost
+• limited in blast radius
+
+Irreversible decisions require human approval.
+
+---
+
+## 🛑 Stop Conditions
+
+Every autonomous loop must define:
+• success criteria
+• failure criteria
+• exit conditions
+
+Endless optimization is a failure mode.
+
+---
+
+## 🧠 Memory Is the Bottleneck
+
+AI didn't just make coding faster. It changed what's scarce.
+
+In ODD, generated artifacts are abundant, but **durable intent** is not.
+So the work shifts toward:
+
+- preserving what was learned,
+- verifying reality,
+- discarding what cannot be trusted,
+- and elevating only what repeatedly reduces future drag.
+
+ODD stays legible by using **Progressive Elevation & Decay**:
+most artifacts die at the Attempt/PRD layer; only proven patterns elevate into Contracts, Canon, and Decision Trace.
+
+See:
+- `/docs/appendices/progressive-elevation.md`
+- `/docs/appendices/product-lanes.md`
+- `/docs/appendices/epochs.md`
+
+---
+
+## 🔗 Relationship to Canon
+
+• ODD → why
+• Constraints → assumptions
+• Decision Rules → how
+• Maturity Model → when
+• Evidence Policies → proof
+
+Together, these form a complete governance layer.
+
+---
+
+## 💡 Closing (Internal)
+
+ODD is not a philosophy of optimism.
+
+It is a discipline of restraint, verification, and curation—
+designed for a world where generation is infinite, but trust is not.
+
+---
+
+## ✅ Status
+
+- ODD v1.1 finalized
+- Public and internal views aligned
+- Ready for MCP exposure and agent enforcement
+
+---
+
+## ⚠️ Confidence, Risks, and Known Failure Modes
+
+(ODD v1.1 — Internal Self-Assessment)
+
+This section captures a snapshot assessment of how well Outcomes-Driven Development (ODD), as currently defined, aligns with its stated principles and where it is most vulnerable.
+
+This is not a guarantee of correctness.
+It is an explicit acknowledgment of uncertainty.
+
+---
+
+### Confidence Model
+
+Confidence scores express current belief that ODD will behave as intended when applied thoughtfully.
+
+Scale: 0.0–1.0
+• 0.9+ — robust under most conditions
+• 0.7–0.85 — strong, but watch for drift
+• 0.5–0.7 — plausible, fragile under misuse
+• <0.5 — likely misaligned without correction
+
+Scores are expected to change as ODD is applied in practice.
+
+---
+
+### Principle-Level Confidence Snapshot
+
+**Prompt Over Code / Convention Over Configuration**
+Confidence: 0.80
+
+Why this is strong
+• ODD treats intent, constraints, and outcomes as first-class artifacts.
+• Canonical resources replace brittle, repeated prompts with stable conventions.
+
+Primary risks
+• Conventions silently becoming configuration sprawl.
+• Clients inventing ad hoc mappings instead of using shared conventions.
+
+Failure mode
+• “Prompt over code” degenerates into “prompt + hidden config everywhere.”
+
+---
+
+**KISS (Keep It Simple, Stupid)**
+Confidence: 0.75
+
+Why this is strong
+• ODD avoids embedding workflows or agent loops.
+• Complexity is deferred intentionally.
+
+Primary risks
+• Meta-layers (manifests, indices, maturity flags) accumulating unchecked.
+• Over-abstracting governance before it proves necessary.
+
+Failure mode
+• Governance becomes heavier than the systems it governs.
+
+---
+
+**DRY (With Isolation)**
+Confidence: 0.70
+
+Why this is strong
+• Canon centralizes worldview and defaults.
+• Single-inventory patterns reduce duplication.
+
+Primary risks
+• Multiple parallel indices drifting out of sync.
+• Reuse pressure creating brittle shared abstractions too early.
+
+Failure mode
+• “One source of truth” becomes “many partial truths.”
+
+---
+
+**Consistency**
+Confidence: 0.65
+
+Why this is weaker
+• Consistency depends on discipline, not tooling.
+• Naming, casing, and URI patterns are easy to drift over time.
+
+Primary risks
+• Small inconsistencies compounding across resources and clients.
+• Human tolerance masking slow degradation.
+
+Failure mode
+• The system remains logically sound but ergonomically frustrating.
+
+---
+
+**Maintainability**
+Confidence: 0.70
+
+Why this is strong
+• Separation of stable principles from evolving operations.
+• Explicit maturity model prevents premature hardening.
+
+Primary risks
+• Manual maintenance of inventories becoming burdensome.
+• Version semantics implied but not enforced.
+
+Failure mode
+• Canon becomes respected but stale.
+
+---
+
+**Antifragile**
+Confidence: 0.60
+
+Why this is intentionally cautious
+• Antifragility depends on real-world stress, not theory.
+• Recovery paths are assumed, not yet proven.
+
+Primary risks
+• MCP or tooling layers becoming hidden single points of failure.
+• Ephemerality mistaken for disposability of meaning.
+
+Failure mode
+• System recovers technically but loses trust socially.
+
+---
+
+**Scalable**
+Confidence: 0.70
+
+Why this is strong
+• ODD scales conceptually: more resources do not require new rules.
+• Governance grows linearly, not exponentially.
+
+Primary risks
+• Human cognitive load becoming the true bottleneck.
+• Discovery/search degrading without deliberate tooling later.
+
+Failure mode
+• System scales in size but not in usability.
+
+---
+
+### Cross-Cutting Risks
+
+**Premature Formalization**
+
+ODD is vulnerable to being “locked in” too early, reducing exploration.
+
+**False Authority**
+
+Well-written governance can be mistaken for correctness without evidence.
+
+**Silent Drift**
+
+Small deviations, left unnamed, can erode trust over time.
+
+---
+
+### Intended Use of This Section
+
+This section exists to:
+• prevent ideological hardening
+• make risks discussable
+• encourage re-evaluation
+• model intellectual humility
+
+It is expected to change.
+
+---
+
+### Re-evaluation Philosophy
+
+ODD should be reassessed when:
+• it is applied to real production systems
+• autonomous agents operate for extended periods
+• failure modes surface that are not addressed here
+
+Confidence should be updated based on evidence, not optimism.
+
+---
+
+Closing (Internal)
+
+ODD is not complete.
+
+It is a living attempt to govern creativity, autonomy, and trust in a world where generation is cheap and certainty is not.
+
+Its strength is not that it claims to be right—
+but that it makes being wrong visible early.
+
+For common failure modes and practical misapplications of ODD, see _Misuse Patterns_ and _Prompt Architecture_ in the ODD appendices.
+
+---
+
+Status
+• ODD v1.1 Extended updated
+• Confidence scoring and failure modes explicitly documented
+• Fully aligned with Canon Index confidence model
+
+---
+
+
+
+--------------------------------------------------------------------------------
+📄 File: odd/maturity.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://odd/maturity
+title: "Project Maturity & Progressive Governance"
+audience: canon
+exposure: nav
+tier: 2
+voice: first_person
+stability: semi_stable
+tags: ["maturity", "governance"]
+---
+
+# Project Maturity & Progressive Governance
+
+> When to apply rigor, not just what rigor exists.
+
+## Description
+
+Project maturity defines how constraints and policies change as a project matures. Three levels exist: Level 0 (PoC/Exploration) focuses on learning quickly with non-authoritative artifacts; Level 1 (Pilot/Product) delivers value safely with evidence, visual proof, and explicit tradeoffs; Level 2 (Production/Long-Term) sustains trust with measurable outcomes, observability, security, and explicit stop conditions. Rigor increases with maturity. Projects should move up when others depend on them, artifacts persist, decisions become costly to reverse, or trust is implicitly assumed.
+
+## Outline
+
+- Core Principle: Rigor increases with maturity
+- Level 0 — PoC / Exploration
+- Level 1 — Pilot / Product
+- Level 2 — Production / Long-Term
+- Relationship to Other Canon Documents
+- Agent Expectations
+- Escalation Rules
+
+---
+
+## Content
+
+**Canon v0.1**
+
+> This governance axis tells agents *when* to apply rigor, not just what rigor exists.
+
+This page defines how my principles, constraints, and policies change as a project matures.
+
+Not every project needs the same level of rigor on day one.
+Applying production-level governance to exploratory work kills learning.
+Failing to apply it later destroys trust.
+
+This model exists to activate the right constraints at the right time.
+
+---
+
+## 📌 Core Principle
+
+I do not apply all rules equally at all times.
+
+Rigor increases with maturity.
+Exploration comes first. Governance comes later.
+
+Every project must explicitly state its current maturity level.
+
+---
+
+## 📋 Maturity Levels Overview
+
+I use three maturity levels:
+
+1. PoC / Exploration
+2. Pilot / Product
+3. Production / Long-Term
+
+These levels are not about importance.
+They are about risk, trust, and dependency.
+
+---
+
+## 🔬 Level 0 — PoC / Exploration
+
+**Goal:** Learn quickly and discard freely.
+
+**Characteristics**
+• Short-lived or experimental
+• Ephemeral artifacts
+• Low dependency from others
+• High uncertainty tolerated
+
+What applies
+• Prompt over code
+• KISS (loosely)
+• DRY (lightly)
+• Consistency (local only)
+• Evidence of possibility (not correctness)
+
+What does not apply yet
+• Formal observability
+• Cost optimization
+• Trust or authority boundaries
+• Production security guarantees
+• Long-term reversibility planning
+
+Required labeling
+
+“This is a PoC. Outputs are exploratory and non-authoritative.”
+
+Critical rule
+
+Nothing at this level is considered final or trusted.
+
+---
+
+## 🚀 Level 1 — Pilot / Product
+
+**Goal:** Deliver real value safely to real users.
+
+**Characteristics**
+• Repeated use
+• Growing user expectations
+• Shared ownership begins
+• Partial persistence
+
+What turns on
+• Definition of Done & Evidence Policy
+• Visual proof for UI behavior
+• Explicit tradeoffs
+• Basic observability
+• Reversibility for major decisions
+• Defined human approval points
+
+New obligation
+
+If users depend on it, it must be verifiable.
+
+Risk posture
+
+Failure is acceptable, but silent failure is not.
+
+---
+
+## ✅ Level 2 — Production / Long-Term
+
+**Goal:** Sustain trust over time.
+
+**Characteristics**
+• Canonical or authoritative data
+• External dependencies
+• Organizational or reputational risk
+• Long timelines
+
+What becomes mandatory
+• Measurable outcomes with metrics
+• Continuous feedback loops
+• Full observability
+• Trust & authority boundaries
+• Cost predictability
+• Security and privacy defaults
+• Explicit stop conditions for autonomy
+
+Critical rule
+
+Nothing enters production without:
+• a named owner
+• an undo path
+• an audit trail
+
+At this level, correctness and trust outweigh speed.
+
+---
+
+## 🔗 Relationship to Other Canon Documents
+
+This maturity model modulates the following:
+• Constraints
+Some constraints are optional at PoC and mandatory later.
+• Decision Rules
+Rules like KISS and Borrow→Build apply at all levels, but escalation thresholds change.
+• Definition of Done
+Evidence requirements increase with maturity.
+• Self-Audit Checklist
+More items become non-optional as maturity increases.
+• Visual Proof Standards
+Optional for PoCs, required for Pilot and Production.
+
+---
+
+## 🤖 Agent Expectations
+
+Agents and collaborators are expected to:
+• explicitly state the project’s maturity level
+• apply only the rules required for that level
+• refuse to over-govern PoCs
+• refuse to under-govern Production systems
+
+If maturity is unclear, the correct action is to ask.
+
+---
+
+## ⚠️ Escalation Rules
+
+A project should move up a maturity level when:
+• others begin depending on it
+• artifacts persist beyond initial intent
+• decisions become costly to reverse
+• trust is implicitly assumed
+
+A project may move down only with explicit acknowledgment.
+
+---
+
+## 💡 Closing Note
+
+This model exists to protect both:
+• exploration, and
+• trust.
+
+Rigor too early kills creativity.
+Rigor too late kills credibility.
+
+Progressive governance keeps both alive.
+
+---
+
+Status
+• Canon v0.1 — Project Maturity complete
+• Canon now supports lifecycle-aware enforcement
+
+---
+
+What This Unlocks (Important)
+
+With this file added, agents can now:
+• ask for or infer maturity
+• activate the correct checks automatically
+• avoid overbuilding PoCs
+• avoid underbuilding production systems
+
+This completes the missing dimension you identified.
+
+---
+
+Suggested Next Moves (Choose One) 1. Update ODD Manifesto → ODD + Maturity 2. Agent Handoff Instruction (now maturity-aware) 3. MCP schema that exposes maturity as a first-class field 4. Refactor existing canon docs to reference maturity thresholds
+
+Say which you want next, and we’ll continue cleanly.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: odd/misuse-patterns.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://odd/misuse-patterns
+title: "ODD Misuse Patterns"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["odd", "misuse", "failure-modes"]
+---
+
+# ODD Misuse Patterns
+
+> Predictable failure modes when ODD is applied incorrectly.
+
+## Description
+
+This appendix documents predictable ways ODD fails: Outcome Theater (saying outcomes but measuring artifacts), Prompt Maximalism (one huge prompt replacing thinking), Premature Governance (locking down before patterns stabilize), Evidence Substitution (assertions replacing demonstrations), Consistency Absolutism (treating early conventions as immutable), and Antifragility as Optimism (assuming recovery without testing it). These are human failure modes under real constraints, not violations of intent. The purpose is early recognition through shared language, not prevention through rules.
+
+## Outline
+
+- Outcome Theater
+- Prompt Maximalism
+- Premature Governance
+- Evidence Substitution
+- Consistency Absolutism
+- Antifragility as Optimism
+- Maturity Note
+- How to Use This Appendix
+
+---
+
+## Content
+
+**(Appendix to ODD Manifesto — Internal)**
+
+This section documents predictable ways Outcomes-Driven Development (ODD) fails when applied incorrectly.
+These are not violations of intent; they are human failure modes under real constraints.
+
+The purpose is not prevention through rules, but early recognition through shared language.
+
+---
+
+## Misuse Pattern 1: Outcome Theater
+
+> "We say outcomes, but still worship artifacts."
+
+What it looks like
+• Outcomes are stated, but success is still measured by:
+• shipped code
+• completed tickets
+• deployed features
+• Evidence is implied, not demonstrated.
+
+Why it happens
+• Artifact-based metrics feel concrete.
+• Outcomes feel abstract until proven.
+
+Where it shows up
+• Early PoCs that never re-anchor to real user value.
+• Pilots that quietly revert to velocity metrics.
+
+Risk
+• ODD becomes rebranded output-driven development.
+
+---
+
+## Misuse Pattern 2: Prompt Maximalism
+
+> "If one prompt is good, ten must be better."
+
+What it looks like
+• Large, ornate prompts replace thinking.
+• Slight prompt changes cause wildly different outcomes.
+• Prompts are curated like fragile artifacts.
+
+Why it happens
+• Early AI success feels magical.
+• Teams mistake correlation for control.
+
+Where it shows up
+• PoCs experimenting rapidly.
+• Teams hopping between tools without stabilizing conventions.
+
+Risk
+• Prompt over code collapses into prompt over judgment.
+
+---
+
+## Misuse Pattern 3: Premature Governance
+
+> "Let's lock this down before it breaks."
+
+What it looks like
+• Rules introduced before patterns stabilize.
+• Heavy definitions of “done” applied too early.
+• Checklists used as gates instead of lenses.
+
+Why it happens
+• Fear of chaos.
+• Desire for predictability before understanding.
+
+Where it shows up
+• Pilots transitioning too quickly to “production thinking.”
+• Teams scaling before learning.
+
+Risk
+• Innovation slows before it has a chance to inform governance.
+
+---
+
+## Misuse Pattern 4: Evidence Substitution
+
+> "Trust me, it works."
+
+What it looks like
+• Assertions replace demonstrations.
+• Logs, explanations, or screenshots stand in for proof.
+• Visual verification is deferred indefinitely.
+
+Why it happens
+• Evidence takes effort.
+• Verifying your own work is uncomfortable.
+
+Where it shows up
+• Autonomous agent workflows.
+• Systems that “should” work but haven’t been observed.
+
+Risk
+• Trust becomes social instead of empirical.
+
+---
+
+## Misuse Pattern 5: Consistency Absolutism
+
+> "One way forever."
+
+What it looks like
+• Early conventions treated as immutable.
+• Divergence framed as error instead of signal.
+• Local context ignored for global uniformity.
+
+Why it happens
+• Consistency reduces cognitive load.
+• Change feels like regression.
+
+Where it shows up
+• Mature systems resisting evolution.
+• Teams optimizing for internal harmony over external reality.
+
+Risk
+• The system becomes brittle under real-world variation.
+
+---
+
+## Misuse Pattern 6: Antifragility as Optimism
+
+> "It'll recover."
+
+What it looks like
+• Failure assumed to be harmless.
+• Recovery paths untested.
+• Learning deferred until “later.”
+
+Why it happens
+• Antifragility sounds resilient.
+• Testing failure is inconvenient.
+
+Where it shows up
+• Distributed systems.
+• Autonomous or semi-autonomous agents.
+
+Risk
+• Systems degrade silently until trust collapses.
+
+---
+
+A note on maturity (intentionally light)
+
+These patterns tend to:
+• appear early as curiosity and speed
+• persist silently through pilots
+• cause real damage in production if unexamined
+
+The solution is not stricter rules, but timely awareness.
+
+---
+
+How this appendix should be used
+• As a diagnostic lens
+• As shared language for course correction
+• As a reminder that misuse is normal — and fixable
+
+This list is expected to grow as real failures are observed.
+
+---
+
+
+
+--------------------------------------------------------------------------------
+📄 File: odd/orientation-map.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://odd/orientation-map
+title: "ODD + Canon + Evidence — Orientation Map"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: semi_stable
+tags: ["odd", "orientation", "mental-model"]
+---
+
+# ODD + Canon + Evidence — Orientation Map
+
+> A one-page mental model for the ODD system.
+
+## Description
+
+This orientation map provides a single-page mental model of how Intent flows through ODD Manifesto to Canon to Decisions to Evidence to Outcomes. ODD is organized as a three-tier conceptual hierarchy: ODD contains universal principles (timeless), Canon contains program-level constraints (shared rules), and Docs contains implementation details (how this instance works). Maturity moves from Exploration through Validation to Commitment. The map explicitly rejects "if it compiles, it's done" and "governance replaces judgment."
+
+## Outline
+
+- The Core Idea (Intent → ODD → Canon → Decisions → Evidence → Outcomes)
+- How to Read This Map
+- The Three-Tier Hierarchy (ODD → Canon → Docs)
+- Where Maturity Lives
+- What This Map Explicitly Rejects
+- Why This Map Exists
+
+---
+
+## Content
+
+> This is not a workflow. It is a mental model.
+
+---
+
+## 🎯 The Core Idea
+
+```
+        Intent
+          |
+          v
+      ODD Manifesto
+          |
+          v
+        Canon
+
+(Constraints & Rules)
+|
+v
+Decisions
+|
+v
+Evidence
+        |
+        v
+      Outcomes
+```
+
+---
+
+## 📖 How to Read This Map
+• ODD explains why and what we care about
+• Canon explains how decisions tend to be shaped
+• Decisions are local, contextual, and human
+• Evidence grounds claims in reality
+• Outcomes are the only thing that matters long-term
+
+Nothing here enforces anything.
+Everything here informs something.
+
+**Canon may reference Docs. Docs must never redefine Canon.**
+
+---
+
+## 🏗️ The Three-Tier Hierarchy
+
+ODD is a conceptual hierarchy, not a monolithic philosophy:
+
+| Tier | Contains | Decay Rate |
+|------|----------|------------|
+| **ODD** | Universal principles (timeless, product-agnostic) | Almost never |
+| **Canon** | Program-level constraints (shared rules across products) | Carefully |
+| **Docs** | Implementation details (how this instance works) | Freely |
+
+**The litmus test:**
+
+1. Would this still be true in 10 years? → **ODD**
+2. Should all products in this program obey it? → **Canon**
+3. Is this about how *we* do it *here*? → **Docs**
+
+This separation allows ODD to outgrow any single repository.
+
+See [D0001: Three-Tier Conceptual Hierarchy](/odd/decisions/D0001-three-tier-conceptual-hierarchy.md).
+
+---
+
+## 📊 Where Maturity Lives (Not Gates)
+
+```
+Exploration ──────→ Validation ──────→ Commitment
+   (PoC)            (Pilot)         (Production)
+```
+
+Rigor increases →
+Evidence expectations increase →
+Governance tightens →
+
+    •	Early: bias toward learning
+    •	Middle: bias toward validation
+    •	Later: bias toward trust and durability
+
+No sharp lines. No ceremony required.
+
+---
+
+## 🚫 What This Map Explicitly Rejects
+• “If it compiles, it’s done.”
+• “Trust the explanation.”
+• “One true workflow.”
+• “Governance replaces judgment.”
+
+---
+
+## 💡 Why This Map Exists
+• To explain the system in under 60 seconds
+• To anchor conversations without debate
+• To keep humans oriented while tools change
+
+---
+
+## ✅ Why These Two Artifacts Are Enough for Now
+• They surface risk without prescribing control
+• They encode wisdom without freezing behavior
+• They respect maturity without formalizing it
+
+This keeps you aligned with:
+• KISS
+• Antifragility
+• Prompt over code
+• Convention over configuration
+
+And most importantly:
+
+They make misuse discussable instead of shameful.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: odd/prompt-architecture.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://odd/prompt-architecture
+title: "Prompt Architecture"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: semi_stable
+tags: ["odd", "prompt-architecture", "orchestration"]
+---
+
+# Prompt Architecture (Orientation)
+
+> How intent scales without collapsing into a monolithic prompt.
+
+## Description
+
+Prompt architecture addresses the God Prompt anti-pattern: as scope grows, prompts become monolithic, unmaintainable, sensitive to small edits, context-bloated, and inconsistent. The alternative is Orchestrated Intent: keep stable intent in canonical artifacts, construct task prompts dynamically, use smaller focused agents for bounded tasks, pass results through shared constraints and evidence standards. Intent is layered: Worldview (rarely changes), Project Intent (changes occasionally), Task Intent (changes constantly). Only the bottom layer should enter the working prompt in full detail. Context budgeting treats every token like a limited resource.
+
+## Outline
+
+- The Anti-Pattern: Prompt Maximalism (God Prompt)
+- The Alternative: Orchestrated Intent
+- Intent Graph (Mental Model)
+- Context Budgeting
+- Maturity Note
+- Failure Mode of Orchestration
+
+---
+
+## Content
+
+**Canon / ODD Appendix v0.1**
+
+This appendix names a common scaling failure mode: the God Prompt.
+
+As an app’s scope grows, prompts tend to grow into a single monolith that becomes:
+• unmaintainable
+• difficult to reason about
+• sensitive to small edits
+• context-bloated
+• increasingly inconsistent
+
+This is rarely intentional. It is a natural default.
+
+---
+
+## ⚠️ The Anti-Pattern: Prompt Maximalism ("God Prompt")
+
+What it looks like
+• One prompt tries to cover:
+• product requirements
+• system constraints
+• UI conventions
+• coding standards
+• edge cases
+• release steps
+• testing expectations
+• The prompt becomes the “real system,” and code becomes an artifact of that prompt.
+
+Why it fails
+• Cognitive load explodes
+• Context bloat crowds out task-relevant details
+• Small edits have unpredictable consequences
+• The prompt becomes a fragile dependency
+
+---
+
+## ✅ The Alternative: Orchestrated Intent
+
+Instead of one prompt that does everything:
+• keep stable intent in canonical artifacts (ODD + Canon)
+• construct task prompts dynamically
+• use smaller focused agents for bounded tasks
+• pass results through shared constraints and evidence standards
+
+In this model:
+• the Canon is the constitution
+• the task prompt is a temporary work order
+• the output is verified by evidence, not confidence
+
+---
+
+## 🧭 Intent Graph (Mental Model)
+
+Think of intent as layered:
+
+1. **Worldview** (rarely changes) — ODD, constraints, decision rules
+2. **Project intent** (changes occasionally) — PRD, scope, priorities, maturity level
+3. **Task intent** (changes constantly) — the specific job to be done right now
+
+Only the bottom layer should enter the working prompt in full detail.
+
+---
+
+## 💰 Context Budgeting (A Simple Heuristic)
+
+Treat context like a budget:
+• Every token spent on generic policy reduces tokens available for task specifics.
+• The goal is not “more context,” but “relevant context.”
+
+A healthy system prefers:
+• small, precise context
+• stable references by URI
+• on-demand retrieval
+
+---
+
+## 📊 Maturity Note (Intentionally Light)
+
+- **PoC:** A larger prompt may be acceptable for speed, as long as it is treated as disposable.
+• Pilot: Prompt growth becomes a risk. Begin splitting tasks and referencing canonical resources.
+• Production: Monolithic prompts become a liability. Orchestrated intent and bounded sub-tasks become the default.
+
+This is not a rule. It is a scaling reality.
+
+---
+
+## ⚠️ Failure Mode of Orchestration (So We Don't Romanticize It)
+
+Orchestration can fail too.
+
+Common orchestration failure modes:
+• semantic drift across sub-agents
+• inconsistent assumptions
+• extra coordination overhead
+• loss of a single coherent narrative
+
+The mitigation is not “more instructions,” but:
+• shared canonical references
+• explicit evidence requirements
+• clear boundaries between tasks
+
+---
+
+## 💡 Closing
+
+When prompts grow without bound, the system becomes fragile.
+
+ODD favors:
+• stable intent captured in canonical artifacts
+• small prompts constructed for the task at hand
+• verification through evidence rather than explanation
+
+---
+
+## ✅ Status
+
+- Appendix v0.1 complete
+- Orientation-only
+- No enforcement semantics
+
+---
+
+## 🔗 Why This Fits Your Pillars
+• KISS: It discourages giant prompts; encourages small bounded contexts.
+• DRY: Canonical references prevent repeating the same boilerplate in every prompt.
+• Consistency: Canon provides a stable “source of truth” across sub-agents.
+• Maintainability: Prompts become smaller, modular, and replaceable.
+• Antifragile: Smaller tasks fail faster and recover easier.
+• Scalable: Orchestration scales better than monoliths.
+• Prompt-over-code: This is the application of that principle at scale.
+
+---
 
 
 
@@ -14300,7 +14300,7 @@ All new canonical documents MUST include YAML frontmatter with at least:
 
 ```yaml
 ---
-uri: klappy://canon/odd/example
+uri: klappy://odd/example
 title: "Example Doc"
 tier: 2
 tags: ["odd", "example"]
@@ -14437,7 +14437,7 @@ Example:
 
 Each entry in `resources` MUST contain:
 
-- `uri` (string) — globally unique, stable identifier (e.g. `klappy://canon/odd/epochs`)
+- `uri` (string) — globally unique, stable identifier (e.g. `klappy://odd/epochs`)
 - `title` (string) — display title
 - `path` (string) — repo-relative path beginning with `/`
 - `tier` (integer) — 0, 1, or 2 (progressive disclosure tier)
@@ -14760,7 +14760,7 @@ They consume visual interfaces.
 
 ## Related Documentation
 
-- [Visual Evolution](/canon/odd/appendices/visual-evolution.md)
+- [Visual Evolution](/odd/appendices/visual-evolution.md)
 - [Interface Contracts](/interfaces/index.md)
 
 
@@ -26980,10 +26980,10 @@ The compiled pack concatenates these files:
 | #   | Source                           | Purpose                                          |
 | --- | -------------------------------- | ------------------------------------------------ |
 | 1   | `canon/README.md`                | Canon orientation, meta rules, confidence scores |
-| 2   | `canon/odd/README.md`            | ODD folder index, core thesis                    |
-| 3   | `canon/odd/manifesto.md`         | Full ODD philosophy                              |
-| 4   | `canon/odd/appendices/README.md` | 24 appendices summarized                         |
-| 5   | `canon/odd/decisions/README.md`  | 14 decisions summarized                          |
+| 2   | `odd/index.md`                   | ODD folder index, core thesis                    |
+| 3   | `odd/manifesto.md`               | Full ODD philosophy                              |
+| 4   | `odd/appendices/README.md`       | Portable appendices summarized                   |
+| 5   | `odd/decisions/README.md`        | ODD conceptual decisions                         |
 | 6   | `canon/constraints.md`           | Baseline assumptions                             |
 | 7   | `canon/decision-rules.md`        | Decision heuristics                              |
 | 8   | `canon/definition-of-done.md`    | Completion criteria                              |
@@ -27589,7 +27589,7 @@ Lanes maintain their own `decisions/` folder for lane-specific architecture deci
 
 ## Context
 
-Canon says "Cross-lane learnings are captured in decision logs, not PRD mutations" (`product-lanes.md`). However, canon only has repo-level decisions (`/canon/odd/decisions/`).
+Canon says "Cross-lane learnings are captured in decision logs, not PRD mutations" (`product-lanes.md`). However, ODD only has repo-level decisions (`/odd/decisions/`).
 
 When this lane deviated from canon patterns (version-first structure, versioned kickoff, etc.), we needed a place to document:
 
@@ -28583,7 +28583,7 @@ This product MUST remain compatible with:
 This product does NOT define colors, fonts, or spacing directly.
 It consumes visual interfaces.
 
-See `/canon/odd/appendices/visual-evolution.md` for the visual evolution model.
+See `/odd/appendices/visual-evolution.md` for the visual evolution model.
 
 ---
 
@@ -28696,7 +28696,7 @@ This PRD is shaped by Canon constraints:
 
 This lane supports optional media assets (images/video/audio/PDF) as a **learning layer**.
 
-This lane follows: `/canon/odd/appendices/media-as-learning-layer.md`
+This lane follows: `/odd/appendices/media-as-learning-layer.md`
 
 ### Discovery Mechanism (Required)
 
@@ -28763,7 +28763,7 @@ The website lane MUST support generating a wipeable "visitor pack" used for prog
 
 ### Contract
 - The compiled pack MUST include a provenance header as defined in:
-  - `klappy://canon/odd/compilation`
+  - `klappy://docs/appendices/compilation`
 
 ---
 
@@ -28774,7 +28774,7 @@ The website lane MUST support generating a wipeable "visitor pack" used for prog
 - Definition of Done: `/canon/definition-of-done.md`
 - Legacy PRD (v0.3): `/docs/PRD/website/PRD-legacy-v0.3.md`
 - Compilation: `/docs/appendices/compilation.md`
-- Media philosophy: `/canon/odd/appendices/media-as-learning-layer.md`
+- Media philosophy: `/odd/appendices/media-as-learning-layer.md`
 
 
 

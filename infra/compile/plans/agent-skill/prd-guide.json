@@ -5,9 +5,9 @@
   "output": "products/agent-skill/dist/prd-guide-pack.md",
   "sources": [
     "canon/README.md",
-    "canon/odd/README.md",
-    "canon/odd/manifesto.md",
-    "canon/odd/appendices/README.md",
+    "odd/index.md",
+    "odd/manifesto.md",
+    "odd/appendices/README.md",
     "docs/appendices/README.md",
     "docs/decisions/README.md",
     "canon/constraints.md",

@@ -10,7 +10,7 @@ Lanes maintain their own `decisions/` folder for lane-specific architecture deci
 
 ## Context
 
-Canon says "Cross-lane learnings are captured in decision logs, not PRD mutations" (`product-lanes.md`). However, canon only has repo-level decisions (`/canon/odd/decisions/`).
+Canon says "Cross-lane learnings are captured in decision logs, not PRD mutations" (`product-lanes.md`). However, ODD only has repo-level decisions (`/odd/decisions/`).
 
 When this lane deviated from canon patterns (version-first structure, versioned kickoff, etc.), we needed a place to document:
 

@@ -75,8 +75,8 @@ Canonical Compression reduces the size of the reasoning surface so consistency b
 Examples:
 
 - `/canon/**`
-- `/canon/odd/appendices/**`
-- `/canon/odd/decisions/**`
+- `/odd/appendices/**`
+- `/odd/decisions/**`
 
 Properties:
 

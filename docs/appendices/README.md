@@ -13,7 +13,7 @@ tags: ["docs", "appendices", "implementation", "reference", "index"]
 
 Implementation-specific appendices that document how klappy.dev applies ODD concepts. These are reference implementation details, not portable methodology.
 
-> **Relationship to Canon:** Portable concepts live in `/canon/odd/appendices/`. This folder contains the klappy.dev-specific implementation of those concepts.
+> **Relationship to ODD:** Portable concepts live in `/odd/appendices/`. This folder contains the klappy.dev-specific implementation of those concepts.
 
 ---
 

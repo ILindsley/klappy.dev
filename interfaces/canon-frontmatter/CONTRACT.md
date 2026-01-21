@@ -49,7 +49,7 @@ All new canonical documents MUST include YAML frontmatter with at least:
 
 ```yaml
 ---
-uri: klappy://canon/odd/example
+uri: klappy://odd/example
 title: "Example Doc"
 tier: 2
 tags: ["odd", "example"]

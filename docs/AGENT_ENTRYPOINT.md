@@ -14,7 +14,7 @@ If you want to understand the system before acting:
 
 1. `/docs/appendices/product-lanes.md` — multi-lane PRD architecture
 2. `/canon/index.md` — Canon orientation, precedence, stability
-3. `/canon/odd/manifesto.md` — philosophy and intent
+3. `/odd/manifesto.md` — philosophy and intent
 4. `/docs/ATTEMPTS.md` — attempt lifecycle orientation
 
 ---

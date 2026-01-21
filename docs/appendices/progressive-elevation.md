@@ -108,7 +108,7 @@ Canon is intentionally small. If it bloats, that is a signal to curate harder, n
 Decisions preserve context without polluting Canon with history.
 
 **Lives in:**
-- `/canon/odd/decisions/**`
+- `/odd/decisions/**`
 
 **Elevate when:** a change affects interpretation, compatibility, or the "rules of the game."
 

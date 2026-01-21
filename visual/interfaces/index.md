@@ -59,5 +59,5 @@ They consume visual interfaces.
 
 ## Related Documentation
 
-- [Visual Evolution](/canon/odd/appendices/visual-evolution.md)
+- [Visual Evolution](/odd/appendices/visual-evolution.md)
 - [Interface Contracts](/interfaces/index.md)

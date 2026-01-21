@@ -48,7 +48,7 @@ Example:
 
 Each entry in `resources` MUST contain:
 
-- `uri` (string) — globally unique, stable identifier (e.g. `klappy://canon/odd/epochs`)
+- `uri` (string) — globally unique, stable identifier (e.g. `klappy://odd/epochs`)
 - `title` (string) — display title
 - `path` (string) — repo-relative path beginning with `/`
 - `tier` (integer) — 0, 1, or 2 (progressive disclosure tier)

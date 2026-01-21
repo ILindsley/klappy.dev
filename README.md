@@ -89,7 +89,7 @@ If you're new and want a concrete path, here's a reasonable order:
 2. **ODD (Outcomes-Driven Development)** — the core philosophy
 
    - `/odd/README.md` (public-facing)
-   - `/canon/odd/manifesto.md` (extended)
+   - `/odd/manifesto.md` (extended)
 
 3. **Canon** — how decisions and verification are shaped
 

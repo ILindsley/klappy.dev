@@ -36,7 +36,7 @@ This decision declares E0003 — Evidence-First Era, requiring attempts to prove
 **Date:** 2026-01-19  
 **Decider:** Klappy  
 **Epoch:** E0003  
-**Related:** D0009 (Multi-lane PRDs), D0012 (Transition Interpretation), D0013 (Lane-scoped dist), Deploy Evidence (klappy://canon/odd/deploy-evidence)
+**Related:** D0009 (Multi-lane PRDs), D0012 (Transition Interpretation), D0013 (Lane-scoped dist), Deploy Evidence (klappy://docs/appendices/deploy-evidence)
 
 ## Context
 

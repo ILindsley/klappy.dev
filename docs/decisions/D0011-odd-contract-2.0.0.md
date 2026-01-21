@@ -15,7 +15,7 @@ tags: ["odd", "decisions", "contract", "version", "epoch"]
 
 ## Description
 
-This decision formalizes ODD Contract 2.0.0 with the multi-lane architecture, declaring two epochs: E0001-single-prd-era and E0002-multi-lane-era. The contract lives at `/canon/odd/contract.md` and requires epoch_id in META.json for all new attempts. Breaking changes include lane-scoped PRD locations, lane-scoped attempt locations, and required `--lane` tooling flags.
+This decision formalizes ODD Contract 2.0.0 with the multi-lane architecture, declaring two epochs: E0001-single-prd-era and E0002-multi-lane-era. The contract lives at `/odd/contract.md` and requires epoch_id in META.json for all new attempts. Breaking changes include lane-scoped PRD locations, lane-scoped attempt locations, and required `--lane` tooling flags.
 
 ## Outline
 
@@ -54,7 +54,7 @@ The system needed:
 
 ## Decision
 
-1. **Create `/canon/odd/contract.md`** as the single source of ODD system versioning.
+1. **Create `/odd/contract.md`** as the single source of ODD system versioning.
 2. **Declare contract version 2.0.0** with the multi-lane architecture.
 3. **Define two epochs:**
    - E0001-single-prd-era (contract 1.x)
@@ -99,12 +99,12 @@ For documents kept for historical reference that describe 1.x workflows:
 > **Epoch 1 Document** (ODD Contract ≤1.x)
 >
 > Kept for historical context. Current workflow is defined by ODD Contract 2.x.
-> See `/canon/odd/contract.md` for the current contract.
+> See `/odd/contract.md` for the current contract.
 ```
 
 ## Related
 
-- `/canon/odd/contract.md` — the contract itself
+- `/odd/contract.md` — the contract itself
 - `/docs/appendices/epochs.md` — epoch semantics
 - `/docs/appendices/product-lanes.md` — lane architecture
 - `/docs/decisions/D0009-multi-lane-prd-architecture.md` — the architectural decision

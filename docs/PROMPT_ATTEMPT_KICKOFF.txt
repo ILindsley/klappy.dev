@@ -99,7 +99,7 @@ TASKS
 
    REFERENCE IF NEEDED:
    - /canon/index.md
-   - /canon/odd/manifesto.md
+   - /odd/manifesto.md
 
 4. Choose your stack.
 

@@ -127,10 +127,10 @@ The compiled pack concatenates these files:
 | #   | Source                           | Purpose                                          |
 | --- | -------------------------------- | ------------------------------------------------ |
 | 1   | `canon/README.md`                | Canon orientation, meta rules, confidence scores |
-| 2   | `canon/odd/README.md`            | ODD folder index, core thesis                    |
-| 3   | `canon/odd/manifesto.md`         | Full ODD philosophy                              |
-| 4   | `canon/odd/appendices/README.md` | 24 appendices summarized                         |
-| 5   | `canon/odd/decisions/README.md`  | 14 decisions summarized                          |
+| 2   | `odd/index.md`                   | ODD folder index, core thesis                    |
+| 3   | `odd/manifesto.md`               | Full ODD philosophy                              |
+| 4   | `odd/appendices/README.md`       | Portable appendices summarized                   |
+| 5   | `odd/decisions/README.md`        | ODD conceptual decisions                         |
 | 6   | `canon/constraints.md`           | Baseline assumptions                             |
 | 7   | `canon/decision-rules.md`        | Decision heuristics                              |
 | 8   | `canon/definition-of-done.md`    | Completion criteria                              |

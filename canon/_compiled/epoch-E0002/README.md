@@ -18,4 +18,4 @@ tags: ["canon", "compiled", "epoch", "e0002"]
 - Do not edit compiled files by hand
 - Regenerate from source Canon
 
-See `/canon/odd/appendices/canonical-compression.md` for the compilation model.
+See `/docs/appendices/canonical-compression.md` for the compilation model.

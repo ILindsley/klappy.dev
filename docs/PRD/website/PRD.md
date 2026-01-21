@@ -31,7 +31,7 @@ This product MUST remain compatible with:
 This product does NOT define colors, fonts, or spacing directly.
 It consumes visual interfaces.
 
-See `/canon/odd/appendices/visual-evolution.md` for the visual evolution model.
+See `/odd/appendices/visual-evolution.md` for the visual evolution model.
 
 ---
 
@@ -142,7 +142,7 @@ This PRD is shaped by Canon constraints:
 
 ## Media (Learning Layer)
 
-This lane follows: `/canon/odd/appendices/media-as-learning-layer.md`
+This lane follows: `/odd/appendices/media-as-learning-layer.md`
 
 Media is:
 - optional (progressive disclosure)
@@ -199,7 +199,7 @@ The website lane MUST support generating a wipeable "visitor pack" used for prog
 
 ### Contract
 - The compiled pack MUST include a provenance header as defined in:
-  - `klappy://canon/odd/compilation`
+  - `klappy://docs/appendices/compilation`
 
 ---
 
@@ -210,4 +210,4 @@ The website lane MUST support generating a wipeable "visitor pack" used for prog
 - Definition of Done: `/canon/definition-of-done.md`
 - Legacy PRD (v0.3): `/docs/PRD/website/PRD-legacy-v0.3.md`
 - Compilation: `/docs/appendices/compilation.md`
-- Media philosophy: `/canon/odd/appendices/media-as-learning-layer.md`
+- Media philosophy: `/odd/appendices/media-as-learning-layer.md`

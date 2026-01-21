@@ -43,8 +43,8 @@
       ]
     },
     {
-      "uri": "klappy://canon/odd/alignment-reviews",
-      "path": "/canon/odd/appendices/alignment-reviews.md",
+      "uri": "klappy://odd/alignment-reviews",
+      "path": "/odd/appendices/alignment-reviews.md",
       "title": "Alignment Reviews",
       "type": "text/markdown",
       "audience": "canon",
@@ -218,8 +218,8 @@
       ]
     },
     {
-      "uri": "klappy://canon/odd/evolution-not-automation",
-      "path": "/canon/odd/appendices/evolution-not-automation.md",
+      "uri": "klappy://odd/evolution-not-automation",
+      "path": "/odd/appendices/evolution-not-automation.md",
       "title": "Evolution, Not Automation",
       "type": "text/markdown",
       "audience": "canon",
@@ -235,8 +235,8 @@
       ]
     },
     {
-      "uri": "klappy://canon/odd/appendices/failure-driven-modularity",
-      "path": "/canon/odd/appendices/failure-driven-modularity.md",
+      "uri": "klappy://odd/appendices/failure-driven-modularity",
+      "path": "/odd/appendices/failure-driven-modularity.md",
       "title": "Failure-Driven Modularity",
       "type": "text/markdown",
       "audience": "canon",
@@ -288,8 +288,8 @@
       }
     },
     {
-      "uri": "klappy://canon/odd/media-as-learning-layer",
-      "path": "/canon/odd/appendices/media-as-learning-layer.md",
+      "uri": "klappy://odd/media-as-learning-layer",
+      "path": "/odd/appendices/media-as-learning-layer.md",
       "title": "Media as a Learning Layer",
       "type": "text/markdown",
       "audience": "canon",
@@ -306,8 +306,8 @@
       ]
     },
     {
-      "uri": "klappy://canon/odd/orientation-map",
-      "path": "/canon/odd/orientation-map.md",
+      "uri": "klappy://odd/orientation-map",
+      "path": "/odd/orientation-map.md",
       "title": "ODD + Canon + Evidence — Orientation Map",
       "type": "text/markdown",
       "audience": "canon",
@@ -322,8 +322,8 @@
       ]
     },
     {
-      "uri": "klappy://canon/odd/appendices",
-      "path": "/canon/odd/appendices/README.md",
+      "uri": "klappy://odd/appendices",
+      "path": "/odd/appendices/README.md",
       "title": "ODD Appendices (Portable)",
       "type": "text/markdown",
       "audience": "canon",
@@ -339,8 +339,8 @@
       ]
     },
     {
-      "uri": "klappy://canon/odd/decisions",
-      "path": "/canon/odd/decisions/README.md",
+      "uri": "klappy://odd/decisions",
+      "path": "/odd/decisions/README.md",
       "title": "ODD Conceptual Decisions",
       "type": "text/markdown",
       "audience": "canon",
@@ -356,8 +356,8 @@
       ]
     },
     {
-      "uri": "klappy://canon/odd/manifesto",
-      "path": "/canon/odd/manifesto.md",
+      "uri": "klappy://odd/manifesto",
+      "path": "/odd/manifesto.md",
       "title": "ODD Manifesto — Extended",
       "type": "text/markdown",
       "audience": "canon",
@@ -392,8 +392,8 @@
       }
     },
     {
-      "uri": "klappy://canon/odd/misuse-patterns",
-      "path": "/canon/odd/misuse-patterns.md",
+      "uri": "klappy://odd/misuse-patterns",
+      "path": "/odd/misuse-patterns.md",
       "title": "ODD Misuse Patterns",
       "type": "text/markdown",
       "audience": "canon",
@@ -408,8 +408,8 @@
       ]
     },
     {
-      "uri": "klappy://canon/odd/contract",
-      "path": "/canon/odd/contract.md",
+      "uri": "klappy://odd/contract",
+      "path": "/odd/contract.md",
       "title": "ODD System Contract",
       "type": "text/markdown",
       "audience": "canon",
@@ -426,8 +426,8 @@
       ]
     },
     {
-      "uri": "klappy://canon/odd",
-      "path": "/canon/odd/README.md",
+      "uri": "klappy://odd",
+      "path": "/odd/index.md",
       "title": "Outcomes-Driven Development",
       "type": "text/markdown",
       "audience": "canon",
@@ -441,8 +441,8 @@
       ]
     },
     {
-      "uri": "klappy://canon/odd/maturity",
-      "path": "/canon/odd/maturity.md",
+      "uri": "klappy://odd/maturity",
+      "path": "/odd/maturity.md",
       "title": "Project Maturity & Progressive Governance",
       "type": "text/markdown",
       "audience": "canon",
@@ -471,8 +471,8 @@
       ]
     },
     {
-      "uri": "klappy://canon/odd/prompt-architecture",
-      "path": "/canon/odd/prompt-architecture.md",
+      "uri": "klappy://odd/prompt-architecture",
+      "path": "/odd/prompt-architecture.md",
       "title": "Prompt Architecture",
       "type": "text/markdown",
       "audience": "canon",
@@ -487,8 +487,8 @@
       ]
     },
     {
-      "uri": "klappy://canon/odd/quantum-development",
-      "path": "/canon/odd/appendices/quantum-development.md",
+      "uri": "klappy://odd/quantum-development",
+      "path": "/odd/appendices/quantum-development.md",
       "title": "Quantum Development",
       "type": "text/markdown",
       "audience": "canon",
@@ -535,8 +535,8 @@
       ]
     },
     {
-      "uri": "klappy://canon/odd/decisions/D0001",
-      "path": "/canon/odd/decisions/D0001-three-tier-conceptual-hierarchy.md",
+      "uri": "klappy://odd/decisions/D0001",
+      "path": "/odd/decisions/D0001-three-tier-conceptual-hierarchy.md",
       "title": "Three-Tier Conceptual Hierarchy",
       "type": "text/markdown",
       "audience": "canon",
@@ -552,8 +552,8 @@
       ]
     },
     {
-      "uri": "klappy://canon/odd/visual-evolution",
-      "path": "/canon/odd/appendices/visual-evolution.md",
+      "uri": "klappy://odd/visual-evolution",
+      "path": "/odd/appendices/visual-evolution.md",
       "title": "Visual Evolution",
       "type": "text/markdown",
       "audience": "canon",

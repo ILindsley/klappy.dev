@@ -60,7 +60,7 @@ Attempts may originate from different sources while targeting the same PRD:
 
 Parallel agent runs are treated as distinct attempts. Provenance tracking ensures they can be compared meaningfully.
 
-See `/canon/odd/appendices/quantum-development.md` for the orientation model behind this practice.
+See `/odd/appendices/quantum-development.md` for the orientation model behind this practice.
 
 ---
 
@@ -320,7 +320,7 @@ The attempt folder contains everything needed:
 - Step-by-step workflow: `/docs/ATTEMPT_KICKOFF.md`
 - Agent entry point: `/docs/AGENT_KICKOFF.md`
 - Deploy behavior: `/docs/CLOUDFLARE_CONFIG.md`
-- Decision log: `/canon/odd/decisions/`
-- Quantum Development: `/canon/odd/appendices/quantum-development.md`
+- Decision log: `/odd/decisions/`
+- Quantum Development: `/odd/appendices/quantum-development.md`
 - Repo Truth: `/docs/appendices/repo-truth.md`
 - Drift Checks: `/docs/appendices/drift-checks.md`

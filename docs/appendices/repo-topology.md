@@ -146,7 +146,7 @@ Note: Root `/attempts/**` is legacy (read-only). New attempts are lane-contained
 | Change Type | Location | Triggers New Attempt? |
 |-------------|----------|----------------------|
 | Fix a typo in Canon | `/canon/` | No |
-| Add a new ODD appendix | `/canon/odd/` | No |
+| Add a new ODD appendix | `/odd/` | No |
 | Update build script | `/infra/` | No |
 | Redesign the UI | `products/<lane>/src/` | Yes (same or new PRD) |
 | Add new feature | `products/<lane>/src/` | Yes (requires PRD) |
