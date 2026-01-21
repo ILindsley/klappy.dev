@@ -125,6 +125,21 @@
       ]
     },
     {
+      "uri": "klappy://canon/template",
+      "path": "/canon/TEMPLATE.md",
+      "title": "Canon Article Template",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "hidden",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "canon",
+        "template"
+      ]
+    },
+    {
       "uri": "klappy://meta/changelog",
       "path": "/canon/CHANGELOG.md",
       "title": "Canon Changelog",
@@ -352,6 +367,37 @@
         "appendices",
         "index",
         "portable"
+      ]
+    },
+    {
+      "uri": "klappy://odd/appendices/template",
+      "path": "/odd/appendices/TEMPLATE.md",
+      "title": "ODD Appendix Template",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "hidden",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "appendices",
+        "template"
+      ]
+    },
+    {
+      "uri": "klappy://odd/template",
+      "path": "/odd/TEMPLATE.md",
+      "title": "ODD Article Template",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "hidden",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "template"
       ]
     },
     {

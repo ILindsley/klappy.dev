@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-21T16:52:57.990Z
-Total Files: 144
+Generated: 2026-01-21T16:56:20.526Z
+Total Files: 147
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -19,11 +19,11 @@ details (attempts, version folders, source code).
 
 - **Root** (1 files)
 - **About** (6 files)
-- **Canon** (9 files)
+- **Canon** (10 files)
 - **Documentation** (54 files)
 - **Infrastructure** (9 files)
 - **Interfaces & Contracts** (6 files)
-- **ODD (Outcomes-Driven Development)** (18 files)
+- **ODD (Outcomes-Driven Development)** (20 files)
 - **Products** (30 files)
 - **Projects** (6 files)
 - **Visual Design System** (5 files)
@@ -9772,6 +9772,192 @@ This Canon v0.1 is considered stable for initial builds. Revisions should be add
 
 
 --------------------------------------------------------------------------------
+📄 File: canon/TEMPLATE.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/template
+title: "Canon Article Template"
+audience: canon
+exposure: hidden
+tier: 2
+voice: neutral
+stability: stable
+tags: ["canon", "template"]
+---
+
+# Canon Article Template
+
+> Template for program-level constraints shared across all products.
+
+## Description
+
+This template defines the standard structure for Canon articles. Canon contains program-level constraints—rules that all products in this program must follow. Canon is more stable than Docs but less universal than ODD. Use this template when adding new constraints, policies, or shared rules.
+
+## Outline
+
+- When to Add to Canon
+- Frontmatter Fields
+- Document Structure
+- Example
+
+---
+
+## When to Add to Canon
+
+Add to Canon when:
+
+- The rule applies to ALL products in this program
+- The rule is derived from ODD principles
+- The rule would still apply if we added new products
+
+Do NOT add to Canon when:
+
+- It's implementation-specific → `/docs/`
+- It's universal philosophy → `/odd/`
+- It's lane-specific → `/products/<lane>/`
+
+**Litmus test:** Should all products obey this? → Canon ✓
+
+---
+
+## Frontmatter Fields
+
+```yaml
+---
+uri: klappy://canon/<name>
+title: "Title"
+audience: canon
+exposure: nav
+tier: 1
+voice: first_person | neutral
+stability: stable
+tags: ["canon", "topic"]
+---
+```
+
+### Canon-Specific Values
+
+| Field | Typical Value | Notes |
+|-------|---------------|-------|
+| `audience` | `canon` | Always canon |
+| `tier` | `1` | Canon is core content |
+| `voice` | `first_person` | Website-ready, personal |
+| `stability` | `stable` | Canon changes carefully |
+
+---
+
+## Document Structure
+
+```markdown
+---
+uri: klappy://canon/<name>
+title: "Title"
+audience: canon
+exposure: nav
+tier: 1
+voice: first_person
+stability: stable
+tags: ["canon", "topic"]
+---
+
+# Title
+
+> One-line description of this constraint or rule.
+
+## Description
+
+1-2 paragraph compressed overview. What is this constraint?
+Why does it exist? How does it shape behavior?
+
+## Outline
+
+- Section 1
+- Section 2
+- Section 3
+
+---
+
+## Content
+
+**Canon vX.Y**
+
+[Full content...]
+
+---
+
+## See Also
+
+- [Related Canon](/canon/related.md)
+- [ODD Principle](/odd/appendices/related.md)
+```
+
+---
+
+## Example
+
+```markdown
+---
+uri: klappy://canon/example-constraint
+title: "Example Constraint"
+audience: canon
+exposure: nav
+tier: 1
+voice: first_person
+stability: stable
+tags: ["canon", "example"]
+---
+
+# Example Constraint
+
+> All products must X before Y.
+
+## Description
+
+This constraint ensures consistency across products by requiring X
+before Y. It derives from the ODD principle of evidence over assertion
+and applies to all lanes.
+
+## Outline
+
+- What I Assume
+- Why It Matters
+- What It Forces
+- When It Doesn't Apply
+
+---
+
+## Content
+
+**Canon v0.1**
+
+### What I Assume
+
+[...]
+
+### Why It Matters
+
+[...]
+
+### What It Forces
+
+[...]
+
+### When It Doesn't Apply
+
+[...]
+```
+
+---
+
+## See Also
+
+- [Canon Index](/canon/README.md)
+- [Three-Tier Hierarchy](/odd/decisions/D0001-three-tier-conceptual-hierarchy.md)
+
+
+
+--------------------------------------------------------------------------------
 📄 File: canon/_compiled/epoch-E0002/README.md
 --------------------------------------------------------------------------------
 
@@ -11388,6 +11574,184 @@ Or skip the theory and look at projects as they are added over time.
 
 
 --------------------------------------------------------------------------------
+📄 File: odd/TEMPLATE.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://odd/template
+title: "ODD Article Template"
+audience: canon
+exposure: hidden
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "template"]
+---
+
+# ODD Article Template
+
+> Template for universal principles that transcend any single implementation.
+
+## Description
+
+This template defines the standard structure for ODD articles. ODD contains universal principles—truths that would still be valid in 10 years, for any team, in any context. ODD is the most stable layer. Use this template when adding new principles or philosophy documents.
+
+## Outline
+
+- When to Add to ODD
+- Frontmatter Fields
+- Document Structure
+- Example
+
+---
+
+## When to Add to ODD
+
+Add to ODD when:
+
+- The principle would still be true in 10 years
+- The principle applies regardless of implementation
+- The principle would survive if klappy.dev disappeared
+
+Do NOT add to ODD when:
+
+- It's program-specific → `/canon/`
+- It's implementation-specific → `/docs/`
+- It's lane-specific → `/products/<lane>/`
+
+**Litmus test:** Would this still be true if klappy.dev didn't exist? → ODD ✓
+
+---
+
+## Frontmatter Fields
+
+```yaml
+---
+uri: klappy://odd/<name>
+title: "Title"
+audience: canon
+exposure: nav
+tier: 1
+voice: neutral
+stability: stable
+tags: ["odd", "philosophy", "topic"]
+---
+```
+
+### ODD-Specific Values
+
+| Field | Typical Value | Notes |
+|-------|---------------|-------|
+| `audience` | `canon` | ODD is canon-level content |
+| `tier` | `1` | Core philosophical content |
+| `voice` | `neutral` | Universal, not personal |
+| `stability` | `stable` | ODD almost never changes |
+
+---
+
+## Document Structure
+
+```markdown
+---
+uri: klappy://odd/<name>
+title: "Title"
+audience: canon
+exposure: nav
+tier: 1
+voice: neutral
+stability: stable
+tags: ["odd", "philosophy"]
+---
+
+# Title
+
+> One-line universal principle.
+
+## Description
+
+1-2 paragraph compressed overview. What is this principle?
+Why is it universal? How does it shape thinking?
+
+## Outline
+
+- Section 1
+- Section 2
+- Section 3
+
+---
+
+## Content
+
+[Full philosophical content...]
+
+---
+
+## See Also
+
+- [Related ODD](/odd/appendices/related.md)
+- [ODD Manifesto](/odd/manifesto.md)
+```
+
+---
+
+## Example
+
+```markdown
+---
+uri: klappy://odd/example-principle
+title: "Example Principle"
+audience: canon
+exposure: nav
+tier: 1
+voice: neutral
+stability: stable
+tags: ["odd", "philosophy", "example"]
+---
+
+# Example Principle
+
+> Durable thinking is scarce; generated artifacts are abundant.
+
+## Description
+
+This principle recognizes that human cognitive bandwidth is limited
+while machine output is cheap. Systems should optimize for preserving
+valuable thinking, not for preserving generated artifacts.
+
+## Outline
+
+- The Scarcity
+- The Abundance
+- The Implication
+
+---
+
+## Content
+
+### The Scarcity
+
+[Why durable thinking is rare...]
+
+### The Abundance
+
+[Why generated artifacts are cheap...]
+
+### The Implication
+
+[What this means for system design...]
+```
+
+---
+
+## See Also
+
+- [ODD Index](/odd/README.md)
+- [ODD Manifesto](/odd/manifesto.md)
+- [Three-Tier Hierarchy](/odd/decisions/D0001-three-tier-conceptual-hierarchy.md)
+
+
+
+--------------------------------------------------------------------------------
 📄 File: odd/appendices/README.md
 --------------------------------------------------------------------------------
 
@@ -11456,6 +11820,181 @@ These appendices extend the core canon documents:
 - `constraints.md` → appendices explain edge cases
 - `definition-of-done.md` → evidence philosophy here, evidence procedures in docs
 - `odd/manifesto.md` → appendices operationalize philosophy
+
+
+
+--------------------------------------------------------------------------------
+📄 File: odd/appendices/TEMPLATE.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://odd/appendices/template
+title: "ODD Appendix Template"
+audience: canon
+exposure: hidden
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "appendices", "template"]
+---
+
+# ODD Appendix Template
+
+> Template for ODD appendices that elaborate on core principles.
+
+## Description
+
+This template defines the standard structure for ODD appendices. Appendices elaborate on ODD principles with deeper analysis, examples, or edge cases. They are still universal (not implementation-specific) but are tier 2 content—revealed after the core principles.
+
+## Outline
+
+- When to Add an ODD Appendix
+- Frontmatter Fields
+- Document Structure
+- Example
+
+---
+
+## When to Add an ODD Appendix
+
+Add an ODD appendix when:
+
+- It elaborates on an existing ODD principle
+- It's universal (not klappy.dev-specific)
+- It's too detailed for the core principle document
+
+Do NOT add an ODD appendix when:
+
+- It's implementation-specific → `/docs/appendices/`
+- It's a new core principle → `/odd/`
+- It's a decision record → `/odd/decisions/`
+
+---
+
+## Frontmatter Fields
+
+```yaml
+---
+uri: klappy://odd/appendices/<name>
+title: "Title"
+audience: odd
+exposure: nav
+tier: 1 | 2
+voice: neutral
+stability: stable
+tags: ["odd", "appendices", "topic"]
+---
+```
+
+### Appendix-Specific Values
+
+| Field | Typical Value | Notes |
+|-------|---------------|-------|
+| `audience` | `odd` | ODD appendix content |
+| `tier` | `1` or `2` | Core elaboration or edge cases |
+| `voice` | `neutral` | Universal, not personal |
+| `stability` | `stable` | ODD appendices rarely change |
+
+---
+
+## Document Structure
+
+```markdown
+---
+uri: klappy://odd/appendices/<name>
+title: "Title"
+audience: odd
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "appendices", "topic"]
+---
+
+# Title
+
+> One-line description of what this appendix elaborates.
+
+## Description
+
+1-2 paragraph compressed overview. What principle does this elaborate?
+What additional depth does it provide?
+
+## Outline
+
+- Section 1
+- Section 2
+- Section 3
+
+---
+
+## Content
+
+[Full content...]
+
+---
+
+## See Also
+
+- [Parent Principle](/odd/related.md)
+- [Related Appendix](/odd/appendices/related.md)
+```
+
+---
+
+## Example
+
+```markdown
+---
+uri: klappy://odd/appendices/example-elaboration
+title: "Example Elaboration"
+audience: odd
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "appendices", "example"]
+---
+
+# Example Elaboration
+
+> How the scarcity principle applies to documentation systems.
+
+## Description
+
+This appendix elaborates on the scarcity principle by examining how
+it applies specifically to documentation systems. It provides examples
+of decay-by-default and elevation criteria.
+
+## Outline
+
+- The Problem
+- The Pattern
+- The Application
+
+---
+
+## Content
+
+### The Problem
+
+[Why documentation sprawl happens...]
+
+### The Pattern
+
+[How decay-by-default works...]
+
+### The Application
+
+[Specific examples...]
+```
+
+---
+
+## See Also
+
+- [ODD Appendices Index](/odd/appendices/README.md)
+- [ODD Index](/odd/README.md)
 
 
 
