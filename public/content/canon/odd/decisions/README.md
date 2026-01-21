@@ -1,45 +1,49 @@
 ---
 uri: klappy://canon/odd/decisions
-title: "ODD Decision Log (Redirect)"
+title: "ODD Conceptual Decisions"
 audience: canon
 exposure: nav
 tier: 1
 voice: neutral
 stability: stable
-tags: ["odd", "decisions", "redirect"]
+tags: ["odd", "decisions", "conceptual", "philosophy"]
 ---
 
-# ODD Decision Log
+# ODD Conceptual Decisions
 
-> **Moved:** Implementation-specific decisions now live in `/docs/decisions/`.
+> Decisions about ODD's mental model and conceptual architecture.
 
-This folder previously contained Architecture Decision Records (ADRs) for the ODD workflow and repository practices.
-
-As part of the canon progressive distillation effort, implementation-specific decisions have been moved to `/docs/decisions/` to separate portable methodology (canon) from reference implementation details (docs).
+This folder contains decisions about ODD itself — the philosophy, not any specific implementation.
 
 ---
 
-## Where Decisions Now Live
+## Conceptual Decisions (This Folder)
 
-| Location | Purpose |
-|----------|---------|
-| `/docs/decisions/` | Implementation-specific decisions for klappy.dev |
-| `/canon/` | Portable methodology and philosophy |
+| ID | Decision | Summary |
+|----|----------|---------|
+| [D0001](./D0001-three-tier-conceptual-hierarchy.md) | Three-Tier Conceptual Hierarchy | ODD separates universal principles → program constraints → implementation details |
+
+---
+
+## Two Types of Decisions
+
+| Location | Contains | Example |
+|----------|----------|---------|
+| `/canon/odd/decisions/` | Decisions about ODD's conceptual architecture | "ODD is a three-tier hierarchy" |
+| `/docs/decisions/` | Decisions about this implementation | "prod branch is production" |
 
 ---
 
 ## The Principle
 
-> **Decisions live in docs. Procedures live in docs. Philosophy lives in canon.**
+> **Conceptual architecture lives in canon. Implementation decisions live in docs.**
 
-Canon remains the shared gravity — constraints, decision rules, and definitions that apply to all ODD-following repos.
-
-Implementation decisions document specific choices made for this repository.
+The three-tier model (ODD → Canon → Docs) is itself captured in D0001.
 
 ---
 
 ## See Also
 
-- `/docs/decisions/README.md` — Full decision index
+- [D0001: Three-Tier Conceptual Hierarchy](./D0001-three-tier-conceptual-hierarchy.md)
+- `/docs/decisions/README.md` — Implementation decision index
 - `/canon/odd/contract.md` — ODD System Contract
-- `/docs/appendices/epochs.md` — Epoch semantics

@@ -341,7 +341,7 @@
     {
       "uri": "klappy://canon/odd/decisions",
       "path": "/canon/odd/decisions/README.md",
-      "title": "ODD Decision Log (Redirect)",
+      "title": "ODD Conceptual Decisions",
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
@@ -351,7 +351,8 @@
       "tags": [
         "odd",
         "decisions",
-        "redirect"
+        "conceptual",
+        "philosophy"
       ]
     },
     {
@@ -531,6 +532,23 @@
       "tags": [
         "self-audit",
         "verification"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/decisions/D0001",
+      "path": "/canon/odd/decisions/D0001-three-tier-conceptual-hierarchy.md",
+      "title": "Three-Tier Conceptual Hierarchy",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 1,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "architecture",
+        "conceptual-model",
+        "philosophy"
       ]
     },
     {

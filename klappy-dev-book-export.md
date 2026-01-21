@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-21T05:25:07.140Z
-Total Files: 141
+Generated: 2026-01-21T05:33:45.875Z
+Total Files: 142
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -19,7 +19,7 @@ details (attempts, version folders, source code).
 
 - **Root** (1 files)
 - **About** (5 files)
-- **Canon** (24 files)
+- **Canon** (25 files)
 - **Documentation** (51 files)
 - **Infrastructure** (4 files)
 - **Interfaces & Contracts** (6 files)
@@ -11409,54 +11409,236 @@ Epoch 1 documents should be marked with an epoch header if they remain in the re
 
 
 --------------------------------------------------------------------------------
-📄 File: canon/odd/decisions/README.md
+📄 File: canon/odd/decisions/D0001-three-tier-conceptual-hierarchy.md
 --------------------------------------------------------------------------------
 
 ---
-uri: klappy://canon/odd/decisions
-title: "ODD Decision Log (Redirect)"
+uri: klappy://canon/odd/decisions/D0001
+title: "Three-Tier Conceptual Hierarchy"
 audience: canon
 exposure: nav
 tier: 1
 voice: neutral
 stability: stable
-tags: ["odd", "decisions", "redirect"]
+tags: ["odd", "architecture", "conceptual-model", "philosophy"]
 ---
 
-# ODD Decision Log
+# Three-Tier Conceptual Hierarchy
 
-> **Moved:** Implementation-specific decisions now live in `/docs/decisions/`.
+> ODD separates universal principles from program constraints from implementation details.
 
-This folder previously contained Architecture Decision Records (ADRs) for the ODD workflow and repository practices.
+## Description
 
-As part of the canon progressive distillation effort, implementation-specific decisions have been moved to `/docs/decisions/` to separate portable methodology (canon) from reference implementation details (docs).
+ODD is organized as a three-tier conceptual hierarchy where each layer absorbs different pressure and has different decay rates. ODD contains universal principles (timeless, product-agnostic), Canon contains program-level constraints (shared rules across products), and Docs contains implementation details (how this instance works). This separation allows ODD to outgrow any single repository without losing coherence.
+
+## Outline
+
+- Decision
+- Status
+- The Three Tiers
+- The Litmus Test
+- Why This Matters
+- Consequences
+- Evidence
 
 ---
 
-## Where Decisions Now Live
+## Content
 
-| Location | Purpose |
-|----------|---------|
-| `/docs/decisions/` | Implementation-specific decisions for klappy.dev |
-| `/canon/` | Portable methodology and philosophy |
+## Decision
+
+ODD is a three-tier conceptual hierarchy, not a single monolithic philosophy:
+
+| Tier | Contains | Answers | Decay Rate |
+|------|----------|---------|------------|
+| **ODD** | Universal principles | "What is always true about building well?" | Almost never |
+| **Canon** | Program-level constraints | "What rules do we share across products?" | Carefully |
+| **Docs** | Implementation details | "How does this instance work?" | Freely |
+
+## Status
+
+**Active**
+
+## The Three Tiers
+
+### Tier 1: ODD (Universal Principles)
+
+ODD is the root. It is:
+
+- Not a framework
+- Not a product philosophy
+- Not owned by any single implementation
+
+ODD contains:
+
+- Progressive distillation
+- Failure-driven modularity
+- Visual proof > narrative confidence
+- Evidence over assertion
+- Elevation before optimization
+
+**The test:** Would this still be true if klappy.dev didn't exist? If Cloudflare vanished? If LLMs were replaced?
+
+If yes → it's ODD.
+
+### Tier 2: Canon (Program-Level Constraints)
+
+Canon is shared contract, not universal truth.
+
+Canon answers: *"If you are building within this program, these are the rules we agree to."*
+
+Canon contains:
+
+- decision-rules
+- definition-of-done
+- self-audit
+- misuse-patterns
+- completion-report-template
+- constraints (scoped to this program)
+
+**The test:** Should all products in this program obey it?
+
+If yes → it's Canon.
+
+Crucially:
+- Canon can change without invalidating ODD
+- Two programs could share ODD but diverge in Canon
+
+### Tier 3: Docs (Implementation Details)
+
+Docs are the reference implementation.
+
+Docs contain:
+
+- Infrastructure decisions
+- CLI paths
+- Cloudflare specifics
+- Repo structure
+- Tooling affordances
+- Branch naming conventions
+
+**The test:** Is this about how *we* do it *here*?
+
+If yes → it's Docs.
+
+## The Litmus Test
+
+For any file, ask:
+
+1. **Would this still be true in 10 years?**
+   - Yes → ODD
+   - No → keep going
+
+2. **Should all products in this program obey it?**
+   - Yes → Canon
+   - No → keep going
+
+3. **Is this about how we do it here?**
+   - Yes → Docs
+
+If something fails all three, it probably doesn't belong at all.
+
+## Why This Matters
+
+This separation:
+
+- Allows publishing ODD as a standalone essay/site
+- Lets other teams adopt ODD without adopting your Canon
+- Supports running multiple Canons under the same ODD
+- Explains why "ODD isn't a framework"
+
+Frameworks conflate all three layers. ODD separates them.
+
+Different decay rates give real systems what they need:
+
+- ODD should almost never change
+- Canon is allowed to evolve carefully
+- Docs are allowed to rot and be rebuilt
+
+## Consequences
+
+### Enables
+
+- ODD can outgrow any single repository
+- Teams can fork Canon while keeping ODD
+- Implementation can be completely replaced without touching philosophy
+- Clear criteria for file placement
+
+### Prevents
+
+- Conflating philosophy with plumbing
+- Breaking universal principles when fixing implementation bugs
+- Vendor lock-in at the conceptual level
+
+### Costs
+
+- Requires discipline to classify correctly
+- Three places to look instead of one
+- Harder to explain to newcomers (until they get it)
+
+## Evidence
+
+- D0015 (this decision) - formalizing the separation
+- Canon progressive distillation effort - moved implementation decisions to docs/
+- `/docs/appendices/` - now contains implementation-specific appendices
+- `/docs/decisions/` - now contains implementation-specific decisions
+- `/canon/odd/appendices/` - retains only portable philosophy
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/odd/decisions/README.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/odd/decisions
+title: "ODD Conceptual Decisions"
+audience: canon
+exposure: nav
+tier: 1
+voice: neutral
+stability: stable
+tags: ["odd", "decisions", "conceptual", "philosophy"]
+---
+
+# ODD Conceptual Decisions
+
+> Decisions about ODD's mental model and conceptual architecture.
+
+This folder contains decisions about ODD itself — the philosophy, not any specific implementation.
+
+---
+
+## Conceptual Decisions (This Folder)
+
+| ID | Decision | Summary |
+|----|----------|---------|
+| [D0001](./D0001-three-tier-conceptual-hierarchy.md) | Three-Tier Conceptual Hierarchy | ODD separates universal principles → program constraints → implementation details |
+
+---
+
+## Two Types of Decisions
+
+| Location | Contains | Example |
+|----------|----------|---------|
+| `/canon/odd/decisions/` | Decisions about ODD's conceptual architecture | "ODD is a three-tier hierarchy" |
+| `/docs/decisions/` | Decisions about this implementation | "prod branch is production" |
 
 ---
 
 ## The Principle
 
-> **Decisions live in docs. Procedures live in docs. Philosophy lives in canon.**
+> **Conceptual architecture lives in canon. Implementation decisions live in docs.**
 
-Canon remains the shared gravity — constraints, decision rules, and definitions that apply to all ODD-following repos.
-
-Implementation decisions document specific choices made for this repository.
+The three-tier model (ODD → Canon → Docs) is itself captured in D0001.
 
 ---
 
 ## See Also
 
-- `/docs/decisions/README.md` — Full decision index
+- [D0001: Three-Tier Conceptual Hierarchy](./D0001-three-tier-conceptual-hierarchy.md)
+- `/docs/decisions/README.md` — Implementation decision index
 - `/canon/odd/contract.md` — ODD System Contract
-- `/docs/appendices/epochs.md` — Epoch semantics
 
 
 
@@ -12400,12 +12582,13 @@ tags: ["odd", "orientation", "mental-model"]
 
 ## Description
 
-This orientation map provides a single-page mental model of how Intent flows through ODD Manifesto to Canon (Constraints & Rules) to Decisions to Evidence to Outcomes. ODD explains why and what we care about; Canon explains how decisions tend to be shaped; Decisions are local, contextual, and human; Evidence grounds claims in reality; Outcomes are the only thing that matters long-term. Maturity moves from Exploration (PoC) through Validation (Pilot) to Commitment (Production). The map explicitly rejects "if it compiles, it's done" and "governance replaces judgment."
+This orientation map provides a single-page mental model of how Intent flows through ODD Manifesto to Canon to Decisions to Evidence to Outcomes. ODD is organized as a three-tier conceptual hierarchy: ODD contains universal principles (timeless), Canon contains program-level constraints (shared rules), and Docs contains implementation details (how this instance works). Maturity moves from Exploration through Validation to Commitment. The map explicitly rejects "if it compiles, it's done" and "governance replaces judgment."
 
 ## Outline
 
 - The Core Idea (Intent → ODD → Canon → Decisions → Evidence → Outcomes)
 - How to Read This Map
+- The Three-Tier Hierarchy (ODD → Canon → Docs)
 - Where Maturity Lives
 - What This Map Explicitly Rejects
 - Why This Map Exists
@@ -12454,6 +12637,28 @@ Nothing here enforces anything.
 Everything here informs something.
 
 **Canon may reference Docs. Docs must never redefine Canon.**
+
+---
+
+## 🏗️ The Three-Tier Hierarchy
+
+ODD is a conceptual hierarchy, not a monolithic philosophy:
+
+| Tier | Contains | Decay Rate |
+|------|----------|------------|
+| **ODD** | Universal principles (timeless, product-agnostic) | Almost never |
+| **Canon** | Program-level constraints (shared rules across products) | Carefully |
+| **Docs** | Implementation details (how this instance works) | Freely |
+
+**The litmus test:**
+
+1. Would this still be true in 10 years? → **ODD**
+2. Should all products in this program obey it? → **Canon**
+3. Is this about how *we* do it *here*? → **Docs**
+
+This separation allows ODD to outgrow any single repository.
+
+See [D0001: Three-Tier Conceptual Hierarchy](/canon/odd/decisions/D0001-three-tier-conceptual-hierarchy.md).
 
 ---
 

@@ -15,12 +15,13 @@ tags: ["odd", "orientation", "mental-model"]
 
 ## Description
 
-This orientation map provides a single-page mental model of how Intent flows through ODD Manifesto to Canon (Constraints & Rules) to Decisions to Evidence to Outcomes. ODD explains why and what we care about; Canon explains how decisions tend to be shaped; Decisions are local, contextual, and human; Evidence grounds claims in reality; Outcomes are the only thing that matters long-term. Maturity moves from Exploration (PoC) through Validation (Pilot) to Commitment (Production). The map explicitly rejects "if it compiles, it's done" and "governance replaces judgment."
+This orientation map provides a single-page mental model of how Intent flows through ODD Manifesto to Canon to Decisions to Evidence to Outcomes. ODD is organized as a three-tier conceptual hierarchy: ODD contains universal principles (timeless), Canon contains program-level constraints (shared rules), and Docs contains implementation details (how this instance works). Maturity moves from Exploration through Validation to Commitment. The map explicitly rejects "if it compiles, it's done" and "governance replaces judgment."
 
 ## Outline
 
 - The Core Idea (Intent → ODD → Canon → Decisions → Evidence → Outcomes)
 - How to Read This Map
+- The Three-Tier Hierarchy (ODD → Canon → Docs)
 - Where Maturity Lives
 - What This Map Explicitly Rejects
 - Why This Map Exists
@@ -69,6 +70,28 @@ Nothing here enforces anything.
 Everything here informs something.
 
 **Canon may reference Docs. Docs must never redefine Canon.**
+
+---
+
+## 🏗️ The Three-Tier Hierarchy
+
+ODD is a conceptual hierarchy, not a monolithic philosophy:
+
+| Tier | Contains | Decay Rate |
+|------|----------|------------|
+| **ODD** | Universal principles (timeless, product-agnostic) | Almost never |
+| **Canon** | Program-level constraints (shared rules across products) | Carefully |
+| **Docs** | Implementation details (how this instance works) | Freely |
+
+**The litmus test:**
+
+1. Would this still be true in 10 years? → **ODD**
+2. Should all products in this program obey it? → **Canon**
+3. Is this about how *we* do it *here*? → **Docs**
+
+This separation allows ODD to outgrow any single repository.
+
+See [D0001: Three-Tier Conceptual Hierarchy](/canon/odd/decisions/D0001-three-tier-conceptual-hierarchy.md).
 
 ---
 
