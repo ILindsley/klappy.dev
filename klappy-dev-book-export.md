@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-21T02:04:02.702Z
-Total Files: 227
+Generated: 2026-01-21T02:23:21.509Z
+Total Files: 229
 
 This is a complete export of all documentation, code, and content files
 from the klappy.dev repository, organized by section.
@@ -25,7 +25,7 @@ from the klappy.dev repository, organized by section.
 - **Infrastructure** (19 files)
 - **Interfaces & Contracts** (6 files)
 - **ODD (Outcomes-Driven Development)** (1 files)
-- **Products** (79 files)
+- **Products** (81 files)
 - **Projects** (6 files)
 - **Public Content** (13 files)
 - **Visual Design System** (4 files)
@@ -25626,17 +25626,15 @@ git add klappy-dev-book-export.md
 
 # Agent Skill — Start Attempt
 
-## Step 0: Load ODD Canon (UPSTREAM)
+## Step 1: Load ODD Canon
 
-Read and internalize: public/agent-skill/latest/prd-guide-pack.md
-
-This pack contains the ODD philosophy that shapes all decisions. Load it first.
+Read and internalize: `public/agent-skill/latest/prd-guide-pack.md`
 
 ---
 
-## Step 1: Follow Versioned Kickoff
+## Step 2: Follow Kickoff
 
-Read and follow: `products/agent-skill/v1.2.1/KICKOFF.md`
+Read and follow: `products/agent-skill/KICKOFF.md`
 
 
 
@@ -25766,6 +25764,104 @@ This lane is allowed to have no UI and is not required to satisfy build-output u
 Lane-specific architecture decisions are documented in [decisions/](decisions/index.md).
 
 These decisions may override canon defaults with documented rationale. Successful patterns may be proposed for elevation to canon.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/agent-skill/KICKOFF.md
+--------------------------------------------------------------------------------
+
+# Agent-Skill — Attempt Kickoff
+
+You are starting an attempt in the **agent-skill** lane.
+
+---
+
+## Step 1: Find Active Version
+
+Check `README.md` — the Versions table shows which version is **Active**.
+
+Note the active version (e.g., `v1.2.2`). This is your target.
+
+---
+
+## Step 2: Read Context
+
+Read these files in order:
+
+1. `README.md` — Lane overview, version table, current champion
+2. `CONTRACT.md` — Structure deviations from canon
+3. `history/index.md` — Champion history and learnings
+4. `<active-version>/PRD.md` — The PRD you're executing
+
+The PRD defines your task, deliverables, and definition of done.
+
+---
+
+## Step 3: Review Prior Art
+
+Check the history folder and previous attempt folders for learnings:
+
+- `history/` — What worked, what didn't
+- Previous version attempts — Evidence and learnings
+
+---
+
+## Step 4: Create Attempt Folder
+
+Create: `<active-version>/attempts/attempt-NNN/`
+
+Where NNN is the next number (check existing folders).
+
+Required files:
+
+- `ATTEMPT.md` — Closure record
+- `META.json` — Machine-readable metadata
+- `evidence/` — Verification artifacts
+
+---
+
+## Step 5: Execute
+
+Follow the PRD's Definition of Done exactly.
+
+- Produce evidence for every claim
+- No assertions without proof
+- Document tradeoffs
+
+---
+
+## Critical Rules
+
+1. **Lane Isolation**: Do NOT modify files outside `products/agent-skill/`
+2. **Version Isolation**: Work within `<active-version>/` folder
+3. **Attempt Containment**: All changes go in attempt folder until promotion
+4. **Evidence Required**: No assertions without proof
+5. **PRD Immutability**: If PRD has a problem, create a NEW version — don't bend rules
+
+---
+
+## When Complete
+
+Update `ATTEMPT.md` with:
+
+- Status: CHAMPION, CLOSED, or ABANDONED
+- Outcome summary
+- Evidence produced
+- Self-audit results
+- Learnings
+
+If championed, add entry to `history/` folder.
+
+---
+
+## If PRD Seems Problematic
+
+Don't bend rules to make it work.
+
+1. Document the issue in `LEARNINGS.md`
+2. Mark attempt as FAILED with clear explanation
+3. Propose a new PRD version to address the issue
 
 
 
@@ -26019,9 +26115,9 @@ This lane produces compiled packs for AI agent consumption. The primary delivera
 
 ## Current Champion
 
-**v1.1** — PRD guide pack (~12K tokens)
+**v1.2.1** — Lane-owned Cloudflare Pages deployment
 
-**Public URL**: `https://main.klappy-dev-agent-skill.pages.dev/v1.1/prd-guide-pack.md`
+**Public URL**: `https://main.klappy-dev-agent-skill.pages.dev/latest/prd-guide-pack.md`
 
 ## Quick Start
 
@@ -26031,18 +26127,19 @@ https://main.klappy-dev-agent-skill.pages.dev/latest/prd-guide-pack.md
 ```
 
 **Option 2: Local file**
-Copy the pack from `v1.1/dist/prd-guide-pack.md` and paste it into your AI context.
+Copy the pack from `public/agent-skill/latest/prd-guide-pack.md` and paste it into your AI context.
 
-See the [usage README](https://main.klappy-dev-agent-skill.pages.dev/v1.1/README.md) for detailed instructions.
+See the [usage README](https://main.klappy-dev-agent-skill.pages.dev/latest/README.md) for detailed instructions.
 
 ## Lane Files
 
 | File | Purpose |
 |------|---------|
+| [ATTEMPT_KICKOFF.md](ATTEMPT_KICKOFF.md) | Copy/paste prompt to start an attempt |
+| [KICKOFF.md](KICKOFF.md) | Full attempt instructions (version-agnostic) |
 | [CONTRACT.md](CONTRACT.md) | Formal structure, deviations from canon |
-| [history/](history/) | Champion history, failures, learnings |
 | [ROADMAP.md](ROADMAP.md) | Vision and future versions |
-| [ATTEMPT_KICKOFF.md](ATTEMPT_KICKOFF.md) | One-liner pointing to active version's KICKOFF |
+| [history/](history/) | Champion history, failures, learnings |
 | [decisions/](decisions/README.md) | Lane-specific architecture decisions |
 
 ## Versions
@@ -26052,6 +26149,7 @@ See the [usage README](https://main.klappy-dev-agent-skill.pages.dev/v1.1/README
 | [v1.1/](v1.1/) | Champion | Core PRD guide pack |
 | [v1.2/](v1.2/) | Failed | Distribution attempt (PRD conflict) |
 | [v1.2.1/](v1.2.1/) | Champion | Lane-owned Cloudflare Pages deployment |
+| [v1.2.2/](v1.2.2/) | Active | Canon content refresh (v0.5.3) |
 
 ## Structure
 
@@ -26060,13 +26158,13 @@ This lane uses a **version-first** folder structure (differs from canon default)
 ```
 products/agent-skill/
 ├── README.md              # You are here
+├── ATTEMPT_KICKOFF.md     # Copy/paste prompt (loads canon, points to KICKOFF)
+├── KICKOFF.md             # Full attempt instructions (version-agnostic)
 ├── CONTRACT.md            # Formal structure/deviations
-├── history/               # Champion log, failures, learnings
 ├── ROADMAP.md             # Vision document
-├── ATTEMPT_KICKOFF.md     # One-liner → active KICKOFF
+├── history/               # Champion log, failures, learnings
 ├── decisions/             # Lane-specific ADRs
 ├── v1.1/                  # Version 1.1 (champion)
-│   ├── KICKOFF.md         # Frozen attempt instructions
 │   ├── PRD.md             # Frozen PRD
 │   ├── src/               # Source files
 │   ├── dist/              # Compiled output
@@ -26074,9 +26172,10 @@ products/agent-skill/
 ├── v1.2/                  # Version 1.2 (failed)
 │   ├── PRD.md             # Frozen PRD
 │   └── attempts/          # Failed attempt evidence
-└── v1.2.1/                # Version 1.2.1 (champion)
-    ├── KICKOFF.md         # Frozen attempt instructions
-    └── PRD.md             # Frozen PRD
+├── v1.2.1/                # Version 1.2.1 (champion)
+│   └── PRD.md             # Frozen PRD
+└── v1.2.2/                # Version 1.2.2 (active)
+    └── PRD.md             # Canon refresh PRD
 ```
 
 ## Build
@@ -26155,6 +26254,23 @@ Patches v1.2 with a lane-owned approach:
 **Target outcome**: Pack available at `https://agent-skill.klappy.dev/latest/prd-guide-pack.md`
 
 **Friction level**: Copy from URL
+
+---
+
+## v1.2.2 — Canon Content Refresh
+
+**Location**: `v1.2.2/`
+
+Patches v1.2.1 with updated canon content (v0.5.3):
+
+- Recompile pack against canon v0.5.3
+- Includes Memory Architecture proposal (manifesto references)
+- No functional changes to pack behavior or distribution
+- Documents canon version for traceability
+
+**Target outcome**: Pack reflects canon v0.5.3 content
+
+**Friction level**: Same as v1.2.1 (copy from URL)
 
 ---
 
@@ -32683,6 +32799,157 @@ Fix: Removed `dist/` from versioned paths — deploy contents of dist, not the f
 - [x] /v1.1/README.md returns HTTP 200
 - [x] URL structure is consistent (no dist/ in paths)
 - [x] Content is accessible without clone or build
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/agent-skill/v1.2.2/PRD.md
+--------------------------------------------------------------------------------
+
+# PRD: ODD Agent Skill — Canon Refresh
+
+| Field           | Value            |
+|-----------------|------------------|
+| **PRD Version** | v1.2.2           |
+| **Lane**        | agent-skill      |
+| **Status**      | Active           |
+| **Created**     | 2026-01-21       |
+| **Author**      | Chris Klapp      |
+| **Canon Version** | 0.5.3          |
+
+---
+
+## Interface Contracts
+
+This lane MUST remain compatible with:
+
+- manifest >=2.0.0 <3.0.0
+- attempt-cli >=2.0.0 <3.0.0
+
+---
+
+## Objective
+
+Recompile the PRD guide pack against canon v0.5.3 to include the Memory Architecture proposal and related updates.
+
+---
+
+## Background
+
+**v1.2.1 delivered**: Lane-owned Cloudflare Pages deployment with versioned, immutable asset URLs.
+
+**v1.2.2 patches v1.2.1** with updated canon content:
+
+- Canon bumped to v0.5.3 (Memory Architecture Proposal)
+- Pack sources (manifesto, constraints, decision-rules, etc.) have been updated
+- No changes to pack structure, INSTRUCTIONS.md, or distribution mechanism
+- This is a content refresh, not a feature change
+
+---
+
+## In Scope (v1.2.2)
+
+### From v1.2.1 (retained)
+
+- Lane-owned Cloudflare Pages deployment
+- Versioned asset URLs
+- README.md per version folder
+- No website lane dependency
+
+### New in v1.2.2
+
+- Recompiled pack against canon v0.5.3
+- Updated source hashes in provenance header
+- Updated `/latest/` to point to v1.2.2 pack
+
+---
+
+## Explicitly Out of Scope (v1.2.2)
+
+- Changes to INSTRUCTIONS.md
+- Changes to compile plan structure
+- Changes to distribution architecture
+- New features or workflow stages
+
+---
+
+## Success Criteria
+
+- [ ] Pack recompiled with canon v0.5.3 sources
+- [ ] Provenance header shows updated source hashes
+- [ ] Pack available at versioned URL
+- [ ] `/latest/` updated to serve v1.2.2 pack
+- [ ] No behavioral changes to pack guidance
+
+---
+
+## Definition of Done
+
+An attempt against this PRD is complete when:
+
+### Compilation
+
+- [ ] `npm run lane:compile -- --lane agent-skill --pack prd-guide` succeeds
+- [ ] Output written to `v1.2.2/dist/prd-guide-pack.md`
+- [ ] Provenance header shows canon v0.5.3 source hashes
+
+### Distribution
+
+- [ ] `public/agent-skill/latest/prd-guide-pack.md` updated
+- [ ] Public URL verified with HTTP 200
+
+### Verification
+
+- [ ] Source hashes differ from v1.2.1 (canon changed)
+- [ ] Pack content includes Memory Architecture references (via manifesto)
+
+### Evidence Required
+
+- [ ] Screenshot of successful compile output
+- [ ] Diff showing updated source hashes
+- [ ] Self-audit completed
+
+---
+
+## Canon Sources
+
+The pack pulls from these canon files (all updated in v0.5.3 or earlier):
+
+1. `canon/odd/manifesto.md` — Includes "Memory Is the Bottleneck" section
+2. `canon/constraints.md`
+3. `canon/decision-rules.md`
+4. `canon/definition-of-done.md`
+5. `canon/self-audit.md`
+6. `docs/PRD/PRD_TEMPLATE.md`
+7. `products/agent-skill/src/INSTRUCTIONS.md` — Unchanged
+
+---
+
+## Constraints
+
+- **No functional changes**: This is a content refresh only
+- **Same distribution**: Uses existing Cloudflare Pages setup
+- **Traceability**: Canon version documented in PRD metadata
+
+---
+
+## Attempt Policy
+
+This PRD may be attempted multiple times.
+
+- Each attempt is evaluated independently
+- Failed attempts inform future attempts or PRD revisions
+- Attempts are sealed when CLOSED or ABANDONED
+
+Attempts live at: `v1.2.2/attempts/attempt-NNN/`
+
+---
+
+## Related Documents
+
+- v1.2.1 Champion: `../v1.2.1/attempts/attempt-001/`
+- Canon Changelog: `/public/content/canon/CHANGELOG.md`
+- Memory Architecture: `/canon/odd/appendices/memory-architecture.proposed.md`
 
 
 

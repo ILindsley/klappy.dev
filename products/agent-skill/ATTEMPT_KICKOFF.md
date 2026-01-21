@@ -1,13 +1,11 @@
 # Agent Skill — Start Attempt
 
-## Step 0: Load ODD Canon (UPSTREAM)
+## Step 1: Load ODD Canon
 
-Read and internalize: public/agent-skill/latest/prd-guide-pack.md
-
-This pack contains the ODD philosophy that shapes all decisions. Load it first.
+Read and internalize: `public/agent-skill/latest/prd-guide-pack.md`
 
 ---
 
-## Step 1: Follow Versioned Kickoff
+## Step 2: Follow Kickoff
 
-Read and follow: `products/agent-skill/v1.2.1/KICKOFF.md`
+Read and follow: `products/agent-skill/KICKOFF.md`

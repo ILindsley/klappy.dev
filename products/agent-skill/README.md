@@ -4,9 +4,9 @@ This lane produces compiled packs for AI agent consumption. The primary delivera
 
 ## Current Champion
 
-**v1.1** — PRD guide pack (~12K tokens)
+**v1.2.1** — Lane-owned Cloudflare Pages deployment
 
-**Public URL**: `https://main.klappy-dev-agent-skill.pages.dev/v1.1/prd-guide-pack.md`
+**Public URL**: `https://main.klappy-dev-agent-skill.pages.dev/latest/prd-guide-pack.md`
 
 ## Quick Start
 
@@ -16,18 +16,19 @@ https://main.klappy-dev-agent-skill.pages.dev/latest/prd-guide-pack.md
 ```
 
 **Option 2: Local file**
-Copy the pack from `v1.1/dist/prd-guide-pack.md` and paste it into your AI context.
+Copy the pack from `public/agent-skill/latest/prd-guide-pack.md` and paste it into your AI context.
 
-See the [usage README](https://main.klappy-dev-agent-skill.pages.dev/v1.1/README.md) for detailed instructions.
+See the [usage README](https://main.klappy-dev-agent-skill.pages.dev/latest/README.md) for detailed instructions.
 
 ## Lane Files
 
 | File | Purpose |
 |------|---------|
+| [ATTEMPT_KICKOFF.md](ATTEMPT_KICKOFF.md) | Copy/paste prompt to start an attempt |
+| [KICKOFF.md](KICKOFF.md) | Full attempt instructions (version-agnostic) |
 | [CONTRACT.md](CONTRACT.md) | Formal structure, deviations from canon |
-| [history/](history/) | Champion history, failures, learnings |
 | [ROADMAP.md](ROADMAP.md) | Vision and future versions |
-| [ATTEMPT_KICKOFF.md](ATTEMPT_KICKOFF.md) | One-liner pointing to active version's KICKOFF |
+| [history/](history/) | Champion history, failures, learnings |
 | [decisions/](decisions/README.md) | Lane-specific architecture decisions |
 
 ## Versions
@@ -37,6 +38,7 @@ See the [usage README](https://main.klappy-dev-agent-skill.pages.dev/v1.1/README
 | [v1.1/](v1.1/) | Champion | Core PRD guide pack |
 | [v1.2/](v1.2/) | Failed | Distribution attempt (PRD conflict) |
 | [v1.2.1/](v1.2.1/) | Champion | Lane-owned Cloudflare Pages deployment |
+| [v1.2.2/](v1.2.2/) | Active | Canon content refresh (v0.5.3) |
 
 ## Structure
 
@@ -45,13 +47,13 @@ This lane uses a **version-first** folder structure (differs from canon default)
 ```
 products/agent-skill/
 ├── README.md              # You are here
+├── ATTEMPT_KICKOFF.md     # Copy/paste prompt (loads canon, points to KICKOFF)
+├── KICKOFF.md             # Full attempt instructions (version-agnostic)
 ├── CONTRACT.md            # Formal structure/deviations
-├── history/               # Champion log, failures, learnings
 ├── ROADMAP.md             # Vision document
-├── ATTEMPT_KICKOFF.md     # One-liner → active KICKOFF
+├── history/               # Champion log, failures, learnings
 ├── decisions/             # Lane-specific ADRs
 ├── v1.1/                  # Version 1.1 (champion)
-│   ├── KICKOFF.md         # Frozen attempt instructions
 │   ├── PRD.md             # Frozen PRD
 │   ├── src/               # Source files
 │   ├── dist/              # Compiled output
@@ -59,9 +61,10 @@ products/agent-skill/
 ├── v1.2/                  # Version 1.2 (failed)
 │   ├── PRD.md             # Frozen PRD
 │   └── attempts/          # Failed attempt evidence
-└── v1.2.1/                # Version 1.2.1 (champion)
-    ├── KICKOFF.md         # Frozen attempt instructions
-    └── PRD.md             # Frozen PRD
+├── v1.2.1/                # Version 1.2.1 (champion)
+│   └── PRD.md             # Frozen PRD
+└── v1.2.2/                # Version 1.2.2 (active)
+    └── PRD.md             # Canon refresh PRD
 ```
 
 ## Build

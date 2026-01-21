@@ -60,6 +60,23 @@ Patches v1.2 with a lane-owned approach:
 
 ---
 
+## v1.2.2 — Canon Content Refresh
+
+**Location**: `v1.2.2/`
+
+Patches v1.2.1 with updated canon content (v0.5.3):
+
+- Recompile pack against canon v0.5.3
+- Includes Memory Architecture proposal (manifesto references)
+- No functional changes to pack behavior or distribution
+- Documents canon version for traceability
+
+**Target outcome**: Pack reflects canon v0.5.3 content
+
+**Friction level**: Same as v1.2.1 (copy from URL)
+
+---
+
 ## v1.3 — Attempt Execution Guidance
 
 Add guidance for executing attempts against PRDs. Extends the pack from "create PRD" to "create PRD + execute attempt."
