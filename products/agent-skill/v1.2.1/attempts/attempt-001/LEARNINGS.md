@@ -50,6 +50,28 @@ Single CF Project: klappy-public
 
 ---
 
+### Gitignore Blocking Public Distribution
+
+**Observed**: 2026-01-21
+
+The root `.gitignore` had `dist/` which unintentionally blocked `public/agent-skill/v1.1/dist/` from being tracked.
+
+**Symptoms**:
+- `/latest/prd-guide-pack.md` returned HTTP 200 (in `latest/` folder, no `dist/`)
+- `/v1.1/dist/prd-guide-pack.md` returned HTTP 404 (blocked by gitignore)
+
+**Fix**:
+```gitignore
+# Build output
+dist/
+# Exception: public distribution folders should be tracked
+!public/**/dist/
+```
+
+**Lesson**: When using `dist/` as a standard build output folder, remember to whitelist `public/**/dist/` if you're storing distribution artifacts there.
+
+---
+
 ## Learnings to Add After Attempt Completion
 
 (This section will be populated when the attempt is sealed)

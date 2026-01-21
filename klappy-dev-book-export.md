@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-21T01:22:50.073Z
-Total Files: 208
+Generated: 2026-01-21T01:24:21.337Z
+Total Files: 209
 
 This is a complete export of all documentation, code, and content files
 from the klappy.dev repository, organized by section.
@@ -25,7 +25,7 @@ from the klappy.dev repository, organized by section.
 - **Infrastructure** (19 files)
 - **Interfaces & Contracts** (6 files)
 - **ODD (Outcomes-Driven Development)** (1 files)
-- **Products** (64 files)
+- **Products** (65 files)
 - **Projects** (6 files)
 - **Public Content** (10 files)
 - **Visual Design System** (4 files)
@@ -29338,6 +29338,28 @@ Single CF Project: klappy-public
 
 ---
 
+### Gitignore Blocking Public Distribution
+
+**Observed**: 2026-01-21
+
+The root `.gitignore` had `dist/` which unintentionally blocked `public/agent-skill/v1.1/dist/` from being tracked.
+
+**Symptoms**:
+- `/latest/prd-guide-pack.md` returned HTTP 200 (in `latest/` folder, no `dist/`)
+- `/v1.1/dist/prd-guide-pack.md` returned HTTP 404 (blocked by gitignore)
+
+**Fix**:
+```gitignore
+# Build output
+dist/
+# Exception: public distribution folders should be tracked
+!public/**/dist/
+```
+
+**Lesson**: When using `dist/` as a standard build output folder, remember to whitelist `public/**/dist/` if you're storing distribution artifacts there.
+
+---
+
 ## Learnings to Add After Attempt Completion
 
 (This section will be populated when the attempt is sealed)
@@ -29379,6 +29401,67 @@ Single CF Project: klappy-public
 
 # Evidence folder for attempt-001
 # Screenshots and verification artifacts will be placed here
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/agent-skill/v1.2.1/attempts/attempt-001/evidence/verification-log.txt
+--------------------------------------------------------------------------------
+
+# Verification Log — Agent-Skill v1.2.1 Attempt-001
+
+## Timestamp: 2026-01-21T01:23:00Z
+
+## Preview URL Verified
+Base: https://main.klappy-dev-agent-skill.pages.dev
+
+### /latest/prd-guide-pack.md — HTTP 200 ✅
+```
+HTTP/2 200 
+date: Wed, 21 Jan 2026 01:21:58 GMT
+content-type: text/markdown; charset=utf-8
+etag: "d897a3a7706d66b8bb72273bd3620147"
+```
+
+### /README.md — HTTP 200 ✅
+```
+HTTP/2 200 
+date: Wed, 21 Jan 2026 01:22:07 GMT
+content-type: text/markdown; charset=utf-8
+```
+
+### /v1.1/dist/prd-guide-pack.md — PENDING
+Initially 404 due to gitignore blocking dist/ folders.
+Fixed with commit 26e995f: "fix: allow public dist folders to be tracked"
+Awaiting CF deployment to verify.
+
+### /v1.1/dist/README.md — PENDING
+Same as above.
+
+---
+
+## Issue Discovered & Fixed
+
+The root `.gitignore` had `dist/` which blocked `public/agent-skill/v1.1/dist/`.
+
+Fix applied:
+```
+# Build output
+dist/
+# Exception: public distribution folders should be tracked
+!public/**/dist/
+```
+
+This is documented in LEARNINGS.md as a gotcha for future lanes.
+
+---
+
+## Verification To Complete After Deploy
+
+Once CF deploys commit 26e995f, verify:
+- [ ] /v1.1/dist/prd-guide-pack.md returns HTTP 200
+- [ ] /v1.1/dist/README.md returns HTTP 200
+- [ ] Content matches local files
 
 
 

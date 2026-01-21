@@ -1,0 +1,54 @@
+# Verification Log — Agent-Skill v1.2.1 Attempt-001
+
+## Timestamp: 2026-01-21T01:23:00Z
+
+## Preview URL Verified
+Base: https://main.klappy-dev-agent-skill.pages.dev
+
+### /latest/prd-guide-pack.md — HTTP 200 ✅
+```
+HTTP/2 200 
+date: Wed, 21 Jan 2026 01:21:58 GMT
+content-type: text/markdown; charset=utf-8
+etag: "d897a3a7706d66b8bb72273bd3620147"
+```
+
+### /README.md — HTTP 200 ✅
+```
+HTTP/2 200 
+date: Wed, 21 Jan 2026 01:22:07 GMT
+content-type: text/markdown; charset=utf-8
+```
+
+### /v1.1/dist/prd-guide-pack.md — PENDING
+Initially 404 due to gitignore blocking dist/ folders.
+Fixed with commit 26e995f: "fix: allow public dist folders to be tracked"
+Awaiting CF deployment to verify.
+
+### /v1.1/dist/README.md — PENDING
+Same as above.
+
+---
+
+## Issue Discovered & Fixed
+
+The root `.gitignore` had `dist/` which blocked `public/agent-skill/v1.1/dist/`.
+
+Fix applied:
+```
+# Build output
+dist/
+# Exception: public distribution folders should be tracked
+!public/**/dist/
+```
+
+This is documented in LEARNINGS.md as a gotcha for future lanes.
+
+---
+
+## Verification To Complete After Deploy
+
+Once CF deploys commit 26e995f, verify:
+- [ ] /v1.1/dist/prd-guide-pack.md returns HTTP 200
+- [ ] /v1.1/dist/README.md returns HTTP 200
+- [ ] Content matches local files
