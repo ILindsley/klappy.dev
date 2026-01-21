@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-21T15:16:36.419Z
+Generated: 2026-01-21T15:22:14.608Z
 Total Files: 146
 
 This is a documentation export of all markdown files from the klappy.dev
@@ -15748,6 +15748,98 @@ Quick reference checklist for evaluating documents.
 
 ---
 
+## Progressive Disclosure Structure Checklist
+
+Every document SHOULD follow this structure:
+
+```markdown
+---
+uri: klappy://[tier]/[path]      ← Required: unique identifier
+title: "Title"                   ← Required: document title
+audience: docs | canon | odd     ← Required: target audience
+tier: 1 | 2                      ← Required: disclosure tier
+stability: stable | evolving     ← Required: change expectation
+tags: ["tag1", "tag2"]           ← Required: search/filter tags
+---
+
+# Title                          ← Required: H1 matching frontmatter
+
+> Subtitle blockquote            ← Required: one-line summary
+
+## Description                   ← Required: 1-2 paragraph overview
+
+[Self-contained summary...]
+
+## Outline                       ← Recommended: table of contents
+
+- Section 1
+- Section 2
+
+---
+
+## Content                       ← Required: full content below
+
+[Detailed content...]
+```
+
+### Quick Compliance Check
+
+For each document:
+
+- [ ] **Frontmatter complete?** (uri, title, audience, tier, stability, tags)
+- [ ] **H1 title present?**
+- [ ] **Blockquote subtitle?** (one line after H1)
+- [ ] **Description section?** (## Description with summary)
+- [ ] **Outline section?** (## Outline with bullet list)
+- [ ] **Content section?** (## Content with full text)
+
+### Compliance Levels
+
+| Level | Requirements | Pack Usability |
+|-------|--------------|----------------|
+| **Full** | All 6 elements | Can compile at any level (L0-L4) |
+| **Partial** | Frontmatter + H1 + Description | Can compile at L0-L2 |
+| **Minimal** | Frontmatter + H1 only | Can only list, not summarize |
+| **Missing** | No frontmatter | Cannot be reliably compiled |
+
+---
+
+## README-as-Index Checklist
+
+Every folder SHOULD have a `README.md` that:
+
+- [ ] Lists all files in the folder with one-line summaries
+- [ ] Groups files by category (if applicable)
+- [ ] Explains the folder's purpose
+- [ ] Links to related folders/docs
+
+### Folder Index Template
+
+```markdown
+# 📁 [Folder Name]
+
+> [One-line description of what this folder contains]
+
+## Contents
+
+| File | Summary |
+|------|---------|
+| `file1.md` | One-line description |
+| `file2.md` | One-line description |
+
+## [Subfolders if any]
+
+| Folder | Purpose |
+|--------|---------|
+| `subfolder/` | What it contains |
+
+## See Also
+
+- [Related doc](/path/to/doc.md)
+```
+
+---
+
 ## Book Export Decision Tree
 
 ```
@@ -15786,29 +15878,43 @@ Is this file a markdown document (.md)?
 
 ## Context Pack Inclusion Matrix
 
+### By Document Type and Disclosure Level
+
 | Document Type | visitor | author | agent-core | dev-peer |
 |---------------|---------|--------|------------|----------|
-| **ODD Manifesto** | ✅ | ✅ | ✅ | ✅ |
-| **ODD Appendices** | ❌ | ✅ | ⚠️ select | ✅ |
-| **ODD Decisions** | ❌ | ⚠️ D0001 only | ❌ | ✅ |
-| **Canon README** | ✅ | ✅ | ✅ | ✅ |
-| **Canon Core** | ❌ | ✅ | ✅ | ✅ |
-| **Canon Changelog** | ❌ | ❌ | ❌ | ✅ |
-| **Docs README** | ✅ | ✅ | ✅ | ✅ |
-| **Docs Appendices** | ❌ | ⚠️ select | ⚠️ select | ✅ |
-| **Docs Decisions** | ❌ | ❌ | ⚠️ select | ✅ |
-| **Lane PRDs** | ⚠️ summary | ✅ | ✅ | ✅ |
-| **Attempt Workflows** | ❌ | ✅ | ✅ | ✅ |
-| **Agent Kickoff** | ❌ | ❌ | ✅ | ✅ |
-| **Interfaces/Contracts** | ❌ | ⚠️ select | ✅ | ✅ |
-| **Visual System** | ❌ | ⚠️ select | ❌ | ✅ |
-| **About Pages** | ✅ | ✅ | ❌ | ✅ |
-| **Projects** | ✅ | ✅ | ❌ | ✅ |
+| **ODD Manifesto** | L2 | L4 | L2 | L4 |
+| **ODD Appendices** | ❌ | L4 | L2 select | L4 |
+| **ODD Decisions** | ❌ | L2 D0001 | ❌ | L4 |
+| **Canon README** | L2 | L4 | L2 | L4 |
+| **Canon Core** | ❌ | L4 | L3 | L4 |
+| **Canon Changelog** | ❌ | ❌ | ❌ | L4 |
+| **Docs README** | L2 | L4 | L2 | L4 |
+| **Docs Appendices** | ❌ | L3 select | L2 select | L4 |
+| **Docs Decisions** | ❌ | ❌ | L2 select | L4 |
+| **Lane PRDs** | L2 | L4 | L4 | L4 |
+| **Attempt Workflows** | ❌ | L4 | L3 | L4 |
+| **Agent Kickoff** | ❌ | ❌ | L4 | L4 |
+| **Interfaces/Contracts** | ❌ | L2 select | L3 | L4 |
+| **Visual System** | ❌ | L2 select | ❌ | L4 |
+| **About Pages** | L2 | L4 | ❌ | L4 |
+| **Projects** | L2 | L4 | ❌ | L4 |
+| **Folder READMEs** | L1 | L2 | L2 | L4 |
 
-Legend:
-- ✅ = Include
-- ❌ = Exclude
-- ⚠️ = Include selectively (see notes)
+### Disclosure Level Legend
+
+| Level | What's Included | Typical Tokens |
+|-------|-----------------|----------------|
+| **L0** | Title only (from frontmatter) | ~50 |
+| **L1** | + Subtitle blockquote | ~100 |
+| **L2** | + Description section | ~200-500 |
+| **L3** | + Outline section | ~300-700 |
+| **L4** | + Full Content | Full doc |
+| **❌** | Exclude entirely | 0 |
+
+### Selection Legend
+- `L4` = Include full document
+- `L2 select` = Include Description level for selected files only
+- `❌` = Exclude from this pack
 
 ---
 
@@ -15879,31 +15985,76 @@ Copy this for each document:
 ## [path/to/file.md]
 
 - **Tier:** [ ] ODD  [ ] Canon  [ ] Docs  [ ] Other
-- **Has frontmatter:** [ ] Yes  [ ] No
 - **Has emoji headers:** [ ] Yes  [ ] No  [ ] N/A
+
+### Progressive Disclosure Compliance
+| Element | Present | Notes |
+|---------|---------|-------|
+| Frontmatter | [ ] Yes [ ] No | uri, title, tier, stability, tags |
+| H1 Title | [ ] Yes [ ] No | Matches frontmatter? |
+| Blockquote subtitle | [ ] Yes [ ] No | One-line summary? |
+| Description section | [ ] Yes [ ] No | 1-2 paragraphs? |
+| Outline section | [ ] Yes [ ] No | Bullet list of sections? |
+| Content section | [ ] Yes [ ] No | Full content below? |
+
+**Compliance Level:** [ ] Full  [ ] Partial  [ ] Minimal  [ ] Missing
 
 ### Book Export
 - **Current:** [ ] Included  [ ] Excluded
 - **Should be:** [ ] Include  [ ] Exclude
 - **Change needed:** [ ] Yes → [action]  [ ] No
 
-### Context Packs
-| Pack | Current | Should | Change |
-|------|---------|--------|--------|
-| visitor | [ ] In  [ ] Out | [ ] In  [ ] Out | [ ] Yes [ ] No |
-| author | [ ] In  [ ] Out | [ ] In  [ ] Out | [ ] Yes [ ] No |
-| agent-core | [ ] In  [ ] Out | [ ] In  [ ] Out | [ ] Yes [ ] No |
+### Context Packs (with disclosure level)
+| Pack | Current | Should | Level |
+|------|---------|--------|-------|
+| visitor | [ ] In [ ] Out | [ ] In [ ] Out | L__ |
+| author | [ ] In [ ] Out | [ ] In [ ] Out | L__ |
+| agent-core | [ ] In [ ] Out | [ ] In [ ] Out | L__ |
+
+### If Folder: README Index Check
+- [ ] Has README.md
+- [ ] README has contents table
+- [ ] README has file summaries
+- [ ] N/A (not a folder)
 
 ### Issues
 - [ ] Stale content: [details]
 - [ ] Misclassified: [should be X]
 - [ ] Redundant: [duplicates Y]
 - [ ] Broken refs: [list]
-- [ ] Missing frontmatter
+- [ ] Missing progressive disclosure structure
+- [ ] Folder missing README index
 - [ ] Other: [details]
 
 ### Recommendation
-[No change | Move to X | Update content | Add to pack Y | Remove from pack Z | Delete]
+[No change | Add disclosure structure | Move to X | Update content | 
+ Add to pack Y at L__ | Remove from pack Z | Create folder README | Delete]
+```
+
+---
+
+## Folder Audit Template
+
+For each folder with documents:
+
+```markdown
+## [path/to/folder/]
+
+- **Has README.md:** [ ] Yes  [ ] No
+- **README has contents table:** [ ] Yes  [ ] No  [ ] N/A
+- **File count:** [X] files
+
+### Files in Folder
+| File | Has Disclosure Structure | Compliance |
+|------|-------------------------|------------|
+| file1.md | [ ] Full [ ] Partial [ ] Missing | Notes |
+| file2.md | [ ] Full [ ] Partial [ ] Missing | Notes |
+
+### Recommendation
+[ ] Folder is compliant
+[ ] Create README index
+[ ] Update README with contents table
+[ ] Add disclosure structure to [files]
 ```
 
 
@@ -15922,6 +16073,8 @@ You are auditing the klappy.dev repository to determine:
 1. Which documents should be in the **book export** (`klappy-dev-book-export.md`)
 2. Which documents should be in **context packs** (lane-scoped compilations)
 3. Which documents are **stale, misclassified, or redundant**
+4. Which documents follow the **progressive disclosure structure**
+5. Which folders have **README-as-index** patterns
 
 ---
 
@@ -15939,6 +16092,91 @@ Documents in this repo are organized into three tiers with different purposes:
 1. Would this still be true in 10 years? → **ODD**
 2. Should all products in this program obey it? → **Canon**
 3. Is this about how *we* do it *here*? → **Docs**
+
+---
+
+## Progressive Disclosure Structure
+
+Documents in this repo follow a **progressive disclosure pattern** that enables different compilation depths:
+
+### Document Structure (Top to Bottom)
+
+```markdown
+---
+uri: klappy://[tier]/[path]
+title: "Document Title"
+audience: docs
+exposure: nav
+tier: 1 | 2
+voice: neutral
+stability: stable | evolving
+tags: ["tag1", "tag2"]
+---
+
+# Title                              ← H1 title (same as frontmatter)
+
+> One-line subtitle explaining       ← Blockquote subtitle
+> what this document is about.
+
+## Description                       ← 1-2 paragraph summary (LLM-friendly)
+
+[Compressed overview of the entire document. Should be self-contained
+enough that an LLM can understand the gist without reading further.]
+
+## Outline                           ← Table of contents / what's covered
+
+- Section 1
+- Section 2
+- Section 3
+
+---
+
+## Content                           ← Full content begins here
+
+[The actual detailed content...]
+```
+
+### Disclosure Levels for Packs
+
+| Level | Includes | Use Case | Context Size |
+|-------|----------|----------|--------------|
+| **L0: Title only** | Frontmatter + H1 | File listing | ~50 tokens |
+| **L1: Subtitle** | + blockquote | Quick orientation | ~100 tokens |
+| **L2: Description** | + Description section | LLM context | ~200-500 tokens |
+| **L3: Outline** | + Outline section | Navigation aid | ~300-700 tokens |
+| **L4: Full** | + Content section | Complete context | Full document |
+
+### Pack Compilation by Disclosure Level
+
+| Pack Target | Typical Level | Why |
+|-------------|---------------|-----|
+| `visitor` | L1-L2 | Minimal orientation, progressive reveal |
+| `author` | L3-L4 | Working context, needs detail |
+| `agent-core` | L2-L3 | Operational rules, not philosophy |
+| `dev-peer` | L4 | Full understanding for contribution |
+
+### README-as-Index Pattern
+
+Every folder SHOULD have a `README.md` that serves as a scannable index:
+
+```
+/docs/
+  README.md           ← Index with table of contents
+  ATTEMPTS.md
+  TRUTH_MAP.md
+  appendices/
+    README.md         ← Index of appendices with summaries
+    epochs.md
+    product-lanes.md
+  decisions/
+    README.md         ← Index of decisions with status
+    D0001-*.md
+```
+
+**Benefits:**
+- Agents can read the index (~500 tokens) instead of all files (~20K tokens)
+- Packs can include folder READMEs for summaries without full content
+- Tree-shaking: know what exists without loading everything
 
 ---
 
@@ -16009,12 +16247,34 @@ Context packs are **lane-scoped, target-specific compilations** for constrained 
 
 ### Pack Inclusion Criteria:
 
-| Target | Include | Exclude |
-|--------|---------|---------|
-| **visitor** | ODD manifesto, Canon README, PRD summary, "What is this?" | Implementation details, CLI commands, internal decisions |
-| **author** | Canon core, PRD, epochs, lanes, compilation | Attempt artifacts, version-specific implementations |
-| **agent-core** (future) | Constraints, decision rules, process docs, kickoff | Philosophy, history, exploratory appendices |
-| **dev-peer** (future) | Full canon, decisions, architecture | Internal process details |
+| Target | Include | Exclude | Disclosure Level |
+|--------|---------|---------|------------------|
+| **visitor** | ODD manifesto, Canon README, PRD summary, "What is this?" | Implementation details, CLI commands, internal decisions | L1-L2 (titles + descriptions) |
+| **author** | Canon core, PRD, epochs, lanes, compilation | Attempt artifacts, version-specific implementations | L3-L4 (outlines + full content) |
+| **agent-core** (future) | Constraints, decision rules, process docs, kickoff | Philosophy, history, exploratory appendices | L2-L3 (descriptions + outlines) |
+| **dev-peer** (future) | Full canon, decisions, architecture | Internal process details | L4 (full content) |
+
+### Using Progressive Disclosure for Pack Compilation
+
+Instead of including or excluding entire documents, packs can include documents at different **disclosure levels**:
+
+```json
+{
+  "lane": "website",
+  "pack": "visitor",
+  "sources": [
+    { "file": "odd/manifesto.md", "level": "L2" },
+    { "file": "canon/README.md", "level": "L2" },
+    { "file": "docs/README.md", "level": "L1" },
+    { "file": "docs/PRD/website/PRD.md", "level": "L2" }
+  ]
+}
+```
+
+**Benefits:**
+- Smaller context size for constrained windows
+- Progressive reveal: start with L1, expand to L4 as needed
+- Consistent structure enables automated extraction
 
 ### Evaluation Questions for Packs:
 
@@ -16049,14 +16309,28 @@ For each document evaluated, produce:
 **Tier:** ODD | Canon | Docs | Other
 **Current Status:** In book export? In which packs?
 
+**Progressive Disclosure Structure:**
+- [ ] Has frontmatter (uri, title, tier, stability, tags)
+- [ ] Has H1 title matching frontmatter
+- [ ] Has blockquote subtitle
+- [ ] Has Description section
+- [ ] Has Outline section
+- [ ] Has Content section
+- **Compliance:** Full | Partial | Missing
+
 **Book Export:**
 - [ ] INCLUDE | EXCLUDE
 - Reason: [why]
 
 **Context Packs:**
-- [ ] visitor: INCLUDE | EXCLUDE — [reason]
-- [ ] author: INCLUDE | EXCLUDE — [reason]
-- [ ] agent-core: INCLUDE | EXCLUDE — [reason]
+- [ ] visitor (L1-L2): INCLUDE | EXCLUDE — [reason]
+- [ ] author (L3-L4): INCLUDE | EXCLUDE — [reason]
+- [ ] agent-core (L2-L3): INCLUDE | EXCLUDE — [reason]
+
+**If folder, has README-as-index?**
+- [ ] Yes, with contents table
+- [ ] Yes, but missing contents table
+- [ ] No README.md
 
 **Issues Found:**
 - [ ] Stale content (last updated: [date], references outdated: [what])
@@ -16064,13 +16338,17 @@ For each document evaluated, produce:
 - [ ] Redundant (duplicates [other file])
 - [ ] Missing from manifest
 - [ ] Broken references
+- [ ] Missing progressive disclosure structure
+- [ ] Folder missing README index
 
 **Recommended Action:**
 - [ ] No change
 - [ ] Move to [new location]
 - [ ] Update content
-- [ ] Add to pack: [pack name]
+- [ ] Add progressive disclosure structure
+- [ ] Add to pack: [pack name] at level [L1-L4]
 - [ ] Remove from pack: [pack name]
+- [ ] Create README index for folder
 - [ ] Delete (with reason)
 ```
 
@@ -16123,8 +16401,11 @@ Group recommendations by:
 | `/docs/TRUTH_MAP.md` | Authoritative sources |
 | `/docs/appendices/compilation-targets.md` | Pack target definitions |
 | `/docs/appendices/canonical-compression.md` | Compression philosophy |
+| `/docs/appendices/compilation.md` | Compilation process |
 | `/infra/scripts/export-book.js` | Current book export logic |
 | `/infra/compile/plans/**/*.json` | Current pack definitions |
+| `/docs/appendices/epochs.md` | Example of full progressive disclosure structure |
+| `/docs/appendices/README.md` | Example of README-as-index pattern |
 
 ---
 
@@ -16138,6 +16419,9 @@ The audit is complete when:
 4. No stale content remains unaddressed
 5. No misclassified documents remain in wrong tiers
 6. All broken references have been flagged
+7. **Progressive disclosure compliance assessed** for all documents
+8. **README-as-index pattern verified** for all folders
+9. **Disclosure levels assigned** for each pack inclusion
 
 ---
 
