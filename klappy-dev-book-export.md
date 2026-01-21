@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-21T04:00:52.870Z
+Generated: 2026-01-21T04:02:18.211Z
 Total Files: 239
 
 This is a complete export of all documentation, code, and content files
@@ -30644,9 +30644,10 @@ products/agent-skill/
 This lane owns its own Cloudflare Pages deployment (not shared with website lane).
 
 - **Project**: `klappy-dev-agent-skill`
-- **Production URL**: `https://main.klappy-dev-agent-skill.pages.dev/`
-- **URL pattern**: `https://main.klappy-dev-agent-skill.pages.dev/vX.Y/<asset>`
-- **Preview URL pattern**: `https://<deployment-id>.klappy-dev-agent-skill.pages.dev/`
+- **Production domain**: `https://agent-skill.klappy.dev/`
+- **Production URL pattern**: `https://agent-skill.klappy.dev/vX.Y/<asset>`
+- **Main branch preview**: `https://main.klappy-dev-agent-skill.pages.dev/`
+- **Branch preview pattern**: `https://<deployment-id>.klappy-dev-agent-skill.pages.dev/`
 - **Isolation**: Full lane ownership, no cross-lane dependencies
 
 ### Finding Preview URLs
@@ -32233,7 +32234,7 @@ Canon refresh to v0.5.4 with proper ODD compliance. INSTRUCTIONS.md treated as e
 
 - **Pack**: `public/agent-skill/v1.2.3/prd-guide-pack.md`
 - **Latest**: `public/agent-skill/latest/prd-guide-pack.md`
-- **Production URL**: `https://main.klappy-dev-agent-skill.pages.dev/v1.2.3/prd-guide-pack.md`
+- **Production URL**: `https://agent-skill.klappy.dev/v1.2.3/prd-guide-pack.md`
 
 ## What Worked
 
@@ -32252,6 +32253,7 @@ Canon refresh to v0.5.4 with proper ODD compliance. INSTRUCTIONS.md treated as e
 1. **Verify before claiming**: Don't mark CHAMPION until HTTP 200 verified
 2. **Cloudflare preview URLs**: Use deployment ID from PR checks (e.g., `20426ceb.klappy-dev-agent-skill.pages.dev`)
 3. **ODD formula works**: Pack + CONTRACT + PRD = Attempt. Nothing else needed.
+4. **Production vs preview**: `agent-skill.klappy.dev` is production; `main.klappy-dev-agent-skill.pages.dev` is main branch preview
 
 ## Follow-up
 

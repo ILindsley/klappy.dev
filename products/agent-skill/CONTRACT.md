@@ -68,9 +68,10 @@ products/agent-skill/
 This lane owns its own Cloudflare Pages deployment (not shared with website lane).
 
 - **Project**: `klappy-dev-agent-skill`
-- **Production URL**: `https://main.klappy-dev-agent-skill.pages.dev/`
-- **URL pattern**: `https://main.klappy-dev-agent-skill.pages.dev/vX.Y/<asset>`
-- **Preview URL pattern**: `https://<deployment-id>.klappy-dev-agent-skill.pages.dev/`
+- **Production domain**: `https://agent-skill.klappy.dev/`
+- **Production URL pattern**: `https://agent-skill.klappy.dev/vX.Y/<asset>`
+- **Main branch preview**: `https://main.klappy-dev-agent-skill.pages.dev/`
+- **Branch preview pattern**: `https://<deployment-id>.klappy-dev-agent-skill.pages.dev/`
 - **Isolation**: Full lane ownership, no cross-lane dependencies
 
 ### Finding Preview URLs
