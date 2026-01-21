@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-21T04:11:44.208Z
+Generated: 2026-01-21T04:21:30.297Z
 Total Files: 138
 
 This is a documentation export of all markdown files from the klappy.dev
@@ -16475,21 +16475,21 @@ Source: `products/agent-skill/`
 
 This folder contains the current champion version of the ODD PRD Guide pack.
 
-**Current champion**: v1.1
+**Current champion**: v1.2.3
 
 ## Contents
 
-- `prd-guide-pack.md` — The compiled pack (~12K tokens)
+- [`prd-guide-pack.md`](./prd-guide-pack.md) — The compiled pack (~12K tokens)
 
 ## Usage
 
 Copy the pack contents and paste into your AI context.
 
-See `../v1.1/dist/README.md` for detailed usage instructions.
+See [`../v1.2.3/README.md`](../v1.2.3/README.md) for detailed usage instructions.
 
 ## Stability
 
-This folder always points to the current champion. If you need stability, pin to a specific version (e.g., `../v1.1/dist/`).
+This folder always points to the current champion. If you need stability, pin to a specific version (e.g., `../v1.2.3/`).
 
 
 
