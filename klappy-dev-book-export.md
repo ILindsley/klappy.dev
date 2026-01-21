@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-21T20:33:51.622Z
+Generated: 2026-01-21T20:39:27.996Z
 Total Files: 152
 
 This is a documentation export of all markdown files from the klappy.dev
@@ -18744,7 +18744,7 @@ products/agent-skill/
 │   └── PRD.md             # Canon refresh v0.5.4 + ODD compliance
 ├── v1.2.4/                # Version 1.2.4 (champion)
 │   └── PRD.md             # Canon refresh v0.8.0 (path fixes)
-└── v1.3/                  # Version 1.3 (active)
+└── v1.3/                  # Version 1.3 (champion)
     └── PRD.md             # PRD Elicitation Enhancement
 ```
 

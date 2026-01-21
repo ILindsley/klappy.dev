@@ -72,7 +72,7 @@ products/agent-skill/
 │   └── PRD.md             # Canon refresh v0.5.4 + ODD compliance
 ├── v1.2.4/                # Version 1.2.4 (champion)
 │   └── PRD.md             # Canon refresh v0.8.0 (path fixes)
-└── v1.3/                  # Version 1.3 (active)
+└── v1.3/                  # Version 1.3 (champion)
     └── PRD.md             # PRD Elicitation Enhancement
 ```
 
