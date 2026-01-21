@@ -139,3 +139,42 @@ products/agent-skill/
 
 - `README.md` — Lane overview, file index, version table
 - `CONTRACT.md` — Formal deviation from canon structure
+
+---
+
+## Entry — PRD v1.2.1 Champion
+
+- Date: 2026-01-21
+- PRD: v1.2.1
+- Epoch: E0003 (evidence-first)
+- Champion: attempt-001
+- Attempt path: `v1.2.1/attempts/attempt-001/`
+
+### Deliverable
+
+- **Cloudflare Pages project**: `klappy-dev-agent-skill`
+- **Preview URL**: `https://main.klappy-dev-agent-skill.pages.dev/`
+- **Pack URL**: `/v1.1/prd-guide-pack.md`
+- **Latest URL**: `/latest/prd-guide-pack.md`
+
+### What worked
+
+- Lane-owned Cloudflare Pages deployment (full isolation from website lane)
+- Publishing from `public/agent-skill/` ensures only promoted content is accessible
+- Consistent URL structure: `/latest/` and `/v1.1/` (no `dist/` in paths)
+- Preview URL verification before production deployment
+
+### What didn't
+
+- Initial gitignore blocked `dist/` folders (fixed with exception)
+- Inconsistent URL structure initially (`/latest/` vs `/v1.1/dist/`) — normalized
+
+### Learnings (1-3 bullets)
+
+- Root gitignore patterns can unexpectedly block public distribution. Use `!public/**/dist/` exception.
+- Deploy contents of dist, not the dist folder itself — keeps URLs clean.
+- Multi-lane CF deployments create serial build bottleneck — single `/public` deployment worth exploring.
+
+### Follow-up (one next action)
+
+- Fast-forward `prod` branch to enable production URL, then configure custom domain.

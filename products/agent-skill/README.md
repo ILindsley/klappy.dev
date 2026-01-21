@@ -4,15 +4,21 @@ This lane produces compiled packs for AI agent consumption. The primary delivera
 
 ## Current Champion
 
-**v1.1** — [v1.1/dist/prd-guide-pack.md](v1.1/dist/prd-guide-pack.md)
+**v1.1** — PRD guide pack (~12K tokens)
 
-~12K tokens, works with any 100K+ context window LLM.
+**Public URL**: `https://main.klappy-dev-agent-skill.pages.dev/v1.1/prd-guide-pack.md`
 
 ## Quick Start
 
-Copy the pack from `v1.1/dist/prd-guide-pack.md` and paste it into your AI context (Claude Code, Cursor, etc.). The AI will guide you through creating an ODD-aligned PRD.
+**Option 1: Public URL (no clone required)**
+```
+https://main.klappy-dev-agent-skill.pages.dev/latest/prd-guide-pack.md
+```
 
-See [v1.1/dist/README.md](v1.1/dist/README.md) for detailed usage instructions.
+**Option 2: Local file**
+Copy the pack from `v1.1/dist/prd-guide-pack.md` and paste it into your AI context.
+
+See the [usage README](https://main.klappy-dev-agent-skill.pages.dev/v1.1/README.md) for detailed instructions.
 
 ## Lane Files
 
@@ -30,7 +36,7 @@ See [v1.1/dist/README.md](v1.1/dist/README.md) for detailed usage instructions.
 |---------|--------|-------------|
 | [v1.1/](v1.1/) | Champion | Core PRD guide pack |
 | [v1.2/](v1.2/) | Failed | Distribution attempt (PRD conflict) |
-| [v1.2.1/](v1.2.1/) | In Progress | Patched distribution approach |
+| [v1.2.1/](v1.2.1/) | Champion | Lane-owned Cloudflare Pages deployment |
 
 ## Structure
 
