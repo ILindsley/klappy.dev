@@ -3,8 +3,9 @@
 /**
  * Book Export Script
  * 
- * Combines all markdown and key documentation files into a single
- * book-format export file for easy sharing/uploading.
+ * Combines markdown documentation files into a single book-format export
+ * for easy sharing/uploading. Focuses on guidance docs while excluding
+ * implementation details (attempts, version folders, source code).
  */
 
 import { readdir, readFile } from 'fs/promises';
@@ -31,15 +32,22 @@ const EXCLUDE_PATHS = new Set([
   '.cursor/plans', // Ephemeral plan files, exclude
 ]);
 
-// File extensions to include
+// Patterns to exclude lane implementations (keep guidance, exclude execution work)
+// - attempts/ folders contain implementation work, not guidance
+// - src/ folders contain code, not documentation
+// - Version folders (v1.1, v1.2.3, etc.) in products are specific implementations
+const EXCLUDE_LANE_PATTERNS = {
+  // Any path containing /attempts/ anywhere
+  attempts: /\/attempts\//,
+  // Any path containing /src/ anywhere  
+  src: /\/src\//,
+  // Version folders in products: products/*/v followed by digits
+  versionFolders: /^products\/[^/]+\/v\d+/,
+};
+
+// File extensions to include (markdown only for clean documentation export)
 const INCLUDE_EXTENSIONS = new Set([
   '.md',
-  '.txt',
-  '.js',
-  '.jsx',
-  '.json', // Include JSON for contracts/manifests
-  '.html', // Include HTML for reference
-  '.css',
 ]);
 
 // Files to exclude
@@ -82,6 +90,14 @@ function shouldExclude(filePath) {
     }
   }
   
+  // Check for lane implementation patterns (exclude attempts/, src/, version folders)
+  const pathWithSlashes = '/' + normalizedPath + '/';
+  for (const pattern of Object.values(EXCLUDE_LANE_PATTERNS)) {
+    if (pattern.test(pathWithSlashes) || pattern.test(normalizedPath)) {
+      return true;
+    }
+  }
+  
   const fileName = parts[parts.length - 1];
   if (EXCLUDE_FILES.has(fileName)) return true;
   return false;
@@ -100,7 +116,8 @@ function getExtension(filePath) {
 function shouldInclude(filePath) {
   if (shouldExclude(filePath)) return false;
   const ext = getExtension(filePath);
-  return INCLUDE_EXTENSIONS.has(ext) || ext === '';
+  // Only include files with extensions in the allowed list (no extensionless files)
+  return INCLUDE_EXTENSIONS.has(ext);
 }
 
 /**
@@ -276,8 +293,9 @@ async function exportBook() {
   bookContent += formatSectionHeader('klappy.dev - Complete Book Export', 1);
   bookContent += `\nGenerated: ${new Date().toISOString()}\n`;
   bookContent += `Total Files: ${filteredFiles.length}\n`;
-  bookContent += `\nThis is a complete export of all documentation, code, and content files\n`;
-  bookContent += `from the klappy.dev repository, organized by section.\n`;
+  bookContent += `\nThis is a documentation export of all markdown files from the klappy.dev\n`;
+  bookContent += `repository. It includes lane guidance docs but excludes implementation\n`;
+  bookContent += `details (attempts, version folders, source code).\n`;
   
   // Table of contents
   bookContent += formatSectionHeader('Table of Contents', 2);
