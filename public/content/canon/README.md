@@ -35,7 +35,6 @@ The Canon exists so that reasoning does not have to be repeated.
 
 | Folder | Purpose |
 |--------|---------|
-| `odd/` | Outcomes-Driven Development philosophy and appendices. See [odd/README.md](./odd/README.md) |
 | `meta/` | Metadata and pack configuration. |
 | `_compiled/` | Compiled outputs (derived, wipeable). |
 
@@ -45,7 +44,7 @@ The Canon exists so that reasoning does not have to be repeated.
 
 1. **`constraints.md`** — What must be true for this work to make sense?
 2. **`definition-of-done.md`** — When can work honestly be called done?
-3. **`odd/manifesto.md`** — Why this approach exists.
+3. **`/odd/manifesto.md`** — Why this approach exists.
 
 These three documents anchor everything else.
 
@@ -108,7 +107,7 @@ Prefer stable file and URI naming over clever branding. Rename rarely.
 First-person documents may be consumed as-is or translated by clients. The Canon itself does not require a specific rendering voice.
 
 **5. Multi-Lane PRD Architecture**
-PRDs are organized into independent product lanes. Each lane has its own active PRD, attempts, and lifecycle. Lanes share canon, not lifecycle. See `odd/appendices/product-lanes.md` for the full model.
+PRDs are organized into independent product lanes. Each lane has its own active PRD, attempts, and lifecycle. Lanes share canon, not lifecycle. See `/docs/appendices/product-lanes.md` for the full model.
 
 ---
 
@@ -170,7 +169,15 @@ When building a guide pack, include:
 - Specific documents needed for the pack's purpose
 - Subfolder READMEs for scannable summaries without including all files
 
-See `odd/appendices/compilation.md` for the compilation model.
+See `/docs/appendices/compilation.md` for the compilation model.
+
+---
+
+## 🔗 See Also
+
+- [ODD (Universal Principles)](/odd/README.md) — Timeless methodology that Canon derives from
+- [Implementation Docs](/docs/README.md) — How klappy.dev implements Canon
+- [Three-Tier Hierarchy](/odd/decisions/D0001-three-tier-conceptual-hierarchy.md) — Why ODD, Canon, and Docs are separate
 
 ---
 

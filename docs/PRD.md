@@ -1,4 +1,15 @@
-# PRD Identity
+---
+uri: klappy://docs/prd
+title: "Website PRD v0.3"
+audience: docs
+exposure: nav
+tier: 1
+voice: neutral
+stability: evolving
+tags: ["docs", "implementation", "prd", "website", "requirements"]
+---
+
+# 📋 PRD Identity
 
 | Field                       | Value       |
 | --------------------------- | ----------- |

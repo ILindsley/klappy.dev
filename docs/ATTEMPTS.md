@@ -1,3 +1,14 @@
+---
+uri: klappy://docs/attempts
+title: "Attempt Lifecycle"
+audience: docs
+exposure: nav
+tier: 1
+voice: neutral
+stability: stable
+tags: ["docs", "implementation", "attempts", "lifecycle", "orientation"]
+---
+
 # 🧭 Attempt Lifecycle — Orientation
 
 > **If the repository is dirty, conclusions drawn from it are invalid.**

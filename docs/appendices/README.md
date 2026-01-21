@@ -9,7 +9,7 @@ stability: evolving
 tags: ["docs", "appendices", "implementation", "reference", "index"]
 ---
 
-# Implementation Appendices
+# 📚 Implementation Appendices
 
 Implementation-specific appendices that document how klappy.dev applies ODD concepts. These are reference implementation details, not portable methodology.
 
@@ -17,7 +17,7 @@ Implementation-specific appendices that document how klappy.dev applies ODD conc
 
 ---
 
-## Contents
+## 📁 Contents
 
 ### Attempt & Evidence
 
@@ -59,7 +59,7 @@ Implementation-specific appendices that document how klappy.dev applies ODD conc
 
 ---
 
-## What Makes These Implementation-Specific
+## 🔧 What Makes These Implementation-Specific
 
 These appendices contain:
 
@@ -71,7 +71,7 @@ These appendices contain:
 
 ---
 
-## When to Read What
+## 🧭 When to Read What
 
 **Setting up a new lane?** Start with `product-lanes.md` and `lane-implementation-surfaces.md`.
 
@@ -83,11 +83,11 @@ These appendices contain:
 
 ---
 
-## Relationship to Canon Appendices
+## 🔗 Relationship to ODD Appendices
 
-| Canon Appendix | Implementation Appendix | Relationship |
-|----------------|------------------------|--------------|
-| `evolution-not-automation.md` | `attempt-lifecycle.md` | Philosophy → Procedure |
-| `failure-driven-modularity.md` | `product-lanes.md` | Concept → Structure |
-| `quantum-development.md` | `attempt-lifecycle.md` | Theory → Practice |
-| `alignment-reviews.md` | `repo-truth-audit.md` | What to review → How to audit |
+| ODD Appendix | Implementation Appendix | Relationship |
+|--------------|------------------------|--------------|
+| `/odd/appendices/evolution-not-automation.md` | `attempt-lifecycle.md` | Philosophy → Procedure |
+| `/odd/appendices/failure-driven-modularity.md` | `product-lanes.md` | Concept → Structure |
+| `/odd/appendices/quantum-development.md` | `attempt-lifecycle.md` | Theory → Practice |
+| `/odd/appendices/alignment-reviews.md` | `repo-truth-audit.md` | What to review → How to audit |

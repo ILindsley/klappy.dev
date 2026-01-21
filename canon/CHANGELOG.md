@@ -16,6 +16,40 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.6.1 — 2026-01-21
+
+**Docs Epistemic Hygiene**
+
+This release brings `/docs/` into full alignment with the three-tier hierarchy, adding consistent frontmatter, correct tier labels, and emoji standardization across all documentation files.
+
+### Fixed
+
+- **canon/README.md** — Removed broken `/canon/odd/` subfolder reference (ODD is now at root level), fixed stale paths to `/docs/appendices/`, added "See Also" section linking to `/odd/`
+- **docs/appendices/README.md** — Changed "Canon Appendix" to "ODD Appendix", fixed paths to use absolute `/odd/appendices/` references
+- **docs/decisions/README.md** — Changed "Canon Document" tier labels to correctly identify ODD vs Canon vs Docs tiers
+
+### Changed
+
+- **docs/TRUTH_MAP.md** — Complete rewrite with frontmatter, three-tier hierarchy section explaining ODD/Canon/Docs authoritative structure, updated sources distinguishing ODD vs Docs decisions
+- **docs/README.md** — Added emoji headers throughout for visual hierarchy
+
+### Added
+
+- **YAML frontmatter** to 11 workflow docs that were missing it:
+  - `ATTEMPTS.md`, `AGENT_KICKOFF.md`, `AGENT_ENTRYPOINT.md`, `ATTEMPT_KICKOFF.md`
+  - `PREVIEW.md`, `CLOUDFLARE_CONFIG.md`, `DISTILLATION_CLASSIFICATION.md`
+  - `PRD.md`, `ATTEMPT_RECORD_PACK.md`, `WHAT_THIS_REPO_IS_NOT.md`, `concept.md`
+- **Emoji headers** standardized across docs for visual scanning
+
+### Philosophy
+
+- All `/docs/` files now have consistent YAML frontmatter (uri, title, audience, tier, stability, tags)
+- Tier labels correctly distinguish ODD (universal) from Canon (program) from Docs (implementation)
+- Cross-references correctly point to the right tier
+- Emoji usage is consistent with files like `ATTEMPTS.md` and `CLOUDFLARE_CONFIG.md`
+
+---
+
 ## 0.6.0 — 2026-01-21
 
 **Three-Tier Hierarchy & ODD Elevation**

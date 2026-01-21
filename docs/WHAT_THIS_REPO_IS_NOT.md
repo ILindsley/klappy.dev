@@ -1,4 +1,15 @@
-# What This Repo Is Not
+---
+uri: klappy://docs/what-this-repo-is-not
+title: "What This Repo Is Not"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["docs", "implementation", "scope", "boundaries", "philosophy"]
+---
+
+# 🚫 What This Repo Is Not
 
 This repository is intentionally not optimized for "everything in one place."
 

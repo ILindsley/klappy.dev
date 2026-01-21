@@ -1,3 +1,14 @@
+---
+uri: klappy://docs/attempt-kickoff
+title: "Attempt Workflow (Human)"
+audience: docs
+exposure: nav
+tier: 1
+voice: neutral
+stability: stable
+tags: ["docs", "implementation", "attempts", "workflow", "human"]
+---
+
 # 🚀 Attempt Workflow (Human)
 
 This document describes the **human workflow** for running attempts.

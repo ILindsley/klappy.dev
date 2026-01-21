@@ -9,15 +9,15 @@ stability: evolving
 tags: ["docs", "decisions", "adr", "implementation", "reference", "index"]
 ---
 
-# Implementation Decision Log
+# 📜 Implementation Decision Log
 
 Architecture Decision Records (ADRs) specific to the klappy.dev repository implementation.
 
-> **Relationship to Canon:** Portable decision-making principles live in `/canon/`. These decisions document specific choices made for this repository's implementation.
+> **Relationship to ODD/Canon:** Universal principles live in `/odd/`. Program constraints live in `/canon/`. These decisions document specific choices made for this repository's implementation.
 
 ---
 
-## Active Decisions
+## ✅ Active Decisions
 
 ### Branch & Deploy Model
 
@@ -55,7 +55,7 @@ Architecture Decision Records (ADRs) specific to the klappy.dev repository imple
 
 ---
 
-## What Makes These Implementation-Specific
+## 🔧 What Makes These Implementation-Specific
 
 These decisions reference:
 
@@ -67,7 +67,7 @@ These decisions reference:
 
 ---
 
-## How Decisions Are Made
+## 🔄 How Decisions Are Made
 
 1. **During an attempt**: Agent notes "Decision Delta" in `ATTEMPT.md`
 2. **After the attempt**: Human or librarian promotes durable decisions here
@@ -75,7 +75,7 @@ These decisions reference:
 
 ---
 
-## Decision File Template
+## 📝 Decision File Template
 
 Each decision file follows this structure:
 
@@ -114,18 +114,19 @@ Each decision file follows this structure:
 
 ---
 
-## Deprecated Decisions
+## 🚫 Deprecated Decisions
 
 _None yet._
 
 ---
 
-## Relationship to Canon
+## 🔗 Relationship to ODD and Canon
 
-Canon contains portable methodology. These decisions are the klappy.dev-specific application of that methodology.
+ODD contains universal principles. Canon contains program constraints. These decisions are the klappy.dev-specific application of those higher-level documents.
 
-| Canon Document | Related Decisions |
-|----------------|-------------------|
-| `/odd/contract.md` | D0009, D0011, D0012 |
-| `/docs/appendices/epochs.md` | D0012, D0014 |
-| `/canon/constraints.md` | All decisions respect constraints |
+| Document | Tier | Related Decisions |
+|----------|------|-------------------|
+| `/odd/contract.md` | ODD | D0009, D0011, D0012 |
+| `/odd/decisions/D0001-three-tier-conceptual-hierarchy.md` | ODD | All (tier separation) |
+| `/canon/constraints.md` | Canon | All decisions respect constraints |
+| `/docs/appendices/epochs.md` | Docs | D0012, D0014 |

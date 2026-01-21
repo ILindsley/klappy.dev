@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-21T14:49:45.278Z
-Total Files: 142
+Generated: 2026-01-21T15:10:47.972Z
+Total Files: 143
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -20,7 +20,7 @@ details (attempts, version folders, source code).
 - **Root** (1 files)
 - **About** (5 files)
 - **Canon** (9 files)
-- **Documentation** (50 files)
+- **Documentation** (51 files)
 - **Infrastructure** (4 files)
 - **Interfaces & Contracts** (6 files)
 - **ODD (Outcomes-Driven Development)** (18 files)
@@ -469,6 +469,17 @@ If you want to understand the rules:
 📄 File: docs/AGENT_ENTRYPOINT.md
 --------------------------------------------------------------------------------
 
+---
+uri: klappy://docs/agent-entrypoint
+title: "Agent Entry Point"
+audience: docs
+exposure: nav
+tier: 1
+voice: neutral
+stability: stable
+tags: ["docs", "implementation", "agent", "entrypoint", "redirect"]
+---
+
 # 🧭 Agent Entry Point
 
 **If you are an AI agent starting an attempt, go directly to:**
@@ -512,7 +523,18 @@ Human workflow lives at `/docs/ATTEMPT_KICKOFF.md`.
 📄 File: docs/AGENT_KICKOFF.md
 --------------------------------------------------------------------------------
 
-# Agent Kickoff — Canonical Entry Point
+---
+uri: klappy://docs/agent-kickoff
+title: "Agent Kickoff"
+audience: docs
+exposure: nav
+tier: 1
+voice: neutral
+stability: stable
+tags: ["docs", "implementation", "agent", "kickoff", "entry-point"]
+---
+
+# 🤖 Agent Kickoff — Canonical Entry Point
 
 **This file is the ONLY authorized entry point for agent attempts.**
 
@@ -679,6 +701,17 @@ This file IS the prompt. Follow it exactly.
 --------------------------------------------------------------------------------
 📄 File: docs/ATTEMPTS.md
 --------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/attempts
+title: "Attempt Lifecycle"
+audience: docs
+exposure: nav
+tier: 1
+voice: neutral
+stability: stable
+tags: ["docs", "implementation", "attempts", "lifecycle", "orientation"]
+---
 
 # 🧭 Attempt Lifecycle — Orientation
 
@@ -1013,6 +1046,17 @@ The attempt folder contains everything needed:
 📄 File: docs/ATTEMPT_KICKOFF.md
 --------------------------------------------------------------------------------
 
+---
+uri: klappy://docs/attempt-kickoff
+title: "Attempt Workflow (Human)"
+audience: docs
+exposure: nav
+tier: 1
+voice: neutral
+stability: stable
+tags: ["docs", "implementation", "attempts", "workflow", "human"]
+---
+
 # 🚀 Attempt Workflow (Human)
 
 This document describes the **human workflow** for running attempts.
@@ -1277,7 +1321,18 @@ See `/docs/appendices/online-evidence.md` for the full requirement.
 📄 File: docs/ATTEMPT_RECORD_PACK.md
 --------------------------------------------------------------------------------
 
-# Attempt Record Packs
+---
+uri: klappy://docs/attempt-record-pack
+title: "Attempt Record Packs"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["docs", "implementation", "attempts", "records", "evidence"]
+---
+
+# 📦 Attempt Record Packs
 
 An attempt produces immutable evidence and metadata that MAY be merged
 before a winner is chosen.
@@ -1321,6 +1376,17 @@ The winning attempt's source code is merged separately via `champion_merge_sha`.
 --------------------------------------------------------------------------------
 📄 File: docs/CLOUDFLARE_CONFIG.md
 --------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/cloudflare-config
+title: "Cloudflare Pages Configuration"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["docs", "implementation", "cloudflare", "deploy", "configuration"]
+---
 
 # ☁️ Cloudflare Pages Configuration
 
@@ -1471,7 +1537,18 @@ This keeps the system antifragile — branch naming can drift without breaking p
 📄 File: docs/DISTILLATION_CLASSIFICATION.md
 --------------------------------------------------------------------------------
 
-# Canon Distillation Classification
+---
+uri: klappy://docs/distillation-classification
+title: "Canon Distillation Classification"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["docs", "implementation", "distillation", "classification", "archive"]
+---
+
+# 📊 Canon Distillation Classification
 
 **Status: COMPLETED (with corrections)**
 
@@ -1610,7 +1687,18 @@ This document tracks the classification of canon files for the progressive disti
 📄 File: docs/PRD.md
 --------------------------------------------------------------------------------
 
-# PRD Identity
+---
+uri: klappy://docs/prd
+title: "Website PRD v0.3"
+audience: docs
+exposure: nav
+tier: 1
+voice: neutral
+stability: evolving
+tags: ["docs", "implementation", "prd", "website", "requirements"]
+---
+
+# 📋 PRD Identity
 
 | Field                       | Value       |
 | --------------------------- | ----------- |
@@ -2842,7 +2930,18 @@ The website lane MUST support generating a wipeable "visitor pack" used for prog
 📄 File: docs/PREVIEW.md
 --------------------------------------------------------------------------------
 
-# Previewing Lanes and Attempts
+---
+uri: klappy://docs/preview
+title: "Previewing Lanes and Attempts"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["docs", "implementation", "preview", "cloudflare", "local"]
+---
+
+# 👁️ Previewing Lanes and Attempts
 
 > **Scope:** Local + Cloudflare preview workflows for lanes and attempts.
 
@@ -2941,29 +3040,205 @@ Production deploys from the `prod` branch to the primary domain.
 
 
 --------------------------------------------------------------------------------
+📄 File: docs/README.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs
+title: "Implementation Documentation"
+audience: docs
+exposure: nav
+tier: 1
+voice: neutral
+stability: evolving
+tags: ["docs", "implementation", "reference", "index"]
+---
+
+# 📖 Implementation Documentation
+
+> How klappy.dev implements ODD. This is the reference implementation, not the philosophy.
+
+## 🗺️ Where You Are in the Hierarchy
+
+```
+/odd/     ← Universal principles (timeless, product-agnostic)
+/canon/   ← Program constraints (shared rules across products)
+/docs/    ← YOU ARE HERE: Implementation details
+```
+
+**The rule:** ODD explains *why*. Canon explains *what rules we share*. Docs explains *how we do it here*.
+
+---
+
+## ✅ What Belongs in /docs/
+
+| Content Type | Examples | Why Here |
+|--------------|----------|----------|
+| CLI commands | `attempt:register`, `attempt:nuke` | Tool-specific |
+| Specific paths | `/products/<lane>/attempts/...` | Repo-specific |
+| Cloudflare config | Branch deploys, preview URLs | Vendor-specific |
+| Lane names | `website`, `ai-navigation`, `agent-skill` | Instance-specific |
+| Epoch definitions | E0001, E0002, E0003 | Instance-specific |
+| Tooling runbooks | ATTEMPTS.md, PREVIEW.md | Procedural |
+
+---
+
+## 🚫 What Does NOT Belong in /docs/
+
+| Content Type | Where It Goes | Why |
+|--------------|---------------|-----|
+| "Durable thinking is scarce" | `/odd/` | Universal principle |
+| "Evidence over assertion" | `/odd/` | Universal principle |
+| Definition of Done | `/canon/` | Shared across all products |
+| Decision rules | `/canon/` | Shared across all products |
+
+**Litmus test:**
+1. Would this still be true in 10 years? → `/odd/`
+2. Should all products in this program obey it? → `/canon/`
+3. Is this about how *we* do it *here*? → `/docs/` ✓
+
+---
+
+## 📁 Contents
+
+### Workflows & Procedures
+
+| File | Purpose |
+|------|---------|
+| [ATTEMPTS.md](./ATTEMPTS.md) | Attempt lifecycle, CLI commands, artifact locations |
+| [ATTEMPT_KICKOFF.md](./ATTEMPT_KICKOFF.md) | Human workflow for starting attempts |
+| [AGENT_KICKOFF.md](./AGENT_KICKOFF.md) | Canonical agent entry point |
+| [PREVIEW.md](./PREVIEW.md) | Local and Cloudflare preview guide |
+| [CLOUDFLARE_CONFIG.md](./CLOUDFLARE_CONFIG.md) | Deploy configuration |
+
+### Reference Documents
+
+| File | Purpose |
+|------|---------|
+| [TRUTH_MAP.md](./TRUTH_MAP.md) | Authoritative source for each domain |
+| [PRD.md](./PRD.md) | PRD orientation and routing |
+| [WHAT_THIS_REPO_IS_NOT.md](./WHAT_THIS_REPO_IS_NOT.md) | Scope boundaries |
+
+### Subfolders
+
+| Folder | Purpose | Count |
+|--------|---------|-------|
+| [appendices/](./appendices/) | Implementation-specific appendices | 17 files |
+| [decisions/](./decisions/) | Implementation decision records (ADRs) | 14 files |
+| [PRD/](./PRD/) | Lane PRDs and template | 3 files |
+| [infra/](./infra/) | Infrastructure documentation | 1 file |
+
+---
+
+## 🔗 Relationship to ODD & Canon
+
+```
+┌─────────────────────────────────────────────────┐
+│  ODD (/odd/)                                    │
+│  Universal principles                           │
+│  - progressive-elevation.md (portability ladder)│
+│  - quantum-development.md                       │
+│  - evolution-not-automation.md                  │
+└─────────────────────────────────────────────────┘
+          │
+          │ derives
+          ▼
+┌─────────────────────────────────────────────────┐
+│  Canon (/canon/)                                │
+│  Program constraints                            │
+│  - constraints.md                               │
+│  - definition-of-done.md                        │
+│  - decision-rules.md                            │
+└─────────────────────────────────────────────────┘
+          │
+          │ implements
+          ▼
+┌─────────────────────────────────────────────────┐
+│  Docs (/docs/)  ← YOU ARE HERE                  │
+│  Implementation details                         │
+│  - ATTEMPTS.md (CLI procedures)                 │
+│  - appendices/epochs.md (E0001-E0003)           │
+│  - decisions/D0001-*.md (klappy.dev choices)    │
+└─────────────────────────────────────────────────┘
+```
+
+---
+
+## 🧹 Epistemic Hygiene Rules
+
+1. **Docs can rot.** Implementation details change frequently. That's fine.
+2. **Don't redefine Canon here.** If you find yourself writing a principle, it probably belongs in `/canon/` or `/odd/`.
+3. **Cross-reference up, not down.** Docs references ODD/Canon. ODD/Canon shouldn't reference specific docs paths.
+4. **Keep it procedural.** Docs answers "how do I..." not "why should I..."
+
+---
+
+## 👀 See Also
+
+- [Three-Tier Hierarchy](/odd/decisions/D0001-three-tier-conceptual-hierarchy.md)
+- [Progressive Elevation](/odd/appendices/progressive-elevation.md)
+- [ODD Contract](/odd/contract.md)
+- [Canon Index](/canon/README.md)
+
+
+
+--------------------------------------------------------------------------------
 📄 File: docs/TRUTH_MAP.md
 --------------------------------------------------------------------------------
 
-# Truth Map
+---
+uri: klappy://docs/truth-map
+title: "Truth Map"
+audience: docs
+exposure: nav
+tier: 1
+voice: neutral
+stability: stable
+tags: ["docs", "implementation", "truth", "authority", "reference"]
+---
+
+# 🗺️ Truth Map
 
 > **Purpose:** This document identifies the single authoritative source for each category of truth in this repository. If something is not listed here, it is not authoritative.
 
 ---
 
-## Authoritative Sources
+## 🏛️ Three-Tier Authority Structure
 
-| Domain | Authoritative Source | Notes |
-|--------|---------------------|-------|
-| **Deploy workflow** | `/docs/CLOUDFLARE_CONFIG.md` | Branch roles, promotion, Cloudflare setup |
-| **Attempt workflow** | `/docs/ATTEMPTS.md` | Lifecycle, META schema, finalization |
-| **Agent kickoff** | `/docs/PROMPT_ATTEMPT_KICKOFF.txt` | The contract agents receive |
-| **Active PRD** | `/docs/PRD.md` | Current hypothesis being tested |
-| **Content manifest** | `/public/content/manifest.json` | Generated from per-file frontmatter; what exists, disclosure tiers, UI spine |
-| **Decision log** | `/odd/decisions/` | Durable decisions (ADR-lite) |
+Truth in this repository is organized into three tiers with different decay rates:
+
+| Tier | Location | Contains | Decay Rate |
+|------|----------|----------|------------|
+| **ODD** | `/odd/` | Universal principles (timeless, product-agnostic) | Almost never |
+| **Canon** | `/canon/` | Program-level constraints (shared rules) | Carefully |
+| **Docs** | `/docs/` | Implementation details (this instance) | Freely |
+
+**The litmus test:**
+1. Would this still be true in 10 years? → **ODD**
+2. Should all products in this program obey it? → **Canon**
+3. Is this about how *we* do it *here*? → **Docs**
+
+See [D0001: Three-Tier Conceptual Hierarchy](/odd/decisions/D0001-three-tier-conceptual-hierarchy.md) for the full decision.
 
 ---
 
-## Branch Roles (Canonical)
+## 📋 Authoritative Sources
+
+| Domain | Authoritative Source | Notes |
+|--------|---------------------|-------|
+| **Universal methodology** | `/odd/` | ODD principles, portable across repos |
+| **Program constraints** | `/canon/` | Shared rules (definition-of-done, decision-rules) |
+| **Deploy workflow** | `/docs/CLOUDFLARE_CONFIG.md` | Branch roles, promotion, Cloudflare setup |
+| **Attempt workflow** | `/docs/ATTEMPTS.md` | Lifecycle, META schema, finalization |
+| **Agent kickoff** | `/docs/AGENT_KICKOFF.md` | Canonical agent entry point |
+| **Active PRDs** | `/docs/PRD/<lane>/PRD.md` | Current hypothesis per lane |
+| **Content manifest** | `/public/content/manifest.json` | Generated; what exists, disclosure tiers |
+| **ODD decisions** | `/odd/decisions/` | Universal methodology decisions |
+| **Implementation decisions** | `/docs/decisions/` | klappy.dev-specific ADRs |
+
+---
+
+## 🌿 Branch Roles (Canonical)
 
 | Branch | Role | Deploys To |
 |--------|------|------------|
@@ -2971,25 +3246,25 @@ Production deploys from the `prod` branch to the primary domain.
 | `main` | **Lab notebook** — experiments, history, artifacts | Preview only |
 | `*` (any other) | **Attempt sandboxes** — ephemeral agent workspaces | Preview only |
 
-> **Invariant:** You never nuke `prod`. You may nuke `/src` on agent branches freely.
+> **Invariant:** You never nuke `prod`. You may nuke `products/<lane>/src` on agent branches freely.
 
 ---
 
-## Current Attempt Model (Canonical)
+## 🔄 Current Attempt Model (Canonical)
 
 | Step | Command | What It Does |
 |------|---------|--------------|
-| 1 | `attempt:register` | Captures provenance (agent, model, tool, git SHA) |
-| 2 | `attempt:nuke` | Deletes `/src` — guarantees blank slate |
+| 1 | `attempt:register --lane <lane>` | Captures provenance (agent, model, tool, git SHA, lane) |
+| 2 | `attempt:nuke --lane <lane>` | Deletes `products/<lane>/src/` — guarantees blank slate |
 | 3 | (agent builds) | Implementation from scratch |
-| 4 | `attempt:finalize` | Assigns `attempt-001`, `attempt-002`, etc. |
-| 5 | `attempt:promote` | Merges champion to `main`, fast-forwards `prod` |
+| 4 | `attempt:finalize --lane <lane>` | Assigns `attempt-001`, `attempt-002`, etc. |
+| 5 | `attempt:promote --lane <lane>` | Merges champion to `main`, fast-forwards `prod` |
 
 > **Invariant:** Register first to capture provenance. Nuke immediately after to guarantee independence.
 
 ---
 
-## Deprecated Terminology (Do Not Use)
+## 🚫 Deprecated Terminology (Do Not Use)
 
 | Old Term | Replaced By | Notes |
 |----------|-------------|-------|
@@ -2997,19 +3272,23 @@ Production deploys from the `prod` branch to the primary domain.
 | `attempt:reserve` | `attempt:register` | Registration captures provenance, not just a number |
 | `attempt:reset` | `attempt:nuke` | Nuke is explicit; reset was ambiguous |
 | "main is production" | "`prod` is production" | D0001 decision |
+| `/canon/odd/` | `/odd/` | ODD elevated to root level (2.1.0) |
 
 ---
 
-## How to Use This Document
+## 📖 How to Use This Document
 
 1. **If two docs conflict**, the one listed in "Authoritative Sources" wins.
 2. **If you find drift**, fix it or flag it — don't propagate the error.
 3. **If you're adding new truth**, update the authoritative source, not a satellite doc.
+4. **If unsure which tier**, apply the litmus test above.
 
 ---
 
-## See Also
+## 🔗 See Also
 
+- [Three-Tier Hierarchy](/odd/decisions/D0001-three-tier-conceptual-hierarchy.md)
+- [ODD Contract](/odd/contract.md) — Version 2.1.0
 - [D0001: prod Branch Is Production](/docs/decisions/D0001-prod-branch-is-production.md)
 - [D0007: Branch Names Are Convenience](/docs/decisions/D0007-branch-names-are-convenience.md)
 - [D0008: Register Before Nuke](/docs/decisions/D0008-register-before-nuke.md)
@@ -3020,7 +3299,18 @@ Production deploys from the `prod` branch to the primary domain.
 📄 File: docs/WHAT_THIS_REPO_IS_NOT.md
 --------------------------------------------------------------------------------
 
-# What This Repo Is Not
+---
+uri: klappy://docs/what-this-repo-is-not
+title: "What This Repo Is Not"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["docs", "implementation", "scope", "boundaries", "philosophy"]
+---
+
+# 🚫 What This Repo Is Not
 
 This repository is intentionally not optimized for "everything in one place."
 
@@ -3098,7 +3388,7 @@ stability: evolving
 tags: ["docs", "appendices", "implementation", "reference", "index"]
 ---
 
-# Implementation Appendices
+# 📚 Implementation Appendices
 
 Implementation-specific appendices that document how klappy.dev applies ODD concepts. These are reference implementation details, not portable methodology.
 
@@ -3106,7 +3396,7 @@ Implementation-specific appendices that document how klappy.dev applies ODD conc
 
 ---
 
-## Contents
+## 📁 Contents
 
 ### Attempt & Evidence
 
@@ -3148,7 +3438,7 @@ Implementation-specific appendices that document how klappy.dev applies ODD conc
 
 ---
 
-## What Makes These Implementation-Specific
+## 🔧 What Makes These Implementation-Specific
 
 These appendices contain:
 
@@ -3160,7 +3450,7 @@ These appendices contain:
 
 ---
 
-## When to Read What
+## 🧭 When to Read What
 
 **Setting up a new lane?** Start with `product-lanes.md` and `lane-implementation-surfaces.md`.
 
@@ -3172,14 +3462,14 @@ These appendices contain:
 
 ---
 
-## Relationship to Canon Appendices
+## 🔗 Relationship to ODD Appendices
 
-| Canon Appendix | Implementation Appendix | Relationship |
-|----------------|------------------------|--------------|
-| `evolution-not-automation.md` | `attempt-lifecycle.md` | Philosophy → Procedure |
-| `failure-driven-modularity.md` | `product-lanes.md` | Concept → Structure |
-| `quantum-development.md` | `attempt-lifecycle.md` | Theory → Practice |
-| `alignment-reviews.md` | `repo-truth-audit.md` | What to review → How to audit |
+| ODD Appendix | Implementation Appendix | Relationship |
+|--------------|------------------------|--------------|
+| `/odd/appendices/evolution-not-automation.md` | `attempt-lifecycle.md` | Philosophy → Procedure |
+| `/odd/appendices/failure-driven-modularity.md` | `product-lanes.md` | Concept → Structure |
+| `/odd/appendices/quantum-development.md` | `attempt-lifecycle.md` | Theory → Practice |
+| `/odd/appendices/alignment-reviews.md` | `repo-truth-audit.md` | What to review → How to audit |
 
 
 
@@ -6232,6 +6522,17 @@ See:
 📄 File: docs/concept.md
 --------------------------------------------------------------------------------
 
+---
+uri: klappy://docs/concept
+title: "Concept Snapshot"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["docs", "implementation", "concept", "overview", "problem-statement"]
+---
+
 # 🧠 Concept Snapshot
 
 > **Working Title:** Outcomes-Driven Canon + Evidence-Based Agents
@@ -7804,15 +8105,15 @@ stability: evolving
 tags: ["docs", "decisions", "adr", "implementation", "reference", "index"]
 ---
 
-# Implementation Decision Log
+# 📜 Implementation Decision Log
 
 Architecture Decision Records (ADRs) specific to the klappy.dev repository implementation.
 
-> **Relationship to Canon:** Portable decision-making principles live in `/canon/`. These decisions document specific choices made for this repository's implementation.
+> **Relationship to ODD/Canon:** Universal principles live in `/odd/`. Program constraints live in `/canon/`. These decisions document specific choices made for this repository's implementation.
 
 ---
 
-## Active Decisions
+## ✅ Active Decisions
 
 ### Branch & Deploy Model
 
@@ -7850,7 +8151,7 @@ Architecture Decision Records (ADRs) specific to the klappy.dev repository imple
 
 ---
 
-## What Makes These Implementation-Specific
+## 🔧 What Makes These Implementation-Specific
 
 These decisions reference:
 
@@ -7862,7 +8163,7 @@ These decisions reference:
 
 ---
 
-## How Decisions Are Made
+## 🔄 How Decisions Are Made
 
 1. **During an attempt**: Agent notes "Decision Delta" in `ATTEMPT.md`
 2. **After the attempt**: Human or librarian promotes durable decisions here
@@ -7870,7 +8171,7 @@ These decisions reference:
 
 ---
 
-## Decision File Template
+## 📝 Decision File Template
 
 Each decision file follows this structure:
 
@@ -7909,21 +8210,22 @@ Each decision file follows this structure:
 
 ---
 
-## Deprecated Decisions
+## 🚫 Deprecated Decisions
 
 _None yet._
 
 ---
 
-## Relationship to Canon
+## 🔗 Relationship to ODD and Canon
 
-Canon contains portable methodology. These decisions are the klappy.dev-specific application of that methodology.
+ODD contains universal principles. Canon contains program constraints. These decisions are the klappy.dev-specific application of those higher-level documents.
 
-| Canon Document | Related Decisions |
-|----------------|-------------------|
-| `/odd/contract.md` | D0009, D0011, D0012 |
-| `/docs/appendices/epochs.md` | D0012, D0014 |
-| `/canon/constraints.md` | All decisions respect constraints |
+| Document | Tier | Related Decisions |
+|----------|------|-------------------|
+| `/odd/contract.md` | ODD | D0009, D0011, D0012 |
+| `/odd/decisions/D0001-three-tier-conceptual-hierarchy.md` | ODD | All (tier separation) |
+| `/canon/constraints.md` | Canon | All decisions respect constraints |
+| `/docs/appendices/epochs.md` | Docs | D0012, D0014 |
 
 
 
@@ -8026,6 +8328,40 @@ This changelog tracks changes to the **Canon pack** as a whole.
 
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
+
+## 0.6.1 — 2026-01-21
+
+**Docs Epistemic Hygiene**
+
+This release brings `/docs/` into full alignment with the three-tier hierarchy, adding consistent frontmatter, correct tier labels, and emoji standardization across all documentation files.
+
+### Fixed
+
+- **canon/README.md** — Removed broken `/canon/odd/` subfolder reference (ODD is now at root level), fixed stale paths to `/docs/appendices/`, added "See Also" section linking to `/odd/`
+- **docs/appendices/README.md** — Changed "Canon Appendix" to "ODD Appendix", fixed paths to use absolute `/odd/appendices/` references
+- **docs/decisions/README.md** — Changed "Canon Document" tier labels to correctly identify ODD vs Canon vs Docs tiers
+
+### Changed
+
+- **docs/TRUTH_MAP.md** — Complete rewrite with frontmatter, three-tier hierarchy section explaining ODD/Canon/Docs authoritative structure, updated sources distinguishing ODD vs Docs decisions
+- **docs/README.md** — Added emoji headers throughout for visual hierarchy
+
+### Added
+
+- **YAML frontmatter** to 11 workflow docs that were missing it:
+  - `ATTEMPTS.md`, `AGENT_KICKOFF.md`, `AGENT_ENTRYPOINT.md`, `ATTEMPT_KICKOFF.md`
+  - `PREVIEW.md`, `CLOUDFLARE_CONFIG.md`, `DISTILLATION_CLASSIFICATION.md`
+  - `PRD.md`, `ATTEMPT_RECORD_PACK.md`, `WHAT_THIS_REPO_IS_NOT.md`, `concept.md`
+- **Emoji headers** standardized across docs for visual scanning
+
+### Philosophy
+
+- All `/docs/` files now have consistent YAML frontmatter (uri, title, audience, tier, stability, tags)
+- Tier labels correctly distinguish ODD (universal) from Canon (program) from Docs (implementation)
+- Cross-references correctly point to the right tier
+- Emoji usage is consistent with files like `ATTEMPTS.md` and `CLOUDFLARE_CONFIG.md`
+
+---
 
 ## 0.6.0 — 2026-01-21
 
@@ -8835,7 +9171,6 @@ The Canon exists so that reasoning does not have to be repeated.
 
 | Folder | Purpose |
 |--------|---------|
-| `odd/` | Outcomes-Driven Development philosophy and appendices. See [odd/README.md](./odd/README.md) |
 | `meta/` | Metadata and pack configuration. |
 | `_compiled/` | Compiled outputs (derived, wipeable). |
 
@@ -8845,7 +9180,7 @@ The Canon exists so that reasoning does not have to be repeated.
 
 1. **`constraints.md`** — What must be true for this work to make sense?
 2. **`definition-of-done.md`** — When can work honestly be called done?
-3. **`odd/manifesto.md`** — Why this approach exists.
+3. **`/odd/manifesto.md`** — Why this approach exists.
 
 These three documents anchor everything else.
 
@@ -8908,7 +9243,7 @@ Prefer stable file and URI naming over clever branding. Rename rarely.
 First-person documents may be consumed as-is or translated by clients. The Canon itself does not require a specific rendering voice.
 
 **5. Multi-Lane PRD Architecture**
-PRDs are organized into independent product lanes. Each lane has its own active PRD, attempts, and lifecycle. Lanes share canon, not lifecycle. See `odd/appendices/product-lanes.md` for the full model.
+PRDs are organized into independent product lanes. Each lane has its own active PRD, attempts, and lifecycle. Lanes share canon, not lifecycle. See `/docs/appendices/product-lanes.md` for the full model.
 
 ---
 
@@ -8970,7 +9305,15 @@ When building a guide pack, include:
 - Specific documents needed for the pack's purpose
 - Subfolder READMEs for scannable summaries without including all files
 
-See `odd/appendices/compilation.md` for the compilation model.
+See `/docs/appendices/compilation.md` for the compilation model.
+
+---
+
+## 🔗 See Also
+
+- [ODD (Universal Principles)](/odd/README.md) — Timeless methodology that Canon derives from
+- [Implementation Docs](/docs/README.md) — How klappy.dev implements Canon
+- [Three-Tier Hierarchy](/odd/decisions/D0001-three-tier-conceptual-hierarchy.md) — Why ODD, Canon, and Docs are separate
 
 ---
 

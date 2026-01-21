@@ -1,3 +1,14 @@
+---
+uri: klappy://docs/concept
+title: "Concept Snapshot"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["docs", "implementation", "concept", "overview", "problem-statement"]
+---
+
 # 🧠 Concept Snapshot
 
 > **Working Title:** Outcomes-Driven Canon + Evidence-Based Agents

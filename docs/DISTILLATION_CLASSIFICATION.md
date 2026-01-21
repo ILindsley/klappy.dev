@@ -1,4 +1,15 @@
-# Canon Distillation Classification
+---
+uri: klappy://docs/distillation-classification
+title: "Canon Distillation Classification"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["docs", "implementation", "distillation", "classification", "archive"]
+---
+
+# 📊 Canon Distillation Classification
 
 **Status: COMPLETED (with corrections)**
 

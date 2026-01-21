@@ -1,4 +1,15 @@
-# Agent Kickoff — Canonical Entry Point
+---
+uri: klappy://docs/agent-kickoff
+title: "Agent Kickoff"
+audience: docs
+exposure: nav
+tier: 1
+voice: neutral
+stability: stable
+tags: ["docs", "implementation", "agent", "kickoff", "entry-point"]
+---
+
+# 🤖 Agent Kickoff — Canonical Entry Point
 
 **This file is the ONLY authorized entry point for agent attempts.**
 

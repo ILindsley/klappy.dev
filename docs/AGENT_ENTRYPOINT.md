@@ -1,3 +1,14 @@
+---
+uri: klappy://docs/agent-entrypoint
+title: "Agent Entry Point"
+audience: docs
+exposure: nav
+tier: 1
+voice: neutral
+stability: stable
+tags: ["docs", "implementation", "agent", "entrypoint", "redirect"]
+---
+
 # 🧭 Agent Entry Point
 
 **If you are an AI agent starting an attempt, go directly to:**

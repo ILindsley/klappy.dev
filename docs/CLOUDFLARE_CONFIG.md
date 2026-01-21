@@ -1,3 +1,14 @@
+---
+uri: klappy://docs/cloudflare-config
+title: "Cloudflare Pages Configuration"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["docs", "implementation", "cloudflare", "deploy", "configuration"]
+---
+
 # ☁️ Cloudflare Pages Configuration
 
 This document describes how Cloudflare Pages should be configured for the klappy.dev repository.

@@ -1,4 +1,15 @@
-# Attempt Record Packs
+---
+uri: klappy://docs/attempt-record-pack
+title: "Attempt Record Packs"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["docs", "implementation", "attempts", "records", "evidence"]
+---
+
+# 📦 Attempt Record Packs
 
 An attempt produces immutable evidence and metadata that MAY be merged
 before a winner is chosen.

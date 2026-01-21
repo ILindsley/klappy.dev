@@ -1,4 +1,15 @@
-# Previewing Lanes and Attempts
+---
+uri: klappy://docs/preview
+title: "Previewing Lanes and Attempts"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["docs", "implementation", "preview", "cloudflare", "local"]
+---
+
+# 👁️ Previewing Lanes and Attempts
 
 > **Scope:** Local + Cloudflare preview workflows for lanes and attempts.
 
