@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-21T15:10:47.972Z
-Total Files: 143
+Generated: 2026-01-21T15:16:36.419Z
+Total Files: 146
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -21,7 +21,7 @@ details (attempts, version folders, source code).
 - **About** (5 files)
 - **Canon** (9 files)
 - **Documentation** (51 files)
-- **Infrastructure** (4 files)
+- **Infrastructure** (7 files)
 - **Interfaces & Contracts** (6 files)
 - **ODD (Outcomes-Driven Development)** (18 files)
 - **Products** (28 files)
@@ -15735,6 +15735,473 @@ Your ONLY job: **produce a working website with public evidence**.
 
 List exact files you will create/modify.
 Then begin.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: infra/prompts/doc-inclusion-audit/CHECKLIST.md
+--------------------------------------------------------------------------------
+
+# 📝 Document Inclusion Audit Checklist
+
+Quick reference checklist for evaluating documents.
+
+---
+
+## Book Export Decision Tree
+
+```
+Is this file a markdown document (.md)?
+├── NO → EXCLUDE (book is markdown only)
+└── YES → Continue
+    │
+    Is it in /public/content/?
+    ├── YES → EXCLUDE (duplicate of source)
+    └── NO → Continue
+        │
+        Is it in /node_modules/, /.git/, /dist/, /build/?
+        ├── YES → EXCLUDE (build/dependency artifact)
+        └── NO → Continue
+            │
+            Is it in /**/attempts/**?
+            ├── YES → Is it ATTEMPT.md, EVIDENCE.md, or META summary?
+            │   ├── YES → EVALUATE (may include sealed records)
+            │   └── NO → EXCLUDE (implementation artifacts)
+            └── NO → Continue
+                │
+                Is it in /**/src/**?
+                ├── YES → EXCLUDE (source code, not docs)
+                └── NO → Continue
+                    │
+                    Is it in /products/*/v*/**?
+                    ├── YES → EXCLUDE (version-specific implementation)
+                    └── NO → Continue
+                        │
+                        Is it in /.cursor/plans/?
+                        ├── YES → EXCLUDE (ephemeral plans)
+                        └── NO → INCLUDE ✅
+```
+
+---
+
+## Context Pack Inclusion Matrix
+
+| Document Type | visitor | author | agent-core | dev-peer |
+|---------------|---------|--------|------------|----------|
+| **ODD Manifesto** | ✅ | ✅ | ✅ | ✅ |
+| **ODD Appendices** | ❌ | ✅ | ⚠️ select | ✅ |
+| **ODD Decisions** | ❌ | ⚠️ D0001 only | ❌ | ✅ |
+| **Canon README** | ✅ | ✅ | ✅ | ✅ |
+| **Canon Core** | ❌ | ✅ | ✅ | ✅ |
+| **Canon Changelog** | ❌ | ❌ | ❌ | ✅ |
+| **Docs README** | ✅ | ✅ | ✅ | ✅ |
+| **Docs Appendices** | ❌ | ⚠️ select | ⚠️ select | ✅ |
+| **Docs Decisions** | ❌ | ❌ | ⚠️ select | ✅ |
+| **Lane PRDs** | ⚠️ summary | ✅ | ✅ | ✅ |
+| **Attempt Workflows** | ❌ | ✅ | ✅ | ✅ |
+| **Agent Kickoff** | ❌ | ❌ | ✅ | ✅ |
+| **Interfaces/Contracts** | ❌ | ⚠️ select | ✅ | ✅ |
+| **Visual System** | ❌ | ⚠️ select | ❌ | ✅ |
+| **About Pages** | ✅ | ✅ | ❌ | ✅ |
+| **Projects** | ✅ | ✅ | ❌ | ✅ |
+
+Legend:
+- ✅ = Include
+- ❌ = Exclude
+- ⚠️ = Include selectively (see notes)
+
+---
+
+## Staleness Indicators
+
+A document may be stale if:
+
+- [ ] References paths that no longer exist
+- [ ] References `/canon/odd/` instead of `/odd/`
+- [ ] Uses deprecated terminology (see TRUTH_MAP.md)
+- [ ] Has frontmatter with old URIs
+- [ ] Mentions epoch E0001 without historical context
+- [ ] References single-PRD model without lane context
+- [ ] Has broken markdown links
+- [ ] Mentions removed CLI commands (attempt:reserve, attempt:reset)
+
+---
+
+## Misclassification Indicators
+
+A document may be in the wrong tier if:
+
+### Should be ODD (currently elsewhere):
+- [ ] Describes universal principles applicable to any project
+- [ ] Would still be true if klappy.dev didn't exist
+- [ ] Contains no repo-specific paths or commands
+
+### Should be Canon (currently elsewhere):
+- [ ] Defines rules shared across all product lanes
+- [ ] Is referenced by multiple lanes as authoritative
+- [ ] Changes would affect all products
+
+### Should be Docs (currently elsewhere):
+- [ ] Contains CLI commands specific to this repo
+- [ ] References Cloudflare, specific branch names, or lane names
+- [ ] Describes how *this* instance implements a concept
+
+---
+
+## Redundancy Indicators
+
+A document may be redundant if:
+
+- [ ] Content is duplicated in `/public/content/` (expected)
+- [ ] Content is duplicated in another source file (NOT expected)
+- [ ] Two files define the same concept differently (conflict)
+- [ ] A file restates another file without adding value
+
+---
+
+## Quick Quality Checks
+
+For each document, verify:
+
+- [ ] **Has frontmatter?** (uri, title, audience, tier, stability, tags)
+- [ ] **Has emoji headers?** (consistent with docs style)
+- [ ] **Has "See Also" section?** (cross-references to related docs)
+- [ ] **References correct tier?** (ODD vs Canon vs Docs)
+- [ ] **Uses absolute paths?** (e.g., `/odd/` not `odd/` or `../odd/`)
+
+---
+
+## Audit Tracking Template
+
+Copy this for each document:
+
+```markdown
+## [path/to/file.md]
+
+- **Tier:** [ ] ODD  [ ] Canon  [ ] Docs  [ ] Other
+- **Has frontmatter:** [ ] Yes  [ ] No
+- **Has emoji headers:** [ ] Yes  [ ] No  [ ] N/A
+
+### Book Export
+- **Current:** [ ] Included  [ ] Excluded
+- **Should be:** [ ] Include  [ ] Exclude
+- **Change needed:** [ ] Yes → [action]  [ ] No
+
+### Context Packs
+| Pack | Current | Should | Change |
+|------|---------|--------|--------|
+| visitor | [ ] In  [ ] Out | [ ] In  [ ] Out | [ ] Yes [ ] No |
+| author | [ ] In  [ ] Out | [ ] In  [ ] Out | [ ] Yes [ ] No |
+| agent-core | [ ] In  [ ] Out | [ ] In  [ ] Out | [ ] Yes [ ] No |
+
+### Issues
+- [ ] Stale content: [details]
+- [ ] Misclassified: [should be X]
+- [ ] Redundant: [duplicates Y]
+- [ ] Broken refs: [list]
+- [ ] Missing frontmatter
+- [ ] Other: [details]
+
+### Recommendation
+[No change | Move to X | Update content | Add to pack Y | Remove from pack Z | Delete]
+```
+
+
+
+--------------------------------------------------------------------------------
+📄 File: infra/prompts/doc-inclusion-audit/PROMPT.md
+--------------------------------------------------------------------------------
+
+# 📋 Document Inclusion Audit Prompt
+
+> Evaluate which documents should be included in book exports and context packs.
+
+## Your Task
+
+You are auditing the klappy.dev repository to determine:
+1. Which documents should be in the **book export** (`klappy-dev-book-export.md`)
+2. Which documents should be in **context packs** (lane-scoped compilations)
+3. Which documents are **stale, misclassified, or redundant**
+
+---
+
+## Understanding the Three-Tier Hierarchy
+
+Documents in this repo are organized into three tiers with different purposes:
+
+| Tier | Location | Contains | Decay Rate | Book Export? |
+|------|----------|----------|------------|--------------|
+| **ODD** | `/odd/` | Universal principles (timeless, product-agnostic) | Almost never | ✅ Yes |
+| **Canon** | `/canon/` | Program-level constraints (shared rules) | Carefully | ✅ Yes |
+| **Docs** | `/docs/` | Implementation details (how this instance works) | Freely | ✅ Yes |
+
+**The litmus test:**
+1. Would this still be true in 10 years? → **ODD**
+2. Should all products in this program obey it? → **Canon**
+3. Is this about how *we* do it *here*? → **Docs**
+
+---
+
+## Book Export Criteria
+
+The book export (`klappy-dev-book-export.md`) is a **complete documentation snapshot** for sharing/uploading. It should include guidance docs but exclude implementation artifacts.
+
+### Currently INCLUDED in book export:
+
+| Path Pattern | Reason |
+|--------------|--------|
+| `/odd/**/*.md` | Universal principles |
+| `/canon/**/*.md` | Program constraints |
+| `/docs/**/*.md` | Implementation docs |
+| `/about/**/*.md` | Author context |
+| `/projects/**/*.md` | Project descriptions |
+| `/interfaces/**/*.md` | Contracts |
+| `/visual/**/*.md` | Visual system docs |
+| `/infra/**/*.md` | Infrastructure docs |
+| `/*.md` (root) | Top-level docs |
+
+### Currently EXCLUDED from book export:
+
+| Path Pattern | Reason |
+|--------------|--------|
+| `/public/content/**` | Copies of source files (duplicates) |
+| `/.cursor/plans/**` | Ephemeral plan files |
+| `/**/attempts/**` | Implementation work, not guidance |
+| `/**/src/**` | Source code, not documentation |
+| `/products/*/v*/**` | Version-specific implementations |
+| `/node_modules/**` | Dependencies |
+| `/.git/**` | Version control |
+| `/dist/**`, `/build/**` | Build artifacts |
+
+### Evaluation Questions for Book Export:
+
+For each document, ask:
+
+1. **Is it guidance or implementation?**
+   - Guidance (philosophy, process, contracts) → INCLUDE
+   - Implementation (code, attempt artifacts, build output) → EXCLUDE
+
+2. **Is it a duplicate?**
+   - `/public/content/` mirrors source files → EXCLUDE (duplicates)
+   - Generated packs in `/_compiled/` → EVALUATE (may include if useful)
+
+3. **Is it ephemeral?**
+   - Plan files, temporary notes → EXCLUDE
+   - Sealed attempt records → INCLUDE (historical evidence)
+
+4. **Is it too granular?**
+   - Individual attempt evidence (screenshots) → EXCLUDE
+   - Attempt summaries (ATTEMPT.md, EVIDENCE.md) → EVALUATE
+
+---
+
+## Context Pack Criteria
+
+Context packs are **lane-scoped, target-specific compilations** for constrained context windows.
+
+### Existing Packs:
+
+| Lane | Pack | Target Audience | Purpose |
+|------|------|-----------------|---------|
+| `website` | `visitor` | First-time visitors | Minimal orientation, progressive disclosure |
+| `website` | `author` | Repo owner | High-signal working context |
+| `agent-skill` | `prd-guide` | Agent developers | PRD + process guidance |
+
+### Pack Inclusion Criteria:
+
+| Target | Include | Exclude |
+|--------|---------|---------|
+| **visitor** | ODD manifesto, Canon README, PRD summary, "What is this?" | Implementation details, CLI commands, internal decisions |
+| **author** | Canon core, PRD, epochs, lanes, compilation | Attempt artifacts, version-specific implementations |
+| **agent-core** (future) | Constraints, decision rules, process docs, kickoff | Philosophy, history, exploratory appendices |
+| **dev-peer** (future) | Full canon, decisions, architecture | Internal process details |
+
+### Evaluation Questions for Packs:
+
+For each document, ask:
+
+1. **Which targets need this?**
+   - Everyone (core) → Include in all packs
+   - Specific role → Include in targeted pack only
+   - No one → Exclude from all packs
+
+2. **What's the signal-to-noise ratio?**
+   - High signal, low noise → INCLUDE
+   - Low signal, high noise → EXCLUDE or SUMMARIZE
+
+3. **Is it stable enough?**
+   - Stable (rarely changes) → INCLUDE
+   - Volatile (changes often) → EXCLUDE from long-lived packs
+
+4. **Does it fit the context budget?**
+   - Essential for correct behavior → INCLUDE
+   - Nice-to-have → EXCLUDE if over budget
+
+---
+
+## Audit Output Format
+
+For each document evaluated, produce:
+
+```markdown
+### [File Path]
+
+**Tier:** ODD | Canon | Docs | Other
+**Current Status:** In book export? In which packs?
+
+**Book Export:**
+- [ ] INCLUDE | EXCLUDE
+- Reason: [why]
+
+**Context Packs:**
+- [ ] visitor: INCLUDE | EXCLUDE — [reason]
+- [ ] author: INCLUDE | EXCLUDE — [reason]
+- [ ] agent-core: INCLUDE | EXCLUDE — [reason]
+
+**Issues Found:**
+- [ ] Stale content (last updated: [date], references outdated: [what])
+- [ ] Misclassified (should be in [tier] instead of [tier])
+- [ ] Redundant (duplicates [other file])
+- [ ] Missing from manifest
+- [ ] Broken references
+
+**Recommended Action:**
+- [ ] No change
+- [ ] Move to [new location]
+- [ ] Update content
+- [ ] Add to pack: [pack name]
+- [ ] Remove from pack: [pack name]
+- [ ] Delete (with reason)
+```
+
+---
+
+## Running the Audit
+
+### Step 1: Collect All Documents
+
+```bash
+# List all markdown files in the repo
+find . -name "*.md" -type f | grep -v node_modules | grep -v .git | sort
+```
+
+### Step 2: Check Current Book Export Inclusion
+
+Review `/infra/scripts/export-book.js` for:
+- `EXCLUDE_DIRS` — directories to skip
+- `EXCLUDE_PATHS` — specific paths to skip
+- `EXCLUDE_LANE_PATTERNS` — pattern-based exclusions
+- `EXCLUDE_FILES` — specific files to skip
+
+### Step 3: Check Current Pack Inclusion
+
+Review `/infra/compile/plans/` for existing compile plans:
+- What sources are included?
+- What's missing?
+- What's redundant?
+
+### Step 4: Evaluate Each Document
+
+Use the evaluation questions above to assess each document.
+
+### Step 5: Produce Recommendations
+
+Group recommendations by:
+1. **Book export changes** (add/remove files from export)
+2. **Pack changes** (add/remove files from compile plans)
+3. **Tier corrections** (move files between ODD/Canon/Docs)
+4. **Content fixes** (update stale content, fix references)
+5. **Deletions** (remove obsolete files)
+
+---
+
+## Key Files to Read Before Auditing
+
+| File | Why |
+|------|-----|
+| `/odd/decisions/D0001-three-tier-conceptual-hierarchy.md` | Tier definitions |
+| `/docs/TRUTH_MAP.md` | Authoritative sources |
+| `/docs/appendices/compilation-targets.md` | Pack target definitions |
+| `/docs/appendices/canonical-compression.md` | Compression philosophy |
+| `/infra/scripts/export-book.js` | Current book export logic |
+| `/infra/compile/plans/**/*.json` | Current pack definitions |
+
+---
+
+## Success Criteria
+
+The audit is complete when:
+
+1. Every markdown file has been evaluated
+2. Book export includes all guidance, excludes all implementation
+3. Each pack serves its target audience with minimal noise
+4. No stale content remains unaddressed
+5. No misclassified documents remain in wrong tiers
+6. All broken references have been flagged
+
+---
+
+## Notes
+
+- This audit is about **what to include**, not **how to compile**
+- Packs are regenerated frequently; the audit focuses on the compile plans
+- The book export is a snapshot; staleness is acceptable if flagged
+- Prefer fewer, higher-quality inclusions over comprehensive coverage
+
+
+
+--------------------------------------------------------------------------------
+📄 File: infra/prompts/doc-inclusion-audit/README.md
+--------------------------------------------------------------------------------
+
+# 🔍 Document Inclusion Audit
+
+Prompt and checklist for evaluating which documents should be included in:
+- **Book export** (`klappy-dev-book-export.md`)
+- **Context packs** (lane-scoped compilations)
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `PROMPT.md` | Complete audit prompt with context, criteria, and output format |
+| `CHECKLIST.md` | Quick reference decision trees and tracking templates |
+
+## When to Use
+
+Run this audit when:
+- Major documentation restructuring (like the three-tier hierarchy change)
+- Adding new lanes or packs
+- Suspecting content drift or staleness
+- Reviewing book export size or quality
+
+## How to Use
+
+1. **Read the prompt** (`PROMPT.md`) to understand criteria
+2. **Use the checklist** (`CHECKLIST.md`) for quick decisions
+3. **Track findings** using the templates provided
+4. **Produce recommendations** grouped by action type
+
+## Quick Start
+
+```bash
+# List all markdown files to audit
+find . -name "*.md" -type f | grep -v node_modules | grep -v .git | sort | wc -l
+
+# Check current book export size
+wc -l klappy-dev-book-export.md
+
+# Review compile plans
+cat infra/compile/plans/website/visitor.json
+cat infra/compile/plans/website/author.json
+```
+
+## Related Documents
+
+- [Compilation Targets](/docs/appendices/compilation-targets.md) — Pack definitions
+- [Canonical Compression](/docs/appendices/canonical-compression.md) — Compression philosophy
+- [Three-Tier Hierarchy](/odd/decisions/D0001-three-tier-conceptual-hierarchy.md) — Tier definitions
+- [Truth Map](/docs/TRUTH_MAP.md) — Authoritative sources
 
 
 
