@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-21T00:31:07.273Z
-Total Files: 203
+Generated: 2026-01-21T00:57:50.408Z
+Total Files: 207
 
 This is a complete export of all documentation, code, and content files
 from the klappy.dev repository, organized by section.
@@ -25,7 +25,7 @@ from the klappy.dev repository, organized by section.
 - **Infrastructure** (19 files)
 - **Interfaces & Contracts** (6 files)
 - **ODD (Outcomes-Driven Development)** (1 files)
-- **Products** (59 files)
+- **Products** (63 files)
 - **Projects** (6 files)
 - **Public Content** (10 files)
 - **Visual Design System** (4 files)
@@ -29026,6 +29026,295 @@ This PRD directly addresses learnings from the v1.2 failed attempt:
 2. **Lane-owned deployment** — Each lane can own its infrastructure
 3. **Versioned assets** — Dependents need stable, immutable URLs
 4. **Antifragile documentation** — README per version, not JSON manifests
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/agent-skill/v1.2.1/attempts/attempt-001/ATTEMPT.md
+--------------------------------------------------------------------------------
+
+# Attempt 001 — PRD v1.2.1 Closure Record
+
+## Status: IN_PROGRESS
+
+| Field | Value |
+|-------|-------|
+| **Lane** | agent-skill |
+| **PRD Version** | v1.2.1 |
+| **Attempt** | 001 |
+| **Status** | IN_PROGRESS |
+| **Epoch** | E0003-evidence-first-era |
+| **Created** | 2026-01-21 |
+| **Sealed** | — |
+
+---
+
+## Objective (from PRD)
+
+Deliver zero-friction public access to the compiled PRD guide pack via a lane-owned deployment with versioned, immutable asset URLs.
+
+---
+
+## Outcome
+
+**PENDING** — Awaiting Cloudflare Pages configuration and verification.
+
+Key deliverables:
+- Cloudflare Pages project configured for agent-skill lane
+- Versioned URLs serving pack from `v1.1/dist/`
+- Public URL verified with HTTP 200
+
+---
+
+## Evidence
+
+| Artifact | Location |
+|----------|----------|
+| Pack URL screenshot | `evidence/pack-url-200.png` |
+| README URL screenshot | `evidence/readme-url-200.png` |
+| Content diff | `evidence/content-diff.txt` |
+| CF settings screenshot | `evidence/cf-settings.png` |
+
+---
+
+## Verification Performed
+
+- [ ] Cloudflare Pages project created
+- [ ] Deployment configured to serve from `products/agent-skill/`
+- [ ] Custom domain configured (optional)
+- [ ] Public URL verified with HTTP 200
+- [ ] Pack content at URL matches local build output
+- [ ] README at public URL is readable
+
+---
+
+## Self-Audit
+
+### Intended Outcome
+
+Enable zero-friction access to the PRD guide pack via stable, versioned URLs without requiring clone or build.
+
+### Constraints Applied
+
+- Lane isolation (no modification of other lanes)
+- Evidence over assertion (URLs must be verified with HTTP 200)
+- Explicit tradeoffs (new CF project adds operational overhead)
+
+### Decision Rules Followed
+
+- Outcomes Before Implementation (focused on "public access" not "infrastructure")
+- Simplicity Wins (static file serving, no build step)
+- Borrow→Bend→Break→Build (using Cloudflare Pages as-is)
+
+### Tradeoffs
+
+- **Separate CF project** — operational overhead but full lane isolation
+- **Static files only** — no build step simplifies but limits future options
+- **Optional custom domain** — can start with CF default domain
+
+### Risks
+
+- CF Pages project naming conflicts
+- DNS propagation delays for custom domain
+
+### Confidence Level
+
+PENDING — Will be updated after verification.
+
+---
+
+## Learnings
+
+PENDING — Will be documented after attempt completion.
+
+---
+
+## Follow-up
+
+PENDING — Will be determined based on outcome.
+
+---
+
+## Closure
+
+This attempt is **IN_PROGRESS**.
+
+Status will be updated to CHAMPION, CLOSED, or ABANDONED after verification.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/agent-skill/v1.2.1/attempts/attempt-001/CLOUDFLARE_SETUP.md
+--------------------------------------------------------------------------------
+
+# Cloudflare Pages Setup Guide — agent-skill Lane
+
+This document provides step-by-step instructions for configuring the Cloudflare Pages project for the agent-skill lane.
+
+---
+
+## Prerequisites
+
+- Cloudflare account with access to the klappy.dev zone
+- GitHub account with access to the klappy.dev repository
+- DNS management access for klappy.dev
+
+---
+
+## Step 1: Create New Pages Project
+
+1. Go to [Cloudflare Dashboard](https://dash.cloudflare.com)
+2. Select your account
+3. Navigate to **Workers & Pages** in the left sidebar
+4. Click **Create application**
+5. Select **Pages** tab
+6. Click **Connect to Git**
+
+---
+
+## Step 2: Connect Repository
+
+1. Select **GitHub** as the Git provider
+2. Authorize Cloudflare if not already done
+3. Select the **klappy.dev** repository
+4. Click **Begin setup**
+
+---
+
+## Step 3: Configure Build Settings
+
+| Setting | Value |
+|---------|-------|
+| **Project name** | `agent-skill` |
+| **Production branch** | `prod` |
+| **Framework preset** | None |
+| **Build command** | *(leave empty)* |
+| **Build output directory** | `public/agent-skill` |
+| **Root directory** | `.` |
+
+**Important**: 
+- Leave the build command empty. This is a static file deployment — no build step needed.
+- Use `public/agent-skill` (not `products/agent-skill`) to ensure only promoted content is accessible.
+
+---
+
+## Step 4: Deploy
+
+1. Click **Save and Deploy**
+2. Wait for the initial deployment to complete
+3. Note the default URL: `agent-skill.pages.dev`
+
+---
+
+## Step 5: Configure Custom Domain (Optional)
+
+1. Go to the **agent-skill** project in Cloudflare Pages
+2. Navigate to **Custom domains** tab
+3. Click **Set up a custom domain**
+4. Enter: `agent-skill.klappy.dev`
+5. Click **Continue**
+6. Cloudflare will automatically configure DNS if klappy.dev is on the same account
+7. Wait for DNS propagation (usually a few minutes)
+
+---
+
+## Step 6: Verify Deployment
+
+After deployment completes, verify these URLs return HTTP 200:
+
+### Using Default Domain
+```bash
+curl -I https://agent-skill.pages.dev/v1.1/dist/prd-guide-pack.md
+curl -I https://agent-skill.pages.dev/v1.1/dist/README.md
+```
+
+### Using Custom Domain (after DNS propagation)
+```bash
+curl -I https://agent-skill.klappy.dev/v1.1/dist/prd-guide-pack.md
+curl -I https://agent-skill.klappy.dev/v1.1/dist/README.md
+```
+
+---
+
+## Expected URL Structure
+
+| URL | Content |
+|-----|---------|
+| `/latest/prd-guide-pack.md` | Always points to current champion |
+| `/v1.1/dist/prd-guide-pack.md` | The compiled PRD guide pack (~12K tokens) |
+| `/v1.1/dist/README.md` | Consumer guidance for using the pack |
+| `/v1.1/dist/_meta/` | Compilation metadata |
+
+**Note**: The `/latest/` path provides a stable URL for consumers who always want the current champion. Versioned paths (`/v1.1/dist/`) allow pinning to specific versions.
+
+---
+
+## Troubleshooting
+
+### 404 on pack URL
+- Verify the `v1.1/dist/` folder exists in `public/agent-skill/`
+- Check that `public/agent-skill` is set as the build output directory
+- Ensure the deployment completed successfully
+- Verify content has been promoted to `public/agent-skill/` (source is in `products/agent-skill/`)
+
+### Custom domain not working
+- Check DNS propagation: `dig agent-skill.klappy.dev`
+- Verify SSL certificate is active in Cloudflare Pages settings
+- Wait up to 24 hours for full propagation
+
+### Build failures
+- This project should have NO build command
+- If build fails, check that the build command field is empty
+
+---
+
+## Post-Setup Checklist
+
+- [ ] Default domain serves pack: `agent-skill.pages.dev/v1.1/dist/prd-guide-pack.md`
+- [ ] Default domain serves latest: `agent-skill.pages.dev/latest/prd-guide-pack.md`
+- [ ] Custom domain configured (optional): `agent-skill.klappy.dev`
+- [ ] HTTP 200 verified for versioned pack URL
+- [ ] HTTP 200 verified for latest pack URL
+- [ ] HTTP 200 verified for README URL
+- [ ] Content matches local file in `public/agent-skill/`
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/agent-skill/v1.2.1/attempts/attempt-001/META.json
+--------------------------------------------------------------------------------
+
+{
+  "lane": "agent-skill",
+  "prd_version": "v1.2.1",
+  "attempt": "001",
+  "status": "IN_PROGRESS",
+  "epoch_id": "E0003-evidence-first-era",
+  "created_at": "2026-01-21T00:00:00.000Z",
+  "sealed_at": null,
+  "sealed_commit": null,
+  "description": "Lane-owned Cloudflare Pages deployment for zero-friction pack distribution",
+  "artifacts": [
+    "ATTEMPT.md",
+    "META.json",
+    "evidence/"
+  ],
+  "evidence": {
+    "pack_url_verified": false,
+    "readme_url_verified": false,
+    "content_match_verified": false,
+    "cf_project_configured": false
+  },
+  "notes": "Awaiting Cloudflare Pages configuration."
+}
+
+
+--------------------------------------------------------------------------------
+📄 File: products/agent-skill/v1.2.1/attempts/attempt-001/evidence/.gitkeep
+--------------------------------------------------------------------------------
+
+# Evidence folder for attempt-001
+# Screenshots and verification artifacts will be placed here
 
 
 
