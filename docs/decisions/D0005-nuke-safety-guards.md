@@ -1,0 +1,88 @@
+---
+uri: klappy://docs/decisions/D0005
+title: "D0005: Nuke Command Safety Guards"
+audience: docs
+exposure: internal
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "decisions", "nuke", "safety"]
+---
+
+# Nuke Command Safety Guards
+
+> Branch-aware safety prevents accidental destruction of production code while preserving attempt branch freedom.
+
+## Description
+
+This decision implements tiered safety guards for the `attempt:nuke` command based on branch context. Production (`prod`) can never be nuked, `main` requires explicit `--force` confirmation, while attempt branches can be freely nuked as they are ephemeral by design. Protected paths like `/canon/`, `/docs/`, and `/infra/` are never deleted even during nuke operations.
+
+## Outline
+
+- Decision statement
+- Status
+- Why
+- Consequences
+- Implementation
+- Evidence
+
+---
+
+## Content
+
+# D0005 — Nuke Command Safety Guards
+
+## Decision
+
+The `attempt:nuke` command has branch-aware safety guards: refuses on `prod`, warns and requires `--force` on `main`, allows freely on `attempt/*` branches.
+
+## Status
+
+**Active**
+
+## Why
+
+- Agents were accidentally nuking production code by running reset on `main`
+- Need explicit friction before destructive operations on important branches
+- `attempt/*` branches are ephemeral by design — no protection needed
+- `prod` is sacred — never allow accidental destruction
+- `main` is valuable but restorable — allow with confirmation
+
+## Consequences
+
+- ✅ Production (`prod`) cannot be accidentally nuked
+- ✅ Main requires explicit `--force` to nuke
+- ✅ Attempt branches can be freely nuked (that's their purpose)
+- ⚠️ Agents on wrong branch will see errors (intentional friction)
+- ⚠️ Human must intervene if nuke is needed on protected branches
+
+## Implementation
+
+- Script: `/infra/scripts/attempt-cli.js` (`cmdNuke` checks branch before proceeding)
+
+### Branch Safety Rules
+
+| Branch | Nuke Allowed? | Behavior |
+|--------|---------------|----------|
+| `prod` | ❌ Never | Hard fail with explanation |
+| `main` | ⚠️ With `--force` | Warning, requires explicit override |
+| `attempt/*` | ✅ Always | Proceeds immediately |
+| Other | ⚠️ With `--force` | Warning, requires explicit override |
+
+### Protected Paths (Never Deleted)
+
+Even during nuke, these are never touched:
+
+- `/canon/`
+- `/docs/`
+- `/attempts/`
+- `/infra/`
+- `/public/`
+- `/.cloudflare/`
+- `/.github/`
+
+## Evidence
+
+- Commit: `15b5c2e` — "feat: environment hardening - prod branch, nuke safety, promote to prod"
+- Commit: `0cce06d` — "fix: protect production - nuclear reset on main skips /src nuke by default"
+- Problem observed: Running `attempt:reset` on `main` deleted production `/src`

@@ -9,7 +9,29 @@ stability: semi_stable
 tags: ["visual-proof", "evidence"]
 ---
 
-# 👁️ Visual Proof Standards
+# Visual Proof Standards
+
+> What "prove it visually" actually means for UI and interaction work.
+
+## Description
+
+Visual proof standards define what constitutes valid visual evidence for work affecting anything a user can see or interact with. Visual proof is required for UI, layout, navigation, interaction, animation, visible state changes, and user-facing behavior. Acceptable forms include screenshots (clearly labeled, not cropped ambiguously), screen recordings (10-30 seconds showing interaction), rendered output artifacts, and structured UI captures. Before/after evidence is required for changes. Visual proof must show correct state, behavior, and context. Explanations without screenshots do not qualify.
+
+## Outline
+
+- Core Principle: Observed behavior over reasoning
+- When Visual Proof Is Required
+- Acceptable Forms (Screenshots, Recordings, Artifacts, UI Captures)
+- What Visual Proof Must Show
+- Labeling Requirements
+- Before/After Evidence
+- Tooling Expectations
+- When Visual Proof Is Not Possible
+- What Does Not Count as Visual Proof
+
+---
+
+## Content
 
 **Canon v0.1**
 

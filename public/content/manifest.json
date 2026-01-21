@@ -61,23 +61,6 @@
       ]
     },
     {
-      "uri": "klappy://canon/odd/attempt-lifecycle",
-      "path": "/canon/odd/appendices/attempt-lifecycle.md",
-      "title": "Attempt Lifecycle",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "semi_stable",
-      "tags": [
-        "odd",
-        "attempt",
-        "lifecycle",
-        "restartability"
-      ]
-    },
-    {
       "uri": "klappy://about/bio",
       "path": "/about/bio.md",
       "title": "Bio",
@@ -142,61 +125,6 @@
       ]
     },
     {
-      "uri": "klappy://canon/odd/canonical-compression",
-      "path": "/canon/odd/appendices/canonical-compression.md",
-      "title": "Canonical Compression",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "stable",
-      "tags": [
-        "odd",
-        "compression",
-        "compiled",
-        "epochs",
-        "drift"
-      ]
-    },
-    {
-      "uri": "klappy://canon/odd/compilation",
-      "path": "/canon/odd/appendices/compilation.md",
-      "title": "Compilation",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "evolving",
-      "tags": [
-        "odd",
-        "compilation",
-        "memory",
-        "context",
-        "packs"
-      ]
-    },
-    {
-      "uri": "klappy://canon/odd/compilation-targets",
-      "path": "/canon/odd/appendices/compilation-targets.md",
-      "title": "Compilation Targets",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "public",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "stable",
-      "tags": [
-        "odd",
-        "compilation",
-        "memory",
-        "portability",
-        "packs",
-        "lanes"
-      ]
-    },
-    {
       "uri": "klappy://canon/compiled/epoch-e0002-readme",
       "path": "/canon/_compiled/epoch-E0002/README.md",
       "title": "Compiled Canon Outputs (Epoch E0002)",
@@ -211,23 +139,6 @@
         "compiled",
         "epoch",
         "e0002"
-      ]
-    },
-    {
-      "uri": "klappy://canon/odd/compiled-memory",
-      "path": "/canon/odd/appendices/compiled-memory.md",
-      "title": "Compiled Memory",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "evolving",
-      "tags": [
-        "odd",
-        "compiled",
-        "memory",
-        "drift"
       ]
     },
     {
@@ -277,255 +188,6 @@
       ]
     },
     {
-      "uri": "klappy://canon/odd/decisions/D0001",
-      "path": "/canon/odd/decisions/D0001-prod-branch-is-production.md",
-      "title": "D0001: prod Branch Is Production",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "internal",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "stable",
-      "tags": [
-        "odd",
-        "decisions",
-        "branch",
-        "deploy"
-      ]
-    },
-    {
-      "uri": "klappy://canon/odd/decisions/D0002",
-      "path": "/canon/odd/decisions/D0002-attempt-provenance-required.md",
-      "title": "D0002: Attempt Provenance Required",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "internal",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "stable",
-      "tags": [
-        "odd",
-        "decisions",
-        "provenance",
-        "model"
-      ]
-    },
-    {
-      "uri": "klappy://canon/odd/decisions/D0003",
-      "path": "/canon/odd/decisions/D0003-prd-version-auto-detection.md",
-      "title": "D0003: PRD Version Auto-Detection",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "internal",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "stable",
-      "tags": [
-        "odd",
-        "decisions",
-        "prd",
-        "version"
-      ]
-    },
-    {
-      "uri": "klappy://canon/odd/decisions/D0004",
-      "path": "/canon/odd/decisions/D0004-repo-truth-cleanup-mandatory.md",
-      "title": "D0004: Repo Truth & Cleanup Mandatory",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "internal",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "stable",
-      "tags": [
-        "odd",
-        "decisions",
-        "cleanup",
-        "hygiene"
-      ]
-    },
-    {
-      "uri": "klappy://canon/odd/decisions/D0005",
-      "path": "/canon/odd/decisions/D0005-nuke-safety-guards.md",
-      "title": "D0005: Nuke Command Safety Guards",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "internal",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "stable",
-      "tags": [
-        "odd",
-        "decisions",
-        "nuke",
-        "safety"
-      ]
-    },
-    {
-      "uri": "klappy://canon/odd/decisions/D0006",
-      "path": "/canon/odd/decisions/D0006-dogfooding-requirement.md",
-      "title": "D0006: Dogfooding Requirement",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "internal",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "stable",
-      "tags": [
-        "odd",
-        "decisions",
-        "dogfooding",
-        "validation"
-      ]
-    },
-    {
-      "uri": "klappy://canon/odd/decisions/D0007",
-      "path": "/canon/odd/decisions/D0007-branch-names-are-convenience.md",
-      "title": "D0007: Branch Names Are Convenience",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "internal",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "stable",
-      "tags": [
-        "odd",
-        "decisions",
-        "branches",
-        "provenance"
-      ]
-    },
-    {
-      "uri": "klappy://canon/odd/decisions/D0008",
-      "path": "/canon/odd/decisions/D0008-register-before-nuke.md",
-      "title": "D0008: Register Before Nuke",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "internal",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "stable",
-      "tags": [
-        "odd",
-        "decisions",
-        "lifecycle",
-        "provenance",
-        "independence"
-      ]
-    },
-    {
-      "uri": "klappy://canon/odd/decisions/D0009",
-      "path": "/canon/odd/decisions/D0009-multi-lane-prd-architecture.md",
-      "title": "D0009: Multi-Lane PRD Architecture",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "internal",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "stable",
-      "tags": [
-        "odd",
-        "decisions",
-        "lanes",
-        "prd",
-        "architecture"
-      ]
-    },
-    {
-      "uri": "klappy://canon/odd/decisions/D0010",
-      "path": "/canon/odd/decisions/D0010-canonical-agent-kickoff.md",
-      "title": "D0010: Canonical Agent Kickoff",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "internal",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "stable",
-      "tags": [
-        "odd",
-        "decisions",
-        "agent",
-        "kickoff",
-        "entrypoint"
-      ]
-    },
-    {
-      "uri": "klappy://canon/odd/decisions/D0011",
-      "path": "/canon/odd/decisions/D0011-odd-contract-2.0.0.md",
-      "title": "D0011: ODD System Contract 2.0.0",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "internal",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "stable",
-      "tags": [
-        "odd",
-        "decisions",
-        "contract",
-        "version",
-        "epoch"
-      ]
-    },
-    {
-      "uri": "klappy://canon/odd/decisions/D0012",
-      "path": "/canon/odd/decisions/D0012-e0002-transition-interpretation.md",
-      "title": "D0012: E0002 Transition Interpretation (Truth vs Enforcement Lag)",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "internal",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "stable",
-      "tags": [
-        "odd",
-        "decisions",
-        "epochs",
-        "lanes",
-        "drift",
-        "interfaces",
-        "tooling"
-      ]
-    },
-    {
-      "uri": "klappy://canon/odd/decisions/D0013",
-      "path": "/canon/odd/decisions/D0013-build-output-lane-scoped-dist.md",
-      "title": "D0013: Build Output Truth is Lane-Scoped (products/<lane>/dist)",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "internal",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "stable",
-      "tags": [
-        "odd",
-        "decisions",
-        "lanes",
-        "build",
-        "deploy",
-        "contracts"
-      ]
-    },
-    {
-      "uri": "klappy://canon/odd/decisions/D0014",
-      "path": "/canon/odd/decisions/D0014-e0003-evidence-first-era.md",
-      "title": "D0014: Declare E0003 Evidence-First Era",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "internal",
-      "tier": 2,
-      "voice": "first_person",
-      "stability": "stable",
-      "tags": [
-        "odd",
-        "epochs",
-        "evidence",
-        "cloudflare",
-        "attempts",
-        "lanes"
-      ]
-    },
-    {
       "uri": "klappy://canon/decision-rules",
       "path": "/canon/decision-rules.md",
       "title": "Decision Rules",
@@ -553,74 +215,6 @@
       "tags": [
         "definition-of-done",
         "evidence"
-      ]
-    },
-    {
-      "uri": "klappy://canon/odd/deploy-evidence",
-      "path": "/canon/odd/appendices/deploy-evidence.md",
-      "title": "Deploy Evidence",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 2,
-      "voice": "first_person",
-      "stability": "stable",
-      "tags": [
-        "odd",
-        "deploy",
-        "evidence",
-        "cloudflare",
-        "attempts"
-      ]
-    },
-    {
-      "uri": "klappy://canon/odd/drift-checks",
-      "path": "/canon/odd/appendices/drift-checks.md",
-      "title": "Drift Checks",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "evolving",
-      "tags": [
-        "odd",
-        "drift",
-        "verification",
-        "contracts"
-      ]
-    },
-    {
-      "uri": "klappy://canon/odd/epochs",
-      "path": "/canon/odd/appendices/epochs.md",
-      "title": "Epochs",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "stable",
-      "tags": [
-        "odd",
-        "epochs",
-        "fitness-landscape",
-        "comparability",
-        "orientation"
-      ]
-    },
-    {
-      "uri": "klappy://canon/evidence",
-      "path": "/canon/odd/appendices/evidence.md",
-      "title": "Evidence",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 1,
-      "voice": "first_person",
-      "stability": "stable",
-      "tags": [
-        "evidence",
-        "verification"
       ]
     },
     {
@@ -694,42 +288,6 @@
       }
     },
     {
-      "uri": "klappy://canon/odd/lane-build-layout",
-      "path": "/canon/odd/appendices/lane-build-layout.md",
-      "title": "Lane Build Layout",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "evolving",
-      "tags": [
-        "odd",
-        "lanes",
-        "build",
-        "layout",
-        "deploy"
-      ]
-    },
-    {
-      "uri": "klappy://canon/odd/lane-implementation-surfaces",
-      "path": "/canon/odd/appendices/lane-implementation-surfaces.md",
-      "title": "Lane-Scoped Implementation Surfaces",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "stable",
-      "tags": [
-        "odd",
-        "lanes",
-        "deployment",
-        "contract",
-        "build"
-      ]
-    },
-    {
       "uri": "klappy://canon/odd/media-as-learning-layer",
       "path": "/canon/odd/appendices/media-as-learning-layer.md",
       "title": "Media as a Learning Layer",
@@ -745,23 +303,6 @@
         "learning",
         "progressive-disclosure",
         "website"
-      ]
-    },
-    {
-      "uri": "klappy://canon/odd/memory-architecture",
-      "path": "/canon/odd/appendices/memory-architecture.proposed.md",
-      "title": "Memory Architecture",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "evolving",
-      "tags": [
-        "odd",
-        "memory",
-        "elevation",
-        "portability"
       ]
     },
     {
@@ -783,7 +324,7 @@
     {
       "uri": "klappy://canon/odd/appendices",
       "path": "/canon/odd/appendices/README.md",
-      "title": "ODD Appendices",
+      "title": "ODD Appendices (Portable)",
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
@@ -793,24 +334,24 @@
       "tags": [
         "odd",
         "appendices",
-        "index"
+        "index",
+        "portable"
       ]
     },
     {
       "uri": "klappy://canon/odd/decisions",
       "path": "/canon/odd/decisions/README.md",
-      "title": "ODD Decision Log",
+      "title": "ODD Decision Log (Redirect)",
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
       "tier": 1,
       "voice": "neutral",
-      "stability": "evolving",
+      "stability": "stable",
       "tags": [
         "odd",
         "decisions",
-        "adr",
-        "index"
+        "redirect"
       ]
     },
     {
@@ -884,24 +425,6 @@
       ]
     },
     {
-      "uri": "klappy://canon/odd/appendices/online-evidence",
-      "path": "/canon/odd/appendices/online-evidence.md",
-      "title": "Online Evidence Requirement",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 2,
-      "voice": "authoritative",
-      "stability": "stable",
-      "tags": [
-        "evidence",
-        "cloudflare",
-        "preview",
-        "attempts",
-        "validation"
-      ]
-    },
-    {
       "uri": "klappy://canon/odd",
       "path": "/canon/odd/README.md",
       "title": "Outcomes-Driven Development",
@@ -914,42 +437,6 @@
       "tags": [
         "odd",
         "index"
-      ]
-    },
-    {
-      "uri": "klappy://canon/odd/product-lanes",
-      "path": "/canon/odd/appendices/product-lanes.md",
-      "title": "Product Lanes in Outcome-Driven Development",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "hidden",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "stable",
-      "tags": [
-        "odd",
-        "prd",
-        "architecture",
-        "lanes",
-        "orientation"
-      ]
-    },
-    {
-      "uri": "klappy://canon/odd/progressive-elevation",
-      "path": "/canon/odd/appendices/progressive-elevation.md",
-      "title": "Progressive Elevation & Decay",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "stable",
-      "tags": [
-        "odd",
-        "memory",
-        "portability",
-        "elevation",
-        "decay"
       ]
     },
     {
@@ -1017,24 +504,6 @@
       ]
     },
     {
-      "uri": "klappy://canon/odd/repo-truth-audit",
-      "path": "/canon/odd/appendices/repo-truth-audit.md",
-      "title": "Repo Truth Audit (Epistemic Audit)",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "semi_stable",
-      "tags": [
-        "odd",
-        "repo-truth",
-        "epistemic",
-        "audit",
-        "drift"
-      ]
-    },
-    {
       "uri": "klappy://projects/repo-as-a-system",
       "path": "/projects/repo-as-a-system/README.md",
       "title": "Repo-as-a-System",
@@ -1047,41 +516,6 @@
       "tags": [
         "projects",
         "repo-as-a-system"
-      ]
-    },
-    {
-      "uri": "klappy://canon/odd/repo-topology",
-      "path": "/canon/odd/appendices/repo-topology.md",
-      "title": "Repository Topology",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "semi_stable",
-      "tags": [
-        "odd",
-        "topology",
-        "structure",
-        "decoupling"
-      ]
-    },
-    {
-      "uri": "klappy://canon/odd/repo-truth",
-      "path": "/canon/odd/appendices/repo-truth.md",
-      "title": "Repository Truth & Epistemic Hygiene",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 2,
-      "voice": "neutral",
-      "stability": "stable",
-      "tags": [
-        "odd",
-        "epistemic",
-        "hygiene",
-        "truth",
-        "cleanup"
       ]
     },
     {

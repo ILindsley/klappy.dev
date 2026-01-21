@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-21T04:22:37.923Z
-Total Files: 138
+Generated: 2026-01-21T05:20:33.340Z
+Total Files: 141
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -19,8 +19,8 @@ details (attempts, version folders, source code).
 
 - **Root** (1 files)
 - **About** (5 files)
-- **Canon** (56 files)
-- **Documentation** (16 files)
+- **Canon** (24 files)
+- **Documentation** (51 files)
 - **Infrastructure** (4 files)
 - **Interfaces & Contracts** (6 files)
 - **ODD (Outcomes-Driven Development)** (1 files)
@@ -1464,6 +1464,137 @@ This keeps the system antifragile — branch naming can drift without breaking p
 - **Interface Contracts: `/interfaces/index.md`** (semver'd compatibility promises)
 - **Lane Build Layout: `/canon/odd/appendices/lane-build-layout.md`** (how lanes avoid /src and /dist collisions)
 - Decision: `/canon/odd/decisions/D0001-prod-branch-is-production.md`
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/DISTILLATION_CLASSIFICATION.md
+--------------------------------------------------------------------------------
+
+# Canon Distillation Classification
+
+**Status: COMPLETED**
+
+This document tracks the classification of canon files for the progressive distillation effort.
+
+## Summary of Work Completed
+
+- Classified all 57 canon files as portable or implementation-specific
+- Extracted 14 decisions to `/docs/decisions/`
+- Extracted 18 appendices to `/docs/appendices/`
+- Added progressive distillation structure (Title, Subtitle, Description, Outline, Content) to all files
+- Updated cross-references in key canon files
+
+## Classification Criteria
+
+**PORTABLE** = Concepts that could apply to any ODD-following repo
+- No hardcoded paths or tooling references
+- Methodology/philosophy over procedure
+
+**IMPLEMENTATION-SPECIFIC** = Contains this repo's specific implementation details
+- Absolute paths (`/products/`, `/docs/PRD.md`, `/infra/`)
+- CLI commands (`attempt:register`, `attempt:nuke`)
+- Branch names (`prod`, `main`, `attempt/*`)
+- Tool-specific config (Cloudflare Pages, git worktrees)
+- Lane names (`website`, `ai-navigation`, `agent-skill`)
+
+---
+
+## Canon Root Files (6 files)
+
+| File | Classification | Notes |
+|------|---------------|-------|
+| `constraints.md` | PORTABLE | Pure methodology |
+| `decision-rules.md` | PORTABLE | Pure heuristics |
+| `definition-of-done.md` | PORTABLE | Pure methodology |
+| `self-audit.md` | PORTABLE | Pure methodology |
+| `visual-proof.md` | PORTABLE | Pure methodology |
+| `completion-report-template.md` | PORTABLE | Pure template |
+
+---
+
+## Canon ODD Root Files (7 files)
+
+| File | Classification | Notes |
+|------|---------------|-------|
+| `manifesto.md` | PORTABLE | Pure philosophy |
+| `contract.md` | IMPLEMENTATION | Epoch IDs, paths, META.json schema |
+| `maturity.md` | PORTABLE | Pure methodology |
+| `orientation-map.md` | PORTABLE | Pure mental model |
+| `misuse-patterns.md` | PORTABLE | Pure failure modes |
+| `prompt-architecture.md` | PORTABLE | Pure methodology |
+| `README.md` | STAYS | Index file |
+
+---
+
+## Canon ODD Decisions (15 files)
+
+**ALL DECISIONS → docs/decisions/**
+
+| File | Classification | Notes |
+|------|---------------|-------|
+| `D0001-prod-branch-is-production.md` | IMPLEMENTATION | Branch names, CLI, Cloudflare |
+| `D0002-attempt-provenance-required.md` | IMPLEMENTATION | CLI, META.json, paths |
+| `D0003-prd-version-auto-detection.md` | IMPLEMENTATION | Specific paths, CLI |
+| `D0004-repo-truth-cleanup-mandatory.md` | IMPLEMENTATION | CLI commands, paths |
+| `D0005-nuke-safety-guards.md` | IMPLEMENTATION | CLI, branch names, paths |
+| `D0006-dogfooding-requirement.md` | IMPLEMENTATION | klappy.dev specific |
+| `D0007-branch-names-are-convenience.md` | IMPLEMENTATION | Cloudflare, META.json |
+| `D0008-register-before-nuke.md` | IMPLEMENTATION | CLI commands |
+| `D0009-multi-lane-prd-architecture.md` | IMPLEMENTATION | Specific lanes, paths |
+| `D0010-canonical-agent-kickoff.md` | IMPLEMENTATION | Specific paths |
+| `D0011-odd-contract-2.0.0.md` | IMPLEMENTATION | Epoch IDs, paths |
+| `D0012-e0002-transition-interpretation.md` | IMPLEMENTATION | Epoch transitions |
+| `D0013-build-output-lane-scoped-dist.md` | IMPLEMENTATION | Specific paths |
+| `D0014-e0003-evidence-first-era.md` | IMPLEMENTATION | Cloudflare, evidence URLs |
+| `README.md` | STAYS | Index file (will update) |
+
+---
+
+## Canon ODD Appendices (25 files)
+
+| File | Classification | Notes |
+|------|---------------|-------|
+| `alignment-reviews.md` | PORTABLE | Pure methodology |
+| `attempt-lifecycle.md` | IMPLEMENTATION | CLI, paths, META.json |
+| `canonical-compression.md` | IMPLEMENTATION | Specific paths |
+| `compilation.md` | IMPLEMENTATION | Paths, npm commands |
+| `compilation-targets.md` | IMPLEMENTATION | Specific paths |
+| `compiled-memory.md` | IMPLEMENTATION | Paths, lanes |
+| `deploy-evidence.md` | IMPLEMENTATION | Cloudflare, paths |
+| `drift-checks.md` | IMPLEMENTATION | npm commands, contracts |
+| `epochs.md` | IMPLEMENTATION | E0003 section is very implementation-specific |
+| `evidence.md` | IMPLEMENTATION | Specific path structure |
+| `evolution-not-automation.md` | PORTABLE | Pure philosophy |
+| `failure-driven-modularity.md` | PORTABLE | Pure methodology |
+| `lane-build-layout.md` | IMPLEMENTATION | Cloudflare, lanes |
+| `lane-implementation-surfaces.md` | IMPLEMENTATION | Cloudflare, lanes |
+| `media-as-learning-layer.md` | PORTABLE | Pure principles |
+| `memory-architecture.proposed.md` | IMPLEMENTATION | Folder patterns |
+| `online-evidence.md` | IMPLEMENTATION | Cloudflare, paths |
+| `product-lanes.md` | IMPLEMENTATION | Specific lanes, paths |
+| `progressive-elevation.md` | IMPLEMENTATION | Specific paths |
+| `quantum-development.md` | PORTABLE | Pure methodology |
+| `repo-topology.md` | IMPLEMENTATION | All paths |
+| `repo-truth.md` | IMPLEMENTATION | CLI, branch names |
+| `repo-truth-audit.md` | IMPLEMENTATION | Specific files to read |
+| `visual-evolution.md` | PORTABLE | Pure methodology |
+| `README.md` | STAYS | Index file (will update) |
+
+---
+
+## Summary
+
+- **PORTABLE (Stay in Canon):** ~18 files
+- **IMPLEMENTATION-SPECIFIC (Move to docs/):** ~32 files (14 decisions + 18 appendices)
+- **Index files (Stay, update references):** ~4 files
+
+## Extraction Order
+
+1. Move all 14 decisions to `docs/decisions/`
+2. Move 18 appendices to `docs/appendices/`
+3. Update README indexes in both locations
+4. Add progressive distillation structure to all files
 
 
 
@@ -2945,6 +3076,3310 @@ Code is allowed to be disposable when regeneration is cheaper than understanding
 
 
 --------------------------------------------------------------------------------
+📄 File: docs/appendices/README.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/appendices
+title: "Implementation Appendices"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["docs", "appendices", "implementation", "reference", "index"]
+---
+
+# Implementation Appendices
+
+Implementation-specific appendices that document how klappy.dev applies ODD concepts. These are reference implementation details, not portable methodology.
+
+> **Relationship to Canon:** Portable concepts live in `/canon/odd/appendices/`. This folder contains the klappy.dev-specific implementation of those concepts.
+
+---
+
+## Contents
+
+### Attempt & Evidence
+
+| File | Title | Summary |
+|------|-------|---------|
+| `attempt-lifecycle.md` | Attempt Lifecycle | How PRD versions, attempts, evidence, and deployments are preserved. Includes CLI commands and folder structure. |
+| `evidence.md` | Evidence | Evidence requirements including `/_evidence/` path structure and `.attempt.json` schema. |
+| `deploy-evidence.md` | Deploy Evidence | Why evidence must be in the build output. Cloudflare Pages serving requirements. |
+| `online-evidence.md` | Online Evidence Requirement | Attempts are invalid without online preview URLs via Cloudflare Pages. |
+
+### Compilation & Memory
+
+| File | Title | Summary |
+|------|-------|---------|
+| `compilation.md` | Compilation | The process of producing derived packs. Includes `/public/_compiled/<lane>/` paths and npm commands. |
+| `compiled-memory.md` | Compiled Memory | Lane-scoped, wipeable, auditable compressed artifacts with specific output paths. |
+| `compilation-targets.md` | Compilation Targets | How compiled packs make the corpus usable with specific plan file paths. |
+| `canonical-compression.md` | Canonical Compression | How derived, minimal working models are produced with `_compiled/` output locations. |
+| `memory-architecture.proposed.md` | Memory Architecture | Memory as layered percolation with specific folder patterns. |
+| `progressive-elevation.md` | Progressive Elevation & Decay | Five layers of portability with specific klappy.dev paths. |
+
+### Repository Structure
+
+| File | Title | Summary |
+|------|-------|---------|
+| `repo-topology.md` | Repository Topology | What lives where and what changes when. Complete folder structure. |
+| `repo-truth.md` | Repository Truth | `attempt:cleanup` command and branch roles (`prod`, `main`, `attempt/*`). |
+| `repo-truth-audit.md` | Repo Truth Audit | Specific files to read for epistemic audit. |
+| `drift-checks.md` | Drift Checks | `npm run verify:contracts` and drift prevention with specific contracts. |
+
+### Product Lanes
+
+| File | Title | Summary |
+|------|-------|---------|
+| `product-lanes.md` | Product Lanes | The three lanes (website, ai-navigation, agent-skill) and their structure. |
+| `lane-build-layout.md` | Lane Build Layout | How lanes avoid `/src` and `/dist` collisions with Cloudflare. |
+| `lane-implementation-surfaces.md` | Lane-Scoped Implementation Surfaces | Each lane owns `products/<lane>/src` and `products/<lane>/dist`. |
+| `epochs.md` | Epochs | Named periods including E0003 evidence requirements with Cloudflare specifics. |
+
+---
+
+## What Makes These Implementation-Specific
+
+These appendices contain:
+
+- Absolute paths specific to this repository (`/products/`, `/docs/PRD.md`, `/infra/`)
+- Specific CLI commands (`attempt:register`, `attempt:nuke`, `npm run verify:contracts`)
+- Branch names specific to this workflow (`prod`, `main`, `attempt/*`)
+- Tool-specific configuration (Cloudflare Pages, git worktrees)
+- Lane names specific to klappy.dev (`website`, `ai-navigation`, `agent-skill`)
+
+---
+
+## When to Read What
+
+**Setting up a new lane?** Start with `product-lanes.md` and `lane-implementation-surfaces.md`.
+
+**Understanding attempt workflow?** Read `attempt-lifecycle.md` and `evidence.md`.
+
+**Building compilation packs?** Read `compilation.md`, `compiled-memory.md`, and `compilation-targets.md`.
+
+**Debugging drift?** Read `drift-checks.md`, `repo-truth.md`, and `repo-truth-audit.md`.
+
+---
+
+## Relationship to Canon Appendices
+
+| Canon Appendix | Implementation Appendix | Relationship |
+|----------------|------------------------|--------------|
+| `evolution-not-automation.md` | `attempt-lifecycle.md` | Philosophy → Procedure |
+| `failure-driven-modularity.md` | `product-lanes.md` | Concept → Structure |
+| `quantum-development.md` | `attempt-lifecycle.md` | Theory → Practice |
+| `alignment-reviews.md` | `repo-truth-audit.md` | What to review → How to audit |
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/appendices/attempt-lifecycle.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/appendices/attempt-lifecycle
+title: "Attempt Lifecycle"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: semi_stable
+tags: ["odd", "attempt", "lifecycle", "restartability"]
+---
+
+# Attempt Lifecycle
+
+> How work is iterated without steering failed attempts.
+
+## Description
+
+This appendix defines the klappy.dev attempt lifecycle: how PRD versions, attempts, evidence, and deployments are preserved. Core principles: attempts are disposable, infrastructure persists, content accumulates, deployments are views not truth. PRDs define what to build; attempts are bounded executions. Attempts exist to test PRDs, not evolve them. The system uses register → nuke for blank slate independence, artifacts always merge (even from failed attempts), and champion selection promotes exactly one attempt to production. The three planes of change are Application (disposable), Content/Canon (persistent), and Infrastructure (slow-changing).
+
+## Outline
+
+- Why This Appendix Exists
+- Core Principles
+- PRD Version vs Attempt
+- PRD as the Unit of Test
+- Independence: Goal vs Infrastructure
+- Worktrees and Learnings
+- Canonical Places (paths)
+- Learnings Payload
+- Artifacts Always Merge
+- What an Attempt Is / Is Not
+- The Three Planes of Change
+- Canonical Structure (folder layout)
+- Collision Avoidance
+- Blank Slate Requirement (Register → Nuke)
+- Attempt Lifecycle (High Level)
+- Sealing an Attempt
+- Champion Selection and Promotion
+- Restartability as a Feature
+
+---
+
+## Content
+
+**Status:** Orientation  
+**Audience:** Internal / Canon  
+**Scope:** How work is iterated without steering failed attempts
+
+---
+
+## Why This Appendix Exists
+
+Outcomes-Driven Development (ODD) assumes that clarity improves faster than execution in an AI-accelerated environment.
+
+As clarity improves, attempts that were once reasonable often become misaligned.
+
+This appendix exists to make stopping, restarting, and rebuilding a normal, explicit part of the system rather than an emotional or ad-hoc decision.
+
+---
+
+## Core Principles
+
+1. **Attempts are disposable.**
+2. **Infrastructure persists.**
+3. **Content accumulates.**
+4. **Deployments are views, not truth.**
+
+Restarting is not a failure of execution.  
+Restarting is evidence that intent has sharpened.
+
+Branch and preview deployments exist to observe behavior. The canonical record is the sealed attempt + commit SHA, not the deployment URL.
+
+---
+
+## PRD Version vs Attempt
+
+A **PRD version** defines what should be built.  
+An **attempt** is a bounded execution of that PRD.
+
+**Key distinction:**
+- A PRD version can have multiple attempts
+- Attempts exist to test the PRD, not to evolve it
+- If the PRD is wrong, create a new PRD version
+- If the implementation fails, create a new attempt against the same PRD
+
+This separation prevents "Phase 1.1" scope creep disguised as iteration.
+
+See [Quantum Development](./quantum-development.md) for the rationale behind multiple attempts.
+
+For the single canonical kickoff prompt used to start any new attempt, see: `/docs/ATTEMPT_KICKOFF.md`.
+
+---
+
+## PRD as the Unit of Test
+
+In ODD, a PRD is treated as the primary test unit.
+
+Issues and failures are mapped back to PRD improvements, and attempts are used to validate PRDs as hypotheses.
+
+This reduces ticket sprawl by keeping the system legible: one PRD version, multiple observable attempts, sealed evidence.
+
+---
+
+## Independence: Goal vs. Infrastructure
+
+Independence is the goal (epistemic).
+
+Infrastructure is an enabler, not a guarantee.
+
+An attempt is independent if:
+- decisions are not steered by prior outcomes,
+- implementation state is fresh,
+- and the approach represents a genuine re-instantiation of the PRD.
+
+Branches and preview deployments can support independence by reducing accidental state leakage and enabling parallel observation, but they do not define independence.
+
+---
+
+## Worktrees and Learnings
+
+**Worktrees are disposable sandboxes. Learnings live in the main repo.**
+
+When using git worktrees for parallel attempts:
+- Each worktree is isolated code state
+- Learnings are repo state, not worktree state
+- Learnings must land in one canonical place that every attempt can write to
+
+You do not try to "share memory" between worktree agents. You publish outputs.
+
+### Canonical Places (Single Source of Truth)
+
+These paths live in the main repo (not inside a worktree only):
+
+- `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/**` — sealed record + evidence (lane-contained)
+- `/docs/PRD/<lane>/PRD.md` — living PRD per lane
+- `/docs/learnings/prd-vX.Y.md` — (optional) rolling "what we learned" log
+
+Anything in those paths is real. Anything else is temporary.
+
+Note: Root `/attempts/**` is legacy (read-only). All new attempts are lane-contained.
+
+### Learnings Payload (Required)
+
+At the end of each attempt, the agent must produce:
+
+1. `products/<lane>/attempts/prd-vX.Y/attempt-NNN/ATTEMPT.md` — closure record
+2. `products/<lane>/attempts/prd-vX.Y/attempt-NNN/META.json` — commit SHA, preview URL, status
+3. `products/<lane>/attempts/prd-vX.Y/attempt-NNN/evidence/*` — screenshots, logs
+4. PRD patch (if learnings exist): updates to `/docs/PRD/<lane>/PRD.md` in a dedicated section:
+   - "Observed failure modes"
+   - "Clarifications / constraints added"
+   - "New DoD checks"
+
+The PRD patch is how learning persists across attempts.
+
+---
+
+## Artifacts Always Merge
+
+**Failed attempts still contribute learnings.**
+
+Attempts produce two types of outputs:
+- **Code changes** — the implementation
+- **Artifacts** — attempt folder, evidence, PRD patches
+
+The merge rule:
+
+| Output | Merge to main? |
+|--------|----------------|
+| Artifacts (attempt folder, evidence, PRD patches) | **Always** |
+| Code (src/, components, etc.) | **Only if Champion** |
+
+This prevents "we lost the learning because the attempt failed."
+
+### Two Merges Per Attempt
+
+1. **Artifacts merge** (always happens)
+   - Seal the attempt folder
+   - Commit evidence and closure record
+   - Apply any PRD patches
+   - Merge to `main`
+
+2. **Code promotion** (only if winner)
+   - Champion's code merges to `main`
+   - Non-winners keep their preview URLs but code stays on attempt branch
+
+This separation ensures every attempt contributes to the knowledge base, regardless of whether its code ships.
+
+---
+
+## What an Attempt Is
+
+An Attempt is a bounded execution of a specific Product Requirements Document (PRD).
+
+An attempt:
+- has a single PRD version
+- has a defined scope
+- produces an outcome artifact
+- is evaluated against its own Definition of Done
+- is explicitly closed (CLOSED or ABANDONED)
+
+An attempt does not:
+- evolve indefinitely
+- absorb new scope reactively
+- serve as the foundation for all future work
+
+---
+
+## What an Attempt Is Not
+
+An attempt is not:
+- a phase in a linear roadmap
+- a commitment to incremental improvement
+- a promise of continuity
+
+Attempts are experiments with intent, not investments to be amortized.
+
+---
+
+## The Three Planes of Change
+
+ODD separates work across three independent planes:
+
+### 1. Application Plane (Behavior)
+
+What the system does:
+- UI structure
+- interaction patterns
+- navigation model
+- rendering logic
+
+This plane is **attempt-scoped and disposable**.
+
+### 2. Content / Canon Plane (Knowledge)
+
+What the system knows:
+- Canon documents
+- ODD Manifesto
+- Projects
+- Writings, notes, transcripts
+
+This plane is **persistent and cumulative**.
+
+Content may evolve independently of any attempt.
+
+### 3. Infrastructure Plane (Capability)
+
+What makes building cheap:
+- deployment setup
+- build tooling
+- sync/verify scripts
+- schemas and formats
+
+This plane **changes slowly and intentionally**.
+
+---
+
+## Canonical Structure
+
+Attempts are **lane-contained**. All attempt artifacts live under the product lane:
+
+```
+products/<lane>/attempts/
+  prd-vX.Y/
+    PRD.md                    # frozen PRD for this version
+    _runs/<run_id>/           # working directory (before finalization)
+    attempt-001/              # finalized attempts
+      ATTEMPT.md              # closure record
+      META.json               # canonical pointers (provenance is truth)
+      EVIDENCE.md             # evidence index
+      evidence/               # screenshots, logs, etc.
+    attempt-002/              # retry (if needed)
+```
+
+Note: Root `/attempts/**` is legacy (read-only). See `/attempts/README.md`.
+
+**META.json** contains:
+- `tool` — which tool was used (Cursor, Claude, etc.)
+- `agent_id` — agent identifier
+- `model` — model used (e.g., "claude-opus-4-5-20250514")
+- `run_id` — unique run identifier
+- `branch` — branch name (convenience, not truth)
+- `prd_version` — PRD version being tested
+- `sealed_commit` — the commit SHA (truth)
+- `git_tag` — convenience pointer (optional)
+- `status` — CLOSED, ABANDONED, or CHAMPION
+- `deploy` — recorded URLs (production, preview) as evidence artifacts
+
+The concrete sealing procedure is documented in `/docs/ATTEMPTS.md`.
+
+---
+
+## Collision Avoidance (Current Model)
+
+Parallel agents don't reserve numbers upfront. Instead:
+
+1. **Register** — Each agent runs `attempt:register` to capture provenance (creates `run-<run_id>/`)
+2. **Build** — Agent works in isolation
+3. **Finalize** — `attempt:finalize` sorts runs by completion time and assigns `attempt-001`, `attempt-002`, etc.
+
+This prevents collisions because numbers are assigned deterministically at completion, not reserved upfront.
+
+> **Deprecated:** The `ATTEMPT_REGISTRY.json` / `attempt:reserve` model is no longer used.
+
+---
+
+## Blank Slate Requirement
+
+**Attempts must start from a clean slate to be independent.**
+
+### The Problem
+
+If attempt-002 branches from attempt-001's code, it's not independent. The agent will see existing patterns and converge on similar solutions.
+
+### The Solution: Register → Nuke
+
+The required sequence is:
+
+1. **`attempt:register --lane <lane>`** — Captures provenance (who, with what model, from where)
+2. **`attempt:nuke --lane <lane>`** — Deletes lane src and framework configs (guarantees blank slate)
+3. **Only then** does implementation begin
+
+This preserves forensic traceability (we know who showed up) while guaranteeing experimental independence (no inherited code).
+
+### What Gets Nuked (Lane-Scoped)
+
+- `products/<lane>/src/` — lane application code
+- `products/<lane>/vite.config.js`, `products/<lane>/tailwind.config.js`, etc. — lane framework configs
+
+> **Note:** Root-level `/src/` no longer exists. All app code is lane-scoped.
+
+### What Survives
+
+- `/infra/` — deployment scripts, contracts
+- `/canon/`, `/about/`, `/projects/` — content
+- `/docs/` — process documentation
+- `/products/<lane>/attempts/` — sealed evidence (lane-contained)
+- `/attempts/` — legacy sealed evidence (read-only)
+- `package.json` — dependency manifest
+- Other lanes (`products/<other-lane>/src/`) — only the target lane is nuked
+
+> **Decision:** See [D0008: Register Before Nuke](/canon/odd/decisions/D0008-register-before-nuke.md)
+
+---
+
+## Attempt Lifecycle (High Level)
+
+1. **Intent Articulation**
+   - A PRD is written for a specific outcome
+   - Scope is explicit and finite
+
+2. **Execution**
+   - The application is built from scratch against the PRD
+   - Existing infrastructure may be reused
+   - Existing content may be consumed
+   - Prior app logic is not assumed
+
+3. **Evaluation**
+   - Outcome is evaluated against the PRD's Definition of Done
+   - Evidence is captured
+
+4. **Closure**
+   - The attempt is explicitly marked CLOSED or ABANDONED
+   - No new scope is added under the same attempt
+
+5. **Reflection**
+   - Learnings inform the next PRD or attempt
+   - The current attempt is not retrofitted
+
+---
+
+## Sealing an Attempt
+
+A **sealed attempt** has:
+- A frozen PRD snapshot (at the PRD version level)
+- Evidence captured and linked
+- A commit pointer (SHA) in META.json
+- Status: CLOSED, ABANDONED, or CHAMPION
+
+Once sealed:
+- No further work is done on that attempt
+- The record is immutable
+- New work requires a new attempt (same PRD) or new PRD version
+
+---
+
+## Champion Selection and Promotion
+
+Quantum Development produces observations. Promotion converts one observation into production.
+
+### Definitions
+
+- **Attempts** = competing candidates (separate branches / preview deploys)
+- **Champion** = the single candidate chosen to become production
+- **`prod` branch** = production deployment (klappy.dev)
+- **`main` branch** = experiment ledger, history aggregation
+
+### The Promotion Rule
+
+**Exactly one attempt becomes Champion for a PRD version.**
+
+The Champion is merged to `main`, then `prod` is fast-forwarded to `main`. Everything else stays sealed evidence.
+
+### Minimum Gate (must pass)
+
+1. PRD Success Criteria (the checkboxes in the PRD)
+2. Evidence bundle (desktop + mobile + deep-link round-trip + failure behavior)
+3. Cloudflare preview URL captured in META.json
+4. No fatal regressions vs current production
+
+### Tie-Breakers (when multiple pass)
+
+Pick one axis and declare it ahead of time:
+
+- Best mobile UX
+- Best navigation clarity
+- Cleanest deep-link contract and anchor behavior
+- Simplest code / fewest dependencies (maintainability)
+
+**Important:** Tie-breakers are not more features. They're about quality under the same PRD.
+
+### Promotion Procedure
+
+**Branch Roles:**
+- `prod` — **production** (only champions go here)
+- `main` — experiment ledger, artifact aggregation
+- `*` (any other) — attempt sandboxes (preview deploys)
+
+**When an attempt wins:**
+
+1. **Seal it**
+   - `products/<lane>/attempts/prd-vX.Y/attempt-NNN/` has: ATTEMPT.md, META.json, evidence folder, preview URL.
+   - Status: CHAMPION
+
+2. **Tag it** (immutable pointer)
+   - Tag: `prd-vX.Y-attempt-NNN`
+
+3. **Merge artifacts to main**
+   - Attempt folder, evidence, PRD patches
+
+4. **Promote code to main**
+   - Champion's `products/<lane>/src` merges to `main`
+
+5. **Fast-forward prod**
+   - `git checkout prod && git merge main --ff-only`
+   - Cloudflare deploys `prod` → production
+
+**What happens to other attempts?**
+- Seal them (ABANDONED or CLOSED-but-not-chosen)
+- Keep their preview URLs + evidence
+- Merge their artifacts to `main` (learnings persist)
+- Do NOT merge their code
+
+### The One Rule That Prevents Chaos
+
+**Only `prod` is allowed to be production.**
+
+`main` is for experiments and history. Attempts can be preview deployments forever.
+
+This makes "which one is live?" a non-question.
+
+> **Decision:** See [D0001: prod Branch Is Production](/canon/odd/decisions/D0001-prod-branch-is-production.md)
+
+### Winner Declaration (ATTEMPT.md snippet)
+
+When an attempt wins, add to its ATTEMPT.md:
+
+```
+Status: CHAMPION (Promoted to Production)
+Promoted commit: <sha>
+Attempt tag: prd-vX.Y-attempt-NNN
+Production tag: production-vX.Y
+Production URL: https://klappy.dev
+Preview URL: <cloudflare preview>
+Why this one won (tie-breaker): <one sentence>
+```
+
+---
+
+## Restartability as a Feature
+
+ODD treats restartability as a first-class design feature:
+- prompts are rewritten, not patched
+- applications are regenerated, not endlessly refactored
+- artifacts are preserved for learning, not extended by default
+
+This prevents:
+- sunk-cost bias
+- prompt sprawl
+- architectural drift
+
+---
+
+## What Persists Across Attempts
+
+The following may persist across attempts:
+- deployment infrastructure
+- build and verification scripts
+- content repositories
+- Canon structure
+- naming conventions
+- evidence standards
+
+The following must not be assumed to persist:
+- UI composition
+- routing model
+- state management decisions
+- interaction flow
+
+---
+
+## Why Attempts Are Explicitly Closed
+
+Explicit closure:
+- creates psychological safety to restart
+- prevents scope creep disguised as "Phase 1.1"
+- keeps PRDs honest and legible
+- makes outcomes comparable across attempts
+
+Unclosed attempts silently turn into products by accident.
+
+---
+
+## How This Appendix Should Be Used
+
+This appendix is:
+- a shared mental model
+- a permission structure
+- a vocabulary for stopping well
+
+It is not:
+- a workflow
+- a checklist
+- a gating mechanism
+
+---
+
+## Summary
+
+ODD optimizes for learning velocity, not artifact continuity.
+
+Attempts exist to be finished.  
+Infrastructure exists to make finishing cheap.  
+Content exists to compound over time.
+
+**Quantum Development ends when one candidate is promoted.**
+Observations without promotion are incomplete experiments.
+
+---
+
+**Status:** Updated 2026-01-16 — Aligned with D0001 (prod branch), D0008 (register before nuke)
+
+> **Authoritative source for attempt workflow:** `/docs/ATTEMPTS.md`
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/appendices/canonical-compression.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/appendices/canonical-compression
+title: Canonical Compression
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "compression", "compiled", "epochs", "drift"]
+status: canonical
+category: odd
+version: 1.0
+epoch: E0002
+---
+
+# Canonical Compression
+
+> Derived compression outputs that fit bounded context windows without modifying source truth.
+
+## Description
+
+Canonical Compression produces minimal, derived working models from the full Canon to solve context window limits. Source Canon remains authoritative while compiled outputs are epoch-scoped, disposable artifacts that can be regenerated anytime. This is compilation, not mutation—compressed outputs live in `_compiled/` and never replace source truth.
+
+## Outline
+
+- Summary
+- The Problem It Addresses
+- Two Classes of Canon Artifacts
+- Compilation Model
+- Where Compiled Canon Lives
+- What Compression Produces
+- What Compression Must Never Do
+- Relationship to Drift Checks
+- Relationship to Epochs
+- The Rule
+- Status
+
+---
+
+## Content
+
+## Summary
+
+As the Canon grows, agents and humans cannot hold the entire system in working memory.
+
+Canonical Compression solves this by producing a **derived, minimal working model** of the Canon that fits into limited context windows without sacrificing the source of truth.
+
+**Canonical Compression is compilation, not mutation.**
+
+- Source Canon remains authoritative and unchanged.
+- Compressed outputs are derived artifacts.
+- Derived artifacts are disposable and regenerable.
+- Any compression output can be deleted without loss of truth.
+
+---
+
+## The Problem It Addresses
+
+Agents drift for reasons beyond contradiction:
+
+- The total doc surface becomes too large for a single context window.
+- Important rules are duplicated across files, creating divergence.
+- Low-signal history (old decisions, obsolete guidance) consumes attention.
+- "More documentation" paradoxically makes behavior less consistent.
+
+Drift checks detect inconsistency.
+Canonical Compression reduces the size of the reasoning surface so consistency becomes feasible.
+
+---
+
+## Two Classes of Canon Artifacts
+
+### 1) Source Canon (Authoritative, Slow)
+
+Examples:
+
+- `/canon/**`
+- `/canon/odd/appendices/**`
+- `/canon/odd/decisions/**`
+
+Properties:
+
+- Curated and human-owned
+- Evidence-backed
+- Traceable
+- Evolves slowly
+- Never rewritten by synthesis
+
+Source Canon is **truth storage**.
+
+### 2) Compiled Canon (Derived, Fast)
+
+Canonical Compression produces **Compiled Canon** outputs.
+
+Properties:
+
+- Derived and lossy (summaries, collapsed checklists, working models)
+- Replaceable and disposable
+- Epoch-scoped
+- Designed for agent working memory
+- Must include links back to Source Canon
+
+Compiled Canon is **truth projection**, not truth itself.
+
+---
+
+## Compilation Model
+
+Canonical Compression produces **derived artifacts**.
+
+- Source Canon is never modified
+- Compressed outputs live in `_compiled/`
+- Outputs are epoch-scoped and disposable
+- Regeneration is always preferred to editing
+
+Compression is compilation, not mutation.
+
+---
+
+## Where Compiled Canon Lives (Exact)
+
+Compiled outputs MUST NOT be written into `/canon/` as source documents.
+
+They live here:
+
+/canon/_compiled/
+epoch-E0002/
+agent-working-model.md
+reasoning-checklist.md
+failure-patterns-collapsed.md
+
+Notes:
+
+- `_compiled/` is derived output (wipeable).
+- Outputs are organized by epoch to preserve comparability.
+- If the entire folder is deleted, no truth is lost — only convenience.
+
+---
+
+## What Compression Produces
+
+Canonical Compression generates a small set of artifacts (exact list may evolve):
+
+- **Agent Working Model**: minimal worldview for correct behavior
+- **Reasoning Checklist**: step-by-step constraints + invariants
+- **Failure Patterns (Collapsed)**: common pitfalls distilled into triggers + tests
+- **Doc Map (Progressive Links)**: what to read next when confidence drops
+
+Each output MUST:
+
+- Be marked as derived/compiled
+- Declare its epoch
+- Link back to source documents for traceability
+
+---
+
+## What Compression Must Never Do
+
+- Rewrite or replace Source Canon files
+- Delete decision logs
+- "Optimize" by removing nuance from the source
+- Invent new rules (compression may restate, not legislate)
+
+If a compression output implies a new rule, that rule must be introduced via:
+- a decision log, or
+- a PRD + attempt process in the relevant lane
+
+---
+
+## Relationship to Drift Checks
+
+Drift checks answer: **"Do these documents contradict?"**
+
+Canonical Compression answers: **"Can a bounded context window hold the rules needed to behave correctly?"**
+
+Drift checks prevent incoherence.
+Compression prevents overload.
+
+Both are required.
+
+---
+
+## Relationship to Epochs
+
+Compression outputs are epoch-scoped.
+
+- If epoch changes, compiled outputs must be regenerated
+- Comparability across epochs is not assumed
+- Old compiled outputs may be archived or deleted
+
+Epoch scoping prevents "half-updated working models" from lingering.
+
+---
+
+## The Rule (One Sentence)
+
+**Canon is written by humans and proven by outcomes.  
+Compiled Canon is written by synthesis and proven by usability.**
+
+---
+
+## Status
+
+This document defines the conceptual model.
+Implementation of tooling to generate compiled outputs is tracked separately.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/appendices/compilation-targets.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/appendices/compilation-targets
+title: "Compilation Targets"
+audience: docs
+exposure: public
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "compilation", "memory", "portability", "packs", "lanes"]
+---
+
+# Compilation Targets
+
+> Lane-scoped, target-specific packs that make the corpus usable at constrained context sizes.
+
+## Description
+
+Compiled packs are derived outputs identified by (lane, target) pairs that can be deleted and regenerated anytime. Each pack has a deterministic plan file defining ordered sources and compilation mode. Targets are constrained consumer profiles (like visitor or author), not personas, and all packs must include provenance for verification without requiring an LLM.
+
+## Outline
+
+- Key Idea
+- Output Location (Wipeable)
+- Compile Plans (Deterministic)
+- Targets
+- Invariants
+- Phase Policy
+
+---
+
+## Content
+
+Compiled packs exist to make the corpus usable at constrained context sizes without rewriting source truth.
+
+A compiled pack is **derived output**. It can be deleted and regenerated at any time.
+
+## Key Idea
+
+Compilation is scoped by:
+
+- **Lane** (which product's PRD and user intent we're serving)
+- **Target** (which consumer needs the compressed view)
+
+A pack is always identified as:
+
+`(lane, target)`
+
+## Output Location (Wipeable)
+
+All compiled output MUST live under:
+
+`/public/_compiled/<lane>/`
+
+Example:
+
+- `/public/_compiled/website/visitor-pack.md`
+- `/public/_compiled/website/author-pack.md`
+
+## Compile Plans (Deterministic)
+
+Each pack MUST have a deterministic plan file:
+
+`/infra/compile/plans/<lane>/<target>.json`
+
+The plan defines:
+- ordered source files
+- compilation mode (Phase 0: concat)
+- output filename
+
+## Targets
+
+Targets are **not personas**. They are constrained consumer profiles.
+
+### Website Lane Targets
+
+- `visitor` — minimal orientation surface; progressive disclosure; "what is this?"
+- `author` — high-signal working pack for the repo owner; more depth; less onboarding
+
+### Future Targets (Defined When Needed)
+
+- `dev-peer` — evaluation / critique / contribution readiness
+- `agent-core` — operational pack for agents to follow process consistently
+
+These exist as names only until a lane PRD requires them.
+
+## Invariants
+
+- Packs are derived. Source docs are not overwritten.
+- Packs do not introduce new truth. They reference truth.
+- Packs must include provenance (lane, target, timestamp, git commit, source list + hashes).
+- Verification MUST be possible without an LLM (hashes + structure + required header).
+
+## Phase Policy
+
+- **Phase 0 (Concat):** deterministic concatenation only
+- **Phase 1 (LLM):** LLM may summarize/select, but output still must satisfy the same provenance + verification contract
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/appendices/compilation.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/appendices/compilation
+title: Compilation
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["odd", "compilation", "memory", "context", "packs"]
+---
+
+# Compilation
+
+> The process of producing wipeable, portable context packs from source documents.
+
+## Description
+
+Compilation creates derived, regeneratable packs that fit in agent and human working memory while preserving source truth unchanged. Compiled outputs live under `/public/_compiled/<lane>/` with required provenance headers for auditability. This mechanism keeps context portable, auditable, and cheap while applying evolutionary pressure against documentation sprawl.
+
+## Outline
+
+- Summary
+- Core Rule
+- Output Location (Wipeable)
+- Provenance Header (Required)
+- Why This Is ODD
+- Multi-Pack Output (E0002+)
+- Relationship to Drift Checks
+- Drift Audits
+
+---
+
+## Content
+
+## Summary
+
+Compilation is the process of producing a **derived, wipeable, portable pack** from higher-entropy source documents.
+
+It exists to solve a practical constraint:
+
+> Agents and humans cannot keep the entire repo in working memory at once.
+
+Compilation produces a **smaller, purpose-built context artifact** that can be regenerated at any time.
+
+---
+
+## Core Rule
+
+**Compilation never edits or replaces source.**
+
+- Source docs remain the truth.
+- Compiled packs are derived outputs.
+- Compiled outputs may be deleted at any time and rebuilt deterministically.
+
+This is compilation, not compression-in-place.
+
+---
+
+## Output Location (Wipeable)
+
+Compiled outputs MUST live under:
+
+`/public/_compiled/<lane>/`
+
+Example:
+
+`/public/_compiled/website/visitor-pack.md`
+
+Compiled outputs MUST NOT be stored inside:
+- `/canon/**`
+- `/docs/**`
+- `/attempts/**`
+
+Those are source-of-truth layers.
+
+---
+
+## Provenance Header (Required)
+
+Every compiled pack MUST begin with a provenance header containing:
+
+- `lane`
+- `pack`
+- `built_at` (ISO8601)
+- `git_commit`
+- `sources` (list of source file paths)
+- `source_hashes` (map of source path → sha256)
+
+If provenance is missing, the compiled pack is invalid.
+
+---
+
+## Why This Is ODD
+
+ODD treats "context" as a consumable.
+
+Compilation is the mechanism that makes context:
+
+- **portable** (shareable artifact)
+- **auditable** (provenance)
+- **regeneratable** (wipeable output)
+- **cheap** (smaller input than full repo)
+
+Compilation is not automation. It is an **evolutionary pressure** against doc sprawl.
+
+If compilation output grows bloated, the correct response is:
+- reduce scope
+- tighten selection rules
+- improve curation
+not "add more docs."
+
+---
+
+## Multi-Pack Output (E0002+)
+
+When a lane has more than one pack, output MUST be structured as:
+
+```
+/public/_compiled/<lane>/
+  index.json
+  <pack>-pack.md
+  _meta/
+    <pack>-COMPILE_META.json
+```
+
+### index.json
+
+Each lane MUST emit `/public/_compiled/<lane>/index.json` listing all known packs from
+`/infra/compile/plans/<lane>/*.json` and whether each output exists.
+
+### Meta filenames are pack-scoped
+
+`COMPILE_META.json` MUST NOT be shared across packs.
+
+Meta MUST be written as:
+
+`/public/_compiled/<lane>/_meta/<pack>-COMPILE_META.json`
+
+This prevents clobbering and preserves provenance per target.
+
+---
+
+## Relationship to Drift Checks
+
+Drift checks ensure the repo does not contradict itself.
+
+Compilation ensures the repo remains **usable** under memory limits.
+
+Both are required for scalability.
+
+---
+
+## Drift Audits
+
+The repository SHOULD provide a read-only drift audit that can be run at any time:
+
+- `npm run audit:drift`
+
+This command MUST NOT regenerate or modify derived outputs. It only verifies consistency.
+
+If regeneration is desired for wipeable derived outputs (compiled packs), the repository MAY also provide:
+
+- `npm run audit:repair`
+
+`audit:repair` may regenerate ONLY derived outputs under `/public/_compiled/**`, then MUST run `audit:drift`.
+
+Canon and PRDs MUST NOT be modified by either command.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/appendices/compiled-memory.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/appendices/compiled-memory
+title: "Compiled Memory"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["odd", "compiled", "memory", "drift"]
+---
+
+# Compiled Memory
+
+> Lane-scoped, wipeable artifacts that keep guidance small and citeable without destroying underlying truth.
+
+## Description
+
+Compiled Memory solves context overload and documentation sprawl by producing auditable compressed artifacts while keeping source truth in Canon, PRDs, and Attempts. The mechanism compiles out-of-place with four outputs per lane: Canon Pack, Lane Pack, PRD Pack, and Run Pack. All compile runs emit provenance metadata and source hashes for traceable, defensible compression.
+
+## Outline
+
+- Summary
+- Why This Exists
+- Compile Is Not Compression-In-Place
+- Scope Levels (The Four Outputs)
+- Lane Rules
+- Auditable by Design
+- Drift and Epochs
+- What This Enables
+- Non-Goals
+
+---
+
+## Content
+
+## Summary
+
+In ODD, repositories accumulate truth faster than agents can hold it in context.
+
+**Compiled Memory** is the mechanism for producing **lane-scoped, wipeable, auditable**
+compressed artifacts that are safe for agents and humans to consume.
+
+This is a **derivation pipeline**, not a rewrite pipeline.
+
+- Source truth remains in Canon + PRDs + Attempts.
+- Compiled output is generated *out of place*.
+- Compiled output can be deleted and regenerated at any time.
+
+## Why This Exists
+
+ODD assumes:
+- generation is abundant
+- trust is not
+- context is bounded
+- drift is inevitable unless actively checked
+
+Agents fail in two predictable ways:
+1. **Context overload** → they miss constraints, repeat mistakes, invent structure.
+2. **Doc sprawl** → humans keep writing more guidance, and agents still can’t load it all.
+
+Compiled Memory keeps the guidance surface **small, current, and citeable** without destroying the underlying truth.
+
+## Compile Is Not Compression-In-Place
+
+**Rule:** Compiled Memory MUST NOT replace Canon/PRDs/Attempts in place.
+
+This is compile-out-of-place:
+
+- Inputs: Canon + lane docs + PRDs + attempt artifacts
+- Outputs: `/public/_compiled/<lane>/**`
+- Verification: hashes + sources + provenance
+
+If compiled output is wrong, we delete it and recompile.
+If source truth is wrong, we change the source truth explicitly.
+
+## Scope Levels (The Four Outputs)
+
+Compiled Memory produces four outputs per lane.
+
+1) **Canon Pack**
+- Purpose: high-signal orientation + invariants relevant to the lane
+- Input: Canon (+ decisions, appendices)
+
+2) **Lane Pack**
+- Purpose: lane identity, non-goals, and how this lane “wins”
+- Input: lane PRD folder + lane docs
+
+3) **PRD Pack**
+- Purpose: the active PRD distilled into an agent-usable execution contract
+- Input: `/docs/PRD/<lane>/PRD.md` (and supporting files in that folder)
+
+4) **Run Pack**
+- Purpose: “what’s happening right now” for an attempt/run
+- Input: attempt artifacts for the lane (or latest run metadata)
+- Note: optional when no runs exist
+
+These are distinct because they change at different rates.
+
+## Lane Rules
+
+Compiled output is always lane-scoped:
+
+- Output root: `/public/_compiled/<lane>/`
+- Meta: `/public/_compiled/<lane>/_meta/`
+
+Lanes are:
+- `website`
+- `ai-navigation`
+- `agent-skill`
+
+Attempts without a lane are invalid (see Product Lanes).
+
+## Auditable by Design
+
+Every compile run MUST emit:
+
+- `COMPILE_META.json`
+  - includes provenance (tool, model, command, timestamp)
+  - includes content hashes for plan + sources
+- `COMPILE_SOURCES.txt`
+  - lists every input file used for compilation (paths)
+
+Every compiled markdown output MUST include a **Sources** section.
+
+The goal is not “perfect summaries.”
+The goal is **traceable, defensible compression**.
+
+## Drift and Epochs
+
+Compiled Memory is an explicit response to drift.
+
+- Canon and PRDs may advance faster than tooling (epoch transitions).
+- Compiled output is always treated as **derived evidence**, not authority.
+
+If Canon/PRDs and tooling disagree:
+- Canon/PRDs define intended truth.
+- tooling must converge later.
+- compiled outputs MUST reflect the intended truth (and cite the mismatch if necessary).
+
+## What This Enables
+
+- Agents can behave consistently without ingesting the whole repo.
+- Humans can evaluate the system without wading through every artifact.
+- Each lane can have its own “agent-ready” pack without coupling to other lanes.
+- The repo can evolve without turning into a documentation graveyard.
+
+## Non-Goals
+
+Compiled Memory does not:
+- attempt to make Canon smaller by rewriting it
+- delete or “consolidate away” decision history
+- guarantee correctness without verification
+- replace evidence capture
+
+It exists to keep context bounded while keeping truth traceable.
+
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/appendices/deploy-evidence.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/appendices/deploy-evidence
+title: "Deploy Evidence"
+audience: docs
+exposure: nav
+tier: 2
+voice: first_person
+stability: stable
+tags: ["odd", "deploy", "evidence", "cloudflare", "attempts"]
+---
+
+# Deploy Evidence
+
+> Evidence is only valid when externally reviewable via deployed URLs.
+
+## Description
+
+Local builds are insufficient proof for online deployment outcomes—evidence must be copied into the lane build output to be served by Cloudflare Pages. Evidence must be accessible at `/_evidence/<run_id>/EVIDENCE.md` on the preview deployment. An attempt is incomplete until the branch is pushed, preview build succeeds, and both preview and evidence URLs return HTTP 200.
+
+## Outline
+
+- Summary
+- Cloudflare Pages Reality
+- Required Evidence Publication Path
+- Completion Rule
+
+---
+
+## Content
+
+## Summary
+
+In ODD, evidence is only valid if it is externally reviewable.
+
+Local builds are not sufficient proof when the intended outcome is an online deployment.
+
+## Cloudflare Pages Reality
+
+Cloudflare Pages serves only the configured build output directory.
+It does **not** serve arbitrary repo folders such as `/attempts/**`.
+
+Therefore, any "Evidence URL" that points to `/attempts/**` on a Pages domain is invalid.
+
+## Required Evidence Publication Path
+
+Evidence MUST be copied into the lane build output so it is served by Pages:
+
+`products/<lane>/dist/_evidence/<run_id>/EVIDENCE.md`
+
+This makes the evidence accessible from the preview deployment at:
+
+`/_evidence/<run_id>/EVIDENCE.md`
+
+## Completion Rule
+
+An attempt is not complete until all are true:
+
+1) The branch is pushed to origin  
+2) Cloudflare preview build succeeds  
+3) The preview URL renders (HTTP 200)  
+4) The evidence URL renders (HTTP 200)
+
+If (2)-(4) cannot be proven, the attempt must seal as failure.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/appendices/drift-checks.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/appendices/drift-checks
+title: "Drift Checks"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["odd", "drift", "verification", "contracts"]
+---
+
+# Drift Checks
+
+> The mechanism for detecting when documentation, prompts, and tooling diverge from truth.
+
+## Description
+
+Drift is the primary failure mode of ODD systems—when components diverge, truth becomes vibes. The drift check command verifies alignment between interface contracts, lane PRDs, attempt lifecycle docs, tooling behavior, and manifest schema. If drift checks fail, conclusions drawn from the repo are invalid and must be fixed before running new attempts.
+
+## Outline
+
+- What Must Stay Aligned
+- The Drift Check Command
+- Epistemic Rule
+
+---
+
+## Content
+
+Drift is the primary failure mode of ODD systems.
+
+When documentation, prompts, and tooling diverge, "truth" becomes vibes again.
+
+This appendix defines the drift-prevention mechanism.
+
+---
+
+## What Must Stay Aligned
+
+- Interface contracts (`/interfaces/**`)
+- Lane PRDs (`/docs/PRD/**`)
+- Attempt lifecycle docs (`/docs/**`)
+- Tooling behavior (CLI)
+- Manifest schema and semantics
+
+---
+
+## The Drift Check Command
+
+The repository SHOULD provide:
+
+```bash
+npm run verify:contracts
+```
+
+This command verifies:
+
+1. `manifest.json` conforms to `manifest@current`
+2. builds conform to `build-output@current`
+3. attempt artifacts conform to `attempt-cli@current`
+4. lane PRDs declare required contracts
+
+---
+
+## Epistemic Rule
+
+If drift checks fail, conclusions drawn from the repo are invalid.
+
+Fix drift before running new attempts.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/appendices/epochs.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/appendices/epochs
+title: "Epochs"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "epochs", "fitness-landscape", "comparability", "orientation"]
+---
+
+# Epochs
+
+> Named periods where success criteria are stable enough for outcome comparison.
+
+## Description
+
+An epoch is a named period where "success" meaning is stable enough to compare outcomes. Attempts are individuals, PRDs are fitness functions, Promotion is selection, Canon is inherited traits, and Epochs are shifts in the fitness landscape. An epoch defines evaluation reality: what "done" means, mandatory evidence, binding contracts, acceptable risks, and infrastructure stability. Epochs are not PRDs—they are the context in which PRDs are interpreted. klappy.dev defines E0001 (single-PRD era), E0002 (multi-lane era), and E0003 (evidence-first era with Cloudflare deployment proof required).
+
+## Outline
+
+- What an Epoch Is
+- What an Epoch Is Not
+- Relationship to Product Lanes
+- Relationship to PRDs and Attempts
+- When to Start a New Epoch
+- Naming Convention (E0001, E0002, E0003)
+- Minimal Epoch Metadata (META.json)
+- Anti-Patterns
+- E0003 — Evidence-First Era (klappy.dev specific)
+
+---
+
+## Content
+
+An **epoch** is a named period where the meaning of "success" is stable enough that outcomes can be compared.
+
+This is borrowed from evolutionary systems:
+
+- **Attempts** are individuals.
+- **PRDs** are fitness functions.
+- **Promotion** is selection.
+- **Canon** is inherited traits.
+- **Epochs** are shifts in the fitness landscape itself.
+
+If epochs are implicit, the system will compare results across incompatible standards and produce folklore.
+
+---
+
+## What an Epoch Is
+
+An epoch defines the **evaluation reality** for a period of work:
+
+- what "done" means (and what it does not)
+- what evidence is mandatory
+- what contracts are binding (build/deploy, provenance, etc.)
+- what risks are acceptable
+- what is treated as stable vs experimental infrastructure
+
+An epoch is *not* a PRD.  
+An epoch is the context in which PRDs are interpreted.
+
+---
+
+## What an Epoch Is Not
+
+Epochs are not:
+
+- a semantic version of the website
+- a replacement for product lanes
+- a reason to rebuild everything
+- a new folder taxonomy for creativity
+
+Epochs exist to prevent invalid comparisons, not to add structure.
+
+---
+
+## Relationship to Product Lanes
+
+**Product lanes** separate *simultaneous intent*.  
+**Epochs** separate *changes over time* in how intent is evaluated.
+
+- Lanes answer: "Which product are we evolving?"
+- Epochs answer: "What counts as truth *right now* across those products?"
+
+Lanes are parallel. Epochs are sequential.
+
+---
+
+## Relationship to PRDs and Attempts
+
+Within a lane:
+
+- A **PRD** specifies requirements for a specific capability.
+- An **attempt** is an observation (implementation + evidence) against that PRD.
+
+Across time:
+
+- An **epoch** determines whether two attempts are comparable.
+- If the evaluation rules changed, you are in a new epoch.
+
+Rule of thumb:
+
+> If you changed what evidence is required, or what contract is binding, you changed the fitness landscape. That is a new epoch.
+
+---
+
+## When to Start a New Epoch
+
+Start a new epoch when any of the following change in a way that would invalidate comparisons with prior attempts:
+
+- Evidence requirements (e.g., "preview URL required" becomes mandatory)
+- Provenance requirements (e.g., capturing tool/model becomes required)
+- Deployment topology (e.g., `prod` branch becomes the production branch)
+- Build/deploy contract semantics (`/dist` rules change materially)
+- Attempt lifecycle mechanics (e.g., reserve → register/finalize)
+- Evaluation method (e.g., manual review → scripted verification gates)
+
+If the change is "nice-to-have" and does not affect comparability, do not create an epoch.
+
+---
+
+## Naming Convention
+
+Epoch IDs should be boring and stable:
+
+- `E0001-<short-name>`
+- `E0002-<short-name>`
+
+Examples:
+- `E0001-single-prd-era`
+- `E0002-multi-lane-era`
+- `E0003-evidence-first-era`
+
+The ID is the canonical reference. The name is a hint.
+
+---
+
+## Minimal Epoch Metadata (Required)
+
+Every attempt's `META.json` MUST include:
+
+- `lane`
+- `prd_version`
+- `epoch_id`
+
+Example:
+
+```json
+{
+  "lane": "website",
+  "prd_version": "v1.0",
+  "epoch_id": "E0002-multi-lane-era"
+}
+```
+
+If epoch_id is missing, the attempt is not comparable by default.
+
+---
+
+## Anti-Patterns
+
+- **Epoch inflation**: Creating a new epoch for every PRD bump.
+- **Hidden epoch shifts**: Changing contracts or evidence rules without naming it.
+- **Epoch as marketing**: Treating epoch IDs like product versions.
+- **Cross-epoch comparisons**: Declaring "Attempt 003 is better than Attempt 001" when the evaluation rules changed.
+
+---
+
+## Why This Exists
+
+Evolutionary systems assume a stable fitness landscape per generation.
+
+Human + AI systems change the landscape constantly (tools, contracts, evidence standards, deployment topology).
+Naming epochs makes those shifts explicit so we can:
+
+- preserve honest comparisons
+- prevent "it worked because residue" confusion
+- keep learnings interpretable over time
+
+If the evaluation landscape changed, say so.
+That's what an epoch is for.
+
+---
+
+## E0003 — Evidence-First Era
+
+### What changed
+
+E0003 begins when online deployment evidence becomes mandatory for attempt completion.
+
+In this epoch, a local build is not sufficient proof when the intended outcome is an online deployment.
+
+### Binding rule (new fitness landscape)
+
+An attempt is not complete until all are true:
+
+1) The attempt branch is pushed to origin
+2) Cloudflare Pages preview deployment succeeds (build passes)
+3) The preview URL returns HTTP 200 and renders the site
+4) The evidence URL returns HTTP 200 and renders the evidence at:
+
+`/_evidence/<run_id>/EVIDENCE.md`
+
+### Why this is a new epoch
+
+This change alters the repository's selection pressure:
+
+- Success is now gated by deployment correctness, not just build correctness
+- Evidence must be externally reviewable, not locally asserted
+- Attempts become comparable only within the same deploy-evidence regime
+
+### Compatibility
+
+- E0002 attempts remain valid within E0002.
+- E0002 attempts are not comparable to E0003 attempts by default.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/appendices/evidence.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/appendices/evidence
+title: "Evidence"
+audience: docs
+exposure: nav
+tier: 1
+voice: first_person
+stability: stable
+tags: ["evidence", "verification"]
+---
+
+# Evidence
+
+> Proof through deployed artifacts, not narrative claims.
+
+## Description
+
+An attempt is valid only if its deployed build exposes public evidence at `/_evidence/` with minimum proof of 1 video recording or 3 screenshots—markdown alone doesn't count. Required files include index.html, index.json, EVIDENCE.md, ATTEMPT.md, META.json, and proof assets. Evidence must be discoverable without knowing run IDs, reading narratives, or running code locally.
+
+## Outline
+
+- Minimum Proof
+- Required Files
+- Discoverability
+- Build Enforcement
+- Related
+
+---
+
+## Content
+
+Evidence is proof, not narrative.
+
+An attempt is valid ONLY if its deployed build exposes public evidence at:
+
+`/_evidence/`
+
+## Minimum Proof
+
+- 1 video recording OR
+- 3 screenshots
+
+Markdown alone does not count as proof.
+
+## Required Files
+
+Every `/_evidence/` folder must contain:
+
+- `index.html` — human-browsable index
+- `index.json` — machine inventory
+- `EVIDENCE.md` — summary and links
+- `ATTEMPT.md` — what was done
+- `META.json` — provenance
+- `screenshots/` — at least 1 image
+- `recordings/` — video proof (or 3 screenshots total)
+
+## Discoverability
+
+Evidence MUST be discoverable without:
+
+- knowing a run ID
+- reading a narrative
+- running code locally
+- guessing paths
+
+If `/_evidence/` returns 404, the attempt is **INVALID**.
+
+## Build Enforcement
+
+When `.attempt.json` exists:
+
+- Build FAILS if `/_evidence/` is missing
+- Build FAILS if proof assets are insufficient
+- Build FAILS if index generation fails
+
+## Related
+
+- Attempt Record Packs: `/docs/ATTEMPT_RECORD_PACK.md`
+- Attempt Kickoff: `/docs/ATTEMPT_KICKOFF.md`
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/appendices/lane-build-layout.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/appendices/lane-build-layout
+title: "Lane Build Layout"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["odd", "lanes", "build", "layout", "deploy"]
+---
+
+# Lane Build Layout
+
+> Policy ensuring multiple product lanes share Canon without colliding in implementation output.
+
+## Description
+
+Multiple product lanes share Canon but must not collide in `/src` or `products/<lane>/dist`. Each attempt operates in its own branch/worktree with disposable, lane-specific `/src` and lane-scoped build output. The recommended deployment model creates one Cloudflare Pages project per lane to avoid requiring a single repo-level `/dist` to represent multiple products.
+
+## Outline
+
+- Policy: One Lane Builds at a Time in a Worktree
+- Policy: Production Deployments Are Lane-Scoped
+- Recommended Deployment Model (Least Brittle)
+- What This Means for `/main` and `/prod`
+- Invariant
+
+---
+
+## Content
+
+This repository contains multiple **product lanes** that share Canon but must not collide in implementation output.
+
+The core collision surfaces are:
+- `/src` (implementation workspace)
+- `products/<lane>/dist` (deployment artifact)
+
+This document defines the lane-safe layout policy.
+
+---
+
+## Policy: One Lane Builds at a Time in a Worktree
+
+Each attempt operates in its own branch/worktree. Within that sandbox:
+
+- `/src` is disposable and lane-specific for that attempt.
+- `products/<lane>/dist` is the output of that lane's build.
+
+Because worktrees isolate filesystem state, lanes do not collide during development.
+
+---
+
+## Policy: Production Deployments Are Lane-Scoped
+
+A single git repository may be deployed multiple times (e.g., Cloudflare Pages projects), each targeting:
+
+- a specific lane
+- a specific branch (`prod/<lane>` or similar)
+
+This prevents one lane's deployment from overwriting another.
+
+---
+
+## Recommended Deployment Model (Least Brittle)
+
+Create one Cloudflare Pages project per lane:
+
+- `klappy-website` → deploys lane `website`
+- `klappy-ai-navigation` → deploys lane `ai-navigation` (when it becomes deployable)
+- `klappy-agent-skill` → deploys lane `agent-skill` (if it has a deployable surface)
+
+Each Pages project selects its own production branch.
+
+This avoids requiring a single repo-level `/dist` to represent multiple products simultaneously.
+
+---
+
+## What This Means for `/main` and `/prod`
+
+- `main` is the aggregation branch for artifacts and evaluation history.
+- Production branches are lane-specific (implementation detail, but must be stable).
+
+Promotion updates the lane's production branch only.
+
+---
+
+## Invariant
+
+A lane must be promotable without affecting any other lane's production surface.
+
+If promoting lane A changes lane B's production outcome, the layout is invalid.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/appendices/lane-implementation-surfaces.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/appendices/lane-implementation-surfaces
+title: "Lane-Scoped Implementation Surfaces"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "lanes", "deployment", "contract", "build"]
+---
+
+# Lane-Scoped Implementation Surfaces
+
+> Each lane owns its own source, build output, and deploy root for epistemic independence.
+
+## Description
+
+In the multi-lane PRD model, each lane MUST have its own implementation surface under `/products/<lane>/` with src, dist, and no shared repo-root directories. Nuking is lane-scoped and MUST NOT affect other lanes, Canon, docs, or attempts. Lane-scoped surfaces restore epistemic independence—if a lane succeeds, you can know it succeeded because the intent was correct, not because of residue from another lane.
+
+## Outline
+
+- Summary
+- Locked Folder Contract
+- Build Output Contract (Pages-style)
+- Attempt Independence
+- Deployment Isolation (Cloudflare)
+- Promotion Model
+- Why This Exists
+
+---
+
+## Content
+
+## Summary
+
+In the multi-lane PRD model, each lane is an independent product.
+
+Therefore each lane MUST have its own implementation surface:
+- its own source directory
+- its own build output directory
+- its own deploy root
+
+No lane may rely on a shared, repo-root `/src` or `/dist`.
+
+This prevents cross-lane contamination and restores independence of attempts.
+
+---
+
+## Locked Folder Contract
+
+Each lane owns its implementation under:
+
+```
+/products/<lane>/
+  src/          # lane implementation source (disposable)
+  dist/         # lane build output (never committed)
+```
+
+`<lane>` is one of:
+- `website`
+- `ai-navigation`
+- `agent-skill`
+
+The repo-root directories `/src` and `/dist` are NOT product surfaces.
+
+---
+
+## Build Output Contract (Pages-style)
+
+For any lane deployed via Cloudflare Pages:
+
+- Build output MUST be `products/<lane>/dist/`
+- `products/<lane>/dist/index.html` MUST exist after build
+
+The lane may use any stack as long as it satisfies the lane's deploy contract.
+
+---
+
+## Attempt Independence
+
+Attempts MUST be able to start from a blank slate without affecting other lanes.
+
+Therefore nuking is lane-scoped:
+
+- `attempt:nuke --lane <lane>` deletes ONLY:
+  - `products/<lane>/src/`
+  - lane-local config files inside `products/<lane>/` (if any)
+
+Nuking MUST NOT delete:
+- `/canon/**`
+- `/docs/**`
+- `/attempts/**`
+- other lanes under `/products/**`
+
+---
+
+## Deployment Isolation (Cloudflare)
+
+Each lane SHOULD be deployed as a separate Cloudflare Pages project.
+
+For each Pages project:
+- Root directory: `products/<lane>`
+- Build command: `npm run build -- --lane <lane>` (or lane-local build)
+- Build output: `dist`
+- Production branch: `prod`
+- Preview deployments: enabled for all non-production branches
+
+This allows all lanes to share one git repository and one production branch while remaining operationally independent.
+
+---
+
+## Promotion Model
+
+Promotion is lane-scoped.
+
+Promoting a champion for lane `<lane>` updates ONLY:
+- `products/<lane>/**` (implementation)
+- the attempt artifacts for that lane
+
+Promotion MUST NOT modify other lanes.
+
+---
+
+## Why This Exists
+
+A shared `/src` makes outcomes non-attributable.
+
+If a lane succeeds, you cannot know whether it succeeded because:
+- the intent was correct, or
+- residue from another lane made it work.
+
+Lane-scoped implementation surfaces restore epistemic independence.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/appendices/memory-architecture.proposed.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/appendices/memory-architecture
+title: "Memory Architecture"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["odd", "memory", "elevation", "portability"]
+status: proposed
+---
+
+# Memory Architecture
+
+> The layered system that preserves learning while discarding what no longer reduces drag.
+
+## Description
+
+Memory in ODD is the percolation path from ephemeral execution to durable truth through five layers: Attempt Evidence, Lane History, Lane Decisions, Cross-Lane Patterns, and Canon. Each layer has different durability, scope, and elevation criteria, with most artifacts expected to decay at lower layers. The system preserves what repeatedly reduces drag, discards what no longer serves, and keeps percolation paths visible.
+
+## Outline
+
+- Summary
+- Why Memory Matters
+- The Memory Layers
+- The Percolation Model
+- Decay Is the Default
+- Folder Patterns
+- What Memory Is Not
+- Relationship to Other Concepts
+- Related Documents
+
+---
+
+## Content
+
+## Summary
+
+In ODD, **memory** is the layered system that preserves what was learned while discarding what no longer reduces drag.
+
+Memory is not a single artifact. It is the percolation path from ephemeral execution to durable truth:
+
+```
+Attempts → Lane History → Lane Decisions → Cross-Lane Patterns → Canon
+```
+
+Each layer has different durability, scope, and elevation criteria.
+
+---
+
+## Why Memory Matters
+
+ODD assumes:
+- Generation is abundant
+- Trust is scarce
+- Context is bounded
+- Drift is inevitable unless actively curated
+
+Memory is the bottleneck — not computation, not generation, not storage.
+
+The system must:
+- Preserve what repeatedly reduces drag
+- Discard what no longer serves
+- Make the percolation path visible
+- Keep each layer scannable by agents and humans
+
+Evidence without elevation creates false confidence rather than learning.
+
+---
+
+## The Memory Layers
+
+### Layer 1: Attempt Evidence (Ephemeral)
+
+**Scope:** Single execution against a PRD  
+**Durability:** Sealed when attempt closes; may be pruned later  
+**Lives in:** `products/<lane>/<version>/attempts/attempt-NNN/evidence/`
+
+Attempts capture what happened during execution:
+- Test output, logs, screenshots
+- Verification artifacts
+- Failure evidence
+
+**Elevates when:** A pattern appears across multiple attempts and can be stated as a reusable learning.
+
+---
+
+### Layer 2: Lane History (Lane-Durable)
+
+**Scope:** What happened in this lane — champions, failures, infrastructure changes  
+**Durability:** Persists as long as the lane exists  
+**Lives in:** `products/<lane>/history/`
+
+History records **what happened** without turning it into rules:
+- Champion promotions
+- Failed attempts with learnings
+- Infrastructure migrations
+
+**Elevates when:** A learning recurs across multiple versions or informs lane decisions.
+
+---
+
+### Layer 3: Lane Decisions (Lane-Durable)
+
+**Scope:** Why this lane chose what it chose  
+**Durability:** Persists as long as the lane exists; may be deprecated  
+**Lives in:** `products/<lane>/decisions/`
+
+Decisions record **why we chose** to make things happen the way they did:
+- Architectural choices
+- Deviations from canon
+- Patterns that worked
+
+History says "we did X." Decisions say "we did X because Y."
+
+**Elevates when:** A decision proves valuable across multiple lanes.
+
+---
+
+### Layer 4: Cross-Lane Patterns (Repo-Durable)
+
+**Scope:** Patterns that recur across lanes  
+**Durability:** Persists in interfaces or shared tooling  
+**Lives in:** `/interfaces/**` or shared infrastructure
+
+Cross-lane patterns emerge when:
+- Multiple lanes solve the same problem
+- Interoperability requires explicit contracts
+- Drift across lanes becomes expensive
+
+**Elevates when:** A pattern satisfies elevation criteria (recurrence, portability, drag reduction, testability).
+
+Many cross-lane patterns remain permanently non-canonical — useful, local, and intentionally contextual. Canon is not the goal of all things.
+
+---
+
+### Layer 5: Canon (Durable Truth)
+
+**Scope:** Curated, high-signal rules that survive context changes  
+**Durability:** Persists across projects, tools, and time  
+**Lives in:** `/canon/**`
+
+Canon is intentionally small. Adding to canon requires:
+1. **Recurrence** — appears across multiple attempts/projects
+2. **Portability** — remains true across stacks/models/tools
+3. **Drag Reduction** — prevents repeated confusion or failure
+4. **Testability** — can be expressed as a falsifiable claim
+
+Canon does not grow by accumulation. It grows by curation.
+
+---
+
+## The Percolation Model
+
+Memory does not flow upward automatically. It requires explicit elevation.
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                        CANON                                │
+│  (Durable truth that survives context changes)              │
+└─────────────────────────────────────────────────────────────┘
+                           ▲
+                           │ elevation (strict criteria)
+                           │
+┌─────────────────────────────────────────────────────────────┐
+│                   CROSS-LANE PATTERNS                       │
+│  (Interfaces, shared contracts, proven interop)             │
+└─────────────────────────────────────────────────────────────┘
+                           ▲
+                           │ elevation (recurrence across lanes)
+                           │
+┌───────────────────────┐ ┌───────────────────────┐
+│   LANE A              │ │   LANE B              │
+│   ├── decisions/      │ │   ├── decisions/      │
+│   ├── history/        │ │   ├── history/        │
+│   └── attempts/       │ │   └── attempts/       │
+└───────────────────────┘ └───────────────────────┘
+         ▲                          ▲
+         │ elevation                │ elevation
+         │ (recurrence,             │ (recurrence,
+         │  learning)               │  learning)
+         │                          │
+    ┌─────────┐                ┌─────────┐
+    │ attempt │                │ attempt │
+    │ attempt │                │ attempt │
+    │ attempt │                │ attempt │
+    └─────────┘                └─────────┘
+```
+
+Most artifacts die at the attempt layer. That is correct behavior.
+
+---
+
+## Decay Is the Default
+
+Memory preservation has a cost: maintenance, cognitive load, drift risk.
+
+ODD assumes most artifacts should decay:
+- Attempts are sealed and may be pruned
+- History entries are append-only but finite
+- Decisions may be deprecated
+- Even canon can be curated down
+
+Discarding is not loss. It is how memory stays useful.
+
+---
+
+## Folder Patterns
+
+Each layer has a consistent folder pattern within lanes:
+
+| Layer | Pattern | Index Style | Authored By |
+|-------|---------|-------------|-------------|
+| Attempts | `<version>/attempts/attempt-NNN/` | Flat enumeration | Agent or human |
+| History | `history/H000X-*.md` | Index table + individual files | Human (post-attempt) |
+| Decisions | `decisions/D000X-*.md` | Index table + individual files | Human |
+
+The index + individual files pattern keeps scan cost low while allowing entries to grow.
+
+---
+
+## What Memory Is Not
+
+Memory is not:
+- A **changelog** (user-facing release notes)
+- A **git log** (commit history)
+- A **wiki** (sprawling documentation)
+
+Memory is curated learning that reduces future drag.
+
+---
+
+## Relationship to Other Concepts
+
+| Concept | Relationship |
+|---------|--------------|
+| Progressive Elevation | The criteria for when something moves up a layer |
+| Compiled Memory | Compression of memory into agent-consumable packs |
+| Product Lanes | The boundaries within which memory is scoped |
+| Epochs | Comparability boundaries when the rules change |
+
+---
+
+## Related Documents
+
+- `/canon/odd/appendices/progressive-elevation.md` — Elevation criteria
+- `/canon/odd/appendices/compiled-memory.md` — Compression for agents
+- `/canon/odd/appendices/product-lanes.md` — Lane isolation
+- `/canon/odd/appendices/attempt-lifecycle.md` — Attempt containment
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/appendices/online-evidence.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/appendices/online-evidence
+title: Online Evidence Requirement
+audience: docs
+exposure: nav
+tier: 2
+voice: authoritative
+stability: stable
+tags: ["evidence", "cloudflare", "preview", "attempts", "validation"]
+---
+
+# Online Evidence Requirement
+
+> Attempts are invalid unless output and evidence are viewable online without running code locally.
+
+## Description
+
+Local builds are allowed during development but do not satisfy the Definition of Done—every attempt must provide a Cloudflare Preview URL and an Evidence URL. The default mechanism is Cloudflare Pages branch preview deployments with attempt branches pushed to origin. Evidence must be exposed via a static hub path at `/_evidence/` or a dedicated Pages project, documented in the lane PRD.
+
+## Outline
+
+- Summary
+- Required Online Proof
+- Required Mechanism (Default)
+- Required Evidence Artifact
+- Non-Goals
+- Related Documents
+
+---
+
+## Content
+
+## Summary
+
+An attempt is not considered valid unless its output and evidence are viewable online without the author running code locally.
+
+Local builds are allowed during development, but they do not satisfy the Definition of Done for an attempt.
+
+## Required Online Proof
+
+Every attempt MUST provide:
+
+1. **Cloudflare Preview URL** for the attempt branch.
+2. **Evidence URL** (an online URL that displays the attempt's evidence artifact).
+
+If either URL is missing, the attempt is **INVALID**.
+
+## Required Mechanism (Default)
+
+The default mechanism is Cloudflare Pages branch preview deployments:
+
+- Each attempt MUST push its branch to `origin`.
+- Cloudflare Pages MUST be configured to deploy preview builds for all branches.
+- The attempt branch name MUST include the lane so preview URLs are traceable.
+
+## Required Evidence Artifact
+
+Each attempt MUST produce an evidence markdown file:
+
+`/products/<lane>/attempts/prd-vX.Y/attempt-NNN/EVIDENCE.md` (or run-scoped equivalent during `_runs/`)
+
+The repo MUST expose evidence online via one of:
+
+- A static "evidence hub" path served by the lane site at `/_evidence/`, OR
+- A dedicated Cloudflare Pages project serving the lane's attempts as static content.
+
+The chosen mechanism must be documented in the lane PRD and enforced in kickoff.
+
+Note: Attempts are lane-contained. Root `/attempts/**` is legacy (read-only).
+
+## Non-Goals
+
+- This does not require production promotion.
+- This does not require perfect UI polish.
+- It requires that a human can click a link and see the output and evidence.
+
+## Related Documents
+
+- Definition of Done: `/canon/definition-of-done.md`
+- Visual Proof Standards: `/canon/visual-proof.md`
+- Attempt Lifecycle: `/canon/odd/appendices/attempt-lifecycle.md`
+- Preview Guide: `/docs/PREVIEW.md`
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/appendices/product-lanes.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/appendices/product-lanes
+title: "Product Lanes in Outcome-Driven Development"
+audience: docs
+exposure: hidden
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "prd", "architecture", "lanes", "orientation"]
+---
+
+# Product Lanes in Outcome-Driven Development
+
+> Why multiple PRD lanes exist and how they relate in klappy.dev.
+
+## Description
+
+This documents klappy.dev's three product lanes: Website (human-facing orientation), AI Navigation Interface (AI helping humans understand ODD), and Agent Cognitive Skill (reusable agent framework). Each lane has its own PRD at `/docs/PRD/<lane>/PRD.md`, attempts at `/products/<lane>/attempts/`, and independent lifecycle. Lanes share canon, not lifecycle. Implementation surfaces are lane-scoped (`products/<lane>/src` and `products/<lane>/dist`). This prevents scope creep, evidence pollution, and cascading reruns across unrelated products.
+
+## Outline
+
+- Summary
+- Why PRDs Must Be Decoupled
+- The Three Lanes (Website, AI Navigation, Agent Skill)
+- Implementation Surfaces Are Lane-Scoped
+- Canon Is Not a Product
+- What Is Shared vs Isolated
+- Attempt Structure (Locked)
+- Anti-Patterns
+- Implications for Tooling and Docs
+- Scalability
+
+---
+
+## Content
+
+**Status:** Orientation  
+**Audience:** Internal / Canon  
+**Scope:** Why multiple PRD lanes exist and how they relate
+
+---
+
+## Summary
+
+ODD systems evolve across multiple independent product lanes.
+
+Each lane has its own PRD, attempts, and failure modes.
+
+Lanes share canon, not lifecycle.
+
+---
+
+## Why PRDs Must Be Decoupled
+
+A single PRD governing everything creates cognitive collapse:
+
+- **Different users**: Website serves humans exploring ODD. Agent skill serves AI systems executing ODD.
+- **Different success criteria**: "Mobile usable" vs "Can propose a PRD autonomously"
+- **Different rates of change**: Website can stagnate while agent skills evolve rapidly.
+- **Different evidence**: Screenshots vs decision quality metrics.
+
+Forcing these into one evolutionary track means:
+
+- Progress in one lane forces reruns in another
+- Evidence requirements conflict
+- Scope creep becomes structural
+
+---
+
+## The Three Lanes
+
+### Lane 1: Public Website (Humans)
+
+**Purpose:** A human-facing orientation surface for ODD.
+
+This is portfolio, explanation, credibility.
+It does not teach agents how to think.
+It does not execute ODD.
+It explains ODD progressively to humans.
+
+**PRD Location:** `/docs/PRD/website/PRD.md`
+
+**Primary User:** Human developers, peers, evaluators
+
+---
+
+### Lane 2: AI Navigation Interface (Humans talking to AI)
+
+**Purpose:** An AI layer over documentation that helps humans understand ODD.
+
+This enables humans to ask questions of the ODD corpus and be:
+
+- Answered accurately
+- Guided progressively
+- Linked to the right documents
+- Without reading everything
+
+This is NOT agent tooling. This is AI helping humans navigate.
+
+**PRD Location:** `/docs/PRD/ai-navigation/PRD.md`
+
+**Primary User:** Humans trying to understand and evaluate ODD
+
+---
+
+### Lane 3: Agent Cognitive Skill (Evolution Engine)
+
+**Purpose:** A reusable agent cognitive framework for ODD reasoning.
+
+This is about how agents think, not what they render.
+
+Enables AI systems to:
+
+- Reason using ODD principles
+- Structure PRDs
+- Define outcomes and evidence
+- Run evolutionary attempts
+- Improve their own process over time
+
+This is not tied to this website. It should work on any project.
+
+**PRD Location:** `/docs/PRD/agent-skill/PRD.md`
+
+**Primary User:** AI agents executing evolutionary development elsewhere
+
+---
+
+## Implementation Surfaces Are Lane-Scoped
+
+Each lane is an independent product.
+
+Implementation directories are lane-scoped:
+
+- `products/<lane>/src` (disposable)
+- `products/<lane>/dist` (build output)
+
+Repo-root `/src` is not a shared surface in the multi-lane model.
+
+See: `/canon/odd/appendices/lane-implementation-surfaces.md`
+
+---
+
+## Canon Is Not a Product
+
+Canon does not have a PRD.
+Canon does not have attempts.
+Canon evolves only through decision logs.
+
+Products may render, query, or reason over canon - but never modify it directly.
+
+| Layer    | Coupling                      |
+|----------|-------------------------------|
+| Canon    | Shared, slow, authoritative   |
+| PRDs     | Isolated, fast, disposable    |
+| Attempts | Ephemeral, lane-scoped        |
+| Tooling  | Canon-aware, lane-agnostic    |
+
+---
+
+## What Is Shared vs What Is Isolated
+
+| Artifact          | Shared Across Lanes? | Notes                                      |
+|-------------------|----------------------|--------------------------------------------|
+| Canon             | Yes                  | All lanes reference the same constraints   |
+| Decision logs     | Yes                  | Architectural decisions affect all lanes   |
+| PRDs              | No                   | Each lane has its own PRD                  |
+| Attempts          | No                   | Attempts are lane-scoped                   |
+| Evidence          | No                   | Success criteria differ per lane           |
+| Definition of Done| Partially            | Core DoD applies; lane-specific criteria extend it |
+
+---
+
+## Attempt Structure (Locked)
+
+Every attempt MUST declare a lane before registration.
+Attempts without a lane are invalid.
+
+**Folder structure:** `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/`
+
+Attempts are **lane-contained** — all artifacts live under the product lane directory.
+
+Valid examples:
+- `/products/website/attempts/prd-v1.0/attempt-001/`
+- `/products/ai-navigation/attempts/prd-v1.0/attempt-001/`
+- `/products/agent-skill/attempts/prd-v1.0/attempt-001/`
+
+Invalid (do not use):
+- `/attempts/<lane>/prd-vX.Y/attempt-NNN/` (legacy, read-only)
+- `/attempts/prd-vX.Y/<lane>/`
+- `/products/<lane>/attempts/attempt-NNN/` (missing PRD version)
+
+---
+
+## Anti-Patterns
+
+### One PRD to Rule Them All
+
+Treating all work as variations of a single product forces:
+
+- Conflicting success criteria
+- Evidence that doesn't apply
+- Reruns across unrelated changes
+
+### Treating Agents as UI Features
+
+The AI navigation interface (Lane 2) is NOT the same as agent cognitive skill (Lane 3).
+
+- Lane 2: AI helps humans understand
+- Lane 3: AI executes ODD autonomously
+
+Mixing these creates scope confusion and evidence pollution.
+
+### Re-running Experiments Across Lanes
+
+A mobile navigation fix (Lane 1) should not invalidate agent skill experiments (Lane 3).
+
+Lane isolation prevents cascading reruns.
+
+---
+
+## Implications for Tooling and Docs
+
+### Where PRDs Live
+
+```
+/docs/PRD/
+  website/PRD.md
+  ai-navigation/PRD.md
+  agent-skill/PRD.md
+```
+
+### Where Attempts Live
+
+Attempts are lane-contained:
+
+```
+/products/
+  website/attempts/prd-vX.Y/attempt-NNN/
+  ai-navigation/attempts/prd-vX.Y/attempt-NNN/
+  agent-skill/attempts/prd-vX.Y/attempt-NNN/
+```
+
+Note: Root `/attempts/**` is legacy (read-only). See `/attempts/README.md`.
+
+### How Evolution Propagates
+
+- Canon changes affect all lanes (but rarely change)
+- PRD changes affect only that lane
+- Attempt outcomes inform only that lane's PRD evolution
+- Cross-lane learnings are captured in decision logs, not PRD mutations
+
+---
+
+## Scalability
+
+This architecture is scalable because it is NOT interdependent.
+
+You do not get a monorepo of coupled PRDs.
+You get shared canon + independent evolutionary tracks.
+
+This lets you:
+
+- Freeze the website indefinitely
+- Rapidly evolve agent skills
+- Replace AI navigation entirely
+- Add a fourth lane later without touching the others
+
+---
+
+## Related Documents
+
+- Decision log: `/canon/odd/decisions/D0009-multi-lane-prd-architecture.md`
+- Attempt lifecycle: `/canon/odd/appendices/attempt-lifecycle.md`
+- Evolution philosophy: `/canon/odd/appendices/evolution-not-automation.md`
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/appendices/progressive-elevation.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/appendices/progressive-elevation
+title: Progressive Elevation & Decay
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "memory", "portability", "elevation", "decay"]
+status: canonical
+category: odd-appendix
+version: 1.0
+---
+
+# Progressive Elevation & Decay
+
+> How artifacts move from ephemeral attempts to durable Canon through strict elevation criteria.
+
+## Description
+
+ODD treats durable thinking as scarce and generated artifacts as abundant—most should decay while only patterns that reduce future drag should elevate. The five layers of portability are Conversation/Attempt, Product Lane/PRD, Interoperability/Contracts, Canon, and Decision Trace. Elevation requires recurrence, portability, drag reduction, and testability; if any criterion fails, the artifact stays local or dies.
+
+## Outline
+
+- Summary
+- The Five Layers of Portability
+- Elevation Criteria (Strict)
+- Decay Rule (Default)
+- Where This Fits With Lanes and Epochs
+
+---
+
+## Content
+
+## Summary
+
+ODD treats **durable thinking** as scarce and **generated artifacts** as abundant.
+
+Most artifacts should **decay** (be discarded or sealed as evidence).
+Only patterns that repeatedly reduce future drag should **elevate** into more durable layers.
+
+This is how the repository avoids documentation sprawl while remaining portable across:
+- time (future-you),
+- people (collaborators),
+- and agents (tooling that reasons over the corpus).
+
+---
+
+## The Five Layers of Portability
+
+### 1) Conversation / Attempt (Ephemeral)
+
+**What it is:** raw chats, prompts, branches, quick experiments, and run folders.  
+**Default fate:** extract value → seal evidence → discard everything else.
+
+**Lives in:**
+- `/products/<lane>/attempts/prd-vX.Y/_runs/<run_id>/`
+- transient branches / worktrees
+- PRD patches produced by failure
+
+**Elevate when:** a failure mode repeats and you can state it as a stable rule, constraint, or test.
+
+---
+
+### 2) Product Lane / PRD (Project-Local)
+
+**What it is:** current intent for a specific product lane.  
+**Default fate:** churn freely. PRDs are disposable and should change as reality is observed.
+
+**Lives in:**
+- `/docs/PRD/<lane>/PRD.md`
+
+**Elevate when:** a requirement becomes reusable across lanes/projects, or becomes an interface boundary.
+
+---
+
+### 3) Interoperability / Contracts (Portability Bridge)
+
+**What it is:** explicit interfaces that allow portability across tools, agents, and products.
+
+Contracts are where compatibility becomes real.
+
+**Lives in:**
+- `/interfaces/**` (semver'd contracts)
+- shared inputs/outputs, schemas, stable runtime paths
+
+**Elevate when:** multiple projects repeatedly need the same boundary and drift becomes expensive.
+
+---
+
+### 4) Canon (Durable, Lean)
+
+**What it is:** curated, high-signal rules and lenses that survive multiple contexts.
+
+Canon is intentionally small. If it bloats, that is a signal to curate harder, not to add more.
+
+**Lives in:**
+- `/canon/**`
+
+**Elevate when:** a pattern recurs across multiple projects/lenses and stays true even when tooling changes.
+
+---
+
+### 5) Decision Trace (Why It Changed)
+
+**What it is:** lightweight records explaining why the system moved.
+
+Decisions preserve context without polluting Canon with history.
+
+**Lives in:**
+- `/canon/odd/decisions/**`
+
+**Elevate when:** a change affects interpretation, compatibility, or the "rules of the game."
+
+---
+
+## Elevation Criteria (Strict)
+
+Something may be elevated only if it satisfies all of the following:
+
+1. **Recurrence**: it appears across multiple attempts or projects (not a one-off).
+2. **Portability**: it remains true across different stacks/models/tools.
+3. **Drag Reduction**: it prevents repeated confusion, re-explanation, or failure.
+4. **Testability**: it can be expressed as a check, constraint, or falsifiable claim.
+
+If any criterion fails, the artifact stays local (Attempt/PRD) or dies.
+
+---
+
+## Decay Rule (Default)
+
+Most artifacts should not be preserved.
+
+ODD assumes:
+- generation is abundant,
+- maintenance is the tax you pay forever,
+- and residue creates epistemic drift.
+
+Discarding is not nihilism. It is how the system stays legible.
+
+---
+
+## Where This Fits With Lanes and Epochs
+
+- **Product lanes** isolate intent and success criteria so that unrelated surfaces do not drift together.
+- **Epochs** define comparability boundaries when the "rules of the game" change.
+
+This document explains the memory model underneath both.
+
+See also:
+- `/canon/odd/appendices/product-lanes.md`
+- `/canon/odd/appendices/epochs.md`
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/appendices/repo-topology.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/appendices/repo-topology
+title: "Repository Topology"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: semi_stable
+tags: ["odd", "topology", "structure", "decoupling"]
+---
+
+# Repository Topology
+
+> What lives where, what changes when, and how concerns stay decoupled.
+
+## Description
+
+The repository separates Application Plane (disposable per attempt), Content Plane (evolves independently), and Infrastructure Plane (persists across attempts). Each product lane owns its implementation under `products/<lane>/src/` with no root-level `/src/` directory. This topology makes restartability cheap by keeping app disposable, content accumulating, infrastructure persisting, and attempts archived.
+
+## Outline
+
+- Why This Appendix Exists
+- Core Topology
+- What Lives Where
+- What Changes When
+- Source of Truth
+- One Active App Per Lane
+- Generated vs Source
+- Deployment Preservation
+- Summary
+
+---
+
+## Content
+
+**Status:** Orientation  
+**Audience:** Internal / Canon  
+**Scope:** What lives where and what changes when
+
+---
+
+## Why This Appendix Exists
+
+This appendix answers:
+- "Where does stuff go?"
+- "What moves vs what stays stable?"
+- "What is allowed to change without triggering a new attempt?"
+
+It encodes the decoupling between App, Content, and Infrastructure planes.
+
+---
+
+## Core Topology
+
+```
+/products/<lane>/src/           # Lane application (disposable per attempt)
+/products/<lane>/dist/          # Lane build output (generated)
+/products/<lane>/attempts/      # Lane attempts (sealed, immutable after seal)
+/canon/                         # Canon documents (evolves independently)
+/odd/                           # ODD public docs (evolves independently)
+/about/                         # About docs (evolves independently)
+/projects/                      # Project docs (evolves independently)
+/infra/                         # Infrastructure (persists across attempts)
+/docs/                          # Operational docs + PRD versions
+/attempts/                      # LEGACY (read-only, see /attempts/README.md)
+/public/content/                # Generated (by sync script)
+/dist/                          # Legacy/transitional mirror (generated)
+```
+
+> **Lane-contained architecture:** Each product lane owns its own app plane under `products/<lane>/src/` and its attempts under `products/<lane>/attempts/`. There is no root-level `/src/` directory. Root `/attempts/` is legacy.
+
+---
+
+## What Lives Where
+
+### Application Plane (`products/<lane>/src/`)
+
+**Disposable per attempt. Lane-scoped.**
+
+Each product lane (website, ai-navigation, agent-skill) has its own application plane:
+- `products/website/src/`
+- `products/ai-navigation/src/`
+- `products/agent-skill/src/`
+
+Contains:
+- UI components
+- Routing logic
+- State management
+- Rendering code
+
+This folder can be deleted and rebuilt from scratch for each attempt via `attempt:nuke --lane <lane>`.
+
+### Content Plane (`/canon/`, `/odd/`, `/about/`, `/projects/`)
+
+**Evolves independently of attempts.**
+
+Contains:
+- Canon documents
+- ODD philosophy
+- About pages
+- Project documentation
+
+Content changes do not require a new attempt.  
+Content is synced to `/public/content/` for the webapp.
+
+### Infrastructure Plane (`/infra/`)
+
+**Persists across attempts.**
+
+Contains:
+- Build scripts
+- Sync scripts
+- Verification scripts
+- Deployment configuration
+
+Infrastructure changes rarely.  
+When it does, the change benefits all future attempts.
+
+### PRD Versions (`/docs/PRD/`)
+
+**Living drafts.**
+
+Contains:
+- PRD drafts and working versions
+- PRD template
+
+These are editable until frozen into an attempt.
+
+### Sealed Attempts (`/products/<lane>/attempts/`)
+
+**Lane-contained. Immutable after seal.**
+
+Contains:
+- Frozen PRD per version (`prd-vX.Y/PRD.md`)
+- Attempt records (`attempt-NNN/`)
+- Evidence bundles
+
+Once sealed, these folders are not modified.
+
+Note: Root `/attempts/**` is legacy (read-only). New attempts are lane-contained.
+
+---
+
+## What Changes When
+
+| Change Type | Location | Triggers New Attempt? |
+|-------------|----------|----------------------|
+| Fix a typo in Canon | `/canon/` | No |
+| Add a new ODD appendix | `/canon/odd/` | No |
+| Update build script | `/infra/` | No |
+| Redesign the UI | `products/<lane>/src/` | Yes (same or new PRD) |
+| Add new feature | `products/<lane>/src/` | Yes (requires PRD) |
+| Add new content doc | `/about/`, `/projects/` | No |
+| Change manifest schema | `/canon/meta/` | No (but may affect app) |
+
+---
+
+## Source of Truth
+
+| Asset | Source | Synced To |
+|-------|--------|-----------|
+| Content manifest | per-file frontmatter in `/canon/`, `/odd/`, `/about/`, `/projects/` | `/public/content/manifest.json` |
+| Markdown content | `/canon/`, `/odd/`, `/about/`, `/projects/` | `/public/content/` |
+| PRD (frozen) | `/products/<lane>/attempts/prd-vX.Y/PRD.md` | N/A (immutable) |
+| Evidence | `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/evidence/` | N/A (immutable) |
+
+---
+
+## One Active App Per Lane
+
+Each lane contains **one active app implementation** in `products/<lane>/src/`.
+
+Prior attempts are preserved by:
+- Git history
+- Sealed attempt records in `/products/<lane>/attempts/`
+- Commit SHAs in `META.json`
+
+There are no `/app-v1`, `/app-v2` folders.  
+There is one `products/<lane>/src/` per lane that gets rebuilt.
+
+---
+
+## Generated vs Source
+
+| Type | Location | How Updated |
+|------|----------|-------------|
+| Source | `/canon/`, `/odd/`, `/about/`, `/projects/` | Manual edit |
+| Generated | `/public/content/` | `npm run sync` |
+| Generated | `/products/<lane>/dist/` | `npm run build -- --lane <lane>` |
+
+**Rule:** Edit source, sync generates output.
+
+---
+
+## Deployment Preservation
+
+Each attempt may be deployed as a preview during development. See [Attempt Lifecycle](/canon/odd/appendices/attempt-lifecycle.md) for how deployments fit into the broader attempt model.
+
+Attempt metadata (`META.json`) stores:
+- `sealed_commit` — the commit SHA (truth)
+- `deploy.production_url` — live site URL (if applicable)
+- `deploy.preview_url` — branch/commit preview URL
+- `deploy.provider` — deployment platform (e.g., cloudflare-pages)
+
+Preview URLs are treated as evidence artifacts and must be recorded when sealing.
+
+**Resurrection path:** To resurrect any attempt, check out the `sealed_commit` and redeploy. The attempt record contains everything needed.
+
+Branches used during development are ephemeral. The durable record is the commit SHA and recorded URLs, not the branch name.
+
+---
+
+## Summary
+
+- **App is disposable** — rebuilt per attempt
+- **Content accumulates** — evolves independently
+- **Infrastructure persists** — shared across attempts
+- **Attempts are archived** — sealed and immutable
+- **PRDs are versioned** — frozen when attempted
+- **Deploys are recorded** — preview URLs preserved in metadata
+
+This topology makes restartability cheap and keeps concerns decoupled.
+
+---
+
+**Status:** Appendix stable for v0.1
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/appendices/repo-truth-audit.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/appendices/repo-truth-audit
+title: "Repo Truth Audit (Epistemic Audit)"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: semi_stable
+tags: ["odd", "repo-truth", "epistemic", "audit", "drift"]
+---
+
+# Repo Truth Audit (Epistemic Audit)
+
+> A repeatable ritual to detect epistemic drift across canon, docs, tooling, and structure.
+
+## Description
+
+Epistemic drift occurs when documentation, tooling, structure, or process encode conflicting truths about how the system works. The audit inventories all sources of truth, identifies contradictions, ambiguities, and deprecated references, then classifies findings and proposes minimum corrective actions. Constraints prohibit inventing new philosophy, rewriting Canon, or fixing by adding more rules—prefer deletion or clarification over expansion.
+
+## Outline
+
+- Definition
+- Read the Following FIRST
+- Audit Scope
+- Your Tasks
+- Constraints
+- Output Format
+
+---
+
+## Content
+
+**Status:** Orientation  
+**Audience:** Internal / Canon  
+**Scope:** A repeatable audit ritual to detect epistemic drift across canon, docs, tooling, and structure
+
+---
+
+You are performing a **Repo Truth Audit**.
+
+Your role is **NOT** to implement features.  
+Your role is to **detect epistemic drift**.
+
+## Definition
+
+**Epistemic drift** occurs when documentation, tooling, structure, or process encode conflicting truths about how the system works.
+
+---
+
+## Read the Following FIRST (in order)
+
+1. `/canon/odd/appendices/repo-truth.md`
+2. `/canon/odd/appendices/product-lanes.md`
+3. `/canon/odd/appendices/epochs.md`
+4. `/docs/ATTEMPTS.md`
+5. `/docs/ATTEMPT_KICKOFF.md`
+6. `/docs/AGENT_ENTRYPOINT.md`
+
+---
+
+## Audit Scope
+
+- Canon vs docs vs tooling
+- Single-PRD assumptions vs multi-lane reality
+- Attempt lifecycle consistency
+- Folder structures vs documented invariants
+- Terminology consistency (lane, PRD, attempt, epoch, promotion)
+- Deprecated concepts that still appear as instructions
+
+---
+
+## Your Tasks
+
+### 1. Inventory all sources of “truth” in the repo
+
+- Canon rules
+- Docs procedures
+- CLI behavior
+- Folder structures
+
+### 2. Identify drift
+
+- Statements that contradict each other
+- Instructions that no longer match reality
+- Concepts defined in one place but used differently elsewhere
+- Dead rules (documented but unenforced)
+- Enforced behavior that is undocumented
+
+### 3. Classify findings into
+
+- ❌ Contradiction (must be fixed)
+- ⚠️ Ambiguity (should be clarified)
+- 🪦 Deprecated but still referenced
+- ✅ Consistent and aligned
+
+### 4. For each ❌ or ⚠️ item
+
+- Cite exact file + section
+- Explain the conflict
+- Propose the *minimum* corrective action
+- DO NOT implement yet
+
+---
+
+## Constraints
+
+- Do NOT invent new philosophy
+- Do NOT rewrite Canon
+- Do NOT fix by adding more rules
+- Prefer deletion or clarification over expansion
+
+---
+
+## Output Format
+
+## Repo Truth Audit — Findings
+
+### ❌ Contradictions
+- Item 1
+- Item 2
+
+### ⚠️ Ambiguities
+- Item 1
+
+### 🪦 Deprecated References
+- Item 1
+
+### ✅ Verified Alignment
+- Item 1
+
+### Recommended Next Actions
+- Ordered, minimal steps
+
+If the repository is clean, explicitly say:
+
+“The repository is epistemically aligned.”
+
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/appendices/repo-truth.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/appendices/repo-truth
+title: "Repository Truth & Epistemic Hygiene"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "epistemic", "hygiene", "truth", "cleanup"]
+---
+
+# Repository Truth & Epistemic Hygiene
+
+> If the repository is dirty, conclusions drawn from it are invalid.
+
+## Description
+
+In AI-assisted development, state residue is indistinguishable from signal—unclean repositories produce false confidence, failures, and learning. A repository is dirty when orphaned worktrees, detached HEADs, stale branches, overlapping attempts, or ambiguous production state exist. `attempt:cleanup` is a reset of epistemic state that guarantees only sealed attempts and intentional branches remain.
+
+## Outline
+
+- Core Principle
+- What "Dirty" Means
+- `attempt:cleanup` as a Truth Reset
+- Why This Matters
+- The Truth Boundary
+- Branch Roles as Epistemic Contracts
+- Orientation Note
+
+---
+
+## Content
+
+## Core Principle
+
+> **If the repository is dirty, conclusions drawn from it are invalid.**
+
+In AI-assisted development, state residue is indistinguishable from signal.
+Unclean repositories produce false confidence, false failures, and false learning.
+
+This project treats repository cleanliness as a prerequisite for reasoning.
+
+---
+
+## What "Dirty" Means
+
+A repository is considered dirty when:
+
+- orphaned worktrees exist
+- detached HEADs remain
+- stale branches survive past their relevance
+- attempts overlap in filesystem state
+- production state is ambiguous
+
+When this happens, outcomes cannot be trusted.
+
+---
+
+## `attempt:cleanup` as a Truth Reset
+
+`attempt:cleanup` is not housekeeping.
+
+It is a **reset of epistemic state**.
+
+Running cleanup guarantees:
+
+- only sealed attempts remain
+- only intentional branches exist
+- production state is explicit
+- new attempts begin without contamination
+
+Without cleanup, experimentation collapses into folklore.
+
+---
+
+## Why This Matters
+
+Quantum Development relies on comparing independent observations.
+
+Independence is meaningless if the filesystem lies.
+
+Therefore:
+
+- cleanup is mandatory
+- residue is failure
+- convenience never overrides truth
+
+---
+
+## The Truth Boundary
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                     TRUTH BOUNDARY                          │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│   INSIDE (trustworthy)          OUTSIDE (suspect)           │
+│   ─────────────────────         ──────────────────          │
+│   • prod branch                 • orphaned worktrees        │
+│   • main branch                 • detached HEADs            │
+│   • sealed attempts             • stale branches            │
+│   • explicit state              • filesystem residue        │
+│                                                             │
+│   `attempt:cleanup` moves everything INSIDE                 │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Branch Roles as Epistemic Contracts
+
+| Branch | Role | Can Be Nuked? |
+|--------|------|---------------|
+| `prod` | Production truth | ❌ Never |
+| `main` | Experiment ledger | ⚠️ Only via promotion |
+| `attempt/*` | Hypotheses | ✅ Always |
+
+These aren't conventions. They're contracts about what can be trusted.
+
+---
+
+## Orientation Note
+
+This document explains *why* the rule exists.
+Procedures for enforcing it live elsewhere.
+
+See:
+- `/docs/ATTEMPTS.md` — attempt lifecycle procedures
+- `/docs/ATTEMPT_KICKOFF.md` — agent kickoff instructions
+- `/docs/CLOUDFLARE_CONFIG.md` — deploy branch mapping
+
+
+
+--------------------------------------------------------------------------------
 📄 File: docs/concept.md
 --------------------------------------------------------------------------------
 
@@ -3116,6 +6551,1530 @@ None of those should re-litigate the ideas above.
 
 - Concept frozen
 - Ready to proceed to Updated PRD
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/decisions/D0001-prod-branch-is-production.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/decisions/D0001
+title: "D0001: prod Branch Is Production"
+audience: docs
+exposure: internal
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "decisions", "branch", "deploy"]
+---
+
+# D0001 — `prod` Branch Is Production
+
+> Protect production from accidental nuke operations by separating production from experiments.
+
+## Description
+
+The `prod` branch is the sole source of production deployments, while `main` serves as the experiment ledger and history aggregation point. This separation protects production from accidental nuke/reset operations, allows `main` to be freely reset, and makes promotion explicit via merge main → prod. Implementation involves `/infra/scripts/attempt-cli.js` and requires Cloudflare Pages configuration (production branch = `prod`).
+
+## Outline
+
+- Decision statement
+- Status: Active
+- Why (production protection, experiment isolation)
+- Consequences (protection, free reset, explicit promotion)
+- Implementation (CLI script, config)
+- Evidence (commits)
+
+---
+
+## Content
+
+## Decision
+
+The `prod` branch is the sole source of production deployments. The `main` branch is the experiment ledger and history aggregation point, but never deploys to production directly.
+
+## Status
+
+**Active**
+
+## Why
+
+- Agents running experiments on `main` were accidentally nuking production code
+- No clear separation between "what's live" and "what's being tested"
+- Need a branch that is **never** touched by experiment tooling
+- Production stability requires explicit, intentional promotion
+
+## Consequences
+
+- ✅ Production is protected from accidental nuke/reset operations
+- ✅ `main` can be freely reset without affecting live site
+- ✅ Promotion to production is explicit: merge main → prod
+- ⚠️ Requires Cloudflare Pages configuration change (production branch = `prod`)
+- ⚠️ Adds one extra step to the promotion workflow
+
+## Implementation
+
+- Script: `/infra/scripts/attempt-cli.js` (`cmdPromote` merges to main, then fast-forwards prod)
+- Config: `/docs/CLOUDFLARE_CONFIG.md` documents the branch mapping
+- Contract: `/infra/contracts/build-output.md` defines what must be in `products/<lane>/dist`
+
+## Evidence
+
+- Commit: `15b5c2e` — "feat: environment hardening - prod branch, nuke safety, promote to prod"
+- Commit: `0cce06d` — "fix: protect production - nuclear reset on main skips /src nuke by default"
+- Problem observed: Production was nuked when running `attempt:reset` on `main`
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/decisions/D0002-attempt-provenance-required.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/decisions/D0002
+title: "D0002: Attempt Provenance Required"
+audience: docs
+exposure: internal
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "decisions", "provenance", "model"]
+---
+
+# Attempt Provenance Required
+
+> Every attempt must capture model provenance at registration to enable meaningful comparison between AI models.
+
+## Description
+
+This decision mandates that every attempt capture model provenance (agent, model, tool, git HEAD, timestamp) at registration time. If the model is unknown, the system proceeds but flags the degraded provenance. This enables forensic traceability and meaningful comparison between different AI models and approaches.
+
+## Outline
+
+- Decision statement
+- Status
+- Why
+- Consequences
+- Implementation
+- Evidence
+
+---
+
+## Content
+
+# D0002 — Attempt Provenance Required
+
+## Decision
+
+Every attempt must capture model provenance at registration time. If the model is unknown, proceed but flag the degraded provenance clearly.
+
+## Status
+
+**Active**
+
+## Why
+
+- If we can't tell which model produced which attempt, comparisons are contaminated
+- "Unknown model" is not the same as "no provenance" — at least we know it's unknown
+- Provenance must be captured at registration, not guessed later
+- Enables meaningful comparison between different AI models/approaches
+
+## Consequences
+
+- ✅ Every attempt knows: who made it, what made it, where, when
+- ✅ Branch names encode provenance: `run/v0.3/cursor-a/opus-45/abc123`
+- ✅ META.json preserves provenance even after worktree is deleted
+- ⚠️ Agents must provide `--agent` and `--model` flags
+- ⚠️ Warning shown if model not provided (but doesn't block progress)
+
+## Implementation
+
+- Script: `/infra/scripts/attempt-cli.js` (`cmdRegister` captures provenance)
+- Prompt: `/docs/PROMPT_ATTEMPT_KICKOFF.txt` instructs agents to provide flags
+- Schema: `.attempt.json` and `META.json` include provenance fields
+
+### Provenance Fields
+
+| Field | Source | Purpose |
+|-------|--------|---------|
+| `agent` | `--agent` flag | Human-friendly label (cursor-a, cursor-b) |
+| `model` | `--model` flag | AI model identifier (opus-4.5, gpt-4o) |
+| `git_head` | Auto-detected | SHA at registration time |
+| `worktree_path` | Auto-detected | Filesystem location |
+| `branch` | Auto-detected | Git branch name |
+| `registered_at` | Auto-generated | ISO timestamp |
+
+## Evidence
+
+- Commit: `8e49616` — "feat: add model provenance tracking to attempt lifecycle"
+- Problem observed: Multiple attempts existed but no way to know which AI model made which
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/decisions/D0003-prd-version-auto-detection.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/decisions/D0003
+title: "D0003: PRD Version Auto-Detection"
+audience: docs
+exposure: internal
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "decisions", "prd", "version"]
+---
+
+# PRD Version Auto-Detection
+
+> PRD version is parsed from source at runtime, eliminating hardcoded version drift in prompts.
+
+## Description
+
+This decision establishes that PRD versions are automatically parsed from `/docs/PRD.md` at runtime rather than hardcoded in operational prompts. When the PRD version changes, prompts don't need updating—the single source of truth in PRD.md is authoritative. A mismatch guard validates any explicit `--prd` flag against the actual PRD.md content.
+
+## Outline
+
+- Decision statement
+- Status
+- Why
+- Consequences
+- Implementation
+- Evidence
+
+---
+
+## Content
+
+# D0003 — PRD Version Auto-Detection
+
+## Decision
+
+The PRD version is automatically parsed from `/docs/PRD.md` at runtime. Operational prompts must never hardcode evolving identifiers like PRD versions.
+
+## Status
+
+**Active**
+
+## Why
+
+- Hardcoded version strings in prompts cause maintenance drift
+- When PRD goes from v0.2 → v0.3, the kickoff prompt shouldn't need updating
+- Single source of truth: `/docs/PRD.md` is authoritative
+- Eliminates "forgot to update the prompt" class of errors
+
+## Consequences
+
+- ✅ Prompts are version-agnostic and future-proof
+- ✅ PRD version changes require only one edit (PRD.md)
+- ✅ Mismatch guard prevents accidental version divergence
+- ⚠️ PRD.md must have parseable version format
+- ⚠️ `--prd` flag still accepted but validated against PRD.md
+
+## Implementation
+
+- Script: `/infra/scripts/attempt-cli.js` (`parsePrdVersion()` reads PRD.md)
+- Prompt: `/docs/PROMPT_ATTEMPT_KICKOFF.txt` uses `attempt:register` without version
+- Guard: If `--prd` is passed and mismatches PRD.md, command fails
+
+### Parseable Formats
+
+The script accepts either:
+
+```markdown
+| **PRD Version** | v0.3 |
+```
+
+Or:
+
+```markdown
+PRD Version: v0.3
+```
+
+## Evidence
+
+- Commit: `bcfbf55` — "feat: make attempt:register version-agnostic"
+- Problem observed: PRD went to v0.3 but prompt still said v0.2
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/decisions/D0004-repo-truth-cleanup-mandatory.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/decisions/D0004
+title: "D0004: Repo Truth & Cleanup Mandatory"
+audience: docs
+exposure: internal
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "decisions", "cleanup", "hygiene"]
+---
+
+# Repository Truth: Cleanup Is Mandatory
+
+> A dirty repository invalidates conclusions; cleanup resets epistemic state for valid experiments.
+
+## Description
+
+This decision establishes that repository cleanliness is a prerequisite for valid conclusions in AI-assisted development. Orphaned worktrees, stale branches, and detached HEADs contaminate experiments by making filesystem state indistinguishable from intentional signal. Cleanup after each PRD cycle ensures only sealed attempts and intentional branches remain, preserving the independence that Quantum Development requires.
+
+## Outline
+
+- Decision statement
+- Status
+- Why
+- Consequences
+- Implementation
+- Evidence
+
+---
+
+## Content
+
+# D0004 — Repository Truth: Cleanup Is Mandatory
+
+## Decision
+
+If the repository is dirty, conclusions drawn from it are invalid. Cleanup is not housekeeping — it is a reset of epistemic state.
+
+## Status
+
+**Active**
+
+## Why
+
+- In AI-assisted development, state residue is indistinguishable from signal
+- Orphaned worktrees, stale branches, and detached HEADs contaminate experiments
+- Quantum Development relies on comparing **independent** observations
+- Independence is meaningless if the filesystem lies
+
+## Consequences
+
+- ✅ Only sealed attempts remain after cleanup
+- ✅ Only intentional branches exist
+- ✅ Production state is explicit
+- ✅ New attempts begin without contamination
+- ⚠️ Requires discipline: cleanup after each PRD cycle
+- ⚠️ Some data loss if worktrees weren't properly submitted
+
+## Implementation
+
+- Script: `/infra/scripts/attempt-cli.js` (`cmdCleanup` prunes worktrees/branches)
+- Philosophy: `/canon/odd/appendices/repo-truth.md` documents the principle
+- Automation: `attempt:reset` auto-calls cleanup for PRD-specific branches
+
+### What "Dirty" Means
+
+A repository is dirty when:
+
+- Orphaned worktrees exist
+- Detached HEADs remain
+- Stale branches survive past relevance
+- Attempts overlap in filesystem state
+- Production state is ambiguous
+
+## Evidence
+
+- Commit: `e7c88aa` — "feat: add attempt:cleanup command for automatic worktree/branch pruning"
+- Commit: `5278f2f` — "docs: encode epistemic hygiene as canonical principle"
+- Document: `/canon/odd/appendices/repo-truth.md`
+- Problem observed: Old worktrees and branches accumulated, making repo state untrustworthy
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/decisions/D0005-nuke-safety-guards.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/decisions/D0005
+title: "D0005: Nuke Command Safety Guards"
+audience: docs
+exposure: internal
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "decisions", "nuke", "safety"]
+---
+
+# Nuke Command Safety Guards
+
+> Branch-aware safety prevents accidental destruction of production code while preserving attempt branch freedom.
+
+## Description
+
+This decision implements tiered safety guards for the `attempt:nuke` command based on branch context. Production (`prod`) can never be nuked, `main` requires explicit `--force` confirmation, while attempt branches can be freely nuked as they are ephemeral by design. Protected paths like `/canon/`, `/docs/`, and `/infra/` are never deleted even during nuke operations.
+
+## Outline
+
+- Decision statement
+- Status
+- Why
+- Consequences
+- Implementation
+- Evidence
+
+---
+
+## Content
+
+# D0005 — Nuke Command Safety Guards
+
+## Decision
+
+The `attempt:nuke` command has branch-aware safety guards: refuses on `prod`, warns and requires `--force` on `main`, allows freely on `attempt/*` branches.
+
+## Status
+
+**Active**
+
+## Why
+
+- Agents were accidentally nuking production code by running reset on `main`
+- Need explicit friction before destructive operations on important branches
+- `attempt/*` branches are ephemeral by design — no protection needed
+- `prod` is sacred — never allow accidental destruction
+- `main` is valuable but restorable — allow with confirmation
+
+## Consequences
+
+- ✅ Production (`prod`) cannot be accidentally nuked
+- ✅ Main requires explicit `--force` to nuke
+- ✅ Attempt branches can be freely nuked (that's their purpose)
+- ⚠️ Agents on wrong branch will see errors (intentional friction)
+- ⚠️ Human must intervene if nuke is needed on protected branches
+
+## Implementation
+
+- Script: `/infra/scripts/attempt-cli.js` (`cmdNuke` checks branch before proceeding)
+
+### Branch Safety Rules
+
+| Branch | Nuke Allowed? | Behavior |
+|--------|---------------|----------|
+| `prod` | ❌ Never | Hard fail with explanation |
+| `main` | ⚠️ With `--force` | Warning, requires explicit override |
+| `attempt/*` | ✅ Always | Proceeds immediately |
+| Other | ⚠️ With `--force` | Warning, requires explicit override |
+
+### Protected Paths (Never Deleted)
+
+Even during nuke, these are never touched:
+
+- `/canon/`
+- `/docs/`
+- `/attempts/`
+- `/infra/`
+- `/public/`
+- `/.cloudflare/`
+- `/.github/`
+
+## Evidence
+
+- Commit: `15b5c2e` — "feat: environment hardening - prod branch, nuke safety, promote to prod"
+- Commit: `0cce06d` — "fix: protect production - nuclear reset on main skips /src nuke by default"
+- Problem observed: Running `attempt:reset` on `main` deleted production `/src`
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/decisions/D0006-dogfooding-requirement.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/decisions/D0006
+title: "D0006: Dogfooding Requirement"
+audience: docs
+exposure: internal
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "decisions", "dogfooding", "validation"]
+---
+
+# Dogfooding Requirement
+
+> Agents must apply canon documents to their work, not just read them, validating documentation through actual use.
+
+## Description
+
+This decision mandates that agents building klappy.dev must internalize and apply the canon documents they're showcasing. ATTEMPT.md must demonstrate application of constraints and decision rules through a 9-section self-audit checklist. This validates the documentation itself—if agents can't follow it, the documentation needs fixing.
+
+## Outline
+
+- Decision statement
+- Status
+- Why
+- Consequences
+- Implementation
+- Evidence
+
+---
+
+## Content
+
+# D0006 — Dogfooding Requirement
+
+## Decision
+
+Agents building klappy.dev must actually FOLLOW the canon documents they're showcasing, not just read them. ATTEMPT.md must demonstrate internalization of constraints and decision rules.
+
+## Status
+
+**Active**
+
+## Why
+
+- klappy.dev is a docs site that showcases AI build processes
+- If agents don't follow the documented processes, the documentation is unvalidated
+- "Read the docs" is not the same as "apply the docs"
+- This validates the documentation itself — if agents can't follow it, it needs fixing
+
+## Consequences
+
+- ✅ Documentation is validated by actual use
+- ✅ Unclear or contradictory docs get flagged as feedback
+- ✅ ATTEMPT.md becomes evidence of process adherence
+- ⚠️ More overhead for agents (must document constraint application)
+- ⚠️ Self-audit checklist adds 9 sections to ATTEMPT.md
+
+## Implementation
+
+- Prompt: `/docs/PROMPT_ATTEMPT_KICKOFF.txt` specifies dogfooding requirement
+- Template: ATTEMPT.md template includes self-audit checklist
+
+### Required Canon Documents
+
+| Document | How to Apply |
+|----------|--------------|
+| `/canon/constraints.md` | Note which constraints were relevant, any overrides |
+| `/canon/decision-rules.md` | Note which rules guided approach choices |
+| `/canon/self-audit.md` | Complete all 9 sections in ATTEMPT.md |
+| `/canon/definition-of-done.md` | Meet all requirements before claiming completion |
+
+### Self-Audit Checklist (9 Sections)
+
+1. Intended Outcome
+2. Constraints Applied
+3. Decision Rules Followed
+4. Verification Performed
+5. Evidence Produced
+6. UX and Behavior Check
+7. Tradeoffs and Risks
+8. Maintainability Check
+9. Confidence Level
+
+## Evidence
+
+- Commit: `43e8428` — "feat: add dogfooding requirement - agents must apply canon docs not just read them"
+- Commit: `157a2f3` — "feat: bulletproof attempt workflow - mandatory completion gates"
+- Problem observed: Agents were reading canon docs but not applying them to their work
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/decisions/D0007-branch-names-are-convenience.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/decisions/D0007
+title: "D0007: Branch Names Are Convenience"
+audience: docs
+exposure: internal
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "decisions", "branches", "provenance"]
+---
+
+# Branch Names Are Convenience, Provenance Lives in META
+
+> Branch names are optional human convenience; canonical provenance lives in META.json files.
+
+## Description
+
+This decision establishes that branch naming conventions are not authoritative—the canonical record of "who made what" lives in META.json. Since Cursor manages worktrees dynamically and attempt numbers are assigned after finalize, systems cannot rely on specific branch patterns. Cloudflare deploys any branch that builds; docs and tooling must not depend on branch naming conventions.
+
+## Outline
+
+- Decision statement
+- Status
+- Why
+- Consequences
+- Implementation
+- Evidence
+
+---
+
+## Content
+
+# D0007 — Branch Names Are Convenience, Provenance Lives in META
+
+## Decision
+
+Branch names are optional convenience for humans and tooling. The canonical record of "who made what" lives in `META.json`. Cloudflare and the attempt system must not depend on specific branch naming conventions.
+
+## Status
+
+**Active**
+
+## Why
+
+- Cursor manages worktrees and branches dynamically — we can't control names reliably
+- Attempt numbers are assigned **after** finalize, not at branch creation
+- Agents don't know their attempt number when they start
+- Hardcoded branch patterns (like `attempt/prd-v0.2/a001`) were causing doc drift
+- Cloudflare deploys any branch that builds — it doesn't parse branch names
+
+## Consequences
+
+- ✅ System is Cursor-proof and future-proof
+- ✅ Branch naming can drift without breaking provenance
+- ✅ Cloudflare config is simpler (just "any non-prod branch")
+- ✅ Docs don't need updating when naming conventions change
+- ⚠️ Humans can't infer provenance from branch names alone
+- ⚠️ Must check `META.json` to know who made what
+
+## Implementation
+
+- Provenance schema: `.attempt.json` and `META.json` include `tool`, `agent`, `model`, `prd_version`, `run_id`, `git_head`
+- Cloudflare: Configured to deploy all non-`prod` branches
+- Docs: `CLOUDFLARE_CONFIG.md` describes deploy behavior, not branch naming
+
+### What Gets Namespaced (Durable)
+
+| Field | Location | Purpose |
+|-------|----------|---------|
+| `prd_version` | META.json | Which PRD |
+| `tool` | META.json | cursor, vscode, cli |
+| `agent` | META.json | Agent ID within tool |
+| `model` | META.json | AI model identifier |
+| `run_id` | META.json | Unique identifier |
+| `git_head` | META.json | SHA at registration |
+
+### What Does NOT Get Namespaced
+
+- Branch names (convenience only)
+- Folder names in worktrees
+- Cloudflare subdomain slugs
+
+## Evidence
+
+- Commit: `15dfa26` — "feat: add --tool flag to provenance tracking"
+- Document: `/docs/CLOUDFLARE_CONFIG.md` — "Branch names are optional convenience"
+- Problem observed: Docs assumed `attempt/prd-v0.2/a001` format, but Cursor doesn't create branches that way
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/decisions/D0008-register-before-nuke.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/decisions/D0008
+title: "D0008: Register Before Nuke"
+audience: docs
+exposure: internal
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "decisions", "lifecycle", "provenance", "independence"]
+---
+
+# Register Before Nuke
+
+> Registration must precede nuke to preserve provenance before destroying pre-state.
+
+## Description
+
+This decision establishes the mandatory sequence of register → nuke for starting any attempt. Registration captures provenance (agent, model, tool, git HEAD, timestamp) while nuke guarantees independence by deleting inherited code. This order is non-negotiable because nuking before registration loses observer identity and pre-state snapshot, while skipping nuke contaminates outcomes.
+
+## Outline
+
+- Decision statement
+- Status
+- Why
+- Consequences
+- Implementation
+- Evidence
+
+---
+
+## Content
+
+# D0008: Register Before Nuke
+
+**Status:** Active  
+**Date:** 2026-01-16  
+**Scope:** Attempt lifecycle  
+
+---
+
+## Decision
+
+The required sequence for starting any attempt is:
+
+1. **`attempt:register`** — captures provenance
+2. **`attempt:nuke`** — guarantees independence
+3. Only then does implementation begin
+
+This order is **mandatory and non-negotiable**.
+
+---
+
+## Why
+
+### If an agent nukes before registering:
+- You lose the "observer" identity
+- You lose the pre-state snapshot (`git_head`, branch, timestamp)
+- You cannot answer: *who did what, with what model, from where?*
+
+### If an agent registers but doesn't nuke:
+- You lose independence
+- You contaminate outcomes with inherited code
+- You lie to yourself about variance between attempts
+
+**Register → Nuke** is the only sequence that satisfies both forensic traceability and experimental purity.
+
+---
+
+## What This Preserves
+
+| Concern | How It's Addressed |
+|---------|-------------------|
+| Provenance | Registration captures agent, model, tool, git HEAD, timestamp |
+| Independence | Nuke deletes `/src` and framework configs — zero inheritance |
+| Forensic truth | Pre-state is recorded before it's destroyed |
+| Experimental purity | Implementation starts from a true blank slate |
+
+---
+
+## Consequences
+
+1. **Agents cannot skip registration** — attempts without provenance are invalid
+2. **Agents cannot skip nuke** — attempts with inherited code are contaminated
+3. **The sequence is enforced by documentation and social contract** — tooling may add guardrails but the rule is the rule
+4. **META.json becomes the authoritative record** — branch names are convenience, provenance is truth
+
+---
+
+## Implementation Hooks
+
+- `PROMPT_ATTEMPT_KICKOFF.txt`: First actions section explicitly states register → nuke
+- `ATTEMPT_KICKOFF.md`: Procedure section documents this order
+- `attempt-cli.js`: Could add warnings if nuke is called without prior registration (future enhancement)
+
+---
+
+## See Also
+
+- [D0002: Attempt Provenance Required](./D0002-attempt-provenance-required.md)
+- [D0005: Nuke Safety Guards](./D0005-nuke-safety-guards.md)
+- [D0006: Dogfooding Requirement](./D0006-dogfooding-requirement.md)
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/decisions/D0009-multi-lane-prd-architecture.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/decisions/D0009
+title: "D0009: Multi-Lane PRD Architecture"
+audience: docs
+exposure: internal
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "decisions", "lanes", "prd", "architecture"]
+---
+
+# Multi-Lane PRD Architecture
+
+> PRDs are organized into independent product lanes, sharing canon but maintaining separate lifecycles.
+
+## Description
+
+This decision supersedes the single-PRD model by introducing independent product lanes (website, ai-navigation, agent-skill). Each lane has its own PRD, attempts, success criteria, and evidence, while canon remains shared gravity. This prevents scope creep, evidence pollution, and confusion about "done" when products have different users, rates of change, and requirements.
+
+## Outline
+
+- Decision statement
+- Status
+- Why
+- Consequences
+- Implementation
+- Evidence
+
+---
+
+## Content
+
+# D0009: Multi-Lane PRD Architecture
+
+**Status:** Accepted  
+**Date:** 2026-01-17  
+**Deciders:** Chris Klapp  
+**Supersedes:** Single Active PRD rule (formerly in canon/index.md)
+
+---
+
+## Context
+
+The original ODD model assumed a single active PRD at any time (`/docs/PRD.md`). All attempts, evidence, and lifecycle tracked against this single evolutionary line.
+
+This created cognitive collapse when multiple independent products emerged:
+
+1. **Public Website** — human-facing orientation surface
+2. **AI Navigation Interface** — AI layer helping humans understand ODD
+3. **Agent Cognitive Skill** — agent framework for executing ODD on any project
+
+These have:
+- Different users (humans vs AI vs AI-as-tool)
+- Different success criteria (screenshots vs citations vs autonomous PRD generation)
+- Different rates of change (website can stagnate while agent skill evolves rapidly)
+- Different evidence requirements
+
+Forcing them into a single PRD caused:
+- Scope creep across unrelated concerns
+- Evidence pollution (mobile screenshots don't validate agent reasoning)
+- Progress in one area forcing reruns in another
+- Confusion about what "done" means
+
+---
+
+## Decision
+
+PRDs are now organized into independent product lanes.
+
+Each lane has:
+- Its own PRD at `/docs/PRD/<lane>/PRD.md`
+- Its own attempts at `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/` (lane-contained)
+- Its own lifecycle, success criteria, and evidence
+
+The three initial lanes are:
+- `website` — human-facing UI/UX
+- `ai-navigation` — AI over documentation
+- `agent-skill` — agent cognitive framework
+
+**Lanes share canon, not lifecycle.**
+
+Canon remains the shared gravity — constraints, decision rules, and definitions that apply to all lanes. Canon evolves via decision logs, not PRDs.
+
+---
+
+## Consequences
+
+### Positive
+
+- **Independence:** Evolve agent skills without touching website PRD
+- **Clarity:** Each lane has explicit success criteria
+- **Scalability:** Add new lanes without restructuring existing ones
+- **Evidence integrity:** Lane-specific evidence stays lane-scoped
+
+### Negative
+
+- **Complexity:** More structure to understand and maintain
+- **Tooling updates:** CLI commands now require `--lane` flag
+- **Migration:** Existing attempts need mental model adjustment
+
+### Neutral
+
+- **Canon unchanged:** Shared constraints still apply to all lanes
+- **Attempt mechanics unchanged:** Same register/nuke/build/seal flow
+
+---
+
+## Constraints
+
+- Every attempt MUST declare a lane before registration
+- Attempts without a lane are invalid
+- Folder structure is locked: `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/`
+- No creative variations on attempt folder structure allowed
+- Root `/attempts/**` is legacy (read-only)
+
+---
+
+## Related Documents
+
+- `/canon/odd/appendices/product-lanes.md` — full orientation
+- `/docs/ATTEMPTS.md` — updated attempt lifecycle
+- `/docs/ATTEMPT_KICKOFF.md` — updated workflow with lane declaration
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/decisions/D0010-canonical-agent-kickoff.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/decisions/D0010
+title: "D0010: Canonical Agent Kickoff"
+audience: docs
+exposure: internal
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "decisions", "agent", "kickoff", "entrypoint"]
+---
+
+# Canonical Agent Kickoff Artifact
+
+> A single authoritative entry point file eliminates agent prompt reconstruction and drift.
+
+## Description
+
+This decision creates `/docs/AGENT_KICKOFF.md` as the only allowed entry point for agent attempts. Rather than expecting agents to compose context from multiple documents, this single file contains all invariants. Humans paste exactly what's in the repo—no external prompts, no helpful context, no reconstruction. The file IS the prompt.
+
+## Outline
+
+- Decision statement
+- Status
+- Why
+- Consequences
+- Implementation
+- Evidence
+
+---
+
+## Content
+
+# D0010: Canonical Agent Kickoff Artifact
+
+**Status:** Accepted  
+**Date:** 2026-01-17  
+**Deciders:** Chris Klapp  
+**Related:** D0009-multi-lane-prd-architecture
+
+---
+
+## Context
+
+After implementing multi-lane PRD architecture (D0009), the agent entry surface became fragmented:
+
+- `/docs/AGENT_ENTRYPOINT.md` — orientation pointers
+- `/docs/ATTEMPT_KICKOFF.md` — human workflow with agent notes
+- `/docs/ATTEMPTS.md` — lifecycle orientation
+- `/canon/odd/appendices/product-lanes.md` — lane architecture
+
+Agents were expected to "compose context" by reading multiple documents. This violated a core principle:
+
+> If it's not in the repo, it doesn't exist.
+
+When a human pastes a "helpful" prompt into Cursor, that prompt is not repo-authoritative. The agent reconstructs intent rather than reading authority.
+
+This creates:
+- Drift between what humans think agents should do and what's documented
+- Hallucinated procedures based on reasonable-sounding synthesis
+- No single source of truth for agent behavior
+
+---
+
+## Decision
+
+Create a single, canonical, copy-pasteable agent kickoff artifact:
+
+**`/docs/AGENT_KICKOFF.md`**
+
+This file:
+- Is the ONLY allowed entry point for agent attempts
+- Contains all invariants in one place
+- Is lane-aware (declares variables, not per-lane copies)
+- Explicitly instructs agents to STOP if conflicts are detected
+
+The existing files are rescoped:
+- `/docs/AGENT_ENTRYPOINT.md` — now points directly to AGENT_KICKOFF
+- `/docs/ATTEMPT_KICKOFF.md` — human workflow only
+- `/docs/ATTEMPTS.md` — orientation, not procedure
+
+---
+
+## Consequences
+
+### Positive
+
+- **Single source of truth:** Agents have one authoritative entry point
+- **No reconstruction:** Humans paste exactly what's in the repo
+- **Conflict detection:** Agents are instructed to stop and report, not guess
+- **Scalable:** New lanes are added to the file, not as separate artifacts
+
+### Negative
+
+- **One more file:** Adds to the doc surface area
+- **Maintenance:** Must be kept in sync with lane changes
+
+### Mitigations
+
+- AGENT_KICKOFF.md references lane PRDs by path pattern, not hardcoded content
+- Lane additions require updating ONE file, not rewriting agent prompts
+- File is self-describing: agents can validate it against repo state
+
+---
+
+## The Invariant
+
+If a human wants an agent to start an attempt, they do ONE thing:
+
+> Point the agent at `/docs/AGENT_KICKOFF.md`
+
+No external prompts. No "helpful context." No reconstruction.
+
+The file IS the prompt.
+
+---
+
+## Related Documents
+
+- `/docs/AGENT_KICKOFF.md` — the canonical artifact
+- `/docs/AGENT_ENTRYPOINT.md` — now a redirect
+- `/canon/odd/appendices/product-lanes.md` — lane architecture
+- D0009 — multi-lane PRD architecture
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/decisions/D0011-odd-contract-2.0.0.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/decisions/D0011
+title: "D0011: ODD System Contract 2.0.0"
+audience: docs
+exposure: internal
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "decisions", "contract", "version", "epoch"]
+---
+
+# ODD System Contract 2.0.0
+
+> Major version bump introduces multi-lane architecture with explicit epoch boundaries.
+
+## Description
+
+This decision formalizes ODD Contract 2.0.0 with the multi-lane architecture, declaring two epochs: E0001-single-prd-era and E0002-multi-lane-era. The contract lives at `/canon/odd/contract.md` and requires epoch_id in META.json for all new attempts. Breaking changes include lane-scoped PRD locations, lane-scoped attempt locations, and required `--lane` tooling flags.
+
+## Outline
+
+- Decision statement
+- Status
+- Why
+- Consequences
+- Implementation
+- Evidence
+
+---
+
+## Content
+
+# D0011: ODD System Contract 2.0.0
+
+## Status
+
+Accepted
+
+## Context
+
+The ODD system evolved from a single-PRD model to a multi-lane architecture. This change affects:
+
+- Directory structure (PRDs, attempts)
+- Tooling requirements (lane flags)
+- Mental model (products decoupled, canon shared)
+- Comparability rules (epochs required)
+
+These changes are not backwards-compatible. Applying 2.x workflows to 1.x structures, or comparing 2.x attempts to 1.x attempts without adjustment, produces invalid conclusions.
+
+The system needed:
+1. A single authoritative version for the ODD contract
+2. Clear epoch boundaries
+3. A path to mark legacy documents without rewriting history
+
+## Decision
+
+1. **Create `/canon/odd/contract.md`** as the single source of ODD system versioning.
+2. **Declare contract version 2.0.0** with the multi-lane architecture.
+3. **Define two epochs:**
+   - E0001-single-prd-era (contract 1.x)
+   - E0002-multi-lane-era (contract 2.x)
+4. **Require epoch_id in META.json** for all new attempts.
+5. **Preserve Epoch 1 artifacts** as historical records, not errors.
+
+## Consequences
+
+### Positive
+- Single source of truth for ODD compatibility
+- Clear boundary between eras
+- Historical artifacts remain valid in their context
+- Future major changes have a pattern to follow
+
+### Negative
+- Epoch 1 documents may need headers if kept for reference
+- Tooling must be epoch-aware for meaningful comparisons
+- Slight overhead in declaring epoch during registration
+
+### Neutral
+- PRD versions remain lane-local (unaffected)
+- Content pack manifest version is separate (unaffected)
+
+## Breaking Changes in 2.0.0
+
+| Category | 1.x | 2.x |
+|----------|-----|-----|
+| PRD location | `/docs/PRD.md` | `/docs/PRD/<lane>/PRD.md` |
+| Attempt location | `/attempts/prd-vX.Y/attempt-NNN/` | `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/` |
+| Lane declaration | N/A | Required |
+| Epoch declaration | N/A | Required |
+| Tooling flags | None | `--lane` required |
+
+Note: Root `/attempts/**` is legacy (read-only). All new attempts are lane-contained under `/products/<lane>/attempts/`.
+
+## Epoch 1 Document Header (Standard)
+
+For documents kept for historical reference that describe 1.x workflows:
+
+```markdown
+> **Epoch 1 Document** (ODD Contract ≤1.x)
+>
+> Kept for historical context. Current workflow is defined by ODD Contract 2.x.
+> See `/canon/odd/contract.md` for the current contract.
+```
+
+## Related
+
+- `/canon/odd/contract.md` — the contract itself
+- `/canon/odd/appendices/epochs.md` — epoch semantics
+- `/canon/odd/appendices/product-lanes.md` — lane architecture
+- `/canon/odd/decisions/D0009-multi-lane-prd-architecture.md` — the architectural decision
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/decisions/D0012-e0002-transition-interpretation.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/decisions/D0012
+title: "D0012: E0002 Transition Interpretation (Truth vs Enforcement Lag)"
+audience: docs
+exposure: internal
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "decisions", "epochs", "lanes", "drift", "interfaces", "tooling"]
+---
+
+# E0002 Transition Interpretation (Truth vs Enforcement Lag)
+
+> During epoch transitions, canon defines truth while tooling may temporarily lag behind.
+
+## Description
+
+This decision addresses the expected gap during E0002 transition where truth (canon/PRDs/contracts) advances faster than enforcement (CLI/build scripts). Canon and lane PRDs define intended truth; tooling lag is temporarily permitted but legacy surfaces must be explicitly labeled. Each contradiction requires selecting ONE canonical truth—no "synthesis truth" allowed.
+
+## Outline
+
+- Decision statement
+- Status
+- Why
+- Consequences
+- Implementation
+- Evidence
+
+---
+
+## Content
+
+# D0012: E0002 Transition Interpretation (Truth vs Enforcement Lag)
+
+**Status:** Accepted  
+**Date:** 2026-01-17  
+**Deciders:** Chris Klapp  
+**Related:** D0009-multi-lane-prd-architecture, D0011-odd-contract-2.0.0
+
+---
+
+## Context
+
+The repository has crossed an epoch boundary into **E0002-multi-lane-era** (ODD Contract 2.x).
+
+A repo truth audit surfaced explicit contradictions between:
+
+- Canon + lane PRDs (intended truth for E0002)
+- Docs (mixed E0001/E0002 references)
+- Tooling + scripts (partially E0001-encoded invariants)
+- Interface contracts (claimed E0002 compatibility; some still encode E0001 shapes)
+
+This is expected during transition: truth (canon/PRDs/contracts) can advance faster than enforcement (CLI/build scripts), and historical artifacts can persist.
+
+---
+
+## Decision
+
+During the E0002 transition:
+
+1. **Canon and lane PRDs define intended truth.**  
+2. **Tooling and enforcement may lag (mixed-era is permitted temporarily).**  
+3. **Legacy surfaces may remain, but MUST be explicitly labeled as legacy (pre-E0002).**  
+4. **Comparability across E0001 ↔ E0002 is limited by default.** If lane and epoch metadata are missing, outcomes are **not comparable by default**.
+5. **Each surfaced contradiction requires selecting ONE canonical truth before alignment work begins.** No “synthesis truth” is permitted.
+
+---
+
+## Consequences
+
+### Positive
+
+- Preserves historical evidence without rewriting it into the new model
+- Prevents folklore by forcing explicit truth selection per contradiction
+- Makes mixed-era state explicitly permissible (and therefore auditable)
+
+### Negative
+
+- Temporary cognitive dissonance: documentation and tooling may disagree
+- Requires deliberate convergence work (contracts, docs labeling, tooling alignment)
+
+---
+
+## Operational Rules (Minimal)
+
+- **Label, don’t rewrite:** Prefer small “Legacy (pre E0002)” headers/notes over broad edits.
+- **Decide before implementing:** For each contradiction, record the canonical truth first; then align docs/contracts/tooling mechanically.
+- **No silent drift:** If contradictions exist, they must be citeable and tracked until resolved.
+
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/decisions/D0013-build-output-lane-scoped-dist.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/decisions/D0013
+title: "D0013: Build Output Truth is Lane-Scoped (products/<lane>/dist)"
+audience: docs
+exposure: internal
+tier: 2
+voice: neutral
+stability: stable
+tags: ["odd", "decisions", "lanes", "build", "deploy", "contracts"]
+---
+
+# Build Output Truth is Lane-Scoped (products/<lane>/dist)
+
+> Lane builds must output to products/<lane>/dist/, eliminating repo-root collision.
+
+## Description
+
+This decision establishes `products/<lane>/dist/` as the canonical build output location for E0002. Multi-lane architecture requires lane-scoped implementation and deployment surfaces—repo-root `/dist` cannot represent multiple lanes without collision. Each lane build must produce `products/<lane>/dist/index.html` to support independent deployment and promotion.
+
+## Outline
+
+- Decision statement
+- Status
+- Why
+- Consequences
+- Implementation
+- Evidence
+
+---
+
+## Content
+
+# D0013: Build Output Truth is Lane-Scoped (products/<lane>/dist)
+
+**Status:** Accepted  
+**Date:** 2026-01-17  
+**Deciders:** Chris Klapp  
+**Related:** D0009-multi-lane-prd-architecture, D0011-odd-contract-2.0.0, D0012-e0002-transition-interpretation
+
+---
+
+## Decision
+
+For ODD Contract 2.x (E0002), the canonical build output location is:
+
+> **`products/<lane>/dist/`**
+
+Specifically, each lane build MUST produce:
+
+- `products/<lane>/dist/`
+- `products/<lane>/dist/index.html`
+
+This is required to support product lanes as first-class, independent products.
+
+---
+
+## Why
+
+- Multi-lane PRD architecture (D0009) requires lane-scoped implementation and deployment surfaces.
+- Repo-root `/dist` cannot represent multiple lane builds without collision or ambiguity.
+- Lane-scoped output enables per-lane Cloudflare Pages projects and per-lane promotion.
+
+---
+
+## Consequences
+
+- Any references to repo-root `/dist` as a universal requirement are **legacy / transitional** and must be labeled as such until aligned.
+- Interface contracts and build tooling must converge mechanically to this truth (tracked as alignment work; not part of this decision).
+- Verifiers (future `verify:contracts`) must validate lane-scoped output, not repo-root output.
+
+---
+
+## Scope Notes (Non-Decision)
+
+This decision does not prescribe:
+
+- how the build is implemented (Vite, etc.)
+- which lanes require a deployable artifact
+- manifest runtime URL conventions
+
+It defines only the canonical output location when a lane produces a deployable build artifact.
+
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/decisions/D0014-e0003-evidence-first-era.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/decisions/D0014
+title: "D0014: Declare E0003 Evidence-First Era"
+audience: docs
+exposure: internal
+tier: 2
+voice: first_person
+stability: stable
+tags: ["odd", "epochs", "evidence", "cloudflare", "attempts", "lanes"]
+---
+
+# Declare E0003 Evidence-First Era
+
+> Attempts require externally verifiable deployment evidence, not just local build success.
+
+## Description
+
+This decision declares E0003 — Evidence-First Era, requiring attempts to prove success through externally reviewable deployment. An attempt is incomplete until the branch is pushed, Cloudflare preview deploys successfully, and evidence renders at `/_evidence/<run_id>/EVIDENCE.md` with HTTP 200. Attempts that cannot prove deployment must seal as failure.
+
+## Outline
+
+- Decision statement
+- Status
+- Why
+- Consequences
+- Implementation
+- Evidence
+
+---
+
+## Content
+
+# D0014: Declare E0003 Evidence-First Era
+
+**Status:** Accepted  
+**Date:** 2026-01-19  
+**Decider:** Klappy  
+**Epoch:** E0003  
+**Related:** D0009 (Multi-lane PRDs), D0012 (Transition Interpretation), D0013 (Lane-scoped dist), Deploy Evidence (klappy://canon/odd/deploy-evidence)
+
+## Context
+
+Under E0002, attempts could claim success with local build proof and repository artifacts.
+
+In practice, this created invalid conclusions:
+
+- Cloudflare Pages serves only the configured build output directory
+- `/attempts/**` is not served by Pages by default
+- Agents completed "successful" attempts that never rendered online
+- Evidence URLs were often hypothetical or unverified
+
+The system incentivized local-only success and narrative closure instead of externally reviewable proof.
+
+## Decision
+
+We declare **E0003 — Evidence-First Era**.
+
+In E0003, an attempt is not complete unless:
+
+1) The attempt branch is pushed to origin
+2) Cloudflare Pages preview deployment succeeds
+3) The preview URL returns HTTP 200 and renders the site
+4) The evidence URL returns HTTP 200 and renders evidence at:
+
+`/_evidence/<run_id>/EVIDENCE.md`
+
+Additionally:
+
+- Evidence MUST be copied into the lane build output:
+  `products/<lane>/dist/_evidence/<run_id>/`
+- Attempts that cannot prove (2)-(4) MUST seal as failure
+
+## Consequences
+
+### Positive
+
+- Prevents "success without deployment"
+- Makes evidence externally reviewable and durable
+- Forces alignment between docs, tooling, and Cloudflare configuration
+
+### Negative
+
+- Adds operational friction (intentional)
+- Increases failure rate until tooling and CF projects are correctly configured
+
+## Compatibility
+
+- E0002 attempts remain valid within E0002.
+- E0002 attempts are not comparable to E0003 attempts by default.
+
+## Minimal operational rule
+
+If a preview URL cannot be verified, stop.
+No additional work is permitted under a false success state.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/decisions/README.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/decisions
+title: "Implementation Decision Log"
+audience: docs
+exposure: nav
+tier: 1
+voice: neutral
+stability: evolving
+tags: ["docs", "decisions", "adr", "implementation", "reference", "index"]
+---
+
+# Implementation Decision Log
+
+Architecture Decision Records (ADRs) specific to the klappy.dev repository implementation.
+
+> **Relationship to Canon:** Portable decision-making principles live in `/canon/`. These decisions document specific choices made for this repository's implementation.
+
+---
+
+## Active Decisions
+
+### Branch & Deploy Model
+
+| ID | Decision | Status |
+|----|----------|--------|
+| [D0001](./D0001-prod-branch-is-production.md) | `prod` branch is production; `main` is experiment ledger | **Active** |
+| [D0005](./D0005-nuke-safety-guards.md) | Nuke command refuses on `prod`, warns on `main` | **Active** |
+| [D0007](./D0007-branch-names-are-convenience.md) | Branch names are convenience; provenance lives in META | **Active** |
+
+### Attempt Lifecycle
+
+| ID | Decision | Status |
+|----|----------|--------|
+| [D0002](./D0002-attempt-provenance-required.md) | Model provenance must be captured at registration | **Active** |
+| [D0003](./D0003-prd-version-auto-detection.md) | PRD version auto-detected from lane PRD | **Active** |
+| [D0006](./D0006-dogfooding-requirement.md) | Agents must apply canon docs, not just read them | **Active** |
+| [D0008](./D0008-register-before-nuke.md) | Register first (provenance), then nuke (independence) | **Active** |
+| [D0010](./D0010-canonical-agent-kickoff.md) | Single canonical agent entry point (`AGENT_KICKOFF.md`) | **Active** |
+
+### Architecture
+
+| ID | Decision | Status |
+|----|----------|--------|
+| [D0009](./D0009-multi-lane-prd-architecture.md) | PRDs organized into independent product lanes | **Active** |
+| [D0011](./D0011-odd-contract-2.0.0.md) | ODD System Contract 2.0.0 (multi-lane era) | **Active** |
+| [D0012](./D0012-e0002-transition-interpretation.md) | E0002 transition interpretation (truth can lead enforcement) | **Active** |
+| [D0013](./D0013-build-output-lane-scoped-dist.md) | Build output truth is lane-scoped (`products/<lane>/dist`) | **Active** |
+| [D0014](./D0014-e0003-evidence-first-era.md) | E0003 evidence-first era (deployment proof required) | **Active** |
+
+### Repository Hygiene
+
+| ID | Decision | Status |
+|----|----------|--------|
+| [D0004](./D0004-repo-truth-cleanup-mandatory.md) | Cleanup is mandatory; dirty repos invalidate conclusions | **Active** |
+
+---
+
+## What Makes These Implementation-Specific
+
+These decisions reference:
+
+- Specific file paths in this repository (`/products/`, `/docs/PRD.md`, `/infra/`)
+- Specific CLI scripts (`/infra/scripts/attempt-cli.js`)
+- Specific branch naming conventions (`prod`, `main`, `attempt/*`)
+- Specific tooling (Cloudflare Pages, git worktrees)
+- Specific product lane names (`website`, `ai-navigation`, `agent-skill`)
+
+---
+
+## How Decisions Are Made
+
+1. **During an attempt**: Agent notes "Decision Delta" in `ATTEMPT.md`
+2. **After the attempt**: Human or librarian promotes durable decisions here
+3. **If stable**: Decision may be referenced from higher-visibility docs
+
+---
+
+## Decision File Template
+
+Each decision file follows this structure:
+
+```markdown
+# D000X — [Title]
+
+## Decision
+
+[1-2 sentences stating what was decided]
+
+## Status
+
+**Active** | Proposed | Deprecated
+
+## Why
+
+- [Bullet point]
+- [Bullet point]
+
+## Consequences
+
+- [What this enables]
+- [What this prevents]
+- [What this costs]
+
+## Implementation
+
+- Script: `/infra/scripts/...`
+- Contract: `/infra/contracts/...`
+
+## Evidence
+
+- Commit: `abc1234`
+- Attempt: `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/`
+```
+
+---
+
+## Deprecated Decisions
+
+_None yet._
+
+---
+
+## Relationship to Canon
+
+Canon contains portable methodology. These decisions are the klappy.dev-specific application of that methodology.
+
+| Canon Document | Related Decisions |
+|----------------|-------------------|
+| `/canon/odd/contract.md` | D0009, D0011, D0012 |
+| `/canon/odd/appendices/epochs.md` | D0012, D0014 |
+| `/canon/constraints.md` | All decisions respect constraints |
 
 
 
@@ -4180,7 +9139,31 @@ stability: evolving
 tags: ["completion-report", "template"]
 ---
 
-# 📋 Completion Report Template
+# Completion Report Template
+
+> The standard format for claiming work is complete.
+
+## Description
+
+The completion report template is the mandatory output format for claiming completion. It ties together the Definition of Done, Self-Audit, and Visual Proof Standards into a single, reviewable artifact. Reports must include task overview, intended outcome, what changed, verification performed, observed behavior, evidence produced, visual proof (if applicable), self-audit summary, confidence and gaps, exceptions or notes, and a completion declaration. Reports may be brief but must be honest. If the report is unclear, the work is unclear.
+
+## Outline
+
+- Task Overview
+- Intended Outcome
+- What Changed
+- Verification Performed
+- Observed Behavior
+- Evidence Produced
+- Visual Proof (If Applicable)
+- Self-Audit Summary
+- Confidence & Gaps
+- Exceptions or Notes
+- Completion Declaration
+
+---
+
+## Content
 
 **Canon v0.1**
 
@@ -4354,7 +9337,30 @@ stability: stable
 tags: ["constraints", "assumptions"]
 ---
 
-# 📌 Constraints
+# Constraints
+
+> Design defaults and assumptions that shape how systems are built.
+
+## Description
+
+Constraints define the baseline assumptions and design defaults applied to most work. They cover offline-first design, long-term maintainability, interoperability, stateless architectures, AI as accelerator (not authority), evidence over assertion, contextual UX, ephemeral artifacts, and explicit tradeoffs. Each constraint includes what is assumed, why it matters, what it forces, and when it does not apply. These are not universal best practices but reflect specific environments and problems.
+
+## Outline
+
+- Offline-First (Default)
+- Long Timelines & Changing Ownership
+- Maintainability Over Cleverness
+- Interoperability Over Feature Completeness
+- Stateless or Low-State by Default
+- AI as Accelerator, Not Authority
+- Evidence Over Assertion
+- UX Is Contextual, Not Universal
+- Ephemeral Artifacts Are Acceptable
+- Explicit Tradeoffs
+
+---
+
+## Content
 
 **Canon v0.1**
 
@@ -4629,7 +9635,34 @@ stability: stable
 tags: ["decision-rules", "heuristics"]
 ---
 
-# 📋 Decision Rules
+# Decision Rules
+
+> Heuristics for choosing between valid options when designing systems.
+
+## Description
+
+Decision rules describe how decisions are made when multiple valid options exist. They complement Constraints by answering "how I choose." Rules include: outcomes before implementation, borrow-bend-break-build progression, KISS, DRY with isolation, explicit state, recoverability over perfection, visible tradeoffs, optimizing for the next maintainer, UI carrying explanation, verification before completion, escalation only when defaults fail, admitting uncertainty early, preferring one-shot builds over steering misses, and hard-coding protocols (not domain tables).
+
+## Outline
+
+- Outcomes Before Implementation
+- Borrow, Bend, Break, Build
+- Simplicity Wins (KISS)
+- DRY, But Not at the Cost of Isolation
+- Prefer Explicit State
+- Favor Recoverability Over Perfection
+- Make Tradeoffs Visible Early
+- Optimize for the Next Maintainer
+- UI Should Carry the Explanation
+- If It Cannot Be Verified, It Is Not Done
+- Escalate Only When Defaults Fail
+- Say "I Don't Know" Early
+- Prefer One-Shot Builds
+- Hard-Code Protocols, Not Domain Tables
+
+---
+
+## Content
 
 **Canon v0.1**
 
@@ -4899,7 +9932,30 @@ stability: semi_stable
 tags: ["definition-of-done", "evidence"]
 ---
 
-# ✅ Definition of Done & Evidence Policy
+# Definition of Done & Evidence Policy
+
+> The enforcement backbone that defines what "complete" means.
+
+## Description
+
+This policy defines completion requirements for all work: code, UI, architecture, automation, and AI-assisted outputs. Work is only done when it includes a change description, verification performed, observed behavior, evidence produced, and self-audit completed. Evidence must demonstrate actual behavior (screenshots, recordings, rendered output, test logs) and be produced after the change. Visual verification is required for UI work. The policy covers partial completion handling, explicit exceptions, and agent responsibilities.
+
+## Outline
+
+- Core Principle: Verified with evidence
+- Definition of Done (5 requirements)
+- Evidence Requirements
+- Visual Verification (Preferred)
+- Verification Must Be Performed
+- Self-Audit Requirement
+- What Does Not Count as Done
+- Partial Completion
+- Explicit Exceptions
+- Agent Responsibility
+
+---
+
+## Content
 
 **Canon v0.1**
 
@@ -5144,70 +10200,68 @@ AI accelerates execution. Governance preserves trust.
 
 ---
 uri: klappy://canon/odd/appendices
-title: "ODD Appendices"
+title: "ODD Appendices (Portable)"
 audience: canon
 exposure: nav
 tier: 2
 voice: neutral
 stability: evolving
-tags: ["odd", "appendices", "index"]
+tags: ["odd", "appendices", "index", "portable"]
 ---
 
-# 🧩 ODD Appendices
+# ODD Appendices (Portable)
 
 Extended concepts that deepen understanding without introducing enforcement. These are diagnostic and orientation documents, not requirements.
 
+> **Note:** Implementation-specific appendices have been moved to `/docs/appendices/`. This folder contains only portable methodology that can apply to any ODD-following repository.
+
 ---
 
-## 📁 Contents
+## Contents
 
 | File | Title | Summary |
 |------|-------|---------|
 | `alignment-reviews.md` | Alignment Reviews | Periodic evaluation of the ODD system itself to detect drift between stated intent, implemented process, and observed outcomes. |
-| `attempt-lifecycle.md` | Attempt Lifecycle | How PRD versions, attempts, evidence, and deployments are preserved. Attempts exist to be finished; content compounds over time. |
-| `canonical-compression.md` | Canonical Compression | How derived, minimal working models are produced from Source Canon to fit into limited context windows. |
-| `compilation.md` | Compilation | The process of producing derived, wipeable, portable packs from higher-entropy source documents. |
-| `compilation-targets.md` | Compilation Targets | How compiled packs make the corpus usable at constrained context sizes without rewriting source truth. |
-| `compiled-memory.md` | Compiled Memory | Lane-scoped, wipeable, auditable compressed artifacts that agents and humans can safely consume. |
-| `deploy-evidence.md` | Deploy Evidence | Why evidence must be in the build output. Local builds are not sufficient proof for online deployments. |
-| `drift-checks.md` | Drift Checks | The drift-prevention mechanism. When docs, prompts, and tooling diverge, truth becomes vibes. |
-| `epochs.md` | Epochs | Named periods where "success" meaning is stable enough to compare outcomes. Shifts in the fitness landscape. |
-| `evidence.md` | Evidence | Evidence is proof, not narrative. Attempts are valid only with deployed public evidence. |
 | `evolution-not-automation.md` | Evolution, Not Automation | This system optimizes learning, not execution. Humans stay in the loop. |
-| `lane-build-layout.md` | Lane Build Layout | How lanes avoid /src and /dist collisions. Worktrees isolate, deployments are lane-scoped. |
-| `lane-implementation-surfaces.md` | Lane-Scoped Implementation Surfaces | Each lane owns its own /products/<lane>/src and /products/<lane>/dist. No shared repo-root surfaces. |
-| `media-as-learning-layer.md` | Media as a Learning Layer | Media reduces cognitive load over stable written content. Canonical truth lives in text. |
-| `memory-architecture.proposed.md` | Memory Architecture | Memory as layered percolation: Attempts → Lane History → Lane Decisions → Cross-Lane Patterns → Canon. |
-| `online-evidence.md` | Online Evidence Requirement | Attempts are invalid without online preview URLs. "Works on my machine" is not evidence. |
-| `product-lanes.md` | Product Lanes | Why multiple PRD lanes exist and how they relate. Lanes share canon, not lifecycle. |
-| `progressive-elevation.md` | Progressive Elevation & Decay | Most artifacts decay; only patterns that repeatedly reduce drag elevate into durable layers. |
-| `quantum-development.md` | Quantum Development | Why multiple attempts against the same PRD are sometimes necessary before changing the PRD itself. |
-| `repo-topology.md` | Repository Topology | What lives where and what changes when. App/Content/Infrastructure decoupling. |
-| `repo-truth.md` | Repository Truth | If the repository is dirty, conclusions drawn from it are invalid. Epistemic hygiene. |
-| `repo-truth-audit.md` | Repo Truth Audit | Prompt for detecting epistemic drift across canon, docs, tooling, and structure. |
-| `visual-evolution.md` | Visual Evolution | Visual systems evolve independently from products through versioned visual interfaces. |
 | `failure-driven-modularity.md` | Failure-Driven Modularity | Modular boundaries are introduced only after repeated failure to regenerate from spec. Modularity is an outcome of failure, not a prerequisite. |
+| `media-as-learning-layer.md` | Media as a Learning Layer | Media reduces cognitive load over stable written content. Canonical truth lives in text. |
+| `quantum-development.md` | Quantum Development | Why multiple attempts against the same PRD are sometimes necessary before changing the PRD itself. |
+| `visual-evolution.md` | Visual Evolution | Visual systems evolve independently from products through versioned visual interfaces. |
 
 ---
 
-## 🔍 When to Read What
+## Implementation-Specific Appendices
 
-**Starting out?** Begin with `attempt-lifecycle.md` and `product-lanes.md` to understand the basic structure.
+The following have been moved to `/docs/appendices/` as they contain klappy.dev-specific implementation details:
 
-**Building a pack?** Read `compilation.md`, `compiled-memory.md`, and `memory-architecture.proposed.md`.
-
-**Debugging drift?** Read `drift-checks.md`, `repo-truth.md`, and `repo-truth-audit.md`.
-
-**Understanding evidence requirements?** Read `evidence.md`, `online-evidence.md`, and `deploy-evidence.md`.
+- `attempt-lifecycle.md` — Attempt folder structure, CLI commands, META.json schema
+- `compilation.md`, `compiled-memory.md`, `compilation-targets.md` — Compilation paths and tooling
+- `epochs.md` — E0003 evidence requirements with Cloudflare specifics
+- `evidence.md`, `deploy-evidence.md`, `online-evidence.md` — Evidence path structure
+- `lane-build-layout.md`, `lane-implementation-surfaces.md` — Lane-specific paths
+- `product-lanes.md` — Specific lane names (website, ai-navigation, agent-skill)
+- `repo-topology.md`, `repo-truth.md`, `repo-truth-audit.md` — Specific folder structures
+- `progressive-elevation.md` — Path-specific elevation rules
+- `canonical-compression.md`, `memory-architecture.proposed.md` — Compilation and memory paths
 
 ---
 
-## 🔗 Relationship to Canon
+## When to Read What
+
+**Understanding ODD methodology?** Start with these portable appendices.
+
+**Implementing ODD in your own repo?** Use these as the conceptual foundation.
+
+**Understanding klappy.dev specifics?** Read `/docs/appendices/` instead.
+
+---
+
+## Relationship to Canon
 
 These appendices extend the core canon documents:
 
 - `constraints.md` → appendices explain edge cases
-- `definition-of-done.md` → evidence appendices detail requirements
+- `definition-of-done.md` → evidence philosophy here, evidence procedures in docs
 - `odd/manifesto.md` → appendices operationalize philosophy
 
 
@@ -5229,9 +10283,25 @@ tags: ["odd", "alignment", "drift", "hygiene", "selection-pressure"]
 
 # Alignment Reviews
 
-## Summary
+> Periodic evaluation of the ODD system itself to detect drift.
 
-An Alignment Review is a periodic evaluation of the ODD system itself.
+## Description
+
+Alignment Reviews are periodic evaluations that detect and correct drift between stated intent, implemented process, and observed outcomes. They apply to content, process, and tooling equally. Reviews evaluate Canon (contradicted rules, obsolete references, undocumented invariants), PRDs (actual decision criteria, implicit patching, lane bleeding), Attempts (incompatible comparisons, ignored failures, insufficient evidence), and Tooling (enforced invariants, accidental drift, silent compensation). Reviews are triggered by events (epoch transitions, repeated failures, PRD rewrites) not schedules. They produce corrections, not features.
+
+## Outline
+
+- Summary
+- Why This Exists
+- What Is Reviewed (Canon, PRDs, Attempts, Tooling)
+- When Reviews Occur
+- What Reviews Produce
+- Non-Goals
+- Core Invariant
+
+---
+
+## Content
 
 Its purpose is to detect and correct **drift** between:
 - stated intent
@@ -5343,1483 +10413,6 @@ Drift that is invisible is more dangerous than failure.
 
 
 --------------------------------------------------------------------------------
-📄 File: canon/odd/appendices/attempt-lifecycle.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/attempt-lifecycle
-title: "Attempt Lifecycle"
-audience: canon
-exposure: nav
-tier: 2
-voice: neutral
-stability: semi_stable
-tags: ["odd", "attempt", "lifecycle", "restartability"]
----
-
-# 🔄 ODD Appendix — Attempt Lifecycle
-
-**Status:** Orientation  
-**Audience:** Internal / Canon  
-**Scope:** How work is iterated without steering failed attempts
-
----
-
-## Why This Appendix Exists
-
-Outcomes-Driven Development (ODD) assumes that clarity improves faster than execution in an AI-accelerated environment.
-
-As clarity improves, attempts that were once reasonable often become misaligned.
-
-This appendix exists to make stopping, restarting, and rebuilding a normal, explicit part of the system rather than an emotional or ad-hoc decision.
-
----
-
-## Core Principles
-
-1. **Attempts are disposable.**
-2. **Infrastructure persists.**
-3. **Content accumulates.**
-4. **Deployments are views, not truth.**
-
-Restarting is not a failure of execution.  
-Restarting is evidence that intent has sharpened.
-
-Branch and preview deployments exist to observe behavior. The canonical record is the sealed attempt + commit SHA, not the deployment URL.
-
----
-
-## PRD Version vs Attempt
-
-A **PRD version** defines what should be built.  
-An **attempt** is a bounded execution of that PRD.
-
-**Key distinction:**
-- A PRD version can have multiple attempts
-- Attempts exist to test the PRD, not to evolve it
-- If the PRD is wrong, create a new PRD version
-- If the implementation fails, create a new attempt against the same PRD
-
-This separation prevents "Phase 1.1" scope creep disguised as iteration.
-
-See [Quantum Development](./quantum-development.md) for the rationale behind multiple attempts.
-
-For the single canonical kickoff prompt used to start any new attempt, see: `/docs/ATTEMPT_KICKOFF.md`.
-
----
-
-## PRD as the Unit of Test
-
-In ODD, a PRD is treated as the primary test unit.
-
-Issues and failures are mapped back to PRD improvements, and attempts are used to validate PRDs as hypotheses.
-
-This reduces ticket sprawl by keeping the system legible: one PRD version, multiple observable attempts, sealed evidence.
-
----
-
-## Independence: Goal vs. Infrastructure
-
-Independence is the goal (epistemic).
-
-Infrastructure is an enabler, not a guarantee.
-
-An attempt is independent if:
-- decisions are not steered by prior outcomes,
-- implementation state is fresh,
-- and the approach represents a genuine re-instantiation of the PRD.
-
-Branches and preview deployments can support independence by reducing accidental state leakage and enabling parallel observation, but they do not define independence.
-
----
-
-## Worktrees and Learnings
-
-**Worktrees are disposable sandboxes. Learnings live in the main repo.**
-
-When using git worktrees for parallel attempts:
-- Each worktree is isolated code state
-- Learnings are repo state, not worktree state
-- Learnings must land in one canonical place that every attempt can write to
-
-You do not try to "share memory" between worktree agents. You publish outputs.
-
-### Canonical Places (Single Source of Truth)
-
-These paths live in the main repo (not inside a worktree only):
-
-- `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/**` — sealed record + evidence (lane-contained)
-- `/docs/PRD/<lane>/PRD.md` — living PRD per lane
-- `/docs/learnings/prd-vX.Y.md` — (optional) rolling "what we learned" log
-
-Anything in those paths is real. Anything else is temporary.
-
-Note: Root `/attempts/**` is legacy (read-only). All new attempts are lane-contained.
-
-### Learnings Payload (Required)
-
-At the end of each attempt, the agent must produce:
-
-1. `products/<lane>/attempts/prd-vX.Y/attempt-NNN/ATTEMPT.md` — closure record
-2. `products/<lane>/attempts/prd-vX.Y/attempt-NNN/META.json` — commit SHA, preview URL, status
-3. `products/<lane>/attempts/prd-vX.Y/attempt-NNN/evidence/*` — screenshots, logs
-4. PRD patch (if learnings exist): updates to `/docs/PRD/<lane>/PRD.md` in a dedicated section:
-   - "Observed failure modes"
-   - "Clarifications / constraints added"
-   - "New DoD checks"
-
-The PRD patch is how learning persists across attempts.
-
----
-
-## Artifacts Always Merge
-
-**Failed attempts still contribute learnings.**
-
-Attempts produce two types of outputs:
-- **Code changes** — the implementation
-- **Artifacts** — attempt folder, evidence, PRD patches
-
-The merge rule:
-
-| Output | Merge to main? |
-|--------|----------------|
-| Artifacts (attempt folder, evidence, PRD patches) | **Always** |
-| Code (src/, components, etc.) | **Only if Champion** |
-
-This prevents "we lost the learning because the attempt failed."
-
-### Two Merges Per Attempt
-
-1. **Artifacts merge** (always happens)
-   - Seal the attempt folder
-   - Commit evidence and closure record
-   - Apply any PRD patches
-   - Merge to `main`
-
-2. **Code promotion** (only if winner)
-   - Champion's code merges to `main`
-   - Non-winners keep their preview URLs but code stays on attempt branch
-
-This separation ensures every attempt contributes to the knowledge base, regardless of whether its code ships.
-
----
-
-## What an Attempt Is
-
-An Attempt is a bounded execution of a specific Product Requirements Document (PRD).
-
-An attempt:
-- has a single PRD version
-- has a defined scope
-- produces an outcome artifact
-- is evaluated against its own Definition of Done
-- is explicitly closed (CLOSED or ABANDONED)
-
-An attempt does not:
-- evolve indefinitely
-- absorb new scope reactively
-- serve as the foundation for all future work
-
----
-
-## What an Attempt Is Not
-
-An attempt is not:
-- a phase in a linear roadmap
-- a commitment to incremental improvement
-- a promise of continuity
-
-Attempts are experiments with intent, not investments to be amortized.
-
----
-
-## The Three Planes of Change
-
-ODD separates work across three independent planes:
-
-### 1. Application Plane (Behavior)
-
-What the system does:
-- UI structure
-- interaction patterns
-- navigation model
-- rendering logic
-
-This plane is **attempt-scoped and disposable**.
-
-### 2. Content / Canon Plane (Knowledge)
-
-What the system knows:
-- Canon documents
-- ODD Manifesto
-- Projects
-- Writings, notes, transcripts
-
-This plane is **persistent and cumulative**.
-
-Content may evolve independently of any attempt.
-
-### 3. Infrastructure Plane (Capability)
-
-What makes building cheap:
-- deployment setup
-- build tooling
-- sync/verify scripts
-- schemas and formats
-
-This plane **changes slowly and intentionally**.
-
----
-
-## Canonical Structure
-
-Attempts are **lane-contained**. All attempt artifacts live under the product lane:
-
-```
-products/<lane>/attempts/
-  prd-vX.Y/
-    PRD.md                    # frozen PRD for this version
-    _runs/<run_id>/           # working directory (before finalization)
-    attempt-001/              # finalized attempts
-      ATTEMPT.md              # closure record
-      META.json               # canonical pointers (provenance is truth)
-      EVIDENCE.md             # evidence index
-      evidence/               # screenshots, logs, etc.
-    attempt-002/              # retry (if needed)
-```
-
-Note: Root `/attempts/**` is legacy (read-only). See `/attempts/README.md`.
-
-**META.json** contains:
-- `tool` — which tool was used (Cursor, Claude, etc.)
-- `agent_id` — agent identifier
-- `model` — model used (e.g., "claude-opus-4-5-20250514")
-- `run_id` — unique run identifier
-- `branch` — branch name (convenience, not truth)
-- `prd_version` — PRD version being tested
-- `sealed_commit` — the commit SHA (truth)
-- `git_tag` — convenience pointer (optional)
-- `status` — CLOSED, ABANDONED, or CHAMPION
-- `deploy` — recorded URLs (production, preview) as evidence artifacts
-
-The concrete sealing procedure is documented in `/docs/ATTEMPTS.md`.
-
----
-
-## Collision Avoidance (Current Model)
-
-Parallel agents don't reserve numbers upfront. Instead:
-
-1. **Register** — Each agent runs `attempt:register` to capture provenance (creates `run-<run_id>/`)
-2. **Build** — Agent works in isolation
-3. **Finalize** — `attempt:finalize` sorts runs by completion time and assigns `attempt-001`, `attempt-002`, etc.
-
-This prevents collisions because numbers are assigned deterministically at completion, not reserved upfront.
-
-> **Deprecated:** The `ATTEMPT_REGISTRY.json` / `attempt:reserve` model is no longer used.
-
----
-
-## Blank Slate Requirement
-
-**Attempts must start from a clean slate to be independent.**
-
-### The Problem
-
-If attempt-002 branches from attempt-001's code, it's not independent. The agent will see existing patterns and converge on similar solutions.
-
-### The Solution: Register → Nuke
-
-The required sequence is:
-
-1. **`attempt:register --lane <lane>`** — Captures provenance (who, with what model, from where)
-2. **`attempt:nuke --lane <lane>`** — Deletes lane src and framework configs (guarantees blank slate)
-3. **Only then** does implementation begin
-
-This preserves forensic traceability (we know who showed up) while guaranteeing experimental independence (no inherited code).
-
-### What Gets Nuked (Lane-Scoped)
-
-- `products/<lane>/src/` — lane application code
-- `products/<lane>/vite.config.js`, `products/<lane>/tailwind.config.js`, etc. — lane framework configs
-
-> **Note:** Root-level `/src/` no longer exists. All app code is lane-scoped.
-
-### What Survives
-
-- `/infra/` — deployment scripts, contracts
-- `/canon/`, `/about/`, `/projects/` — content
-- `/docs/` — process documentation
-- `/products/<lane>/attempts/` — sealed evidence (lane-contained)
-- `/attempts/` — legacy sealed evidence (read-only)
-- `package.json` — dependency manifest
-- Other lanes (`products/<other-lane>/src/`) — only the target lane is nuked
-
-> **Decision:** See [D0008: Register Before Nuke](/canon/odd/decisions/D0008-register-before-nuke.md)
-
----
-
-## Attempt Lifecycle (High Level)
-
-1. **Intent Articulation**
-   - A PRD is written for a specific outcome
-   - Scope is explicit and finite
-
-2. **Execution**
-   - The application is built from scratch against the PRD
-   - Existing infrastructure may be reused
-   - Existing content may be consumed
-   - Prior app logic is not assumed
-
-3. **Evaluation**
-   - Outcome is evaluated against the PRD's Definition of Done
-   - Evidence is captured
-
-4. **Closure**
-   - The attempt is explicitly marked CLOSED or ABANDONED
-   - No new scope is added under the same attempt
-
-5. **Reflection**
-   - Learnings inform the next PRD or attempt
-   - The current attempt is not retrofitted
-
----
-
-## Sealing an Attempt
-
-A **sealed attempt** has:
-- A frozen PRD snapshot (at the PRD version level)
-- Evidence captured and linked
-- A commit pointer (SHA) in META.json
-- Status: CLOSED, ABANDONED, or CHAMPION
-
-Once sealed:
-- No further work is done on that attempt
-- The record is immutable
-- New work requires a new attempt (same PRD) or new PRD version
-
----
-
-## Champion Selection and Promotion
-
-Quantum Development produces observations. Promotion converts one observation into production.
-
-### Definitions
-
-- **Attempts** = competing candidates (separate branches / preview deploys)
-- **Champion** = the single candidate chosen to become production
-- **`prod` branch** = production deployment (klappy.dev)
-- **`main` branch** = experiment ledger, history aggregation
-
-### The Promotion Rule
-
-**Exactly one attempt becomes Champion for a PRD version.**
-
-The Champion is merged to `main`, then `prod` is fast-forwarded to `main`. Everything else stays sealed evidence.
-
-### Minimum Gate (must pass)
-
-1. PRD Success Criteria (the checkboxes in the PRD)
-2. Evidence bundle (desktop + mobile + deep-link round-trip + failure behavior)
-3. Cloudflare preview URL captured in META.json
-4. No fatal regressions vs current production
-
-### Tie-Breakers (when multiple pass)
-
-Pick one axis and declare it ahead of time:
-
-- Best mobile UX
-- Best navigation clarity
-- Cleanest deep-link contract and anchor behavior
-- Simplest code / fewest dependencies (maintainability)
-
-**Important:** Tie-breakers are not more features. They're about quality under the same PRD.
-
-### Promotion Procedure
-
-**Branch Roles:**
-- `prod` — **production** (only champions go here)
-- `main` — experiment ledger, artifact aggregation
-- `*` (any other) — attempt sandboxes (preview deploys)
-
-**When an attempt wins:**
-
-1. **Seal it**
-   - `products/<lane>/attempts/prd-vX.Y/attempt-NNN/` has: ATTEMPT.md, META.json, evidence folder, preview URL.
-   - Status: CHAMPION
-
-2. **Tag it** (immutable pointer)
-   - Tag: `prd-vX.Y-attempt-NNN`
-
-3. **Merge artifacts to main**
-   - Attempt folder, evidence, PRD patches
-
-4. **Promote code to main**
-   - Champion's `products/<lane>/src` merges to `main`
-
-5. **Fast-forward prod**
-   - `git checkout prod && git merge main --ff-only`
-   - Cloudflare deploys `prod` → production
-
-**What happens to other attempts?**
-- Seal them (ABANDONED or CLOSED-but-not-chosen)
-- Keep their preview URLs + evidence
-- Merge their artifacts to `main` (learnings persist)
-- Do NOT merge their code
-
-### The One Rule That Prevents Chaos
-
-**Only `prod` is allowed to be production.**
-
-`main` is for experiments and history. Attempts can be preview deployments forever.
-
-This makes "which one is live?" a non-question.
-
-> **Decision:** See [D0001: prod Branch Is Production](/canon/odd/decisions/D0001-prod-branch-is-production.md)
-
-### Winner Declaration (ATTEMPT.md snippet)
-
-When an attempt wins, add to its ATTEMPT.md:
-
-```
-Status: CHAMPION (Promoted to Production)
-Promoted commit: <sha>
-Attempt tag: prd-vX.Y-attempt-NNN
-Production tag: production-vX.Y
-Production URL: https://klappy.dev
-Preview URL: <cloudflare preview>
-Why this one won (tie-breaker): <one sentence>
-```
-
----
-
-## Restartability as a Feature
-
-ODD treats restartability as a first-class design feature:
-- prompts are rewritten, not patched
-- applications are regenerated, not endlessly refactored
-- artifacts are preserved for learning, not extended by default
-
-This prevents:
-- sunk-cost bias
-- prompt sprawl
-- architectural drift
-
----
-
-## What Persists Across Attempts
-
-The following may persist across attempts:
-- deployment infrastructure
-- build and verification scripts
-- content repositories
-- Canon structure
-- naming conventions
-- evidence standards
-
-The following must not be assumed to persist:
-- UI composition
-- routing model
-- state management decisions
-- interaction flow
-
----
-
-## Why Attempts Are Explicitly Closed
-
-Explicit closure:
-- creates psychological safety to restart
-- prevents scope creep disguised as "Phase 1.1"
-- keeps PRDs honest and legible
-- makes outcomes comparable across attempts
-
-Unclosed attempts silently turn into products by accident.
-
----
-
-## How This Appendix Should Be Used
-
-This appendix is:
-- a shared mental model
-- a permission structure
-- a vocabulary for stopping well
-
-It is not:
-- a workflow
-- a checklist
-- a gating mechanism
-
----
-
-## Summary
-
-ODD optimizes for learning velocity, not artifact continuity.
-
-Attempts exist to be finished.  
-Infrastructure exists to make finishing cheap.  
-Content exists to compound over time.
-
-**Quantum Development ends when one candidate is promoted.**
-Observations without promotion are incomplete experiments.
-
----
-
-**Status:** Updated 2026-01-16 — Aligned with D0001 (prod branch), D0008 (register before nuke)
-
-> **Authoritative source for attempt workflow:** `/docs/ATTEMPTS.md`
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/appendices/canonical-compression.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/canonical-compression
-title: Canonical Compression
-audience: canon
-exposure: nav
-tier: 2
-voice: neutral
-stability: stable
-tags: ["odd", "compression", "compiled", "epochs", "drift"]
-status: canonical
-category: odd
-version: 1.0
-epoch: E0002
----
-
-# Canonical Compression
-
-## Summary
-
-As the Canon grows, agents and humans cannot hold the entire system in working memory.
-
-Canonical Compression solves this by producing a **derived, minimal working model** of the Canon that fits into limited context windows without sacrificing the source of truth.
-
-**Canonical Compression is compilation, not mutation.**
-
-- Source Canon remains authoritative and unchanged.
-- Compressed outputs are derived artifacts.
-- Derived artifacts are disposable and regenerable.
-- Any compression output can be deleted without loss of truth.
-
----
-
-## The Problem It Addresses
-
-Agents drift for reasons beyond contradiction:
-
-- The total doc surface becomes too large for a single context window.
-- Important rules are duplicated across files, creating divergence.
-- Low-signal history (old decisions, obsolete guidance) consumes attention.
-- "More documentation" paradoxically makes behavior less consistent.
-
-Drift checks detect inconsistency.
-Canonical Compression reduces the size of the reasoning surface so consistency becomes feasible.
-
----
-
-## Two Classes of Canon Artifacts
-
-### 1) Source Canon (Authoritative, Slow)
-
-Examples:
-
-- `/canon/**`
-- `/canon/odd/appendices/**`
-- `/canon/odd/decisions/**`
-
-Properties:
-
-- Curated and human-owned
-- Evidence-backed
-- Traceable
-- Evolves slowly
-- Never rewritten by synthesis
-
-Source Canon is **truth storage**.
-
-### 2) Compiled Canon (Derived, Fast)
-
-Canonical Compression produces **Compiled Canon** outputs.
-
-Properties:
-
-- Derived and lossy (summaries, collapsed checklists, working models)
-- Replaceable and disposable
-- Epoch-scoped
-- Designed for agent working memory
-- Must include links back to Source Canon
-
-Compiled Canon is **truth projection**, not truth itself.
-
----
-
-## Compilation Model
-
-Canonical Compression produces **derived artifacts**.
-
-- Source Canon is never modified
-- Compressed outputs live in `_compiled/`
-- Outputs are epoch-scoped and disposable
-- Regeneration is always preferred to editing
-
-Compression is compilation, not mutation.
-
----
-
-## Where Compiled Canon Lives (Exact)
-
-Compiled outputs MUST NOT be written into `/canon/` as source documents.
-
-They live here:
-
-/canon/_compiled/
-epoch-E0002/
-agent-working-model.md
-reasoning-checklist.md
-failure-patterns-collapsed.md
-
-Notes:
-
-- `_compiled/` is derived output (wipeable).
-- Outputs are organized by epoch to preserve comparability.
-- If the entire folder is deleted, no truth is lost — only convenience.
-
----
-
-## What Compression Produces
-
-Canonical Compression generates a small set of artifacts (exact list may evolve):
-
-- **Agent Working Model**: minimal worldview for correct behavior
-- **Reasoning Checklist**: step-by-step constraints + invariants
-- **Failure Patterns (Collapsed)**: common pitfalls distilled into triggers + tests
-- **Doc Map (Progressive Links)**: what to read next when confidence drops
-
-Each output MUST:
-
-- Be marked as derived/compiled
-- Declare its epoch
-- Link back to source documents for traceability
-
----
-
-## What Compression Must Never Do
-
-- Rewrite or replace Source Canon files
-- Delete decision logs
-- "Optimize" by removing nuance from the source
-- Invent new rules (compression may restate, not legislate)
-
-If a compression output implies a new rule, that rule must be introduced via:
-- a decision log, or
-- a PRD + attempt process in the relevant lane
-
----
-
-## Relationship to Drift Checks
-
-Drift checks answer: **"Do these documents contradict?"**
-
-Canonical Compression answers: **"Can a bounded context window hold the rules needed to behave correctly?"**
-
-Drift checks prevent incoherence.
-Compression prevents overload.
-
-Both are required.
-
----
-
-## Relationship to Epochs
-
-Compression outputs are epoch-scoped.
-
-- If epoch changes, compiled outputs must be regenerated
-- Comparability across epochs is not assumed
-- Old compiled outputs may be archived or deleted
-
-Epoch scoping prevents "half-updated working models" from lingering.
-
----
-
-## The Rule (One Sentence)
-
-**Canon is written by humans and proven by outcomes.  
-Compiled Canon is written by synthesis and proven by usability.**
-
----
-
-## Status
-
-This document defines the conceptual model.
-Implementation of tooling to generate compiled outputs is tracked separately.
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/appendices/compilation-targets.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/compilation-targets
-title: "Compilation Targets"
-audience: canon
-exposure: public
-tier: 2
-voice: neutral
-stability: stable
-tags: ["odd", "compilation", "memory", "portability", "packs", "lanes"]
----
-
-# Compilation Targets
-
-Compiled packs exist to make the corpus usable at constrained context sizes without rewriting source truth.
-
-A compiled pack is **derived output**. It can be deleted and regenerated at any time.
-
-## Key Idea
-
-Compilation is scoped by:
-
-- **Lane** (which product's PRD and user intent we're serving)
-- **Target** (which consumer needs the compressed view)
-
-A pack is always identified as:
-
-`(lane, target)`
-
-## Output Location (Wipeable)
-
-All compiled output MUST live under:
-
-`/public/_compiled/<lane>/`
-
-Example:
-
-- `/public/_compiled/website/visitor-pack.md`
-- `/public/_compiled/website/author-pack.md`
-
-## Compile Plans (Deterministic)
-
-Each pack MUST have a deterministic plan file:
-
-`/infra/compile/plans/<lane>/<target>.json`
-
-The plan defines:
-- ordered source files
-- compilation mode (Phase 0: concat)
-- output filename
-
-## Targets
-
-Targets are **not personas**. They are constrained consumer profiles.
-
-### Website Lane Targets
-
-- `visitor` — minimal orientation surface; progressive disclosure; "what is this?"
-- `author` — high-signal working pack for the repo owner; more depth; less onboarding
-
-### Future Targets (Defined When Needed)
-
-- `dev-peer` — evaluation / critique / contribution readiness
-- `agent-core` — operational pack for agents to follow process consistently
-
-These exist as names only until a lane PRD requires them.
-
-## Invariants
-
-- Packs are derived. Source docs are not overwritten.
-- Packs do not introduce new truth. They reference truth.
-- Packs must include provenance (lane, target, timestamp, git commit, source list + hashes).
-- Verification MUST be possible without an LLM (hashes + structure + required header).
-
-## Phase Policy
-
-- **Phase 0 (Concat):** deterministic concatenation only
-- **Phase 1 (LLM):** LLM may summarize/select, but output still must satisfy the same provenance + verification contract
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/appendices/compilation.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/compilation
-title: Compilation
-audience: canon
-exposure: nav
-tier: 2
-voice: neutral
-stability: evolving
-tags: ["odd", "compilation", "memory", "context", "packs"]
----
-
-# Compilation
-
-## Summary
-
-Compilation is the process of producing a **derived, wipeable, portable pack** from higher-entropy source documents.
-
-It exists to solve a practical constraint:
-
-> Agents and humans cannot keep the entire repo in working memory at once.
-
-Compilation produces a **smaller, purpose-built context artifact** that can be regenerated at any time.
-
----
-
-## Core Rule
-
-**Compilation never edits or replaces source.**
-
-- Source docs remain the truth.
-- Compiled packs are derived outputs.
-- Compiled outputs may be deleted at any time and rebuilt deterministically.
-
-This is compilation, not compression-in-place.
-
----
-
-## Output Location (Wipeable)
-
-Compiled outputs MUST live under:
-
-`/public/_compiled/<lane>/`
-
-Example:
-
-`/public/_compiled/website/visitor-pack.md`
-
-Compiled outputs MUST NOT be stored inside:
-- `/canon/**`
-- `/docs/**`
-- `/attempts/**`
-
-Those are source-of-truth layers.
-
----
-
-## Provenance Header (Required)
-
-Every compiled pack MUST begin with a provenance header containing:
-
-- `lane`
-- `pack`
-- `built_at` (ISO8601)
-- `git_commit`
-- `sources` (list of source file paths)
-- `source_hashes` (map of source path → sha256)
-
-If provenance is missing, the compiled pack is invalid.
-
----
-
-## Why This Is ODD
-
-ODD treats "context" as a consumable.
-
-Compilation is the mechanism that makes context:
-
-- **portable** (shareable artifact)
-- **auditable** (provenance)
-- **regeneratable** (wipeable output)
-- **cheap** (smaller input than full repo)
-
-Compilation is not automation. It is an **evolutionary pressure** against doc sprawl.
-
-If compilation output grows bloated, the correct response is:
-- reduce scope
-- tighten selection rules
-- improve curation
-not "add more docs."
-
----
-
-## Multi-Pack Output (E0002+)
-
-When a lane has more than one pack, output MUST be structured as:
-
-```
-/public/_compiled/<lane>/
-  index.json
-  <pack>-pack.md
-  _meta/
-    <pack>-COMPILE_META.json
-```
-
-### index.json
-
-Each lane MUST emit `/public/_compiled/<lane>/index.json` listing all known packs from
-`/infra/compile/plans/<lane>/*.json` and whether each output exists.
-
-### Meta filenames are pack-scoped
-
-`COMPILE_META.json` MUST NOT be shared across packs.
-
-Meta MUST be written as:
-
-`/public/_compiled/<lane>/_meta/<pack>-COMPILE_META.json`
-
-This prevents clobbering and preserves provenance per target.
-
----
-
-## Relationship to Drift Checks
-
-Drift checks ensure the repo does not contradict itself.
-
-Compilation ensures the repo remains **usable** under memory limits.
-
-Both are required for scalability.
-
----
-
-## Drift Audits
-
-The repository SHOULD provide a read-only drift audit that can be run at any time:
-
-- `npm run audit:drift`
-
-This command MUST NOT regenerate or modify derived outputs. It only verifies consistency.
-
-If regeneration is desired for wipeable derived outputs (compiled packs), the repository MAY also provide:
-
-- `npm run audit:repair`
-
-`audit:repair` may regenerate ONLY derived outputs under `/public/_compiled/**`, then MUST run `audit:drift`.
-
-Canon and PRDs MUST NOT be modified by either command.
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/appendices/compiled-memory.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/compiled-memory
-title: "Compiled Memory"
-audience: canon
-exposure: nav
-tier: 2
-voice: neutral
-stability: evolving
-tags: ["odd", "compiled", "memory", "drift"]
----
-
-# Compiled Memory
-
-## Summary
-
-In ODD, repositories accumulate truth faster than agents can hold it in context.
-
-**Compiled Memory** is the mechanism for producing **lane-scoped, wipeable, auditable**
-compressed artifacts that are safe for agents and humans to consume.
-
-This is a **derivation pipeline**, not a rewrite pipeline.
-
-- Source truth remains in Canon + PRDs + Attempts.
-- Compiled output is generated *out of place*.
-- Compiled output can be deleted and regenerated at any time.
-
-## Why This Exists
-
-ODD assumes:
-- generation is abundant
-- trust is not
-- context is bounded
-- drift is inevitable unless actively checked
-
-Agents fail in two predictable ways:
-1. **Context overload** → they miss constraints, repeat mistakes, invent structure.
-2. **Doc sprawl** → humans keep writing more guidance, and agents still can’t load it all.
-
-Compiled Memory keeps the guidance surface **small, current, and citeable** without destroying the underlying truth.
-
-## Compile Is Not Compression-In-Place
-
-**Rule:** Compiled Memory MUST NOT replace Canon/PRDs/Attempts in place.
-
-This is compile-out-of-place:
-
-- Inputs: Canon + lane docs + PRDs + attempt artifacts
-- Outputs: `/public/_compiled/<lane>/**`
-- Verification: hashes + sources + provenance
-
-If compiled output is wrong, we delete it and recompile.
-If source truth is wrong, we change the source truth explicitly.
-
-## Scope Levels (The Four Outputs)
-
-Compiled Memory produces four outputs per lane.
-
-1) **Canon Pack**
-- Purpose: high-signal orientation + invariants relevant to the lane
-- Input: Canon (+ decisions, appendices)
-
-2) **Lane Pack**
-- Purpose: lane identity, non-goals, and how this lane “wins”
-- Input: lane PRD folder + lane docs
-
-3) **PRD Pack**
-- Purpose: the active PRD distilled into an agent-usable execution contract
-- Input: `/docs/PRD/<lane>/PRD.md` (and supporting files in that folder)
-
-4) **Run Pack**
-- Purpose: “what’s happening right now” for an attempt/run
-- Input: attempt artifacts for the lane (or latest run metadata)
-- Note: optional when no runs exist
-
-These are distinct because they change at different rates.
-
-## Lane Rules
-
-Compiled output is always lane-scoped:
-
-- Output root: `/public/_compiled/<lane>/`
-- Meta: `/public/_compiled/<lane>/_meta/`
-
-Lanes are:
-- `website`
-- `ai-navigation`
-- `agent-skill`
-
-Attempts without a lane are invalid (see Product Lanes).
-
-## Auditable by Design
-
-Every compile run MUST emit:
-
-- `COMPILE_META.json`
-  - includes provenance (tool, model, command, timestamp)
-  - includes content hashes for plan + sources
-- `COMPILE_SOURCES.txt`
-  - lists every input file used for compilation (paths)
-
-Every compiled markdown output MUST include a **Sources** section.
-
-The goal is not “perfect summaries.”
-The goal is **traceable, defensible compression**.
-
-## Drift and Epochs
-
-Compiled Memory is an explicit response to drift.
-
-- Canon and PRDs may advance faster than tooling (epoch transitions).
-- Compiled output is always treated as **derived evidence**, not authority.
-
-If Canon/PRDs and tooling disagree:
-- Canon/PRDs define intended truth.
-- tooling must converge later.
-- compiled outputs MUST reflect the intended truth (and cite the mismatch if necessary).
-
-## What This Enables
-
-- Agents can behave consistently without ingesting the whole repo.
-- Humans can evaluate the system without wading through every artifact.
-- Each lane can have its own “agent-ready” pack without coupling to other lanes.
-- The repo can evolve without turning into a documentation graveyard.
-
-## Non-Goals
-
-Compiled Memory does not:
-- attempt to make Canon smaller by rewriting it
-- delete or “consolidate away” decision history
-- guarantee correctness without verification
-- replace evidence capture
-
-It exists to keep context bounded while keeping truth traceable.
-
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/appendices/deploy-evidence.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/deploy-evidence
-title: "Deploy Evidence"
-audience: canon
-exposure: nav
-tier: 2
-voice: first_person
-stability: stable
-tags: ["odd", "deploy", "evidence", "cloudflare", "attempts"]
----
-
-# Deploy Evidence
-
-## Summary
-
-In ODD, evidence is only valid if it is externally reviewable.
-
-Local builds are not sufficient proof when the intended outcome is an online deployment.
-
-## Cloudflare Pages Reality
-
-Cloudflare Pages serves only the configured build output directory.
-It does **not** serve arbitrary repo folders such as `/attempts/**`.
-
-Therefore, any "Evidence URL" that points to `/attempts/**` on a Pages domain is invalid.
-
-## Required Evidence Publication Path
-
-Evidence MUST be copied into the lane build output so it is served by Pages:
-
-`products/<lane>/dist/_evidence/<run_id>/EVIDENCE.md`
-
-This makes the evidence accessible from the preview deployment at:
-
-`/_evidence/<run_id>/EVIDENCE.md`
-
-## Completion Rule
-
-An attempt is not complete until all are true:
-
-1) The branch is pushed to origin  
-2) Cloudflare preview build succeeds  
-3) The preview URL renders (HTTP 200)  
-4) The evidence URL renders (HTTP 200)
-
-If (2)-(4) cannot be proven, the attempt must seal as failure.
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/appendices/drift-checks.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/drift-checks
-title: "Drift Checks"
-audience: canon
-exposure: nav
-tier: 2
-voice: neutral
-stability: evolving
-tags: ["odd", "drift", "verification", "contracts"]
----
-
-# Drift Checks
-
-Drift is the primary failure mode of ODD systems.
-
-When documentation, prompts, and tooling diverge, "truth" becomes vibes again.
-
-This appendix defines the drift-prevention mechanism.
-
----
-
-## What Must Stay Aligned
-
-- Interface contracts (`/interfaces/**`)
-- Lane PRDs (`/docs/PRD/**`)
-- Attempt lifecycle docs (`/docs/**`)
-- Tooling behavior (CLI)
-- Manifest schema and semantics
-
----
-
-## The Drift Check Command
-
-The repository SHOULD provide:
-
-```bash
-npm run verify:contracts
-```
-
-This command verifies:
-
-1. `manifest.json` conforms to `manifest@current`
-2. builds conform to `build-output@current`
-3. attempt artifacts conform to `attempt-cli@current`
-4. lane PRDs declare required contracts
-
----
-
-## Epistemic Rule
-
-If drift checks fail, conclusions drawn from the repo are invalid.
-
-Fix drift before running new attempts.
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/appendices/epochs.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/epochs
-title: "Epochs"
-audience: canon
-exposure: nav
-tier: 2
-voice: neutral
-stability: stable
-tags: ["odd", "epochs", "fitness-landscape", "comparability", "orientation"]
----
-
-# Epochs
-
-An **epoch** is a named period where the meaning of "success" is stable enough that outcomes can be compared.
-
-This is borrowed from evolutionary systems:
-
-- **Attempts** are individuals.
-- **PRDs** are fitness functions.
-- **Promotion** is selection.
-- **Canon** is inherited traits.
-- **Epochs** are shifts in the fitness landscape itself.
-
-If epochs are implicit, the system will compare results across incompatible standards and produce folklore.
-
----
-
-## What an Epoch Is
-
-An epoch defines the **evaluation reality** for a period of work:
-
-- what "done" means (and what it does not)
-- what evidence is mandatory
-- what contracts are binding (build/deploy, provenance, etc.)
-- what risks are acceptable
-- what is treated as stable vs experimental infrastructure
-
-An epoch is *not* a PRD.  
-An epoch is the context in which PRDs are interpreted.
-
----
-
-## What an Epoch Is Not
-
-Epochs are not:
-
-- a semantic version of the website
-- a replacement for product lanes
-- a reason to rebuild everything
-- a new folder taxonomy for creativity
-
-Epochs exist to prevent invalid comparisons, not to add structure.
-
----
-
-## Relationship to Product Lanes
-
-**Product lanes** separate *simultaneous intent*.  
-**Epochs** separate *changes over time* in how intent is evaluated.
-
-- Lanes answer: "Which product are we evolving?"
-- Epochs answer: "What counts as truth *right now* across those products?"
-
-Lanes are parallel. Epochs are sequential.
-
----
-
-## Relationship to PRDs and Attempts
-
-Within a lane:
-
-- A **PRD** specifies requirements for a specific capability.
-- An **attempt** is an observation (implementation + evidence) against that PRD.
-
-Across time:
-
-- An **epoch** determines whether two attempts are comparable.
-- If the evaluation rules changed, you are in a new epoch.
-
-Rule of thumb:
-
-> If you changed what evidence is required, or what contract is binding, you changed the fitness landscape. That is a new epoch.
-
----
-
-## When to Start a New Epoch
-
-Start a new epoch when any of the following change in a way that would invalidate comparisons with prior attempts:
-
-- Evidence requirements (e.g., "preview URL required" becomes mandatory)
-- Provenance requirements (e.g., capturing tool/model becomes required)
-- Deployment topology (e.g., `prod` branch becomes the production branch)
-- Build/deploy contract semantics (`/dist` rules change materially)
-- Attempt lifecycle mechanics (e.g., reserve → register/finalize)
-- Evaluation method (e.g., manual review → scripted verification gates)
-
-If the change is "nice-to-have" and does not affect comparability, do not create an epoch.
-
----
-
-## Naming Convention
-
-Epoch IDs should be boring and stable:
-
-- `E0001-<short-name>`
-- `E0002-<short-name>`
-
-Examples:
-- `E0001-single-prd-era`
-- `E0002-multi-lane-era`
-- `E0003-evidence-first-era`
-
-The ID is the canonical reference. The name is a hint.
-
----
-
-## Minimal Epoch Metadata (Required)
-
-Every attempt's `META.json` MUST include:
-
-- `lane`
-- `prd_version`
-- `epoch_id`
-
-Example:
-
-```json
-{
-  "lane": "website",
-  "prd_version": "v1.0",
-  "epoch_id": "E0002-multi-lane-era"
-}
-```
-
-If epoch_id is missing, the attempt is not comparable by default.
-
----
-
-## Anti-Patterns
-
-- **Epoch inflation**: Creating a new epoch for every PRD bump.
-- **Hidden epoch shifts**: Changing contracts or evidence rules without naming it.
-- **Epoch as marketing**: Treating epoch IDs like product versions.
-- **Cross-epoch comparisons**: Declaring "Attempt 003 is better than Attempt 001" when the evaluation rules changed.
-
----
-
-## Why This Exists
-
-Evolutionary systems assume a stable fitness landscape per generation.
-
-Human + AI systems change the landscape constantly (tools, contracts, evidence standards, deployment topology).
-Naming epochs makes those shifts explicit so we can:
-
-- preserve honest comparisons
-- prevent "it worked because residue" confusion
-- keep learnings interpretable over time
-
-If the evaluation landscape changed, say so.
-That's what an epoch is for.
-
----
-
-## E0003 — Evidence-First Era
-
-### What changed
-
-E0003 begins when online deployment evidence becomes mandatory for attempt completion.
-
-In this epoch, a local build is not sufficient proof when the intended outcome is an online deployment.
-
-### Binding rule (new fitness landscape)
-
-An attempt is not complete until all are true:
-
-1) The attempt branch is pushed to origin
-2) Cloudflare Pages preview deployment succeeds (build passes)
-3) The preview URL returns HTTP 200 and renders the site
-4) The evidence URL returns HTTP 200 and renders the evidence at:
-
-`/_evidence/<run_id>/EVIDENCE.md`
-
-### Why this is a new epoch
-
-This change alters the repository's selection pressure:
-
-- Success is now gated by deployment correctness, not just build correctness
-- Evidence must be externally reviewable, not locally asserted
-- Attempts become comparable only within the same deploy-evidence regime
-
-### Compatibility
-
-- E0002 attempts remain valid within E0002.
-- E0002 attempts are not comparable to E0003 attempts by default.
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/appendices/evidence.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/evidence
-title: "Evidence"
-audience: canon
-exposure: nav
-tier: 1
-voice: first_person
-stability: stable
-tags: ["evidence", "verification"]
----
-
-# Evidence
-
-Evidence is proof, not narrative.
-
-An attempt is valid ONLY if its deployed build exposes public evidence at:
-
-`/_evidence/`
-
-## Minimum Proof
-
-- 1 video recording OR
-- 3 screenshots
-
-Markdown alone does not count as proof.
-
-## Required Files
-
-Every `/_evidence/` folder must contain:
-
-- `index.html` — human-browsable index
-- `index.json` — machine inventory
-- `EVIDENCE.md` — summary and links
-- `ATTEMPT.md` — what was done
-- `META.json` — provenance
-- `screenshots/` — at least 1 image
-- `recordings/` — video proof (or 3 screenshots total)
-
-## Discoverability
-
-Evidence MUST be discoverable without:
-
-- knowing a run ID
-- reading a narrative
-- running code locally
-- guessing paths
-
-If `/_evidence/` returns 404, the attempt is **INVALID**.
-
-## Build Enforcement
-
-When `.attempt.json` exists:
-
-- Build FAILS if `/_evidence/` is missing
-- Build FAILS if proof assets are insufficient
-- Build FAILS if index generation fails
-
-## Related
-
-- Attempt Record Packs: `/docs/ATTEMPT_RECORD_PACK.md`
-- Attempt Kickoff: `/docs/ATTEMPT_KICKOFF.md`
-
-
-
---------------------------------------------------------------------------------
 📄 File: canon/odd/appendices/evolution-not-automation.md
 --------------------------------------------------------------------------------
 
@@ -6834,7 +10427,27 @@ stability: semi_stable
 tags: ["odd", "evolution", "automation", "orientation"]
 ---
 
-# 🧬 ODD Appendix — Evolution, Not Automation
+# Evolution, Not Automation
+
+> This system optimizes learning, not execution.
+
+## Description
+
+ODD is often mistaken for an attempt to automate software development. It is not. Automation optimizes execution; evolution optimizes learning. ODD is designed for disciplined evolution: humans define intent (PRDs, constraints, DoD), agents generate variation (independent attempts), reality provides feedback (evidence), humans perform selection (promotion/rejection), and learnings are retained. Humans stay in the loop because fully automated selection optimizes for what is easy to measure rather than what actually matters. All evolution is discrete, auditable, reversible, and bounded.
+
+## Outline
+
+- Why This Appendix Exists
+- What We Are Not Doing
+- What We Are Doing Instead
+- Why Humans Stay in the Loop
+- Evolutionary Scope
+- Controlled, Not Runaway
+- The Core Principle
+
+---
+
+## Content
 
 **Status:** Orientation  
 **Audience:** Internal / Canon  
@@ -6956,10 +10569,25 @@ tags: ["canon", "evolution", "modularity", "regenerability"]
 
 # Failure-Driven Modularity
 
-## Summary
+> Modular boundaries emerge from repeated failure, not upfront design.
 
-In Outcome-Driven Development (ODD), modular boundaries are introduced **only after**
-repeated, documented failure to regenerate a system from its specification.
+## Description
+
+In ODD, modular boundaries are introduced only after repeated, documented failure to regenerate a system from its specification. Successful regeneration proves the system remains cognitively tractable as a single unit. A failure is when the generated system diverges materially, constraints are repeatedly omitted, specifications need ad hoc re-explanation, or attempts converge inconsistently. Only patterned failure justifies decomposition. The evolution rule: begin with the smallest viable specification, attempt regeneration, do not modularize if it succeeds, extract the smallest region of cognitive overload if it fails repeatedly.
+
+## Outline
+
+- Summary
+- Definition of Failure
+- The Evolution Rule
+- Rationale
+- Implications
+- Non-Goals
+- Related Canon
+
+---
+
+## Content
 
 Successful regeneration is evidence that the system remains cognitively tractable as a single unit.
 Repeated failure is evidence that the boundary is incorrect and must be revised.
@@ -7047,205 +10675,6 @@ For historical and conceptual motivation, see:
 
 
 --------------------------------------------------------------------------------
-📄 File: canon/odd/appendices/lane-build-layout.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/lane-build-layout
-title: "Lane Build Layout"
-audience: canon
-exposure: nav
-tier: 2
-voice: neutral
-stability: evolving
-tags: ["odd", "lanes", "build", "layout", "deploy"]
----
-
-# Lane Build Layout
-
-This repository contains multiple **product lanes** that share Canon but must not collide in implementation output.
-
-The core collision surfaces are:
-- `/src` (implementation workspace)
-- `products/<lane>/dist` (deployment artifact)
-
-This document defines the lane-safe layout policy.
-
----
-
-## Policy: One Lane Builds at a Time in a Worktree
-
-Each attempt operates in its own branch/worktree. Within that sandbox:
-
-- `/src` is disposable and lane-specific for that attempt.
-- `products/<lane>/dist` is the output of that lane's build.
-
-Because worktrees isolate filesystem state, lanes do not collide during development.
-
----
-
-## Policy: Production Deployments Are Lane-Scoped
-
-A single git repository may be deployed multiple times (e.g., Cloudflare Pages projects), each targeting:
-
-- a specific lane
-- a specific branch (`prod/<lane>` or similar)
-
-This prevents one lane's deployment from overwriting another.
-
----
-
-## Recommended Deployment Model (Least Brittle)
-
-Create one Cloudflare Pages project per lane:
-
-- `klappy-website` → deploys lane `website`
-- `klappy-ai-navigation` → deploys lane `ai-navigation` (when it becomes deployable)
-- `klappy-agent-skill` → deploys lane `agent-skill` (if it has a deployable surface)
-
-Each Pages project selects its own production branch.
-
-This avoids requiring a single repo-level `/dist` to represent multiple products simultaneously.
-
----
-
-## What This Means for `/main` and `/prod`
-
-- `main` is the aggregation branch for artifacts and evaluation history.
-- Production branches are lane-specific (implementation detail, but must be stable).
-
-Promotion updates the lane's production branch only.
-
----
-
-## Invariant
-
-A lane must be promotable without affecting any other lane's production surface.
-
-If promoting lane A changes lane B's production outcome, the layout is invalid.
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/appendices/lane-implementation-surfaces.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/lane-implementation-surfaces
-title: "Lane-Scoped Implementation Surfaces"
-audience: canon
-exposure: nav
-tier: 2
-voice: neutral
-stability: stable
-tags: ["odd", "lanes", "deployment", "contract", "build"]
----
-
-# Lane-Scoped Implementation Surfaces
-
-## Summary
-
-In the multi-lane PRD model, each lane is an independent product.
-
-Therefore each lane MUST have its own implementation surface:
-- its own source directory
-- its own build output directory
-- its own deploy root
-
-No lane may rely on a shared, repo-root `/src` or `/dist`.
-
-This prevents cross-lane contamination and restores independence of attempts.
-
----
-
-## Locked Folder Contract
-
-Each lane owns its implementation under:
-
-```
-/products/<lane>/
-  src/          # lane implementation source (disposable)
-  dist/         # lane build output (never committed)
-```
-
-`<lane>` is one of:
-- `website`
-- `ai-navigation`
-- `agent-skill`
-
-The repo-root directories `/src` and `/dist` are NOT product surfaces.
-
----
-
-## Build Output Contract (Pages-style)
-
-For any lane deployed via Cloudflare Pages:
-
-- Build output MUST be `products/<lane>/dist/`
-- `products/<lane>/dist/index.html` MUST exist after build
-
-The lane may use any stack as long as it satisfies the lane's deploy contract.
-
----
-
-## Attempt Independence
-
-Attempts MUST be able to start from a blank slate without affecting other lanes.
-
-Therefore nuking is lane-scoped:
-
-- `attempt:nuke --lane <lane>` deletes ONLY:
-  - `products/<lane>/src/`
-  - lane-local config files inside `products/<lane>/` (if any)
-
-Nuking MUST NOT delete:
-- `/canon/**`
-- `/docs/**`
-- `/attempts/**`
-- other lanes under `/products/**`
-
----
-
-## Deployment Isolation (Cloudflare)
-
-Each lane SHOULD be deployed as a separate Cloudflare Pages project.
-
-For each Pages project:
-- Root directory: `products/<lane>`
-- Build command: `npm run build -- --lane <lane>` (or lane-local build)
-- Build output: `dist`
-- Production branch: `prod`
-- Preview deployments: enabled for all non-production branches
-
-This allows all lanes to share one git repository and one production branch while remaining operationally independent.
-
----
-
-## Promotion Model
-
-Promotion is lane-scoped.
-
-Promoting a champion for lane `<lane>` updates ONLY:
-- `products/<lane>/**` (implementation)
-- the attempt artifacts for that lane
-
-Promotion MUST NOT modify other lanes.
-
----
-
-## Why This Exists
-
-A shared `/src` makes outcomes non-attributable.
-
-If a lane succeeds, you cannot know whether it succeeded because:
-- the intent was correct, or
-- residue from another lane made it work.
-
-Lane-scoped implementation surfaces restore epistemic independence.
-
-
-
---------------------------------------------------------------------------------
 📄 File: canon/odd/appendices/media-as-learning-layer.md
 --------------------------------------------------------------------------------
 
@@ -7262,9 +10691,27 @@ tags: ["odd", "media", "learning", "progressive-disclosure", "website"]
 
 # Media as a Learning Layer
 
-## Summary
+> Media reduces cognitive load over stable written content.
 
-Media exists to **reduce cognitive load**, not increase it.
+## Description
+
+Media exists to reduce cognitive load, not increase it. It is a learning layer over stable written content—optional, contextual, and regenerable. Canonical truth lives in text; media supports understanding but does not define it. Core rules: clarity is the default (not any specific medium), media is not canon, progressive disclosure is mandatory (opt-in only, no autoplay), media must match learning intent (diagrams for mental models, short video for orientation, audio for reflection), and media is created only for stable content. The system rejects media-first pages, content dumps, and redundant explanations.
+
+## Outline
+
+- Summary
+- Core Rules
+  - Clarity is the default
+  - Media is not Canon
+  - Progressive disclosure is mandatory
+  - Match media to learning intent
+  - Stability before production
+- Anti-Patterns (Explicitly Rejected)
+- Compliance Note
+
+---
+
+## Content
 
 Media is a **learning layer** over stable written content.
 It is optional, contextual, and regenerable.
@@ -7391,709 +10838,6 @@ This appendix defines the governing constraint.
 
 
 --------------------------------------------------------------------------------
-📄 File: canon/odd/appendices/memory-architecture.proposed.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/memory-architecture
-title: "Memory Architecture"
-audience: canon
-exposure: nav
-tier: 2
-voice: neutral
-stability: evolving
-tags: ["odd", "memory", "elevation", "portability"]
-status: proposed
----
-
-# Memory Architecture
-
-## Summary
-
-In ODD, **memory** is the layered system that preserves what was learned while discarding what no longer reduces drag.
-
-Memory is not a single artifact. It is the percolation path from ephemeral execution to durable truth:
-
-```
-Attempts → Lane History → Lane Decisions → Cross-Lane Patterns → Canon
-```
-
-Each layer has different durability, scope, and elevation criteria.
-
----
-
-## Why Memory Matters
-
-ODD assumes:
-- Generation is abundant
-- Trust is scarce
-- Context is bounded
-- Drift is inevitable unless actively curated
-
-Memory is the bottleneck — not computation, not generation, not storage.
-
-The system must:
-- Preserve what repeatedly reduces drag
-- Discard what no longer serves
-- Make the percolation path visible
-- Keep each layer scannable by agents and humans
-
-Evidence without elevation creates false confidence rather than learning.
-
----
-
-## The Memory Layers
-
-### Layer 1: Attempt Evidence (Ephemeral)
-
-**Scope:** Single execution against a PRD  
-**Durability:** Sealed when attempt closes; may be pruned later  
-**Lives in:** `products/<lane>/<version>/attempts/attempt-NNN/evidence/`
-
-Attempts capture what happened during execution:
-- Test output, logs, screenshots
-- Verification artifacts
-- Failure evidence
-
-**Elevates when:** A pattern appears across multiple attempts and can be stated as a reusable learning.
-
----
-
-### Layer 2: Lane History (Lane-Durable)
-
-**Scope:** What happened in this lane — champions, failures, infrastructure changes  
-**Durability:** Persists as long as the lane exists  
-**Lives in:** `products/<lane>/history/`
-
-History records **what happened** without turning it into rules:
-- Champion promotions
-- Failed attempts with learnings
-- Infrastructure migrations
-
-**Elevates when:** A learning recurs across multiple versions or informs lane decisions.
-
----
-
-### Layer 3: Lane Decisions (Lane-Durable)
-
-**Scope:** Why this lane chose what it chose  
-**Durability:** Persists as long as the lane exists; may be deprecated  
-**Lives in:** `products/<lane>/decisions/`
-
-Decisions record **why we chose** to make things happen the way they did:
-- Architectural choices
-- Deviations from canon
-- Patterns that worked
-
-History says "we did X." Decisions say "we did X because Y."
-
-**Elevates when:** A decision proves valuable across multiple lanes.
-
----
-
-### Layer 4: Cross-Lane Patterns (Repo-Durable)
-
-**Scope:** Patterns that recur across lanes  
-**Durability:** Persists in interfaces or shared tooling  
-**Lives in:** `/interfaces/**` or shared infrastructure
-
-Cross-lane patterns emerge when:
-- Multiple lanes solve the same problem
-- Interoperability requires explicit contracts
-- Drift across lanes becomes expensive
-
-**Elevates when:** A pattern satisfies elevation criteria (recurrence, portability, drag reduction, testability).
-
-Many cross-lane patterns remain permanently non-canonical — useful, local, and intentionally contextual. Canon is not the goal of all things.
-
----
-
-### Layer 5: Canon (Durable Truth)
-
-**Scope:** Curated, high-signal rules that survive context changes  
-**Durability:** Persists across projects, tools, and time  
-**Lives in:** `/canon/**`
-
-Canon is intentionally small. Adding to canon requires:
-1. **Recurrence** — appears across multiple attempts/projects
-2. **Portability** — remains true across stacks/models/tools
-3. **Drag Reduction** — prevents repeated confusion or failure
-4. **Testability** — can be expressed as a falsifiable claim
-
-Canon does not grow by accumulation. It grows by curation.
-
----
-
-## The Percolation Model
-
-Memory does not flow upward automatically. It requires explicit elevation.
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                        CANON                                │
-│  (Durable truth that survives context changes)              │
-└─────────────────────────────────────────────────────────────┘
-                           ▲
-                           │ elevation (strict criteria)
-                           │
-┌─────────────────────────────────────────────────────────────┐
-│                   CROSS-LANE PATTERNS                       │
-│  (Interfaces, shared contracts, proven interop)             │
-└─────────────────────────────────────────────────────────────┘
-                           ▲
-                           │ elevation (recurrence across lanes)
-                           │
-┌───────────────────────┐ ┌───────────────────────┐
-│   LANE A              │ │   LANE B              │
-│   ├── decisions/      │ │   ├── decisions/      │
-│   ├── history/        │ │   ├── history/        │
-│   └── attempts/       │ │   └── attempts/       │
-└───────────────────────┘ └───────────────────────┘
-         ▲                          ▲
-         │ elevation                │ elevation
-         │ (recurrence,             │ (recurrence,
-         │  learning)               │  learning)
-         │                          │
-    ┌─────────┐                ┌─────────┐
-    │ attempt │                │ attempt │
-    │ attempt │                │ attempt │
-    │ attempt │                │ attempt │
-    └─────────┘                └─────────┘
-```
-
-Most artifacts die at the attempt layer. That is correct behavior.
-
----
-
-## Decay Is the Default
-
-Memory preservation has a cost: maintenance, cognitive load, drift risk.
-
-ODD assumes most artifacts should decay:
-- Attempts are sealed and may be pruned
-- History entries are append-only but finite
-- Decisions may be deprecated
-- Even canon can be curated down
-
-Discarding is not loss. It is how memory stays useful.
-
----
-
-## Folder Patterns
-
-Each layer has a consistent folder pattern within lanes:
-
-| Layer | Pattern | Index Style | Authored By |
-|-------|---------|-------------|-------------|
-| Attempts | `<version>/attempts/attempt-NNN/` | Flat enumeration | Agent or human |
-| History | `history/H000X-*.md` | Index table + individual files | Human (post-attempt) |
-| Decisions | `decisions/D000X-*.md` | Index table + individual files | Human |
-
-The index + individual files pattern keeps scan cost low while allowing entries to grow.
-
----
-
-## What Memory Is Not
-
-Memory is not:
-- A **changelog** (user-facing release notes)
-- A **git log** (commit history)
-- A **wiki** (sprawling documentation)
-
-Memory is curated learning that reduces future drag.
-
----
-
-## Relationship to Other Concepts
-
-| Concept | Relationship |
-|---------|--------------|
-| Progressive Elevation | The criteria for when something moves up a layer |
-| Compiled Memory | Compression of memory into agent-consumable packs |
-| Product Lanes | The boundaries within which memory is scoped |
-| Epochs | Comparability boundaries when the rules change |
-
----
-
-## Related Documents
-
-- `/canon/odd/appendices/progressive-elevation.md` — Elevation criteria
-- `/canon/odd/appendices/compiled-memory.md` — Compression for agents
-- `/canon/odd/appendices/product-lanes.md` — Lane isolation
-- `/canon/odd/appendices/attempt-lifecycle.md` — Attempt containment
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/appendices/online-evidence.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/appendices/online-evidence
-title: Online Evidence Requirement
-audience: canon
-exposure: nav
-tier: 2
-voice: authoritative
-stability: stable
-tags: ["evidence", "cloudflare", "preview", "attempts", "validation"]
----
-
-# Online Evidence Requirement
-
-## Summary
-
-An attempt is not considered valid unless its output and evidence are viewable online without the author running code locally.
-
-Local builds are allowed during development, but they do not satisfy the Definition of Done for an attempt.
-
-## Required Online Proof
-
-Every attempt MUST provide:
-
-1. **Cloudflare Preview URL** for the attempt branch.
-2. **Evidence URL** (an online URL that displays the attempt's evidence artifact).
-
-If either URL is missing, the attempt is **INVALID**.
-
-## Required Mechanism (Default)
-
-The default mechanism is Cloudflare Pages branch preview deployments:
-
-- Each attempt MUST push its branch to `origin`.
-- Cloudflare Pages MUST be configured to deploy preview builds for all branches.
-- The attempt branch name MUST include the lane so preview URLs are traceable.
-
-## Required Evidence Artifact
-
-Each attempt MUST produce an evidence markdown file:
-
-`/products/<lane>/attempts/prd-vX.Y/attempt-NNN/EVIDENCE.md` (or run-scoped equivalent during `_runs/`)
-
-The repo MUST expose evidence online via one of:
-
-- A static "evidence hub" path served by the lane site at `/_evidence/`, OR
-- A dedicated Cloudflare Pages project serving the lane's attempts as static content.
-
-The chosen mechanism must be documented in the lane PRD and enforced in kickoff.
-
-Note: Attempts are lane-contained. Root `/attempts/**` is legacy (read-only).
-
-## Non-Goals
-
-- This does not require production promotion.
-- This does not require perfect UI polish.
-- It requires that a human can click a link and see the output and evidence.
-
-## Related Documents
-
-- Definition of Done: `/canon/definition-of-done.md`
-- Visual Proof Standards: `/canon/visual-proof.md`
-- Attempt Lifecycle: `/canon/odd/appendices/attempt-lifecycle.md`
-- Preview Guide: `/docs/PREVIEW.md`
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/appendices/product-lanes.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/product-lanes
-title: "Product Lanes in Outcome-Driven Development"
-audience: canon
-exposure: hidden
-tier: 2
-voice: neutral
-stability: stable
-tags: ["odd", "prd", "architecture", "lanes", "orientation"]
----
-
-# Product Lanes in Outcome-Driven Development
-
-**Status:** Orientation  
-**Audience:** Internal / Canon  
-**Scope:** Why multiple PRD lanes exist and how they relate
-
----
-
-## Summary
-
-ODD systems evolve across multiple independent product lanes.
-
-Each lane has its own PRD, attempts, and failure modes.
-
-Lanes share canon, not lifecycle.
-
----
-
-## Why PRDs Must Be Decoupled
-
-A single PRD governing everything creates cognitive collapse:
-
-- **Different users**: Website serves humans exploring ODD. Agent skill serves AI systems executing ODD.
-- **Different success criteria**: "Mobile usable" vs "Can propose a PRD autonomously"
-- **Different rates of change**: Website can stagnate while agent skills evolve rapidly.
-- **Different evidence**: Screenshots vs decision quality metrics.
-
-Forcing these into one evolutionary track means:
-
-- Progress in one lane forces reruns in another
-- Evidence requirements conflict
-- Scope creep becomes structural
-
----
-
-## The Three Lanes
-
-### Lane 1: Public Website (Humans)
-
-**Purpose:** A human-facing orientation surface for ODD.
-
-This is portfolio, explanation, credibility.
-It does not teach agents how to think.
-It does not execute ODD.
-It explains ODD progressively to humans.
-
-**PRD Location:** `/docs/PRD/website/PRD.md`
-
-**Primary User:** Human developers, peers, evaluators
-
----
-
-### Lane 2: AI Navigation Interface (Humans talking to AI)
-
-**Purpose:** An AI layer over documentation that helps humans understand ODD.
-
-This enables humans to ask questions of the ODD corpus and be:
-
-- Answered accurately
-- Guided progressively
-- Linked to the right documents
-- Without reading everything
-
-This is NOT agent tooling. This is AI helping humans navigate.
-
-**PRD Location:** `/docs/PRD/ai-navigation/PRD.md`
-
-**Primary User:** Humans trying to understand and evaluate ODD
-
----
-
-### Lane 3: Agent Cognitive Skill (Evolution Engine)
-
-**Purpose:** A reusable agent cognitive framework for ODD reasoning.
-
-This is about how agents think, not what they render.
-
-Enables AI systems to:
-
-- Reason using ODD principles
-- Structure PRDs
-- Define outcomes and evidence
-- Run evolutionary attempts
-- Improve their own process over time
-
-This is not tied to this website. It should work on any project.
-
-**PRD Location:** `/docs/PRD/agent-skill/PRD.md`
-
-**Primary User:** AI agents executing evolutionary development elsewhere
-
----
-
-## Implementation Surfaces Are Lane-Scoped
-
-Each lane is an independent product.
-
-Implementation directories are lane-scoped:
-
-- `products/<lane>/src` (disposable)
-- `products/<lane>/dist` (build output)
-
-Repo-root `/src` is not a shared surface in the multi-lane model.
-
-See: `/canon/odd/appendices/lane-implementation-surfaces.md`
-
----
-
-## Canon Is Not a Product
-
-Canon does not have a PRD.
-Canon does not have attempts.
-Canon evolves only through decision logs.
-
-Products may render, query, or reason over canon - but never modify it directly.
-
-| Layer    | Coupling                      |
-|----------|-------------------------------|
-| Canon    | Shared, slow, authoritative   |
-| PRDs     | Isolated, fast, disposable    |
-| Attempts | Ephemeral, lane-scoped        |
-| Tooling  | Canon-aware, lane-agnostic    |
-
----
-
-## What Is Shared vs What Is Isolated
-
-| Artifact          | Shared Across Lanes? | Notes                                      |
-|-------------------|----------------------|--------------------------------------------|
-| Canon             | Yes                  | All lanes reference the same constraints   |
-| Decision logs     | Yes                  | Architectural decisions affect all lanes   |
-| PRDs              | No                   | Each lane has its own PRD                  |
-| Attempts          | No                   | Attempts are lane-scoped                   |
-| Evidence          | No                   | Success criteria differ per lane           |
-| Definition of Done| Partially            | Core DoD applies; lane-specific criteria extend it |
-
----
-
-## Attempt Structure (Locked)
-
-Every attempt MUST declare a lane before registration.
-Attempts without a lane are invalid.
-
-**Folder structure:** `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/`
-
-Attempts are **lane-contained** — all artifacts live under the product lane directory.
-
-Valid examples:
-- `/products/website/attempts/prd-v1.0/attempt-001/`
-- `/products/ai-navigation/attempts/prd-v1.0/attempt-001/`
-- `/products/agent-skill/attempts/prd-v1.0/attempt-001/`
-
-Invalid (do not use):
-- `/attempts/<lane>/prd-vX.Y/attempt-NNN/` (legacy, read-only)
-- `/attempts/prd-vX.Y/<lane>/`
-- `/products/<lane>/attempts/attempt-NNN/` (missing PRD version)
-
----
-
-## Anti-Patterns
-
-### One PRD to Rule Them All
-
-Treating all work as variations of a single product forces:
-
-- Conflicting success criteria
-- Evidence that doesn't apply
-- Reruns across unrelated changes
-
-### Treating Agents as UI Features
-
-The AI navigation interface (Lane 2) is NOT the same as agent cognitive skill (Lane 3).
-
-- Lane 2: AI helps humans understand
-- Lane 3: AI executes ODD autonomously
-
-Mixing these creates scope confusion and evidence pollution.
-
-### Re-running Experiments Across Lanes
-
-A mobile navigation fix (Lane 1) should not invalidate agent skill experiments (Lane 3).
-
-Lane isolation prevents cascading reruns.
-
----
-
-## Implications for Tooling and Docs
-
-### Where PRDs Live
-
-```
-/docs/PRD/
-  website/PRD.md
-  ai-navigation/PRD.md
-  agent-skill/PRD.md
-```
-
-### Where Attempts Live
-
-Attempts are lane-contained:
-
-```
-/products/
-  website/attempts/prd-vX.Y/attempt-NNN/
-  ai-navigation/attempts/prd-vX.Y/attempt-NNN/
-  agent-skill/attempts/prd-vX.Y/attempt-NNN/
-```
-
-Note: Root `/attempts/**` is legacy (read-only). See `/attempts/README.md`.
-
-### How Evolution Propagates
-
-- Canon changes affect all lanes (but rarely change)
-- PRD changes affect only that lane
-- Attempt outcomes inform only that lane's PRD evolution
-- Cross-lane learnings are captured in decision logs, not PRD mutations
-
----
-
-## Scalability
-
-This architecture is scalable because it is NOT interdependent.
-
-You do not get a monorepo of coupled PRDs.
-You get shared canon + independent evolutionary tracks.
-
-This lets you:
-
-- Freeze the website indefinitely
-- Rapidly evolve agent skills
-- Replace AI navigation entirely
-- Add a fourth lane later without touching the others
-
----
-
-## Related Documents
-
-- Decision log: `/canon/odd/decisions/D0009-multi-lane-prd-architecture.md`
-- Attempt lifecycle: `/canon/odd/appendices/attempt-lifecycle.md`
-- Evolution philosophy: `/canon/odd/appendices/evolution-not-automation.md`
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/appendices/progressive-elevation.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/progressive-elevation
-title: Progressive Elevation & Decay
-audience: canon
-exposure: nav
-tier: 2
-voice: neutral
-stability: stable
-tags: ["odd", "memory", "portability", "elevation", "decay"]
-status: canonical
-category: odd-appendix
-version: 1.0
----
-
-# Progressive Elevation & Decay
-
-## Summary
-
-ODD treats **durable thinking** as scarce and **generated artifacts** as abundant.
-
-Most artifacts should **decay** (be discarded or sealed as evidence).
-Only patterns that repeatedly reduce future drag should **elevate** into more durable layers.
-
-This is how the repository avoids documentation sprawl while remaining portable across:
-- time (future-you),
-- people (collaborators),
-- and agents (tooling that reasons over the corpus).
-
----
-
-## The Five Layers of Portability
-
-### 1) Conversation / Attempt (Ephemeral)
-
-**What it is:** raw chats, prompts, branches, quick experiments, and run folders.  
-**Default fate:** extract value → seal evidence → discard everything else.
-
-**Lives in:**
-- `/products/<lane>/attempts/prd-vX.Y/_runs/<run_id>/`
-- transient branches / worktrees
-- PRD patches produced by failure
-
-**Elevate when:** a failure mode repeats and you can state it as a stable rule, constraint, or test.
-
----
-
-### 2) Product Lane / PRD (Project-Local)
-
-**What it is:** current intent for a specific product lane.  
-**Default fate:** churn freely. PRDs are disposable and should change as reality is observed.
-
-**Lives in:**
-- `/docs/PRD/<lane>/PRD.md`
-
-**Elevate when:** a requirement becomes reusable across lanes/projects, or becomes an interface boundary.
-
----
-
-### 3) Interoperability / Contracts (Portability Bridge)
-
-**What it is:** explicit interfaces that allow portability across tools, agents, and products.
-
-Contracts are where compatibility becomes real.
-
-**Lives in:**
-- `/interfaces/**` (semver'd contracts)
-- shared inputs/outputs, schemas, stable runtime paths
-
-**Elevate when:** multiple projects repeatedly need the same boundary and drift becomes expensive.
-
----
-
-### 4) Canon (Durable, Lean)
-
-**What it is:** curated, high-signal rules and lenses that survive multiple contexts.
-
-Canon is intentionally small. If it bloats, that is a signal to curate harder, not to add more.
-
-**Lives in:**
-- `/canon/**`
-
-**Elevate when:** a pattern recurs across multiple projects/lenses and stays true even when tooling changes.
-
----
-
-### 5) Decision Trace (Why It Changed)
-
-**What it is:** lightweight records explaining why the system moved.
-
-Decisions preserve context without polluting Canon with history.
-
-**Lives in:**
-- `/canon/odd/decisions/**`
-
-**Elevate when:** a change affects interpretation, compatibility, or the "rules of the game."
-
----
-
-## Elevation Criteria (Strict)
-
-Something may be elevated only if it satisfies all of the following:
-
-1. **Recurrence**: it appears across multiple attempts or projects (not a one-off).
-2. **Portability**: it remains true across different stacks/models/tools.
-3. **Drag Reduction**: it prevents repeated confusion, re-explanation, or failure.
-4. **Testability**: it can be expressed as a check, constraint, or falsifiable claim.
-
-If any criterion fails, the artifact stays local (Attempt/PRD) or dies.
-
----
-
-## Decay Rule (Default)
-
-Most artifacts should not be preserved.
-
-ODD assumes:
-- generation is abundant,
-- maintenance is the tax you pay forever,
-- and residue creates epistemic drift.
-
-Discarding is not nihilism. It is how the system stays legible.
-
----
-
-## Where This Fits With Lanes and Epochs
-
-- **Product lanes** isolate intent and success criteria so that unrelated surfaces do not drift together.
-- **Epochs** define comparability boundaries when the "rules of the game" change.
-
-This document explains the memory model underneath both.
-
-See also:
-- `/canon/odd/appendices/product-lanes.md`
-- `/canon/odd/appendices/epochs.md`
-
-
-
---------------------------------------------------------------------------------
 📄 File: canon/odd/appendices/quantum-development.md
 --------------------------------------------------------------------------------
 
@@ -8108,7 +10852,32 @@ stability: semi_stable
 tags: ["odd", "quantum", "attempts", "uncertainty", "orientation"]
 ---
 
-# 🔮 Quantum Development — ODD Appendix (Orientation)
+# Quantum Development
+
+> Why multiple attempts against the same PRD are sometimes necessary.
+
+## Description
+
+Quantum Development is a way of reasoning about uncertainty in AI-assisted development. Given the same PRD, different agents, prompts, and execution paths can produce meaningfully different results. Each attempt is an independent observation of the same specification. The goal is to distinguish specification failure from execution-path variance. A PRD is a hypothesis, an attempt is an experimental run, an outcome is an observation. Multiple attempts allow patterns to emerge and prevent premature convergence. Quantum Development is appropriate when the PRD is clear but failure is ambiguous. It ends when one candidate is promoted.
+
+## Outline
+
+- Purpose
+- Core Idea
+- PRD vs Attempt (Clarified)
+- Why This Matters
+- When Quantum Development Is Appropriate
+- When to Change the PRD Instead
+- Independence Requirement
+- Outcome Interpretation
+- On Timing and Observation
+- Relationship to ODD
+- What This Appendix Is Not
+- Summary
+
+---
+
+## Content
 
 ## Purpose
 
@@ -8226,7 +10995,7 @@ Infrastructure exists to protect and surface independence, not to define it.
 
 Confusing infrastructural isolation with epistemic independence is a common failure mode in AI-assisted development.
 
-See `/canon/odd/appendices/attempt-lifecycle.md` for the attempt model and the “PRD as the unit of test” framing.
+See `/docs/appendices/attempt-lifecycle.md` for the attempt model and the “PRD as the unit of test” framing.
 
 ---
 
@@ -8302,7 +11071,7 @@ By observing more than one, teams reduce the risk of mistaking chance for truth.
 
 **Quantum Development ends when one candidate is promoted.**
 
-Observations without promotion are incomplete experiments. See the Champion selection and promotion procedure in `/canon/odd/appendices/attempt-lifecycle.md`.
+Observations without promotion are incomplete experiments. See the Champion selection and promotion procedure in `/docs/appendices/attempt-lifecycle.md`.
 
 ---
 
@@ -8311,460 +11080,6 @@ Observations without promotion are incomplete experiments. See the Champion sele
 - Orientation-only
 - Non-prescriptive
 - Applies primarily to AI-assisted systems
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/appendices/repo-topology.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/repo-topology
-title: "Repository Topology"
-audience: canon
-exposure: nav
-tier: 2
-voice: neutral
-stability: semi_stable
-tags: ["odd", "topology", "structure", "decoupling"]
----
-
-# 📁 ODD Appendix — Repository Topology
-
-**Status:** Orientation  
-**Audience:** Internal / Canon  
-**Scope:** What lives where and what changes when
-
----
-
-## Why This Appendix Exists
-
-This appendix answers:
-- "Where does stuff go?"
-- "What moves vs what stays stable?"
-- "What is allowed to change without triggering a new attempt?"
-
-It encodes the decoupling between App, Content, and Infrastructure planes.
-
----
-
-## Core Topology
-
-```
-/products/<lane>/src/           # Lane application (disposable per attempt)
-/products/<lane>/dist/          # Lane build output (generated)
-/products/<lane>/attempts/      # Lane attempts (sealed, immutable after seal)
-/canon/                         # Canon documents (evolves independently)
-/odd/                           # ODD public docs (evolves independently)
-/about/                         # About docs (evolves independently)
-/projects/                      # Project docs (evolves independently)
-/infra/                         # Infrastructure (persists across attempts)
-/docs/                          # Operational docs + PRD versions
-/attempts/                      # LEGACY (read-only, see /attempts/README.md)
-/public/content/                # Generated (by sync script)
-/dist/                          # Legacy/transitional mirror (generated)
-```
-
-> **Lane-contained architecture:** Each product lane owns its own app plane under `products/<lane>/src/` and its attempts under `products/<lane>/attempts/`. There is no root-level `/src/` directory. Root `/attempts/` is legacy.
-
----
-
-## What Lives Where
-
-### Application Plane (`products/<lane>/src/`)
-
-**Disposable per attempt. Lane-scoped.**
-
-Each product lane (website, ai-navigation, agent-skill) has its own application plane:
-- `products/website/src/`
-- `products/ai-navigation/src/`
-- `products/agent-skill/src/`
-
-Contains:
-- UI components
-- Routing logic
-- State management
-- Rendering code
-
-This folder can be deleted and rebuilt from scratch for each attempt via `attempt:nuke --lane <lane>`.
-
-### Content Plane (`/canon/`, `/odd/`, `/about/`, `/projects/`)
-
-**Evolves independently of attempts.**
-
-Contains:
-- Canon documents
-- ODD philosophy
-- About pages
-- Project documentation
-
-Content changes do not require a new attempt.  
-Content is synced to `/public/content/` for the webapp.
-
-### Infrastructure Plane (`/infra/`)
-
-**Persists across attempts.**
-
-Contains:
-- Build scripts
-- Sync scripts
-- Verification scripts
-- Deployment configuration
-
-Infrastructure changes rarely.  
-When it does, the change benefits all future attempts.
-
-### PRD Versions (`/docs/PRD/`)
-
-**Living drafts.**
-
-Contains:
-- PRD drafts and working versions
-- PRD template
-
-These are editable until frozen into an attempt.
-
-### Sealed Attempts (`/products/<lane>/attempts/`)
-
-**Lane-contained. Immutable after seal.**
-
-Contains:
-- Frozen PRD per version (`prd-vX.Y/PRD.md`)
-- Attempt records (`attempt-NNN/`)
-- Evidence bundles
-
-Once sealed, these folders are not modified.
-
-Note: Root `/attempts/**` is legacy (read-only). New attempts are lane-contained.
-
----
-
-## What Changes When
-
-| Change Type | Location | Triggers New Attempt? |
-|-------------|----------|----------------------|
-| Fix a typo in Canon | `/canon/` | No |
-| Add a new ODD appendix | `/canon/odd/` | No |
-| Update build script | `/infra/` | No |
-| Redesign the UI | `products/<lane>/src/` | Yes (same or new PRD) |
-| Add new feature | `products/<lane>/src/` | Yes (requires PRD) |
-| Add new content doc | `/about/`, `/projects/` | No |
-| Change manifest schema | `/canon/meta/` | No (but may affect app) |
-
----
-
-## Source of Truth
-
-| Asset | Source | Synced To |
-|-------|--------|-----------|
-| Content manifest | per-file frontmatter in `/canon/`, `/odd/`, `/about/`, `/projects/` | `/public/content/manifest.json` |
-| Markdown content | `/canon/`, `/odd/`, `/about/`, `/projects/` | `/public/content/` |
-| PRD (frozen) | `/products/<lane>/attempts/prd-vX.Y/PRD.md` | N/A (immutable) |
-| Evidence | `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/evidence/` | N/A (immutable) |
-
----
-
-## One Active App Per Lane
-
-Each lane contains **one active app implementation** in `products/<lane>/src/`.
-
-Prior attempts are preserved by:
-- Git history
-- Sealed attempt records in `/products/<lane>/attempts/`
-- Commit SHAs in `META.json`
-
-There are no `/app-v1`, `/app-v2` folders.  
-There is one `products/<lane>/src/` per lane that gets rebuilt.
-
----
-
-## Generated vs Source
-
-| Type | Location | How Updated |
-|------|----------|-------------|
-| Source | `/canon/`, `/odd/`, `/about/`, `/projects/` | Manual edit |
-| Generated | `/public/content/` | `npm run sync` |
-| Generated | `/products/<lane>/dist/` | `npm run build -- --lane <lane>` |
-
-**Rule:** Edit source, sync generates output.
-
----
-
-## Deployment Preservation
-
-Each attempt may be deployed as a preview during development. See [Attempt Lifecycle](/canon/odd/appendices/attempt-lifecycle.md) for how deployments fit into the broader attempt model.
-
-Attempt metadata (`META.json`) stores:
-- `sealed_commit` — the commit SHA (truth)
-- `deploy.production_url` — live site URL (if applicable)
-- `deploy.preview_url` — branch/commit preview URL
-- `deploy.provider` — deployment platform (e.g., cloudflare-pages)
-
-Preview URLs are treated as evidence artifacts and must be recorded when sealing.
-
-**Resurrection path:** To resurrect any attempt, check out the `sealed_commit` and redeploy. The attempt record contains everything needed.
-
-Branches used during development are ephemeral. The durable record is the commit SHA and recorded URLs, not the branch name.
-
----
-
-## Summary
-
-- **App is disposable** — rebuilt per attempt
-- **Content accumulates** — evolves independently
-- **Infrastructure persists** — shared across attempts
-- **Attempts are archived** — sealed and immutable
-- **PRDs are versioned** — frozen when attempted
-- **Deploys are recorded** — preview URLs preserved in metadata
-
-This topology makes restartability cheap and keeps concerns decoupled.
-
----
-
-**Status:** Appendix stable for v0.1
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/appendices/repo-truth-audit.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/repo-truth-audit
-title: "Repo Truth Audit (Epistemic Audit)"
-audience: canon
-exposure: nav
-tier: 2
-voice: neutral
-stability: semi_stable
-tags: ["odd", "repo-truth", "epistemic", "audit", "drift"]
----
-
-# 🔍 ODD Appendix — Repo Truth Audit (Epistemic Audit)
-
-**Status:** Orientation  
-**Audience:** Internal / Canon  
-**Scope:** A repeatable audit ritual to detect epistemic drift across canon, docs, tooling, and structure
-
----
-
-You are performing a **Repo Truth Audit**.
-
-Your role is **NOT** to implement features.  
-Your role is to **detect epistemic drift**.
-
-## Definition
-
-**Epistemic drift** occurs when documentation, tooling, structure, or process encode conflicting truths about how the system works.
-
----
-
-## Read the Following FIRST (in order)
-
-1. `/canon/odd/appendices/repo-truth.md`
-2. `/canon/odd/appendices/product-lanes.md`
-3. `/canon/odd/appendices/epochs.md`
-4. `/docs/ATTEMPTS.md`
-5. `/docs/ATTEMPT_KICKOFF.md`
-6. `/docs/AGENT_ENTRYPOINT.md`
-
----
-
-## Audit Scope
-
-- Canon vs docs vs tooling
-- Single-PRD assumptions vs multi-lane reality
-- Attempt lifecycle consistency
-- Folder structures vs documented invariants
-- Terminology consistency (lane, PRD, attempt, epoch, promotion)
-- Deprecated concepts that still appear as instructions
-
----
-
-## Your Tasks
-
-### 1. Inventory all sources of “truth” in the repo
-
-- Canon rules
-- Docs procedures
-- CLI behavior
-- Folder structures
-
-### 2. Identify drift
-
-- Statements that contradict each other
-- Instructions that no longer match reality
-- Concepts defined in one place but used differently elsewhere
-- Dead rules (documented but unenforced)
-- Enforced behavior that is undocumented
-
-### 3. Classify findings into
-
-- ❌ Contradiction (must be fixed)
-- ⚠️ Ambiguity (should be clarified)
-- 🪦 Deprecated but still referenced
-- ✅ Consistent and aligned
-
-### 4. For each ❌ or ⚠️ item
-
-- Cite exact file + section
-- Explain the conflict
-- Propose the *minimum* corrective action
-- DO NOT implement yet
-
----
-
-## Constraints
-
-- Do NOT invent new philosophy
-- Do NOT rewrite Canon
-- Do NOT fix by adding more rules
-- Prefer deletion or clarification over expansion
-
----
-
-## Output Format
-
-## Repo Truth Audit — Findings
-
-### ❌ Contradictions
-- Item 1
-- Item 2
-
-### ⚠️ Ambiguities
-- Item 1
-
-### 🪦 Deprecated References
-- Item 1
-
-### ✅ Verified Alignment
-- Item 1
-
-### Recommended Next Actions
-- Ordered, minimal steps
-
-If the repository is clean, explicitly say:
-
-“The repository is epistemically aligned.”
-
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/appendices/repo-truth.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/repo-truth
-title: "Repository Truth & Epistemic Hygiene"
-audience: canon
-exposure: nav
-tier: 2
-voice: neutral
-stability: stable
-tags: ["odd", "epistemic", "hygiene", "truth", "cleanup"]
----
-
-# Repository Truth & Epistemic Hygiene
-
-## Core Principle
-
-> **If the repository is dirty, conclusions drawn from it are invalid.**
-
-In AI-assisted development, state residue is indistinguishable from signal.
-Unclean repositories produce false confidence, false failures, and false learning.
-
-This project treats repository cleanliness as a prerequisite for reasoning.
-
----
-
-## What "Dirty" Means
-
-A repository is considered dirty when:
-
-- orphaned worktrees exist
-- detached HEADs remain
-- stale branches survive past their relevance
-- attempts overlap in filesystem state
-- production state is ambiguous
-
-When this happens, outcomes cannot be trusted.
-
----
-
-## `attempt:cleanup` as a Truth Reset
-
-`attempt:cleanup` is not housekeeping.
-
-It is a **reset of epistemic state**.
-
-Running cleanup guarantees:
-
-- only sealed attempts remain
-- only intentional branches exist
-- production state is explicit
-- new attempts begin without contamination
-
-Without cleanup, experimentation collapses into folklore.
-
----
-
-## Why This Matters
-
-Quantum Development relies on comparing independent observations.
-
-Independence is meaningless if the filesystem lies.
-
-Therefore:
-
-- cleanup is mandatory
-- residue is failure
-- convenience never overrides truth
-
----
-
-## The Truth Boundary
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                     TRUTH BOUNDARY                          │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│   INSIDE (trustworthy)          OUTSIDE (suspect)           │
-│   ─────────────────────         ──────────────────          │
-│   • prod branch                 • orphaned worktrees        │
-│   • main branch                 • detached HEADs            │
-│   • sealed attempts             • stale branches            │
-│   • explicit state              • filesystem residue        │
-│                                                             │
-│   `attempt:cleanup` moves everything INSIDE                 │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
-```
-
----
-
-## Branch Roles as Epistemic Contracts
-
-| Branch | Role | Can Be Nuked? |
-|--------|------|---------------|
-| `prod` | Production truth | ❌ Never |
-| `main` | Experiment ledger | ⚠️ Only via promotion |
-| `attempt/*` | Hypotheses | ✅ Always |
-
-These aren't conventions. They're contracts about what can be trusted.
-
----
-
-## Orientation Note
-
-This document explains *why* the rule exists.
-Procedures for enforcing it live elsewhere.
-
-See:
-- `/docs/ATTEMPTS.md` — attempt lifecycle procedures
-- `/docs/ATTEMPT_KICKOFF.md` — agent kickoff instructions
-- `/docs/CLOUDFLARE_CONFIG.md` — deploy branch mapping
 
 
 
@@ -8785,9 +11100,29 @@ tags: ["odd", "visual", "evolution", "interfaces"]
 
 # Visual Evolution
 
-## Summary
+> Visual systems evolve independently through versioned interfaces.
 
-In Outcome-Driven Development (ODD), visual systems evolve independently from products.
+## Description
+
+In ODD, visual systems evolve independently from products. Visual consistency is enforced through versioned visual interfaces and evolutionary selection of visual assets, not shared components or frozen style guides. Products consume visual systems as contracts. Visual decisions are explicit, versioned, testable, and replaceable—treated like API decisions. Three layers exist: Visual Interfaces (compatibility contracts, slow, versioned), Visual Assets (generated outputs, disposable), and Visual Attempts (evolutionary exploration, ephemeral). Visual evolution follows the same promotion rules as code. Products declare compatibility; they do not own visuals.
+
+## Outline
+
+- Summary
+- The Core Principle
+- Visual Layers
+- Visual Interfaces
+- Visual Assets
+- Visual Attempts
+- Promotion Model
+- Separation from Product Lanes
+- Relationship to Evolutionary Development
+- Non-Goals
+- Related Canon
+
+---
+
+## Content
 
 Visual consistency is not enforced through shared components or frozen style guides.
 It is enforced through **versioned visual interfaces** and **evolutionary selection of visual assets**.
@@ -8967,6 +11302,24 @@ tags: ["odd", "contract", "version", "semver", "compatibility"]
 
 # ODD System Contract
 
+> The single source of truth for ODD workflow compatibility.
+
+## Description
+
+The ODD System Contract versions repo structure, PRD lanes, attempt lifecycle, tooling invariants, required paths, provenance requirements (META.json), and evidence standards. Current version is 2.0.0 (multi-lane architecture). Epochs mark shifts in the evaluation landscape: E0001 (single-PRD era, contract 1.x) and E0002 (multi-lane era, contract 2.x). Contract 2.0.0 breaking changes include lane declaration required, epoch declaration in META.json, PRDs under `/docs/PRD/<lane>/PRD.md`, and attempts under `/products/<lane>/attempts/`. Do not compare outcomes across epochs without explicit adjustment.
+
+## Outline
+
+- What This Versions
+- Epochs (E0001, E0002)
+- Contract 2.0.0 Breaking Changes
+- Compatibility (Forward and Backward)
+- Version History
+
+---
+
+## Content
+
 **Current Version:** 2.0.0
 
 This document is the single source of truth for the ODD workflow contract version.
@@ -8999,7 +11352,7 @@ Epochs mark shifts in the evaluation landscape. Contract versions and epochs are
 
 **Rule:** Do not compare outcomes across epochs without explicit adjustment.
 
-See `/canon/odd/appendices/epochs.md` for epoch semantics.
+See `/docs/appendices/epochs.md` for epoch semantics.
 
 ---
 
@@ -9048,1104 +11401,10 @@ Epoch 1 documents should be marked with an epoch header if they remain in the re
 
 ## Related Documents
 
-- Decision log: `/canon/odd/decisions/D0011-odd-contract-2.0.0.md`
-- Epochs: `/canon/odd/appendices/epochs.md`
-- Product Lanes: `/canon/odd/appendices/product-lanes.md`
+- Decision log: `/docs/decisions/D0011-odd-contract-2.0.0.md`
+- Epochs: `/docs/appendices/epochs.md`
+- Product Lanes: `/docs/appendices/product-lanes.md`
 - Alignment Reviews: `/canon/odd/appendices/alignment-reviews.md`
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/decisions/D0001-prod-branch-is-production.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/decisions/D0001
-title: "D0001: prod Branch Is Production"
-audience: canon
-exposure: internal
-tier: 2
-voice: neutral
-stability: stable
-tags: ["odd", "decisions", "branch", "deploy"]
----
-
-# D0001 — `prod` Branch Is Production
-
-## Decision
-
-The `prod` branch is the sole source of production deployments. The `main` branch is the experiment ledger and history aggregation point, but never deploys to production directly.
-
-## Status
-
-**Active**
-
-## Why
-
-- Agents running experiments on `main` were accidentally nuking production code
-- No clear separation between "what's live" and "what's being tested"
-- Need a branch that is **never** touched by experiment tooling
-- Production stability requires explicit, intentional promotion
-
-## Consequences
-
-- ✅ Production is protected from accidental nuke/reset operations
-- ✅ `main` can be freely reset without affecting live site
-- ✅ Promotion to production is explicit: merge main → prod
-- ⚠️ Requires Cloudflare Pages configuration change (production branch = `prod`)
-- ⚠️ Adds one extra step to the promotion workflow
-
-## Implementation
-
-- Script: `/infra/scripts/attempt-cli.js` (`cmdPromote` merges to main, then fast-forwards prod)
-- Config: `/docs/CLOUDFLARE_CONFIG.md` documents the branch mapping
-- Contract: `/infra/contracts/build-output.md` defines what must be in `products/<lane>/dist`
-
-## Evidence
-
-- Commit: `15b5c2e` — "feat: environment hardening - prod branch, nuke safety, promote to prod"
-- Commit: `0cce06d` — "fix: protect production - nuclear reset on main skips /src nuke by default"
-- Problem observed: Production was nuked when running `attempt:reset` on `main`
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/decisions/D0002-attempt-provenance-required.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/decisions/D0002
-title: "D0002: Attempt Provenance Required"
-audience: canon
-exposure: internal
-tier: 2
-voice: neutral
-stability: stable
-tags: ["odd", "decisions", "provenance", "model"]
----
-
-# D0002 — Attempt Provenance Required
-
-## Decision
-
-Every attempt must capture model provenance at registration time. If the model is unknown, proceed but flag the degraded provenance clearly.
-
-## Status
-
-**Active**
-
-## Why
-
-- If we can't tell which model produced which attempt, comparisons are contaminated
-- "Unknown model" is not the same as "no provenance" — at least we know it's unknown
-- Provenance must be captured at registration, not guessed later
-- Enables meaningful comparison between different AI models/approaches
-
-## Consequences
-
-- ✅ Every attempt knows: who made it, what made it, where, when
-- ✅ Branch names encode provenance: `run/v0.3/cursor-a/opus-45/abc123`
-- ✅ META.json preserves provenance even after worktree is deleted
-- ⚠️ Agents must provide `--agent` and `--model` flags
-- ⚠️ Warning shown if model not provided (but doesn't block progress)
-
-## Implementation
-
-- Script: `/infra/scripts/attempt-cli.js` (`cmdRegister` captures provenance)
-- Prompt: `/docs/PROMPT_ATTEMPT_KICKOFF.txt` instructs agents to provide flags
-- Schema: `.attempt.json` and `META.json` include provenance fields
-
-### Provenance Fields
-
-| Field | Source | Purpose |
-|-------|--------|---------|
-| `agent` | `--agent` flag | Human-friendly label (cursor-a, cursor-b) |
-| `model` | `--model` flag | AI model identifier (opus-4.5, gpt-4o) |
-| `git_head` | Auto-detected | SHA at registration time |
-| `worktree_path` | Auto-detected | Filesystem location |
-| `branch` | Auto-detected | Git branch name |
-| `registered_at` | Auto-generated | ISO timestamp |
-
-## Evidence
-
-- Commit: `8e49616` — "feat: add model provenance tracking to attempt lifecycle"
-- Problem observed: Multiple attempts existed but no way to know which AI model made which
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/decisions/D0003-prd-version-auto-detection.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/decisions/D0003
-title: "D0003: PRD Version Auto-Detection"
-audience: canon
-exposure: internal
-tier: 2
-voice: neutral
-stability: stable
-tags: ["odd", "decisions", "prd", "version"]
----
-
-# D0003 — PRD Version Auto-Detection
-
-## Decision
-
-The PRD version is automatically parsed from `/docs/PRD.md` at runtime. Operational prompts must never hardcode evolving identifiers like PRD versions.
-
-## Status
-
-**Active**
-
-## Why
-
-- Hardcoded version strings in prompts cause maintenance drift
-- When PRD goes from v0.2 → v0.3, the kickoff prompt shouldn't need updating
-- Single source of truth: `/docs/PRD.md` is authoritative
-- Eliminates "forgot to update the prompt" class of errors
-
-## Consequences
-
-- ✅ Prompts are version-agnostic and future-proof
-- ✅ PRD version changes require only one edit (PRD.md)
-- ✅ Mismatch guard prevents accidental version divergence
-- ⚠️ PRD.md must have parseable version format
-- ⚠️ `--prd` flag still accepted but validated against PRD.md
-
-## Implementation
-
-- Script: `/infra/scripts/attempt-cli.js` (`parsePrdVersion()` reads PRD.md)
-- Prompt: `/docs/PROMPT_ATTEMPT_KICKOFF.txt` uses `attempt:register` without version
-- Guard: If `--prd` is passed and mismatches PRD.md, command fails
-
-### Parseable Formats
-
-The script accepts either:
-
-```markdown
-| **PRD Version** | v0.3 |
-```
-
-Or:
-
-```markdown
-PRD Version: v0.3
-```
-
-## Evidence
-
-- Commit: `bcfbf55` — "feat: make attempt:register version-agnostic"
-- Problem observed: PRD went to v0.3 but prompt still said v0.2
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/decisions/D0004-repo-truth-cleanup-mandatory.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/decisions/D0004
-title: "D0004: Repo Truth & Cleanup Mandatory"
-audience: canon
-exposure: internal
-tier: 2
-voice: neutral
-stability: stable
-tags: ["odd", "decisions", "cleanup", "hygiene"]
----
-
-# D0004 — Repository Truth: Cleanup Is Mandatory
-
-## Decision
-
-If the repository is dirty, conclusions drawn from it are invalid. Cleanup is not housekeeping — it is a reset of epistemic state.
-
-## Status
-
-**Active**
-
-## Why
-
-- In AI-assisted development, state residue is indistinguishable from signal
-- Orphaned worktrees, stale branches, and detached HEADs contaminate experiments
-- Quantum Development relies on comparing **independent** observations
-- Independence is meaningless if the filesystem lies
-
-## Consequences
-
-- ✅ Only sealed attempts remain after cleanup
-- ✅ Only intentional branches exist
-- ✅ Production state is explicit
-- ✅ New attempts begin without contamination
-- ⚠️ Requires discipline: cleanup after each PRD cycle
-- ⚠️ Some data loss if worktrees weren't properly submitted
-
-## Implementation
-
-- Script: `/infra/scripts/attempt-cli.js` (`cmdCleanup` prunes worktrees/branches)
-- Philosophy: `/canon/odd/appendices/repo-truth.md` documents the principle
-- Automation: `attempt:reset` auto-calls cleanup for PRD-specific branches
-
-### What "Dirty" Means
-
-A repository is dirty when:
-
-- Orphaned worktrees exist
-- Detached HEADs remain
-- Stale branches survive past relevance
-- Attempts overlap in filesystem state
-- Production state is ambiguous
-
-## Evidence
-
-- Commit: `e7c88aa` — "feat: add attempt:cleanup command for automatic worktree/branch pruning"
-- Commit: `5278f2f` — "docs: encode epistemic hygiene as canonical principle"
-- Document: `/canon/odd/appendices/repo-truth.md`
-- Problem observed: Old worktrees and branches accumulated, making repo state untrustworthy
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/decisions/D0005-nuke-safety-guards.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/decisions/D0005
-title: "D0005: Nuke Command Safety Guards"
-audience: canon
-exposure: internal
-tier: 2
-voice: neutral
-stability: stable
-tags: ["odd", "decisions", "nuke", "safety"]
----
-
-# D0005 — Nuke Command Safety Guards
-
-## Decision
-
-The `attempt:nuke` command has branch-aware safety guards: refuses on `prod`, warns and requires `--force` on `main`, allows freely on `attempt/*` branches.
-
-## Status
-
-**Active**
-
-## Why
-
-- Agents were accidentally nuking production code by running reset on `main`
-- Need explicit friction before destructive operations on important branches
-- `attempt/*` branches are ephemeral by design — no protection needed
-- `prod` is sacred — never allow accidental destruction
-- `main` is valuable but restorable — allow with confirmation
-
-## Consequences
-
-- ✅ Production (`prod`) cannot be accidentally nuked
-- ✅ Main requires explicit `--force` to nuke
-- ✅ Attempt branches can be freely nuked (that's their purpose)
-- ⚠️ Agents on wrong branch will see errors (intentional friction)
-- ⚠️ Human must intervene if nuke is needed on protected branches
-
-## Implementation
-
-- Script: `/infra/scripts/attempt-cli.js` (`cmdNuke` checks branch before proceeding)
-
-### Branch Safety Rules
-
-| Branch | Nuke Allowed? | Behavior |
-|--------|---------------|----------|
-| `prod` | ❌ Never | Hard fail with explanation |
-| `main` | ⚠️ With `--force` | Warning, requires explicit override |
-| `attempt/*` | ✅ Always | Proceeds immediately |
-| Other | ⚠️ With `--force` | Warning, requires explicit override |
-
-### Protected Paths (Never Deleted)
-
-Even during nuke, these are never touched:
-
-- `/canon/`
-- `/docs/`
-- `/attempts/`
-- `/infra/`
-- `/public/`
-- `/.cloudflare/`
-- `/.github/`
-
-## Evidence
-
-- Commit: `15b5c2e` — "feat: environment hardening - prod branch, nuke safety, promote to prod"
-- Commit: `0cce06d` — "fix: protect production - nuclear reset on main skips /src nuke by default"
-- Problem observed: Running `attempt:reset` on `main` deleted production `/src`
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/decisions/D0006-dogfooding-requirement.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/decisions/D0006
-title: "D0006: Dogfooding Requirement"
-audience: canon
-exposure: internal
-tier: 2
-voice: neutral
-stability: stable
-tags: ["odd", "decisions", "dogfooding", "validation"]
----
-
-# D0006 — Dogfooding Requirement
-
-## Decision
-
-Agents building klappy.dev must actually FOLLOW the canon documents they're showcasing, not just read them. ATTEMPT.md must demonstrate internalization of constraints and decision rules.
-
-## Status
-
-**Active**
-
-## Why
-
-- klappy.dev is a docs site that showcases AI build processes
-- If agents don't follow the documented processes, the documentation is unvalidated
-- "Read the docs" is not the same as "apply the docs"
-- This validates the documentation itself — if agents can't follow it, it needs fixing
-
-## Consequences
-
-- ✅ Documentation is validated by actual use
-- ✅ Unclear or contradictory docs get flagged as feedback
-- ✅ ATTEMPT.md becomes evidence of process adherence
-- ⚠️ More overhead for agents (must document constraint application)
-- ⚠️ Self-audit checklist adds 9 sections to ATTEMPT.md
-
-## Implementation
-
-- Prompt: `/docs/PROMPT_ATTEMPT_KICKOFF.txt` specifies dogfooding requirement
-- Template: ATTEMPT.md template includes self-audit checklist
-
-### Required Canon Documents
-
-| Document | How to Apply |
-|----------|--------------|
-| `/canon/constraints.md` | Note which constraints were relevant, any overrides |
-| `/canon/decision-rules.md` | Note which rules guided approach choices |
-| `/canon/self-audit.md` | Complete all 9 sections in ATTEMPT.md |
-| `/canon/definition-of-done.md` | Meet all requirements before claiming completion |
-
-### Self-Audit Checklist (9 Sections)
-
-1. Intended Outcome
-2. Constraints Applied
-3. Decision Rules Followed
-4. Verification Performed
-5. Evidence Produced
-6. UX and Behavior Check
-7. Tradeoffs and Risks
-8. Maintainability Check
-9. Confidence Level
-
-## Evidence
-
-- Commit: `43e8428` — "feat: add dogfooding requirement - agents must apply canon docs not just read them"
-- Commit: `157a2f3` — "feat: bulletproof attempt workflow - mandatory completion gates"
-- Problem observed: Agents were reading canon docs but not applying them to their work
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/decisions/D0007-branch-names-are-convenience.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/decisions/D0007
-title: "D0007: Branch Names Are Convenience"
-audience: canon
-exposure: internal
-tier: 2
-voice: neutral
-stability: stable
-tags: ["odd", "decisions", "branches", "provenance"]
----
-
-# D0007 — Branch Names Are Convenience, Provenance Lives in META
-
-## Decision
-
-Branch names are optional convenience for humans and tooling. The canonical record of "who made what" lives in `META.json`. Cloudflare and the attempt system must not depend on specific branch naming conventions.
-
-## Status
-
-**Active**
-
-## Why
-
-- Cursor manages worktrees and branches dynamically — we can't control names reliably
-- Attempt numbers are assigned **after** finalize, not at branch creation
-- Agents don't know their attempt number when they start
-- Hardcoded branch patterns (like `attempt/prd-v0.2/a001`) were causing doc drift
-- Cloudflare deploys any branch that builds — it doesn't parse branch names
-
-## Consequences
-
-- ✅ System is Cursor-proof and future-proof
-- ✅ Branch naming can drift without breaking provenance
-- ✅ Cloudflare config is simpler (just "any non-prod branch")
-- ✅ Docs don't need updating when naming conventions change
-- ⚠️ Humans can't infer provenance from branch names alone
-- ⚠️ Must check `META.json` to know who made what
-
-## Implementation
-
-- Provenance schema: `.attempt.json` and `META.json` include `tool`, `agent`, `model`, `prd_version`, `run_id`, `git_head`
-- Cloudflare: Configured to deploy all non-`prod` branches
-- Docs: `CLOUDFLARE_CONFIG.md` describes deploy behavior, not branch naming
-
-### What Gets Namespaced (Durable)
-
-| Field | Location | Purpose |
-|-------|----------|---------|
-| `prd_version` | META.json | Which PRD |
-| `tool` | META.json | cursor, vscode, cli |
-| `agent` | META.json | Agent ID within tool |
-| `model` | META.json | AI model identifier |
-| `run_id` | META.json | Unique identifier |
-| `git_head` | META.json | SHA at registration |
-
-### What Does NOT Get Namespaced
-
-- Branch names (convenience only)
-- Folder names in worktrees
-- Cloudflare subdomain slugs
-
-## Evidence
-
-- Commit: `15dfa26` — "feat: add --tool flag to provenance tracking"
-- Document: `/docs/CLOUDFLARE_CONFIG.md` — "Branch names are optional convenience"
-- Problem observed: Docs assumed `attempt/prd-v0.2/a001` format, but Cursor doesn't create branches that way
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/decisions/D0008-register-before-nuke.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/decisions/D0008
-title: "D0008: Register Before Nuke"
-audience: canon
-exposure: internal
-tier: 2
-voice: neutral
-stability: stable
-tags: ["odd", "decisions", "lifecycle", "provenance", "independence"]
----
-
-# D0008: Register Before Nuke
-
-**Status:** Active  
-**Date:** 2026-01-16  
-**Scope:** Attempt lifecycle  
-
----
-
-## Decision
-
-The required sequence for starting any attempt is:
-
-1. **`attempt:register`** — captures provenance
-2. **`attempt:nuke`** — guarantees independence
-3. Only then does implementation begin
-
-This order is **mandatory and non-negotiable**.
-
----
-
-## Why
-
-### If an agent nukes before registering:
-- You lose the "observer" identity
-- You lose the pre-state snapshot (`git_head`, branch, timestamp)
-- You cannot answer: *who did what, with what model, from where?*
-
-### If an agent registers but doesn't nuke:
-- You lose independence
-- You contaminate outcomes with inherited code
-- You lie to yourself about variance between attempts
-
-**Register → Nuke** is the only sequence that satisfies both forensic traceability and experimental purity.
-
----
-
-## What This Preserves
-
-| Concern | How It's Addressed |
-|---------|-------------------|
-| Provenance | Registration captures agent, model, tool, git HEAD, timestamp |
-| Independence | Nuke deletes `/src` and framework configs — zero inheritance |
-| Forensic truth | Pre-state is recorded before it's destroyed |
-| Experimental purity | Implementation starts from a true blank slate |
-
----
-
-## Consequences
-
-1. **Agents cannot skip registration** — attempts without provenance are invalid
-2. **Agents cannot skip nuke** — attempts with inherited code are contaminated
-3. **The sequence is enforced by documentation and social contract** — tooling may add guardrails but the rule is the rule
-4. **META.json becomes the authoritative record** — branch names are convenience, provenance is truth
-
----
-
-## Implementation Hooks
-
-- `PROMPT_ATTEMPT_KICKOFF.txt`: First actions section explicitly states register → nuke
-- `ATTEMPT_KICKOFF.md`: Procedure section documents this order
-- `attempt-cli.js`: Could add warnings if nuke is called without prior registration (future enhancement)
-
----
-
-## See Also
-
-- [D0002: Attempt Provenance Required](./D0002-attempt-provenance-required.md)
-- [D0005: Nuke Safety Guards](./D0005-nuke-safety-guards.md)
-- [D0006: Dogfooding Requirement](./D0006-dogfooding-requirement.md)
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/decisions/D0009-multi-lane-prd-architecture.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/decisions/D0009
-title: "D0009: Multi-Lane PRD Architecture"
-audience: canon
-exposure: internal
-tier: 2
-voice: neutral
-stability: stable
-tags: ["odd", "decisions", "lanes", "prd", "architecture"]
----
-
-# D0009: Multi-Lane PRD Architecture
-
-**Status:** Accepted  
-**Date:** 2026-01-17  
-**Deciders:** Chris Klapp  
-**Supersedes:** Single Active PRD rule (formerly in canon/index.md)
-
----
-
-## Context
-
-The original ODD model assumed a single active PRD at any time (`/docs/PRD.md`). All attempts, evidence, and lifecycle tracked against this single evolutionary line.
-
-This created cognitive collapse when multiple independent products emerged:
-
-1. **Public Website** — human-facing orientation surface
-2. **AI Navigation Interface** — AI layer helping humans understand ODD
-3. **Agent Cognitive Skill** — agent framework for executing ODD on any project
-
-These have:
-- Different users (humans vs AI vs AI-as-tool)
-- Different success criteria (screenshots vs citations vs autonomous PRD generation)
-- Different rates of change (website can stagnate while agent skill evolves rapidly)
-- Different evidence requirements
-
-Forcing them into a single PRD caused:
-- Scope creep across unrelated concerns
-- Evidence pollution (mobile screenshots don't validate agent reasoning)
-- Progress in one area forcing reruns in another
-- Confusion about what "done" means
-
----
-
-## Decision
-
-PRDs are now organized into independent product lanes.
-
-Each lane has:
-- Its own PRD at `/docs/PRD/<lane>/PRD.md`
-- Its own attempts at `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/` (lane-contained)
-- Its own lifecycle, success criteria, and evidence
-
-The three initial lanes are:
-- `website` — human-facing UI/UX
-- `ai-navigation` — AI over documentation
-- `agent-skill` — agent cognitive framework
-
-**Lanes share canon, not lifecycle.**
-
-Canon remains the shared gravity — constraints, decision rules, and definitions that apply to all lanes. Canon evolves via decision logs, not PRDs.
-
----
-
-## Consequences
-
-### Positive
-
-- **Independence:** Evolve agent skills without touching website PRD
-- **Clarity:** Each lane has explicit success criteria
-- **Scalability:** Add new lanes without restructuring existing ones
-- **Evidence integrity:** Lane-specific evidence stays lane-scoped
-
-### Negative
-
-- **Complexity:** More structure to understand and maintain
-- **Tooling updates:** CLI commands now require `--lane` flag
-- **Migration:** Existing attempts need mental model adjustment
-
-### Neutral
-
-- **Canon unchanged:** Shared constraints still apply to all lanes
-- **Attempt mechanics unchanged:** Same register/nuke/build/seal flow
-
----
-
-## Constraints
-
-- Every attempt MUST declare a lane before registration
-- Attempts without a lane are invalid
-- Folder structure is locked: `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/`
-- No creative variations on attempt folder structure allowed
-- Root `/attempts/**` is legacy (read-only)
-
----
-
-## Related Documents
-
-- `/canon/odd/appendices/product-lanes.md` — full orientation
-- `/docs/ATTEMPTS.md` — updated attempt lifecycle
-- `/docs/ATTEMPT_KICKOFF.md` — updated workflow with lane declaration
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/decisions/D0010-canonical-agent-kickoff.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/decisions/D0010
-title: "D0010: Canonical Agent Kickoff"
-audience: canon
-exposure: internal
-tier: 2
-voice: neutral
-stability: stable
-tags: ["odd", "decisions", "agent", "kickoff", "entrypoint"]
----
-
-# D0010: Canonical Agent Kickoff Artifact
-
-**Status:** Accepted  
-**Date:** 2026-01-17  
-**Deciders:** Chris Klapp  
-**Related:** D0009-multi-lane-prd-architecture
-
----
-
-## Context
-
-After implementing multi-lane PRD architecture (D0009), the agent entry surface became fragmented:
-
-- `/docs/AGENT_ENTRYPOINT.md` — orientation pointers
-- `/docs/ATTEMPT_KICKOFF.md` — human workflow with agent notes
-- `/docs/ATTEMPTS.md` — lifecycle orientation
-- `/canon/odd/appendices/product-lanes.md` — lane architecture
-
-Agents were expected to "compose context" by reading multiple documents. This violated a core principle:
-
-> If it's not in the repo, it doesn't exist.
-
-When a human pastes a "helpful" prompt into Cursor, that prompt is not repo-authoritative. The agent reconstructs intent rather than reading authority.
-
-This creates:
-- Drift between what humans think agents should do and what's documented
-- Hallucinated procedures based on reasonable-sounding synthesis
-- No single source of truth for agent behavior
-
----
-
-## Decision
-
-Create a single, canonical, copy-pasteable agent kickoff artifact:
-
-**`/docs/AGENT_KICKOFF.md`**
-
-This file:
-- Is the ONLY allowed entry point for agent attempts
-- Contains all invariants in one place
-- Is lane-aware (declares variables, not per-lane copies)
-- Explicitly instructs agents to STOP if conflicts are detected
-
-The existing files are rescoped:
-- `/docs/AGENT_ENTRYPOINT.md` — now points directly to AGENT_KICKOFF
-- `/docs/ATTEMPT_KICKOFF.md` — human workflow only
-- `/docs/ATTEMPTS.md` — orientation, not procedure
-
----
-
-## Consequences
-
-### Positive
-
-- **Single source of truth:** Agents have one authoritative entry point
-- **No reconstruction:** Humans paste exactly what's in the repo
-- **Conflict detection:** Agents are instructed to stop and report, not guess
-- **Scalable:** New lanes are added to the file, not as separate artifacts
-
-### Negative
-
-- **One more file:** Adds to the doc surface area
-- **Maintenance:** Must be kept in sync with lane changes
-
-### Mitigations
-
-- AGENT_KICKOFF.md references lane PRDs by path pattern, not hardcoded content
-- Lane additions require updating ONE file, not rewriting agent prompts
-- File is self-describing: agents can validate it against repo state
-
----
-
-## The Invariant
-
-If a human wants an agent to start an attempt, they do ONE thing:
-
-> Point the agent at `/docs/AGENT_KICKOFF.md`
-
-No external prompts. No "helpful context." No reconstruction.
-
-The file IS the prompt.
-
----
-
-## Related Documents
-
-- `/docs/AGENT_KICKOFF.md` — the canonical artifact
-- `/docs/AGENT_ENTRYPOINT.md` — now a redirect
-- `/canon/odd/appendices/product-lanes.md` — lane architecture
-- D0009 — multi-lane PRD architecture
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/decisions/D0011-odd-contract-2.0.0.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/decisions/D0011
-title: "D0011: ODD System Contract 2.0.0"
-audience: canon
-exposure: internal
-tier: 2
-voice: neutral
-stability: stable
-tags: ["odd", "decisions", "contract", "version", "epoch"]
----
-
-# D0011: ODD System Contract 2.0.0
-
-## Status
-
-Accepted
-
-## Context
-
-The ODD system evolved from a single-PRD model to a multi-lane architecture. This change affects:
-
-- Directory structure (PRDs, attempts)
-- Tooling requirements (lane flags)
-- Mental model (products decoupled, canon shared)
-- Comparability rules (epochs required)
-
-These changes are not backwards-compatible. Applying 2.x workflows to 1.x structures, or comparing 2.x attempts to 1.x attempts without adjustment, produces invalid conclusions.
-
-The system needed:
-1. A single authoritative version for the ODD contract
-2. Clear epoch boundaries
-3. A path to mark legacy documents without rewriting history
-
-## Decision
-
-1. **Create `/canon/odd/contract.md`** as the single source of ODD system versioning.
-2. **Declare contract version 2.0.0** with the multi-lane architecture.
-3. **Define two epochs:**
-   - E0001-single-prd-era (contract 1.x)
-   - E0002-multi-lane-era (contract 2.x)
-4. **Require epoch_id in META.json** for all new attempts.
-5. **Preserve Epoch 1 artifacts** as historical records, not errors.
-
-## Consequences
-
-### Positive
-- Single source of truth for ODD compatibility
-- Clear boundary between eras
-- Historical artifacts remain valid in their context
-- Future major changes have a pattern to follow
-
-### Negative
-- Epoch 1 documents may need headers if kept for reference
-- Tooling must be epoch-aware for meaningful comparisons
-- Slight overhead in declaring epoch during registration
-
-### Neutral
-- PRD versions remain lane-local (unaffected)
-- Content pack manifest version is separate (unaffected)
-
-## Breaking Changes in 2.0.0
-
-| Category | 1.x | 2.x |
-|----------|-----|-----|
-| PRD location | `/docs/PRD.md` | `/docs/PRD/<lane>/PRD.md` |
-| Attempt location | `/attempts/prd-vX.Y/attempt-NNN/` | `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/` |
-| Lane declaration | N/A | Required |
-| Epoch declaration | N/A | Required |
-| Tooling flags | None | `--lane` required |
-
-Note: Root `/attempts/**` is legacy (read-only). All new attempts are lane-contained under `/products/<lane>/attempts/`.
-
-## Epoch 1 Document Header (Standard)
-
-For documents kept for historical reference that describe 1.x workflows:
-
-```markdown
-> **Epoch 1 Document** (ODD Contract ≤1.x)
->
-> Kept for historical context. Current workflow is defined by ODD Contract 2.x.
-> See `/canon/odd/contract.md` for the current contract.
-```
-
-## Related
-
-- `/canon/odd/contract.md` — the contract itself
-- `/canon/odd/appendices/epochs.md` — epoch semantics
-- `/canon/odd/appendices/product-lanes.md` — lane architecture
-- `/canon/odd/decisions/D0009-multi-lane-prd-architecture.md` — the architectural decision
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/decisions/D0012-e0002-transition-interpretation.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/decisions/D0012
-title: "D0012: E0002 Transition Interpretation (Truth vs Enforcement Lag)"
-audience: canon
-exposure: internal
-tier: 2
-voice: neutral
-stability: stable
-tags: ["odd", "decisions", "epochs", "lanes", "drift", "interfaces", "tooling"]
----
-
-# D0012: E0002 Transition Interpretation (Truth vs Enforcement Lag)
-
-**Status:** Accepted  
-**Date:** 2026-01-17  
-**Deciders:** Chris Klapp  
-**Related:** D0009-multi-lane-prd-architecture, D0011-odd-contract-2.0.0
-
----
-
-## Context
-
-The repository has crossed an epoch boundary into **E0002-multi-lane-era** (ODD Contract 2.x).
-
-A repo truth audit surfaced explicit contradictions between:
-
-- Canon + lane PRDs (intended truth for E0002)
-- Docs (mixed E0001/E0002 references)
-- Tooling + scripts (partially E0001-encoded invariants)
-- Interface contracts (claimed E0002 compatibility; some still encode E0001 shapes)
-
-This is expected during transition: truth (canon/PRDs/contracts) can advance faster than enforcement (CLI/build scripts), and historical artifacts can persist.
-
----
-
-## Decision
-
-During the E0002 transition:
-
-1. **Canon and lane PRDs define intended truth.**  
-2. **Tooling and enforcement may lag (mixed-era is permitted temporarily).**  
-3. **Legacy surfaces may remain, but MUST be explicitly labeled as legacy (pre-E0002).**  
-4. **Comparability across E0001 ↔ E0002 is limited by default.** If lane and epoch metadata are missing, outcomes are **not comparable by default**.
-5. **Each surfaced contradiction requires selecting ONE canonical truth before alignment work begins.** No “synthesis truth” is permitted.
-
----
-
-## Consequences
-
-### Positive
-
-- Preserves historical evidence without rewriting it into the new model
-- Prevents folklore by forcing explicit truth selection per contradiction
-- Makes mixed-era state explicitly permissible (and therefore auditable)
-
-### Negative
-
-- Temporary cognitive dissonance: documentation and tooling may disagree
-- Requires deliberate convergence work (contracts, docs labeling, tooling alignment)
-
----
-
-## Operational Rules (Minimal)
-
-- **Label, don’t rewrite:** Prefer small “Legacy (pre E0002)” headers/notes over broad edits.
-- **Decide before implementing:** For each contradiction, record the canonical truth first; then align docs/contracts/tooling mechanically.
-- **No silent drift:** If contradictions exist, they must be citeable and tracked until resolved.
-
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/decisions/D0013-build-output-lane-scoped-dist.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/decisions/D0013
-title: "D0013: Build Output Truth is Lane-Scoped (products/<lane>/dist)"
-audience: canon
-exposure: internal
-tier: 2
-voice: neutral
-stability: stable
-tags: ["odd", "decisions", "lanes", "build", "deploy", "contracts"]
----
-
-# D0013: Build Output Truth is Lane-Scoped (products/<lane>/dist)
-
-**Status:** Accepted  
-**Date:** 2026-01-17  
-**Deciders:** Chris Klapp  
-**Related:** D0009-multi-lane-prd-architecture, D0011-odd-contract-2.0.0, D0012-e0002-transition-interpretation
-
----
-
-## Decision
-
-For ODD Contract 2.x (E0002), the canonical build output location is:
-
-> **`products/<lane>/dist/`**
-
-Specifically, each lane build MUST produce:
-
-- `products/<lane>/dist/`
-- `products/<lane>/dist/index.html`
-
-This is required to support product lanes as first-class, independent products.
-
----
-
-## Why
-
-- Multi-lane PRD architecture (D0009) requires lane-scoped implementation and deployment surfaces.
-- Repo-root `/dist` cannot represent multiple lane builds without collision or ambiguity.
-- Lane-scoped output enables per-lane Cloudflare Pages projects and per-lane promotion.
-
----
-
-## Consequences
-
-- Any references to repo-root `/dist` as a universal requirement are **legacy / transitional** and must be labeled as such until aligned.
-- Interface contracts and build tooling must converge mechanically to this truth (tracked as alignment work; not part of this decision).
-- Verifiers (future `verify:contracts`) must validate lane-scoped output, not repo-root output.
-
----
-
-## Scope Notes (Non-Decision)
-
-This decision does not prescribe:
-
-- how the build is implemented (Vite, etc.)
-- which lanes require a deployable artifact
-- manifest runtime URL conventions
-
-It defines only the canonical output location when a lane produces a deployable build artifact.
-
-
-
-
---------------------------------------------------------------------------------
-📄 File: canon/odd/decisions/D0014-e0003-evidence-first-era.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://canon/odd/decisions/D0014
-title: "D0014: Declare E0003 Evidence-First Era"
-audience: canon
-exposure: internal
-tier: 2
-voice: first_person
-stability: stable
-tags: ["odd", "epochs", "evidence", "cloudflare", "attempts", "lanes"]
----
-
-# D0014: Declare E0003 Evidence-First Era
-
-**Status:** Accepted  
-**Date:** 2026-01-19  
-**Decider:** Klappy  
-**Epoch:** E0003  
-**Related:** D0009 (Multi-lane PRDs), D0012 (Transition Interpretation), D0013 (Lane-scoped dist), Deploy Evidence (klappy://canon/odd/deploy-evidence)
-
-## Context
-
-Under E0002, attempts could claim success with local build proof and repository artifacts.
-
-In practice, this created invalid conclusions:
-
-- Cloudflare Pages serves only the configured build output directory
-- `/attempts/**` is not served by Pages by default
-- Agents completed "successful" attempts that never rendered online
-- Evidence URLs were often hypothetical or unverified
-
-The system incentivized local-only success and narrative closure instead of externally reviewable proof.
-
-## Decision
-
-We declare **E0003 — Evidence-First Era**.
-
-In E0003, an attempt is not complete unless:
-
-1) The attempt branch is pushed to origin
-2) Cloudflare Pages preview deployment succeeds
-3) The preview URL returns HTTP 200 and renders the site
-4) The evidence URL returns HTTP 200 and renders evidence at:
-
-`/_evidence/<run_id>/EVIDENCE.md`
-
-Additionally:
-
-- Evidence MUST be copied into the lane build output:
-  `products/<lane>/dist/_evidence/<run_id>/`
-- Attempts that cannot prove (2)-(4) MUST seal as failure
-
-## Consequences
-
-### Positive
-
-- Prevents "success without deployment"
-- Makes evidence externally reviewable and durable
-- Forces alignment between docs, tooling, and Cloudflare configuration
-
-### Negative
-
-- Adds operational friction (intentional)
-- Increases failure rate until tooling and CF projects are correctly configured
-
-## Compatibility
-
-- E0002 attempts remain valid within E0002.
-- E0002 attempts are not comparable to E0003 attempts by default.
-
-## Minimal operational rule
-
-If a preview URL cannot be verified, stop.
-No additional work is permitted under a false success state.
 
 
 
@@ -10155,111 +11414,49 @@ No additional work is permitted under a false success state.
 
 ---
 uri: klappy://canon/odd/decisions
-title: "ODD Decision Log"
+title: "ODD Decision Log (Redirect)"
 audience: canon
 exposure: nav
 tier: 1
 voice: neutral
-stability: evolving
-tags: ["odd", "decisions", "adr", "index"]
+stability: stable
+tags: ["odd", "decisions", "redirect"]
 ---
 
-# 📋 ODD Decision Log
+# ODD Decision Log
 
-This folder contains Architecture Decision Records (ADRs) for the ODD workflow and repository practices.
+> **Moved:** Implementation-specific decisions now live in `/docs/decisions/`.
 
-> **Principle:** Decisions live here. Procedures live in `/docs/`. Philosophy lives in `/canon/`.
+This folder previously contained Architecture Decision Records (ADRs) for the ODD workflow and repository practices.
 
----
-
-## ✅ Active Decisions
-
-### Branch & Deploy Model
-
-| ID | Decision | Status |
-|----|----------|--------|
-| [D0001](./D0001-prod-branch-is-production.md) | `prod` branch is production; `main` is experiment ledger | **Active** |
-| [D0005](./D0005-nuke-safety-guards.md) | Nuke command refuses on `prod`, warns on `main` | **Active** |
-| [D0007](./D0007-branch-names-are-convenience.md) | Branch names are convenience; provenance lives in META | **Active** |
-
-### Attempt Lifecycle
-
-| ID | Decision | Status |
-|----|----------|--------|
-| [D0002](./D0002-attempt-provenance-required.md) | Model provenance must be captured at registration | **Active** |
-| [D0003](./D0003-prd-version-auto-detection.md) | PRD version auto-detected from lane PRD | **Active** |
-| [D0006](./D0006-dogfooding-requirement.md) | Agents must apply canon docs, not just read them | **Active** |
-| [D0008](./D0008-register-before-nuke.md) | Register first (provenance), then nuke (independence) | **Active** |
-| [D0010](./D0010-canonical-agent-kickoff.md) | Single canonical agent entry point (`AGENT_KICKOFF.md`) | **Active** |
-
-### Architecture
-
-| ID | Decision | Status |
-|----|----------|--------|
-| [D0009](./D0009-multi-lane-prd-architecture.md) | PRDs organized into independent product lanes | **Active** |
-| [D0011](./D0011-odd-contract-2.0.0.md) | ODD System Contract 2.0.0 (multi-lane era) | **Active** |
-| [D0012](./D0012-e0002-transition-interpretation.md) | E0002 transition interpretation (truth can lead enforcement; contradictions are tracked) | **Active** |
-| [D0013](./D0013-build-output-lane-scoped-dist.md) | Build output truth is lane-scoped (`products/<lane>/dist`) | **Active** |
-
-### Repository Hygiene
-
-| ID | Decision | Status |
-|----|----------|--------|
-| [D0004](./D0004-repo-truth-cleanup-mandatory.md) | Cleanup is mandatory; dirty repos invalidate conclusions | **Active** |
+As part of the canon progressive distillation effort, implementation-specific decisions have been moved to `/docs/decisions/` to separate portable methodology (canon) from reference implementation details (docs).
 
 ---
 
-## 🔄 How Decisions Are Made
+## Where Decisions Now Live
 
-1. **During an attempt**: Agent notes "Decision Delta" in `ATTEMPT.md`
-2. **After the attempt**: Human or librarian promotes durable decisions here
-3. **If stable**: Decision may be referenced from higher-visibility docs
-
----
-
-## 📝 Decision File Template
-
-Each decision file follows this structure:
-
-```markdown
-# D000X — [Title]
-
-## Decision
-
-[1-2 sentences stating what was decided]
-
-## Status
-
-**Active** | Proposed | Deprecated
-
-## Why
-
-- [Bullet point]
-- [Bullet point]
-
-## Consequences
-
-- [What this enables]
-- [What this prevents]
-- [What this costs]
-
-## Implementation
-
-- Script: `/infra/scripts/...`
-- Contract: `/infra/contracts/...`
-- Prompt: `/docs/PROMPT_ATTEMPT_KICKOFF.txt`
-
-## Evidence
-
-- Commit: `abc1234`
-- Attempt: `/attempts/prd-vX.Y/attempt-00N/`
-```
+| Location | Purpose |
+|----------|---------|
+| `/docs/decisions/` | Implementation-specific decisions for klappy.dev |
+| `/canon/` | Portable methodology and philosophy |
 
 ---
 
-## 🚫 Deprecated Decisions
+## The Principle
 
-_None yet._
+> **Decisions live in docs. Procedures live in docs. Philosophy lives in canon.**
+
+Canon remains the shared gravity — constraints, decision rules, and definitions that apply to all ODD-following repos.
+
+Implementation decisions document specific choices made for this repository.
+
+---
+
+## See Also
+
+- `/docs/decisions/README.md` — Full decision index
+- `/canon/odd/contract.md` — ODD System Contract
+- `/docs/appendices/epochs.md` — Epoch semantics
 
 
 
@@ -10278,7 +11475,31 @@ stability: stable
 tags: ["odd", "philosophy"]
 ---
 
-# 🧠 ODD Manifesto v1.1 (Extended — Internal / Canon)
+# ODD Manifesto v1.1 (Extended)
+
+> A governance framework for human-AI collaboration that optimizes learning, not execution.
+
+## Description
+
+Outcomes-Driven Development (ODD) operationalizes governance for human-AI collaboration. The core thesis: development is about defining outcomes, enforcing constraints, and verifying reality—not writing code. AI accelerates execution; governance preserves trust. The pillars include Prompt Over Code, KISS, DRY with Isolation, Consistency, Maintainability, Antifragile design, and Scalability. ODD treats restartability as a feature, applies progressive governance based on maturity (PoC → Pilot → Production), requires evidence over assertion, treats AI as accelerator not authority, demands falsifiable outcomes, prefers reversibility, and requires stop conditions. Memory is the bottleneck, not computation.
+
+## Outline
+
+- Purpose and Core Thesis
+- Pillars (Operational Interpretation)
+- Restartability Over Salvage
+- Progressive Governance (Maturity-Aware)
+- Evidence as the Gate
+- Trust, Authority, and AI
+- Outcomes Must Be Falsifiable
+- Reversibility and Cost Awareness
+- Stop Conditions
+- Memory Is the Bottleneck
+- Confidence, Risks, and Known Failure Modes
+
+---
+
+## Content
 
 > ODD v1.1 — Extended (Internal / Agent-Governance) → for canon, MCP, agents (this file)
 
@@ -10476,9 +11697,9 @@ ODD stays legible by using **Progressive Elevation & Decay**:
 most artifacts die at the Attempt/PRD layer; only proven patterns elevate into Contracts, Canon, and Decision Trace.
 
 See:
-- `/canon/odd/appendices/progressive-elevation.md`
-- `/canon/odd/appendices/product-lanes.md`
-- `/canon/odd/appendices/epochs.md`
+- `/docs/appendices/progressive-elevation.md`
+- `/docs/appendices/product-lanes.md`
+- `/docs/appendices/epochs.md`
 
 ---
 
@@ -10726,7 +11947,27 @@ stability: semi_stable
 tags: ["maturity", "governance"]
 ---
 
-# 📊 Project Maturity & Progressive Governance
+# Project Maturity & Progressive Governance
+
+> When to apply rigor, not just what rigor exists.
+
+## Description
+
+Project maturity defines how constraints and policies change as a project matures. Three levels exist: Level 0 (PoC/Exploration) focuses on learning quickly with non-authoritative artifacts; Level 1 (Pilot/Product) delivers value safely with evidence, visual proof, and explicit tradeoffs; Level 2 (Production/Long-Term) sustains trust with measurable outcomes, observability, security, and explicit stop conditions. Rigor increases with maturity. Projects should move up when others depend on them, artifacts persist, decisions become costly to reverse, or trust is implicitly assumed.
+
+## Outline
+
+- Core Principle: Rigor increases with maturity
+- Level 0 — PoC / Exploration
+- Level 1 — Pilot / Product
+- Level 2 — Production / Long-Term
+- Relationship to Other Canon Documents
+- Agent Expectations
+- Escalation Rules
+
+---
+
+## Content
 
 **Canon v0.1**
 
@@ -10950,7 +12191,28 @@ stability: evolving
 tags: ["odd", "misuse", "failure-modes"]
 ---
 
-# ⚠️ ODD Misuse Patterns
+# ODD Misuse Patterns
+
+> Predictable failure modes when ODD is applied incorrectly.
+
+## Description
+
+This appendix documents predictable ways ODD fails: Outcome Theater (saying outcomes but measuring artifacts), Prompt Maximalism (one huge prompt replacing thinking), Premature Governance (locking down before patterns stabilize), Evidence Substitution (assertions replacing demonstrations), Consistency Absolutism (treating early conventions as immutable), and Antifragility as Optimism (assuming recovery without testing it). These are human failure modes under real constraints, not violations of intent. The purpose is early recognition through shared language, not prevention through rules.
+
+## Outline
+
+- Outcome Theater
+- Prompt Maximalism
+- Premature Governance
+- Evidence Substitution
+- Consistency Absolutism
+- Antifragility as Optimism
+- Maturity Note
+- How to Use This Appendix
+
+---
+
+## Content
 
 **(Appendix to ODD Manifesto — Internal)**
 
@@ -11132,7 +12394,25 @@ stability: semi_stable
 tags: ["odd", "orientation", "mental-model"]
 ---
 
-# 🧭 ODD + Canon + Evidence — 1-Page Orientation Map
+# ODD + Canon + Evidence — Orientation Map
+
+> A one-page mental model for the ODD system.
+
+## Description
+
+This orientation map provides a single-page mental model of how Intent flows through ODD Manifesto to Canon (Constraints & Rules) to Decisions to Evidence to Outcomes. ODD explains why and what we care about; Canon explains how decisions tend to be shaped; Decisions are local, contextual, and human; Evidence grounds claims in reality; Outcomes are the only thing that matters long-term. Maturity moves from Exploration (PoC) through Validation (Pilot) to Commitment (Production). The map explicitly rejects "if it compiles, it's done" and "governance replaces judgment."
+
+## Outline
+
+- The Core Idea (Intent → ODD → Canon → Decisions → Evidence → Outcomes)
+- How to Read This Map
+- Where Maturity Lives
+- What This Map Explicitly Rejects
+- Why This Map Exists
+
+---
+
+## Content
 
 > This is not a workflow. It is a mental model.
 
@@ -11172,6 +12452,8 @@ Evidence
 
 Nothing here enforces anything.
 Everything here informs something.
+
+**Canon may reference Docs. Docs must never redefine Canon.**
 
 ---
 
@@ -11241,7 +12523,26 @@ stability: semi_stable
 tags: ["odd", "prompt-architecture", "orchestration"]
 ---
 
-# 🧠 Prompt Architecture (Orientation)
+# Prompt Architecture (Orientation)
+
+> How intent scales without collapsing into a monolithic prompt.
+
+## Description
+
+Prompt architecture addresses the God Prompt anti-pattern: as scope grows, prompts become monolithic, unmaintainable, sensitive to small edits, context-bloated, and inconsistent. The alternative is Orchestrated Intent: keep stable intent in canonical artifacts, construct task prompts dynamically, use smaller focused agents for bounded tasks, pass results through shared constraints and evidence standards. Intent is layered: Worldview (rarely changes), Project Intent (changes occasionally), Task Intent (changes constantly). Only the bottom layer should enter the working prompt in full detail. Context budgeting treats every token like a limited resource.
+
+## Outline
+
+- The Anti-Pattern: Prompt Maximalism (God Prompt)
+- The Alternative: Orchestrated Intent
+- Intent Graph (Mental Model)
+- Context Budgeting
+- Maturity Note
+- Failure Mode of Orchestration
+
+---
+
+## Content
 
 **Canon / ODD Appendix v0.1**
 
@@ -11393,7 +12694,31 @@ stability: evolving
 tags: ["self-audit", "verification"]
 ---
 
-# 🔍 Self-Audit Checklist
+# Self-Audit Checklist
+
+> A reflection layer that makes the Definition of Done actionable.
+
+## Description
+
+The self-audit checklist defines how work should be self-reviewed before claiming completion. It covers nine areas: intended outcome, constraints applied, decision rules followed, verification performed, evidence produced, UX and behavior check, tradeoffs and risks, maintainability check, and confidence level. Minimum acceptable completion requires a stated outcome, at least one verification step, at least one piece of evidence, and acknowledgment of tradeoffs or unknowns. This replaces repeated back-and-forth questions about whether work was actually run and verified.
+
+## Outline
+
+- Intended Outcome
+- Constraints Applied
+- Decision Rules Followed
+- Verification Performed
+- Evidence Produced
+- UX & Behavior Check
+- Tradeoffs & Risks
+- Maintainability Check
+- Confidence Level
+- Minimum Acceptable Completion
+- Agent Expectations
+
+---
+
+## Content
 
 **Canon v0.1**
 
@@ -11558,7 +12883,29 @@ stability: semi_stable
 tags: ["visual-proof", "evidence"]
 ---
 
-# 👁️ Visual Proof Standards
+# Visual Proof Standards
+
+> What "prove it visually" actually means for UI and interaction work.
+
+## Description
+
+Visual proof standards define what constitutes valid visual evidence for work affecting anything a user can see or interact with. Visual proof is required for UI, layout, navigation, interaction, animation, visible state changes, and user-facing behavior. Acceptable forms include screenshots (clearly labeled, not cropped ambiguously), screen recordings (10-30 seconds showing interaction), rendered output artifacts, and structured UI captures. Before/after evidence is required for changes. Visual proof must show correct state, behavior, and context. Explanations without screenshots do not qualify.
+
+## Outline
+
+- Core Principle: Observed behavior over reasoning
+- When Visual Proof Is Required
+- Acceptable Forms (Screenshots, Recordings, Artifacts, UI Captures)
+- What Visual Proof Must Show
+- Labeling Requirements
+- Before/After Evidence
+- Tooling Expectations
+- When Visual Proof Is Not Possible
+- What Does Not Count as Visual Proof
+
+---
+
+## Content
 
 **Canon v0.1**
 

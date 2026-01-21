@@ -9,7 +9,31 @@ stability: evolving
 tags: ["self-audit", "verification"]
 ---
 
-# 🔍 Self-Audit Checklist
+# Self-Audit Checklist
+
+> A reflection layer that makes the Definition of Done actionable.
+
+## Description
+
+The self-audit checklist defines how work should be self-reviewed before claiming completion. It covers nine areas: intended outcome, constraints applied, decision rules followed, verification performed, evidence produced, UX and behavior check, tradeoffs and risks, maintainability check, and confidence level. Minimum acceptable completion requires a stated outcome, at least one verification step, at least one piece of evidence, and acknowledgment of tradeoffs or unknowns. This replaces repeated back-and-forth questions about whether work was actually run and verified.
+
+## Outline
+
+- Intended Outcome
+- Constraints Applied
+- Decision Rules Followed
+- Verification Performed
+- Evidence Produced
+- UX & Behavior Check
+- Tradeoffs & Risks
+- Maintainability Check
+- Confidence Level
+- Minimum Acceptable Completion
+- Agent Expectations
+
+---
+
+## Content
 
 **Canon v0.1**
 

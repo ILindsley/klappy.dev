@@ -9,7 +9,30 @@ stability: semi_stable
 tags: ["definition-of-done", "evidence"]
 ---
 
-# ✅ Definition of Done & Evidence Policy
+# Definition of Done & Evidence Policy
+
+> The enforcement backbone that defines what "complete" means.
+
+## Description
+
+This policy defines completion requirements for all work: code, UI, architecture, automation, and AI-assisted outputs. Work is only done when it includes a change description, verification performed, observed behavior, evidence produced, and self-audit completed. Evidence must demonstrate actual behavior (screenshots, recordings, rendered output, test logs) and be produced after the change. Visual verification is required for UI work. The policy covers partial completion handling, explicit exceptions, and agent responsibilities.
+
+## Outline
+
+- Core Principle: Verified with evidence
+- Definition of Done (5 requirements)
+- Evidence Requirements
+- Visual Verification (Preferred)
+- Verification Must Be Performed
+- Self-Audit Requirement
+- What Does Not Count as Done
+- Partial Completion
+- Explicit Exceptions
+- Agent Responsibility
+
+---
+
+## Content
 
 **Canon v0.1**
 

@@ -9,7 +9,32 @@ stability: semi_stable
 tags: ["odd", "quantum", "attempts", "uncertainty", "orientation"]
 ---
 
-# 🔮 Quantum Development — ODD Appendix (Orientation)
+# Quantum Development
+
+> Why multiple attempts against the same PRD are sometimes necessary.
+
+## Description
+
+Quantum Development is a way of reasoning about uncertainty in AI-assisted development. Given the same PRD, different agents, prompts, and execution paths can produce meaningfully different results. Each attempt is an independent observation of the same specification. The goal is to distinguish specification failure from execution-path variance. A PRD is a hypothesis, an attempt is an experimental run, an outcome is an observation. Multiple attempts allow patterns to emerge and prevent premature convergence. Quantum Development is appropriate when the PRD is clear but failure is ambiguous. It ends when one candidate is promoted.
+
+## Outline
+
+- Purpose
+- Core Idea
+- PRD vs Attempt (Clarified)
+- Why This Matters
+- When Quantum Development Is Appropriate
+- When to Change the PRD Instead
+- Independence Requirement
+- Outcome Interpretation
+- On Timing and Observation
+- Relationship to ODD
+- What This Appendix Is Not
+- Summary
+
+---
+
+## Content
 
 ## Purpose
 
@@ -127,7 +152,7 @@ Infrastructure exists to protect and surface independence, not to define it.
 
 Confusing infrastructural isolation with epistemic independence is a common failure mode in AI-assisted development.
 
-See `/canon/odd/appendices/attempt-lifecycle.md` for the attempt model and the “PRD as the unit of test” framing.
+See `/docs/appendices/attempt-lifecycle.md` for the attempt model and the “PRD as the unit of test” framing.
 
 ---
 
@@ -203,7 +228,7 @@ By observing more than one, teams reduce the risk of mistaking chance for truth.
 
 **Quantum Development ends when one candidate is promoted.**
 
-Observations without promotion are incomplete experiments. See the Champion selection and promotion procedure in `/canon/odd/appendices/attempt-lifecycle.md`.
+Observations without promotion are incomplete experiments. See the Champion selection and promotion procedure in `/docs/appendices/attempt-lifecycle.md`.
 
 ---
 

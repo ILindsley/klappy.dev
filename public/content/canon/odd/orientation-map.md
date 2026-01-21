@@ -9,7 +9,25 @@ stability: semi_stable
 tags: ["odd", "orientation", "mental-model"]
 ---
 
-# 🧭 ODD + Canon + Evidence — 1-Page Orientation Map
+# ODD + Canon + Evidence — Orientation Map
+
+> A one-page mental model for the ODD system.
+
+## Description
+
+This orientation map provides a single-page mental model of how Intent flows through ODD Manifesto to Canon (Constraints & Rules) to Decisions to Evidence to Outcomes. ODD explains why and what we care about; Canon explains how decisions tend to be shaped; Decisions are local, contextual, and human; Evidence grounds claims in reality; Outcomes are the only thing that matters long-term. Maturity moves from Exploration (PoC) through Validation (Pilot) to Commitment (Production). The map explicitly rejects "if it compiles, it's done" and "governance replaces judgment."
+
+## Outline
+
+- The Core Idea (Intent → ODD → Canon → Decisions → Evidence → Outcomes)
+- How to Read This Map
+- Where Maturity Lives
+- What This Map Explicitly Rejects
+- Why This Map Exists
+
+---
+
+## Content
 
 > This is not a workflow. It is a mental model.
 
@@ -49,6 +67,8 @@ Evidence
 
 Nothing here enforces anything.
 Everything here informs something.
+
+**Canon may reference Docs. Docs must never redefine Canon.**
 
 ---
 

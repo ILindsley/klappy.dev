@@ -9,7 +9,31 @@ stability: stable
 tags: ["odd", "philosophy"]
 ---
 
-# 🧠 ODD Manifesto v1.1 (Extended — Internal / Canon)
+# ODD Manifesto v1.1 (Extended)
+
+> A governance framework for human-AI collaboration that optimizes learning, not execution.
+
+## Description
+
+Outcomes-Driven Development (ODD) operationalizes governance for human-AI collaboration. The core thesis: development is about defining outcomes, enforcing constraints, and verifying reality—not writing code. AI accelerates execution; governance preserves trust. The pillars include Prompt Over Code, KISS, DRY with Isolation, Consistency, Maintainability, Antifragile design, and Scalability. ODD treats restartability as a feature, applies progressive governance based on maturity (PoC → Pilot → Production), requires evidence over assertion, treats AI as accelerator not authority, demands falsifiable outcomes, prefers reversibility, and requires stop conditions. Memory is the bottleneck, not computation.
+
+## Outline
+
+- Purpose and Core Thesis
+- Pillars (Operational Interpretation)
+- Restartability Over Salvage
+- Progressive Governance (Maturity-Aware)
+- Evidence as the Gate
+- Trust, Authority, and AI
+- Outcomes Must Be Falsifiable
+- Reversibility and Cost Awareness
+- Stop Conditions
+- Memory Is the Bottleneck
+- Confidence, Risks, and Known Failure Modes
+
+---
+
+## Content
 
 > ODD v1.1 — Extended (Internal / Agent-Governance) → for canon, MCP, agents (this file)
 
@@ -207,9 +231,9 @@ ODD stays legible by using **Progressive Elevation & Decay**:
 most artifacts die at the Attempt/PRD layer; only proven patterns elevate into Contracts, Canon, and Decision Trace.
 
 See:
-- `/canon/odd/appendices/progressive-elevation.md`
-- `/canon/odd/appendices/product-lanes.md`
-- `/canon/odd/appendices/epochs.md`
+- `/docs/appendices/progressive-elevation.md`
+- `/docs/appendices/product-lanes.md`
+- `/docs/appendices/epochs.md`
 
 ---
 

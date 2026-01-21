@@ -9,7 +9,30 @@ stability: stable
 tags: ["constraints", "assumptions"]
 ---
 
-# 📌 Constraints
+# Constraints
+
+> Design defaults and assumptions that shape how systems are built.
+
+## Description
+
+Constraints define the baseline assumptions and design defaults applied to most work. They cover offline-first design, long-term maintainability, interoperability, stateless architectures, AI as accelerator (not authority), evidence over assertion, contextual UX, ephemeral artifacts, and explicit tradeoffs. Each constraint includes what is assumed, why it matters, what it forces, and when it does not apply. These are not universal best practices but reflect specific environments and problems.
+
+## Outline
+
+- Offline-First (Default)
+- Long Timelines & Changing Ownership
+- Maintainability Over Cleverness
+- Interoperability Over Feature Completeness
+- Stateless or Low-State by Default
+- AI as Accelerator, Not Authority
+- Evidence Over Assertion
+- UX Is Contextual, Not Universal
+- Ephemeral Artifacts Are Acceptable
+- Explicit Tradeoffs
+
+---
+
+## Content
 
 **Canon v0.1**
 

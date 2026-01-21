@@ -11,6 +11,24 @@ tags: ["odd", "contract", "version", "semver", "compatibility"]
 
 # ODD System Contract
 
+> The single source of truth for ODD workflow compatibility.
+
+## Description
+
+The ODD System Contract versions repo structure, PRD lanes, attempt lifecycle, tooling invariants, required paths, provenance requirements (META.json), and evidence standards. Current version is 2.0.0 (multi-lane architecture). Epochs mark shifts in the evaluation landscape: E0001 (single-PRD era, contract 1.x) and E0002 (multi-lane era, contract 2.x). Contract 2.0.0 breaking changes include lane declaration required, epoch declaration in META.json, PRDs under `/docs/PRD/<lane>/PRD.md`, and attempts under `/products/<lane>/attempts/`. Do not compare outcomes across epochs without explicit adjustment.
+
+## Outline
+
+- What This Versions
+- Epochs (E0001, E0002)
+- Contract 2.0.0 Breaking Changes
+- Compatibility (Forward and Backward)
+- Version History
+
+---
+
+## Content
+
 **Current Version:** 2.0.0
 
 This document is the single source of truth for the ODD workflow contract version.
@@ -43,7 +61,7 @@ Epochs mark shifts in the evaluation landscape. Contract versions and epochs are
 
 **Rule:** Do not compare outcomes across epochs without explicit adjustment.
 
-See `/canon/odd/appendices/epochs.md` for epoch semantics.
+See `/docs/appendices/epochs.md` for epoch semantics.
 
 ---
 
@@ -92,7 +110,7 @@ Epoch 1 documents should be marked with an epoch header if they remain in the re
 
 ## Related Documents
 
-- Decision log: `/canon/odd/decisions/D0011-odd-contract-2.0.0.md`
-- Epochs: `/canon/odd/appendices/epochs.md`
-- Product Lanes: `/canon/odd/appendices/product-lanes.md`
+- Decision log: `/docs/decisions/D0011-odd-contract-2.0.0.md`
+- Epochs: `/docs/appendices/epochs.md`
+- Product Lanes: `/docs/appendices/product-lanes.md`
 - Alignment Reviews: `/canon/odd/appendices/alignment-reviews.md`

@@ -1,107 +1,45 @@
 ---
 uri: klappy://canon/odd/decisions
-title: "ODD Decision Log"
+title: "ODD Decision Log (Redirect)"
 audience: canon
 exposure: nav
 tier: 1
 voice: neutral
-stability: evolving
-tags: ["odd", "decisions", "adr", "index"]
+stability: stable
+tags: ["odd", "decisions", "redirect"]
 ---
 
-# 📋 ODD Decision Log
+# ODD Decision Log
 
-This folder contains Architecture Decision Records (ADRs) for the ODD workflow and repository practices.
+> **Moved:** Implementation-specific decisions now live in `/docs/decisions/`.
 
-> **Principle:** Decisions live here. Procedures live in `/docs/`. Philosophy lives in `/canon/`.
+This folder previously contained Architecture Decision Records (ADRs) for the ODD workflow and repository practices.
 
----
-
-## ✅ Active Decisions
-
-### Branch & Deploy Model
-
-| ID | Decision | Status |
-|----|----------|--------|
-| [D0001](./D0001-prod-branch-is-production.md) | `prod` branch is production; `main` is experiment ledger | **Active** |
-| [D0005](./D0005-nuke-safety-guards.md) | Nuke command refuses on `prod`, warns on `main` | **Active** |
-| [D0007](./D0007-branch-names-are-convenience.md) | Branch names are convenience; provenance lives in META | **Active** |
-
-### Attempt Lifecycle
-
-| ID | Decision | Status |
-|----|----------|--------|
-| [D0002](./D0002-attempt-provenance-required.md) | Model provenance must be captured at registration | **Active** |
-| [D0003](./D0003-prd-version-auto-detection.md) | PRD version auto-detected from lane PRD | **Active** |
-| [D0006](./D0006-dogfooding-requirement.md) | Agents must apply canon docs, not just read them | **Active** |
-| [D0008](./D0008-register-before-nuke.md) | Register first (provenance), then nuke (independence) | **Active** |
-| [D0010](./D0010-canonical-agent-kickoff.md) | Single canonical agent entry point (`AGENT_KICKOFF.md`) | **Active** |
-
-### Architecture
-
-| ID | Decision | Status |
-|----|----------|--------|
-| [D0009](./D0009-multi-lane-prd-architecture.md) | PRDs organized into independent product lanes | **Active** |
-| [D0011](./D0011-odd-contract-2.0.0.md) | ODD System Contract 2.0.0 (multi-lane era) | **Active** |
-| [D0012](./D0012-e0002-transition-interpretation.md) | E0002 transition interpretation (truth can lead enforcement; contradictions are tracked) | **Active** |
-| [D0013](./D0013-build-output-lane-scoped-dist.md) | Build output truth is lane-scoped (`products/<lane>/dist`) | **Active** |
-
-### Repository Hygiene
-
-| ID | Decision | Status |
-|----|----------|--------|
-| [D0004](./D0004-repo-truth-cleanup-mandatory.md) | Cleanup is mandatory; dirty repos invalidate conclusions | **Active** |
+As part of the canon progressive distillation effort, implementation-specific decisions have been moved to `/docs/decisions/` to separate portable methodology (canon) from reference implementation details (docs).
 
 ---
 
-## 🔄 How Decisions Are Made
+## Where Decisions Now Live
 
-1. **During an attempt**: Agent notes "Decision Delta" in `ATTEMPT.md`
-2. **After the attempt**: Human or librarian promotes durable decisions here
-3. **If stable**: Decision may be referenced from higher-visibility docs
-
----
-
-## 📝 Decision File Template
-
-Each decision file follows this structure:
-
-```markdown
-# D000X — [Title]
-
-## Decision
-
-[1-2 sentences stating what was decided]
-
-## Status
-
-**Active** | Proposed | Deprecated
-
-## Why
-
-- [Bullet point]
-- [Bullet point]
-
-## Consequences
-
-- [What this enables]
-- [What this prevents]
-- [What this costs]
-
-## Implementation
-
-- Script: `/infra/scripts/...`
-- Contract: `/infra/contracts/...`
-- Prompt: `/docs/PROMPT_ATTEMPT_KICKOFF.txt`
-
-## Evidence
-
-- Commit: `abc1234`
-- Attempt: `/attempts/prd-vX.Y/attempt-00N/`
-```
+| Location | Purpose |
+|----------|---------|
+| `/docs/decisions/` | Implementation-specific decisions for klappy.dev |
+| `/canon/` | Portable methodology and philosophy |
 
 ---
 
-## 🚫 Deprecated Decisions
+## The Principle
 
-_None yet._
+> **Decisions live in docs. Procedures live in docs. Philosophy lives in canon.**
+
+Canon remains the shared gravity — constraints, decision rules, and definitions that apply to all ODD-following repos.
+
+Implementation decisions document specific choices made for this repository.
+
+---
+
+## See Also
+
+- `/docs/decisions/README.md` — Full decision index
+- `/canon/odd/contract.md` — ODD System Contract
+- `/docs/appendices/epochs.md` — Epoch semantics
