@@ -1,0 +1,11 @@
+{
+  "lane": "agent-skill",
+  "prd_version": "1.2.4",
+  "attempt": 1,
+  "status": "in_progress",
+  "epoch": "E0003-evidence-first-era",
+  "created_at": "2026-01-21T00:00:00.000Z",
+  "sealed_at": null,
+  "model": "claude-opus-4-20250514",
+  "canon_version": "0.8.0"
+}

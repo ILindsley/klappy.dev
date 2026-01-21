@@ -186,8 +186,8 @@ Attempts live at: `v1.2.4/attempts/attempt-NNN/`
 
 ## Related Documents
 
-- v1.2.3 Champion: [H0006](./history/H0006-v1.2.3-champion.md)
-- v1.2.3 Attempt: `v1.2.3/attempts/attempt-001/`
+- v1.2.3 Champion: [H0006](../history/H0006-v1.2.3-champion.md)
+- v1.2.3 Attempt: `../v1.2.3/attempts/attempt-001/`
 - Canon Changelog: `/canon/CHANGELOG.md`
 - Three-Tier Hierarchy: `/odd/decisions/D0001-three-tier-conceptual-hierarchy.md`
 - Cognitive Partitioning: `/odd/cognitive-partitioning.md`

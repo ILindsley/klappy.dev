@@ -10,10 +10,13 @@ This is not a commitment — it's a sketch that evolves as we learn.
 
 ## Versioning Strategy
 
-- **v1.x** = Pack content (ODD workflow stages)
+- **v1.1** = Initial pack (PRD guidance)
+- **v1.2.x** = Distribution + patches (deployment, canon refreshes)
+- **v1.3** = Pack Architecture v2 (multi-pack, tiered compilation)
+- **v1.4+** = Role-specific packs (Attempt Agent, Verification Agent)
 - **v2.x** = Presentation layer (UI/showcase)
 
-Each workflow stage is a minor version bump (additive, non-breaking).
+Minor versions add features; patch versions fix issues or refresh content.
 
 ---
 
@@ -75,51 +78,131 @@ Patches v1.2.1 with updated canon content (v0.5.3):
 
 **Friction level**: Same as v1.2.1 (copy from URL)
 
+**Why it didn't work**: INSTRUCTIONS.md was being persisted when it should be ephemeral, and compile plans lived in central `infra/` instead of lane. ODD formula violated. See [history/H0005](./history/H0005-v1.2.2-failed.md) for details.
+
 ---
 
-## v1.3 — Attempt Execution Guidance
+## v1.2.3 — Canon Refresh + ODD Compliance
 
-Add guidance for executing attempts against PRDs. Extends the pack from "create PRD" to "create PRD + execute attempt."
+**Location**: `v1.2.3/`
 
-**Potential additions**:
+Patches v1.2.2 with ODD compliance + canon v0.5.4:
 
-- Attempt folder structure guidance
-- META.json requirements
-- Evidence gathering prompts
+- INSTRUCTIONS.md treated as ephemeral (generated per-attempt)
+- Compile plan lives in lane (`src/compile-plan.json`)
+- Pack includes folder READMEs for scannable summaries
+- Clean restart with corrected architecture
+
+**Target outcome**: Pack reflects canon v0.5.4 with proper ODD compliance
+
+**Friction level**: Same as v1.2.1 (copy from URL)
+
+---
+
+## v1.2.4 — Canon Refresh v0.8.0
+
+**Location**: `v1.2.4/`
+
+Patches v1.2.3 with canon v0.8.0:
+
+- Fixes stale ODD paths (`canon/odd/` → `odd/`) from 0.6.0 elevation
+- Includes Three-Tier Hierarchy formalization
+- Adds Cognitive Partitioning concept
+- Adds Tool Specialization appendix
+
+**Target outcome**: Pack reflects canon v0.8.0 with correct paths
+
+**Friction level**: Same as v1.2.1 (copy from URL)
+
+---
+
+## v1.3 — Pack Architecture v2
+
+Major architectural upgrade enabling role-specific agent packs with tiered content inclusion.
+
+**Key features**:
+
+- **Multi-pack support**: Single compile plan produces multiple role-specific packs
+- **Tiered compilation**: 
+  - Tier 1 (Core): Full file content
+  - Tier 2 (Context): Title, subtitle, description, outline only
+  - Tier 3 (Index): Title + subtitle (skip if already in README index)
+- **Role-specific instructions**: Each pack gets tailored guidance
+- **Progressive disclosure**: Agents get what they need without token bloat
+
+**Compile plan schema v2**:
+
+```json
+{
+  "packs": {
+    "prd-guide": {
+      "tier1_full": [...],
+      "tier2_summary": [...],
+      "tier3_index": [...],
+      "instructions": "instructions/PRD_AGENT.md"
+    }
+  }
+}
+```
+
+**Target outcome**: Architecture supports multiple specialized packs; PRD Agent Pack recompiled using tiered approach
+
+**Why this matters**: Cognitive Partitioning applied to agent context — each agent role gets precisely the context it needs
+
+---
+
+## v1.4 — Attempt Agent Pack
+
+Role-specific pack for agents executing attempts against PRDs.
+
+**Tier 1 (Full)**:
+
+- Attempt lifecycle
 - Lane isolation rules
-- Test containment (mock structures)
+- META.json requirements
+- Definition of done
 
-**Target outcome**: Agent can guide full PRD → Attempt workflow
+**Tier 2 (Summary)**:
+
+- Progressive elevation (memory architecture)
+- Online evidence requirements
+- Deploy evidence rules
+
+**Tier 3 (Index)**:
+
+- ODD decisions (already in README index)
+- History patterns
+
+**Instructions focus**: Execute attempts, produce evidence, know when to stop
+
+**Target outcome**: `attempt-guide-pack.md` available at public URL
 
 ---
 
-## v1.4 — Evidence Gathering Guidance
+## v1.5 — Verification Agent Pack
 
-Add guidance for producing and organizing evidence during attempts.
+Role-specific pack for agents evaluating and verifying work.
 
-**Potential additions**:
+**Tier 1 (Full)**:
 
-- Evidence types by task (screenshots, logs, test output)
-- Evidence folder structure
-- Provenance requirements
+- Definition of done
+- Self-audit checklist
 - Visual proof standards
+- Evidence policy
 
-**Target outcome**: Agent ensures attempts produce proper evidence
+**Tier 2 (Summary)**:
 
----
-
-## v1.5 — Failure Detection Guidance
-
-Add guidance for detecting and documenting failures, including PRD design flaws.
-
-**Potential additions**:
-
-- Failure vs. abandoned distinction
+- Failure detection patterns
 - LEARNINGS.md structure
-- PRD conflict detection (like our v1.2 experience)
-- When to propose new PRD version vs. retry
+- PRD conflict detection
 
-**Target outcome**: Agent can recognize and document failures constructively
+**Tier 3 (Index)**:
+
+- ODD appendices (failure-driven modularity, etc.)
+
+**Instructions focus**: Verify claims, detect failures, enforce evidence standards
+
+**Target outcome**: `verification-guide-pack.md` available at public URL
 
 ---
 
@@ -146,12 +229,14 @@ A webpage that showcases the pack with good UX for discovery and use.
 
 Captured here so we don't forget, not committed to any version:
 
-- **MCP server**: Expose pack via Model Context Protocol
-- **Cursor SKILL.md format**: Package as a Cursor skill
+- **MCP server**: Expose packs via Model Context Protocol
+- **Cursor SKILL.md format**: Package packs as Cursor skills
 - **Pack versioning**: Semantic versions for packs, backward compatibility
 - **Analytics**: Track pack usage (if hosted)
 - **Feedback loop**: Users can report issues with pack guidance
-- **Self-improvement guidance**: Pack that helps agents improve the pack itself
+- **Self-improvement guidance**: Pack that helps agents improve packs themselves
+- **Dynamic tier selection**: Agents request tier depth based on task complexity
+- **Cross-pack references**: Packs can reference other packs for handoff workflows
 
 ---
 
