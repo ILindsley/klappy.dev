@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-21T20:24:19.950Z
+Generated: 2026-01-21T20:33:51.622Z
 Total Files: 152
 
 This is a documentation export of all markdown files from the klappy.dev
@@ -18156,11 +18156,25 @@ products/agent-skill/
 This lane owns its own Cloudflare Pages deployment (not shared with website lane).
 
 - **Project**: `klappy-dev-agent-skill`
+- **Production branch**: `prod` (NOT `main`)
 - **Production domain**: `https://agent-skill.klappy.dev/`
 - **Production URL pattern**: `https://agent-skill.klappy.dev/vX.Y/<asset>`
 - **Main branch preview**: `https://main.klappy-dev-agent-skill.pages.dev/`
 - **Branch preview pattern**: `https://<deployment-id>.klappy-dev-agent-skill.pages.dev/`
 - **Isolation**: Full lane ownership, no cross-lane dependencies
+
+### Production Release Process
+
+**CRITICAL**: Merging to `main` does NOT deploy to production. You must:
+
+1. Merge PR to `main`
+2. Fast-forward `prod` to `main`:
+   ```bash
+   git checkout prod && git merge --ff-only origin/main && git push origin prod
+   ```
+3. Verify HTTP 200 on production domain (`agent-skill.klappy.dev`)
+
+See [D0001: prod branch is production](/docs/decisions/D0001-prod-branch-is-production.md) for rationale.
 
 ### Finding Preview URLs
 
@@ -18218,6 +18232,14 @@ In addition to canon constraints, this lane observes:
 - Cloudflare preview URLs use deployment ID from PR checks
 - Clean restart after v1.2.2 failure (didn't steer a miss)
 - Promotion must update `latest/README.md` — pack file copy alone leaves stale version reference
+
+### v1.3 (2026-01-21) — Champion
+
+- PRD Elicitation Enhancement delivered (Agent Role, Stage Typing, Inventory, Ambiguity Capture)
+- **Production requires `prod` branch**: Merging to `main` is NOT production — must ff `prod` to `main`
+- Preview URLs (`main.klappy-dev-agent-skill.pages.dev`) work immediately after merge
+- Production domain (`agent-skill.klappy.dev`) only updates when `prod` branch is pushed
+- This learning was missed during attempt — added to Deployment section for future agents
 
 ---
 
@@ -18325,6 +18347,28 @@ Update `ATTEMPT.md` with:
 - Learnings
 
 If championed, add entry to `history/` folder.
+
+---
+
+## Production Release (If Championed)
+
+**Merging to `main` is NOT production deployment.**
+
+After PR is merged to `main`:
+
+1. Fast-forward `prod` to `main`:
+   ```bash
+   git checkout prod && git merge --ff-only origin/main && git push origin prod
+   ```
+
+2. Verify HTTP 200 on production domain:
+   ```bash
+   curl -s -o /dev/null -w "%{http_code}" https://agent-skill.klappy.dev/vX.Y/prd-guide-pack.md
+   ```
+
+3. Update lane README to mark version as Champion (not just Active)
+
+See `CONTRACT.md` Deployment section and [D0001](/docs/decisions/D0001-prod-branch-is-production.md) for details.
 
 ---
 

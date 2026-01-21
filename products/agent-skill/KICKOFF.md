@@ -82,6 +82,28 @@ If championed, add entry to `history/` folder.
 
 ---
 
+## Production Release (If Championed)
+
+**Merging to `main` is NOT production deployment.**
+
+After PR is merged to `main`:
+
+1. Fast-forward `prod` to `main`:
+   ```bash
+   git checkout prod && git merge --ff-only origin/main && git push origin prod
+   ```
+
+2. Verify HTTP 200 on production domain:
+   ```bash
+   curl -s -o /dev/null -w "%{http_code}" https://agent-skill.klappy.dev/vX.Y/prd-guide-pack.md
+   ```
+
+3. Update lane README to mark version as Champion (not just Active)
+
+See `CONTRACT.md` Deployment section and [D0001](/docs/decisions/D0001-prod-branch-is-production.md) for details.
+
+---
+
 ## If PRD Seems Problematic
 
 Don't bend rules to make it work.
