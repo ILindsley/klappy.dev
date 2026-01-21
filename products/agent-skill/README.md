@@ -4,7 +4,7 @@ This lane produces compiled packs for AI agent consumption. The primary delivera
 
 ## Current Champion
 
-**v1.2.1** — Lane-owned Cloudflare Pages deployment
+**v1.2.3** — Canon refresh v0.5.4 + ODD compliance
 
 **Public URL**: `https://main.klappy-dev-agent-skill.pages.dev/latest/prd-guide-pack.md`
 
@@ -39,7 +39,7 @@ See the [usage README](https://main.klappy-dev-agent-skill.pages.dev/latest/READ
 | [v1.2/](v1.2/) | Failed | Distribution attempt (PRD conflict) |
 | [v1.2.1/](v1.2.1/) | Champion | Lane-owned Cloudflare Pages deployment |
 | [v1.2.2/](v1.2.2/) | Failed | Exposed ODD violations (ephemeral artifacts, compile plan location) |
-| [v1.2.3/](v1.2.3/) | Active | Canon refresh v0.5.4 + ODD compliance |
+| [v1.2.3/](v1.2.3/) | Champion | Canon refresh v0.5.4 + ODD compliance |
 
 ## Structure
 

@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-21T03:49:33.703Z
-Total Files: 238
+Generated: 2026-01-21T03:57:43.147Z
+Total Files: 239
 
 This is a complete export of all documentation, code, and content files
 from the klappy.dev repository, organized by section.
@@ -25,7 +25,7 @@ from the klappy.dev repository, organized by section.
 - **Infrastructure** (19 files)
 - **Interfaces & Contracts** (6 files)
 - **ODD (Outcomes-Driven Development)** (1 files)
-- **Products** (82 files)
+- **Products** (83 files)
 - **Projects** (6 files)
 - **Public Content** (19 files)
 - **Visual Design System** (4 files)
@@ -30992,7 +30992,7 @@ This lane produces compiled packs for AI agent consumption. The primary delivera
 
 ## Current Champion
 
-**v1.2.1** — Lane-owned Cloudflare Pages deployment
+**v1.2.3** — Canon refresh v0.5.4 + ODD compliance
 
 **Public URL**: `https://main.klappy-dev-agent-skill.pages.dev/latest/prd-guide-pack.md`
 
@@ -31027,7 +31027,7 @@ See the [usage README](https://main.klappy-dev-agent-skill.pages.dev/latest/READ
 | [v1.2/](v1.2/) | Failed | Distribution attempt (PRD conflict) |
 | [v1.2.1/](v1.2.1/) | Champion | Lane-owned Cloudflare Pages deployment |
 | [v1.2.2/](v1.2.2/) | Failed | Exposed ODD violations (ephemeral artifacts, compile plan location) |
-| [v1.2.3/](v1.2.3/) | Active | Canon refresh v0.5.4 + ODD compliance |
+| [v1.2.3/](v1.2.3/) | Champion | Canon refresh v0.5.4 + ODD compliance |
 
 ## Structure
 
@@ -32188,6 +32188,52 @@ Attempt to add README index pattern for tree-shakeable memory exposed fundamenta
 
 
 --------------------------------------------------------------------------------
+📄 File: products/agent-skill/history/H0006-v1.2.3-champion.md
+--------------------------------------------------------------------------------
+
+# H0006 — PRD v1.2.3 Champion
+
+- **Date**: 2026-01-21
+- **Type**: Champion
+- **PRD**: v1.2.3
+- **Epoch**: E0003 (evidence-first)
+- **Attempt**: `v1.2.3/attempts/attempt-001/`
+
+## Summary
+
+Canon refresh to v0.5.4 with proper ODD compliance. INSTRUCTIONS.md treated as ephemeral (generated per-attempt), pack includes README index pattern for tree-shakeable memory.
+
+## Deliverable
+
+- **Pack**: `public/agent-skill/v1.2.3/prd-guide-pack.md`
+- **Latest**: `public/agent-skill/latest/prd-guide-pack.md`
+- **Production URL**: `https://main.klappy-dev-agent-skill.pages.dev/v1.2.3/prd-guide-pack.md`
+
+## What Worked
+
+- Clean restart after v1.2.2 failure (didn't steer a miss)
+- INSTRUCTIONS.md generated fresh in attempt folder (ephemeral)
+- Proper deployment verification before claiming CHAMPION
+- Evidence produced for every claim
+
+## What Didn't
+
+- Initially declared CHAMPION before verifying deployment (corrected)
+- Had to find preview URL pattern (deployment ID based)
+
+## Learnings
+
+1. **Verify before claiming**: Don't mark CHAMPION until HTTP 200 verified
+2. **Cloudflare preview URLs**: Use deployment ID from PR checks (e.g., `20426ceb.klappy-dev-agent-skill.pages.dev`)
+3. **ODD formula works**: Pack + CONTRACT + PRD = Attempt. Nothing else needed.
+
+## Follow-up
+
+- Consider automating preview URL discovery in attempt workflow
+
+
+
+--------------------------------------------------------------------------------
 📄 File: products/agent-skill/history/index.md
 --------------------------------------------------------------------------------
 
@@ -32208,6 +32254,7 @@ For future vision, see [ROADMAP.md](../ROADMAP.md).
 | [H0003](./H0003-lane-structure-migration.md) | Infrastructure | Migrated to version-first folder structure | 2026-01-20 |
 | [H0004](./H0004-v1.2.1-champion.md) | v1.2.1 | Champion — Lane-owned Cloudflare Pages deployment | 2026-01-21 |
 | [H0005](./H0005-v1.2.2-failed.md) | v1.2.2 | Failed — Exposed ODD violations (ephemeral artifacts, compile plan location) | 2026-01-21 |
+| [H0006](./H0006-v1.2.3-champion.md) | v1.2.3 | Champion — Canon refresh v0.5.4 + ODD compliance | 2026-01-21 |
 
 ---
 
