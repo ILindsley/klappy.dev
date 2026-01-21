@@ -4,7 +4,11 @@
   "mode": "concat",
   "output": "products/agent-skill/dist/prd-guide-pack.md",
   "sources": [
+    "canon/README.md",
+    "canon/odd/README.md",
     "canon/odd/manifesto.md",
+    "canon/odd/appendices/README.md",
+    "canon/odd/decisions/README.md",
     "canon/constraints.md",
     "canon/decision-rules.md",
     "canon/definition-of-done.md",

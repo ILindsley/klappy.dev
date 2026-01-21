@@ -1,0 +1,183 @@
+---
+uri: klappy://canon
+title: "Canon"
+audience: canon
+exposure: nav
+tier: 1
+voice: neutral
+stability: stable
+tags: ["canon", "index", "orientation"]
+---
+
+# 🧭 Canon
+
+Curated documents that capture how decisions are made, what assumptions are held, how work is verified, and how rigor changes as projects mature.
+
+The Canon exists so that reasoning does not have to be repeated.
+
+---
+
+## 📁 Contents
+
+### Core Documents
+
+| File | Title | Summary | Answers |
+|------|-------|---------|---------|
+| `constraints.md` | Constraints | Baseline assumptions and non-negotiables that shape every decision. | What must be true for this work to make sense? |
+| `decision-rules.md` | Decision Rules | Default heuristics used when multiple valid options exist. | How do choices tend to be made? |
+| `definition-of-done.md` | Definition of Done | What qualifies as completed work and what evidence is required. | When can work honestly be called done? |
+| `self-audit.md` | Self-Audit Checklist | Review checklist before declaring completion. | What should be reviewed before claiming success? |
+| `visual-proof.md` | Visual Proof Standards | What qualifies as acceptable visual evidence. | What does "prove it visually" mean? |
+| `completion-report-template.md` | Completion Report Template | Standard format for reporting completed work. | How should completion be communicated? |
+| `CHANGELOG.md` | Canon Changelog | Version history of canon changes. | What changed and when? |
+
+### Subfolders
+
+| Folder | Purpose |
+|--------|---------|
+| `odd/` | Outcomes-Driven Development philosophy and appendices. See [odd/README.md](./odd/README.md) |
+| `meta/` | Metadata and pack configuration. |
+| `_compiled/` | Compiled outputs (derived, wipeable). |
+
+---
+
+## 🚀 Start Here
+
+1. **`constraints.md`** — What must be true for this work to make sense?
+2. **`definition-of-done.md`** — When can work honestly be called done?
+3. **`odd/manifesto.md`** — Why this approach exists.
+
+These three documents anchor everything else.
+
+---
+
+## 📖 Precedence & Interpretation
+
+A useful mental model for reading:
+
+1. ODD Manifesto provides philosophical grounding
+2. Maturity Model explains when rigor increases
+3. Constraints shape the solution space
+4. Decision Rules guide choices
+5. Evidence Policies define completion
+
+If documents appear to conflict, maturity context and explicit tradeoffs usually explain why.
+
+---
+
+## 🧠 What the Canon Is (and Is Not)
+
+**The Canon Is:**
+- A shared reference
+- A source of assumptions and defaults
+- A way to encode thinking without enforcing execution
+
+**The Canon Is Not:**
+- A workflow
+- A command system
+- A task list
+- A replacement for judgment
+
+Nothing in the Canon executes by itself.
+
+---
+
+## 🔒 Public vs Internal Boundary
+
+- `/odd/README.md` → public-facing ODD (shareable, human-friendly)
+- `/canon/**` → internal reference (governance artifacts, precise language)
+
+Public documents explain intent. Canon documents preserve precision.
+
+---
+
+## 📋 Meta Rules
+
+Structural conventions for keeping the Canon coherent over time. These are not workflows or enforcement steps.
+
+**1. Single Inventory Source**
+If an inventory of Canon resources exists, there should be one authoritative source (e.g., a manifest). Other indexes should be derived or optional.
+
+**2. Stable Names Beat Clever Names**
+Prefer stable file and URI naming over clever branding. Rename rarely.
+
+**3. Audience Separation Matters**
+"Public" explains and invites. "Canon" defines and stabilizes.
+
+**4. Voice Is Labeled, Not Transformed**
+First-person documents may be consumed as-is or translated by clients. The Canon itself does not require a specific rendering voice.
+
+**5. Multi-Lane PRD Architecture**
+PRDs are organized into independent product lanes. Each lane has its own active PRD, attempts, and lifecycle. Lanes share canon, not lifecycle. See `odd/appendices/product-lanes.md` for the full model.
+
+---
+
+## 🔄 Stability & Change Philosophy
+
+Not all Canon documents are equally stable.
+
+Some are intended to remain largely fixed. Others are expected to evolve through use.
+
+Change is allowed, but should be:
+- Intentional
+- Versioned (at least informally)
+- Documented somewhere discoverable
+
+---
+
+## ⚠️ Confidence & Drift Risk
+
+This section expresses current confidence that the Canon and surrounding architecture align with the core pillars: KISS, DRY, Consistency, Maintainability, Antifragile, Scalable, Prompt-over-Code.
+
+These are not guarantees. They are a snapshot of perceived risk.
+
+**Confidence scale:**
+- 0.9+ — robust
+- 0.7–0.85 — strong, but watch for drift
+- 0.5–0.7 — plausible, fragile under misuse
+- <0.5 — likely misaligned unless corrected
+
+**Current scores (v0.1 snapshot):**
+
+| Pillar | Score | Notes |
+|--------|-------|-------|
+| Prompt-over-Code | 0.80 | Strong fit. Risk: schema sprawl or client-specific conventions. |
+| KISS | 0.75 | Minimal primitives. Risk: meta-layer creep. |
+| DRY (with isolation) | 0.70 | Canon centralizes principles. Risk: duplicate indices drifting. |
+| Consistency | 0.65 | URI/metadata structure supports it. Risk: naming drift. |
+| Maintainability | 0.70 | Stable worldview vs evolving templates. Risk: manual updates out of sync. |
+| Antifragile | 0.60 | Recoverable if served statically. Risk: hidden single points of failure. |
+| Scalable | 0.70 | Schema supports growth. Risk: large manifests becoming brittle. |
+
+---
+
+## 🚫 What Is Intentionally Undefined
+
+The Canon deliberately does not define:
+- Specific tools
+- Specific agents
+- Specific workflows
+- Specific automation loops
+
+These are left open to evolve without rewriting foundational thinking.
+
+---
+
+## 📦 For Pack Compilation
+
+When building a guide pack, include:
+- This README for orientation
+- Specific documents needed for the pack's purpose
+- Subfolder READMEs for scannable summaries without including all files
+
+See `odd/appendices/compilation.md` for the compilation model.
+
+---
+
+## ✅ Status
+
+- Canon Index v0.1 complete
+- Orientation-only
+- Includes confidence and drift snapshot
+
+This Canon v0.1 is considered stable for initial builds. Revisions should be additive unless a documented failure requires change.

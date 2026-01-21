@@ -9,7 +9,7 @@ stability: evolving
 tags: ["odd", "decisions", "adr", "index"]
 ---
 
-# ODD Decision Log
+# 📋 ODD Decision Log
 
 This folder contains Architecture Decision Records (ADRs) for the ODD workflow and repository practices.
 
@@ -17,7 +17,7 @@ This folder contains Architecture Decision Records (ADRs) for the ODD workflow a
 
 ---
 
-## Active Decisions
+## ✅ Active Decisions
 
 ### Branch & Deploy Model
 
@@ -54,7 +54,7 @@ This folder contains Architecture Decision Records (ADRs) for the ODD workflow a
 
 ---
 
-## How Decisions Are Made
+## 🔄 How Decisions Are Made
 
 1. **During an attempt**: Agent notes "Decision Delta" in `ATTEMPT.md`
 2. **After the attempt**: Human or librarian promotes durable decisions here
@@ -62,7 +62,7 @@ This folder contains Architecture Decision Records (ADRs) for the ODD workflow a
 
 ---
 
-## Decision File Template
+## 📝 Decision File Template
 
 Each decision file follows this structure:
 
@@ -102,6 +102,6 @@ Each decision file follows this structure:
 
 ---
 
-## Deprecated Decisions
+## 🚫 Deprecated Decisions
 
 _None yet._

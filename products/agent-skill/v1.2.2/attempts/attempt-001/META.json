@@ -1,0 +1,20 @@
+{
+  "prd_version": "v1.2.2",
+  "attempt": "001",
+  "started": "2026-01-21T00:00:00Z",
+  "sealed": "2026-01-21T02:35:00Z",
+  "status": "champion",
+  "canon_version": "0.5.3",
+  "objective": "Recompile PRD guide pack against canon v0.5.3 with Memory Architecture",
+  "outcome": "SUCCESS - Pack now includes Memory Architecture content",
+  "evidence": [
+    "evidence/compile-output.txt",
+    "evidence/hash-comparison.md"
+  ],
+  "deliverables": {
+    "pack": "products/agent-skill/v1.2.2/dist/prd-guide-pack.md",
+    "public_latest": "public/agent-skill/latest/prd-guide-pack.md",
+    "public_versioned": "public/agent-skill/v1.2.2/prd-guide-pack.md"
+  },
+  "notes": "Initial misdiagnosis corrected after user feedback - compile plan was missing new file"
+}

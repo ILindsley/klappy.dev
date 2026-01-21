@@ -16,6 +16,44 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.5.4 — 2026-01-21
+
+**README Index Pattern**
+
+This release introduces scannable README.md files for all canon folders, enabling tree-shaking of memory into guide packs without reading every file.
+
+### Added
+
+- **canon/README.md** — Top-level canon index with contents table, meta rules, confidence scores
+- **canon/odd/README.md** — ODD folder index with core thesis
+- **canon/odd/appendices/README.md** — 24 appendices indexed with one-line summaries
+- **canon/odd/decisions/README.md** — Renamed from index.md, same content + emojis
+
+### Changed
+
+- **failure-driven-modularity.md** — Moved from `canon/evolution/` to `canon/odd/appendices/` (single file doesn't need its own folder)
+- **prd-guide compile plan** — Now includes folder READMEs instead of specific appendices; agents get scannable summaries without full content
+- **Emojis** — Consistent emoji headers added to all README/index files
+
+### Removed
+
+- **canon/evolution/** — Folder removed (contained only one file)
+- **canon/index.md** — Replaced by README.md
+
+### Philosophy
+
+- README.md serves as both orientation AND scannable index
+- Contents tables enable tree-shaking: agents can see what exists without reading everything
+- Pack compilation can include folder READMEs for summaries instead of all individual files
+- One file per folder is overhead; promote to parent or appropriate collection
+
+### Notes
+
+- This pattern enables the prd-guide-pack to include appendices summary (~500 tokens) instead of full appendices (~20K tokens)
+- Agent-skill decisions/index.md also renamed to README.md for consistency
+
+---
+
 ## 0.5.3 — 2026-01-21
 
 **Memory Architecture Proposal**

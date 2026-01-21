@@ -110,6 +110,22 @@
       ]
     },
     {
+      "uri": "klappy://canon",
+      "path": "/canon/README.md",
+      "title": "Canon",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 1,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "canon",
+        "index",
+        "orientation"
+      ]
+    },
+    {
       "uri": "klappy://meta/changelog",
       "path": "/canon/CHANGELOG.md",
       "title": "Canon Changelog",
@@ -123,22 +139,6 @@
         "meta",
         "changelog",
         "versioning"
-      ]
-    },
-    {
-      "uri": "klappy://meta/canon-index",
-      "path": "/canon/index.md",
-      "title": "Canon Index",
-      "type": "text/markdown",
-      "audience": "canon",
-      "exposure": "nav",
-      "tier": 1,
-      "voice": "neutral",
-      "stability": "semi_stable",
-      "tags": [
-        "canon",
-        "index",
-        "orientation"
       ]
     },
     {
@@ -641,8 +641,8 @@
       ]
     },
     {
-      "uri": "klappy://canon/evolution/failure-driven-modularity",
-      "path": "/canon/evolution/failure-driven-modularity.md",
+      "uri": "klappy://canon/odd/appendices/failure-driven-modularity",
+      "path": "/canon/odd/appendices/failure-driven-modularity.md",
       "title": "Failure-Driven Modularity",
       "type": "text/markdown",
       "audience": "canon",
@@ -781,8 +781,24 @@
       ]
     },
     {
+      "uri": "klappy://canon/odd/appendices",
+      "path": "/canon/odd/appendices/README.md",
+      "title": "ODD Appendices",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": [
+        "odd",
+        "appendices",
+        "index"
+      ]
+    },
+    {
       "uri": "klappy://canon/odd/decisions",
-      "path": "/canon/odd/decisions/index.md",
+      "path": "/canon/odd/decisions/README.md",
       "title": "ODD Decision Log",
       "type": "text/markdown",
       "audience": "canon",
@@ -883,6 +899,21 @@
         "preview",
         "attempts",
         "validation"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd",
+      "path": "/canon/odd/README.md",
+      "title": "Outcomes-Driven Development",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 1,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "index"
       ]
     },
     {

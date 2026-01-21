@@ -1,4 +1,4 @@
-# Agent-Skill Lane History
+# 📜 Agent-Skill Lane History
 
 What actually happened — champions, failures, learnings, infrastructure changes.
 
@@ -6,7 +6,7 @@ For future vision, see [ROADMAP.md](../ROADMAP.md).
 
 ---
 
-## Entries
+## 📋 Entries
 
 | ID | Version/Event | What Happened | Date |
 |----|---------------|---------------|------|
@@ -14,10 +14,11 @@ For future vision, see [ROADMAP.md](../ROADMAP.md).
 | [H0002](./H0002-v1.2-failed.md) | v1.2 | Failed — Cross-lane violation (website lane dependency) | 2026-01-20 |
 | [H0003](./H0003-lane-structure-migration.md) | Infrastructure | Migrated to version-first folder structure | 2026-01-20 |
 | [H0004](./H0004-v1.2.1-champion.md) | v1.2.1 | Champion — Lane-owned Cloudflare Pages deployment | 2026-01-21 |
+| [H0005](./H0005-v1.2.2-champion.md) | v1.2.2 | Champion — Memory Architecture added to pack | 2026-01-21 |
 
 ---
 
-## Entry Types
+## 🏷️ Entry Types
 
 - **Champion**: PRD attempt succeeded, deliverable promoted
 - **Failed**: PRD attempt failed, learnings captured
@@ -25,7 +26,7 @@ For future vision, see [ROADMAP.md](../ROADMAP.md).
 
 ---
 
-## How to Add an Entry
+## ➕ How to Add an Entry
 
 1. Create `H000X-<slug>.md` using template below
 2. Add row to index table above
@@ -33,7 +34,7 @@ For future vision, see [ROADMAP.md](../ROADMAP.md).
 
 ---
 
-## Entry Template
+## 📝 Entry Template
 
 ```markdown
 # H000X — [Title]

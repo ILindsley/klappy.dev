@@ -4,7 +4,7 @@ This lane produces compiled packs for AI agent consumption. The primary delivera
 
 ## Current Champion
 
-**v1.2.1** — Lane-owned Cloudflare Pages deployment
+**v1.2.2** — Canon refresh with Memory Architecture
 
 **Public URL**: `https://main.klappy-dev-agent-skill.pages.dev/latest/prd-guide-pack.md`
 
@@ -38,7 +38,7 @@ See the [usage README](https://main.klappy-dev-agent-skill.pages.dev/latest/READ
 | [v1.1/](v1.1/) | Champion | Core PRD guide pack |
 | [v1.2/](v1.2/) | Failed | Distribution attempt (PRD conflict) |
 | [v1.2.1/](v1.2.1/) | Champion | Lane-owned Cloudflare Pages deployment |
-| [v1.2.2/](v1.2.2/) | Active | Canon content refresh (v0.5.3) |
+| [v1.2.2/](v1.2.2/) | Champion | Canon content refresh + Memory Architecture |
 
 ## Structure
 
