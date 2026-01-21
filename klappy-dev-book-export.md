@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-21T18:39:43.924Z
+Generated: 2026-01-21T18:58:00.252Z
 Total Files: 151
 
 This is a documentation export of all markdown files from the klappy.dev
@@ -18342,11 +18342,11 @@ Don't bend rules to make it work.
 📄 File: products/agent-skill/PRD.md
 --------------------------------------------------------------------------------
 
-# PRD: ODD Agent Skill — Canon Refresh v0.8.0
+# PRD: ODD Agent Skill — PRD Elicitation Enhancement
 
 | Field             | Value       |
 | ----------------- | ----------- |
-| **PRD Version**   | v1.2.4      |
+| **PRD Version**   | v1.3        |
 | **Lane**          | agent-skill |
 | **Status**        | Active      |
 | **Created**       | 2026-01-21  |
@@ -18366,74 +18366,140 @@ This lane MUST remain compatible with:
 
 ## Objective
 
-Recompile the PRD guide pack against canon v0.8.0, fixing stale ODD paths from the 0.6.0 root-level elevation and incorporating new concepts (Cognitive Partitioning, Tool Specialization).
+Transform the prd-guide pack from an informational resource (teaches ODD) into an interrogative system (extracts PRDs from humans) by adding stage typing, asset intake, and a formal elicitation loop.
 
 ---
 
 ## Background
 
-**v1.2.3 delivered**: Canon refresh to v0.5.4 with ODD compliance. INSTRUCTIONS.md treated as ephemeral.
+**v1.2.4 delivered**: Canon refresh to v0.8.0 with Cognitive Partitioning and Tool Specialization.
 
-**Problem discovered**: The compile plan at `src/compile-plan.json` still references `canon/odd/manifesto.md`, but ODD was elevated to root level (`/odd/`) in canon 0.6.0. This path is stale.
+**Problem identified**: External review found the pack "conceptually sound but operationally incomplete":
 
-**Canon changes since v0.5.4**:
+| Strength | Gap |
+|----------|-----|
+| Canonical alignment unusually strong | No structured elicitation loop |
+| Compilation philosophy correct | No stage-aware questioning |
+| Agent authority properly scoped | No asset-gathering protocols |
+| Treats PRDs as evolving intent | No explicit interview modes |
 
-| Version | Summary |
-|---------|---------|
-| 0.6.0   | Three-Tier Hierarchy — ODD elevated from `/canon/odd/` to `/odd/` |
-| 0.6.1   | Docs epistemic hygiene, frontmatter standardization |
-| 0.7.0   | Doc Inclusion Audit, README indexes, derived outputs |
-| 0.8.0   | Cognitive Partitioning, Tool Specialization appendix |
+The pack teaches agents how ODD works, but does not fully teach agents how to elicit a PRD from a human.
 
-**v1.2.4 patches v1.2.3** with:
+**v1.2.x INSTRUCTIONS.md** has 7 stages, but:
 
-- Fixed ODD paths (`canon/odd/` → `odd/`)
-- Canon bumped to v0.8.0
-- New content: Cognitive Partitioning, Tool Specialization
-- Updated source hashes
+- Jumps straight to "What outcome are you trying to achieve?"
+- No classification of PRD type (PoC vs Feature vs Fix)
+- No inventory of existing assets
+- No explicit agent role declaration
+- No ambiguity capture stage
+
+**v1.3 addresses this** by adding:
+
+- Agent Role Declaration (elicitation system, not author)
+- PRD Stage Typing gate before questioning
+- Resequenced Interview Loop with Inventory and Ambiguity Capture
+- Asset Intake Contract with guidance for partial information
 
 ---
 
-## In Scope (v1.2.4)
+## In Scope (v1.3)
 
-### From v1.2.3 (retained)
+### From v1.2.4 (retained)
 
 - Lane-owned Cloudflare Pages deployment
 - Versioned asset URLs
-- README.md per version folder
-- No website lane dependency
+- Canon sources at v0.8.0
 - INSTRUCTIONS.md as ephemeral artifact
 - Compile plan in lane (`src/compile-plan.json`)
 
-### New in v1.2.4
+### New in v1.3
 
-- Fixed ODD paths to reflect root-level elevation
-- Recompiled pack against canon v0.8.0
-- Added Cognitive Partitioning concept reference
-- Added Tool Specialization appendix reference
-- Updated `/latest/` to point to v1.2.4 pack
-- Updated `latest/README.md` to reflect v1.2.4 as champion
+#### 1. Agent Role Declaration
+
+Add explicit framing at the top of INSTRUCTIONS.md:
+
+```markdown
+## Agent Role
+
+You are not a PRD author.
+You are a PRD elicitation system that helps humans externalize intent, constraints, uncertainty, and evidence.
+
+You extract. You do not invent.
+```
+
+#### 2. PRD Stage Typing Gate
+
+Add classification before current Stage 1:
+
+| Stage Type | Evidence Expectations | Ambiguity Tolerance |
+|------------|----------------------|---------------------|
+| PoC / Exploration | Minimal, learning-focused | High |
+| Feature | Required, scope bounded | Medium |
+| Fix | Root cause required, regression risk | Low |
+| Product slice | End-to-end verification | Medium |
+| Refactor / migration | No user-facing change | Low |
+
+Questions:
+- "Is this exploring something new, building something known, or fixing something broken?"
+- "Will users see a change, or is this internal?"
+
+#### 3. Formal Interview Loop (Resequenced)
+
+| Phase | v1.2.x Stage | v1.3 Phase |
+|-------|--------------|------------|
+| NEW | - | **0. Stage Identification** — What type of PRD is this? |
+| NEW | - | **1. Orient** — What are we trying to learn or change? |
+| NEW | - | **2. Inventory** — What assets already exist? |
+| Moved | Stage 4 | **3. Constraint Surfacing** — Time, scope, reversibility, risk |
+| Moved | Stage 1 | **4. Outcome Framing** — What would "better" look like? |
+| Moved | Stage 2 | **5. Evidence Definition** — How will we know? |
+| NEW | - | **6. Ambiguity Capture** — What is still unclear or contested? |
+| Same | Stages 3,5,6,7 | **7. Draft Assembly** — Non-goals, risks, final PRD |
+
+Key changes:
+- Inventory BEFORE outcome (you can't define what you want until you know what you have)
+- Explicit ambiguity capture (ODD acknowledges uncertainty)
+- Stage identification gates the entire flow
+
+#### 4. Asset Intake Contract
+
+| Type | Examples | When missing |
+|------|----------|--------------|
+| Text | docs, notes, prior PRDs | Proceed with "no prior docs" flag |
+| Media | screenshots, recordings, mockups | Proceed if non-UI; require for UI work |
+| Links | repos, tickets, deployed systems | Note as "greenfield" if no links |
+| Oral testimony | interview answers | This is the PRD session itself |
+
+Guidance:
+- "What documentation already exists for this?"
+- "Do you have any screenshots, mockups, or recordings?"
+- "Is there a repo, ticket, or deployed system I should know about?"
+- Proceed with what's available; don't block on missing assets
 
 ---
 
-## Explicitly Out of Scope (v1.2.4)
+## Explicitly Out of Scope (v1.3)
 
 - Changes to distribution architecture (Cloudflare Pages setup unchanged)
-- New workflow stages (that's v1.3)
-- Changing INSTRUCTIONS.md content (only path fixes)
-- Adding attempt execution guidance (that's v1.3)
+- Multi-pack compilation (that's v1.4)
+- Tiered content inclusion (that's v1.4)
+- Role-specific packs (that's v1.5+)
+- Renaming the pack (keep "prd-guide" for now)
 
 ---
 
 ## Success Criteria
 
-- [ ] Compile plan paths updated (`odd/` instead of `canon/odd/`)
-- [ ] Pack recompiled with canon v0.8.0 sources
-- [ ] Provenance header shows updated source hashes
-- [ ] Pack available at versioned URL (`/v1.2.4/prd-guide-pack.md`)
-- [ ] `/latest/` updated to serve v1.2.4 pack
-- [ ] `latest/README.md` updated to reference v1.2.4
-- [ ] No behavioral changes to pack guidance (path fix only)
+- [ ] INSTRUCTIONS.md includes Agent Role Declaration section
+- [ ] INSTRUCTIONS.md includes Stage Identification gate (Phase 0)
+- [ ] INSTRUCTIONS.md includes Inventory phase (Phase 2)
+- [ ] INSTRUCTIONS.md includes Ambiguity Capture phase (Phase 6)
+- [ ] INSTRUCTIONS.md includes Asset Intake guidance
+- [ ] Interview loop resequenced per spec
+- [ ] Stage Typing table included with evidence expectations
+- [ ] Pack available at versioned URL (`/v1.3/prd-guide-pack.md`)
+- [ ] `/latest/` updated to serve v1.3 pack
+- [ ] `latest/README.md` updated to reference v1.3
 
 ---
 
@@ -18441,9 +18507,17 @@ Recompile the PRD guide pack against canon v0.8.0, fixing stale ODD paths from t
 
 An attempt against this PRD is complete when:
 
+### INSTRUCTIONS.md Content
+
+- [ ] Agent Role Declaration added at top
+- [ ] Stage Identification (Phase 0) defined with PRD type classification
+- [ ] Inventory (Phase 2) defined with asset intake questions
+- [ ] Ambiguity Capture (Phase 6) defined with uncertainty documentation
+- [ ] Interview loop has 8 phases (0-7) in correct order
+- [ ] Stage Typing table includes all 5 types with implications
+
 ### Compilation
 
-- [ ] Compile plan paths corrected (`odd/manifesto.md`, etc.)
 - [ ] Compile succeeds using lane-owned `src/compile-plan.json`
 - [ ] Output written to attempt's `evidence/` folder
 - [ ] Provenance header shows canon v0.8.0 source hashes
@@ -18451,24 +18525,24 @@ An attempt against this PRD is complete when:
 
 ### Distribution
 
-- [ ] `public/agent-skill/v1.2.4/prd-guide-pack.md` created
+- [ ] `public/agent-skill/v1.3/prd-guide-pack.md` created
 - [ ] `public/agent-skill/latest/prd-guide-pack.md` updated
 - [ ] `public/agent-skill/latest/README.md` updated (version reference)
 - [ ] Public URL verified with HTTP 200
 
 ### Verification
 
-- [ ] Source hashes differ from v1.2.3 (paths changed, canon content changed)
-- [ ] ODD paths in compile plan point to `/odd/` not `/canon/odd/`
-- [ ] Pack content includes correct ODD manifesto from root level
-- [ ] No persisted INSTRUCTIONS.md in `src/` or version folder
+- [ ] INSTRUCTIONS.md demonstrably different from v1.2.4
+- [ ] Agent using pack asks about PRD type before jumping to outcomes
+- [ ] Agent using pack asks about existing assets before defining scope
+- [ ] Ambiguity capture section present and functional
 
 ### Evidence Required
 
+- [ ] Diff showing new INSTRUCTIONS.md content vs v1.2.4
 - [ ] Screenshot or log of successful compile output
-- [ ] Diff showing updated paths in compile-plan.json
-- [ ] Diff showing updated source hashes
 - [ ] HTTP 200 verification of preview URL
+- [ ] Sample conversation demonstrating elicitation flow
 - [ ] Self-audit completed
 
 ---
@@ -18477,42 +18551,53 @@ An attempt against this PRD is complete when:
 
 The compiled pack concatenates these files:
 
-### Canon Sources (persisted)
+### Canon Sources (persisted, unchanged from v1.2.4)
 
-| #   | Source                                | Purpose                                          |
-| --- | ------------------------------------- | ------------------------------------------------ |
-| 1   | `canon/README.md`                     | Canon orientation, meta rules, confidence scores |
-| 2   | `odd/README.md`                       | ODD folder index, core thesis                    |
-| 3   | `odd/manifesto.md`                    | Full ODD philosophy                              |
-| 4   | `odd/cognitive-partitioning.md`       | **NEW** Scaling pattern for reasoning systems    |
-| 5   | `odd/appendices/README.md`            | Portable appendices summarized                   |
-| 6   | `odd/decisions/README.md`             | ODD conceptual decisions                         |
-| 7   | `canon/odd/appendices/tool-specialization.md` | **NEW** Tool isolation pattern           |
-| 8   | `canon/constraints.md`                | Baseline assumptions                             |
-| 9   | `canon/decision-rules.md`             | Decision heuristics                              |
-| 10  | `canon/definition-of-done.md`         | Completion criteria                              |
-| 11  | `canon/self-audit.md`                 | Review checklist                                 |
-| 12  | `docs/PRD/PRD_TEMPLATE.md`            | PRD structure                                    |
+| # | Source | Purpose |
+|---|--------|---------|
+| 1 | `canon/README.md` | Canon orientation, meta rules, confidence scores |
+| 2 | `odd/README.md` | ODD folder index, core thesis |
+| 3 | `odd/manifesto.md` | Full ODD philosophy |
+| 4 | `odd/cognitive-partitioning.md` | Scaling pattern for reasoning systems |
+| 5 | `odd/appendices/README.md` | Portable appendices summarized |
+| 6 | `odd/decisions/README.md` | ODD conceptual decisions |
+| 7 | `canon/odd/appendices/tool-specialization.md` | Tool isolation pattern |
+| 8 | `canon/constraints.md` | Baseline assumptions |
+| 9 | `canon/decision-rules.md` | Decision heuristics |
+| 10 | `canon/definition-of-done.md` | Completion criteria |
+| 11 | `canon/self-audit.md` | Review checklist |
+| 12 | `docs/PRD/PRD_TEMPLATE.md` | PRD structure |
 
 ### Generated Sources (ephemeral)
 
-| #   | Source            | Purpose                                     |
-| --- | ----------------- | ------------------------------------------- |
-| 13  | `INSTRUCTIONS.md` | Interactive guidance (generated by attempt) |
+| # | Source | Purpose |
+|---|--------|---------|
+| 13 | `INSTRUCTIONS.md` | **UPDATED** Interactive elicitation guidance |
 
-**Note:** INSTRUCTIONS.md is a **generated artifact**, not persisted input. Each attempt generates it fresh based on PRD requirements. It is ephemeral like code — it lives only in the attempt's evidence folder, never in `src/` or version folders.
+**Note:** INSTRUCTIONS.md is the primary deliverable of this PRD. It must include all elicitation enhancements.
 
 ---
 
 ## Constraints
 
-- **Path fix focus**: Primary goal is fixing stale paths
+- **Elicitation focus**: Primary goal is improving the interview mechanics
 - **Same distribution**: Uses existing Cloudflare Pages setup
-- **Traceability**: Canon version documented in PRD metadata
+- **Same canon sources**: v0.8.0 sources unchanged
 - **ODD formula**: Pack + CONTRACT + PRD = Attempt (nothing else)
 - **Ephemeral artifacts**: Generated code (INSTRUCTIONS.md) not persisted
-- **Lane isolation**: Compile plans and version-specific assets stay in lane
-- **Complete latest update**: Both pack AND README must be updated
+- **Lane isolation**: All changes stay within agent-skill lane
+- **Backward compatible**: Existing PRD guidance still works (enhanced, not replaced)
+
+---
+
+## Risks
+
+| Risk | Mitigation |
+|------|------------|
+| Elicitation loop changes may require iteration | v1.3 can have patch versions (v1.3.1, v1.3.2) |
+| Stage typing may not cover all cases | Include "Other" type with fallback to generic flow |
+| Interview loop may feel too long | Can be streamlined in v1.3.x based on feedback |
+| Asset intake may block users who have nothing | Explicit guidance to proceed with partial information |
 
 ---
 
@@ -18524,18 +18609,16 @@ This PRD may be attempted multiple times.
 - Failed attempts inform future attempts or PRD revisions
 - Attempts are sealed when CLOSED or ABANDONED
 
-Attempts live at: `v1.2.4/attempts/attempt-NNN/`
+Attempts live at: `v1.3/attempts/attempt-NNN/`
 
 ---
 
 ## Related Documents
 
-- v1.2.3 Champion: [H0006](./history/H0006-v1.2.3-champion.md)
-- v1.2.3 Attempt: `v1.2.3/attempts/attempt-001/`
-- Canon Changelog: `/canon/CHANGELOG.md`
-- Three-Tier Hierarchy: `/odd/decisions/D0001-three-tier-conceptual-hierarchy.md`
-- Cognitive Partitioning: `/odd/cognitive-partitioning.md`
-- Tool Specialization: `/canon/odd/appendices/tool-specialization.md`
+- v1.2.4 Champion: [H0007](./history/H0007-v1.2.4-champion.md)
+- v1.2.4 Attempt: `v1.2.4/attempts/attempt-001/`
+- Roadmap: [ROADMAP.md](./ROADMAP.md)
+- External Review: Feedback that identified elicitation gap (provided by user)
 
 
 
@@ -18585,7 +18668,8 @@ See the [usage README](https://main.klappy-dev-agent-skill.pages.dev/latest/READ
 | [v1.2.1/](v1.2.1/) | Champion | Lane-owned Cloudflare Pages deployment |
 | [v1.2.2/](v1.2.2/) | Failed | Exposed ODD violations (ephemeral artifacts, compile plan location) |
 | [v1.2.3/](v1.2.3/) | Champion | Canon refresh v0.5.4 + ODD compliance |
-| [v1.2.4/](v1.2.4/) | **Champion** | Canon refresh v0.8.0 (path fixes + new content) |
+| [v1.2.4/](v1.2.4/) | Champion | Canon refresh v0.8.0 (path fixes + new content) |
+| [v1.3/](v1.3/) | **Active** | PRD Elicitation Enhancement (interview mechanics, stage typing) |
 
 ## Structure
 
@@ -18614,8 +18698,10 @@ products/agent-skill/
 │   └── PRD.md             # Canon refresh PRD (failed)
 ├── v1.2.3/                # Version 1.2.3 (champion)
 │   └── PRD.md             # Canon refresh v0.5.4 + ODD compliance
-└── v1.2.4/                # Version 1.2.4 (active)
-    └── PRD.md             # Canon refresh v0.8.0 (path fixes)
+├── v1.2.4/                # Version 1.2.4 (champion)
+│   └── PRD.md             # Canon refresh v0.8.0 (path fixes)
+└── v1.3/                  # Version 1.3 (active)
+    └── PRD.md             # PRD Elicitation Enhancement
 ```
 
 ## Build
@@ -18649,8 +18735,9 @@ This is not a commitment — it's a sketch that evolves as we learn.
 
 - **v1.1** = Initial pack (PRD guidance)
 - **v1.2.x** = Distribution + patches (deployment, canon refreshes)
-- **v1.3** = Pack Architecture v2 (multi-pack, tiered compilation)
-- **v1.4+** = Role-specific packs (Attempt Agent, Verification Agent)
+- **v1.3** = PRD Elicitation Enhancement (interview mechanics, stage typing)
+- **v1.4** = Pack Architecture v2 (multi-pack, tiered compilation)
+- **v1.5+** = Role-specific packs (Attempt Agent, Verification Agent)
 - **v2.x** = Presentation layer (UI/showcase)
 
 Minor versions add features; patch versions fix issues or refresh content.
@@ -18753,7 +18840,42 @@ Patches v1.2.3 with canon v0.8.0:
 
 ---
 
-## v1.3 — Pack Architecture v2
+## v1.3 — PRD Elicitation Enhancement
+
+**Location**: `v1.3/`
+
+Addresses the gap between "understanding ODD" and "extracting a PRD from a human." The pack teaches ODD philosophy well, but v1.2.x lacked the interrogative mechanics to guide elicitation.
+
+**Key features**:
+
+- **Agent Role Declaration**: Explicit framing that the agent is an elicitation system, not a PRD author
+- **PRD Stage Typing**: Classification gate before questioning (PoC, Feature, Fix, Product slice, Refactor)
+- **Formal Interview Loop**: Resequenced stages with Orient, Inventory, Constraint Surfacing before Outcome Framing
+- **Asset Intake Contract**: Formalized guidance for what assets to request and how to proceed with partial information
+- **Ambiguity Capture**: Explicit stage for documenting what remains unclear or contested
+
+**Interview Loop (resequenced)**:
+
+| Phase | Purpose |
+|-------|---------|
+| 0. Stage Identification | What type of PRD is this? |
+| 1. Orient | What are we trying to learn or change? |
+| 2. Inventory | What assets already exist? |
+| 3. Constraint Surfacing | Time, scope, reversibility, risk |
+| 4. Outcome Framing | What would "better" look like? |
+| 5. Evidence Definition | How will we know? |
+| 6. Ambiguity Capture | What is still unclear or contested? |
+| 7. Draft Assembly | Assemble the PRD |
+
+**Target outcome**: Agents using the pack ask about PRD type and existing assets before jumping to outcomes
+
+**Friction level**: Same as v1.2.x (copy from URL)
+
+**Why this matters**: The pack was conceptually sound but operationally incomplete. This version makes it interrogative, not just informational.
+
+---
+
+## v1.4 — Pack Architecture v2
 
 Major architectural upgrade enabling role-specific agent packs with tiered content inclusion.
 
@@ -18788,7 +18910,7 @@ Major architectural upgrade enabling role-specific agent packs with tiered conte
 
 ---
 
-## v1.4 — Attempt Agent Pack
+## v1.5 — Attempt Agent Pack
 
 Role-specific pack for agents executing attempts against PRDs.
 
@@ -18816,7 +18938,7 @@ Role-specific pack for agents executing attempts against PRDs.
 
 ---
 
-## v1.5 — Verification Agent Pack
+## v1.6 — Verification Agent Pack
 
 Role-specific pack for agents evaluating and verifying work.
 

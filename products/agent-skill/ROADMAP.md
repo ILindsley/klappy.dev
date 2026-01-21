@@ -12,8 +12,9 @@ This is not a commitment — it's a sketch that evolves as we learn.
 
 - **v1.1** = Initial pack (PRD guidance)
 - **v1.2.x** = Distribution + patches (deployment, canon refreshes)
-- **v1.3** = Pack Architecture v2 (multi-pack, tiered compilation)
-- **v1.4+** = Role-specific packs (Attempt Agent, Verification Agent)
+- **v1.3** = PRD Elicitation Enhancement (interview mechanics, stage typing)
+- **v1.4** = Pack Architecture v2 (multi-pack, tiered compilation)
+- **v1.5+** = Role-specific packs (Attempt Agent, Verification Agent)
 - **v2.x** = Presentation layer (UI/showcase)
 
 Minor versions add features; patch versions fix issues or refresh content.
@@ -116,7 +117,42 @@ Patches v1.2.3 with canon v0.8.0:
 
 ---
 
-## v1.3 — Pack Architecture v2
+## v1.3 — PRD Elicitation Enhancement
+
+**Location**: `v1.3/`
+
+Addresses the gap between "understanding ODD" and "extracting a PRD from a human." The pack teaches ODD philosophy well, but v1.2.x lacked the interrogative mechanics to guide elicitation.
+
+**Key features**:
+
+- **Agent Role Declaration**: Explicit framing that the agent is an elicitation system, not a PRD author
+- **PRD Stage Typing**: Classification gate before questioning (PoC, Feature, Fix, Product slice, Refactor)
+- **Formal Interview Loop**: Resequenced stages with Orient, Inventory, Constraint Surfacing before Outcome Framing
+- **Asset Intake Contract**: Formalized guidance for what assets to request and how to proceed with partial information
+- **Ambiguity Capture**: Explicit stage for documenting what remains unclear or contested
+
+**Interview Loop (resequenced)**:
+
+| Phase | Purpose |
+|-------|---------|
+| 0. Stage Identification | What type of PRD is this? |
+| 1. Orient | What are we trying to learn or change? |
+| 2. Inventory | What assets already exist? |
+| 3. Constraint Surfacing | Time, scope, reversibility, risk |
+| 4. Outcome Framing | What would "better" look like? |
+| 5. Evidence Definition | How will we know? |
+| 6. Ambiguity Capture | What is still unclear or contested? |
+| 7. Draft Assembly | Assemble the PRD |
+
+**Target outcome**: Agents using the pack ask about PRD type and existing assets before jumping to outcomes
+
+**Friction level**: Same as v1.2.x (copy from URL)
+
+**Why this matters**: The pack was conceptually sound but operationally incomplete. This version makes it interrogative, not just informational.
+
+---
+
+## v1.4 — Pack Architecture v2
 
 Major architectural upgrade enabling role-specific agent packs with tiered content inclusion.
 
@@ -151,7 +187,7 @@ Major architectural upgrade enabling role-specific agent packs with tiered conte
 
 ---
 
-## v1.4 — Attempt Agent Pack
+## v1.5 — Attempt Agent Pack
 
 Role-specific pack for agents executing attempts against PRDs.
 
@@ -179,7 +215,7 @@ Role-specific pack for agents executing attempts against PRDs.
 
 ---
 
-## v1.5 — Verification Agent Pack
+## v1.6 — Verification Agent Pack
 
 Role-specific pack for agents evaluating and verifying work.
 
