@@ -16,6 +16,47 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.9.0 — 2026-01-21
+
+**Resonance — Intellectual Context with Explicit Divergence**
+
+This release introduces the Resonance section: external works that echo ideas found in ODD, with mandatory explicit divergence showing where ODD makes different tradeoffs.
+
+### Added
+
+- **Resonance Index** (`/canon/resonance/README.md`) — Documents the relationship between ODD and influential external works with mandatory divergence rule
+- **Resonance Template** (`/canon/resonance/TEMPLATE.md`) — Book-centered naming convention with ODD principle as subtitle
+- **Four Resonance Pages:**
+  - `antifragile.md` — Taleb's Antifragile → ODD Principle: Systems Should Improve Under Stress
+  - `lean-startup.md` — Ries' The Lean Startup → ODD Principle: Epistemic Feedback Loops
+  - `ooda-loop.md` — Boyd's OODA Loop → ODD Principle: Orientation Dominates Action
+  - `sprint.md` — Knapp's Sprint → ODD Principle: Constrained Convergence Produces Clarity
+
+### Changed
+
+- **canon/README.md** — Added Resonance section with contents table and mandatory divergence rule
+- **public/content/manifest.json** — Added 5 resonance resources with URIs and metadata
+- **Compile Plans** — Added resonance to all packs:
+  - `infra/compile/plans/agent-skill/prd-guide.json`
+  - `infra/compile/plans/website/author.json`
+  - `infra/compile/plans/website/visitor.json`
+
+### Philosophy
+
+- **Books are guests. ODD owns the house.** — Resonance pages acknowledge intellectual overlap without borrowing authority
+- **Divergence is mandatory** — Every cited work must include at least one explicit divergence; if no divergence exists, the citation does not belong
+- **Book-centered naming** — Files are named after the book (`lean-startup.md`) for immediate orientation, with ODD principle as subtitle inside
+- **Resonance is optional** — Not required to understand or apply ODD; exists for intellectual context and boundary-setting
+
+### Canon Rule
+
+> Every cited work must include at least one explicit divergence.
+> If no divergence exists, the citation does not belong.
+
+This rule prevents cargo-cult alignment and silent disagreement.
+
+---
+
 ## 0.8.0 — 2026-01-21
 
 **Cognitive Partitioning — Agent Scaling Concepts**

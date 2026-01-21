@@ -35,9 +35,22 @@ The Canon exists so that reasoning does not have to be repeated.
 
 | Folder | Purpose |
 |--------|---------|
+| `resonance/` | External works that converge with ODD — and where ODD explicitly diverges. |
 | `meta/` | Metadata and pack configuration. |
 | `_compiled/` | Compiled outputs (derived, wipeable). |
 | `odd/appendices/` | ODD-derived patterns and invariants. |
+
+### Resonance (External Alignment & Divergence)
+
+| File | Work | ODD Principle |
+|------|------|---------------|
+| `resonance/antifragile.md` | Antifragile | Systems Should Improve Under Stress |
+| `resonance/lean-startup.md` | The Lean Startup | Epistemic Feedback Loops |
+| `resonance/ooda-loop.md` | OODA Loop | Orientation Dominates Action |
+| `resonance/sprint.md` | Sprint | Constrained Convergence Produces Clarity |
+
+> **Canon Rule:** Every cited work must include at least one explicit divergence.
+> If no divergence exists, the citation does not belong.
 
 ### ODD Appendices (Patterns)
 

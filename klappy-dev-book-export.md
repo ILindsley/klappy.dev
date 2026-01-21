@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-21T20:39:27.996Z
-Total Files: 152
+Generated: 2026-01-21T23:49:59.824Z
+Total Files: 158
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -19,7 +19,7 @@ details (attempts, version folders, source code).
 
 - **Root** (1 files)
 - **About** (6 files)
-- **Canon** (11 files)
+- **Canon** (17 files)
 - **Documentation** (55 files)
 - **Infrastructure** (9 files)
 - **Interfaces & Contracts** (6 files)
@@ -8832,6 +8832,47 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.9.0 — 2026-01-21
+
+**Resonance — Intellectual Context with Explicit Divergence**
+
+This release introduces the Resonance section: external works that echo ideas found in ODD, with mandatory explicit divergence showing where ODD makes different tradeoffs.
+
+### Added
+
+- **Resonance Index** (`/canon/resonance/README.md`) — Documents the relationship between ODD and influential external works with mandatory divergence rule
+- **Resonance Template** (`/canon/resonance/TEMPLATE.md`) — Book-centered naming convention with ODD principle as subtitle
+- **Four Resonance Pages:**
+  - `antifragile.md` — Taleb's Antifragile → ODD Principle: Systems Should Improve Under Stress
+  - `lean-startup.md` — Ries' The Lean Startup → ODD Principle: Epistemic Feedback Loops
+  - `ooda-loop.md` — Boyd's OODA Loop → ODD Principle: Orientation Dominates Action
+  - `sprint.md` — Knapp's Sprint → ODD Principle: Constrained Convergence Produces Clarity
+
+### Changed
+
+- **canon/README.md** — Added Resonance section with contents table and mandatory divergence rule
+- **public/content/manifest.json** — Added 5 resonance resources with URIs and metadata
+- **Compile Plans** — Added resonance to all packs:
+  - `infra/compile/plans/agent-skill/prd-guide.json`
+  - `infra/compile/plans/website/author.json`
+  - `infra/compile/plans/website/visitor.json`
+
+### Philosophy
+
+- **Books are guests. ODD owns the house.** — Resonance pages acknowledge intellectual overlap without borrowing authority
+- **Divergence is mandatory** — Every cited work must include at least one explicit divergence; if no divergence exists, the citation does not belong
+- **Book-centered naming** — Files are named after the book (`lean-startup.md`) for immediate orientation, with ODD principle as subtitle inside
+- **Resonance is optional** — Not required to understand or apply ODD; exists for intellectual context and boundary-setting
+
+### Canon Rule
+
+> Every cited work must include at least one explicit divergence.
+> If no divergence exists, the citation does not belong.
+
+This rule prevents cargo-cult alignment and silent disagreement.
+
+---
+
 ## 0.8.0 — 2026-01-21
 
 **Cognitive Partitioning — Agent Scaling Concepts**
@@ -9753,9 +9794,22 @@ The Canon exists so that reasoning does not have to be repeated.
 
 | Folder | Purpose |
 |--------|---------|
+| `resonance/` | External works that converge with ODD — and where ODD explicitly diverges. |
 | `meta/` | Metadata and pack configuration. |
 | `_compiled/` | Compiled outputs (derived, wipeable). |
 | `odd/appendices/` | ODD-derived patterns and invariants. |
+
+### Resonance (External Alignment & Divergence)
+
+| File | Work | ODD Principle |
+|------|------|---------------|
+| `resonance/antifragile.md` | Antifragile | Systems Should Improve Under Stress |
+| `resonance/lean-startup.md` | The Lean Startup | Epistemic Feedback Loops |
+| `resonance/ooda-loop.md` | OODA Loop | Orientation Dominates Action |
+| `resonance/sprint.md` | Sprint | Constrained Convergence Produces Clarity |
+
+> **Canon Rule:** Every cited work must include at least one explicit divergence.
+> If no divergence exists, the citation does not belong.
 
 ### ODD Appendices (Patterns)
 
@@ -11231,6 +11285,613 @@ This pattern does not define:
 
 - [Cognitive Partitioning](/odd/cognitive-partitioning.md) — Universal concept
 - [Canonical Compression](/docs/appendices/canonical-compression.md) — Reduce reasoning surface area (context limits)
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/resonance/README.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/resonance
+title: "Resonance Index"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["resonance", "index", "principles", "divergence"]
+---
+
+# Resonance
+
+> External works that *echo* ideas found in ODD — and where ODD explicitly chooses different tradeoffs.
+
+## Purpose
+
+Resonance pages document the relationship between ODD and influential external works.
+
+They are not required to understand or apply ODD.  
+They exist to provide intellectual context, comparison, and explicit boundary-setting.
+
+These are not citations for authority. These are acknowledgments of intellectual overlap — and explicit statements of where ODD diverges.
+
+**Books are guests. ODD owns the house.**
+
+---
+
+## Why Divergence Is Required
+
+Most frameworks fail in one of two ways:
+
+1. **Cargo-cult alignment** — "We do X because Lean Startup / Agile / Taleb says so."
+2. **Silent disagreement** — The framework quietly violates the book but keeps the quote anyway.
+
+Both erode trust.
+
+ODD's strength is that it is:
+- experiential
+- operational
+- and occasionally in direct disagreement with its intellectual neighbors
+
+Divergence is therefore first-class, not a footnote.
+
+---
+
+## Canon Rule
+
+> Every cited work must include at least one explicit divergence.  
+> If no divergence exists, the citation does not belong.
+
+This rule keeps the system honest and prevents authority leakage over time.
+
+---
+
+## Naming Convention
+
+**Files are named after the book, not the principle.**
+
+This provides immediate orientation ("This is about Lean Startup") while preserving ODD-first thinking inside the document.
+
+Example: `lean-startup.md`, not `epistemic-feedback-loops.md`
+
+---
+
+## Structure
+
+Each resonance page follows a consistent structure:
+
+1. **Title** — Book name with "(Resonance)"
+2. **ODD Principle** — Defined strictly in ODD terms
+3. **Convergent Quotes** — Max 3, non-authoritative
+4. **Where ODD Aligns** — Mechanical alignment only
+5. **Where ODD Diverges** — Explicit tradeoffs (required)
+6. **Why the Divergence Matters** — Consequences
+7. **Operationalization in ODD**
+8. **Related Canon**
+
+---
+
+## Contents
+
+| File | Work | ODD Principle |
+|------|------|---------------|
+| `antifragile.md` | Antifragile | Systems Should Improve Under Stress |
+| `lean-startup.md` | The Lean Startup | Epistemic Feedback Loops |
+| `ooda-loop.md` | OODA Loop | Orientation Dominates Action |
+| `sprint.md` | Sprint | Constrained Convergence Produces Clarity |
+
+---
+
+## What Resonance Is Not
+
+**Resonance Is Not:**
+- A bibliography
+- An endorsement
+- A synthesis essay
+- Borrowed authority
+
+**Resonance Is:**
+- Formalized lived convergence
+- Explicit divergence as proof of thinking
+- Intellectual honesty over citation padding
+
+---
+
+## See Also
+
+- [ODD Manifesto](/odd/manifesto.md)
+- [Canon Index](/canon/README.md)
+- [Three-Tier Hierarchy](/odd/decisions/D0001-three-tier-conceptual-hierarchy.md)
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/resonance/TEMPLATE.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/resonance/template
+title: "Resonance Page Template"
+audience: canon
+exposure: hidden
+tier: 2
+voice: neutral
+stability: stable
+tags: ["resonance", "template"]
+---
+
+# Resonance Page Template
+
+> Template for documenting external works that converge with ODD.
+
+## Description
+
+This template defines the standard structure for resonance pages. Use this when adding a new external work that has mechanical alignment with ODD — and explicit divergence.
+
+---
+
+## Naming Convention
+
+**Files are named after the book, not the principle.**
+
+This provides immediate orientation ("This is about Lean Startup") while preserving ODD-first thinking inside the file.
+
+Examples:
+- `lean-startup.md` — not `epistemic-feedback-loops.md`
+- `antifragile.md` — not `convexity-under-stress.md`
+- `ooda-loop.md` — not `orientation-dominates-action.md`
+
+---
+
+## Canon Rule (Mandatory)
+
+**Every cited work must include at least one explicit divergence.**
+**If no divergence exists, the citation does not belong.**
+
+This rule prevents:
+- Cargo-cult alignment ("We do X because Taleb says so")
+- Silent disagreement (violating the book while keeping the quote)
+
+---
+
+## Frontmatter
+
+```yaml
+---
+uri: klappy://canon/resonance/<book-slug>
+title: "<Book Title>"
+audience: canon
+tier: 2
+voice: neutral
+stability: stable
+tags: ["resonance", "<book-slug>", "<topic-tags>"]
+---
+```
+
+---
+
+## Structure
+
+```markdown
+---
+uri: klappy://canon/resonance/<book-slug>
+title: "<Book Title>"
+audience: canon
+tier: 2
+voice: neutral
+stability: stable
+tags: ["resonance", "<book-slug>", "<topic-tags>"]
+---
+
+# <Book Title> (Resonance)
+
+> <Author>, <Year>
+
+## ODD Principle: <Principle Name>
+
+<One or two sentences defining the principle strictly in ODD terms.
+No references. No citations.>
+
+---
+
+## Convergent Quotes (Non-Authoritative)
+
+> "<Quote>"
+> — <Author>, *<Work>*
+
+> "<Quote>"
+> — <Author>, *<Work>*
+
+<Optional third quote. Hard cap at three.>
+
+---
+
+## Where ODD Aligns
+
+- <Specific, concrete alignment>
+- <Behavioral or structural similarity>
+- <What ODD genuinely shares>
+
+Alignment must be **mechanical**, not philosophical.
+
+---
+
+## Where ODD Diverges (Explicit)
+
+This is not disagreement for its own sake.
+This is where ODD makes a **different tradeoff**.
+
+- <Divergence #1>
+- <Divergence #2>
+- <What ODD refuses to adopt>
+
+If this section feels uncomfortable, that's a signal the citation is weak.
+
+---
+
+## Why the Divergence Matters
+
+<One short paragraph explaining the *consequences* of the difference.
+This is where ODD sharpens itself.>
+
+---
+
+## Operationalization in ODD
+
+- <Concrete practice>
+- <Structural rule>
+- <Artifact behavior>
+
+---
+
+## Related Canon
+
+- [Related ODD file](/odd/<file>)
+- [Related Canon file](/canon/<file>)
+```
+
+---
+
+## Litmus Test
+
+Before adding a resonance page, ask:
+
+1. **Is there mechanical alignment?** — Not just philosophical vibes, but actual shared behavior.
+2. **Is there explicit divergence?** — If you can't name a tradeoff ODD makes differently, don't add it.
+3. **Does divergence have consequences?** — The difference should affect how work is done.
+
+If all three are yes, the resonance page belongs.
+
+---
+
+## See Also
+
+- [Resonance Index](/canon/resonance/README.md)
+- [Canon Index](/canon/README.md)
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/resonance/antifragile.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/resonance/antifragile
+title: "Antifragile"
+audience: canon
+tier: 2
+voice: neutral
+stability: stable
+tags: ["resonance", "antifragile", "antifragility", "failure", "optionality"]
+---
+
+# Antifragile (Resonance)
+
+> Nassim Nicholas Taleb, 2012
+
+## ODD Principle: Systems Should Improve Under Stress
+
+ODD is designed so that shocks, failures, and volatility increase system clarity rather than degrade it. Stress is treated as information, not merely as risk to be minimized.
+
+---
+
+## Convergent Quotes (Non-Authoritative)
+
+> "Some things benefit from shocks; they thrive and grow when exposed to volatility, randomness, disorder, and stressors."
+> — Nassim Nicholas Taleb, *Antifragile*
+
+> "Wind extinguishes a candle and energizes fire."
+> — Nassim Nicholas Taleb, *Antifragile*
+
+---
+
+## Where ODD Aligns
+
+- **Stress as signal:** Both treat volatility as a source of information rather than noise.
+- **Redundancy over optimization:** Slack and overlap are preferred to brittle efficiency.
+- **Failure reveals structure:** Breakage exposes hidden assumptions and weak constraints.
+
+These alignments justify exposing systems to pressure rather than insulating them from it.
+
+---
+
+## Where ODD Diverges (Explicit)
+
+ODD adopts antifragility while rejecting several of Taleb's core positions:
+
+- **Designed evolution vs anti-design:** Taleb rejects intentional system design; ODD is deliberately designed to evolve under pressure.
+- **Memory is mandatory:** Taleb tolerates antifragility without persistent memory; ODD requires failures to leave durable artifacts that alter future behavior.
+- **Teams, not markets:** Taleb's arguments are strongest in markets and biology; ODD is optimized for coordinated human teams.
+- **Constraint beats optionality alone:** Taleb emphasizes optionality; ODD emphasizes constraint as the mechanism that converts stress into learning.
+
+---
+
+## Why the Divergence Matters
+
+Pure antifragility without memory produces resilience without wisdom. Systems may survive shocks repeatedly without becoming more coherent.
+
+ODD treats antifragility as insufficient on its own. Stress must be captured, interpreted, and constrained into future action, or volatility degenerates into churn.
+
+---
+
+## Operationalization in ODD
+
+- Multiple attempts are expected and encouraged
+- Failure is captured, not hidden
+- Artifacts persist beyond individual cycles
+- Redundancy is explicit rather than accidental
+
+---
+
+## Related Canon
+
+- [Attempts](/docs/ATTEMPTS.md)
+- [Evolution Not Automation](/odd/appendices/evolution-not-automation.md)
+- [ODD Manifesto](/odd/manifesto.md)
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/resonance/lean-startup.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/resonance/lean-startup
+title: "The Lean Startup"
+audience: canon
+tier: 2
+voice: neutral
+stability: stable
+tags: ["resonance", "lean-startup", "feedback", "learning", "iteration"]
+---
+
+# The Lean Startup (Resonance)
+
+> Eric Ries, 2011
+
+## ODD Principle: Epistemic Feedback Loops
+
+ODD prioritizes feedback that reduces uncertainty over execution that increases throughput.
+
+Learning is only valuable when it durably alters future decisions, orientation, or constraints.
+
+---
+
+## Convergent Quotes (Non-Authoritative)
+
+> "The goal of a startup is to figure out the right thing to build — the thing customers want and will pay for — as quickly as possible."
+> — Eric Ries, *The Lean Startup*
+
+> "Validated learning is a rigorous method for demonstrating progress when one is embedded in the soil of extreme uncertainty."
+> — Eric Ries, *The Lean Startup*
+
+---
+
+## Where ODD Aligns
+
+- **Feedback over speculation:** Both prioritize empirical signal over internal confidence.
+- **Short learning loops:** Faster feedback reduces the cost of being wrong.
+- **Hypothesis-driven work:** Action exists to test assumptions, not to perform activity.
+
+These alignments are mechanical, not rhetorical: they shape how work is sequenced and evaluated.
+
+---
+
+## Where ODD Diverges (Explicit)
+
+ODD makes several deliberate tradeoffs that differ from The Lean Startup.
+
+- **Artifacts over metrics:** Lean Startup emphasizes metrics as proof of learning; ODD requires durable artifacts that alter future execution, not just dashboards.
+- **Orientation over iteration:** Lean Startup centers on iterative cycles; ODD centers on orientation shift as the primary outcome of feedback.
+- **Teams over ventures:** Lean Startup optimizes for early-stage companies; ODD is optimized for ongoing teams operating across multiple problem domains.
+- **Memory is mandatory:** Lean Startup tolerates learning that does not compound; ODD treats non-compounding learning as partial failure.
+
+---
+
+## Why the Divergence Matters
+
+Lean Startup excels at escaping local ignorance early, but it under-specifies how learning accumulates over time.
+
+ODD treats learning as an asset that must persist, migrate, and constrain future work. Without this, teams repeat discovery work, regress orientation, and mistake motion for progress.
+
+ODD absorbs Lean Startup's speed while rejecting its tolerance for epistemic amnesia.
+
+---
+
+## Operationalization in ODD
+
+- Attempts exist to test assumptions, not to "ship"
+- Feedback is captured in lane history, not just metrics
+- Orientation updates are explicit and reviewable
+- Learning that does not change future constraints is flagged
+
+---
+
+## Related Canon
+
+- [Attempts](/odd/appendices/attempt-lifecycle.md)
+- [Lane Architecture](/docs/appendices/product-lanes.md)
+- [Evolution Not Automation](/odd/appendices/evolution-not-automation.md)
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/resonance/ooda-loop.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/resonance/ooda-loop
+title: "OODA Loop"
+audience: canon
+tier: 2
+voice: neutral
+stability: stable
+tags: ["resonance", "ooda-loop", "orientation", "decision-making", "feedback"]
+---
+
+# OODA Loop (Resonance)
+
+> John Boyd, 1970s–1990s
+
+## ODD Principle: Orientation Dominates Action
+
+In ODD, the primary output of any cycle is not execution, but orientation. Actions matter only insofar as they reshape how the system perceives, constrains, and decides.
+
+---
+
+## Convergent Quotes (Non-Authoritative)
+
+> "Orientation is the schwerpunkt of the OODA loop."
+> — John Boyd, *OODA Loop briefings*
+
+> "Without orientation, observation is meaningless."
+> — John Boyd, *OODA Loop briefings*
+
+---
+
+## Where ODD Aligns
+
+- **Orientation as the center of gravity:** Both ODD and Boyd treat orientation—not action—as the decisive factor in outcomes.
+- **Feedback reshapes perception:** Action exists to update understanding, not merely to produce results.
+- **Tempo over raw speed:** Advantage comes from tighter perception–decision cycles, not faster motion alone.
+
+These alignments are structural: they determine what is measured and what is considered success.
+
+---
+
+## Where ODD Diverges (Explicit)
+
+ODD adopts Boyd's insight but makes several deliberate departures:
+
+- **Persistent memory vs situational cognition:** Boyd's loop is transient and situational; ODD requires orientation changes to be captured as durable artifacts.
+- **Team systems vs individual actors:** OODA was designed around pilots and commanders; ODD is designed for distributed teams and long-lived projects.
+- **Asynchronous cycles:** Boyd assumes tightly coupled loops; ODD allows loops to be staggered, parallel, and uneven across lanes.
+
+---
+
+## Why the Divergence Matters
+
+Boyd's model excels in adversarial, real-time contexts where advantage is temporary. Teams, however, suffer when orientation resets between cycles.
+
+ODD treats orientation as cumulative capital. By externalizing it into artifacts, decisions compound instead of evaporating, allowing teams to operate coherently across time, turnover, and scale.
+
+---
+
+## Operationalization in ODD
+
+- Orientation updates are explicit and reviewable
+- Attempts exist to test perception, not just ideas
+- Lane history preserves shifts in understanding
+- Action without orientation change is treated as noise
+
+---
+
+## Related Canon
+
+- [ODD Manifesto](/odd/manifesto.md)
+- [Lane Architecture](/docs/appendices/product-lanes.md)
+- [Attempts](/docs/ATTEMPTS.md)
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/resonance/sprint.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/resonance/sprint
+title: "Sprint"
+audience: canon
+tier: 2
+voice: neutral
+stability: stable
+tags: ["resonance", "sprint", "convergence", "constraints", "decision-making"]
+---
+
+# Sprint (Resonance)
+
+> Jake Knapp et al., 2016
+
+## ODD Principle: Constrained Convergence Produces Clarity
+
+ODD treats time, scope, and decision constraints as tools for forcing clarity. Progress is achieved not by open-ended exploration, but by deliberately narrowing uncertainty to reach a decisive orientation.
+
+---
+
+## Convergent Quotes (Non-Authoritative)
+
+> "Time pressure forces focus."
+> — Jake Knapp et al., *Sprint*
+
+> "The sprint gives teams a superpower: the ability to build and test a realistic prototype in just five days."
+> — Jake Knapp et al., *Sprint*
+
+---
+
+## Where ODD Aligns
+
+- **Constraints as catalysts:** Both treat strict constraints as a means to accelerate clarity.
+- **Forced decision-making:** Indecision is resolved by time-boxed commitments rather than consensus drift.
+- **Shared orientation:** Sprint creates a temporary, aligned mental model across a team.
+
+These alignments describe why Sprint is effective in specific, bounded contexts.
+
+---
+
+## Where ODD Diverges (Explicit)
+
+ODD deliberately limits the role Sprint-style processes can play:
+
+- **Local tactic vs system:** Sprint is a powerful local convergence technique; ODD is a continuous system governing long-lived work.
+- **Artificial consensus:** Sprint can manufacture alignment that dissolves once constraints lift; ODD requires alignment to persist through artifacts and memory.
+- **Event-based learning:** Sprint concentrates learning into events; ODD distributes learning across ongoing attempts.
+- **Outcome illusion:** Sprint risks mistaking decisiveness for correctness; ODD distinguishes clarity from truth.
+
+---
+
+## Why the Divergence Matters
+
+Sprint is excellent at collapsing ambiguity quickly, but poor at preserving learning once the sprint ends. Teams often emerge aligned but fragile, requiring repeated sprints to maintain momentum.
+
+ODD absorbs Sprint's constraint discipline while rejecting its event-centric model. Convergence must feed a durable system, or it becomes an expensive ritual.
+
+---
+
+## Operationalization in ODD
+
+- Time-boxed convergence is used sparingly and intentionally
+- Decisions are recorded as orientation changes, not meeting outcomes
+- Artifacts outlive the convergence event
+- Sprint-like methods are nested inside broader ODD loops
+
+---
+
+## Related Canon
+
+- [ODD Manifesto](/odd/manifesto.md)
+- [Attempts](/docs/ATTEMPTS.md)
+- [Decision Records](/docs/decisions/README.md)
 
 
 

@@ -1,8 +1,8 @@
 {
   "pack": {
     "name": "klappy-canon",
-    "version": "0.3.1",
-    "updated_at": "2026-01-17",
+    "version": "0.9.0",
+    "updated_at": "2026-01-21",
     "description": "Canonical orientation, constraints, decision rules, evidence policies, and ODD appendices used across klappy.dev.",
     "public_entrypoint": "klappy://public/odd",
     "canon_entrypoint": "klappy://meta/canon-index",
@@ -74,6 +74,24 @@
         "drift",
         "hygiene",
         "selection-pressure"
+      ]
+    },
+    {
+      "uri": "klappy://canon/resonance/antifragile",
+      "path": "/canon/resonance/antifragile.md",
+      "title": "Antifragile",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "resonance",
+        "antifragile",
+        "antifragility",
+        "failure",
+        "optionality"
       ]
     },
     {
@@ -505,6 +523,24 @@
       ]
     },
     {
+      "uri": "klappy://canon/resonance/ooda-loop",
+      "path": "/canon/resonance/ooda-loop.md",
+      "title": "OODA Loop",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "resonance",
+        "ooda-loop",
+        "orientation",
+        "decision-making",
+        "feedback"
+      ]
+    },
+    {
       "uri": "klappy://odd",
       "path": "/odd/index.md",
       "title": "Outcomes-Driven Development",
@@ -617,6 +653,38 @@
       ]
     },
     {
+      "uri": "klappy://canon/resonance",
+      "path": "/canon/resonance/README.md",
+      "title": "Resonance Index",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "resonance",
+        "index",
+        "principles",
+        "divergence"
+      ]
+    },
+    {
+      "uri": "klappy://canon/resonance/template",
+      "path": "/canon/resonance/TEMPLATE.md",
+      "title": "Resonance Page Template",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "hidden",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "resonance",
+        "template"
+      ]
+    },
+    {
       "uri": "klappy://canon/self-audit",
       "path": "/canon/self-audit.md",
       "title": "Self-Audit Checklist",
@@ -629,6 +697,42 @@
       "tags": [
         "self-audit",
         "verification"
+      ]
+    },
+    {
+      "uri": "klappy://canon/resonance/sprint",
+      "path": "/canon/resonance/sprint.md",
+      "title": "Sprint",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "resonance",
+        "sprint",
+        "convergence",
+        "constraints",
+        "decision-making"
+      ]
+    },
+    {
+      "uri": "klappy://canon/resonance/lean-startup",
+      "path": "/canon/resonance/lean-startup.md",
+      "title": "The Lean Startup",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "resonance",
+        "lean-startup",
+        "feedback",
+        "learning",
+        "iteration"
       ]
     },
     {
