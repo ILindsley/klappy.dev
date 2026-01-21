@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-21T16:56:20.526Z
-Total Files: 147
+Generated: 2026-01-21T17:21:34.415Z
+Total Files: 150
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -19,11 +19,11 @@ details (attempts, version folders, source code).
 
 - **Root** (1 files)
 - **About** (6 files)
-- **Canon** (10 files)
-- **Documentation** (54 files)
+- **Canon** (11 files)
+- **Documentation** (55 files)
 - **Infrastructure** (9 files)
 - **Interfaces & Contracts** (6 files)
-- **ODD (Outcomes-Driven Development)** (20 files)
+- **ODD (Outcomes-Driven Development)** (21 files)
 - **Products** (30 files)
 - **Projects** (6 files)
 - **Visual Design System** (5 files)
@@ -2913,6 +2913,7 @@ tags: ["docs", "implementation", "reference", "index"]
 
 | Folder | Purpose | Count |
 |--------|---------|-------|
+| [agent-architecture/](./agent-architecture/) | Agent system design patterns | 1 file |
 | [appendices/](./appendices/) | Implementation-specific appendices | 17 files |
 | [decisions/](./decisions/) | Implementation decision records (ADRs) | 14 files |
 | [PRD/](./PRD/) | Lane PRDs and template | 3 files |
@@ -3592,6 +3593,104 @@ The durable artifact is:
 - and evidence.
 
 Code is allowed to be disposable when regeneration is cheaper than understanding.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/agent-architecture/sub-agents.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/agent-architecture/sub-agents
+title: "Sub-Agents"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["agents", "tools", "mcp", "implementation"]
+---
+
+# Sub-Agents
+
+> How klappy.dev applies cognitive partitioning to tool-heavy agent systems.
+
+## Description
+
+In klappy.dev, adding tools or MCP servers directly to a single "main" agent can
+increase decision paralysis and degrade reliability.
+
+Sub-agents are used to isolate tool usage behind narrowly scoped reasoning
+contexts that already know how to use a specific tool correctly.
+
+This document is the reference implementation layer: concrete guidance for this
+repo, not a universal principle.
+
+## Outline
+
+- When to introduce a sub-agent
+- Tools vs sub-agents (the pairing rule)
+- Scope contract (what a sub-agent is allowed to do)
+- Outputs and promotion
+- Common failure modes
+
+---
+
+## When to Introduce a Sub-Agent
+
+Introduce a sub-agent when:
+- a tool is powerful but brittle
+- tool choice dominates reasoning time
+- repeated misuse happens despite prompt constraints
+- the "main" agent succeeds in isolation but fails during integration
+
+---
+
+## Tools vs Sub-Agents (Pairing Rule)
+
+Tools increase capability.
+Sub-agents reduce choice.
+
+**Rule of thumb:**
+If adding a tool increases decision complexity more than it reduces execution cost,
+pair it with a specialist sub-agent that uses that tool and emits bounded outputs.
+
+This is "Unix philosophy," but applied to agents: small specialists with explicit
+inputs/outputs.
+
+---
+
+## Scope Contract
+
+A sub-agent:
+- owns one responsibility (one tool or one narrow workflow)
+- returns explicit outputs (no hidden state assumptions)
+- does not expand its own scope without evidence
+
+---
+
+## Outputs and Promotion
+
+Sub-agent outputs should be:
+- explicit (named, structured, and quotable)
+- promotable (eligible to become decisions/patterns later)
+- attributable (easy to trace back to the run/attempt)
+
+---
+
+## Common Failure Modes
+
+- Premature sub-agents (created before real pressure exists)
+- Sub-agents accreting responsibilities ("just one more thing")
+- Treating sub-agents as personas instead of constraints
+- Adding tools without narrowing decision surfaces
+
+---
+
+## See Also
+
+- [Cognitive Partitioning](/odd/cognitive-partitioning.md) — Universal concept
+- [Tool Specialization](/canon/odd/appendices/tool-specialization.md) — General pattern
 
 
 
@@ -8733,6 +8832,45 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.8.0 — 2026-01-21
+
+**Cognitive Partitioning — Agent Scaling Concepts**
+
+This release adds a three-tier documentation set explaining why reasoning systems must divide under pressure as they scale.
+
+### Added
+
+- **ODD Concept:** `odd/cognitive-partitioning.md` (tier 1)
+  - Universal principle: decision complexity grows faster than execution capability
+  - Explains the failure mode when reasoning systems have too many valid actions
+  - Analogy: hiring too early (startups that hire ahead of demonstrated need)
+
+- **Canon Pattern:** `canon/odd/appendices/tool-specialization.md` (tier 2)
+  - General pattern for preserving reliability as tool availability increases
+  - Invariants: isolation precedes orchestration, outputs must be explicit and promotable
+  - Tradeoffs: coordination overhead, risk of premature specialization
+
+- **Docs Implementation:** `docs/agent-architecture/sub-agents.md` (tier 2)
+  - Reference implementation: how klappy.dev applies cognitive partitioning
+  - Pairing rule: if a tool increases decision complexity more than it reduces execution cost, pair it with a sub-agent
+  - Scope contract: one responsibility, explicit outputs, no scope creep without evidence
+
+### Changed
+
+- **canon/README.md** — Added ODD Appendices (Patterns) section linking to Tool Specialization
+- **odd/index.md** — Added Cognitive Partitioning to contents table
+- **odd/orientation-map.md** — Added See Also section linking to Cognitive Partitioning
+- **docs/README.md** — Added agent-architecture/ subfolder to contents
+
+### Philosophy
+
+- Three-tier hierarchy maintained: ODD (universal) → Canon (pattern) → Docs (implementation)
+- Progressive disclosure tiers: ODD concept at tier 1, Canon/Docs at tier 2
+- Cross-links use relative paths for portability
+- Docs layer intentionally NOT synced to public manifest (repo-internal reference)
+
+---
+
 ## 0.7.0 — 2026-01-21
 
 **Doc Inclusion Audit — README Indexes and Derived Output Hygiene**
@@ -9617,6 +9755,13 @@ The Canon exists so that reasoning does not have to be repeated.
 |--------|---------|
 | `meta/` | Metadata and pack configuration. |
 | `_compiled/` | Compiled outputs (derived, wipeable). |
+| `odd/appendices/` | ODD-derived patterns and invariants. |
+
+### ODD Appendices (Patterns)
+
+| File | Title | Summary |
+|------|-------|---------|
+| `odd/appendices/tool-specialization.md` | Tool Specialization | Preserve reliability as tool availability increases by isolating tool usage behind narrowly scoped reasoning units. |
 
 ---
 
@@ -10992,6 +11137,100 @@ It is meant to stop work from being incorrectly declared finished.
 
 - Canon v0.1 — Definition of Done & Evidence Policy complete
 - Ready to proceed to Canon v0.1 — Self-Audit Checklist
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/odd/appendices/tool-specialization.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/odd/tool-specialization
+title: "Tool Specialization"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["odd", "pattern", "tools", "decision-complexity"]
+---
+
+# Tool Specialization
+
+> A general pattern for preserving reliability as tool availability increases.
+
+## Description
+
+When systems accumulate many tools or actions, generalist reasoning becomes
+unreliable. The Tool Specialization pattern isolates tool usage behind narrowly
+scoped reasoning units, reducing decision complexity while preserving capability.
+
+This pattern captures invariants and tradeoffs without prescribing a specific
+implementation.
+
+## Outline
+
+- Context
+- The pattern
+- Invariants
+- Tradeoffs
+- Non-goals
+
+---
+
+## Context
+
+This pattern emerges when adding tools increases confusion, misfires, or decision
+paralysis instead of effectiveness.
+
+Typical triggers:
+- a growing tool menu that the "main" agent uses inconsistently
+- repeated tool misuse despite prompt reminders
+- correct tools, wrong selection timing
+- tool choice dominates reasoning time
+
+---
+
+## The Pattern
+
+Assign responsibility for a narrow set of tools or actions to a dedicated reasoning
+unit with constrained scope and explicit outputs.
+
+The goal is not "smarter" reasoning.
+The goal is making tool-use boring and reliable.
+
+---
+
+## Invariants
+
+- Capability grows faster than reliability without isolation
+- Isolation precedes orchestration
+- Specialization reduces decision load, not intelligence
+- Outputs must be explicit and promotable
+
+---
+
+## Tradeoffs
+
+- Increased coordination overhead
+- Additional interfaces to maintain
+- Risk of premature specialization if created before pressure is visible
+
+---
+
+## Non-goals
+
+This pattern does not define:
+- an agent framework
+- a required topology
+- how sub-agents are implemented in any specific repo
+
+---
+
+## See Also
+
+- [Cognitive Partitioning](/odd/cognitive-partitioning.md) — Universal concept
+- [Canonical Compression](/docs/appendices/canonical-compression.md) — Reduce reasoning surface area (context limits)
 
 
 
@@ -13177,6 +13416,112 @@ It exists to preserve compatibility, comparability, and reversibility.
 
 
 --------------------------------------------------------------------------------
+📄 File: odd/cognitive-partitioning.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://odd/cognitive-partitioning
+title: "Cognitive Partitioning"
+audience: docs
+exposure: nav
+tier: 1
+voice: neutral
+stability: evolving
+tags: ["odd", "cognition", "scaling", "decision-load"]
+---
+
+# Cognitive Partitioning
+
+> Why reasoning systems must divide under pressure, just like execution systems do.
+
+## Description
+
+As systems accumulate tools, context, and responsibilities, the decision surface of a
+single reasoning entity expands faster than its reliability.
+
+Cognitive Partitioning names this constraint and explains why isolating reasoning
+responsibilities becomes necessary as systems scale. The concept is universal and
+does not prescribe any specific implementation.
+
+## Outline
+
+- The failure mode
+- The underlying constraint
+- Analogy: hiring too early
+- Relationship to other ODD concepts
+- Non-goals
+
+---
+
+## The Failure Mode
+
+When a reasoning system has access to too many valid actions, it begins to fail
+not from lack of capability, but from excess choice.
+
+Symptoms include hesitation, inconsistent behavior, over-exploration, and repeated
+clarification loops — even when the tools themselves are "correct."
+
+---
+
+## The Constraint
+
+Decision complexity grows faster than execution capability.
+
+Past a threshold, adding more tools can degrade reliability unless reasoning scope
+is reduced.
+
+---
+
+## Analogy: Hiring Too Early
+
+The same failure mode appears in early-stage teams.
+
+Effective startups rarely hire a large staff upfront and then decide what each
+person should do. Instead, they operate with a small, generalist core until
+specific pain becomes visible — missed deadlines, overloaded founders, or repeated
+failures in a narrow area.
+
+Hiring occurs in response to pressure, not anticipation.
+
+Teams that hire ahead of demonstrated need experience the same symptoms as
+overloaded reasoning systems:
+- unclear ownership
+- duplicated or conflicting work
+- excessive coordination
+- founders managing people instead of outcomes
+
+Cognitive Partitioning follows the same rule. Reasoning capacity is expanded only
+when existing structures can no longer reliably absorb the load.
+
+---
+
+## Relationship to Other ODD Concepts
+
+Product Lanes partition execution to preserve evidence integrity.
+Cognitive Partitioning applies the same pressure logic to reasoning itself.
+
+---
+
+## Non-goals
+
+This document does not define:
+- specific agents
+- specific tools or MCP servers
+- orchestration frameworks
+- required workflows
+
+It explains why systems evolve toward isolation as complexity grows.
+
+---
+
+## See Also
+
+- [Product Lanes](/docs/appendices/product-lanes.md) — Execution partitioning under pressure
+- [ODD Misuse Patterns](/odd/misuse-patterns.md) — Common failure modes (diagnostic)
+
+
+
+--------------------------------------------------------------------------------
 📄 File: odd/contract.md
 --------------------------------------------------------------------------------
 
@@ -13585,6 +13930,7 @@ The philosophical and operational foundation for this repository. ODD treats out
 | `misuse-patterns.md` | Misuse Patterns | Common failure modes and how ODD gets misapplied in practice. |
 | `prompt-architecture.md` | Prompt Architecture | How intent scales without giant prompts. |
 | `orientation-map.md` | Orientation Map | One-page mental model of ODD, Canon, Evidence, and Outcomes. |
+| `cognitive-partitioning.md` | Cognitive Partitioning | Why reasoning systems must divide under pressure as they scale. |
 
 ### Subfolders
 
@@ -14682,6 +15028,13 @@ This keeps you aligned with:
 And most importantly:
 
 They make misuse discussable instead of shameful.
+
+---
+
+## See Also
+
+- [Cognitive Partitioning](/odd/cognitive-partitioning.md) — Why reasoning systems must divide under pressure
+- [ODD Misuse Patterns](/odd/misuse-patterns.md) — Common failure modes and how ODD gets misapplied
 
 
 

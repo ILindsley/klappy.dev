@@ -16,6 +16,45 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.8.0 — 2026-01-21
+
+**Cognitive Partitioning — Agent Scaling Concepts**
+
+This release adds a three-tier documentation set explaining why reasoning systems must divide under pressure as they scale.
+
+### Added
+
+- **ODD Concept:** `odd/cognitive-partitioning.md` (tier 1)
+  - Universal principle: decision complexity grows faster than execution capability
+  - Explains the failure mode when reasoning systems have too many valid actions
+  - Analogy: hiring too early (startups that hire ahead of demonstrated need)
+
+- **Canon Pattern:** `canon/odd/appendices/tool-specialization.md` (tier 2)
+  - General pattern for preserving reliability as tool availability increases
+  - Invariants: isolation precedes orchestration, outputs must be explicit and promotable
+  - Tradeoffs: coordination overhead, risk of premature specialization
+
+- **Docs Implementation:** `docs/agent-architecture/sub-agents.md` (tier 2)
+  - Reference implementation: how klappy.dev applies cognitive partitioning
+  - Pairing rule: if a tool increases decision complexity more than it reduces execution cost, pair it with a sub-agent
+  - Scope contract: one responsibility, explicit outputs, no scope creep without evidence
+
+### Changed
+
+- **canon/README.md** — Added ODD Appendices (Patterns) section linking to Tool Specialization
+- **odd/index.md** — Added Cognitive Partitioning to contents table
+- **odd/orientation-map.md** — Added See Also section linking to Cognitive Partitioning
+- **docs/README.md** — Added agent-architecture/ subfolder to contents
+
+### Philosophy
+
+- Three-tier hierarchy maintained: ODD (universal) → Canon (pattern) → Docs (implementation)
+- Progressive disclosure tiers: ODD concept at tier 1, Canon/Docs at tier 2
+- Cross-links use relative paths for portability
+- Docs layer intentionally NOT synced to public manifest (repo-internal reference)
+
+---
+
 ## 0.7.0 — 2026-01-21
 
 **Doc Inclusion Audit — README Indexes and Derived Output Hygiene**

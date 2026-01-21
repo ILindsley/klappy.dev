@@ -25,6 +25,7 @@ The philosophical and operational foundation for this repository. ODD treats out
 | `misuse-patterns.md` | Misuse Patterns | Common failure modes and how ODD gets misapplied in practice. |
 | `prompt-architecture.md` | Prompt Architecture | How intent scales without giant prompts. |
 | `orientation-map.md` | Orientation Map | One-page mental model of ODD, Canon, Evidence, and Outcomes. |
+| `cognitive-partitioning.md` | Cognitive Partitioning | Why reasoning systems must divide under pressure as they scale. |
 
 ### Subfolders
 

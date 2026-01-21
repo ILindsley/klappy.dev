@@ -37,6 +37,13 @@ The Canon exists so that reasoning does not have to be repeated.
 |--------|---------|
 | `meta/` | Metadata and pack configuration. |
 | `_compiled/` | Compiled outputs (derived, wipeable). |
+| `odd/appendices/` | ODD-derived patterns and invariants. |
+
+### ODD Appendices (Patterns)
+
+| File | Title | Summary |
+|------|-------|---------|
+| `odd/appendices/tool-specialization.md` | Tool Specialization | Preserve reliability as tool availability increases by isolating tool usage behind narrowly scoped reasoning units. |
 
 ---
 

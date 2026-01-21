@@ -87,6 +87,7 @@ tags: ["docs", "implementation", "reference", "index"]
 
 | Folder | Purpose | Count |
 |--------|---------|-------|
+| [agent-architecture/](./agent-architecture/) | Agent system design patterns | 1 file |
 | [appendices/](./appendices/) | Implementation-specific appendices | 17 files |
 | [decisions/](./decisions/) | Implementation decision records (ADRs) | 14 files |
 | [PRD/](./PRD/) | Lane PRDs and template | 3 files |

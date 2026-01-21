@@ -143,3 +143,10 @@ This keeps you aligned with:
 And most importantly:
 
 They make misuse discussable instead of shameful.
+
+---
+
+## See Also
+
+- [Cognitive Partitioning](/odd/cognitive-partitioning.md) — Why reasoning systems must divide under pressure
+- [ODD Misuse Patterns](/odd/misuse-patterns.md) — Common failure modes and how ODD gets misapplied

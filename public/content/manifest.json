@@ -156,6 +156,23 @@
       ]
     },
     {
+      "uri": "klappy://odd/cognitive-partitioning",
+      "path": "/odd/cognitive-partitioning.md",
+      "title": "Cognitive Partitioning",
+      "type": "text/markdown",
+      "audience": "docs",
+      "exposure": "nav",
+      "tier": 1,
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": [
+        "odd",
+        "cognition",
+        "scaling",
+        "decision-load"
+      ]
+    },
+    {
       "uri": "klappy://canon/compiled/epoch-e0002-readme",
       "path": "/canon/_compiled/epoch-E0002/README.md",
       "title": "Compiled Canon Outputs (Epoch E0002)",
@@ -629,6 +646,23 @@
         "architecture",
         "conceptual-model",
         "philosophy"
+      ]
+    },
+    {
+      "uri": "klappy://canon/odd/tool-specialization",
+      "path": "/canon/odd/appendices/tool-specialization.md",
+      "title": "Tool Specialization",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": [
+        "odd",
+        "pattern",
+        "tools",
+        "decision-complexity"
       ]
     },
     {
