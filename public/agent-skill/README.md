@@ -7,7 +7,7 @@ This folder contains compiled ODD packs for public consumption.
 When deployed to Cloudflare Pages:
 
 - **Latest**: `https://agent-skill.klappy.dev/latest/prd-guide-pack.md`
-- **Versioned**: `https://agent-skill.klappy.dev/v1.1/dist/prd-guide-pack.md`
+- **Versioned**: `https://agent-skill.klappy.dev/v1.1/prd-guide-pack.md`
 
 ## Structure
 
@@ -17,10 +17,9 @@ public/agent-skill/
 ├── latest/            # Always points to current champion
 │   └── prd-guide-pack.md
 ├── v1.1/
-│   └── dist/
-│       ├── README.md
-│       ├── prd-guide-pack.md
-│       └── _meta/
+│   ├── README.md
+│   ├── prd-guide-pack.md
+│   └── _meta/
 └── v1.2/              # (future versions)
 ```
 
@@ -36,7 +35,7 @@ public/agent-skill/
 2. Paste into your AI context (Claude Code, Cursor, etc.)
 3. Start your PRD creation conversation
 
-See `v1.1/dist/README.md` for detailed usage instructions.
+See `v1.1/README.md` for detailed usage instructions.
 
 ## Versioning
 

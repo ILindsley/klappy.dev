@@ -75,14 +75,14 @@ After deployment completes, verify these URLs return HTTP 200:
 
 ### Using Default Domain
 ```bash
-curl -I https://agent-skill.pages.dev/v1.1/dist/prd-guide-pack.md
-curl -I https://agent-skill.pages.dev/v1.1/dist/README.md
+curl -I https://agent-skill.pages.dev/v1.1/prd-guide-pack.md
+curl -I https://agent-skill.pages.dev/v1.1/README.md
 ```
 
 ### Using Custom Domain (after DNS propagation)
 ```bash
-curl -I https://agent-skill.klappy.dev/v1.1/dist/prd-guide-pack.md
-curl -I https://agent-skill.klappy.dev/v1.1/dist/README.md
+curl -I https://agent-skill.klappy.dev/v1.1/prd-guide-pack.md
+curl -I https://agent-skill.klappy.dev/v1.1/README.md
 ```
 
 ---
@@ -92,21 +92,22 @@ curl -I https://agent-skill.klappy.dev/v1.1/dist/README.md
 | URL | Content |
 |-----|---------|
 | `/latest/prd-guide-pack.md` | Always points to current champion |
-| `/v1.1/dist/prd-guide-pack.md` | The compiled PRD guide pack (~12K tokens) |
-| `/v1.1/dist/README.md` | Consumer guidance for using the pack |
-| `/v1.1/dist/_meta/` | Compilation metadata |
+| `/v1.1/prd-guide-pack.md` | The compiled PRD guide pack (~12K tokens) |
+| `/v1.1/README.md` | Consumer guidance for using the pack |
+| `/v1.1/_meta/` | Compilation metadata |
 
-**Note**: The `/latest/` path provides a stable URL for consumers who always want the current champion. Versioned paths (`/v1.1/dist/`) allow pinning to specific versions.
+**Note**: The `/latest/` path provides a stable URL for consumers who always want the current champion. Versioned paths (`/v1.1/`) allow pinning to specific versions. Build outputs deploy the *contents* of dist, not the dist folder itself.
 
 ---
 
 ## Troubleshooting
 
 ### 404 on pack URL
-- Verify the `v1.1/dist/` folder exists in `public/agent-skill/`
+- Verify the `v1.1/` folder exists in `public/agent-skill/`
 - Check that `public/agent-skill` is set as the build output directory
 - Ensure the deployment completed successfully
 - Verify content has been promoted to `public/agent-skill/` (source is in `products/agent-skill/`)
+- Note: Deploy the *contents* of dist, not the dist folder itself
 
 ### Custom domain not working
 - Check DNS propagation: `dig agent-skill.klappy.dev`
@@ -121,7 +122,7 @@ curl -I https://agent-skill.klappy.dev/v1.1/dist/README.md
 
 ## Post-Setup Checklist
 
-- [ ] Default domain serves pack: `agent-skill.pages.dev/v1.1/dist/prd-guide-pack.md`
+- [ ] Default domain serves pack: `agent-skill.pages.dev/v1.1/prd-guide-pack.md`
 - [ ] Default domain serves latest: `agent-skill.pages.dev/latest/prd-guide-pack.md`
 - [ ] Custom domain configured (optional): `agent-skill.klappy.dev`
 - [ ] HTTP 200 verified for versioned pack URL
