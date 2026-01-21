@@ -93,6 +93,7 @@ In addition to canon constraints, this lane observes:
 3. **Version immutability**: Once a version is published, it cannot be changed
 4. **INSTRUCTIONS.md is ephemeral**: Generated per-attempt in the attempt folder, never persisted in `src/` or version folders
 5. **Verify before CHAMPION**: No attempt may be marked CHAMPION until HTTP 200 verified on deployed preview URL
+6. **Complete latest update**: Promotion must update both `latest/prd-guide-pack.md` AND `latest/README.md` to reflect new champion version
 
 ---
 
@@ -128,6 +129,7 @@ In addition to canon constraints, this lane observes:
 - Verify deployment HTTP 200 BEFORE claiming CHAMPION
 - Cloudflare preview URLs use deployment ID from PR checks
 - Clean restart after v1.2.2 failure (didn't steer a miss)
+- Promotion must update `latest/README.md` — pack file copy alone leaves stale version reference
 
 ---
 

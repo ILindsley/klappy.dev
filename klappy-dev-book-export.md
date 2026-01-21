@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-21T04:21:30.297Z
+Generated: 2026-01-21T04:22:37.923Z
 Total Files: 138
 
 This is a documentation export of all markdown files from the klappy.dev
@@ -25302,6 +25302,7 @@ In addition to canon constraints, this lane observes:
 3. **Version immutability**: Once a version is published, it cannot be changed
 4. **INSTRUCTIONS.md is ephemeral**: Generated per-attempt in the attempt folder, never persisted in `src/` or version folders
 5. **Verify before CHAMPION**: No attempt may be marked CHAMPION until HTTP 200 verified on deployed preview URL
+6. **Complete latest update**: Promotion must update both `latest/prd-guide-pack.md` AND `latest/README.md` to reflect new champion version
 
 ---
 
@@ -25337,6 +25338,7 @@ In addition to canon constraints, this lane observes:
 - Verify deployment HTTP 200 BEFORE claiming CHAMPION
 - Cloudflare preview URLs use deployment ID from PR checks
 - Clean restart after v1.2.2 failure (didn't steer a miss)
+- Promotion must update `latest/README.md` — pack file copy alone leaves stale version reference
 
 ---
 
@@ -26880,6 +26882,7 @@ Canon refresh to v0.5.4 with proper ODD compliance. INSTRUCTIONS.md treated as e
 
 - Initially declared CHAMPION before verifying deployment (corrected)
 - Had to find preview URL pattern (deployment ID based)
+- `public/agent-skill/latest/README.md` not updated during promotion (discovered post-deploy, still claimed v1.1)
 
 ## Learnings
 
@@ -26887,10 +26890,12 @@ Canon refresh to v0.5.4 with proper ODD compliance. INSTRUCTIONS.md treated as e
 2. **Cloudflare preview URLs**: Use deployment ID from PR checks (e.g., `20426ceb.klappy-dev-agent-skill.pages.dev`)
 3. **ODD formula works**: Pack + CONTRACT + PRD = Attempt. Nothing else needed.
 4. **Production vs preview**: `agent-skill.klappy.dev` is production; `main.klappy-dev-agent-skill.pages.dev` is main branch preview
+5. **Update ALL latest references**: Promotion must update `latest/README.md` to reflect new champion version (pack file alone is not enough)
 
 ## Follow-up
 
 - Consider automating preview URL discovery in attempt workflow
+- Add `latest/README.md` update to promotion checklist or automate it
 
 
 
