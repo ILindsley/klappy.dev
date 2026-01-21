@@ -194,7 +194,7 @@ There is one `products/<lane>/src/` per lane that gets rebuilt.
 
 ## Deployment Preservation
 
-Each attempt may be deployed as a preview during development. See [Attempt Lifecycle](/canon/odd/appendices/attempt-lifecycle.md) for how deployments fit into the broader attempt model.
+Each attempt may be deployed as a preview during development. See [Attempt Lifecycle](/docs/appendices/attempt-lifecycle.md) for how deployments fit into the broader attempt model.
 
 Attempt metadata (`META.json`) stores:
 - `sealed_commit` — the commit SHA (truth)

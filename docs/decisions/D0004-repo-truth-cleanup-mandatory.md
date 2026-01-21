@@ -59,7 +59,7 @@ If the repository is dirty, conclusions drawn from it are invalid. Cleanup is no
 ## Implementation
 
 - Script: `/infra/scripts/attempt-cli.js` (`cmdCleanup` prunes worktrees/branches)
-- Philosophy: `/canon/odd/appendices/repo-truth.md` documents the principle
+- Philosophy: `/docs/appendices/repo-truth.md` documents the principle
 - Automation: `attempt:reset` auto-calls cleanup for PRD-specific branches
 
 ### What "Dirty" Means
@@ -76,5 +76,5 @@ A repository is dirty when:
 
 - Commit: `e7c88aa` — "feat: add attempt:cleanup command for automatic worktree/branch pruning"
 - Commit: `5278f2f` — "docs: encode epistemic hygiene as canonical principle"
-- Document: `/canon/odd/appendices/repo-truth.md`
+- Document: `/docs/appendices/repo-truth.md`
 - Problem observed: Old worktrees and branches accumulated, making repo state untrustworthy

@@ -12,7 +12,7 @@ That file is the canonical, copy-pasteable entry point for all agent attempts.
 
 If you want to understand the system before acting:
 
-1. `/canon/odd/appendices/product-lanes.md` — multi-lane PRD architecture
+1. `/docs/appendices/product-lanes.md` — multi-lane PRD architecture
 2. `/canon/index.md` — Canon orientation, precedence, stability
 3. `/canon/odd/manifesto.md` — philosophy and intent
 4. `/docs/ATTEMPTS.md` — attempt lifecycle orientation

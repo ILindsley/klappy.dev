@@ -127,5 +127,5 @@ Canon contains portable methodology. These decisions are the klappy.dev-specific
 | Canon Document | Related Decisions |
 |----------------|-------------------|
 | `/canon/odd/contract.md` | D0009, D0011, D0012 |
-| `/canon/odd/appendices/epochs.md` | D0012, D0014 |
+| `/docs/appendices/epochs.md` | D0012, D0014 |
 | `/canon/constraints.md` | All decisions respect constraints |

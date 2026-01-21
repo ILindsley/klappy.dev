@@ -120,7 +120,7 @@ Local preview instructions are allowed during development, but they **do not sat
 
 If an agent cannot provide both URLs, the attempt is **INVALID**.
 
-See `/canon/odd/appendices/online-evidence.md` for the full requirement.
+See `/docs/appendices/online-evidence.md` for the full requirement.
 
 ---
 
@@ -218,9 +218,9 @@ The website lane MUST support generating a wipeable "visitor pack" used for prog
 
 ## Related Documents
 
-- Lane architecture: `/canon/odd/appendices/product-lanes.md`
+- Lane architecture: `/docs/appendices/product-lanes.md`
 - Canon constraints: `/canon/constraints.md`
 - Definition of Done: `/canon/definition-of-done.md`
 - Legacy PRD (v0.3): `/docs/PRD/website/PRD-legacy-v0.3.md`
-- Compilation: `/canon/odd/appendices/compilation.md`
+- Compilation: `/docs/appendices/compilation.md`
 - Media philosophy: `/canon/odd/appendices/media-as-learning-layer.md`

@@ -91,5 +91,5 @@ Production deploys from the `prod` branch to the primary domain.
 ## Related Documents
 
 - Build contract: `/infra/contracts/build-output.md`
-- Lane architecture: `/canon/odd/appendices/product-lanes.md`
+- Lane architecture: `/docs/appendices/product-lanes.md`
 - Cloudflare config: `/docs/CLOUDFLARE_CONFIG.md`

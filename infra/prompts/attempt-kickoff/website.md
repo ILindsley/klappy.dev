@@ -15,7 +15,7 @@ Copy/paste into agent chat WITHOUT modification.
 
 ## Read First
 
-1. `/canon/odd/appendices/evidence.md`
+1. `/docs/appendices/evidence.md`
 2. `/docs/PRD/website/PRD.md`
 3. `/canon/constraints.md`
 

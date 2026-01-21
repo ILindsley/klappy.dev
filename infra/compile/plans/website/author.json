@@ -4,11 +4,11 @@
   "mode": "concat",
   "output": "author-pack.md",
   "sources": [
-    "canon/index.md",
-    "canon/odd/appendices/product-lanes.md",
-    "canon/odd/appendices/epochs.md",
-    "canon/odd/appendices/compilation.md",
-    "canon/odd/appendices/compilation-targets.md",
+    "canon/README.md",
+    "docs/appendices/product-lanes.md",
+    "docs/appendices/epochs.md",
+    "docs/appendices/compilation.md",
+    "docs/appendices/compilation-targets.md",
     "docs/PRD/website/PRD.md"
   ]
 }

@@ -243,7 +243,7 @@ Memory is curated learning that reduces future drag.
 
 ## Related Documents
 
-- `/canon/odd/appendices/progressive-elevation.md` — Elevation criteria
-- `/canon/odd/appendices/compiled-memory.md` — Compression for agents
-- `/canon/odd/appendices/product-lanes.md` — Lane isolation
-- `/canon/odd/appendices/attempt-lifecycle.md` — Attempt containment
+- `/docs/appendices/progressive-elevation.md` — Elevation criteria
+- `/docs/appendices/compiled-memory.md` — Compression for agents
+- `/docs/appendices/product-lanes.md` — Lane isolation
+- `/docs/appendices/attempt-lifecycle.md` — Attempt containment

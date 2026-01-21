@@ -47,7 +47,7 @@ When `.attempt.json` exists:
 
 **If `/_evidence/index.html` returns 404, the attempt is INVALID.**
 
-See `/canon/odd/decisions/D0014-e0003-evidence-first-era.md` for the epoch decision.
+See `/docs/decisions/D0014-e0003-evidence-first-era.md` for the epoch decision.
 
 ---
 
@@ -76,8 +76,8 @@ Every attempt MUST declare a lane. Attempts without a lane are invalid.
 **Rule:**  
 Before registration, declare the current epoch. Epoch determines comparability of outcomes. If `epoch_id` is missing, results must not be compared to prior attempts.
 
-See `/canon/odd/appendices/product-lanes.md` for the multi-lane architecture.  
-See `/canon/odd/appendices/epochs.md` for epoch semantics.
+See `/docs/appendices/product-lanes.md` for the multi-lane architecture.  
+See `/docs/appendices/epochs.md` for epoch semantics.
 
 ---
 
@@ -190,7 +190,7 @@ See `/infra/contracts/build-output.md`
 - Stack choice is unrestricted
 - No client secrets
 
-See `/canon/odd/appendices/lane-implementation-surfaces.md` for the locked folder contract.
+See `/docs/appendices/lane-implementation-surfaces.md` for the locked folder contract.
 
 ---
 
@@ -225,7 +225,7 @@ Before an attempt can be marked complete, the agent MUST:
 
 Local builds and previews are allowed during development, but they **do not satisfy** the Definition of Done.
 
-See `/canon/odd/appendices/online-evidence.md` for the full requirement.
+See `/docs/appendices/online-evidence.md` for the full requirement.
 
 ---
 
@@ -243,15 +243,15 @@ See `/canon/odd/appendices/online-evidence.md` for the full requirement.
 
 ## 🔗 Related Documents
 
-- **Product Lanes Architecture: `/canon/odd/appendices/product-lanes.md`** (READ FIRST)
-- **Online Evidence Requirement: `/canon/odd/appendices/online-evidence.md`** (no URL = invalid attempt)
+- **Product Lanes Architecture: `/docs/appendices/product-lanes.md`** (READ FIRST)
+- **Online Evidence Requirement: `/docs/appendices/online-evidence.md`** (no URL = invalid attempt)
 - **Preview Guide: `/docs/PREVIEW.md`** (local + Cloudflare preview how-to)
 - **Interface Contracts: `/interfaces/index.md`** (semver'd compatibility promises)
-- **Lane Build Layout: `/canon/odd/appendices/lane-build-layout.md`** (how lanes avoid /src and /dist collisions)
+- **Lane Build Layout: `/docs/appendices/lane-build-layout.md`** (how lanes avoid /src and /dist collisions)
 - **Agent Entry Point: `/docs/AGENT_KICKOFF.md`** (canonical agent instructions)
 - Attempt lifecycle (deep): `/docs/ATTEMPTS.md`
 - Deploy contract: `/infra/contracts/build-output.md`
 - Cloudflare config: `/docs/CLOUDFLARE_CONFIG.md`
-- Decision log: `/canon/odd/decisions/`
-- Repo truth principle: `/canon/odd/appendices/repo-truth.md`
-- Drift Checks: `/canon/odd/appendices/drift-checks.md`
+- Decision log: `/docs/decisions/`
+- Repo truth principle: `/docs/appendices/repo-truth.md`
+- Drift Checks: `/docs/appendices/drift-checks.md`

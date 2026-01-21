@@ -370,4 +370,4 @@ Independence enforcement:
 - Do not “promote” an attempt folder into `/src/` as a substitute for sealing.
 - Attempts are sealed records; `/src/` remains disposable and may be rebuilt between attempts.
 
-See: `/canon/odd/appendices/attempt-lifecycle.md`
+See: `/docs/appendices/attempt-lifecycle.md`

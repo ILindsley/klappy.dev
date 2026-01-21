@@ -1,131 +1,81 @@
 ---
 lane: website
 pack: visitor
-built_at: 2026-01-20T05:23:25.798Z
-git_commit: c8e732941363a3edd7a564ad7e5f0e1fceea66aa
+built_at: 2026-01-21T05:24:32.203Z
+git_commit: fa94679e3e1824fb564490282b040cbdcaff92f1
 sources:
-  - canon/index.md
-  - canon/odd/appendices/product-lanes.md
-  - canon/odd/appendices/epochs.md
-  - canon/odd/appendices/compilation.md
+  - canon/README.md
+  - docs/appendices/product-lanes.md
+  - docs/appendices/epochs.md
+  - docs/appendices/compilation.md
   - docs/PRD/website/PRD.md
 source_hashes:
-  canon/index.md: 8bf3004d7c204693562db1c4206a7736efafdb85b05c299f60366a460d3125dc
-  canon/odd/appendices/product-lanes.md: 977b29aa2e06eecb32419d967da590f4d851c3c9feb5e38269cfc094b6da3d09
-  canon/odd/appendices/epochs.md: 59099c36270436e7e095d3acaa9161c75d7ae72b8bd500c51dc2145260c743dc
-  canon/odd/appendices/compilation.md: f95da459f446bd2c63d664c997663f0c02bdb0852b0c46af0106c1750e559aef
-  docs/PRD/website/PRD.md: 7177542662a88a87277d7bcb6cde9fd4376a32e971a30d42af5ffa813d8ddca1
+  canon/README.md: fe5795892bd4378256fb67ec8f3664e5c1e1d65228e5c89251b76f708f4e279c
+  docs/appendices/product-lanes.md: 2ae8b18bb685ad87aded2127b547f91a0b132f4a3945dc10c06d0ffd4f1dc828
+  docs/appendices/epochs.md: 20fd2a722267b13cd8441eb1cf8a7d94f41131fe30750da04b05d088a23bf334
+  docs/appendices/compilation.md: 5751bcb06ef4784f15690ba5ccc3e70395e0acf575bb57c38084aeaabdbba55d
+  docs/PRD/website/PRD.md: a02a183dc2151ed25a6cdcc7db14228cbd3554aa694910ee3074af0f3560d7e3
 ---
 
 
 ---
 
-## Source: `canon/index.md`
+## Source: `canon/README.md`
 
 ---
-uri: klappy://meta/canon-index
-title: "Canon Index"
+uri: klappy://canon
+title: "Canon"
 audience: canon
 exposure: nav
 tier: 1
 voice: neutral
-stability: semi_stable
+stability: stable
 tags: ["canon", "index", "orientation"]
 ---
 
-# 🧭 Canon Index v0.1
+# 🧭 Canon
 
-**Scope, Structure, Intent, and Confidence**
+Curated documents that capture how decisions are made, what assumptions are held, how work is verified, and how rigor changes as projects mature.
 
-This document provides orientation to the Canon.
-It describes what exists, what each artifact is for, how they relate, and where the current design is strong vs fragile.
-
-It does not define workflows, agent loops, enforcement steps, or execution order.
+The Canon exists so that reasoning does not have to be repeated.
 
 ---
 
-## 📌 Purpose of the Canon
+## 📁 Contents
 
-The Canon is a curated set of documents that capture:
-• how decisions are made
-• what assumptions are held
-• how work is verified
-• how rigor changes as projects mature
+### Core Documents
 
-Its purpose is clarity, not control.
+| File | Title | Summary | Answers |
+|------|-------|---------|---------|
+| `constraints.md` | Constraints | Baseline assumptions and non-negotiables that shape every decision. | What must be true for this work to make sense? |
+| `decision-rules.md` | Decision Rules | Default heuristics used when multiple valid options exist. | How do choices tend to be made? |
+| `definition-of-done.md` | Definition of Done | What qualifies as completed work and what evidence is required. | When can work honestly be called done? |
+| `self-audit.md` | Self-Audit Checklist | Review checklist before declaring completion. | What should be reviewed before claiming success? |
+| `visual-proof.md` | Visual Proof Standards | What qualifies as acceptable visual evidence. | What does "prove it visually" mean? |
+| `completion-report-template.md` | Completion Report Template | Standard format for reporting completed work. | How should completion be communicated? |
+| `CHANGELOG.md` | Canon Changelog | Version history of canon changes. | What changed and when? |
 
-PRDs are versioned and may be attempted multiple times; attempts are sealed records, not evolving workstreams.
+### Subfolders
 
-The Canon exists so that:
-• reasoning does not have to be repeated
-• principles remain stable while implementations change
-• future systems can reference intent without inheriting outdated instructions
-
----
-
-## 🧠 What the Canon Is (and Is Not)
-
-**The Canon Is**
-• a shared reference
-• a source of assumptions and defaults
-• a way to encode thinking without enforcing execution
-
-**The Canon Is Not**
-
-• a workflow
-• a command system
-• a task list
-• a replacement for judgment
-
-Nothing in the Canon executes by itself.
+| Folder | Purpose |
+|--------|---------|
+| `odd/` | Outcomes-Driven Development philosophy and appendices. See [odd/README.md](./odd/README.md) |
+| `meta/` | Metadata and pack configuration. |
+| `_compiled/` | Compiled outputs (derived, wipeable). |
 
 ---
 
 ## 🚀 Start Here
 
-**Constraints** — baseline assumptions and non-negotiables that shape every decision. What must be true for this work to make sense?
+1. **`constraints.md`** — What must be true for this work to make sense?
+2. **`definition-of-done.md`** — When can work honestly be called done?
+3. **`odd/manifesto.md`** — Why this approach exists.
 
-**Definition of Done** — what qualifies as completed work and what evidence is required. When can work honestly be called done?
-
-These two documents anchor everything else.
-
----
-
-## 🔍 If You Want the Philosophy
-
-**ODD Manifesto** — the philosophical and operational foundation of Outcomes-Driven Development. Why this approach exists.
-
-**Maturity Model** — how rigor changes as projects mature. When different expectations become binding.
-
-**Decision Rules** — default heuristics used when multiple valid options exist.
+These three documents anchor everything else.
 
 ---
 
-## 🧩 If You Want the Edge Cases
-
-The appendices extend understanding without introducing enforcement:
-
-• **Attempt Lifecycle** — how PRD versions, attempts, and evidence are preserved
-• **Quantum Development** — evaluating multiple paths before revising intent
-• **Repository Topology** — what lives where and what changes when
-• **Misuse Patterns** — common failure modes and how ODD gets misapplied
-• **Media as a Learning Layer** — media is optional, regenerable, and progressively disclosed; text remains canonical
-
-These are diagnostic and orientation documents, not requirements.
-
----
-
-## 🔒 Public vs Internal Boundary
-
-• `/odd/README.md` → public-facing ODD (shareable, human-friendly)
-• `/canon/**` → internal reference (governance artifacts, precise language)
-
-Public documents explain intent.
-Canon documents preserve precision.
-
----
-
-## 📖 Precedence & Interpretation (Orientation Only)
+## 📖 Precedence & Interpretation
 
 A useful mental model for reading:
 
@@ -139,210 +89,35 @@ If documents appear to conflict, maturity context and explicit tradeoffs usually
 
 ---
 
-## 📁 Canon Structure
+## 🧠 What the Canon Is (and Is Not)
 
-```text
+**The Canon Is:**
+- A shared reference
+- A source of assumptions and defaults
+- A way to encode thinking without enforcing execution
 
-/canon/
-  index.md
-  constraints.md
-  decision-rules.md
-  definition-of-done.md
-  self-audit.md
-  visual-proof.md
-  completion-report-template.md
-  odd/
-    contract.md
-    manifesto.md
-    maturity.md
-    misuse-patterns.md
-    prompt-architecture.md
-    orientation-map.md
-    appendices/
-      alignment-reviews.md
-      epochs.md
-      lane-implementation-surfaces.md
-      media-as-learning-layer.md
-      product-lanes.md
-      attempt-lifecycle.md
-      drift-checks.md
-      evolution-not-automation.md
-      lane-build-layout.md
-      quantum-development.md
-      repo-topology.md
-      repo-truth.md
-      visual-evolution.md
-    decisions/
-      D0001-prod-branch-is-production.md
-      ...
-```
+**The Canon Is Not:**
+- A workflow
+- A command system
+- A task list
+- A replacement for judgment
 
-Each file addresses a different dimension of decision-making.
+Nothing in the Canon executes by itself.
 
 ---
 
-## 📎 Canon Components & Roles
+## 🔒 Public vs Internal Boundary
 
-### Constraints
+- `/odd/README.md` → public-facing ODD (shareable, human-friendly)
+- `/canon/**` → internal reference (governance artifacts, precise language)
 
-**File:** `constraints.md`
-
-Defines baseline assumptions and non-negotiables that shape decisions.
-
-Answers:
-
-What must be true for this work to make sense?
+Public documents explain intent. Canon documents preserve precision.
 
 ---
 
-### Decision Rules
+## 📋 Meta Rules
 
-**File:** `decision-rules.md`
-
-Default heuristics used when multiple valid options exist.
-
-Answers:
-
-How do choices tend to be made?
-
----
-
-### Evolution
-
-- [Failure-Driven Modularity](./evolution/failure-driven-modularity.md)
-
----
-
-### Definition of Done & Evidence Policy
-
-**File:** `definition-of-done.md`
-
-Defines what qualifies as completed work and what evidence is required.
-
-Answers:
-
-When can work honestly be called done?
-
----
-
-### Self-Audit Checklist
-
-**File:** `self-audit.md`
-
-A checklist for reviewing work before declaring completion.
-
-Answers:
-
-What should be reviewed before claiming success?
-
----
-
-### Visual Proof Standards
-
-**File:** `visual-proof.md`
-
-Defines what qualifies as acceptable visual evidence.
-
-Answers:
-
-What does "prove it visually" mean?
-
----
-
-### Completion Report Template
-
-**File:** `completion-report-template.md`
-
-Standard format for reporting completed work.
-
-Answers:
-
-How should completion be communicated?
-
----
-
-### ODD System Contract
-
-**File:** `odd/contract.md`
-
-The single source of truth for ODD workflow contract versioning.
-
-Answers:
-
-What version of ODD is this repo compatible with?
-
----
-
-### ODD Manifesto (Extended)
-
-**File:** `odd/manifesto.md`
-
-Philosophical and operational foundation of Outcomes-Driven Development.
-
-Answers:
-
-Why this approach exists.
-
----
-
-### Project Maturity & Progressive Governance
-
-**File:** `odd/maturity.md`
-
-Defines how rigor changes as projects mature.
-
-Answers:
-
-When different expectations become binding.
-
----
-
-### ODD Appendices (Orientation Only)
-
-These files extend understanding without introducing enforcement:
-• Alignment Reviews (odd/appendices/alignment-reviews.md)
-Periodic evaluation of the ODD system itself. Detects drift between stated intent, implemented process, and observed outcomes.
-• Epochs (odd/appendices/epochs.md)
-Named periods where the meaning of "success" is stable enough that outcomes can be compared. Prevents invalid cross-era comparisons.
-• Progressive Elevation & Decay (odd/appendices/progressive-elevation.md)
-The memory model: how artifacts move from ephemeral (attempts/PRDs) to durable (canon/contracts/decisions). Most artifacts decay; only proven patterns elevate.
-• Canonical Compression (odd/appendices/canonical-compression.md)
-The compilation model: how derived, minimal working models are produced from Source Canon without mutating source truth. Compiled outputs are disposable and epoch-scoped.
-• Lane-Scoped Implementation Surfaces (odd/appendices/lane-implementation-surfaces.md)
-Each lane owns its own `/products/<lane>/src` and `/products/<lane>/dist`. No shared repo-root surfaces.
-• Product Lanes (odd/appendices/product-lanes.md)
-Why multiple PRD lanes exist and how they relate. Each lane has its own PRD, attempts, and lifecycle. Lanes share canon, not lifecycle.
-• Misuse Patterns (odd/misuse-patterns.md)
-Common failure modes and how ODD is misapplied in practice. Diagnostic only.
-• Prompt Architecture (odd/prompt-architecture.md)
-How intent scales without giant prompts. Orientation only.
-• Orientation Map (odd/orientation-map.md)
-A one-page mental model of ODD, Canon, Evidence, and Outcomes.
-• Attempt Lifecycle (odd/appendices/attempt-lifecycle.md)
-How PRD versions, attempts, evidence, and deployments are preserved across iterations. PRDs can have multiple attempts; attempts are sealed records.
-• Quantum Development (odd/appendices/quantum-development.md)
-Evaluating multiple execution paths before revising intent. Explains why divergence is signal, not waste.
-• Repository Topology (odd/appendices/repo-topology.md)
-What lives where and what changes when. Encodes App/Content/Infrastructure decoupling.
-• Evolution, Not Automation (odd/appendices/evolution-not-automation.md)
-Why this system supports learning, not automatic execution. Humans stay in the loop.
-• Visual Evolution (odd/appendices/visual-evolution.md)
-Why visual systems evolve independently from products. Products consume visual interfaces, not raw design decisions.
-• Drift Checks (odd/appendices/drift-checks.md)
-The drift-prevention mechanism. When docs, prompts, and tooling diverge, truth becomes vibes.
-• Lane Build Layout (odd/appendices/lane-build-layout.md)
-How lanes avoid /src and /dist collisions. Worktrees isolate, deployments are lane-scoped.
-• Online Evidence Requirement (odd/appendices/online-evidence.md)
-Why "works on my machine" is not evidence. Attempts are invalid without online preview URLs.
-• Deploy Evidence (odd/appendices/deploy-evidence.md)
-Why evidence must be in the build output. Cloudflare only serves products/<lane>/dist, not /attempts/**.
-
----
-
-## 📋 Meta Rules (Orientation Only)
-
-These are structural conventions for keeping the Canon coherent over time.
-They are not workflows or enforcement steps.
+Structural conventions for keeping the Canon coherent over time. These are not workflows or enforcement steps.
 
 **1. Single Inventory Source**
 If an inventory of Canon resources exists, there should be one authoritative source (e.g., a manifest). Other indexes should be derived or optional.
@@ -357,7 +132,7 @@ Prefer stable file and URI naming over clever branding. Rename rarely.
 First-person documents may be consumed as-is or translated by clients. The Canon itself does not require a specific rendering voice.
 
 **5. Multi-Lane PRD Architecture**
-PRDs are organized into independent product lanes. Each lane has its own active PRD, attempts, and lifecycle. Lanes share canon, not lifecycle. See `/canon/odd/appendices/product-lanes.md` for the full model.
+PRDs are organized into independent product lanes. Each lane has its own active PRD, attempts, and lifecycle. Lanes share canon, not lifecycle. See `odd/appendices/product-lanes.md` for the full model.
 
 ---
 
@@ -365,92 +140,81 @@ PRDs are organized into independent product lanes. Each lane has its own active 
 
 Not all Canon documents are equally stable.
 
-Some are intended to remain largely fixed.
-Others are expected to evolve through use.
+Some are intended to remain largely fixed. Others are expected to evolve through use.
 
 Change is allowed, but should be:
-• intentional
-• versioned (at least informally)
-• documented somewhere discoverable
+- Intentional
+- Versioned (at least informally)
+- Documented somewhere discoverable
 
 ---
 
-## ⚠️ Confidence & Drift Risk (Self-Assessment)
+## ⚠️ Confidence & Drift Risk
 
-This section expresses current confidence that the Canon and surrounding architecture align with the core pillars:
-KISS, DRY, Consistency, Maintainability, Antifragile, Scalable, Prompt-over-Code.
+This section expresses current confidence that the Canon and surrounding architecture align with the core pillars: KISS, DRY, Consistency, Maintainability, Antifragile, Scalable, Prompt-over-Code.
 
-These are not guarantees.
-They are a snapshot of perceived risk.
+These are not guarantees. They are a snapshot of perceived risk.
 
-Confidence scale
-• 0.9+ — robust
-• 0.7–0.85 — strong, but watch for drift
-• 0.5–0.7 — plausible, fragile under misuse
-• <0.5 — likely misaligned unless corrected
+**Confidence scale:**
+- 0.9+ — robust
+- 0.7–0.85 — strong, but watch for drift
+- 0.5–0.7 — plausible, fragile under misuse
+- <0.5 — likely misaligned unless corrected
 
-Current scores (v0.1 snapshot)
-• Prompt-over-Code / Convention-over-Config: 0.80
-Strong fit due to stable addressing and canonical retrieval surfaces. Risk: schema sprawl or client-specific conventions.
-• KISS: 0.75
-Minimal primitives and no workflow semantics. Risk: meta-layer creep.
-• DRY (with isolation): 0.70
-Canon centralizes principles; manifest can become a single inventory. Risk: duplicate indices drifting.
-• Consistency: 0.65
-URI and metadata structure support consistency. Risk: naming drift across files and routes.
-• Maintainability: 0.70
-Separation of stable worldview vs evolving templates helps. Risk: manual inventory updates falling out of sync.
-• Antifragile: 0.60
-Recoverability improves if resources can be served statically and via MCP. Risk: hidden single points of failure.
-• Scalable: 0.70
-Schema supports growth. Risk: large manifests becoming manually brittle.
+**Current scores (v0.1 snapshot):**
 
-Intended use of this section
-• Make risks explicit early
-• Prevent false confidence
-• Provide a stable baseline for future comparison
+| Pillar | Score | Notes |
+|--------|-------|-------|
+| Prompt-over-Code | 0.80 | Strong fit. Risk: schema sprawl or client-specific conventions. |
+| KISS | 0.75 | Minimal primitives. Risk: meta-layer creep. |
+| DRY (with isolation) | 0.70 | Canon centralizes principles. Risk: duplicate indices drifting. |
+| Consistency | 0.65 | URI/metadata structure supports it. Risk: naming drift. |
+| Maintainability | 0.70 | Stable worldview vs evolving templates. Risk: manual updates out of sync. |
+| Antifragile | 0.60 | Recoverable if served statically. Risk: hidden single points of failure. |
+| Scalable | 0.70 | Schema supports growth. Risk: large manifests becoming brittle. |
 
 ---
 
 ## 🚫 What Is Intentionally Undefined
 
 The Canon deliberately does not define:
-• specific tools
-• specific agents
-• specific workflows
-• specific automation loops
+- Specific tools
+- Specific agents
+- Specific workflows
+- Specific automation loops
 
 These are left open to evolve without rewriting foundational thinking.
 
 ---
 
-## 💡 Closing Note
+## 📦 For Pack Compilation
 
-The Canon exists to preserve intent without freezing execution.
+When building a guide pack, include:
+- This README for orientation
+- Specific documents needed for the pack's purpose
+- Subfolder READMEs for scannable summaries without including all files
 
-It encodes how thinking works, not what must be done next.
+See `odd/appendices/compilation.md` for the compilation model.
 
 ---
 
 ## ✅ Status
 
-• Canon Index v0.1 complete
-• Orientation-only
-• Includes a confidence and drift snapshot
-
----
+- Canon Index v0.1 complete
+- Orientation-only
+- Includes confidence and drift snapshot
 
 This Canon v0.1 is considered stable for initial builds. Revisions should be additive unless a documented failure requires change.
 
 
 ---
 
-## Source: `canon/odd/appendices/product-lanes.md`
+## Source: `docs/appendices/product-lanes.md`
 
 ---
-uri: klappy://canon/odd/product-lanes
+uri: klappy://docs/appendices/product-lanes
 title: "Product Lanes in Outcome-Driven Development"
-audience: canon
+audience: docs
 exposure: hidden
 tier: 2
 voice: neutral
@@ -459,6 +223,29 @@ tags: ["odd", "prd", "architecture", "lanes", "orientation"]
 ---
 
 # Product Lanes in Outcome-Driven Development
+
+> Why multiple PRD lanes exist and how they relate in klappy.dev.
+
+## Description
+
+This documents klappy.dev's three product lanes: Website (human-facing orientation), AI Navigation Interface (AI helping humans understand ODD), and Agent Cognitive Skill (reusable agent framework). Each lane has its own PRD at `/docs/PRD/<lane>/PRD.md`, attempts at `/products/<lane>/attempts/`, and independent lifecycle. Lanes share canon, not lifecycle. Implementation surfaces are lane-scoped (`products/<lane>/src` and `products/<lane>/dist`). This prevents scope creep, evidence pollution, and cascading reruns across unrelated products.
+
+## Outline
+
+- Summary
+- Why PRDs Must Be Decoupled
+- The Three Lanes (Website, AI Navigation, Agent Skill)
+- Implementation Surfaces Are Lane-Scoped
+- Canon Is Not a Product
+- What Is Shared vs Isolated
+- Attempt Structure (Locked)
+- Anti-Patterns
+- Implications for Tooling and Docs
+- Scalability
+
+---
+
+## Content
 
 **Status:** Orientation  
 **Audience:** Internal / Canon  
@@ -562,7 +349,7 @@ Implementation directories are lane-scoped:
 
 Repo-root `/src` is not a shared surface in the multi-lane model.
 
-See: `/canon/odd/appendices/lane-implementation-surfaces.md`
+See: `/docs/appendices/lane-implementation-surfaces.md`
 
 ---
 
@@ -601,17 +388,19 @@ Products may render, query, or reason over canon - but never modify it directly.
 Every attempt MUST declare a lane before registration.
 Attempts without a lane are invalid.
 
-**Folder structure:** `/attempts/<lane>/prd-vX.Y/attempt-NNN/`
+**Folder structure:** `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/`
+
+Attempts are **lane-contained** — all artifacts live under the product lane directory.
 
 Valid examples:
-- `/attempts/website/prd-v1.0/attempt-001/`
-- `/attempts/ai-navigation/prd-v1.0/attempt-001/`
-- `/attempts/agent-skill/prd-v1.0/attempt-001/`
+- `/products/website/attempts/prd-v1.0/attempt-001/`
+- `/products/ai-navigation/attempts/prd-v1.0/attempt-001/`
+- `/products/agent-skill/attempts/prd-v1.0/attempt-001/`
 
 Invalid (do not use):
+- `/attempts/<lane>/prd-vX.Y/attempt-NNN/` (legacy, read-only)
 - `/attempts/prd-vX.Y/<lane>/`
-- `/attempts/<lane>/attempt-NNN/`
-- `/attempts/<lane>/<anything creative>/`
+- `/products/<lane>/attempts/attempt-NNN/` (missing PRD version)
 
 ---
 
@@ -655,12 +444,16 @@ Lane isolation prevents cascading reruns.
 
 ### Where Attempts Live
 
+Attempts are lane-contained:
+
 ```
-/attempts/
-  website/prd-vX.Y/attempt-NNN/
-  ai-navigation/prd-vX.Y/attempt-NNN/
-  agent-skill/prd-vX.Y/attempt-NNN/
+/products/
+  website/attempts/prd-vX.Y/attempt-NNN/
+  ai-navigation/attempts/prd-vX.Y/attempt-NNN/
+  agent-skill/attempts/prd-vX.Y/attempt-NNN/
 ```
+
+Note: Root `/attempts/**` is legacy (read-only). See `/attempts/README.md`.
 
 ### How Evolution Propagates
 
@@ -689,19 +482,19 @@ This lets you:
 
 ## Related Documents
 
-- Decision log: `/canon/odd/decisions/D0009-multi-lane-prd-architecture.md`
-- Attempt lifecycle: `/canon/odd/appendices/attempt-lifecycle.md`
+- Decision log: `/docs/decisions/D0009-multi-lane-prd-architecture.md`
+- Attempt lifecycle: `/docs/appendices/attempt-lifecycle.md`
 - Evolution philosophy: `/canon/odd/appendices/evolution-not-automation.md`
 
 
 ---
 
-## Source: `canon/odd/appendices/epochs.md`
+## Source: `docs/appendices/epochs.md`
 
 ---
-uri: klappy://canon/odd/epochs
+uri: klappy://docs/appendices/epochs
 title: "Epochs"
-audience: canon
+audience: docs
 exposure: nav
 tier: 2
 voice: neutral
@@ -710,6 +503,28 @@ tags: ["odd", "epochs", "fitness-landscape", "comparability", "orientation"]
 ---
 
 # Epochs
+
+> Named periods where success criteria are stable enough for outcome comparison.
+
+## Description
+
+An epoch is a named period where "success" meaning is stable enough to compare outcomes. Attempts are individuals, PRDs are fitness functions, Promotion is selection, Canon is inherited traits, and Epochs are shifts in the fitness landscape. An epoch defines evaluation reality: what "done" means, mandatory evidence, binding contracts, acceptable risks, and infrastructure stability. Epochs are not PRDs—they are the context in which PRDs are interpreted. klappy.dev defines E0001 (single-PRD era), E0002 (multi-lane era), and E0003 (evidence-first era with Cloudflare deployment proof required).
+
+## Outline
+
+- What an Epoch Is
+- What an Epoch Is Not
+- Relationship to Product Lanes
+- Relationship to PRDs and Attempts
+- When to Start a New Epoch
+- Naming Convention (E0001, E0002, E0003)
+- Minimal Epoch Metadata (META.json)
+- Anti-Patterns
+- E0003 — Evidence-First Era (klappy.dev specific)
+
+---
+
+## Content
 
 An **epoch** is a named period where the meaning of "success" is stable enough that outcomes can be compared.
 
@@ -896,12 +711,12 @@ This change alters the repository's selection pressure:
 
 ---
 
-## Source: `canon/odd/appendices/compilation.md`
+## Source: `docs/appendices/compilation.md`
 
 ---
-uri: klappy://canon/odd/compilation
+uri: klappy://docs/appendices/compilation
 title: Compilation
-audience: canon
+audience: docs
 exposure: nav
 tier: 2
 voice: neutral
@@ -910,6 +725,27 @@ tags: ["odd", "compilation", "memory", "context", "packs"]
 ---
 
 # Compilation
+
+> The process of producing wipeable, portable context packs from source documents.
+
+## Description
+
+Compilation creates derived, regeneratable packs that fit in agent and human working memory while preserving source truth unchanged. Compiled outputs live under `/public/_compiled/<lane>/` with required provenance headers for auditability. This mechanism keeps context portable, auditable, and cheap while applying evolutionary pressure against documentation sprawl.
+
+## Outline
+
+- Summary
+- Core Rule
+- Output Location (Wipeable)
+- Provenance Header (Required)
+- Why This Is ODD
+- Multi-Pack Output (E0002+)
+- Relationship to Drift Checks
+- Drift Audits
+
+---
+
+## Content
 
 ## Summary
 
@@ -1171,7 +1007,7 @@ Local preview instructions are allowed during development, but they **do not sat
 
 If an agent cannot provide both URLs, the attempt is **INVALID**.
 
-See `/canon/odd/appendices/online-evidence.md` for the full requirement.
+See `/docs/appendices/online-evidence.md` for the full requirement.
 
 ---
 
@@ -1257,9 +1093,9 @@ The website lane MUST support generating a wipeable "visitor pack" used for prog
 
 ## Related Documents
 
-- Lane architecture: `/canon/odd/appendices/product-lanes.md`
+- Lane architecture: `/docs/appendices/product-lanes.md`
 - Canon constraints: `/canon/constraints.md`
 - Definition of Done: `/canon/definition-of-done.md`
 - Legacy PRD (v0.3): `/docs/PRD/website/PRD-legacy-v0.3.md`
-- Compilation: `/canon/odd/appendices/compilation.md`
+- Compilation: `/docs/appendices/compilation.md`
 - Media philosophy: `/canon/odd/appendices/media-as-learning-layer.md`

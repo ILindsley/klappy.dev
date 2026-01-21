@@ -1,21 +1,21 @@
 {
   "lane": "website",
   "pack": "visitor",
-  "built_at": "2026-01-20T05:23:25.798Z",
-  "git_commit": "c8e732941363a3edd7a564ad7e5f0e1fceea66aa",
+  "built_at": "2026-01-21T05:24:32.203Z",
+  "git_commit": "fa94679e3e1824fb564490282b040cbdcaff92f1",
   "sources": [
-    "canon/index.md",
-    "canon/odd/appendices/product-lanes.md",
-    "canon/odd/appendices/epochs.md",
-    "canon/odd/appendices/compilation.md",
+    "canon/README.md",
+    "docs/appendices/product-lanes.md",
+    "docs/appendices/epochs.md",
+    "docs/appendices/compilation.md",
     "docs/PRD/website/PRD.md"
   ],
   "source_hashes": {
-    "canon/index.md": "8bf3004d7c204693562db1c4206a7736efafdb85b05c299f60366a460d3125dc",
-    "canon/odd/appendices/product-lanes.md": "977b29aa2e06eecb32419d967da590f4d851c3c9feb5e38269cfc094b6da3d09",
-    "canon/odd/appendices/epochs.md": "59099c36270436e7e095d3acaa9161c75d7ae72b8bd500c51dc2145260c743dc",
-    "canon/odd/appendices/compilation.md": "f95da459f446bd2c63d664c997663f0c02bdb0852b0c46af0106c1750e559aef",
-    "docs/PRD/website/PRD.md": "7177542662a88a87277d7bcb6cde9fd4376a32e971a30d42af5ffa813d8ddca1"
+    "canon/README.md": "fe5795892bd4378256fb67ec8f3664e5c1e1d65228e5c89251b76f708f4e279c",
+    "docs/appendices/product-lanes.md": "2ae8b18bb685ad87aded2127b547f91a0b132f4a3945dc10c06d0ffd4f1dc828",
+    "docs/appendices/epochs.md": "20fd2a722267b13cd8441eb1cf8a7d94f41131fe30750da04b05d088a23bf334",
+    "docs/appendices/compilation.md": "5751bcb06ef4784f15690ba5ccc3e70395e0acf575bb57c38084aeaabdbba55d",
+    "docs/PRD/website/PRD.md": "a02a183dc2151ed25a6cdcc7db14228cbd3554aa694910ee3074af0f3560d7e3"
   },
   "output": "public/_compiled/website/visitor-pack.md",
   "plan": "infra/compile/plans/website/visitor.json"

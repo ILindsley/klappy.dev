@@ -105,6 +105,6 @@ For documents kept for historical reference that describe 1.x workflows:
 ## Related
 
 - `/canon/odd/contract.md` — the contract itself
-- `/canon/odd/appendices/epochs.md` — epoch semantics
-- `/canon/odd/appendices/product-lanes.md` — lane architecture
-- `/canon/odd/decisions/D0009-multi-lane-prd-architecture.md` — the architectural decision
+- `/docs/appendices/epochs.md` — epoch semantics
+- `/docs/appendices/product-lanes.md` — lane architecture
+- `/docs/decisions/D0009-multi-lane-prd-architecture.md` — the architectural decision

@@ -117,6 +117,6 @@ Canon remains the shared gravity — constraints, decision rules, and definition
 
 ## Related Documents
 
-- `/canon/odd/appendices/product-lanes.md` — full orientation
+- `/docs/appendices/product-lanes.md` — full orientation
 - `/docs/ATTEMPTS.md` — updated attempt lifecycle
 - `/docs/ATTEMPT_KICKOFF.md` — updated workflow with lane declaration

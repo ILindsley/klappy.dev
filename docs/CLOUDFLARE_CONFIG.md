@@ -69,7 +69,7 @@ Build command:     npm run build -- --lane website
 Build output:      products/website/dist
 ```
 
-See `/canon/odd/appendices/lane-implementation-surfaces.md` for the locked folder contract.
+See `/docs/appendices/lane-implementation-surfaces.md` for the locked folder contract.
 
 > **Legacy / Transitional note (pre-D0013):** Some existing deploy configurations may still publish repo-root `/dist/`. That output is no longer canonical; the canonical build output for lane deployments is `products/<lane>/dist/`.
 
@@ -138,5 +138,5 @@ This keeps the system antifragile — branch naming can drift without breaking p
 - Attempt workflow: `/docs/ATTEMPTS.md`
 - Deploy contract: `/infra/contracts/build-output.md`
 - **Interface Contracts: `/interfaces/index.md`** (semver'd compatibility promises)
-- **Lane Build Layout: `/canon/odd/appendices/lane-build-layout.md`** (how lanes avoid /src and /dist collisions)
-- Decision: `/canon/odd/decisions/D0001-prod-branch-is-production.md`
+- **Lane Build Layout: `/docs/appendices/lane-build-layout.md`** (how lanes avoid /src and /dist collisions)
+- Decision: `/docs/decisions/D0001-prod-branch-is-production.md`

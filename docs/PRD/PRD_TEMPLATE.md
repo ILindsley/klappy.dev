@@ -103,4 +103,4 @@ _Additional context, references, or considerations._
 - Failed attempts inform future attempts or PRD revisions
 - Attempts are sealed when CLOSED or ABANDONED
 
-See: `/canon/odd/appendices/attempt-lifecycle.md`
+See: `/docs/appendices/attempt-lifecycle.md`

@@ -51,10 +51,10 @@ Lane-specific Architecture Decision Records (ADRs) for the agent-skill product l
 
 Before documenting a new pattern, verify it isn't already in canon:
 
-- `canon/odd/appendices/product-lanes.md` — Lane isolation, cross-lane rules
-- `canon/odd/appendices/attempt-lifecycle.md` — Attempt containment
-- `canon/odd/appendices/repo-topology.md` — PRD immutability
-- `canon/odd/decisions/` — Existing decisions
+- `docs/appendices/product-lanes.md` — Lane isolation, cross-lane rules
+- `docs/appendices/attempt-lifecycle.md` — Attempt containment
+- `docs/appendices/repo-topology.md` — PRD immutability
+- `docs/decisions/` — Existing decisions
 
 Some of our learnings (D0001, D0002) were applications of existing canon principles we failed to read carefully. Document this when it happens — it's valuable evidence that canon is correct but underutilized.
 

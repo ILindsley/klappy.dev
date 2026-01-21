@@ -20,7 +20,7 @@ This document explains the mental model behind attempts: what they are, why they
 
 > **Every attempt MUST declare a lane before registration. Attempts without a lane are invalid.**
 
-See `/canon/odd/appendices/product-lanes.md` for the multi-lane architecture.
+See `/docs/appendices/product-lanes.md` for the multi-lane architecture.
 
 ---
 
@@ -76,7 +76,7 @@ This ensures:
 - True independence between attempts
 - No cross-lane contamination
 
-See `/canon/odd/appendices/lane-implementation-surfaces.md` for the locked folder contract.
+See `/docs/appendices/lane-implementation-surfaces.md` for the locked folder contract.
 
 ---
 
@@ -211,7 +211,7 @@ Each attempt contains a `META.json` with provenance, lane, and canonical pointer
 
 **Lane field is REQUIRED.** Valid values: `website`, `ai-navigation`, `agent-skill`
 
-**Epoch field is REQUIRED.** If `epoch_id` is missing, the attempt is not comparable to other attempts by default. See `/canon/odd/appendices/epochs.md`.
+**Epoch field is REQUIRED.** If `epoch_id` is missing, the attempt is not comparable to other attempts by default. See `/docs/appendices/epochs.md`.
 
 **Key insight:** The commit SHA + provenance fields + lane + epoch are truth. Branch names and tags are convenience.
 
@@ -314,13 +314,13 @@ The attempt folder contains everything needed:
 
 ## 🔗 Related Documents
 
-- **Product Lanes Architecture: `/canon/odd/appendices/product-lanes.md`** (READ FIRST)
+- **Product Lanes Architecture: `/docs/appendices/product-lanes.md`** (READ FIRST)
 - **Interface Contracts: `/interfaces/index.md`** (semver'd compatibility promises)
-- **Lane Build Layout: `/canon/odd/appendices/lane-build-layout.md`** (how lanes avoid /src and /dist collisions)
+- **Lane Build Layout: `/docs/appendices/lane-build-layout.md`** (how lanes avoid /src and /dist collisions)
 - Step-by-step workflow: `/docs/ATTEMPT_KICKOFF.md`
 - Agent entry point: `/docs/AGENT_KICKOFF.md`
 - Deploy behavior: `/docs/CLOUDFLARE_CONFIG.md`
 - Decision log: `/canon/odd/decisions/`
 - Quantum Development: `/canon/odd/appendices/quantum-development.md`
-- Repo Truth: `/canon/odd/appendices/repo-truth.md`
-- Drift Checks: `/canon/odd/appendices/drift-checks.md`
+- Repo Truth: `/docs/appendices/repo-truth.md`
+- Drift Checks: `/docs/appendices/drift-checks.md`

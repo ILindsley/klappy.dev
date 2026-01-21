@@ -28,8 +28,8 @@ Epoch determines whether your attempt's outcomes can be compared to prior attemp
 
 ## Step 1: Read Required Documents (In Order)
 
-1. `/canon/odd/appendices/product-lanes.md` — understand the multi-lane model
-2. `/canon/odd/appendices/epochs.md` — understand when outcomes are comparable
+1. `/docs/appendices/product-lanes.md` — understand the multi-lane model
+2. `/docs/appendices/epochs.md` — understand when outcomes are comparable
 3. Your lane's PRD (e.g., `/docs/PRD/ai-navigation/PRD.md`)
 4. `/canon/constraints.md` — non-negotiables that shape all work
 
@@ -71,7 +71,7 @@ Choose any stack that satisfies the deploy contract (`/infra/contracts/build-out
 
 Your implementation goes in `products/<lane>/src/`. Build output goes to `products/<lane>/dist/`.
 
-See `/canon/odd/appendices/lane-implementation-surfaces.md` for the locked folder contract.
+See `/docs/appendices/lane-implementation-surfaces.md` for the locked folder contract.
 
 ---
 
@@ -143,9 +143,9 @@ Do NOT guess. Do NOT synthesize. Report the conflict.
 
 | What | Where |
 |------|-------|
-| Lane architecture | `/canon/odd/appendices/product-lanes.md` |
-| Lane implementation surfaces | `/canon/odd/appendices/lane-implementation-surfaces.md` |
-| Epoch semantics | `/canon/odd/appendices/epochs.md` |
+| Lane architecture | `/docs/appendices/product-lanes.md` |
+| Lane implementation surfaces | `/docs/appendices/lane-implementation-surfaces.md` |
+| Epoch semantics | `/docs/appendices/epochs.md` |
 | Constraints | `/canon/constraints.md` |
 | Definition of Done | `/canon/definition-of-done.md` |
 | Deploy contract | `/infra/contracts/build-output.md` |

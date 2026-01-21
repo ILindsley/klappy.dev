@@ -64,6 +64,6 @@
 
 ## See Also
 
-- [D0001: prod Branch Is Production](/canon/odd/decisions/D0001-prod-branch-is-production.md)
-- [D0007: Branch Names Are Convenience](/canon/odd/decisions/D0007-branch-names-are-convenience.md)
-- [D0008: Register Before Nuke](/canon/odd/decisions/D0008-register-before-nuke.md)
+- [D0001: prod Branch Is Production](/docs/decisions/D0001-prod-branch-is-production.md)
+- [D0007: Branch Names Are Convenience](/docs/decisions/D0007-branch-names-are-convenience.md)
+- [D0008: Register Before Nuke](/docs/decisions/D0008-register-before-nuke.md)

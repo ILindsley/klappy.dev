@@ -6,9 +6,9 @@ You MUST follow repo instructions. You MUST NOT invent process.
 
 ## Required Reads (in order)
 
-1. `/canon/odd/appendices/product-lanes.md`
-2. `/canon/odd/appendices/epochs.md`
-3. `/canon/odd/appendices/online-evidence.md`
+1. `/docs/appendices/product-lanes.md`
+2. `/docs/appendices/epochs.md`
+3. `/docs/appendices/online-evidence.md`
 4. `/docs/ATTEMPT_KICKOFF.md`
 5. `/docs/ATTEMPTS.md`
 6. The lane PRD you are assigned (e.g., `/docs/PRD/website/PRD.md`)

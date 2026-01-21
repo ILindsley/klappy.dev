@@ -148,5 +148,5 @@ Discarding is not nihilism. It is how the system stays legible.
 This document explains the memory model underneath both.
 
 See also:
-- `/canon/odd/appendices/product-lanes.md`
-- `/canon/odd/appendices/epochs.md`
+- `/docs/appendices/product-lanes.md`
+- `/docs/appendices/epochs.md`

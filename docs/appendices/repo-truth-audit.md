@@ -49,9 +49,9 @@ Your role is to **detect epistemic drift**.
 
 ## Read the Following FIRST (in order)
 
-1. `/canon/odd/appendices/repo-truth.md`
-2. `/canon/odd/appendices/product-lanes.md`
-3. `/canon/odd/appendices/epochs.md`
+1. `/docs/appendices/repo-truth.md`
+2. `/docs/appendices/product-lanes.md`
+3. `/docs/appendices/epochs.md`
 4. `/docs/ATTEMPTS.md`
 5. `/docs/ATTEMPT_KICKOFF.md`
 6. `/docs/AGENT_ENTRYPOINT.md`

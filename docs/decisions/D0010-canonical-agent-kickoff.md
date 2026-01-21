@@ -46,7 +46,7 @@ After implementing multi-lane PRD architecture (D0009), the agent entry surface 
 - `/docs/AGENT_ENTRYPOINT.md` — orientation pointers
 - `/docs/ATTEMPT_KICKOFF.md` — human workflow with agent notes
 - `/docs/ATTEMPTS.md` — lifecycle orientation
-- `/canon/odd/appendices/product-lanes.md` — lane architecture
+- `/docs/appendices/product-lanes.md` — lane architecture
 
 Agents were expected to "compose context" by reading multiple documents. This violated a core principle:
 
@@ -118,5 +118,5 @@ The file IS the prompt.
 
 - `/docs/AGENT_KICKOFF.md` — the canonical artifact
 - `/docs/AGENT_ENTRYPOINT.md` — now a redirect
-- `/canon/odd/appendices/product-lanes.md` — lane architecture
+- `/docs/appendices/product-lanes.md` — lane architecture
 - D0009 — multi-lane PRD architecture

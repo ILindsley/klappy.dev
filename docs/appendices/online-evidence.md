@@ -78,5 +78,5 @@ Note: Attempts are lane-contained. Root `/attempts/**` is legacy (read-only).
 
 - Definition of Done: `/canon/definition-of-done.md`
 - Visual Proof Standards: `/canon/visual-proof.md`
-- Attempt Lifecycle: `/canon/odd/appendices/attempt-lifecycle.md`
+- Attempt Lifecycle: `/docs/appendices/attempt-lifecycle.md`
 - Preview Guide: `/docs/PREVIEW.md`

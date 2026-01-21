@@ -339,7 +339,7 @@ This preserves forensic traceability (we know who showed up) while guaranteeing 
 - `package.json` — dependency manifest
 - Other lanes (`products/<other-lane>/src/`) — only the target lane is nuked
 
-> **Decision:** See [D0008: Register Before Nuke](/canon/odd/decisions/D0008-register-before-nuke.md)
+> **Decision:** See [D0008: Register Before Nuke](/docs/decisions/D0008-register-before-nuke.md)
 
 ---
 
@@ -459,7 +459,7 @@ Pick one axis and declare it ahead of time:
 
 This makes "which one is live?" a non-question.
 
-> **Decision:** See [D0001: prod Branch Is Production](/canon/odd/decisions/D0001-prod-branch-is-production.md)
+> **Decision:** See [D0001: prod Branch Is Production](/docs/decisions/D0001-prod-branch-is-production.md)
 
 ### Winner Declaration (ATTEMPT.md snippet)
 

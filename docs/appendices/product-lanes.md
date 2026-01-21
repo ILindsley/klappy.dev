@@ -136,7 +136,7 @@ Implementation directories are lane-scoped:
 
 Repo-root `/src` is not a shared surface in the multi-lane model.
 
-See: `/canon/odd/appendices/lane-implementation-surfaces.md`
+See: `/docs/appendices/lane-implementation-surfaces.md`
 
 ---
 
@@ -269,6 +269,6 @@ This lets you:
 
 ## Related Documents
 
-- Decision log: `/canon/odd/decisions/D0009-multi-lane-prd-architecture.md`
-- Attempt lifecycle: `/canon/odd/appendices/attempt-lifecycle.md`
+- Decision log: `/docs/decisions/D0009-multi-lane-prd-architecture.md`
+- Attempt lifecycle: `/docs/appendices/attempt-lifecycle.md`
 - Evolution philosophy: `/canon/odd/appendices/evolution-not-automation.md`
