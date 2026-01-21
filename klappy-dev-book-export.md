@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-21T16:05:42.010Z
-Total Files: 141
+Generated: 2026-01-21T16:36:40.379Z
+Total Files: 145
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -21,7 +21,7 @@ details (attempts, version folders, source code).
 - **About** (6 files)
 - **Canon** (9 files)
 - **Documentation** (51 files)
-- **Infrastructure** (9 files)
+- **Infrastructure** (13 files)
 - **Interfaces & Contracts** (6 files)
 - **ODD (Outcomes-Driven Development)** (18 files)
 - **Products** (30 files)
@@ -1812,7 +1812,37 @@ New PRDs should follow [PRD_TEMPLATE.md](PRD/PRD_TEMPLATE.md).
 📄 File: docs/PRD/PRD_TEMPLATE.md
 --------------------------------------------------------------------------------
 
+---
+uri: klappy://docs/prd/template
+title: "PRD Template"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["docs", "prd", "template"]
+---
+
 # 📋 PRD Template
+
+> Standard template for Product Requirements Documents.
+
+## Description
+
+This template defines the standard structure for PRDs. Each product lane has one active PRD at a time. PRDs define success criteria, constraints, and definition of done for attempts. Use this template when creating or revising a lane's PRD.
+
+## Outline
+
+- PRD Identity
+- Objective and Success Criteria
+- Non-Goals
+- Background and Approach
+- Phases
+- Definition of Done
+- Constraints, Risks, Notes
+- Attempt Policy
+
+---
 
 Use this template when drafting or revising the active PRD.
 
@@ -15357,6 +15387,7 @@ The infra folder contains implementation tooling for the klappy.dev repository: 
 | `contracts/` | Build and deployment contracts |
 | `prompts/` | Reusable prompt templates for agents |
 | `scripts/` | Node.js tooling scripts |
+| `templates/` | Standard document templates (article, decision, README) |
 
 ---
 
@@ -16529,6 +16560,673 @@ cat infra/compile/plans/website/author.json
 - [Canonical Compression](/docs/appendices/canonical-compression.md) — Compression philosophy
 - [Three-Tier Hierarchy](/odd/decisions/D0001-three-tier-conceptual-hierarchy.md) — Tier definitions
 - [Truth Map](/docs/TRUTH_MAP.md) — Authoritative sources
+
+
+
+--------------------------------------------------------------------------------
+📄 File: infra/templates/ARTICLE_TEMPLATE.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://templates/article
+title: "Article Template"
+audience: docs
+exposure: hidden
+tier: 2
+voice: neutral
+stability: stable
+tags: ["template", "article"]
+---
+
+# Article Template
+
+> Standard template for documentation articles with progressive disclosure.
+
+## Description
+
+This template defines the standard structure for documentation articles. All documents should follow this progressive disclosure pattern to enable different compilation depths for context packs.
+
+## Outline
+
+- Frontmatter Fields
+- Document Structure
+- Example
+
+---
+
+## Frontmatter Fields
+
+```yaml
+---
+uri: klappy://<tier>/<path>/<name>    # Stable identifier
+title: "Human-Readable Title"          # Display name
+audience: docs | canon | public        # Who reads this
+exposure: nav | hidden                 # Appears in navigation?
+tier: 0 | 1 | 2                        # Progressive disclosure tier
+voice: neutral | authoritative         # Tone
+stability: stable | evolving | deprecated
+tags: ["tag1", "tag2"]
+---
+```
+
+### Field Reference
+
+| Field | Required | Values | Purpose |
+|-------|----------|--------|---------|
+| `uri` | Yes | `klappy://path/name` | Stable linking identifier |
+| `title` | Yes | String | Human-readable title |
+| `audience` | Yes | `public`, `docs`, `canon` | Target reader |
+| `exposure` | Yes | `nav`, `hidden` | Show in navigation? |
+| `tier` | Yes | `0`, `1`, `2` | Disclosure tier |
+| `voice` | No | `neutral`, `authoritative` | Tone (default: neutral) |
+| `stability` | Yes | `stable`, `evolving`, `deprecated` | Change frequency |
+| `tags` | No | Array | Categorization |
+
+### Audience Values
+
+| Value | Meaning | Example Folder |
+|-------|---------|----------------|
+| `public` | User-facing content | `/about/` |
+| `docs` | Implementation reference | `/docs/` |
+| `canon` | Shared constraints | `/canon/`, `/odd/` |
+
+### Tier Values
+
+| Tier | Meaning | Visibility |
+|------|---------|------------|
+| `0` | Immediate orientation | Always visible |
+| `1` | Core content | Visible by default |
+| `2` | Detailed/edge cases | Requires expansion |
+
+---
+
+## Document Structure
+
+```markdown
+---
+uri: klappy://<path>/<name>
+title: "Title"
+audience: docs
+exposure: nav
+tier: 1
+voice: neutral
+stability: evolving
+tags: ["tag1"]
+---
+
+# Title
+
+> One-line subtitle explaining what this document is about.
+
+## Description
+
+1-2 paragraph compressed overview. Should be self-contained enough that
+an LLM can understand the gist without reading further.
+
+## Outline
+
+- Section 1
+- Section 2
+- Section 3
+
+---
+
+## Section 1
+
+[Content...]
+
+---
+
+## Section 2
+
+[Content...]
+
+---
+
+## See Also
+
+- [Related Doc](/path/to/doc.md) — Brief description
+```
+
+---
+
+## Disclosure Levels
+
+| Level | Includes | Use Case | ~Tokens |
+|-------|----------|----------|---------|
+| L0 | Frontmatter + H1 | File listing | ~50 |
+| L1 | + blockquote subtitle | Quick orientation | ~100 |
+| L2 | + Description | LLM context | ~200-500 |
+| L3 | + Outline | Navigation aid | ~300-700 |
+| L4 | Full document | Complete context | Full |
+
+---
+
+## Example
+
+```markdown
+---
+uri: klappy://docs/appendices/example
+title: "Example Appendix"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["docs", "example"]
+---
+
+# Example Appendix
+
+> Demonstrates the standard article structure.
+
+## Description
+
+This example shows how to structure a documentation article using
+progressive disclosure. The Description section provides a compressed
+overview that can stand alone in context-constrained situations.
+
+## Outline
+
+- Background
+- Implementation
+- Consequences
+
+---
+
+## Background
+
+[Why this exists...]
+
+---
+
+## Implementation
+
+[How it works...]
+
+---
+
+## Consequences
+
+[What results from this...]
+
+---
+
+## See Also
+
+- [Article Template](/infra/templates/ARTICLE_TEMPLATE.md)
+```
+
+
+
+--------------------------------------------------------------------------------
+📄 File: infra/templates/DECISION_TEMPLATE.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://templates/decision
+title: "Decision Template"
+audience: docs
+exposure: hidden
+tier: 2
+voice: neutral
+stability: stable
+tags: ["template", "decision", "adr"]
+---
+
+# Decision Template
+
+> ADR-lite template for recording architectural and process decisions.
+
+## Description
+
+This template defines the standard structure for decision records. Decisions document the "why" behind choices that affect the repository, products, or processes. Use this for both `/docs/decisions/` (implementation choices) and `/odd/decisions/` (universal principle choices).
+
+## Outline
+
+- When to Create a Decision
+- Numbering Convention
+- Template Structure
+- Frontmatter by Location
+
+---
+
+## When to Create a Decision
+
+Create a decision record when:
+
+- A choice affects multiple files or systems
+- The reasoning would be lost without documentation
+- Someone might ask "why did we do it this way?"
+- A constraint or rule is being established
+
+Do NOT create a decision record for:
+
+- Trivial implementation choices
+- One-off fixes
+- Temporary workarounds
+
+---
+
+## Numbering Convention
+
+| Location | Format | Example |
+|----------|--------|---------|
+| `/docs/decisions/` | `D00XX-slug.md` | `D0015-cache-invalidation.md` |
+| `/odd/decisions/` | `D00XX-slug.md` | `D0002-memory-portability.md` |
+
+Numbers are sequential within each folder. Check the folder's README for the next available number.
+
+---
+
+## Frontmatter by Location
+
+### For `/docs/decisions/` (implementation choices)
+
+```yaml
+---
+uri: klappy://docs/decisions/D00XX
+title: "D00XX: Decision Title"
+audience: docs
+exposure: internal
+tier: 2
+voice: neutral
+stability: stable
+tags: ["docs", "decisions", "topic"]
+---
+```
+
+### For `/odd/decisions/` (universal principle choices)
+
+```yaml
+---
+uri: klappy://odd/decisions/D00XX
+title: "D00XX: Decision Title"
+audience: canon
+exposure: nav
+tier: 1
+voice: neutral
+stability: stable
+tags: ["odd", "decisions", "philosophy", "topic"]
+---
+```
+
+---
+
+## Template Structure
+
+```markdown
+---
+uri: klappy://<tier>/decisions/D00XX
+title: "D00XX: Decision Title"
+audience: docs | canon
+exposure: internal | nav
+tier: 1 | 2
+voice: neutral
+stability: stable
+tags: ["decisions", "topic"]
+---
+
+# D00XX — Decision Title
+
+> One-line summary of what this decision establishes.
+
+## Description
+
+2-3 sentence compressed overview. What was decided? Why does it matter?
+This should be self-contained for LLM context.
+
+## Outline
+
+- Decision
+- Status
+- Context
+- Consequences
+- Implementation
+- Evidence
+
+---
+
+## Decision
+
+[Clear statement of what was decided. Use active voice.]
+
+## Status
+
+**Active** | **Superseded by D00YY** | **Deprecated**
+
+## Context
+
+[Why did this decision need to be made? What problem prompted it?]
+
+## Consequences
+
+- ✅ Positive consequence
+- ✅ Another positive
+- ⚠️ Tradeoff or cost
+- ⚠️ Another tradeoff
+
+## Implementation
+
+[Where is this decision implemented? Files, scripts, configs.]
+
+- Script: `/path/to/script.js`
+- Config: `/path/to/config.md`
+
+## Evidence
+
+[What triggered this decision? Commits, incidents, observations.]
+
+- Commit: `abc1234` — "commit message"
+- Problem observed: [description]
+```
+
+---
+
+## Status Values
+
+| Status | Meaning |
+|--------|---------|
+| **Active** | Currently in effect |
+| **Superseded** | Replaced by another decision |
+| **Deprecated** | No longer recommended |
+| **Proposed** | Under consideration |
+
+---
+
+## See Also
+
+- [docs/decisions/README.md](/docs/decisions/README.md) — Implementation decisions index
+- [odd/decisions/README.md](/odd/decisions/README.md) — ODD decisions index
+
+
+
+--------------------------------------------------------------------------------
+📄 File: infra/templates/README.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://infra/templates
+title: "Templates"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["infra", "templates", "index"]
+---
+
+# Templates
+
+> Standard templates for creating new documentation files.
+
+## Description
+
+The templates folder contains starter templates for different document types. Each template includes the required YAML frontmatter and progressive disclosure structure. Templates are intentionally excluded from visitor/author context packs but may be included in specialized packs (e.g., prd-guide includes PRD_TEMPLATE).
+
+## Outline
+
+- Contents
+- Which Template to Use
+- Related Templates (Other Locations)
+
+---
+
+## Contents
+
+| Template | Purpose | When to Use |
+|----------|---------|-------------|
+| `ARTICLE_TEMPLATE.md` | General documentation | Any new doc file |
+| `DECISION_TEMPLATE.md` | ADR-style decisions | `/docs/decisions/` or `/odd/decisions/` |
+| `README_INDEX_TEMPLATE.md` | Folder index | Any folder with 3+ files |
+
+---
+
+## Which Template to Use
+
+| Creating... | Template | Location |
+|-------------|----------|----------|
+| New documentation article | `ARTICLE_TEMPLATE.md` | This folder |
+| New decision record | `DECISION_TEMPLATE.md` | This folder |
+| New folder README | `README_INDEX_TEMPLATE.md` | This folder |
+| New PRD | `PRD_TEMPLATE.md` | `/docs/PRD/` |
+| New completion report | `completion-report-template.md` | `/canon/` |
+
+---
+
+## Related Templates (Other Locations)
+
+| Template | Location | Purpose |
+|----------|----------|---------|
+| `PRD_TEMPLATE.md` | `/docs/PRD/` | Product Requirements Documents |
+| `completion-report-template.md` | `/canon/` | Completion reports |
+
+These templates live in their "home" folders for discoverability but follow the same progressive disclosure pattern.
+
+---
+
+## See Also
+
+- [PRD Template](/docs/PRD/PRD_TEMPLATE.md) — For lane PRDs
+- [Completion Report Template](/canon/completion-report-template.md) — For completion claims
+- [Doc Inclusion Audit](/infra/prompts/doc-inclusion-audit/PROMPT.md) — Progressive disclosure criteria
+
+
+
+--------------------------------------------------------------------------------
+📄 File: infra/templates/README_INDEX_TEMPLATE.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://templates/readme-index
+title: "README Index Template"
+audience: docs
+exposure: hidden
+tier: 2
+voice: neutral
+stability: stable
+tags: ["template", "readme", "index"]
+---
+
+# README Index Template
+
+> Template for folder README.md files that serve as scannable indexes.
+
+## Description
+
+Every navigable folder should have a README.md that serves as a scannable index. This enables agents to understand folder contents (~500 tokens) without reading every file (~20K+ tokens). The README-as-index pattern supports tree-shaking in context packs.
+
+## Outline
+
+- When to Use This Template
+- Frontmatter by Folder Type
+- Template Structure
+- Contents Table Format
+
+---
+
+## When to Use This Template
+
+Create a README index when:
+
+- A folder contains 3+ files
+- The folder is navigable (not internal/generated)
+- Agents or humans need to discover what's in the folder
+
+Do NOT create a README index for:
+
+- Generated/derived folders (`public/_compiled/`, `dist/`)
+- Single-file folders (promote the file to parent instead)
+- Internal tooling folders (`.git/`, `node_modules/`)
+
+---
+
+## Frontmatter by Folder Type
+
+### Public-facing folders (`/about/`)
+
+```yaml
+---
+uri: klappy://about
+title: "About"
+audience: public
+exposure: nav
+tier: 1
+voice: neutral
+stability: semi_stable
+tags: ["about", "index"]
+---
+```
+
+### Implementation docs (`/docs/`, `/infra/`)
+
+```yaml
+---
+uri: klappy://docs/appendices
+title: "Appendices"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["docs", "appendices", "index"]
+---
+```
+
+### Canon/ODD folders (`/canon/`, `/odd/`)
+
+```yaml
+---
+uri: klappy://canon
+title: "Canon"
+audience: canon
+exposure: nav
+tier: 1
+voice: neutral
+stability: stable
+tags: ["canon", "index"]
+---
+```
+
+### Product lanes (`/products/<lane>/`)
+
+```yaml
+---
+uri: klappy://products/website
+title: "Website Lane"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["products", "website", "lane", "index"]
+---
+```
+
+---
+
+## Template Structure
+
+```markdown
+---
+uri: klappy://<path>
+title: "Folder Name"
+audience: docs | canon | public
+exposure: nav
+tier: 1 | 2
+voice: neutral
+stability: stable | evolving
+tags: ["folder", "index"]
+---
+
+# Folder Name
+
+> One-line description of what this folder contains.
+
+## Description
+
+1-2 paragraph overview of the folder's purpose. What kind of content
+lives here? Who is the intended audience? How does this folder relate
+to the broader structure?
+
+## Outline
+
+- Contents
+- [Optional: How to Use]
+- [Optional: Relationship to X]
+- See Also
+
+---
+
+## Contents
+
+| File | Purpose |
+|------|---------|
+| `file1.md` | Brief description |
+| `file2.md` | Brief description |
+| `subfolder/` | Brief description |
+
+---
+
+## [Optional Section]
+
+[Additional context if needed...]
+
+---
+
+## See Also
+
+- [Related Folder](/path/to/folder/) — Brief description
+- [Related Doc](/path/to/doc.md) — Brief description
+```
+
+---
+
+## Contents Table Format
+
+### For files
+
+```markdown
+| File | Purpose |
+|------|---------|
+| `ATTEMPTS.md` | Attempt lifecycle and CLI commands |
+| `TRUTH_MAP.md` | Authoritative source for each domain |
+```
+
+### For files with titles
+
+```markdown
+| File | Title | Summary |
+|------|-------|---------|
+| `bio.md` | Bio | Author background |
+| `faq.md` | FAQ | Common questions |
+```
+
+### For subfolders
+
+```markdown
+| Folder | Purpose | Count |
+|--------|---------|-------|
+| `appendices/` | Implementation appendices | 17 files |
+| `decisions/` | Decision records | 14 files |
+```
+
+### For decisions (with status)
+
+```markdown
+| ID | Title | Status |
+|----|-------|--------|
+| D0001 | prod Branch Is Production | Active |
+| D0002 | Attempt Provenance Required | Active |
+```
+
+---
+
+## See Also
+
+- [docs/README.md](/docs/README.md) — Example implementation docs index
+- [about/README.md](/about/README.md) — Example public-facing index
+- [Article Template](/infra/templates/ARTICLE_TEMPLATE.md) — For non-index documents
 
 
 

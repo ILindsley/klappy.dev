@@ -1,4 +1,34 @@
+---
+uri: klappy://docs/prd/template
+title: "PRD Template"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["docs", "prd", "template"]
+---
+
 # 📋 PRD Template
+
+> Standard template for Product Requirements Documents.
+
+## Description
+
+This template defines the standard structure for PRDs. Each product lane has one active PRD at a time. PRDs define success criteria, constraints, and definition of done for attempts. Use this template when creating or revising a lane's PRD.
+
+## Outline
+
+- PRD Identity
+- Objective and Success Criteria
+- Non-Goals
+- Background and Approach
+- Phases
+- Definition of Done
+- Constraints, Risks, Notes
+- Attempt Policy
+
+---
 
 Use this template when drafting or revising the active PRD.
 

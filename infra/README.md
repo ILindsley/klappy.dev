@@ -34,6 +34,7 @@ The infra folder contains implementation tooling for the klappy.dev repository: 
 | `contracts/` | Build and deployment contracts |
 | `prompts/` | Reusable prompt templates for agents |
 | `scripts/` | Node.js tooling scripts |
+| `templates/` | Standard document templates (article, decision, README) |
 
 ---
 
