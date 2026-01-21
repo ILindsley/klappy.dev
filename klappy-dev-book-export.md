@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-21T05:24:44.140Z
+Generated: 2026-01-21T05:25:07.140Z
 Total Files: 141
 
 This is a documentation export of all markdown files from the klappy.dev
@@ -13535,10 +13535,10 @@ This project tests whether ODD can be operationalized as a portable cognitive sy
 
 ## Where This Fits
 
-- Memory model: `/canon/odd/appendices/progressive-elevation.md`
-- Multi-lane intent isolation: `/canon/odd/appendices/product-lanes.md`
-- Comparability boundaries: `/canon/odd/appendices/epochs.md`
-- Decisions: `/canon/odd/decisions/`
+- Memory model: `/docs/appendices/progressive-elevation.md`
+- Multi-lane intent isolation: `/docs/appendices/product-lanes.md`
+- Comparability boundaries: `/docs/appendices/epochs.md`
+- Decisions: `/docs/decisions/`
 
 
 
