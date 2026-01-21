@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-21T01:00:40.839Z
+Generated: 2026-01-21T01:22:50.073Z
 Total Files: 208
 
 This is a complete export of all documentation, code, and content files
@@ -46,6 +46,8 @@ node_modules/
 
 # Build output
 dist/
+# Exception: public distribution folders should be tracked
+!public/**/dist/
 
 # Local env files
 .env

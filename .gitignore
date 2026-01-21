@@ -3,6 +3,8 @@ node_modules/
 
 # Build output
 dist/
+# Exception: public distribution folders should be tracked
+!public/**/dist/
 
 # Local env files
 .env
