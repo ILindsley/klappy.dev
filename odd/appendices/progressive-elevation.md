@@ -1,9 +1,9 @@
 ---
-uri: klappy://docs/appendices/progressive-elevation
+uri: klappy://odd/appendices/progressive-elevation
 title: Progressive Elevation & Decay
-audience: docs
+audience: odd
 exposure: nav
-tier: 2
+tier: 1
 voice: neutral
 stability: stable
 tags: ["odd", "memory", "portability", "elevation", "decay"]

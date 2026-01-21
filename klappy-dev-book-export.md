@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-21T05:39:07.495Z
+Generated: 2026-01-21T14:27:27.743Z
 Total Files: 142
 
 This is a documentation export of all markdown files from the klappy.dev
@@ -20,10 +20,10 @@ details (attempts, version folders, source code).
 - **Root** (1 files)
 - **About** (5 files)
 - **Canon** (9 files)
-- **Documentation** (51 files)
+- **Documentation** (50 files)
 - **Infrastructure** (4 files)
 - **Interfaces & Contracts** (6 files)
-- **ODD (Outcomes-Driven Development)** (17 files)
+- **ODD (Outcomes-Driven Development)** (18 files)
 - **Products** (28 files)
 - **Projects** (6 files)
 - **Public Content** (11 files)
@@ -3028,7 +3028,7 @@ Most artifacts decay by design:
 - PRDs churn,
 - and only proven patterns elevate.
 
-See: `/docs/appendices/progressive-elevation.md`
+See: `/odd/appendices/progressive-elevation.md`
 
 ## This Is Not a Framework You Must Adopt
 
@@ -5328,7 +5328,7 @@ Memory is curated learning that reduces future drag.
 
 ## Related Documents
 
-- `/docs/appendices/progressive-elevation.md` — Elevation criteria
+- `/odd/appendices/progressive-elevation.md` — Elevation criteria
 - `/docs/appendices/compiled-memory.md` — Compression for agents
 - `/docs/appendices/product-lanes.md` — Lane isolation
 - `/docs/appendices/attempt-lifecycle.md` — Attempt containment
@@ -5702,165 +5702,6 @@ This lets you:
 - Decision log: `/docs/decisions/D0009-multi-lane-prd-architecture.md`
 - Attempt lifecycle: `/docs/appendices/attempt-lifecycle.md`
 - Evolution philosophy: `/odd/appendices/evolution-not-automation.md`
-
-
-
---------------------------------------------------------------------------------
-📄 File: docs/appendices/progressive-elevation.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://docs/appendices/progressive-elevation
-title: Progressive Elevation & Decay
-audience: docs
-exposure: nav
-tier: 2
-voice: neutral
-stability: stable
-tags: ["odd", "memory", "portability", "elevation", "decay"]
-status: canonical
-category: odd-appendix
-version: 1.0
----
-
-# Progressive Elevation & Decay
-
-> How artifacts move from ephemeral attempts to durable Canon through strict elevation criteria.
-
-## Description
-
-ODD treats durable thinking as scarce and generated artifacts as abundant—most should decay while only patterns that reduce future drag should elevate. The five layers of portability are Conversation/Attempt, Product Lane/PRD, Interoperability/Contracts, Canon, and Decision Trace. Elevation requires recurrence, portability, drag reduction, and testability; if any criterion fails, the artifact stays local or dies.
-
-## Outline
-
-- Summary
-- The Five Layers of Portability
-- Elevation Criteria (Strict)
-- Decay Rule (Default)
-- Where This Fits With Lanes and Epochs
-
----
-
-## Content
-
-## Summary
-
-ODD treats **durable thinking** as scarce and **generated artifacts** as abundant.
-
-Most artifacts should **decay** (be discarded or sealed as evidence).
-Only patterns that repeatedly reduce future drag should **elevate** into more durable layers.
-
-This is how the repository avoids documentation sprawl while remaining portable across:
-- time (future-you),
-- people (collaborators),
-- and agents (tooling that reasons over the corpus).
-
----
-
-## The Five Layers of Portability
-
-### 1) Conversation / Attempt (Ephemeral)
-
-**What it is:** raw chats, prompts, branches, quick experiments, and run folders.  
-**Default fate:** extract value → seal evidence → discard everything else.
-
-**Lives in:**
-- `/products/<lane>/attempts/prd-vX.Y/_runs/<run_id>/`
-- transient branches / worktrees
-- PRD patches produced by failure
-
-**Elevate when:** a failure mode repeats and you can state it as a stable rule, constraint, or test.
-
----
-
-### 2) Product Lane / PRD (Project-Local)
-
-**What it is:** current intent for a specific product lane.  
-**Default fate:** churn freely. PRDs are disposable and should change as reality is observed.
-
-**Lives in:**
-- `/docs/PRD/<lane>/PRD.md`
-
-**Elevate when:** a requirement becomes reusable across lanes/projects, or becomes an interface boundary.
-
----
-
-### 3) Interoperability / Contracts (Portability Bridge)
-
-**What it is:** explicit interfaces that allow portability across tools, agents, and products.
-
-Contracts are where compatibility becomes real.
-
-**Lives in:**
-- `/interfaces/**` (semver'd contracts)
-- shared inputs/outputs, schemas, stable runtime paths
-
-**Elevate when:** multiple projects repeatedly need the same boundary and drift becomes expensive.
-
----
-
-### 4) Canon (Durable, Lean)
-
-**What it is:** curated, high-signal rules and lenses that survive multiple contexts.
-
-Canon is intentionally small. If it bloats, that is a signal to curate harder, not to add more.
-
-**Lives in:**
-- `/canon/**`
-
-**Elevate when:** a pattern recurs across multiple projects/lenses and stays true even when tooling changes.
-
----
-
-### 5) Decision Trace (Why It Changed)
-
-**What it is:** lightweight records explaining why the system moved.
-
-Decisions preserve context without polluting Canon with history.
-
-**Lives in:**
-- `/odd/decisions/**`
-
-**Elevate when:** a change affects interpretation, compatibility, or the "rules of the game."
-
----
-
-## Elevation Criteria (Strict)
-
-Something may be elevated only if it satisfies all of the following:
-
-1. **Recurrence**: it appears across multiple attempts or projects (not a one-off).
-2. **Portability**: it remains true across different stacks/models/tools.
-3. **Drag Reduction**: it prevents repeated confusion, re-explanation, or failure.
-4. **Testability**: it can be expressed as a check, constraint, or falsifiable claim.
-
-If any criterion fails, the artifact stays local (Attempt/PRD) or dies.
-
----
-
-## Decay Rule (Default)
-
-Most artifacts should not be preserved.
-
-ODD assumes:
-- generation is abundant,
-- maintenance is the tax you pay forever,
-- and residue creates epistemic drift.
-
-Discarding is not nihilism. It is how the system stays legible.
-
----
-
-## Where This Fits With Lanes and Epochs
-
-- **Product lanes** isolate intent and success criteria so that unrelated surfaces do not drift together.
-- **Epochs** define comparability boundaries when the "rules of the game" change.
-
-This document explains the memory model underneath both.
-
-See also:
-- `/docs/appendices/product-lanes.md`
-- `/docs/appendices/epochs.md`
 
 
 
@@ -10743,6 +10584,7 @@ Extended concepts that deepen understanding without introducing enforcement. The
 | `evolution-not-automation.md` | Evolution, Not Automation | This system optimizes learning, not execution. Humans stay in the loop. |
 | `failure-driven-modularity.md` | Failure-Driven Modularity | Modular boundaries are introduced only after repeated failure to regenerate from spec. Modularity is an outcome of failure, not a prerequisite. |
 | `media-as-learning-layer.md` | Media as a Learning Layer | Media reduces cognitive load over stable written content. Canonical truth lives in text. |
+| `progressive-elevation.md` | Progressive Elevation & Decay | The five-layer portability model: how artifacts move from ephemeral attempts to durable canon through strict elevation criteria. Most should decay; few should elevate. |
 | `quantum-development.md` | Quantum Development | Why multiple attempts against the same PRD are sometimes necessary before changing the PRD itself. |
 | `visual-evolution.md` | Visual Evolution | Visual systems evolve independently from products through versioned visual interfaces. |
 
@@ -10759,7 +10601,6 @@ The following have been moved to `/docs/appendices/` as they contain klappy.dev-
 - `lane-build-layout.md`, `lane-implementation-surfaces.md` — Lane-specific paths
 - `product-lanes.md` — Specific lane names (website, ai-navigation, agent-skill)
 - `repo-topology.md`, `repo-truth.md`, `repo-truth-audit.md` — Specific folder structures
-- `progressive-elevation.md` — Path-specific elevation rules
 - `canonical-compression.md`, `memory-architecture.proposed.md` — Compilation and memory paths
 
 ---
@@ -11352,6 +11193,165 @@ They should not re-litigate the philosophy.
 
 PRDs define **how** the lane applies this principle.
 This appendix defines the governing constraint.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: odd/appendices/progressive-elevation.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://odd/appendices/progressive-elevation
+title: Progressive Elevation & Decay
+audience: odd
+exposure: nav
+tier: 1
+voice: neutral
+stability: stable
+tags: ["odd", "memory", "portability", "elevation", "decay"]
+status: canonical
+category: odd-appendix
+version: 1.0
+---
+
+# Progressive Elevation & Decay
+
+> How artifacts move from ephemeral attempts to durable Canon through strict elevation criteria.
+
+## Description
+
+ODD treats durable thinking as scarce and generated artifacts as abundant—most should decay while only patterns that reduce future drag should elevate. The five layers of portability are Conversation/Attempt, Product Lane/PRD, Interoperability/Contracts, Canon, and Decision Trace. Elevation requires recurrence, portability, drag reduction, and testability; if any criterion fails, the artifact stays local or dies.
+
+## Outline
+
+- Summary
+- The Five Layers of Portability
+- Elevation Criteria (Strict)
+- Decay Rule (Default)
+- Where This Fits With Lanes and Epochs
+
+---
+
+## Content
+
+## Summary
+
+ODD treats **durable thinking** as scarce and **generated artifacts** as abundant.
+
+Most artifacts should **decay** (be discarded or sealed as evidence).
+Only patterns that repeatedly reduce future drag should **elevate** into more durable layers.
+
+This is how the repository avoids documentation sprawl while remaining portable across:
+- time (future-you),
+- people (collaborators),
+- and agents (tooling that reasons over the corpus).
+
+---
+
+## The Five Layers of Portability
+
+### 1) Conversation / Attempt (Ephemeral)
+
+**What it is:** raw chats, prompts, branches, quick experiments, and run folders.  
+**Default fate:** extract value → seal evidence → discard everything else.
+
+**Lives in:**
+- `/products/<lane>/attempts/prd-vX.Y/_runs/<run_id>/`
+- transient branches / worktrees
+- PRD patches produced by failure
+
+**Elevate when:** a failure mode repeats and you can state it as a stable rule, constraint, or test.
+
+---
+
+### 2) Product Lane / PRD (Project-Local)
+
+**What it is:** current intent for a specific product lane.  
+**Default fate:** churn freely. PRDs are disposable and should change as reality is observed.
+
+**Lives in:**
+- `/docs/PRD/<lane>/PRD.md`
+
+**Elevate when:** a requirement becomes reusable across lanes/projects, or becomes an interface boundary.
+
+---
+
+### 3) Interoperability / Contracts (Portability Bridge)
+
+**What it is:** explicit interfaces that allow portability across tools, agents, and products.
+
+Contracts are where compatibility becomes real.
+
+**Lives in:**
+- `/interfaces/**` (semver'd contracts)
+- shared inputs/outputs, schemas, stable runtime paths
+
+**Elevate when:** multiple projects repeatedly need the same boundary and drift becomes expensive.
+
+---
+
+### 4) Canon (Durable, Lean)
+
+**What it is:** curated, high-signal rules and lenses that survive multiple contexts.
+
+Canon is intentionally small. If it bloats, that is a signal to curate harder, not to add more.
+
+**Lives in:**
+- `/canon/**`
+
+**Elevate when:** a pattern recurs across multiple projects/lenses and stays true even when tooling changes.
+
+---
+
+### 5) Decision Trace (Why It Changed)
+
+**What it is:** lightweight records explaining why the system moved.
+
+Decisions preserve context without polluting Canon with history.
+
+**Lives in:**
+- `/odd/decisions/**`
+
+**Elevate when:** a change affects interpretation, compatibility, or the "rules of the game."
+
+---
+
+## Elevation Criteria (Strict)
+
+Something may be elevated only if it satisfies all of the following:
+
+1. **Recurrence**: it appears across multiple attempts or projects (not a one-off).
+2. **Portability**: it remains true across different stacks/models/tools.
+3. **Drag Reduction**: it prevents repeated confusion, re-explanation, or failure.
+4. **Testability**: it can be expressed as a check, constraint, or falsifiable claim.
+
+If any criterion fails, the artifact stays local (Attempt/PRD) or dies.
+
+---
+
+## Decay Rule (Default)
+
+Most artifacts should not be preserved.
+
+ODD assumes:
+- generation is abundant,
+- maintenance is the tax you pay forever,
+- and residue creates epistemic drift.
+
+Discarding is not nihilism. It is how the system stays legible.
+
+---
+
+## Where This Fits With Lanes and Epochs
+
+- **Product lanes** isolate intent and success criteria so that unrelated surfaces do not drift together.
+- **Epochs** define comparability boundaries when the "rules of the game" change.
+
+This document explains the memory model underneath both.
+
+See also:
+- `/docs/appendices/product-lanes.md`
+- `/docs/appendices/epochs.md`
 
 
 
@@ -12457,7 +12457,7 @@ ODD stays legible by using **Progressive Elevation & Decay**:
 most artifacts die at the Attempt/PRD layer; only proven patterns elevate into Contracts, Canon, and Decision Trace.
 
 See:
-- `/docs/appendices/progressive-elevation.md`
+- `/odd/appendices/progressive-elevation.md`
 - `/docs/appendices/product-lanes.md`
 - `/docs/appendices/epochs.md`
 
@@ -13740,7 +13740,7 @@ This project tests whether ODD can be operationalized as a portable cognitive sy
 
 ## Where This Fits
 
-- Memory model: `/docs/appendices/progressive-elevation.md`
+- Memory model: `/odd/appendices/progressive-elevation.md`
 - Multi-lane intent isolation: `/docs/appendices/product-lanes.md`
 - Comparability boundaries: `/docs/appendices/epochs.md`
 - Decisions: `/docs/decisions/`

@@ -49,7 +49,7 @@ This project tests whether ODD can be operationalized as a portable cognitive sy
 
 ## Where This Fits
 
-- Memory model: `/docs/appendices/progressive-elevation.md`
+- Memory model: `/odd/appendices/progressive-elevation.md`
 - Multi-lane intent isolation: `/docs/appendices/product-lanes.md`
 - Comparability boundaries: `/docs/appendices/epochs.md`
 - Decisions: `/docs/decisions/`

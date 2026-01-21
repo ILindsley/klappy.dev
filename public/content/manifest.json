@@ -441,6 +441,24 @@
       ]
     },
     {
+      "uri": "klappy://odd/appendices/progressive-elevation",
+      "path": "/odd/appendices/progressive-elevation.md",
+      "title": "Progressive Elevation & Decay",
+      "type": "text/markdown",
+      "audience": "odd",
+      "exposure": "nav",
+      "tier": 1,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "odd",
+        "memory",
+        "portability",
+        "elevation",
+        "decay"
+      ]
+    },
+    {
       "uri": "klappy://odd/maturity",
       "path": "/odd/maturity.md",
       "title": "Project Maturity & Progressive Governance",

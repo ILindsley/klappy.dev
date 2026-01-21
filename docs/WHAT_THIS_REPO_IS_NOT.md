@@ -14,7 +14,7 @@ Most artifacts decay by design:
 - PRDs churn,
 - and only proven patterns elevate.
 
-See: `/docs/appendices/progressive-elevation.md`
+See: `/odd/appendices/progressive-elevation.md`
 
 ## This Is Not a Framework You Must Adopt
 

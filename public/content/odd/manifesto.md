@@ -231,7 +231,7 @@ ODD stays legible by using **Progressive Elevation & Decay**:
 most artifacts die at the Attempt/PRD layer; only proven patterns elevate into Contracts, Canon, and Decision Trace.
 
 See:
-- `/docs/appendices/progressive-elevation.md`
+- `/odd/appendices/progressive-elevation.md`
 - `/docs/appendices/product-lanes.md`
 - `/docs/appendices/epochs.md`
 

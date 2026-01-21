@@ -25,6 +25,7 @@ Extended concepts that deepen understanding without introducing enforcement. The
 | `evolution-not-automation.md` | Evolution, Not Automation | This system optimizes learning, not execution. Humans stay in the loop. |
 | `failure-driven-modularity.md` | Failure-Driven Modularity | Modular boundaries are introduced only after repeated failure to regenerate from spec. Modularity is an outcome of failure, not a prerequisite. |
 | `media-as-learning-layer.md` | Media as a Learning Layer | Media reduces cognitive load over stable written content. Canonical truth lives in text. |
+| `progressive-elevation.md` | Progressive Elevation & Decay | The five-layer portability model: how artifacts move from ephemeral attempts to durable canon through strict elevation criteria. Most should decay; few should elevate. |
 | `quantum-development.md` | Quantum Development | Why multiple attempts against the same PRD are sometimes necessary before changing the PRD itself. |
 | `visual-evolution.md` | Visual Evolution | Visual systems evolve independently from products through versioned visual interfaces. |
 
@@ -41,7 +42,6 @@ The following have been moved to `/docs/appendices/` as they contain klappy.dev-
 - `lane-build-layout.md`, `lane-implementation-surfaces.md` — Lane-specific paths
 - `product-lanes.md` — Specific lane names (website, ai-navigation, agent-skill)
 - `repo-topology.md`, `repo-truth.md`, `repo-truth-audit.md` — Specific folder structures
-- `progressive-elevation.md` — Path-specific elevation rules
 - `canonical-compression.md`, `memory-architecture.proposed.md` — Compilation and memory paths
 
 ---
