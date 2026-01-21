@@ -1,5 +1,5 @@
 ---
-uri: klappy://templates/article
+uri: klappy://docs/template
 title: "Article Template"
 audience: docs
 exposure: hidden
@@ -185,5 +185,5 @@ overview that can stand alone in context-constrained situations.
 
 ## See Also
 
-- [Article Template](/infra/templates/ARTICLE_TEMPLATE.md)
+- [Article Template](/docs/TEMPLATE.md)
 ```

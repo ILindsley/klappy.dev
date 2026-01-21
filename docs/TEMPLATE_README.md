@@ -1,5 +1,5 @@
 ---
-uri: klappy://templates/readme-index
+uri: klappy://docs/template-readme
 title: "README Index Template"
 audience: docs
 exposure: hidden
@@ -205,6 +205,6 @@ to the broader structure?
 
 ## See Also
 
-- [docs/README.md](/docs/README.md) — Example implementation docs index
-- [about/README.md](/about/README.md) — Example public-facing index
-- [Article Template](/infra/templates/ARTICLE_TEMPLATE.md) — For non-index documents
+- [Docs Index](./README.md) — Example implementation docs index
+- [About Index](/about/README.md) — Example public-facing index
+- [Article Template](./TEMPLATE.md) — For non-index documents

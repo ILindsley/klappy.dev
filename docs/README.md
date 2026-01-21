@@ -74,6 +74,15 @@ tags: ["docs", "implementation", "reference", "index"]
 | [PRD.md](./PRD.md) | PRD orientation and routing |
 | [WHAT_THIS_REPO_IS_NOT.md](./WHAT_THIS_REPO_IS_NOT.md) | Scope boundaries |
 
+### Templates
+
+| File | Purpose |
+|------|---------|
+| [TEMPLATE.md](./TEMPLATE.md) | General article template |
+| [TEMPLATE_README.md](./TEMPLATE_README.md) | Folder README index template |
+| [decisions/TEMPLATE.md](./decisions/TEMPLATE.md) | Decision record template |
+| [PRD/PRD_TEMPLATE.md](./PRD/PRD_TEMPLATE.md) | PRD template |
+
 ### Subfolders
 
 | Folder | Purpose | Count |

@@ -1,5 +1,5 @@
 ---
-uri: klappy://templates/decision
+uri: klappy://docs/decisions/template
 title: "Decision Template"
 audience: docs
 exposure: hidden
@@ -171,5 +171,5 @@ This should be self-contained for LLM context.
 
 ## See Also
 
-- [docs/decisions/README.md](/docs/decisions/README.md) — Implementation decisions index
-- [odd/decisions/README.md](/odd/decisions/README.md) — ODD decisions index
+- [Decisions Index](./README.md) — Implementation decisions index
+- [ODD Decisions](/odd/decisions/README.md) — ODD decisions index
