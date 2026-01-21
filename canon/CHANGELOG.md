@@ -16,6 +16,39 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.5.3 — 2026-01-21
+
+**Memory Architecture Proposal**
+
+This release proposes the Memory Architecture appendix and establishes the lane history folder pattern in agent-skill.
+
+### Added
+
+- **Memory Architecture (Proposed)** (`/canon/odd/appendices/memory-architecture.proposed.md`) — Defines memory as a layered percolation system: Attempts → Lane History → Lane Decisions → Cross-Lane Patterns → Canon. Makes decay the default and elevation explicit.
+
+### Changed
+
+- **Agent-Skill Lane** — Replaced single `LEDGER.md` with indexed `history/` folder pattern (mirrors `decisions/` pattern)
+  - D0008: ROADMAP tracks vision only, not status
+  - D0009: History folder pattern with index + individual entry files
+  - Migrated all LEDGER entries to `history/H000X-*.md` files
+  - Removed Learnings Log from ROADMAP (now lives in history/)
+
+### Philosophy
+
+- Memory is the percolation path from ephemeral execution to durable truth
+- Decay is the default; elevation requires explicit criteria (recurrence, portability, drag reduction, testability)
+- "Evidence without elevation creates false confidence rather than learning"
+- Canon is not the goal of all things — many patterns remain usefully non-canonical
+
+### Notes
+
+- Memory Architecture is `proposed` status until at least one more lane adopts the pattern
+- The history/ folder pattern reduces agent scan cost (~500 tokens for index)
+- This release demonstrates ODD working: frustration → lane decision → proposed canon
+
+---
+
 ## 0.5.2 — 2026-01-20
 
 **Lane-Contained Attempts**
