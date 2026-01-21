@@ -16,6 +16,7 @@ For future vision, see [ROADMAP.md](../ROADMAP.md).
 | [H0004](./H0004-v1.2.1-champion.md) | v1.2.1 | Champion — Lane-owned Cloudflare Pages deployment | 2026-01-21 |
 | [H0005](./H0005-v1.2.2-failed.md) | v1.2.2 | Failed — Exposed ODD violations (ephemeral artifacts, compile plan location) | 2026-01-21 |
 | [H0006](./H0006-v1.2.3-champion.md) | v1.2.3 | Champion — Canon refresh v0.5.4 + ODD compliance | 2026-01-21 |
+| [H0007](./H0007-v1.2.4-champion.md) | v1.2.4 | Champion — Canon refresh v0.8.0 (path fixes + new content) | 2026-01-21 |
 
 ---
 

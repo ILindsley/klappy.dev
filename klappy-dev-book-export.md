@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-21T18:35:12.583Z
-Total Files: 150
+Generated: 2026-01-21T18:39:43.924Z
+Total Files: 151
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -24,7 +24,7 @@ details (attempts, version folders, source code).
 - **Infrastructure** (9 files)
 - **Interfaces & Contracts** (6 files)
 - **ODD (Outcomes-Driven Development)** (21 files)
-- **Products** (30 files)
+- **Products** (31 files)
 - **Projects** (6 files)
 - **Visual Design System** (5 files)
 
@@ -19883,6 +19883,55 @@ Canon refresh to v0.5.4 with proper ODD compliance. INSTRUCTIONS.md treated as e
 
 
 --------------------------------------------------------------------------------
+📄 File: products/agent-skill/history/H0007-v1.2.4-champion.md
+--------------------------------------------------------------------------------
+
+# H0007 — PRD v1.2.4 Champion
+
+- **Date**: 2026-01-21
+- **Type**: Champion
+- **PRD**: v1.2.4
+- **Epoch**: E0003 (evidence-first)
+- **Attempt**: `v1.2.4/attempts/attempt-001/`
+
+## Summary
+
+Canon refresh to v0.8.0 with ODD path fixes (elevated from `/canon/odd/` to `/odd/`) and new content (Cognitive Partitioning, Tool Specialization).
+
+## Deliverable
+
+- **Pack**: `public/agent-skill/v1.2.4/prd-guide-pack.md`
+- **Latest**: `public/agent-skill/latest/prd-guide-pack.md`
+- **Preview URL**: `https://main.klappy-dev-agent-skill.pages.dev/v1.2.4/prd-guide-pack.md`
+
+## What Worked
+
+- Clean path fixes without behavioral changes
+- New content (Cognitive Partitioning, Tool Specialization) integrated seamlessly
+- INSTRUCTIONS.md generated fresh per-attempt (ephemeral pattern)
+- HTTP 200 verified before claiming CHAMPION
+- Evidence produced for every claim
+
+## What Didn't
+
+- Manual compilation required (no automated path validation)
+- Compile plan doesn't auto-generate INSTRUCTIONS.md
+
+## Learnings
+
+1. **Canon reorganizations require path audits**: ODD elevation from `/canon/odd/` to `/odd/` created stale references
+2. **Compile plans need version tracking**: When canon version bumps, compile plan paths should be validated
+3. **New content integration is straightforward**: Adding sources to compile plan is additive, non-breaking
+4. **ODD formula still works**: Pack + CONTRACT + PRD = Attempt (no additional context needed)
+
+## Follow-up
+
+- Consider automating compile plan path validation against canon version
+- Production deploy to `agent-skill.klappy.dev` for stable URL
+
+
+
+--------------------------------------------------------------------------------
 📄 File: products/agent-skill/history/index.md
 --------------------------------------------------------------------------------
 
@@ -19904,6 +19953,7 @@ For future vision, see [ROADMAP.md](../ROADMAP.md).
 | [H0004](./H0004-v1.2.1-champion.md) | v1.2.1 | Champion — Lane-owned Cloudflare Pages deployment | 2026-01-21 |
 | [H0005](./H0005-v1.2.2-failed.md) | v1.2.2 | Failed — Exposed ODD violations (ephemeral artifacts, compile plan location) | 2026-01-21 |
 | [H0006](./H0006-v1.2.3-champion.md) | v1.2.3 | Champion — Canon refresh v0.5.4 + ODD compliance | 2026-01-21 |
+| [H0007](./H0007-v1.2.4-champion.md) | v1.2.4 | Champion — Canon refresh v0.8.0 (path fixes + new content) | 2026-01-21 |
 
 ---
 
