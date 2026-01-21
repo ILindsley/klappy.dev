@@ -6,8 +6,9 @@ This lane produces compiled packs for AI agent consumption.
 
 | File                | Purpose                               |
 | ------------------- | ------------------------------------- |
-| `INSTRUCTIONS.md`   | Interactive guidance for PRD creation |
 | `compile-plan.json` | Defines sources and compilation mode  |
+
+**Note**: `INSTRUCTIONS.md` is an ephemeral artifact generated per-attempt in the attempt folder. It is NOT persisted in `src/` or version folders. See [CONTRACT.md](../CONTRACT.md) for details.
 
 ## Build
 
