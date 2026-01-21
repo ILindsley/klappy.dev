@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-21T14:27:27.743Z
+Generated: 2026-01-21T14:49:45.278Z
 Total Files: 142
 
 This is a documentation export of all markdown files from the klappy.dev
@@ -1473,7 +1473,7 @@ This keeps the system antifragile — branch naming can drift without breaking p
 
 # Canon Distillation Classification
 
-**Status: COMPLETED**
+**Status: COMPLETED (with corrections)**
 
 This document tracks the classification of canon files for the progressive distillation effort.
 
@@ -1481,9 +1481,17 @@ This document tracks the classification of canon files for the progressive disti
 
 - Classified all 57 canon files as portable or implementation-specific
 - Extracted 14 decisions to `/docs/decisions/`
-- Extracted 18 appendices to `/docs/appendices/`
+- Extracted 17 appendices to `/docs/appendices/` (originally 18, 1 re-elevated)
 - Added progressive distillation structure (Title, Subtitle, Description, Outline, Content) to all files
 - Updated cross-references in key canon files
+- **Moved ODD to root level**: `/canon/odd/` → `/odd/`
+- **Re-elevated `progressive-elevation.md`** back to `/odd/appendices/` (it defines the portability ladder itself)
+
+## Post-Distillation Corrections
+
+| File | Original Classification | Corrected Classification | Reason |
+|------|------------------------|-------------------------|--------|
+| `progressive-elevation.md` | IMPLEMENTATION | **ODD** | Defines the five-layer portability model - that's universal methodology, not implementation |
 
 ## Classification Criteria
 
@@ -1573,7 +1581,7 @@ This document tracks the classification of canon files for the progressive disti
 | `memory-architecture.proposed.md` | IMPLEMENTATION | Folder patterns |
 | `online-evidence.md` | IMPLEMENTATION | Cloudflare, paths |
 | `product-lanes.md` | IMPLEMENTATION | Specific lanes, paths |
-| `progressive-elevation.md` | IMPLEMENTATION | Specific paths |
+| `progressive-elevation.md` | **ELEVATED TO ODD** | Defines the portability ladder - paths are examples, principle is universal |
 | `quantum-development.md` | PORTABLE | Pure methodology |
 | `repo-topology.md` | IMPLEMENTATION | All paths |
 | `repo-truth.md` | IMPLEMENTATION | CLI, branch names |
@@ -8019,6 +8027,45 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.6.0 — 2026-01-21
+
+**Three-Tier Hierarchy & ODD Elevation**
+
+This release formalizes the three-tier conceptual hierarchy and physically restructures the repository to match the mental model.
+
+### Breaking Changes
+
+- **ODD moved to root level**: `/canon/odd/` → `/odd/`
+- **URIs changed**: `klappy://canon/odd/*` → `klappy://odd/*`
+- **All references updated** throughout the repo
+
+### Added
+
+- **D0001: Three-Tier Conceptual Hierarchy** (`/odd/decisions/D0001-three-tier-conceptual-hierarchy.md`) — Formalizes ODD (universal principles) → Canon (program constraints) → Docs (implementation details)
+- **Three-tier section in ODD Contract** — Contract bumped to 2.1.0 with hierarchy documentation
+- **Litmus test** for file classification: 10-year truth test → ODD, all-products test → Canon, local test → Docs
+
+### Changed
+
+- **ODD System Contract** — Bumped to 2.1.0 with three-tier hierarchy section
+- **orientation-map.md** — Now includes the three-tier hierarchy and litmus test
+- **progressive-elevation.md** — Elevated from `/docs/appendices/` back to `/odd/appendices/` (it defines the portability ladder itself)
+
+### Philosophy
+
+- **ODD = physics** — Universal principles that would still be true if klappy.dev didn't exist
+- **Canon = constitution** — Program-level constraints derived from ODD, shared across products
+- **Docs = implementation** — How this instance works, lane PRDs, CLI commands, Cloudflare specifics
+
+### Migration Notes
+
+- All cross-references have been updated
+- Historical files (CHANGELOG, attempt evidence) retain old paths as historical record
+- Compile plans updated to use new paths
+- Run `npm run sync` to regenerate public/content/
+
+---
+
 ## 0.5.4 — 2026-01-21
 
 **README Index Pattern**
@@ -11824,7 +11871,7 @@ tags: ["odd", "contract", "version", "semver", "compatibility"]
 
 ## Description
 
-The ODD System Contract versions repo structure, PRD lanes, attempt lifecycle, tooling invariants, required paths, provenance requirements (META.json), and evidence standards. Current version is 2.0.0 (multi-lane architecture). Epochs mark shifts in the evaluation landscape: E0001 (single-PRD era, contract 1.x) and E0002 (multi-lane era, contract 2.x). Contract 2.0.0 breaking changes include lane declaration required, epoch declaration in META.json, PRDs under `/docs/PRD/<lane>/PRD.md`, and attempts under `/products/<lane>/attempts/`. Do not compare outcomes across epochs without explicit adjustment.
+The ODD System Contract versions the three-tier hierarchy (ODD/Canon/Docs), repo structure, PRD lanes, attempt lifecycle, tooling invariants, required paths, provenance requirements (META.json), and evidence standards. Current version is 2.1.0. Version 2.1.0 formalizes the three-tier conceptual hierarchy where ODD contains universal principles, Canon contains program constraints, and Docs contains implementation details. Each tier has different decay rates. Epochs mark shifts in the evaluation landscape. Do not compare outcomes across epochs without explicit adjustment.
 
 ## Outline
 
@@ -11838,7 +11885,7 @@ The ODD System Contract versions repo structure, PRD lanes, attempt lifecycle, t
 
 ## Content
 
-**Current Version:** 2.0.0
+**Current Version:** 2.1.0
 
 This document is the single source of truth for the ODD workflow contract version.
 
@@ -11850,12 +11897,32 @@ All other documents reference this version. Individual PRDs, attempts, and conte
 
 The ODD System Contract covers:
 
+- **Three-tier hierarchy** (ODD → Canon → Docs)
 - **Repo structure** required for ODD workflow
 - **PRD lanes** and attempt lifecycle contracts
 - **Tooling invariants** (register/nuke/finalize/promote)
 - **Required paths** and naming conventions
 - **Provenance requirements** (META.json schema)
 - **Evidence standards** (what counts as proof)
+
+---
+
+## Three-Tier Hierarchy (2.1.0)
+
+ODD is organized as a conceptual hierarchy with different decay rates:
+
+| Tier | Location | Contains | Decay Rate |
+|------|----------|----------|------------|
+| **ODD** | `/odd/` | Universal principles (timeless, product-agnostic) | Almost never |
+| **Canon** | `/canon/` | Program-level constraints (shared rules across products) | Carefully |
+| **Docs** | `/docs/` | Implementation details (how this instance works) | Freely |
+
+**The litmus test:**
+1. Would this still be true in 10 years? → **ODD**
+2. Should all products in this program obey it? → **Canon**
+3. Is this about how *we* do it *here*? → **Docs**
+
+See [D0001: Three-Tier Conceptual Hierarchy](/odd/decisions/D0001-three-tier-conceptual-hierarchy.md).
 
 ---
 
@@ -11912,6 +11979,7 @@ Epoch 1 documents should be marked with an epoch header if they remain in the re
 
 | Version | Date | Summary |
 |---------|------|---------|
+| 2.1.0 | 2026-01-21 | Three-tier hierarchy (ODD/Canon/Docs), ODD at root level |
 | 2.0.0 | 2026-01-17 | Multi-lane architecture, epoch requirements |
 | 1.x | Pre-2026-01-17 | Single PRD era (implicit, never formally versioned) |
 

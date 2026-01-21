@@ -15,7 +15,7 @@ tags: ["odd", "contract", "version", "semver", "compatibility"]
 
 ## Description
 
-The ODD System Contract versions repo structure, PRD lanes, attempt lifecycle, tooling invariants, required paths, provenance requirements (META.json), and evidence standards. Current version is 2.0.0 (multi-lane architecture). Epochs mark shifts in the evaluation landscape: E0001 (single-PRD era, contract 1.x) and E0002 (multi-lane era, contract 2.x). Contract 2.0.0 breaking changes include lane declaration required, epoch declaration in META.json, PRDs under `/docs/PRD/<lane>/PRD.md`, and attempts under `/products/<lane>/attempts/`. Do not compare outcomes across epochs without explicit adjustment.
+The ODD System Contract versions the three-tier hierarchy (ODD/Canon/Docs), repo structure, PRD lanes, attempt lifecycle, tooling invariants, required paths, provenance requirements (META.json), and evidence standards. Current version is 2.1.0. Version 2.1.0 formalizes the three-tier conceptual hierarchy where ODD contains universal principles, Canon contains program constraints, and Docs contains implementation details. Each tier has different decay rates. Epochs mark shifts in the evaluation landscape. Do not compare outcomes across epochs without explicit adjustment.
 
 ## Outline
 
@@ -29,7 +29,7 @@ The ODD System Contract versions repo structure, PRD lanes, attempt lifecycle, t
 
 ## Content
 
-**Current Version:** 2.0.0
+**Current Version:** 2.1.0
 
 This document is the single source of truth for the ODD workflow contract version.
 
@@ -41,12 +41,32 @@ All other documents reference this version. Individual PRDs, attempts, and conte
 
 The ODD System Contract covers:
 
+- **Three-tier hierarchy** (ODD → Canon → Docs)
 - **Repo structure** required for ODD workflow
 - **PRD lanes** and attempt lifecycle contracts
 - **Tooling invariants** (register/nuke/finalize/promote)
 - **Required paths** and naming conventions
 - **Provenance requirements** (META.json schema)
 - **Evidence standards** (what counts as proof)
+
+---
+
+## Three-Tier Hierarchy (2.1.0)
+
+ODD is organized as a conceptual hierarchy with different decay rates:
+
+| Tier | Location | Contains | Decay Rate |
+|------|----------|----------|------------|
+| **ODD** | `/odd/` | Universal principles (timeless, product-agnostic) | Almost never |
+| **Canon** | `/canon/` | Program-level constraints (shared rules across products) | Carefully |
+| **Docs** | `/docs/` | Implementation details (how this instance works) | Freely |
+
+**The litmus test:**
+1. Would this still be true in 10 years? → **ODD**
+2. Should all products in this program obey it? → **Canon**
+3. Is this about how *we* do it *here*? → **Docs**
+
+See [D0001: Three-Tier Conceptual Hierarchy](/odd/decisions/D0001-three-tier-conceptual-hierarchy.md).
 
 ---
 
@@ -103,6 +123,7 @@ Epoch 1 documents should be marked with an epoch header if they remain in the re
 
 | Version | Date | Summary |
 |---------|------|---------|
+| 2.1.0 | 2026-01-21 | Three-tier hierarchy (ODD/Canon/Docs), ODD at root level |
 | 2.0.0 | 2026-01-17 | Multi-lane architecture, epoch requirements |
 | 1.x | Pre-2026-01-17 | Single PRD era (implicit, never formally versioned) |
 

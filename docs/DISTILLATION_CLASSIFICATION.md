@@ -1,6 +1,6 @@
 # Canon Distillation Classification
 
-**Status: COMPLETED**
+**Status: COMPLETED (with corrections)**
 
 This document tracks the classification of canon files for the progressive distillation effort.
 
@@ -8,9 +8,17 @@ This document tracks the classification of canon files for the progressive disti
 
 - Classified all 57 canon files as portable or implementation-specific
 - Extracted 14 decisions to `/docs/decisions/`
-- Extracted 18 appendices to `/docs/appendices/`
+- Extracted 17 appendices to `/docs/appendices/` (originally 18, 1 re-elevated)
 - Added progressive distillation structure (Title, Subtitle, Description, Outline, Content) to all files
 - Updated cross-references in key canon files
+- **Moved ODD to root level**: `/canon/odd/` → `/odd/`
+- **Re-elevated `progressive-elevation.md`** back to `/odd/appendices/` (it defines the portability ladder itself)
+
+## Post-Distillation Corrections
+
+| File | Original Classification | Corrected Classification | Reason |
+|------|------------------------|-------------------------|--------|
+| `progressive-elevation.md` | IMPLEMENTATION | **ODD** | Defines the five-layer portability model - that's universal methodology, not implementation |
 
 ## Classification Criteria
 
@@ -100,7 +108,7 @@ This document tracks the classification of canon files for the progressive disti
 | `memory-architecture.proposed.md` | IMPLEMENTATION | Folder patterns |
 | `online-evidence.md` | IMPLEMENTATION | Cloudflare, paths |
 | `product-lanes.md` | IMPLEMENTATION | Specific lanes, paths |
-| `progressive-elevation.md` | IMPLEMENTATION | Specific paths |
+| `progressive-elevation.md` | **ELEVATED TO ODD** | Defines the portability ladder - paths are examples, principle is universal |
 | `quantum-development.md` | PORTABLE | Pure methodology |
 | `repo-topology.md` | IMPLEMENTATION | All paths |
 | `repo-truth.md` | IMPLEMENTATION | CLI, branch names |

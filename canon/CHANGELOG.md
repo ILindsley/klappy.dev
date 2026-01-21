@@ -16,6 +16,45 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.6.0 — 2026-01-21
+
+**Three-Tier Hierarchy & ODD Elevation**
+
+This release formalizes the three-tier conceptual hierarchy and physically restructures the repository to match the mental model.
+
+### Breaking Changes
+
+- **ODD moved to root level**: `/canon/odd/` → `/odd/`
+- **URIs changed**: `klappy://canon/odd/*` → `klappy://odd/*`
+- **All references updated** throughout the repo
+
+### Added
+
+- **D0001: Three-Tier Conceptual Hierarchy** (`/odd/decisions/D0001-three-tier-conceptual-hierarchy.md`) — Formalizes ODD (universal principles) → Canon (program constraints) → Docs (implementation details)
+- **Three-tier section in ODD Contract** — Contract bumped to 2.1.0 with hierarchy documentation
+- **Litmus test** for file classification: 10-year truth test → ODD, all-products test → Canon, local test → Docs
+
+### Changed
+
+- **ODD System Contract** — Bumped to 2.1.0 with three-tier hierarchy section
+- **orientation-map.md** — Now includes the three-tier hierarchy and litmus test
+- **progressive-elevation.md** — Elevated from `/docs/appendices/` back to `/odd/appendices/` (it defines the portability ladder itself)
+
+### Philosophy
+
+- **ODD = physics** — Universal principles that would still be true if klappy.dev didn't exist
+- **Canon = constitution** — Program-level constraints derived from ODD, shared across products
+- **Docs = implementation** — How this instance works, lane PRDs, CLI commands, Cloudflare specifics
+
+### Migration Notes
+
+- All cross-references have been updated
+- Historical files (CHANGELOG, attempt evidence) retain old paths as historical record
+- Compile plans updated to use new paths
+- Run `npm run sync` to regenerate public/content/
+
+---
+
 ## 0.5.4 — 2026-01-21
 
 **README Index Pattern**
