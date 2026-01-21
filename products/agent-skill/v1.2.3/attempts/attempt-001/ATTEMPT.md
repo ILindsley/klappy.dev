@@ -157,8 +157,8 @@ Recompile the PRD guide pack against canon v0.5.4 with proper ODD compliance: ep
 
 ## Follow-up
 
-- [ ] Push to git and verify Cloudflare deployment (HTTP 200)
-- [ ] Add H0006 history entry when championed
+- [x] Push to git and verify Cloudflare deployment (HTTP 200) — Done
+- [x] Add H0006 history entry when championed — Done
 - [ ] Consider updating compile plan to support per-attempt INSTRUCTIONS.md generation
 
 ---

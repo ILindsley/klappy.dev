@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-21T03:57:43.147Z
+Generated: 2026-01-21T04:00:52.870Z
 Total Files: 239
 
 This is a complete export of all documentation, code, and content files
@@ -30643,9 +30643,19 @@ products/agent-skill/
 
 This lane owns its own Cloudflare Pages deployment (not shared with website lane).
 
-- **Domain**: TBD (will be configured when v1.2.1 is championed)
-- **URL pattern**: `https://<domain>/vX.Y/<asset>`
+- **Project**: `klappy-dev-agent-skill`
+- **Production URL**: `https://main.klappy-dev-agent-skill.pages.dev/`
+- **URL pattern**: `https://main.klappy-dev-agent-skill.pages.dev/vX.Y/<asset>`
+- **Preview URL pattern**: `https://<deployment-id>.klappy-dev-agent-skill.pages.dev/`
 - **Isolation**: Full lane ownership, no cross-lane dependencies
+
+### Finding Preview URLs
+
+During PR review, get the deployment ID from `gh pr checks`:
+```
+Cloudflare Pages: klappy-dev-agent-skill  pass  https://dash.cloudflare.com/.../<deployment-id>
+```
+Then construct: `https://<first-8-chars>.klappy-dev-agent-skill.pages.dev/`
 
 ---
 
@@ -30656,6 +30666,8 @@ In addition to canon constraints, this lane observes:
 1. **Lane isolation during attempts**: Test execution stays within attempt folder
 2. **No cross-lane modification**: PRDs cannot require modifying other lanes
 3. **Version immutability**: Once a version is published, it cannot be changed
+4. **INSTRUCTIONS.md is ephemeral**: Generated per-attempt in the attempt folder, never persisted in `src/` or version folders
+5. **Verify before CHAMPION**: No attempt may be marked CHAMPION until HTTP 200 verified on deployed preview URL
 
 ---
 
@@ -30677,6 +30689,20 @@ In addition to canon constraints, this lane observes:
 - Version-first structure enables immutable releases
 - Each version needs its own README for consumer guidance
 - Antifragile documentation (README) beats brittle manifests (JSON)
+
+### v1.2.2 (2026-01-21) — Failed
+
+- INSTRUCTIONS.md was being persisted when it should be ephemeral
+- Compile plans lived in central `infra/` instead of lane
+- ODD formula violated: agents should only need Pack + CONTRACT + PRD
+- Don't steer a miss — when fundamentals are wrong, fail and restart clean
+
+### v1.2.3 (2026-01-21) — Champion
+
+- INSTRUCTIONS.md generated per-attempt in attempt folder (ephemeral)
+- Verify deployment HTTP 200 BEFORE claiming CHAMPION
+- Cloudflare preview URLs use deployment ID from PR checks
+- Clean restart after v1.2.2 failure (didn't steer a miss)
 
 ---
 
@@ -36863,8 +36889,8 @@ Recompile the PRD guide pack against canon v0.5.4 with proper ODD compliance: ep
 
 ## Follow-up
 
-- [ ] Push to git and verify Cloudflare deployment (HTTP 200)
-- [ ] Add H0006 history entry when championed
+- [x] Push to git and verify Cloudflare deployment (HTTP 200) — Done
+- [x] Add H0006 history entry when championed — Done
 - [ ] Consider updating compile plan to support per-attempt INSTRUCTIONS.md generation
 
 ---
