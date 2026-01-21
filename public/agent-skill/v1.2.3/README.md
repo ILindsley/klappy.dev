@@ -6,11 +6,11 @@ This folder contains the PRD guide pack compiled against canon v0.5.4.
 
 | File | Purpose |
 |------|---------|
-| `prd-guide-pack.md` | Complete compiled pack for AI agent consumption |
+| [`prd-guide-pack.md`](./prd-guide-pack.md) | Complete compiled pack for AI agent consumption |
 
 ## Usage
 
-Copy the contents of `prd-guide-pack.md` into your AI assistant's context to enable interactive PRD creation guidance.
+Copy the contents of [`prd-guide-pack.md`](./prd-guide-pack.md) into your AI assistant's context to enable interactive PRD creation guidance.
 
 ## What's New in v1.2.3
 
