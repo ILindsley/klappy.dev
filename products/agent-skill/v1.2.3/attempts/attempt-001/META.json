@@ -1,0 +1,10 @@
+{
+  "lane": "agent-skill",
+  "prd_version": "v1.2.3",
+  "attempt": "001",
+  "status": "IN_PROGRESS",
+  "epoch": "E0003-evidence-first-era",
+  "created": "2026-01-21",
+  "sealed": null,
+  "canon_version": "0.5.4"
+}

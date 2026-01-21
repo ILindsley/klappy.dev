@@ -39,6 +39,7 @@ See the [usage README](https://main.klappy-dev-agent-skill.pages.dev/latest/READ
 | [v1.2/](v1.2/) | Failed | Distribution attempt (PRD conflict) |
 | [v1.2.1/](v1.2.1/) | Champion | Lane-owned Cloudflare Pages deployment |
 | [v1.2.2/](v1.2.2/) | Failed | Exposed ODD violations (ephemeral artifacts, compile plan location) |
+| [v1.2.3/](v1.2.3/) | Active | Canon refresh v0.5.4 + ODD compliance |
 
 ## Structure
 
@@ -63,8 +64,10 @@ products/agent-skill/
 │   └── attempts/          # Failed attempt evidence
 ├── v1.2.1/                # Version 1.2.1 (champion)
 │   └── PRD.md             # Frozen PRD
-└── v1.2.2/                # Version 1.2.2 (active)
-    └── PRD.md             # Canon refresh PRD
+├── v1.2.2/                # Version 1.2.2 (failed)
+│   └── PRD.md             # Canon refresh PRD (failed)
+└── v1.2.3/                # Version 1.2.3 (active)
+    └── PRD.md             # Canon refresh + ODD compliance
 ```
 
 ## Build

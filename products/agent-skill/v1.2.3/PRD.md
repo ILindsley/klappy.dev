@@ -30,7 +30,7 @@ Recompile the PRD guide pack against canon v0.5.4 with proper ODD compliance: ep
 
 **v1.2.1 delivered**: Lane-owned Cloudflare Pages deployment with versioned, immutable asset URLs.
 
-**v1.2.2 failed** (see [H0005](./history/H0005-v1.2.2-failed.md)): Attempt exposed fundamental ODD violations:
+**v1.2.2 failed** (see [H0005](../history/H0005-v1.2.2-failed.md)): Attempt exposed fundamental ODD violations:
 
 - INSTRUCTIONS.md was being persisted when it should be ephemeral
 - Compile plans lived in central `infra/compile/plans/` instead of lane
@@ -172,7 +172,7 @@ Attempts live at: `v1.2.3/attempts/attempt-NNN/`
 
 ## Related Documents
 
-- v1.2.2 Failure: [H0005](./history/H0005-v1.2.2-failed.md)
-- v1.2.1 Champion: `v1.2.1/attempts/attempt-001/`
+- v1.2.2 Failure: [H0005](../history/H0005-v1.2.2-failed.md)
+- v1.2.1 Champion: `../v1.2.1/attempts/attempt-001/`
 - Canon Changelog: `/public/content/canon/CHANGELOG.md`
 - Canon 0.5.4: `/canon/CHANGELOG.md` (README Index Pattern)
