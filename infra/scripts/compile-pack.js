@@ -133,18 +133,17 @@ function main() {
     ""
   ].join("\n");
 
-  // Determine output path - handle both relative and full paths in plan
-  const outFile = plan.output.includes("/")
-    ? plan.output.split("/").pop()
-    : plan.output;
-  const outRel = `public/_compiled/${lane}/${outFile}`;
+  // Determine output path - respect full paths in plan, default to public/_compiled
+  const outRel = plan.output.includes("/")
+    ? plan.output
+    : `public/_compiled/${lane}/${plan.output}`;
   const outAbs = resolvePath(outRel);
 
   ensureDir(dirname(outAbs));
   writeFileSync(outAbs, header + parts.join(""), "utf8");
 
-  // Write pack-specific meta for verification tooling
-  const metaDir = join(ROOT, "public", "_compiled", lane, "_meta");
+  // Write pack-specific meta for verification tooling (alongside output)
+  const metaDir = join(dirname(outAbs), "_meta");
   ensureDir(metaDir);
   writeFileSync(
     join(metaDir, `${pack}-COMPILE_META.json`),

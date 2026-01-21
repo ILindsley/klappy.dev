@@ -1,0 +1,13 @@
+{
+  "lane": "agent-skill",
+  "generated_at": "2026-01-20T22:32:06.864Z",
+  "packs": [
+    {
+      "pack": "prd-guide",
+      "plan": "infra/compile/plans/agent-skill/prd-guide.json",
+      "output": "public/_compiled/agent-skill/prd-guide-pack.md",
+      "meta": "public/_compiled/agent-skill/_meta/prd-guide-COMPILE_META.json",
+      "exists": false
+    }
+  ]
+}
