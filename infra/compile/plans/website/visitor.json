@@ -3,6 +3,10 @@
   "pack": "visitor",
   "output": "public/_compiled/website/visitor-pack.md",
   "sources": [
+    "odd/README.md",
+    "odd/manifesto.md",
+    "odd/appendices/progressive-elevation.md",
+    "about/home.md",
     "canon/README.md",
     "docs/appendices/product-lanes.md",
     "docs/appendices/epochs.md",

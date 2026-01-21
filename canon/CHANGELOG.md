@@ -16,6 +16,46 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.7.0 — 2026-01-21
+
+**Doc Inclusion Audit — README Indexes and Derived Output Hygiene**
+
+This release cleans up documentation inclusion rules, adds navigational README indexes to key folders, and explicitly separates derived outputs from source truth.
+
+### Added
+
+- **README indexes** for navigable folders (progressive disclosure structure with Description/Outline):
+  - `about/README.md` (audience: public) — Author orientation
+  - `visual/README.md` — Visual design system index
+  - `infra/README.md` — Infrastructure and tooling index
+  - `infra/prompts/README.md` — Reusable prompt templates index
+  - `products/website/README.md` — Website lane index
+  - `products/ai-navigation/README.md` — AI Navigation lane index (sparse/planned)
+- **Derived Outputs section** in `docs/TRUTH_MAP.md` — Explicit rules for derived paths (`public/_compiled`, `public/content`, `public/agent-skill`)
+
+### Changed
+
+- **export-book.js** — Added exclusions for `public/_compiled` and `public/agent-skill` (prevents derived artifacts in book export)
+- **docs/PRD.md** — Converted from legacy PRD content to a PRD Index routing to active lane PRDs
+- **docs/PRD/website/PRD-legacy-v0.3.md** — Added deprecation frontmatter and header
+- **infra/compile/plans/website/visitor.json** — Expanded sources, added `odd/appendices/progressive-elevation.md`, tier-ordered (ODD → Canon → Docs)
+- **infra/compile/plans/website/author.json** — Fixed output path consistency (`public/_compiled/website/author-pack.md`), expanded sources, tier-ordered
+
+### Philosophy
+
+- README-as-index pattern enables progressive disclosure at folder level
+- Derived outputs are explicitly documented as wipeable and non-authoritative
+- Compile packs use tier ordering (ODD first, Canon next, Docs last) for coherent context
+- Book exports exclude derived artifacts to prevent source/generated confusion
+
+### Notes
+
+- READMEs use progressive disclosure structure: Frontmatter, H1, Blockquote Subtitle, Description, Outline, Content
+- `about/README.md` uses `audience: public` since it contains user-facing content (not docs)
+- Compile plans now include `progressive-elevation.md` as it explains the portability ladder
+
+---
+
 ## 0.6.1 — 2026-01-21
 
 **Docs Epistemic Hygiene**

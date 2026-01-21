@@ -30,6 +30,8 @@ const EXCLUDE_DIRS = new Set([
 const EXCLUDE_PATHS = new Set([
   'public/content', // These are copies of source files, exclude to avoid duplicates
   '.cursor/plans', // Ephemeral plan files, exclude
+  'public/_compiled', // Derived compilation outputs (wipeable)
+  'public/agent-skill', // Versioned skill outputs (derived)
 ]);
 
 // Patterns to exclude lane implementations (keep guidance, exclude execution work)

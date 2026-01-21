@@ -97,6 +97,25 @@ See [D0001: Three-Tier Conceptual Hierarchy](/odd/decisions/D0001-three-tier-con
 
 ---
 
+## 🗑️ Derived Outputs (Do Not Edit)
+
+These paths contain derived/compiled artifacts. Never edit them directly:
+
+| Path | Why Derived | Source |
+|------|-------------|--------|
+| `public/_compiled/**` | Compilation outputs | Source docs + compile plans |
+| `public/content/**` | Mirrored content | Source folders (odd/, canon/, docs/, about/) |
+| `public/agent-skill/**` | Versioned skill packs | products/agent-skill/ |
+
+**Rules:**
+
+- **Always link to source URIs** (`klappy://...` or source file paths) — compiled outputs are ephemeral views
+- If a derived file needs fixing, fix the source and regenerate
+- Derived outputs can be deleted and rebuilt anytime
+- Never edit derived files directly
+
+---
+
 ## 🔗 See Also
 
 - [Three-Tier Hierarchy](/odd/decisions/D0001-three-tier-conceptual-hierarchy.md)

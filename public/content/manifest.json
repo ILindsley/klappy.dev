@@ -10,6 +10,22 @@
   },
   "resources": [
     {
+      "uri": "klappy://about",
+      "path": "/about/README.md",
+      "title": "About",
+      "type": "text/markdown",
+      "audience": "public",
+      "exposure": "nav",
+      "tier": 1,
+      "voice": "neutral",
+      "stability": "semi_stable",
+      "tags": [
+        "about",
+        "author",
+        "index"
+      ]
+    },
+    {
       "uri": "klappy://projects/adding-a-project",
       "path": "/projects/ADDING-A-PROJECT.md",
       "title": "Adding a Project",

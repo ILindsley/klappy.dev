@@ -1,12 +1,29 @@
-# PRD Identity
+---
+uri: klappy://docs/prd/website/legacy-v0.3
+title: "Website PRD (Legacy v0.3)"
+audience: docs
+exposure: hidden
+tier: 2
+voice: neutral
+stability: deprecated
+status: deprecated
+superseded_by: PRD.md
+tags: ["docs", "prd", "website", "legacy", "deprecated"]
+---
+
+# PRD Identity (LEGACY)
+
+> **DEPRECATED:** This PRD has been superseded by [PRD.md](PRD.md) (v1.2).
+> This file is preserved for historical reference only.
 
 | Field                       | Value       |
 | --------------------------- | ----------- |
 | **PRD Version**             | v0.3        |
-| **Status**                  | Draft       |
+| **Status**                  | Deprecated  |
 | **Created**                 | 2026-01-16  |
 | **Author**                  | Chris Klapp |
 | **Preview Deploy Required** | Yes         |
+| **Superseded By**           | PRD.md (v1.2) |
 
 ---
 
