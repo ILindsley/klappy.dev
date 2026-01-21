@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-21T01:36:30.171Z
-Total Files: 212
+Generated: 2026-01-21T02:02:31.349Z
+Total Files: 227
 
 This is a complete export of all documentation, code, and content files
 from the klappy.dev repository, organized by section.
@@ -20,12 +20,12 @@ from the klappy.dev repository, organized by section.
 - **.cursor** (1 files)
 - **.husky** (17 files)
 - **About** (5 files)
-- **Canon** (54 files)
+- **Canon** (55 files)
 - **Documentation** (17 files)
 - **Infrastructure** (19 files)
 - **Interfaces & Contracts** (6 files)
 - **ODD (Outcomes-Driven Development)** (1 files)
-- **Products** (65 files)
+- **Products** (79 files)
 - **Projects** (6 files)
 - **Public Content** (13 files)
 - **Visual Design System** (4 files)
@@ -7821,6 +7821,240 @@ They should not re-litigate the philosophy.
 
 PRDs define **how** the lane applies this principle.
 This appendix defines the governing constraint.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/odd/appendices/memory-architecture.proposed.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/odd/memory-architecture
+title: "Memory Architecture"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["odd", "memory", "elevation", "portability"]
+status: proposed
+---
+
+# Memory Architecture
+
+## Summary
+
+In ODD, **memory** is the layered system that preserves what was learned while discarding what no longer reduces drag.
+
+Memory is not a single artifact. It is the percolation path from ephemeral execution to durable truth:
+
+```
+Attempts → Lane History → Lane Decisions → Cross-Lane Patterns → Canon
+```
+
+Each layer has different durability, scope, and elevation criteria.
+
+---
+
+## Why Memory Matters
+
+ODD assumes:
+- Generation is abundant
+- Trust is scarce
+- Context is bounded
+- Drift is inevitable unless actively curated
+
+Memory is the bottleneck — not computation, not generation, not storage.
+
+The system must:
+- Preserve what repeatedly reduces drag
+- Discard what no longer serves
+- Make the percolation path visible
+- Keep each layer scannable by agents and humans
+
+Evidence without elevation creates false confidence rather than learning.
+
+---
+
+## The Memory Layers
+
+### Layer 1: Attempt Evidence (Ephemeral)
+
+**Scope:** Single execution against a PRD  
+**Durability:** Sealed when attempt closes; may be pruned later  
+**Lives in:** `products/<lane>/<version>/attempts/attempt-NNN/evidence/`
+
+Attempts capture what happened during execution:
+- Test output, logs, screenshots
+- Verification artifacts
+- Failure evidence
+
+**Elevates when:** A pattern appears across multiple attempts and can be stated as a reusable learning.
+
+---
+
+### Layer 2: Lane History (Lane-Durable)
+
+**Scope:** What happened in this lane — champions, failures, infrastructure changes  
+**Durability:** Persists as long as the lane exists  
+**Lives in:** `products/<lane>/history/`
+
+History records **what happened** without turning it into rules:
+- Champion promotions
+- Failed attempts with learnings
+- Infrastructure migrations
+
+**Elevates when:** A learning recurs across multiple versions or informs lane decisions.
+
+---
+
+### Layer 3: Lane Decisions (Lane-Durable)
+
+**Scope:** Why this lane chose what it chose  
+**Durability:** Persists as long as the lane exists; may be deprecated  
+**Lives in:** `products/<lane>/decisions/`
+
+Decisions record **why we chose** to make things happen the way they did:
+- Architectural choices
+- Deviations from canon
+- Patterns that worked
+
+History says "we did X." Decisions say "we did X because Y."
+
+**Elevates when:** A decision proves valuable across multiple lanes.
+
+---
+
+### Layer 4: Cross-Lane Patterns (Repo-Durable)
+
+**Scope:** Patterns that recur across lanes  
+**Durability:** Persists in interfaces or shared tooling  
+**Lives in:** `/interfaces/**` or shared infrastructure
+
+Cross-lane patterns emerge when:
+- Multiple lanes solve the same problem
+- Interoperability requires explicit contracts
+- Drift across lanes becomes expensive
+
+**Elevates when:** A pattern satisfies elevation criteria (recurrence, portability, drag reduction, testability).
+
+Many cross-lane patterns remain permanently non-canonical — useful, local, and intentionally contextual. Canon is not the goal of all things.
+
+---
+
+### Layer 5: Canon (Durable Truth)
+
+**Scope:** Curated, high-signal rules that survive context changes  
+**Durability:** Persists across projects, tools, and time  
+**Lives in:** `/canon/**`
+
+Canon is intentionally small. Adding to canon requires:
+1. **Recurrence** — appears across multiple attempts/projects
+2. **Portability** — remains true across stacks/models/tools
+3. **Drag Reduction** — prevents repeated confusion or failure
+4. **Testability** — can be expressed as a falsifiable claim
+
+Canon does not grow by accumulation. It grows by curation.
+
+---
+
+## The Percolation Model
+
+Memory does not flow upward automatically. It requires explicit elevation.
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                        CANON                                │
+│  (Durable truth that survives context changes)              │
+└─────────────────────────────────────────────────────────────┘
+                           ▲
+                           │ elevation (strict criteria)
+                           │
+┌─────────────────────────────────────────────────────────────┐
+│                   CROSS-LANE PATTERNS                       │
+│  (Interfaces, shared contracts, proven interop)             │
+└─────────────────────────────────────────────────────────────┘
+                           ▲
+                           │ elevation (recurrence across lanes)
+                           │
+┌───────────────────────┐ ┌───────────────────────┐
+│   LANE A              │ │   LANE B              │
+│   ├── decisions/      │ │   ├── decisions/      │
+│   ├── history/        │ │   ├── history/        │
+│   └── attempts/       │ │   └── attempts/       │
+└───────────────────────┘ └───────────────────────┘
+         ▲                          ▲
+         │ elevation                │ elevation
+         │ (recurrence,             │ (recurrence,
+         │  learning)               │  learning)
+         │                          │
+    ┌─────────┐                ┌─────────┐
+    │ attempt │                │ attempt │
+    │ attempt │                │ attempt │
+    │ attempt │                │ attempt │
+    └─────────┘                └─────────┘
+```
+
+Most artifacts die at the attempt layer. That is correct behavior.
+
+---
+
+## Decay Is the Default
+
+Memory preservation has a cost: maintenance, cognitive load, drift risk.
+
+ODD assumes most artifacts should decay:
+- Attempts are sealed and may be pruned
+- History entries are append-only but finite
+- Decisions may be deprecated
+- Even canon can be curated down
+
+Discarding is not loss. It is how memory stays useful.
+
+---
+
+## Folder Patterns
+
+Each layer has a consistent folder pattern within lanes:
+
+| Layer | Pattern | Index Style | Authored By |
+|-------|---------|-------------|-------------|
+| Attempts | `<version>/attempts/attempt-NNN/` | Flat enumeration | Agent or human |
+| History | `history/H000X-*.md` | Index table + individual files | Human (post-attempt) |
+| Decisions | `decisions/D000X-*.md` | Index table + individual files | Human |
+
+The index + individual files pattern keeps scan cost low while allowing entries to grow.
+
+---
+
+## What Memory Is Not
+
+Memory is not:
+- A **changelog** (user-facing release notes)
+- A **git log** (commit history)
+- A **wiki** (sprawling documentation)
+
+Memory is curated learning that reduces future drag.
+
+---
+
+## Relationship to Other Concepts
+
+| Concept | Relationship |
+|---------|--------------|
+| Progressive Elevation | The criteria for when something moves up a layer |
+| Compiled Memory | Compression of memory into agent-consumable packs |
+| Product Lanes | The boundaries within which memory is scoped |
+| Epochs | Comparability boundaries when the rules change |
+
+---
+
+## Related Documents
+
+- `/canon/odd/appendices/progressive-elevation.md` — Elevation criteria
+- `/canon/odd/appendices/compiled-memory.md` — Compression for agents
+- `/canon/odd/appendices/product-lanes.md` — Lane isolation
+- `/canon/odd/appendices/attempt-lifecycle.md` — Attempt containment
 
 
 
@@ -25503,189 +25737,242 @@ These decisions may override canon defaults with documented rationale. Successfu
 
 
 --------------------------------------------------------------------------------
-📄 File: products/agent-skill/LEDGER.md
+📄 File: products/agent-skill/PRD.md
 --------------------------------------------------------------------------------
 
-# Agent Skill Lane Ledger
+# PRD: ODD Agent Skill
 
-Append-only product memory for the `agent-skill` lane.
-Records outcomes (champions, merges, deployments) without turning them into canon.
-
----
-
-## Entry — PRD v1.1 Champion
-
-- Date: 2026-01-20
-- PRD: v1.1
-- Epoch: E0003 (evidence-first)
-- Champion: attempt-001
-- Attempt path: `v1.1/attempts/attempt-001/`
-
-### Deliverable
-
-- **Pack**: `v1.1/dist/prd-guide-pack.md`
-- **Size**: ~12K tokens (45KB, 1838 lines)
-- **Sources**: 7 canon + guidance documents compiled
-
-### What worked
-
-- Compiled pack approach produces portable, self-contained context artifact.
-- Interactive guidance instructions transform static docs into conversation flow.
-- 7-stage PRD creation process covers outcomes, criteria, constraints, evidence.
-- Token budget (~12K) is reasonable for context injection (~6-12% of typical windows).
-
-### What didn't
-
-- Initial implementation scattered files across repo (infra/, public/_compiled/, docs/PRD/).
-- Had to reorganize to consolidate everything under products/agent-skill/.
-
-### Learnings (1–3 bullets)
-
-- Lane isolation matters: all artifacts for a lane should live in `products/<lane>/`.
-- PRD-first, then implement: creating just the PRD before building prevents scope creep.
-- Attempt structure preserves implementation as evidence, not production artifacts.
-
-### Follow-up (one next action)
-
-- Test pack with Claude Code on a real PRD creation session to validate interactive flow.
+| Field           | Value       |
+| --------------- | ----------- |
+| **PRD Version** | v1.2        |
+| **Lane**        | agent-skill |
+| **Status**      | Active      |
+| **Created**     | 2026-01-17  |
+| **Updated**     | 2026-01-20  |
+| **Author**      | Chris Klapp |
 
 ---
 
-## Entry — PRD v1.2 Failed
+## Interface Contracts
 
-- Date: 2026-01-20
-- PRD: v1.2
-- Epoch: E0003 (evidence-first)
-- Status: FAILED
-- Attempt path: `v1.2/attempts/attempt-001/`
+This lane MUST remain compatible with:
 
-### Objective
+- manifest >=2.0.0 <3.0.0
+- attempt-cli >=2.0.0 <3.0.0
 
-Add zero-friction public access to the compiled pack via a stable URL using website lane's Cloudflare Pages deployment.
-
-### What happened
-
-The PRD required modifying the website lane's build process (`infra/scripts/smart-build.js`) to copy the pack to website dist. This violates lane isolation — attempts cannot modify files outside their lane.
-
-The mechanism was proven to work via mock testing within the attempt folder, but the PRD cannot be satisfied without cross-lane modification.
-
-### What worked
-
-- Mirroring repo structure in attempt folder for clean promotion path
-- Mock website dist for lane-contained testing
-- PROMOTION.md document for clear promotion instructions
-
-### What didn't work
-
-- Initial plan to modify infra directly (lane violation)
-- Running test that wrote outside lane (lane violation)
-- The PRD itself (requires cross-lane modification by design)
-
-### Learnings (1–3 bullets)
-
-- Lane isolation is absolute during attempts — not just for proposals, but for test execution too
-- PRDs can have design flaws that violate constraints
-- A lane cannot require modification of another lane's build process
-
-### Follow-up (one next action)
-
-- Create v1.2.1 PRD with lane-owned deployment approach.
+This lane is allowed to have no UI and is not required to satisfy build-output unless it produces a deployable artifact.
 
 ---
 
-## Entry — Lane Structure Migration
+## Objective
 
-- Date: 2026-01-20
-- Epoch: E0003 (evidence-first)
-- Type: Infrastructure
+Deliver a compiled pack (`prd-guide-pack.md`) that enables AI agents to interactively guide humans through creating ODD-aligned PRDs.
 
-### What changed
-
-Migrated lane from flat structure to version-first structure:
-
-**Before:**
-
-```
-products/agent-skill/
-├── PRD.md
-├── src/
-├── dist/
-└── attempts/
-    └── prd-vX.Y/
-```
-
-**After:**
-
-```
-products/agent-skill/
-├── README.md        # Lane overview
-├── CONTRACT.md      # Formal structure/deviations
-├── LEDGER.md        # This file
-├── ROADMAP.md       # Vision document
-├── prompts/
-│   └── ATTEMPT_KICKOFF.md
-├── v1.1/            # Version-first
-│   ├── PRD.md       # Frozen
-│   ├── src/
-│   ├── dist/
-│   └── attempts/
-├── v1.2/            # Failed version
-│   ├── PRD.md       # Frozen
-│   └── attempts/
-└── v1.2.1/          # Current
-    └── PRD.md       # Active
-```
-
-### Why
-
-- Versioned assets enable immutable releases
-- Dependents can pin to specific versions
-- Each version is fully self-contained
-- Clear boundaries between version states
-
-### Documented in
-
-- `README.md` — Lane overview, file index, version table
-- `CONTRACT.md` — Formal deviation from canon structure
+**v1.2 addition**: The compiled pack is publicly accessible at a stable URL without requiring clone or build.
 
 ---
 
-## Entry — PRD v1.2.1 Champion
+## Background
 
-- Date: 2026-01-21
-- PRD: v1.2.1
-- Epoch: E0003 (evidence-first)
-- Champion: attempt-001
-- Attempt path: `v1.2.1/attempts/attempt-001/`
+This is the whole point.
 
-### Deliverable
+This PRD is about how agents think, not what they render.
 
-- **Cloudflare Pages project**: `klappy-dev-agent-skill`
-- **Preview URL**: `https://main.klappy-dev-agent-skill.pages.dev/`
-- **Pack URL**: `/v1.1/prd-guide-pack.md`
-- **Latest URL**: `/latest/prd-guide-pack.md`
+This is not tied to this website. This should work on any project.
 
-### What worked
+Once this succeeds, any future PoC can start without rebuilding process.
 
-- Lane-owned Cloudflare Pages deployment (full isolation from website lane)
-- Publishing from `public/agent-skill/` ensures only promoted content is accessible
-- Consistent URL structure: `/latest/` and `/v1.1/` (no `dist/` in paths)
-- Preview URL verification before production deployment
+**V1.1 delivered**: A portable, compiled pack that any LLM can use to guide PRD creation using ODD principles.
 
-### What didn't
+**V1.2 adds**: Zero-friction public distribution so anyone can grab the pack from a URL.
 
-- Initial gitignore blocked `dist/` folders (fixed with exception)
-- Inconsistent URL structure initially (`/latest/` vs `/v1.1/dist/`) — normalized
+---
 
-### Learnings (1-3 bullets)
+## In Scope (v1.2)
 
-- Root gitignore patterns can unexpectedly block public distribution. Use `!public/**/dist/` exception.
-- Deploy contents of dist, not the dist folder itself — keeps URLs clean.
-- Multi-lane CF deployments create serial build bottleneck — single `/public` deployment worth exploring.
+### From v1.1 (retained)
 
-### Follow-up (one next action)
+- Compiled pack for PRD creation guidance
+- Distilled ODD philosophy (manifesto, constraints, decision rules)
+- PRD template structure
+- Interactive conversation flow instructions
+- Questions to probe for outcomes, evidence, and constraints
+- Anti-pattern detection (feature-first thinking, untestable criteria)
 
-- Fast-forward `prod` branch to enable production URL, then configure custom domain.
+### New in v1.2
+
+- Public URL for pack distribution
+- Integration with existing Cloudflare Pages deployment
+- Automated build-and-deploy (no manual upload)
+
+---
+
+## Explicitly Out of Scope (v1.2)
+
+- UI rendering (belongs to website lane)
+- Website styling or navigation
+- Human onboarding (belongs to website lane)
+- Content authoring for humans
+- Helping humans understand ODD (belongs to ai-navigation lane)
+- MCP server integration (future)
+- Cursor SKILL.md format (future)
+- Attempt execution guidance (future)
+- Failure detection / self-improvement (future)
+- Multi-project orchestration (future)
+
+---
+
+## Success Criteria
+
+### v1.1 Criteria (retained)
+
+- [ ] Pack can be consumed by any LLM with 100K+ context window
+- [ ] Agent using pack asks clarifying questions about outcomes (not features)
+- [ ] Agent using pack identifies untestable success criteria
+- [ ] Agent using pack suggests missing constraints or non-goals
+- [ ] Resulting PRD follows ODD template structure
+- [ ] No dependency on this repo's UI or tooling
+
+### v1.2 Criteria (new)
+
+- [ ] Pack available at stable public URL (e.g., `https://klappy.dev/packs/agent-skill/prd-guide-pack.md`)
+- [ ] URL returns HTTP 200 with correct pack content
+- [ ] No clone or build required for consumers to access pack
+- [ ] URL documented in lane README
+
+---
+
+## Definition of Done
+
+An attempt against this PRD is complete when:
+
+### v1.1 Requirements (retained)
+
+- [ ] Compile plan exists at `infra/compile/plans/agent-skill/prd-guide.json`
+- [ ] Interactive guidance exists at `products/agent-skill/src/INSTRUCTIONS.md`
+- [ ] Pack generated at `products/agent-skill/dist/prd-guide-pack.md`
+- [ ] Pack includes valid provenance header (lane, pack, built_at, git_commit, sources, source_hashes)
+
+### v1.2 Requirements (new)
+
+- [ ] Distribution mechanism implemented (build script copies pack to website dist)
+- [ ] Public URL verified with HTTP 200 after deployment
+- [ ] Pack content at URL matches local build output
+- [ ] `products/agent-skill/src/README.md` updated with public URL
+
+### Evidence Required
+
+- [ ] Screenshot of pack URL returning 200
+- [ ] Diff showing pack content matches local build
+- [ ] Self-audit completed with explicit tradeoffs
+
+---
+
+## Primary User
+
+AI agents (Claude Opus 4.5 or similar) operating in Claude Code, Cursor, or any IDE with LLM context injection.
+
+---
+
+## Target Use Case
+
+A developer wants to create a V1 PRD for their product using ODD principles.
+
+**v1.1 flow**: Clone repo, build pack, paste into AI context.
+
+**v1.2 flow**: Copy pack from public URL, paste into AI context. No clone or build required.
+
+The AI guides them through:
+
+1. Clarifying the outcome (not features)
+2. Defining testable success criteria
+3. Establishing constraints and non-goals
+4. Specifying evidence requirements
+5. Completing a self-audit
+
+---
+
+## Compiled Pack
+
+### Source
+
+- `products/agent-skill/src/INSTRUCTIONS.md` - Interactive guidance
+- `products/agent-skill/src/compile-plan.json` - Build configuration
+
+### Build Command
+
+- `npm run lane:compile -- --lane agent-skill --pack prd-guide`
+
+### Output
+
+- `products/agent-skill/dist/prd-guide-pack.md`
+- `products/agent-skill/dist/_meta/prd-guide-COMPILE_META.json`
+
+### Distribution (v1.2)
+
+- Deployed to: `https://klappy.dev/packs/agent-skill/prd-guide-pack.md`
+- Automated via website build process
+
+### Verification
+
+- `npm run verify:compiled -- --lane agent-skill --pack prd-guide`
+
+### Contract
+
+- The compiled pack MUST include a provenance header as defined in:
+  - `klappy://canon/odd/compilation`
+
+### Sources (in order)
+
+1. `canon/odd/manifesto.md` - Philosophy foundation
+2. `canon/constraints.md` - Baseline assumptions
+3. `canon/decision-rules.md` - Decision heuristics
+4. `canon/definition-of-done.md` - Completion criteria
+5. `canon/self-audit.md` - Review checklist
+6. `docs/PRD/PRD_TEMPLATE.md` - PRD structure
+7. `products/agent-skill/src/INSTRUCTIONS.md` - Interactive guidance
+
+---
+
+## Constraints
+
+This PRD is shaped by Canon constraints:
+
+- Evidence over assertion
+- Evolution, not automation (humans stay in the loop)
+- Explicit tradeoffs required
+- Bounded evolution (no self-modifying goals)
+- Portability: pack must work outside this repository
+
+### v1.2 Constraints
+
+- Must integrate with existing Cloudflare Pages deployment
+- Must not require manual steps after merge to main
+- Pack must be regeneratable (not manually uploaded)
+
+---
+
+## Attempt Policy
+
+This PRD may be attempted multiple times.
+
+- Each attempt is evaluated independently
+- Failed attempts inform future attempts or PRD revisions
+- Attempts are sealed when CLOSED or ABANDONED
+
+Attempts live at: `products/agent-skill/attempts/prd-v1.2/attempt-NNN/`
+
+---
+
+## Related Documents
+
+- Lane architecture: `/canon/odd/appendices/product-lanes.md`
+- Canon constraints: `/canon/constraints.md`
+- Definition of Done: `/canon/definition-of-done.md`
+- Evolution philosophy: `/canon/odd/appendices/evolution-not-automation.md`
+- Compilation: `/canon/odd/appendices/compilation.md`
+- Compilation targets: `/canon/odd/appendices/compilation-targets.md`
+- v1.1 Champion: `products/agent-skill/attempts/prd-v1.1/attempt-001/`
 
 
 
@@ -25720,7 +26007,7 @@ See the [usage README](https://main.klappy-dev-agent-skill.pages.dev/v1.1/README
 | File | Purpose |
 |------|---------|
 | [CONTRACT.md](CONTRACT.md) | Formal structure, deviations from canon |
-| [LEDGER.md](LEDGER.md) | Champion history and key learnings |
+| [history/](history/) | Champion history, failures, learnings |
 | [ROADMAP.md](ROADMAP.md) | Vision and future versions |
 | [ATTEMPT_KICKOFF.md](ATTEMPT_KICKOFF.md) | One-liner pointing to active version's KICKOFF |
 | [decisions/](decisions/README.md) | Lane-specific architecture decisions |
@@ -25741,7 +26028,7 @@ This lane uses a **version-first** folder structure (differs from canon default)
 products/agent-skill/
 ├── README.md              # You are here
 ├── CONTRACT.md            # Formal structure/deviations
-├── LEDGER.md              # Champion log
+├── history/               # Champion log, failures, learnings
 ├── ROADMAP.md             # Vision document
 ├── ATTEMPT_KICKOFF.md     # One-liner → active KICKOFF
 ├── decisions/             # Lane-specific ADRs
@@ -25754,9 +26041,9 @@ products/agent-skill/
 ├── v1.2/                  # Version 1.2 (failed)
 │   ├── PRD.md             # Frozen PRD
 │   └── attempts/          # Failed attempt evidence
-└── v1.2.1/                # Version 1.2.1 (in progress)
-    ├── KICKOFF.md         # Active attempt instructions
-    └── PRD.md             # Active PRD
+└── v1.2.1/                # Version 1.2.1 (champion)
+    ├── KICKOFF.md         # Frozen attempt instructions
+    └── PRD.md             # Frozen PRD
 ```
 
 ## Build
@@ -25780,7 +26067,9 @@ Note: Build configuration lives in each version's `src/compile-plan.json`.
 
 Living document capturing the evolution vision for the agent-skill lane.
 
-This is not a commitment - it's a sketch that evolves as we learn.
+This is not a commitment — it's a sketch that evolves as we learn.
+
+> **Note:** This roadmap tracks *vision*, not *status*. For what actually happened (champions, failures, learnings), see **[history/](./history/)**.
 
 ---
 
@@ -25793,35 +26082,34 @@ Each workflow stage is a minor version bump (additive, non-breaking).
 
 ---
 
-## v1.1 - PRD Creation Guidance (CHAMPION)
+## v1.1 — PRD Creation Guidance
 
-**Status**: Complete  
 **Location**: `v1.1/`
 
-Delivered a compiled pack (`prd-guide-pack.md`) that enables AI agents to interactively guide humans through creating ODD-aligned PRDs.
+A compiled pack (`prd-guide-pack.md`) that enables AI agents to interactively guide humans through creating ODD-aligned PRDs.
 
-**Outcome**: Pack exists at `v1.1/dist/prd-guide-pack.md`
+**Target outcome**: Pack available locally after build
 
 **Friction level**: Clone repo, run build, copy pack
 
 ---
 
-## v1.2 - Distribution (FAILED)
+## v1.2 — Distribution (Website Lane)
 
-**Status**: Failed  
 **Location**: `v1.2/`
 
-Attempted to add zero-friction public access via website lane's Cloudflare Pages deployment.
+Zero-friction public access via website lane's Cloudflare Pages deployment.
 
-**Outcome**: PRD required cross-lane modification (website build process), which violates lane isolation.
+**Target outcome**: Pack available at public URL via website deployment
 
-See `v1.2/attempts/attempt-001/LEARNINGS.md` for full analysis.
+**Friction level**: Copy from URL
+
+**Why it didn't work**: PRD required cross-lane modification (website build process), which violates lane isolation. See [history/H0002](./history/H0002-v1.2-failed.md) for details.
 
 ---
 
-## v1.2.1 - Distribution (CURRENT)
+## v1.2.1 — Distribution (Lane-Owned)
 
-**Status**: PRD written, awaiting attempt  
 **Location**: `v1.2.1/`
 
 Patches v1.2 with a lane-owned approach:
@@ -25831,15 +26119,13 @@ Patches v1.2 with a lane-owned approach:
 - `/latest/` convention pointing to current champion
 - No website lane dependency
 
-**Outcome**: Pack available at `https://agent-skill.klappy.dev/latest/prd-guide-pack.md`
+**Target outcome**: Pack available at `https://agent-skill.klappy.dev/latest/prd-guide-pack.md`
 
 **Friction level**: Copy from URL
 
 ---
 
-## v1.3 - Attempt Execution Guidance (FUTURE)
-
-**Status**: Vision only
+## v1.3 — Attempt Execution Guidance
 
 Add guidance for executing attempts against PRDs. Extends the pack from "create PRD" to "create PRD + execute attempt."
 
@@ -25851,13 +26137,11 @@ Add guidance for executing attempts against PRDs. Extends the pack from "create 
 - Lane isolation rules
 - Test containment (mock structures)
 
-**Outcome**: Agent can guide full PRD → Attempt workflow
+**Target outcome**: Agent can guide full PRD → Attempt workflow
 
 ---
 
-## v1.4 - Evidence Gathering Guidance (FUTURE)
-
-**Status**: Vision only
+## v1.4 — Evidence Gathering Guidance
 
 Add guidance for producing and organizing evidence during attempts.
 
@@ -25868,13 +26152,11 @@ Add guidance for producing and organizing evidence during attempts.
 - Provenance requirements
 - Visual proof standards
 
-**Outcome**: Agent ensures attempts produce proper evidence
+**Target outcome**: Agent ensures attempts produce proper evidence
 
 ---
 
-## v1.5 - Failure Detection Guidance (FUTURE)
-
-**Status**: Vision only
+## v1.5 — Failure Detection Guidance
 
 Add guidance for detecting and documenting failures, including PRD design flaws.
 
@@ -25885,13 +26167,11 @@ Add guidance for detecting and documenting failures, including PRD design flaws.
 - PRD conflict detection (like our v1.2 experience)
 - When to propose new PRD version vs. retry
 
-**Outcome**: Agent can recognize and document failures constructively
+**Target outcome**: Agent can recognize and document failures constructively
 
 ---
 
-## v2.0 - Showcase Page (FUTURE)
-
-**Status**: Vision only
+## v2.0 — Showcase Page
 
 A webpage that showcases the pack with good UX for discovery and use.
 
@@ -25904,7 +26184,7 @@ A webpage that showcases the pack with good UX for discovery and use.
 - Last updated / provenance info
 - Link to source (for transparency)
 
-**Outcome**: Visitors can discover, preview, and copy the pack from a nice UI
+**Target outcome**: Visitors can discover, preview, and copy the pack from a nice UI
 
 **Friction level**: Click to copy
 
@@ -25929,46 +26209,215 @@ Captured here so we don't forget, not committed to any version:
 
 ---
 
-## Learnings Log
-
-Append learnings here as we complete versions:
-
-### v1.1 Learnings (2026-01-20)
-
-- Lane isolation matters: all artifacts should live in `products/<lane>/`
-- PRD-first prevents scope creep
-- Compiled pack is like compiled code - source in `src/`, output in `dist/`
-- ~12K tokens is reasonable context budget (~6-12% of typical windows)
-
-### v1.2 Learnings (2026-01-20) — FAILED
-
-- Lane isolation is absolute during attempts — not just for proposals, but for test execution too
-- PRDs can have design flaws that violate constraints
-- Check PRD feasibility before implementing — if the PRD requires things that violate constraints, flag it immediately
-- Mock structures prove mechanisms without crossing boundaries
-- A lane cannot require modification of another lane's build process
-
-### v1.2.1 Planning Learnings (2026-01-20)
-
-- Version-first folder structure enables immutable releases
-- Each version needs its own README for consumer guidance
-- Antifragile documentation (README) beats brittle manifests (JSON)
-- Lane-owned deployment ensures full isolation
-- PRDs are immutable once an attempt runs — create new version for changes
-- Upstream canon loading: pack should be loaded FIRST in kickoffs
-- RTFM: Many "learnings" were actually canon we failed to read carefully
-
----
-
 ## How to Use This Document
 
-1. **Before starting a version**: Read the vision, refine it, then write the PRD
-2. **After completing a version**: Add learnings to the log
-3. **When ideas emerge**: Add to "Future Ideas" section
+1. **Before starting a version**: Read the vision here, refine it, then write the PRD
+2. **After completing a version**: Add entry to [history/](./history/) (not here)
+3. **When ideas emerge**: Add to "Future Ideas" section above
 4. **Periodically**: Review and prune ideas that no longer make sense
 
 This roadmap informs PRDs but does not replace them. PRDs are the contract; this is the vision.
 
+
+
+--------------------------------------------------------------------------------
+📄 File: products/agent-skill/attempts/README.md
+--------------------------------------------------------------------------------
+
+# Agent Skill Lane Attempts
+
+Canonical attempt artifacts live here:
+
+```
+/products/agent-skill/attempts/prd-vX.Y/attempt-NNN/
+```
+
+## Structure
+
+```
+attempts/
+  prd-v1.1/
+    attempt-001/        # first attempt at V1.1
+      META.json
+      INSTRUCTIONS.md   # interactive guidance content
+      compile-plan.json # compilation plan
+      evidence/
+        prd-guide-pack.md
+        COMPILE_META.json
+```
+
+## Evidence
+
+Attempt evidence includes:
+
+- Compiled pack (the deliverable)
+- Compile metadata (provenance)
+- Interactive guidance instructions
+
+## Related
+
+- PRD: `products/agent-skill/PRD.md`
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/agent-skill/attempts/prd-v1.1/attempt-001/ATTEMPT.md
+--------------------------------------------------------------------------------
+
+# Attempt 001 — PRD v1.1 Closure Record
+
+## Status: CHAMPION (Sealed)
+
+| Field           | Value                    |
+| --------------- | ------------------------ |
+| **Lane**        | agent-skill              |
+| **PRD Version** | v1.1                     |
+| **Attempt**     | 001                      |
+| **Status**      | CHAMPION                 |
+| **Epoch**       | E0003-evidence-first-era |
+| **Created**     | 2026-01-20               |
+| **Sealed**      | 2026-01-20               |
+
+---
+
+## Objective (from PRD)
+
+Deliver a compiled pack (`prd-guide-pack.md`) that enables AI agents to interactively guide humans through creating ODD-aligned PRDs.
+
+---
+
+## Outcome
+
+**SUCCESS** — Pack created and verified.
+
+The attempt produced a compiled pack containing:
+
+- ODD Manifesto (philosophy foundation)
+- Constraints (10 baseline assumptions)
+- Decision Rules (14 heuristics)
+- Definition of Done (completion criteria)
+- Self-Audit Checklist (9-point review)
+- PRD Template (structure)
+- Interactive Instructions (conversation flow)
+
+**Pack metrics:**
+
+- ~12,000 tokens
+- 1,838 lines
+- 45KB
+
+---
+
+## Evidence
+
+| Artifact             | Location                     |
+| -------------------- | ---------------------------- |
+| Compiled pack        | `evidence/prd-guide-pack.md` |
+| Compile metadata     | `evidence/COMPILE_META.json` |
+| Interactive guidance | `INSTRUCTIONS.md`            |
+| Compile plan         | `compile-plan.json`          |
+
+---
+
+## Verification Performed
+
+- [x] Pack compiled successfully (`npm run lane:compile`)
+- [x] Pack verified (`npm run verify:compiled`)
+- [x] Provenance header present with source hashes
+- [x] All 7 sources included in correct order
+- [ ] Real-world test with Claude Code (deferred to iteration)
+
+---
+
+## Self-Audit
+
+### Intended Outcome
+
+Create a portable context artifact that any LLM can use to guide PRD creation.
+
+### Constraints Applied
+
+- Evidence over assertion (pack includes verification metadata)
+- Maintainability (everything contained in products/agent-skill/)
+- Portability (single file, no dependencies)
+
+### Decision Rules Followed
+
+- Outcomes Before Implementation (focused on "guide PRD creation" not "build tooling")
+- Simplicity Wins (concat mode, not LLM summarization)
+- Borrow→Bend→Break→Build (reused existing compile infrastructure)
+
+### Tradeoffs
+
+- **Included full manifesto** — verbose but complete; could be trimmed in future iteration
+- **Concat mode only** — deterministic but larger; LLM summarization could reduce size
+- **No real-world test** — shipped without Claude Code validation; will iterate based on feedback
+
+### Risks
+
+- Pack may be too verbose for smaller context windows
+- Interactive instructions may need tuning after real usage
+
+### Confidence Level
+
+0.75 — Strong foundation, but untested in real PRD creation session.
+
+---
+
+## Learnings
+
+1. **Lane isolation matters**: Initial implementation scattered files across repo; consolidated to products/agent-skill/.
+2. **PRD-first prevents scope creep**: Creating just the PRD before building clarifies intent.
+3. **Attempt structure works**: Evidence and artifacts are contained and traceable.
+
+---
+
+## Follow-up
+
+- Test pack with Claude Code on a real PRD creation session
+- Iterate based on feedback (attempt-002 if needed)
+- Consider trimming manifesto confidence section to reduce token count
+
+---
+
+## Closure
+
+This attempt is **SEALED** as CHAMPION for PRD v1.1.
+
+No further work will be done on this attempt. Future improvements require attempt-002 or a new PRD version.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/agent-skill/attempts/prd-v1.1/attempt-001/META.json
+--------------------------------------------------------------------------------
+
+{
+  "lane": "agent-skill",
+  "prd_version": "v1.1",
+  "attempt": "001",
+  "status": "CHAMPION",
+  "epoch_id": "E0003-evidence-first-era",
+  "created_at": "2026-01-20T21:10:00.000Z",
+  "sealed_at": "2026-01-20T21:45:00.000Z",
+  "sealed_commit": "PENDING_COMMIT",
+  "description": "First attempt at PRD creation guidance pack",
+  "artifacts": [
+    "ATTEMPT.md",
+    "INSTRUCTIONS.md",
+    "compile-plan.json",
+    "evidence/prd-guide-pack.md",
+    "evidence/COMPILE_META.json"
+  ],
+  "evidence": {
+    "pack_tokens": "~12000",
+    "pack_lines": 1838,
+    "pack_bytes": 45270,
+    "sources_count": 7,
+    "verified": true
+  },
+  "notes": "Sealed as champion. sealed_commit to be updated after git commit."
+}
 
 
 --------------------------------------------------------------------------------
@@ -27480,6 +27929,130 @@ Read and internalize: https://agent-skill.klappy.dev/latest/prd-guide-pack.md
 
 
 --------------------------------------------------------------------------------
+📄 File: products/agent-skill/decisions/D0008-roadmap-vision-only.md
+--------------------------------------------------------------------------------
+
+# D0008 — ROADMAP as Vision Only (No Status Tracking)
+
+## Decision
+
+ROADMAP tracks future vision and version objectives only. It does not track version status (champion, failed, in-progress). The `history/` folder is the single source of truth for what happened.
+
+## Status
+
+**Active**
+
+## Context
+
+The ROADMAP contained a "Status" field for each version (e.g., "CHAMPION", "FAILED", "PRD written, awaiting attempt"). After v1.2.1 was promoted to champion, the ROADMAP still showed "awaiting attempt" — creating drift between ROADMAP and history.
+
+Options considered:
+
+1. **Remove status from ROADMAP** — history/ is authoritative, ROADMAP is vision-only
+2. **Enforce ROADMAP updates during promotion** — Add to promotion checklist
+
+## Why
+
+- **DRY**: history/ already tracks champion/failed status authoritatively. Duplicating in ROADMAP violates DRY.
+- **KISS**: Fewer places to maintain = fewer places to forget
+- **Role clarity**: ROADMAP answers "where are we going?" / history/ answers "where have we been?"
+- **Antifragile**: Design removes drift possibility rather than relying on discipline to prevent it
+
+Option 2 was rejected because it fights drift with process discipline instead of structural design. Discipline eventually loses to forgetfulness.
+
+## Consequences
+
+- ✅ No more drift between ROADMAP and history/
+- ✅ Clear separation of concerns (vision vs. history)
+- ✅ Simpler ROADMAP maintenance (just update vision, not status)
+- ⚠️ Loses at-a-glance "where are we" in ROADMAP (go to history/ for that)
+- ⚠️ Agents loading ROADMAP need to also check history/ for current state
+
+## Relationship to Canon
+
+- **Overrides**: None (canon doesn't specify roadmap structure)
+- **Extends**: Canon principle of DRY (with isolation), KISS
+- **Candidate for elevation**: Yes — useful pattern for any lane with both ROADMAP and LEDGER
+
+## Evidence
+
+- Conversation: 2026-01-21 (ROADMAP showed v1.2.1 as "awaiting attempt" after champion promotion)
+- Root cause: Status tracked in two places (ROADMAP + LEDGER)
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/agent-skill/decisions/D0009-history-folder-pattern.md
+--------------------------------------------------------------------------------
+
+# D0009 — History Folder Pattern (Indexed Entries)
+
+## Decision
+
+Lane history is stored in a `history/` folder with an index file (`index.md`) and individual entry files (`H000X-*.md`). This mirrors the `decisions/` folder pattern for consistency.
+
+## Status
+
+**Active**
+
+## Context
+
+LEDGER.md was a single file capturing all lane history (champions, failures, learnings, infrastructure changes). As the lane matures, this file will grow unbounded, making it slow for agents to parse and increasing cognitive load.
+
+Options considered:
+
+1. **Keep single LEDGER.md** — simple but doesn't scale
+2. **Rename to CHANGELOG.md** — standard format but loses narrative/learnings structure
+3. **Split into history/ folder** — mirrors decisions/ pattern, scales well
+
+## Why
+
+- **Consistency**: Same pattern as `decisions/` — index + individual files
+- **Scalability**: Agents can scan index (~500 tokens) and dig deeper only when needed
+- **Cognitive load**: Familiar pattern reduces mental overhead
+- **Growth-friendly**: Individual entries can include evidence, links, screenshots without bloating index
+
+## Structure
+
+```
+products/agent-skill/
+├── history/
+│   ├── index.md                           # Quick reference table
+│   ├── H0001-v1.1-champion.md
+│   ├── H0002-v1.2-failed.md
+│   ├── H0003-lane-structure-migration.md
+│   └── H0004-v1.2.1-champion.md
+```
+
+## Naming
+
+- Folder: `history/` (not `memory/`) — universally understood, consistent with conventions
+- Files: `H000X-<slug>.md` — mirrors `D000X-*.md` pattern from decisions
+- Index: `index.md` — same as decisions
+
+## Consequences
+
+- ✅ Agents can quickly scan lane history via index
+- ✅ Individual entries can grow without affecting scan performance
+- ✅ Consistent with decisions/ pattern — less cognitive load
+- ✅ LEDGER.md removed — single source of truth
+- ✅ ROADMAP Learnings Log removed — history/ is the authority
+- ⚠️ More files to manage (but same tradeoff as decisions/)
+
+## Relationship to Canon
+
+- **Overrides**: None (canon doesn't specify history storage pattern)
+- **Extends**: Canon principle of "Memory Is the Bottleneck" — this makes memory scannable
+- **Candidate for elevation**: Yes — useful pattern for any lane with accumulated history
+
+## Evidence
+
+- Conversation: 2026-01-21 (LEDGER drift discussion, scalability concerns)
+- Prior art: `decisions/` folder in this lane
+
+
+
+--------------------------------------------------------------------------------
 📄 File: products/agent-skill/decisions/README.md
 --------------------------------------------------------------------------------
 
@@ -27601,6 +28174,610 @@ When a lane decision proves valuable across multiple lanes, it becomes a candida
 
 _None yet._
 
+
+
+--------------------------------------------------------------------------------
+📄 File: products/agent-skill/decisions/index.md
+--------------------------------------------------------------------------------
+
+# Agent-Skill Lane Decision Log
+
+Lane-specific Architecture Decision Records (ADRs) for the agent-skill product lane.
+
+> **Scope:** These decisions apply only to this lane. They may override or extend canon patterns with documented rationale. Successful patterns may be proposed for elevation to canon.
+
+---
+
+## Active Decisions
+
+### Structure & Organization
+
+| ID                                            | Title                   | What Was Decided                                                                                                                                   |
+| --------------------------------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [D0001](./D0001-version-first-structure.md)   | Version-first structure | Use `vX.Y/` folders at top level (not `attempts/prd-vX.Y/`). Each version contains PRD, src, dist, attempts. Enables immutable versioned releases. |
+| [D0003](./D0003-versioned-kickoff-pattern.md) | Versioned KICKOFF       | Each PRD version has its own `KICKOFF.md`. Lane root has minimal one-liner pointing to active version. KICKOFFs freeze with their version.         |
+| [D0004](./D0004-readme-contract-pattern.md)   | README + CONTRACT       | Split lane docs: `README.md` for human overview, `CONTRACT.md` for formal structure/deviations. README links to CONTRACT for details.              |
+
+### Deployment & Distribution
+
+| ID                                        | Title                 | What Was Decided                                                                             |
+| ----------------------------------------- | --------------------- | -------------------------------------------------------------------------------------------- |
+| [D0002](./D0002-lane-owned-deployment.md) | Lane-owned deployment | This lane owns its own Cloudflare Pages project. No website lane dependency. Full isolation. |
+
+### Attempt Practices
+
+| ID                                             | Title            | What Was Decided                                                                                                                            |
+| ---------------------------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| [D0005](./D0005-test-execution-containment.md) | Test containment | Tests during attempts CANNOT write outside attempt folder. Use mock structures (e.g., `mock-website-dist/`) to prove cross-lane mechanisms. |
+
+### Governance
+
+| ID                                           | Title                  | What Was Decided                                                                                                                                        |
+| -------------------------------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [D0006](./D0006-lane-level-decision-logs.md) | Lane decisions folder  | Lanes maintain their own `decisions/` for patterns that don't rise to canon. Enables transparent deviation + elevation path.                            |
+| [D0007](./D0007-upstream-canon-loading.md)   | Upstream canon loading | Load ODD pack from public URL (`/latest/prd-guide-pack.md`) FIRST in kickoffs, before lane instructions. Portable + ensures canon shapes all decisions. |
+| [D0008](./D0008-roadmap-vision-only.md)      | ROADMAP vision only    | ROADMAP tracks future vision only, not version status. History is single source of truth for champion/failed status. Prevents drift.                     |
+| [D0009](./D0009-history-folder-pattern.md)   | History folder pattern | Lane history in `history/` folder with index + individual entry files. Mirrors `decisions/` pattern. Replaces single LEDGER.md file.                     |
+
+---
+
+## How Decisions Are Made
+
+1. **During an attempt**: Note decision in `ATTEMPT.md` or `LEARNINGS.md`
+2. **After learning stabilizes**: Document as decision file here
+3. **If pattern proves valuable**: Propose elevation to canon
+
+---
+
+## RTFM Check
+
+Before documenting a new pattern, verify it isn't already in canon:
+
+- `canon/odd/appendices/product-lanes.md` — Lane isolation, cross-lane rules
+- `canon/odd/appendices/attempt-lifecycle.md` — Attempt containment
+- `canon/odd/appendices/repo-topology.md` — PRD immutability
+- `canon/odd/decisions/` — Existing decisions
+
+Some of our learnings (D0001, D0002) were applications of existing canon principles we failed to read carefully. Document this when it happens — it's valuable evidence that canon is correct but underutilized.
+
+---
+
+## Relationship to Canon
+
+These decisions:
+
+- **May override** canon defaults (with documented rationale)
+- **Must not violate** canon constraints (lane isolation, evidence requirements)
+- **Should inform** future canon evolution
+
+When a lane decision proves valuable across multiple lanes, it becomes a candidate for canon promotion.
+
+---
+
+## Decision File Template
+
+```markdown
+# D000X — [Title]
+
+## Decision
+
+[1-2 sentences stating what was decided]
+
+## Status
+
+**Active** | Proposed | Deprecated
+
+## Context
+
+[What problem prompted this decision]
+
+## Why
+
+- [Bullet point]
+- [Bullet point]
+
+## Consequences
+
+- [What this enables]
+- [What this prevents]
+- [What this costs]
+
+## Relationship to Canon
+
+- Overrides: [canon pattern, if any]
+- Extends: [canon pattern, if any]
+- Candidate for elevation: Yes/No
+
+## Evidence
+
+- Conversation: [date or reference]
+- Attempt: [path, if applicable]
+```
+
+---
+
+## Deprecated Decisions
+
+_None yet._
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/agent-skill/history/H0001-v1.1-champion.md
+--------------------------------------------------------------------------------
+
+# H0001 — PRD v1.1 Champion
+
+- **Date**: 2026-01-20
+- **Type**: Champion
+- **PRD**: v1.1
+- **Epoch**: E0003 (evidence-first)
+- **Attempt**: `v1.1/attempts/attempt-001/`
+
+## Summary
+
+Delivered a compiled pack (`prd-guide-pack.md`) that enables AI agents to interactively guide humans through creating ODD-aligned PRDs.
+
+## Deliverable
+
+- **Pack**: `v1.1/dist/prd-guide-pack.md`
+- **Size**: ~12K tokens (45KB, 1838 lines)
+- **Sources**: 7 canon + guidance documents compiled
+
+## What Worked
+
+- Compiled pack approach produces portable, self-contained context artifact
+- Interactive guidance instructions transform static docs into conversation flow
+- 7-stage PRD creation process covers outcomes, criteria, constraints, evidence
+- Token budget (~12K) is reasonable for context injection (~6-12% of typical windows)
+
+## What Didn't
+
+- Initial implementation scattered files across repo (infra/, public/_compiled/, docs/PRD/)
+- Had to reorganize to consolidate everything under products/agent-skill/
+
+## Learnings
+
+- Lane isolation matters: all artifacts for a lane should live in `products/<lane>/`
+- PRD-first, then implement: creating just the PRD before building prevents scope creep
+- Attempt structure preserves implementation as evidence, not production artifacts
+
+## Follow-up
+
+- Test pack with Claude Code on a real PRD creation session to validate interactive flow
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/agent-skill/history/H0002-v1.2-failed.md
+--------------------------------------------------------------------------------
+
+# H0002 — PRD v1.2 Failed
+
+- **Date**: 2026-01-20
+- **Type**: Failed
+- **PRD**: v1.2
+- **Epoch**: E0003 (evidence-first)
+- **Attempt**: `v1.2/attempts/attempt-001/`
+
+## Summary
+
+Attempted to add zero-friction public access to the compiled pack via website lane's Cloudflare Pages deployment. Failed because the PRD required cross-lane modification, violating lane isolation.
+
+## Objective
+
+Add zero-friction public access to the compiled pack via a stable URL using website lane's Cloudflare Pages deployment.
+
+## What Happened
+
+The PRD required modifying the website lane's build process (`infra/scripts/smart-build.js`) to copy the pack to website dist. This violates lane isolation — attempts cannot modify files outside their lane.
+
+The mechanism was proven to work via mock testing within the attempt folder, but the PRD cannot be satisfied without cross-lane modification.
+
+## What Worked
+
+- Mirroring repo structure in attempt folder for clean promotion path
+- Mock website dist for lane-contained testing
+- PROMOTION.md document for clear promotion instructions
+
+## What Didn't
+
+- Initial plan to modify infra directly (lane violation)
+- Running test that wrote outside lane (lane violation)
+- The PRD itself (requires cross-lane modification by design)
+
+## Learnings
+
+- Lane isolation is absolute during attempts — not just for proposals, but for test execution too
+- PRDs can have design flaws that violate constraints
+- A lane cannot require modification of another lane's build process
+
+## Follow-up
+
+- Create v1.2.1 PRD with lane-owned deployment approach
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/agent-skill/history/H0003-lane-structure-migration.md
+--------------------------------------------------------------------------------
+
+# H0003 — Lane Structure Migration
+
+- **Date**: 2026-01-20
+- **Type**: Infrastructure
+- **Epoch**: E0003 (evidence-first)
+
+## Summary
+
+Migrated lane from flat structure to version-first structure, enabling immutable versioned releases.
+
+## What Changed
+
+**Before:**
+
+```
+products/agent-skill/
+├── PRD.md
+├── src/
+├── dist/
+└── attempts/
+    └── prd-vX.Y/
+```
+
+**After:**
+
+```
+products/agent-skill/
+├── README.md        # Lane overview
+├── CONTRACT.md      # Formal structure/deviations
+├── ROADMAP.md       # Vision document
+├── history/         # What happened (this folder)
+├── decisions/       # Architecture decisions
+├── prompts/
+│   └── ATTEMPT_KICKOFF.md
+├── v1.1/            # Version-first
+│   ├── PRD.md       # Frozen
+│   ├── src/
+│   ├── dist/
+│   └── attempts/
+├── v1.2/            # Failed version
+│   ├── PRD.md       # Frozen
+│   └── attempts/
+└── v1.2.1/          # Current
+    └── PRD.md       # Active
+```
+
+## Why
+
+- Versioned assets enable immutable releases
+- Dependents can pin to specific versions
+- Each version is fully self-contained
+- Clear boundaries between version states
+
+## Documented In
+
+- `README.md` — Lane overview, file index, version table
+- `CONTRACT.md` — Formal deviation from canon structure
+- `decisions/D0001-version-first-structure.md` — Decision record
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/agent-skill/history/H0004-v1.2.1-champion.md
+--------------------------------------------------------------------------------
+
+# H0004 — PRD v1.2.1 Champion
+
+- **Date**: 2026-01-21
+- **Type**: Champion
+- **PRD**: v1.2.1
+- **Epoch**: E0003 (evidence-first)
+- **Attempt**: `v1.2.1/attempts/attempt-001/`
+
+## Summary
+
+Patched v1.2's failed approach with lane-owned Cloudflare Pages deployment. Pack now available at public URL without website lane dependency.
+
+## Deliverable
+
+- **Cloudflare Pages project**: `klappy-dev-agent-skill`
+- **Preview URL**: `https://main.klappy-dev-agent-skill.pages.dev/`
+- **Pack URL**: `/v1.1/prd-guide-pack.md`
+- **Latest URL**: `/latest/prd-guide-pack.md`
+
+## What Worked
+
+- Lane-owned Cloudflare Pages deployment (full isolation from website lane)
+- Publishing from `public/agent-skill/` ensures only promoted content is accessible
+- Consistent URL structure: `/latest/` and `/v1.1/` (no `dist/` in paths)
+- Preview URL verification before production deployment
+
+## What Didn't
+
+- Initial gitignore blocked `dist/` folders (fixed with exception)
+- Inconsistent URL structure initially (`/latest/` vs `/v1.1/dist/`) — normalized
+
+## Learnings
+
+- Root gitignore patterns can unexpectedly block public distribution. Use `!public/**/dist/` exception
+- Deploy contents of dist, not the dist folder itself — keeps URLs clean
+- Multi-lane CF deployments create serial build bottleneck — single `/public` deployment worth exploring
+
+## Follow-up
+
+- Fast-forward `prod` branch to enable production URL, then configure custom domain
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/agent-skill/history/index.md
+--------------------------------------------------------------------------------
+
+# Agent-Skill Lane History
+
+What actually happened — champions, failures, learnings, infrastructure changes.
+
+For future vision, see [ROADMAP.md](../ROADMAP.md).
+
+---
+
+## Entries
+
+| ID | Version/Event | What Happened | Date |
+|----|---------------|---------------|------|
+| [H0001](./H0001-v1.1-champion.md) | v1.1 | Champion — PRD Creation Guidance pack delivered (~12K tokens) | 2026-01-20 |
+| [H0002](./H0002-v1.2-failed.md) | v1.2 | Failed — Cross-lane violation (website lane dependency) | 2026-01-20 |
+| [H0003](./H0003-lane-structure-migration.md) | Infrastructure | Migrated to version-first folder structure | 2026-01-20 |
+| [H0004](./H0004-v1.2.1-champion.md) | v1.2.1 | Champion — Lane-owned Cloudflare Pages deployment | 2026-01-21 |
+
+---
+
+## Entry Types
+
+- **Champion**: PRD attempt succeeded, deliverable promoted
+- **Failed**: PRD attempt failed, learnings captured
+- **Infrastructure**: Non-PRD changes to lane structure/tooling
+
+---
+
+## How to Add an Entry
+
+1. Create `H000X-<slug>.md` using template below
+2. Add row to index table above
+3. Keep entries append-only (don't edit old entries except to fix errors)
+
+---
+
+## Entry Template
+
+```markdown
+# H000X — [Title]
+
+- **Date**: YYYY-MM-DD
+- **Type**: Champion | Failed | Infrastructure
+- **PRD**: vX.Y (if applicable)
+- **Attempt**: `vX.Y/attempts/attempt-NNN/` (if applicable)
+
+## Summary
+
+[1-2 sentences: what happened]
+
+## Deliverable (if Champion)
+
+- [What was produced, where it lives]
+
+## What Worked
+
+- [Bullet points]
+
+## What Didn't
+
+- [Bullet points]
+
+## Learnings
+
+- [1-3 bullets that inform future work]
+
+## Follow-up
+
+- [One next action, if any]
+```
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/agent-skill/prompts/ATTEMPT_KICKOFF.md
+--------------------------------------------------------------------------------
+
+# Agent Skill Lane — Attempt Kickoff
+
+Use this prompt when starting a new attempt for the agent-skill lane.
+
+---
+
+## Instructions
+
+Copy everything below this line and paste it into a new conversation with your AI agent.
+
+---
+
+## Kickoff Prompt
+
+```markdown
+# Agent-Skill Lane Attempt
+
+## Context
+
+I'm starting an attempt for the **agent-skill** lane in the klappy.dev repository.
+
+This lane produces compiled packs for AI agent consumption. The primary deliverable is a portable context artifact that enables any LLM to guide humans through ODD-aligned PRD creation.
+
+## Lane Structure
+
+This lane uses a **version-first** folder structure:
+```
+
+products/agent-skill/
+├── README.md # Lane overview, file index
+├── CONTRACT.md # Formal structure/deviations from canon
+├── history/ # Champion history, failures, learnings
+├── ROADMAP.md # Vision document
+├── prompts/
+│ └── ATTEMPT_KICKOFF.md # This file
+├── v1.1/ # Champion version
+│ ├── PRD.md # Frozen PRD
+│ ├── src/ # Source files
+│ ├── dist/ # Compiled output
+│ └── attempts/ # Attempt history
+├── v1.2/ # Failed version
+│ ├── PRD.md # Frozen PRD
+│ └── attempts/ # Failed attempt evidence
+└── v1.2.1/ # Current version
+└── PRD.md # Active PRD
+
+```
+
+## Your Task
+
+1. **Read the lane documentation**:
+   - `products/agent-skill/README.md` — Lane overview
+   - `products/agent-skill/CONTRACT.md` — Structure deviations from canon
+   - `products/agent-skill/history/` — Champion history and learnings
+
+2. **Identify the active PRD**:
+   - Check which version has an active (non-frozen) PRD
+   - Currently: `v1.2.1/PRD.md`
+
+3. **Read the PRD thoroughly**:
+   - Understand the objective
+   - Note success criteria and definition of done
+   - Review constraints
+
+4. **Check related documents**:
+   - Previous champion: `v1.1/attempts/attempt-001/ATTEMPT.md`
+   - Previous failure: `v1.2/attempts/attempt-001/LEARNINGS.md`
+   - Lane roadmap: `ROADMAP.md`
+
+5. **Create attempt folder**:
+   - Location: `v1.2.1/attempts/attempt-001/`
+   - Required files:
+     - `ATTEMPT.md` — Closure record (status, outcome, evidence)
+     - `META.json` — Machine-readable metadata
+
+6. **Execute the PRD**:
+   - Follow definition of done
+   - All work stays within the attempt folder until promotion
+   - Test execution must not cross lane boundaries
+
+7. **Produce evidence**:
+   - Place in `evidence/` subfolder
+   - Include screenshots, logs, test output as appropriate
+
+8. **Complete self-audit**:
+   - Review against Canon self-audit checklist
+   - Document tradeoffs and risks
+
+## Critical Rules
+
+1. **Lane Isolation**: Do NOT modify files outside `products/agent-skill/`
+2. **Version Isolation**: Work within the specific version folder
+3. **Attempt Containment**: All changes go in the attempt folder until promotion
+4. **Evidence Required**: No assertions without proof
+5. **PRD Immutability**: If PRD has a problem, create a NEW version (don't modify frozen PRDs)
+
+## When Complete
+
+Update `ATTEMPT.md` with:
+- Status (CHAMPION, CLOSED, or ABANDONED)
+- Outcome summary
+- Evidence produced
+- Self-audit results
+- Learnings
+
+If championed, add entry to `history/` folder.
+```
+
+---
+
+## Notes for Humans
+
+Before starting an attempt:
+
+1. Verify you're working on the correct PRD version
+2. Check ROADMAP.md for context on what this version is trying to achieve
+3. Review history/ folder for learnings from previous attempts
+4. Ensure you understand the lane's CONTRACT.md (structure deviations)
+
+If the PRD seems problematic:
+
+- Don't try to "make it work" by bending rules
+- Document the issue in your attempt's LEARNINGS.md
+- Mark the attempt as FAILED with clear explanation
+- Propose a new PRD version to address the issue
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/agent-skill/src/README.md
+--------------------------------------------------------------------------------
+
+# Agent Skill — Source
+
+This lane produces compiled packs for AI agent consumption.
+
+## Source Files
+
+| File                | Purpose                               |
+| ------------------- | ------------------------------------- |
+| `INSTRUCTIONS.md`   | Interactive guidance for PRD creation |
+| `compile-plan.json` | Defines sources and compilation mode  |
+
+## Build
+
+To compile the pack:
+
+```bash
+# From repo root
+npm run lane:compile -- --lane agent-skill --pack prd-guide
+```
+
+This produces:
+
+- `products/agent-skill/dist/prd-guide-pack.md`
+- `products/agent-skill/dist/_meta/prd-guide-COMPILE_META.json`
+
+## Usage
+
+The compiled pack can be:
+
+1. Pasted into any LLM context (Claude Code, Cursor, etc.)
+2. Used as a system prompt foundation
+3. Included in CLAUDE.md or similar config files
+
+The pack guides AI agents through interactive PRD creation using ODD principles.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/agent-skill/src/compile-plan.json
+--------------------------------------------------------------------------------
+
+{
+  "lane": "agent-skill",
+  "pack": "prd-guide",
+  "mode": "concat",
+  "output": "products/agent-skill/dist/prd-guide-pack.md",
+  "sources": [
+    "canon/odd/manifesto.md",
+    "canon/constraints.md",
+    "canon/decision-rules.md",
+    "canon/definition-of-done.md",
+    "canon/self-audit.md",
+    "docs/PRD/PRD_TEMPLATE.md",
+    "products/agent-skill/src/INSTRUCTIONS.md"
+  ]
+}
 
 
 --------------------------------------------------------------------------------
@@ -30720,7 +31897,7 @@ Read these files in order:
 
 1. `../README.md` — Lane overview, version table
 2. `../CONTRACT.md` — Structure deviations from canon
-3. `../LEDGER.md` — Champion history and learnings
+3. `../history/` — Champion history and learnings
 4. `PRD.md` — The PRD you're executing (this folder)
 
 Also review:
@@ -30774,7 +31951,7 @@ Update `ATTEMPT.md` with:
 - Self-audit results
 - Learnings
 
-If championed, update `../LEDGER.md` with the entry.
+If championed, add entry to `../history/` folder.
 
 ---
 

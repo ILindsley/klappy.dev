@@ -2,7 +2,9 @@
 
 Living document capturing the evolution vision for the agent-skill lane.
 
-This is not a commitment - it's a sketch that evolves as we learn.
+This is not a commitment — it's a sketch that evolves as we learn.
+
+> **Note:** This roadmap tracks *vision*, not *status*. For what actually happened (champions, failures, learnings), see **[history/](./history/)**.
 
 ---
 
@@ -15,35 +17,34 @@ Each workflow stage is a minor version bump (additive, non-breaking).
 
 ---
 
-## v1.1 - PRD Creation Guidance (CHAMPION)
+## v1.1 — PRD Creation Guidance
 
-**Status**: Complete  
 **Location**: `v1.1/`
 
-Delivered a compiled pack (`prd-guide-pack.md`) that enables AI agents to interactively guide humans through creating ODD-aligned PRDs.
+A compiled pack (`prd-guide-pack.md`) that enables AI agents to interactively guide humans through creating ODD-aligned PRDs.
 
-**Outcome**: Pack exists at `v1.1/dist/prd-guide-pack.md`
+**Target outcome**: Pack available locally after build
 
 **Friction level**: Clone repo, run build, copy pack
 
 ---
 
-## v1.2 - Distribution (FAILED)
+## v1.2 — Distribution (Website Lane)
 
-**Status**: Failed  
 **Location**: `v1.2/`
 
-Attempted to add zero-friction public access via website lane's Cloudflare Pages deployment.
+Zero-friction public access via website lane's Cloudflare Pages deployment.
 
-**Outcome**: PRD required cross-lane modification (website build process), which violates lane isolation.
+**Target outcome**: Pack available at public URL via website deployment
 
-See `v1.2/attempts/attempt-001/LEARNINGS.md` for full analysis.
+**Friction level**: Copy from URL
+
+**Why it didn't work**: PRD required cross-lane modification (website build process), which violates lane isolation. See [history/H0002](./history/H0002-v1.2-failed.md) for details.
 
 ---
 
-## v1.2.1 - Distribution (CURRENT)
+## v1.2.1 — Distribution (Lane-Owned)
 
-**Status**: PRD written, awaiting attempt  
 **Location**: `v1.2.1/`
 
 Patches v1.2 with a lane-owned approach:
@@ -53,15 +54,13 @@ Patches v1.2 with a lane-owned approach:
 - `/latest/` convention pointing to current champion
 - No website lane dependency
 
-**Outcome**: Pack available at `https://agent-skill.klappy.dev/latest/prd-guide-pack.md`
+**Target outcome**: Pack available at `https://agent-skill.klappy.dev/latest/prd-guide-pack.md`
 
 **Friction level**: Copy from URL
 
 ---
 
-## v1.3 - Attempt Execution Guidance (FUTURE)
-
-**Status**: Vision only
+## v1.3 — Attempt Execution Guidance
 
 Add guidance for executing attempts against PRDs. Extends the pack from "create PRD" to "create PRD + execute attempt."
 
@@ -73,13 +72,11 @@ Add guidance for executing attempts against PRDs. Extends the pack from "create 
 - Lane isolation rules
 - Test containment (mock structures)
 
-**Outcome**: Agent can guide full PRD → Attempt workflow
+**Target outcome**: Agent can guide full PRD → Attempt workflow
 
 ---
 
-## v1.4 - Evidence Gathering Guidance (FUTURE)
-
-**Status**: Vision only
+## v1.4 — Evidence Gathering Guidance
 
 Add guidance for producing and organizing evidence during attempts.
 
@@ -90,13 +87,11 @@ Add guidance for producing and organizing evidence during attempts.
 - Provenance requirements
 - Visual proof standards
 
-**Outcome**: Agent ensures attempts produce proper evidence
+**Target outcome**: Agent ensures attempts produce proper evidence
 
 ---
 
-## v1.5 - Failure Detection Guidance (FUTURE)
-
-**Status**: Vision only
+## v1.5 — Failure Detection Guidance
 
 Add guidance for detecting and documenting failures, including PRD design flaws.
 
@@ -107,13 +102,11 @@ Add guidance for detecting and documenting failures, including PRD design flaws.
 - PRD conflict detection (like our v1.2 experience)
 - When to propose new PRD version vs. retry
 
-**Outcome**: Agent can recognize and document failures constructively
+**Target outcome**: Agent can recognize and document failures constructively
 
 ---
 
-## v2.0 - Showcase Page (FUTURE)
-
-**Status**: Vision only
+## v2.0 — Showcase Page
 
 A webpage that showcases the pack with good UX for discovery and use.
 
@@ -126,7 +119,7 @@ A webpage that showcases the pack with good UX for discovery and use.
 - Last updated / provenance info
 - Link to source (for transparency)
 
-**Outcome**: Visitors can discover, preview, and copy the pack from a nice UI
+**Target outcome**: Visitors can discover, preview, and copy the pack from a nice UI
 
 **Friction level**: Click to copy
 
@@ -151,42 +144,11 @@ Captured here so we don't forget, not committed to any version:
 
 ---
 
-## Learnings Log
-
-Append learnings here as we complete versions:
-
-### v1.1 Learnings (2026-01-20)
-
-- Lane isolation matters: all artifacts should live in `products/<lane>/`
-- PRD-first prevents scope creep
-- Compiled pack is like compiled code - source in `src/`, output in `dist/`
-- ~12K tokens is reasonable context budget (~6-12% of typical windows)
-
-### v1.2 Learnings (2026-01-20) — FAILED
-
-- Lane isolation is absolute during attempts — not just for proposals, but for test execution too
-- PRDs can have design flaws that violate constraints
-- Check PRD feasibility before implementing — if the PRD requires things that violate constraints, flag it immediately
-- Mock structures prove mechanisms without crossing boundaries
-- A lane cannot require modification of another lane's build process
-
-### v1.2.1 Planning Learnings (2026-01-20)
-
-- Version-first folder structure enables immutable releases
-- Each version needs its own README for consumer guidance
-- Antifragile documentation (README) beats brittle manifests (JSON)
-- Lane-owned deployment ensures full isolation
-- PRDs are immutable once an attempt runs — create new version for changes
-- Upstream canon loading: pack should be loaded FIRST in kickoffs
-- RTFM: Many "learnings" were actually canon we failed to read carefully
-
----
-
 ## How to Use This Document
 
-1. **Before starting a version**: Read the vision, refine it, then write the PRD
-2. **After completing a version**: Add learnings to the log
-3. **When ideas emerge**: Add to "Future Ideas" section
+1. **Before starting a version**: Read the vision here, refine it, then write the PRD
+2. **After completing a version**: Add entry to [history/](./history/) (not here)
+3. **When ideas emerge**: Add to "Future Ideas" section above
 4. **Periodically**: Review and prune ideas that no longer make sense
 
 This roadmap informs PRDs but does not replace them. PRDs are the contract; this is the vision.

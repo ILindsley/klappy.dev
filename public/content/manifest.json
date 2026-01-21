@@ -748,6 +748,23 @@
       ]
     },
     {
+      "uri": "klappy://canon/odd/memory-architecture",
+      "path": "/canon/odd/appendices/memory-architecture.proposed.md",
+      "title": "Memory Architecture",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": [
+        "odd",
+        "memory",
+        "elevation",
+        "portability"
+      ]
+    },
+    {
       "uri": "klappy://canon/odd/orientation-map",
       "path": "/canon/odd/orientation-map.md",
       "title": "ODD + Canon + Evidence — Orientation Map",

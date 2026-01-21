@@ -25,7 +25,7 @@ See the [usage README](https://main.klappy-dev-agent-skill.pages.dev/v1.1/README
 | File | Purpose |
 |------|---------|
 | [CONTRACT.md](CONTRACT.md) | Formal structure, deviations from canon |
-| [LEDGER.md](LEDGER.md) | Champion history and key learnings |
+| [history/](history/) | Champion history, failures, learnings |
 | [ROADMAP.md](ROADMAP.md) | Vision and future versions |
 | [ATTEMPT_KICKOFF.md](ATTEMPT_KICKOFF.md) | One-liner pointing to active version's KICKOFF |
 | [decisions/](decisions/README.md) | Lane-specific architecture decisions |
@@ -46,7 +46,7 @@ This lane uses a **version-first** folder structure (differs from canon default)
 products/agent-skill/
 ├── README.md              # You are here
 ├── CONTRACT.md            # Formal structure/deviations
-├── LEDGER.md              # Champion log
+├── history/               # Champion log, failures, learnings
 ├── ROADMAP.md             # Vision document
 ├── ATTEMPT_KICKOFF.md     # One-liner → active KICKOFF
 ├── decisions/             # Lane-specific ADRs
@@ -59,9 +59,9 @@ products/agent-skill/
 ├── v1.2/                  # Version 1.2 (failed)
 │   ├── PRD.md             # Frozen PRD
 │   └── attempts/          # Failed attempt evidence
-└── v1.2.1/                # Version 1.2.1 (in progress)
-    ├── KICKOFF.md         # Active attempt instructions
-    └── PRD.md             # Active PRD
+└── v1.2.1/                # Version 1.2.1 (champion)
+    ├── KICKOFF.md         # Frozen attempt instructions
+    └── PRD.md             # Frozen PRD
 ```
 
 ## Build

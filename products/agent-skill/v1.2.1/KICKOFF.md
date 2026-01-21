@@ -10,7 +10,7 @@ Read these files in order:
 
 1. `../README.md` — Lane overview, version table
 2. `../CONTRACT.md` — Structure deviations from canon
-3. `../LEDGER.md` — Champion history and learnings
+3. `../history/` — Champion history and learnings
 4. `PRD.md` — The PRD you're executing (this folder)
 
 Also review:
@@ -64,7 +64,7 @@ Update `ATTEMPT.md` with:
 - Self-audit results
 - Learnings
 
-If championed, update `../LEDGER.md` with the entry.
+If championed, add entry to `../history/` folder.
 
 ---
 
