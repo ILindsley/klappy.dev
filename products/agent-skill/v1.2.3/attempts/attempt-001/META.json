@@ -2,9 +2,16 @@
   "lane": "agent-skill",
   "prd_version": "v1.2.3",
   "attempt": "001",
-  "status": "IN_PROGRESS",
+  "status": "CHAMPION",
   "epoch": "E0003-evidence-first-era",
   "created": "2026-01-21",
-  "sealed": null,
-  "canon_version": "0.5.4"
+  "sealed": "2026-01-21",
+  "canon_version": "0.5.4",
+  "deploy": {
+    "provider": "cloudflare-pages",
+    "project": "klappy-dev-agent-skill",
+    "deployment_id": "20426ceb-5d24-46f4-8b63-3213e933feaf",
+    "preview_url": "https://20426ceb.klappy-dev-agent-skill.pages.dev/v1.2.3/prd-guide-pack.md",
+    "captured_at": "2026-01-21T03:36:14Z"
+  }
 }
