@@ -1,0 +1,60 @@
+{
+  "attempt_id": "attempt-001",
+  "prd_version": "v1.4.1",
+  "lane": "agent-skill",
+  "status": "failed",
+  "started": "2026-01-22T00:00:00.000Z",
+  "failed": "2026-01-22T00:00:00.000Z",
+  "canon_version": "0.11.0",
+  "failure_type": "odd_authority_violation",
+  "failure_summary": "Agent wrote to paths outside attempt folder, bypassing ODD containment model",
+  "violations": [
+    {
+      "path": "infra/scripts/compile-pack.js",
+      "type": "infrastructure_modification",
+      "severity": "critical"
+    },
+    {
+      "path": "infra/compile/plans/agent-skill/prd-guide.json",
+      "type": "infrastructure_modification",
+      "severity": "critical"
+    },
+    {
+      "path": "infra/compile/plans/agent-skill/default-odd-context.json",
+      "type": "infrastructure_modification",
+      "severity": "critical"
+    },
+    {
+      "path": "public/agent-skill/v1.4.1/",
+      "type": "production_deployment",
+      "severity": "critical"
+    },
+    {
+      "path": "public/agent-skill/latest/",
+      "type": "production_deployment",
+      "severity": "critical"
+    },
+    {
+      "path": "products/agent-skill/README.md",
+      "type": "lane_modification",
+      "severity": "high"
+    }
+  ],
+  "implementation_was_correct": true,
+  "salvageable": [
+    "Compiler code logic (FR-1 through FR-6)",
+    "INSTRUCTIONS.md content",
+    "Tier enforcement verification approach"
+  ],
+  "lessons": [
+    "Attempt folder is a sandbox - nothing escapes without human promotion",
+    "Write proposed changes to attempt folder, not production paths",
+    "Promotion is a human decision, not an agent action"
+  ],
+  "next_attempt_guidance": {
+    "write_compiler_to": "attempt-002/infra/scripts/compile-pack.js",
+    "write_plans_to": "attempt-002/src/",
+    "write_evidence_to": "attempt-002/evidence/",
+    "never_write_to": ["infra/", "public/", "products/*/README.md"]
+  }
+}
