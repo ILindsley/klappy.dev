@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-22T00:01:11.520Z
+Generated: 2026-01-22T00:02:57.004Z
 Total Files: 159
 
 This is a documentation export of all markdown files from the klappy.dev
@@ -19321,12 +19321,13 @@ Don't bend rules to make it work.
 
 | Field             | Value       |
 | ----------------- | ----------- |
-| **PRD Version**   | v1.3        |
+| **PRD Version**   | v1.3.1      |
 | **Lane**          | agent-skill |
 | **Status**        | Active      |
 | **Created**       | 2026-01-21  |
+| **Updated**       | 2026-01-22  |
 | **Author**        | Chris Klapp |
-| **Canon Version** | 0.8.0       |
+| **Canon Version** | 0.10.0      |
 
 ---
 
@@ -19495,7 +19496,7 @@ An attempt against this PRD is complete when:
 
 - [ ] Compile succeeds using lane-owned `src/compile-plan.json`
 - [ ] Output written to attempt's `evidence/` folder
-- [ ] Provenance header shows canon v0.8.0 source hashes
+- [ ] Provenance header shows canon v0.10.0 source hashes
 - [ ] INSTRUCTIONS.md generated fresh (not copied from persisted source)
 
 ### Distribution
@@ -19526,22 +19527,23 @@ An attempt against this PRD is complete when:
 
 The compiled pack concatenates these files:
 
-### Canon Sources (persisted, unchanged from v1.2.4)
+### Canon Sources (v0.10.0)
 
 | # | Source | Purpose |
 |---|--------|---------|
 | 1 | `canon/README.md` | Canon orientation, meta rules, confidence scores |
 | 2 | `odd/README.md` | ODD folder index, core thesis |
-| 3 | `odd/manifesto.md` | Full ODD philosophy |
-| 4 | `odd/cognitive-partitioning.md` | Scaling pattern for reasoning systems |
-| 5 | `odd/appendices/README.md` | Portable appendices summarized |
-| 6 | `odd/decisions/README.md` | ODD conceptual decisions |
-| 7 | `canon/odd/appendices/tool-specialization.md` | Tool isolation pattern |
-| 8 | `canon/constraints.md` | Baseline assumptions |
-| 9 | `canon/decision-rules.md` | Decision heuristics |
-| 10 | `canon/definition-of-done.md` | Completion criteria |
-| 11 | `canon/self-audit.md` | Review checklist |
-| 12 | `docs/PRD/PRD_TEMPLATE.md` | PRD structure |
+| 3 | `odd/terminology.md` | **NEW** Constrained vocabulary and disambiguation |
+| 4 | `odd/manifesto.md` | Full ODD philosophy |
+| 5 | `odd/cognitive-partitioning.md` | Scaling pattern for reasoning systems |
+| 6 | `odd/appendices/README.md` | Portable appendices summarized |
+| 7 | `odd/decisions/README.md` | ODD conceptual decisions |
+| 8 | `canon/odd/appendices/tool-specialization.md` | Tool isolation pattern |
+| 9 | `canon/constraints.md` | Baseline assumptions |
+| 10 | `canon/decision-rules.md` | Decision heuristics |
+| 11 | `canon/definition-of-done.md` | Completion criteria |
+| 12 | `canon/self-audit.md` | Review checklist |
+| 13 | `docs/PRD/PRD_TEMPLATE.md` | PRD structure |
 
 ### Generated Sources (ephemeral)
 
@@ -19557,7 +19559,7 @@ The compiled pack concatenates these files:
 
 - **Elicitation focus**: Primary goal is improving the interview mechanics
 - **Same distribution**: Uses existing Cloudflare Pages setup
-- **Same canon sources**: v0.8.0 sources unchanged
+- **Same canon sources**: v0.10.0 sources (includes terminology.md)
 - **ODD formula**: Pack + CONTRACT + PRD = Attempt (nothing else)
 - **Ephemeral artifacts**: Generated code (INSTRUCTIONS.md) not persisted
 - **Lane isolation**: All changes stay within agent-skill lane

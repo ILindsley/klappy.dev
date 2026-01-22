@@ -2,7 +2,7 @@
   "lane": "agent-skill",
   "pack": "prd-guide",
   "mode": "concat",
-  "canon_version": "0.8.0",
+  "canon_version": "0.10.0",
   "output": "products/agent-skill/dist/prd-guide-pack.md",
   "sources": [
     "canon/README.md",
