@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-22T02:28:35.765Z
+Generated: 2026-01-22T02:56:05.618Z
 Total Files: 162
 
 This is a documentation export of all markdown files from the klappy.dev
@@ -7079,6 +7079,18 @@ A Tier 1 Canon document (high epistemic obligation) might be projected at:
 
 The tier doesn't change. The projection does.
 
+### Tier 0 Content
+
+Tier 0 is a scope exclusion marker, not an epistemic tier.
+
+Tier 0 content is:
+
+- Never included in default context-packs
+- Excluded from agent reasoning contexts
+- Not subject to projection detail levels
+
+Projection detail (full, medium, low) applies only to Tier 1–3 content. Tier 0 content is simply absent from the epistemic system.
+
 ---
 
 ## Detail Levels Explained
@@ -11587,6 +11599,7 @@ This document explains the three-tier system used to organize content in this re
 - Tier 2: Shared Obligation
 - Tier 3: Awareness Without Obligation
 - Why Tier 3 Exists
+- Tier 0: Scope Exclusion (Not a Tier)
 - Tiers Are Not Importance
 
 ---
@@ -11668,6 +11681,23 @@ Without Tier 3, either:
 - Low-obligation content goes undocumented (creating knowledge gaps)
 
 Tier 3 gives content a home without giving it unearned epistemic weight.
+
+### Tier 0: Scope Exclusion (Not a Tier)
+
+Tier 0 is not part of the epistemic tier system. It is a scope exclusion marker.
+
+Content marked Tier 0 is:
+
+- Public-facing and intended for human readers
+- Excluded from agent reasoning contexts
+- Excluded from default context-packs
+- Not comparable to Tier 1–3 content
+
+Tier 0 is not "lower obligation than Tier 3." It is outside the epistemic ladder entirely.
+
+**Use Tier 0 for:** About pages, marketing content, visitor-facing explanations—content that exists for humans, not for systems reasoning about the repository.
+
+**Do not confuse:** Tier 0 with Tier 3. Tier 3 is low-obligation content within the epistemic system. Tier 0 is excluded from the epistemic system altogether.
 
 ### Tiers Are Not Importance
 
@@ -19791,11 +19821,11 @@ Don't bend rules to make it work.
 📄 File: products/agent-skill/PRD.md
 --------------------------------------------------------------------------------
 
-# PRD: ODD Agent Skill — PRD Elicitation Enhancement
+# PRD: ODD Agent Skill — Tiered Context Construction
 
 | Field             | Value       |
 | ----------------- | ----------- |
-| **PRD Version**   | v1.3.1      |
+| **PRD Version**   | v1.4.0      |
 | **Lane**          | agent-skill |
 | **Status**        | Active      |
 | **Created**       | 2026-01-21  |
@@ -19850,9 +19880,95 @@ The pack teaches agents how ODD works, but does not fully teach agents how to el
 - Resequenced Interview Loop with Inventory and Ambiguity Capture
 - Asset Intake Contract with guidance for partial information
 
+**v1.4 addresses**: Tiered context construction with projection detail, previously deferred from v1.3.
+
 ---
 
-## In Scope (v1.3)
+## Core Requirements (v1.4)
+
+### Default Context Construction
+
+The agent skill shall construct a default odd-context-pack using tier-weighted projection detail.
+
+| Document Tier | Default Projection Detail |
+|---------------|---------------------------|
+| Tier 1        | `high` (full content)     |
+| Tier 2        | `medium` (structural)     |
+| Tier 3        | `low` (minimal)           |
+
+**Requirements:**
+
+1. **Tier determines default detail** — The agent shall project documents at detail levels corresponding to their epistemic tier unless explicitly overridden.
+
+2. **No tier flattening** — The agent shall not equalize detail across tiers. Tier 1 content receives more tokens than Tier 3 content by default.
+
+3. **No folder inference** — The agent shall determine epistemic obligation from document tier metadata, not from folder location.
+
+4. **Degradation is explicit** — When document structure is insufficient for the requested projection detail, the agent shall surface this degradation rather than compensating.
+
+5. **No synthesized context** — The agent shall use existing document structure for projection. It shall not summarize, synthesize, or generate context to fill gaps.
+
+### Agent Responsibilities
+
+The agent shall:
+
+- Respect epistemic obligation as encoded in document tiers
+- Treat Tier 3 content at low detail as awareness only, not reasoning input
+- Surface when documents lack structure required for projection
+- Proceed with available structure without inventing compensating context
+
+The agent shall not:
+
+- Infer obligation from folder hierarchy
+- Special-case READMEs or index files for elevated inclusion
+- Promote Tier 3 content to higher detail for perceived convenience
+- Summarize or synthesize documentation content
+
+---
+
+## Non-Goals (v1.4)
+
+These behaviors are explicitly excluded from this release to prevent design regression:
+
+| Non-Goal | Rationale |
+|----------|-----------|
+| README/index file special-casing | Navigation documents are typically Tier 3; elevating them would distort context weighting |
+| Convenience-based tier promotion | Tier 3 content exists for awareness, not reasoning; promoting it undermines epistemic discipline |
+| Summarization or synthesis | Projection uses authored structure only; missing structure is a signal, not a gap to fill |
+| Folder-based obligation inference | Tiers are document properties, orthogonal to folder location |
+| Smart exceptions | No heuristics that override tier-to-detail mapping based on content analysis |
+
+---
+
+## In Scope (v1.4)
+
+### New in v1.4
+
+#### 1. Tier-Weighted Context Pack Assembly
+
+Implement default context construction that maps document tiers to projection detail levels:
+
+- Tier 1 documents projected at `high` detail (full content)
+- Tier 2 documents projected at `medium` detail (frontmatter, description, outline)
+- Tier 3 documents projected at `low` detail (title, one-line summary)
+
+#### 2. Projection Detail Enforcement
+
+Add validation that the assembled context pack respects tier-to-detail mapping:
+
+- Tier 1 content must receive highest token allocation
+- Tier 3 content must not exceed minimal token allocation
+- Detail level must be determinable from tier without additional logic
+
+#### 3. Degradation Surfacing
+
+When documents lack structure required for their projected detail level:
+
+- Return what structure exists (no fallback to full content silently)
+- Include degradation indicator in pack output
+- Do not synthesize missing structural elements
+
+### From v1.3 (retained)
 
 ### From v1.2.4 (retained)
 
@@ -19928,17 +20044,38 @@ Guidance:
 
 ---
 
-## Explicitly Out of Scope (v1.3)
+## Explicitly Out of Scope (v1.4)
 
 - Changes to distribution architecture (Cloudflare Pages setup unchanged)
-- Multi-pack compilation (that's v1.4)
-- Tiered content inclusion (that's v1.4)
+- Multi-pack compilation (that's v1.5+)
 - Role-specific packs (that's v1.5+)
 - Renaming the pack (keep "prd-guide" for now)
+- Override mechanisms for tier-to-detail mapping (future consideration)
+- Dynamic detail adjustment based on token budget (future consideration)
 
 ---
 
 ## Success Criteria
+
+### v1.4 — Tiered Context Construction
+
+- [ ] Default context pack assembles with tier-weighted detail mapping
+- [ ] Tier 1 documents receive `high` detail projection
+- [ ] Tier 2 documents receive `medium` detail projection
+- [ ] Tier 3 documents receive `low` detail projection
+- [ ] No tier-flattening occurs in assembled context
+- [ ] Degradation is surfaced when document structure is insufficient
+- [ ] README/index files do not receive elevated detail due to file type
+
+### v1.4 — Acceptance Criteria (Testable)
+
+- [ ] Agent behavior demonstrates tier-weighted context usage
+- [ ] Tier 3 documents do not materially influence agent reasoning unless explicitly requested
+- [ ] Removing README content does not change agent conclusions
+- [ ] Increasing detail for Tier 1 documents materially improves reasoning depth
+- [ ] Agent does not synthesize context to compensate for missing document structure
+
+### v1.3 — Elicitation Enhancement (retained)
 
 - [ ] INSTRUCTIONS.md includes Agent Role Declaration section
 - [ ] INSTRUCTIONS.md includes Stage Identification gate (Phase 0)
@@ -19947,9 +20084,9 @@ Guidance:
 - [ ] INSTRUCTIONS.md includes Asset Intake guidance
 - [ ] Interview loop resequenced per spec
 - [ ] Stage Typing table included with evidence expectations
-- [ ] Pack available at versioned URL (`/v1.3/prd-guide-pack.md`)
-- [ ] `/latest/` updated to serve v1.3 pack
-- [ ] `latest/README.md` updated to reference v1.3
+- [ ] Pack available at versioned URL (`/v1.4/prd-guide-pack.md`)
+- [ ] `/latest/` updated to serve v1.4 pack
+- [ ] `latest/README.md` updated to reference v1.4
 
 ---
 
@@ -19957,7 +20094,22 @@ Guidance:
 
 An attempt against this PRD is complete when:
 
-### INSTRUCTIONS.md Content
+### Context Construction (v1.4)
+
+- [ ] Context pack assembly implements tier-to-detail mapping
+- [ ] Tier 1 → `high`, Tier 2 → `medium`, Tier 3 → `low`
+- [ ] No special-casing for README or index files
+- [ ] Degradation surfaced when structure missing
+- [ ] No context synthesis or summarization
+
+### Context Verification (v1.4)
+
+- [ ] Tier-weighted context demonstrably affects agent output
+- [ ] Tier 3 content removal does not alter reasoning conclusions
+- [ ] Tier 1 content at high detail produces deeper reasoning than low detail
+- [ ] Agent does not infer tier from folder location
+
+### INSTRUCTIONS.md Content (v1.3, retained)
 
 - [ ] Agent Role Declaration added at top
 - [ ] Stage Identification (Phase 0) defined with PRD type classification
@@ -19975,24 +20127,26 @@ An attempt against this PRD is complete when:
 
 ### Distribution
 
-- [ ] `public/agent-skill/v1.3/prd-guide-pack.md` created
+- [ ] `public/agent-skill/v1.4/prd-guide-pack.md` created
 - [ ] `public/agent-skill/latest/prd-guide-pack.md` updated
 - [ ] `public/agent-skill/latest/README.md` updated (version reference)
 - [ ] Public URL verified with HTTP 200
 
 ### Verification
 
-- [ ] INSTRUCTIONS.md demonstrably different from v1.2.4
+- [ ] INSTRUCTIONS.md demonstrably different from v1.3
 - [ ] Agent using pack asks about PRD type before jumping to outcomes
 - [ ] Agent using pack asks about existing assets before defining scope
 - [ ] Ambiguity capture section present and functional
+- [ ] Context pack demonstrates tier-weighted detail allocation
 
 ### Evidence Required
 
-- [ ] Diff showing new INSTRUCTIONS.md content vs v1.2.4
+- [ ] Diff showing tier-weighted context construction
 - [ ] Screenshot or log of successful compile output
 - [ ] HTTP 200 verification of preview URL
 - [ ] Sample conversation demonstrating elicitation flow
+- [ ] Evidence that Tier 3 removal does not change conclusions
 - [ ] Self-audit completed
 
 ---
@@ -20031,7 +20185,9 @@ The compiled pack concatenates these files:
 
 ## Constraints
 
-- **Elicitation focus**: Primary goal is improving the interview mechanics
+- **Tier-detail mapping is fixed**: Tier 1 → high, Tier 2 → medium, Tier 3 → low. No adaptive logic.
+- **No synthesis**: Projection uses existing document structure only. Missing structure degrades output explicitly.
+- **No special cases**: READMEs, indexes, and navigation files receive tier-appropriate treatment, not elevated treatment.
 - **Same distribution**: Uses existing Cloudflare Pages setup
 - **Same canon sources**: v0.10.0 sources (includes terminology.md)
 - **ODD formula**: Pack + CONTRACT + PRD = Attempt (nothing else)
@@ -20045,10 +20201,12 @@ The compiled pack concatenates these files:
 
 | Risk | Mitigation |
 |------|------------|
-| Elicitation loop changes may require iteration | v1.3 can have patch versions (v1.3.1, v1.3.2) |
+| Tier 3 at low detail may appear to exclude useful content | Document explicitly that tier is obligation, not importance; users can request higher detail |
+| Documents lacking structure degrade projection | Degradation is explicit by design; documents should follow templates for clean projection |
+| Future engineers may add "smart" exceptions | Non-goals section explicitly forbids; acceptance criteria test for absence of special-casing |
+| README removal test may seem counter-intuitive | Document rationale: navigation files are Tier 3 awareness, not reasoning input |
+| Elicitation loop changes may require iteration | v1.4 can have patch versions (v1.4.1, v1.4.2) |
 | Stage typing may not cover all cases | Include "Other" type with fallback to generic flow |
-| Interview loop may feel too long | Can be streamlined in v1.3.x based on feedback |
-| Asset intake may block users who have nothing | Explicit guidance to proceed with partial information |
 
 ---
 
@@ -20060,16 +20218,17 @@ This PRD may be attempted multiple times.
 - Failed attempts inform future attempts or PRD revisions
 - Attempts are sealed when CLOSED or ABANDONED
 
-Attempts live at: `v1.3/attempts/attempt-NNN/`
+Attempts live at: `v1.4/attempts/attempt-NNN/`
 
 ---
 
 ## Related Documents
 
+- v1.3.1 Prior: Previous elicitation-focused release
 - v1.2.4 Champion: [H0007](./history/H0007-v1.2.4-champion.md)
-- v1.2.4 Attempt: `v1.2.4/attempts/attempt-001/`
 - Roadmap: [ROADMAP.md](./ROADMAP.md)
-- External Review: Feedback that identified elicitation gap (provided by user)
+- Context Packs and Projection Detail: `/docs/context-packs-and-projection-detail.md`
+- Epistemic Obligation and Document Tiers: `/canon/epistemic-obligation-and-document-tiers.md`
 
 
 

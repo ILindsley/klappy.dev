@@ -24,6 +24,7 @@ This document explains the three-tier system used to organize content in this re
 - Tier 2: Shared Obligation
 - Tier 3: Awareness Without Obligation
 - Why Tier 3 Exists
+- Tier 0: Scope Exclusion (Not a Tier)
 - Tiers Are Not Importance
 
 ---
@@ -105,6 +106,23 @@ Without Tier 3, either:
 - Low-obligation content goes undocumented (creating knowledge gaps)
 
 Tier 3 gives content a home without giving it unearned epistemic weight.
+
+### Tier 0: Scope Exclusion (Not a Tier)
+
+Tier 0 is not part of the epistemic tier system. It is a scope exclusion marker.
+
+Content marked Tier 0 is:
+
+- Public-facing and intended for human readers
+- Excluded from agent reasoning contexts
+- Excluded from default context-packs
+- Not comparable to Tier 1–3 content
+
+Tier 0 is not "lower obligation than Tier 3." It is outside the epistemic ladder entirely.
+
+**Use Tier 0 for:** About pages, marketing content, visitor-facing explanations—content that exists for humans, not for systems reasoning about the repository.
+
+**Do not confuse:** Tier 0 with Tier 3. Tier 3 is low-obligation content within the epistemic system. Tier 0 is excluded from the epistemic system altogether.
 
 ### Tiers Are Not Importance
 
