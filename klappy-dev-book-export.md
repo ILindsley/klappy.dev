@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-21T23:49:59.824Z
-Total Files: 158
+Generated: 2026-01-22T00:01:11.520Z
+Total Files: 159
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -23,7 +23,7 @@ details (attempts, version folders, source code).
 - **Documentation** (55 files)
 - **Infrastructure** (9 files)
 - **Interfaces & Contracts** (6 files)
-- **ODD (Outcomes-Driven Development)** (21 files)
+- **ODD (Outcomes-Driven Development)** (22 files)
 - **Products** (32 files)
 - **Projects** (6 files)
 - **Visual Design System** (5 files)
@@ -8832,6 +8832,39 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.10.0 — 2026-01-21
+
+**ODD Terminology — Language Governance Before Elevation**
+
+This release adds a terminology and disambiguation document to ODD, establishing constrained vocabulary before truth elevation to Canon.
+
+### Added
+
+- **ODD Terminology** (`/odd/terminology.md`) — Defines constrained vocabulary of ODD including core terms (Outcome, Evidence, Artifact, Elevation, Canon, Attempt, Lane, Maturity), disambiguation table, anti-patterns in language, and evolution process
+
+### Changed
+
+- **odd/index.md** — Added terminology.md to contents table (after manifesto, before maturity) and "Start Here" reading order
+- **Compile Plans** — Added terminology to all packs:
+  - `infra/compile/plans/website/author.json`
+  - `infra/compile/plans/website/visitor.json`
+  - `products/agent-skill/src/compile-plan.json`
+
+### Philosophy
+
+- **Language comes before execution** — Terminology is positioned after philosophy (manifesto) but before operational docs
+- **ODD owns vocabulary** — Terminology lives in `odd/`, not `canon/`, because it governs how meaning is formed before elevation
+- **Direction of authority** — Canon may reference terminology; terminology does not subordinate to Canon
+
+### Ontology Enforcement
+
+> ODD and Canon are siblings. Canon is not a parent namespace.
+> ODD feeds Canon, but does not live inside it.
+
+This document's placement enforces that distinction.
+
+---
+
 ## 0.9.0 — 2026-01-21
 
 **Resonance — Intellectual Context with Explicit Divergence**
@@ -14586,6 +14619,7 @@ The philosophical and operational foundation for this repository. ODD treats out
 | File | Title | Summary |
 |------|-------|---------|
 | `manifesto.md` | ODD Manifesto | The core philosophy: defining outcomes, enforcing constraints, verifying reality. AI accelerates execution; governance preserves trust. |
+| `terminology.md` | Terminology & Disambiguation | Constrained vocabulary of ODD. Defines terms before elevation — language governance at the point of origin. |
 | `maturity.md` | Project Maturity | How rigor changes as projects mature. PoC → Pilot → Production. |
 | `contract.md` | ODD System Contract | Version contract for ODD compatibility. Currently v2.0.0 (multi-lane era). |
 | `misuse-patterns.md` | Misuse Patterns | Common failure modes and how ODD gets misapplied in practice. |
@@ -14605,8 +14639,9 @@ The philosophical and operational foundation for this repository. ODD treats out
 ## 🚀 Start Here
 
 1. **`manifesto.md`** — Understand the philosophy
-2. **`maturity.md`** — Know when rigor increases
-3. **`appendices/attempt-lifecycle.md`** — See how work flows
+2. **`terminology.md`** — Lock in the language
+3. **`maturity.md`** — Know when rigor increases
+4. **`appendices/attempt-lifecycle.md`** — See how work flows
 
 ---
 
@@ -15867,6 +15902,241 @@ ODD favors:
 • Prompt-over-code: This is the application of that principle at scale.
 
 ---
+
+
+
+--------------------------------------------------------------------------------
+📄 File: odd/terminology.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://odd/terminology
+slug: odd-terminology
+version: 0.1
+status: evolving
+audience: odd
+exposure: nav
+tier: 1
+voice: neutral
+stability: evolving
+tags: ["odd", "terminology", "disambiguation", "boundary"]
+---
+
+# 📖 ODD Terminology & Disambiguation
+
+This document defines the constrained vocabulary of Outcomes-Driven Development. It governs how language is used **before** elevation to Canon — ensuring precision at the point of origin, not retroactive clarification.
+
+---
+
+## Why This Exists
+
+Language drifts. Terms get overloaded. Meanings blur under repetition.
+
+In ODD, ambiguous language creates:
+- misaligned expectations
+- false confidence in shared understanding
+- governance that sounds rigorous but isn't
+
+This document exists to:
+- **constrain vocabulary** — fewer terms, tighter meanings
+- **disambiguate collisions** — clarify where everyday usage differs from ODD usage
+- **establish boundaries** — define what terms do NOT mean
+
+---
+
+## Namespace Ontology
+
+### ODD vs Canon
+
+| Namespace | Role | Contains |
+|-----------|------|----------|
+| `odd/` | Discipline, operating system, rules of motion | How thinking and work happen |
+| `canon/` | Elevated truths distilled from experience | What survived that process |
+
+**Key relationships:**
+- ODD feeds Canon, but does not live inside it
+- Canon may reference ODD
+- ODD is not canon, and not subordinate to it
+- Language governance (this document) belongs to ODD — it constrains canon formation
+
+**Why this matters:**
+If terminology lived under `canon/`, language would appear post hoc. ODD would look like a justification layer. By keeping it under `odd/`, we're saying: "This discipline governs how meaning is formed — before truth is elevated."
+
+---
+
+## Core Terms
+
+### Outcome
+
+**ODD meaning:** A verifiable state of reality that can be demonstrated, not just described.
+
+**Not:** A deliverable, artifact, feature, or checkbox.
+
+**Test:** Can you show it working? If explanation is required to prove it exists, it's not an outcome yet.
+
+---
+
+### Evidence
+
+**ODD meaning:** Observable proof that an outcome occurred. Must be reproducible or recorded.
+
+**Not:** Explanation, confidence, or expert assertion.
+
+**Test:** Could a skeptic verify this independently?
+
+---
+
+### Artifact
+
+**ODD meaning:** A byproduct of work — code, documents, diagrams. Ephemeral by default.
+
+**Not:** The goal. Not proof of value.
+
+**Test:** If this disappeared, would the outcome still be demonstrable?
+
+---
+
+### Elevation
+
+**ODD meaning:** The deliberate act of promoting a verified truth from working memory to Canon.
+
+**Not:** Filing, archiving, or organizing.
+
+**Requirements:**
+- Evidence exists
+- The insight has survived stress
+- The statement is stable enough to govern future decisions
+
+---
+
+### Canon
+
+**ODD meaning:** The curated body of truths that have earned permanence through verification and survival.
+
+**Not:** A knowledge base, wiki, or documentation dump.
+
+**Test:** Does this statement constrain future decisions? If not, it's reference material, not canon.
+
+---
+
+### Attempt
+
+**ODD meaning:** A bounded execution against a defined goal. Has a start, an end, and produces evidence.
+
+**Not:** A try, experiment, or vague effort.
+
+**Requirements:**
+- Explicit goal
+- Bounded scope
+- Evidence captured (success or failure)
+
+---
+
+### Lane
+
+**ODD meaning:** A parallel track of work with its own lifecycle, evidence, and maturity state.
+
+**Not:** A branch, feature, or workstream in the general sense.
+
+**Key property:** Lanes can evolve independently while sharing governance.
+
+---
+
+### Maturity
+
+**ODD meaning:** The phase of a project that determines appropriate rigor level.
+
+**Phases:**
+- **PoC (Proof of Concept)** — Learning, speed, disposable artifacts
+- **Pilot** — Proof, repeatability, early governance
+- **Production** — Trust, durability, handoff readiness
+
+**Not:** Quality, completeness, or age.
+
+---
+
+## Disambiguation Table
+
+| Common Term | ODD Meaning | Common Misuse |
+|-------------|-------------|---------------|
+| "Done" | Evidence exists proving outcome | Code merged, ticket closed |
+| "Works" | Verified under realistic conditions | Passed tests, "looks right" |
+| "Documented" | Captured for future governance | Written down somewhere |
+| "Tested" | Stress-tested against failure modes | Happy path confirmed |
+| "Shipped" | Outcome delivered and verifiable | Artifact deployed |
+
+---
+
+## Anti-Patterns in Language
+
+### Confidence as Evidence
+"I'm confident this works" is not evidence. Confidence is a feeling. Evidence is observable.
+
+### Explanation as Proof
+"Let me explain why this is correct" is not proof. Explanations can be fluent and wrong. Demonstrations are harder to fake.
+
+### Activity as Progress
+"I worked on this for hours" is not progress. Time spent is input. Outcomes are output.
+
+### Artifact as Outcome
+"The code is written" is not an outcome. Code is an artifact. The outcome is what the code enables when verified.
+
+---
+
+## Boundary Conditions
+
+### What This Document Does NOT Define
+
+- **Domain-specific terms** — Each product/project may extend vocabulary within its scope
+- **Implementation details** — How tools or systems work internally
+- **Opinions** — This is constraint, not preference
+
+### When to Extend
+
+New terms may be proposed when:
+- Existing vocabulary cannot express a necessary distinction
+- The term has been used consistently across multiple attempts
+- Ambiguity has caused actual confusion or failure
+
+Extensions follow the same elevation process as any canon candidate.
+
+---
+
+## Usage Guidelines
+
+### For Authors
+
+- Use terms as defined here, not as commonly understood
+- When a term might be ambiguous, link back to this document
+- If you need a word not defined here, check if an existing term suffices first
+
+### For Reviewers
+
+- Flag terminology drift — when ODD terms are used with non-ODD meanings
+- Distinguish between "this word is wrong" and "this concept needs a new word"
+
+### For Canon Documents
+
+- Canon documents should link here when term precision matters
+- Do not duplicate definitions — reference, don't repeat
+
+---
+
+## Evolution Process
+
+This document evolves through:
+
+1. **Observation** — A term collision or ambiguity causes friction
+2. **Proposal** — A clarification or new term is suggested
+3. **Stress test** — The proposal is used in practice
+4. **Elevation** — If it survives, it enters this document
+
+Changes require evidence of the problem being solved.
+
+---
+
+> Language is not neutral. The words we use shape what we can think.
+> ODD constrains vocabulary not to limit expression, but to increase precision where it matters.
 
 
 

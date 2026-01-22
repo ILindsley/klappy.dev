@@ -4,6 +4,7 @@
   "output": "public/_compiled/website/visitor-pack.md",
   "sources": [
     "odd/README.md",
+    "odd/terminology.md",
     "odd/manifesto.md",
     "odd/appendices/progressive-elevation.md",
     "about/home.md",

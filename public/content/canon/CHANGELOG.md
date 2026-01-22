@@ -16,6 +16,39 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.10.0 — 2026-01-21
+
+**ODD Terminology — Language Governance Before Elevation**
+
+This release adds a terminology and disambiguation document to ODD, establishing constrained vocabulary before truth elevation to Canon.
+
+### Added
+
+- **ODD Terminology** (`/odd/terminology.md`) — Defines constrained vocabulary of ODD including core terms (Outcome, Evidence, Artifact, Elevation, Canon, Attempt, Lane, Maturity), disambiguation table, anti-patterns in language, and evolution process
+
+### Changed
+
+- **odd/index.md** — Added terminology.md to contents table (after manifesto, before maturity) and "Start Here" reading order
+- **Compile Plans** — Added terminology to all packs:
+  - `infra/compile/plans/website/author.json`
+  - `infra/compile/plans/website/visitor.json`
+  - `products/agent-skill/src/compile-plan.json`
+
+### Philosophy
+
+- **Language comes before execution** — Terminology is positioned after philosophy (manifesto) but before operational docs
+- **ODD owns vocabulary** — Terminology lives in `odd/`, not `canon/`, because it governs how meaning is formed before elevation
+- **Direction of authority** — Canon may reference terminology; terminology does not subordinate to Canon
+
+### Ontology Enforcement
+
+> ODD and Canon are siblings. Canon is not a parent namespace.
+> ODD feeds Canon, but does not live inside it.
+
+This document's placement enforces that distinction.
+
+---
+
 ## 0.9.0 — 2026-01-21
 
 **Resonance — Intellectual Context with Explicit Divergence**

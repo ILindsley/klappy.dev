@@ -7,6 +7,7 @@
   "sources": [
     "canon/README.md",
     "odd/README.md",
+    "odd/terminology.md",
     "odd/manifesto.md",
     "odd/cognitive-partitioning.md",
     "odd/appendices/README.md",

@@ -5,6 +5,7 @@
   "output": "public/_compiled/website/author-pack.md",
   "sources": [
     "odd/README.md",
+    "odd/terminology.md",
     "odd/appendices/progressive-elevation.md",
     "canon/README.md",
     "canon/constraints.md",
