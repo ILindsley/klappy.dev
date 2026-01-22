@@ -805,6 +805,18 @@
       ]
     },
     {
+      "uri": "klappy://odd/constraint/use-only-what-hurts",
+      "path": "/odd/constraint/use-only-what-hurts.md",
+      "title": "Use Only What Hurts",
+      "type": "text/markdown",
+      "audience": "system",
+      "exposure": "constraint",
+      "tier": 2,
+      "voice": "direct",
+      "stability": "constrained",
+      "tags": []
+    },
+    {
       "uri": "klappy://odd/visual-evolution",
       "path": "/odd/appendices/visual-evolution.md",
       "title": "Visual Evolution",
