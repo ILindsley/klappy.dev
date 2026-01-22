@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-22T03:11:22.850Z
+Generated: 2026-01-22T03:20:36.558Z
 Total Files: 162
 
 This is a documentation export of all markdown files from the klappy.dev
@@ -20322,7 +20322,8 @@ See the [usage README](https://main.klappy-dev-agent-skill.pages.dev/latest/READ
 | [v1.2.3/](v1.2.3/) | Champion | Canon refresh v0.5.4 + ODD compliance |
 | [v1.2.4/](v1.2.4/) | Superseded | Canon refresh v0.8.0 (path fixes + new content) |
 | [v1.3/](v1.3/) | Superseded | PRD Elicitation Enhancement (interview mechanics, stage typing) |
-| [v1.3.1/](v1.3.1/) | **Champion** | Canon Refresh (adds terminology.md, canon v0.10.0) |
+| [v1.3.1/](v1.3.1/) | Superseded | Canon Refresh (adds terminology.md, canon v0.10.0) |
+| [v1.4/](v1.4/) | **Active** | Tiered Context Construction (tier-weighted projection) |
 
 ## Structure
 
@@ -20355,8 +20356,10 @@ products/agent-skill/
 │   └── PRD.md             # Canon refresh v0.8.0 (path fixes)
 ├── v1.3/                  # Version 1.3 (superseded)
 │   └── PRD.md             # PRD Elicitation Enhancement
-└── v1.3.1/                # Version 1.3.1 (champion)
-    └── PRD.md             # Canon refresh v0.10.0 (terminology.md)
+├── v1.3.1/                # Version 1.3.1 (superseded)
+│   └── PRD.md             # Canon refresh v0.10.0 (terminology.md)
+└── v1.4/                  # Version 1.4 (active)
+    └── PRD.md             # Tiered Context Construction
 ```
 
 ## Build

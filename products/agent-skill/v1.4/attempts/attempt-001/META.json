@@ -1,0 +1,15 @@
+{
+  "attempt": "001",
+  "prd_version": "1.4.0",
+  "lane": "agent-skill",
+  "status": "IN_PROGRESS",
+  "started": "2026-01-22",
+  "completed": null,
+  "outcome": null,
+  "evidence": [
+    "evidence/compile-output.txt",
+    "evidence/deployment-verification.md",
+    "evidence/hash-comparison.md",
+    "evidence/prd-guide-pack.md"
+  ]
+}
