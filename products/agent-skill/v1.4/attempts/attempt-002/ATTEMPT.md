@@ -2,7 +2,7 @@
 
 - **Date Started**: 2026-01-22
 - **PRD**: v1.4.0
-- **Status**: CLOSED
+- **Status**: FAILED
 
 ---
 
@@ -74,9 +74,25 @@ High (0.85) — Work is complete and verified. Human review required for promoti
 
 ---
 
+## Failure Analysis
+
+**Discovery during audit**: The PRD v1.4.0 objective is "Tiered Context Construction" — teaching agents to apply tier-weighted projection. However:
+
+1. **Compiler violation**: `compile-pack.js` is a hardcoded concatenator with no tier logic
+2. **Tier 0 included**: `odd/README.md` (Tier 0) is in the pack — should be excluded
+3. **No projection**: All files concatenated at full detail regardless of tier
+4. **Doctrine vs reality gap**: INSTRUCTIONS.md documents behavior that doesn't exist in code
+
+The attempt documented tier rules but the infrastructure doesn't enforce them. This is not a documentation success — it's an incomplete implementation.
+
+**Root cause**: PRD scope mismatch. "Tiered Context Construction" requires compiler changes, not just INSTRUCTIONS.md changes.
+
+---
+
 ## Seal
 
-This attempt is CLOSED.
-Work is complete. Evidence is collected.
-Agent does NOT update latest/ or promote to Champion.
-Human review required for any promotion decision.
+This attempt is FAILED.
+
+The INSTRUCTIONS.md content is sound but the compiler doesn't implement it.
+No artifacts from this attempt should be promoted.
+Next attempt must address compiler infrastructure, not documentation.

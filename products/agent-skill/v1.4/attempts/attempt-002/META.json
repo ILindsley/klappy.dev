@@ -2,10 +2,10 @@
   "attempt": "002",
   "prd_version": "1.4.0",
   "lane": "agent-skill",
-  "status": "CLOSED",
+  "status": "FAILED",
   "started": "2026-01-22",
   "completed": "2026-01-22",
-  "outcome": "Work complete, awaiting human review for Champion promotion",
+  "outcome": "FAILED - compiler does not implement tier enforcement, Tier 0 violation in pack",
   "corrections_from_001": [
     "Added Tier 0 -> excluded",
     "Locked terminology to high|medium|low",
