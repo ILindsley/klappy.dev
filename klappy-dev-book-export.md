@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-22T03:24:07.055Z
+Generated: 2026-01-22T03:25:28.012Z
 Total Files: 163
 
 This is a documentation export of all markdown files from the klappy.dev
@@ -20284,7 +20284,9 @@ This lane produces compiled packs for AI agent consumption. The primary delivera
 
 ## Current Champion
 
-**v1.4** — Tiered Context Construction (tier-weighted projection, canon v0.11.0)
+**v1.3.1** — Canon Refresh (adds terminology.md, canon v0.10.0)
+
+> **v1.4 Preview Verified** — Awaiting production deployment to `prod` branch
 
 **Public URL**: `https://main.klappy-dev-agent-skill.pages.dev/latest/prd-guide-pack.md`
 
@@ -20323,7 +20325,7 @@ See the [usage README](https://main.klappy-dev-agent-skill.pages.dev/latest/READ
 | [v1.2.4/](v1.2.4/) | Superseded | Canon refresh v0.8.0 (path fixes + new content) |
 | [v1.3/](v1.3/) | Superseded | PRD Elicitation Enhancement (interview mechanics, stage typing) |
 | [v1.3.1/](v1.3.1/) | Superseded | Canon Refresh (adds terminology.md, canon v0.10.0) |
-| [v1.4/](v1.4/) | **Champion** | Tiered Context Construction (tier-weighted projection) |
+| [v1.4/](v1.4/) | Preview Verified | Tiered Context Construction (tier-weighted projection) |
 
 ## Structure
 
@@ -20358,7 +20360,7 @@ products/agent-skill/
 │   └── PRD.md             # PRD Elicitation Enhancement
 ├── v1.3.1/                # Version 1.3.1 (superseded)
 │   └── PRD.md             # Canon refresh v0.10.0 (terminology.md)
-└── v1.4/                  # Version 1.4 (champion)
+└── v1.4/                  # Version 1.4 (preview verified, awaiting prod)
     └── PRD.md             # Tiered Context Construction
 ```
 
@@ -21787,19 +21789,21 @@ Key change: Inventory BEFORE Outcome (can't define what you want until you know 
 
 
 --------------------------------------------------------------------------------
-📄 File: products/agent-skill/history/H0009-v1.4-champion.md
+📄 File: products/agent-skill/history/H0009-v1.4-preview-verified.md
 --------------------------------------------------------------------------------
 
-# H0009 — v1.4 Champion
+# H0009 — v1.4 Preview Verified
 
 - **Date**: 2026-01-22
-- **Type**: Champion
+- **Type**: Preview Verified (NOT Champion yet)
 - **PRD**: v1.4.0
 - **Attempt**: `v1.4/attempts/attempt-001/`
 
 ## Summary
 
-Successfully delivered Tiered Context Construction guidance. The prd-guide pack now teaches agents how to weight content based on document tiers using a fixed tier-to-detail mapping.
+Preview deployment verified for Tiered Context Construction guidance. The prd-guide pack now teaches agents how to weight content based on document tiers using a fixed tier-to-detail mapping.
+
+**NOT YET CHAMPION** — Requires `prod` branch deployment and production domain verification.
 
 ## Deliverable
 
@@ -21827,9 +21831,11 @@ Successfully delivered Tiered Context Construction guidance. The prd-guide pack 
 
 ## Follow-up
 
-- Fast-forward `prod` branch to deploy to production domain (`agent-skill.klappy.dev`)
-- Monitor agent behavior with new tier-weighted guidance
-- Consider v1.5 for role-specific packs or multi-pack compilation
+**TO BECOME CHAMPION:**
+1. Fast-forward `prod` branch: `git checkout prod && git merge --ff-only origin/main && git push origin prod`
+2. Verify HTTP 200 on production: `curl -s -o /dev/null -w "%{http_code}" https://agent-skill.klappy.dev/v1.4/prd-guide-pack.md`
+3. Update this entry and ATTEMPT.md to CHAMPION status
+4. Update lane README to mark v1.4 as Champion
 
 
 
@@ -21857,7 +21863,7 @@ For future vision, see [ROADMAP.md](../ROADMAP.md).
 | [H0006](./H0006-v1.2.3-champion.md) | v1.2.3 | Champion — Canon refresh v0.5.4 + ODD compliance | 2026-01-21 |
 | [H0007](./H0007-v1.2.4-champion.md) | v1.2.4 | Champion — Canon refresh v0.8.0 (path fixes + new content) | 2026-01-21 |
 | [H0008](./H0008-v1.3-champion.md) | v1.3 | Champion — PRD Elicitation Enhancement (interview mechanics, stage typing) | 2026-01-21 |
-| [H0009](./H0009-v1.4-champion.md) | v1.4 | Champion — Tiered Context Construction (tier-weighted projection) | 2026-01-22 |
+| [H0009](./H0009-v1.4-preview-verified.md) | v1.4 | Preview Verified — Tiered Context Construction (awaiting prod deploy) | 2026-01-22 |
 
 ---
 

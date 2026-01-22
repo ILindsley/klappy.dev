@@ -2,7 +2,7 @@
   "attempt": "001",
   "prd_version": "1.4.0",
   "lane": "agent-skill",
-  "status": "CHAMPION",
+  "status": "PREVIEW_VERIFIED",
   "started": "2026-01-22",
   "completed": "2026-01-22",
   "outcome": "Success - Tiered Context Construction guidance added to INSTRUCTIONS.md",

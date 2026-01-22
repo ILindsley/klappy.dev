@@ -3,7 +3,7 @@
 - **Date Started**: 2026-01-22
 - **Date Completed**: 2026-01-22
 - **PRD**: v1.4.0
-- **Status**: CHAMPION
+- **Status**: PREVIEW_VERIFIED
 
 ---
 
@@ -99,9 +99,24 @@ The implementation matches the PRD specification exactly. The tier-to-detail map
 
 ---
 
-## Next Steps
+## Next Steps (TO BECOME CHAMPION)
 
-1. Create history entry H0009-v1.4-champion.md
-2. Update lane README to mark v1.4 as Champion (not just Active)
-3. Fast-forward `prod` branch to deploy to production
-4. Verify HTTP 200 on production domain
+1. ~~Create history entry~~ Done (H0009)
+2. **Fast-forward `prod` branch**:
+   ```bash
+   git checkout prod && git merge --ff-only origin/main && git push origin prod
+   ```
+3. **Verify HTTP 200 on PRODUCTION domain**:
+   ```bash
+   curl -s -o /dev/null -w "%{http_code}" https://agent-skill.klappy.dev/v1.4/prd-guide-pack.md
+   ```
+4. Update this ATTEMPT.md status to CHAMPION
+5. Update lane README to mark v1.4 as Champion
+
+---
+
+## Correction Note
+
+**2026-01-22**: Status was prematurely marked as CHAMPION before production deployment. Corrected to PREVIEW_VERIFIED. The preview URL was verified (main.klappy-dev-agent-skill.pages.dev), but production (agent-skill.klappy.dev) requires the `prod` branch to be updated.
+
+Per CONTRACT.md: "Merging to main is NOT production deployment."
