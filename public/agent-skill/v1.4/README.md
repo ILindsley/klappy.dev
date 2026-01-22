@@ -2,9 +2,11 @@
 
 This version adds tier-weighted context construction guidance to the PRD elicitation system.
 
+**Source**: attempt-002 (corrected from attempt-001)
+
 ## Contents
 
-- [`prd-guide-pack.md`](./prd-guide-pack.md) — The compiled pack (~19K tokens)
+- [`prd-guide-pack.md`](./prd-guide-pack.md) — The compiled pack
 
 ## What's New in v1.4
 
@@ -14,33 +16,30 @@ The pack now includes a new section teaching agents how to construct context usi
 
 | Document Tier | Default Projection Detail | What Is Returned |
 |---------------|---------------------------|------------------|
-| **Tier 1** | `high` (full content) | Complete document content |
-| **Tier 2** | `medium` (structural) | Frontmatter + description + outline |
-| **Tier 3** | `low` (minimal) | Title + one-line summary |
+| **Tier 0** | `excluded` | Never included in default context packs |
+| **Tier 1** | `high` | Complete document content |
+| **Tier 2** | `medium` | Frontmatter + title + summary + description + outline |
+| **Tier 3** | `low` | Frontmatter + title + summary only |
 
-### Agent Responsibilities
+### Key Addition: Tier 0 Exclusion
 
-Agents using this pack will:
-
-- Respect epistemic obligation as encoded in document tiers
-- Treat Tier 1 content as foundational (must absorb fully)
-- Treat Tier 2 content as shared convention (respect by default)
-- Treat Tier 3 content as awareness only (reference when relevant)
-- Surface degradation when document structure is insufficient
+Tier 0 is a scope exclusion marker, not an epistemic tier. Content marked Tier 0:
+- Is public-facing, intended for human readers
+- Is excluded from agent reasoning contexts
+- Must never leak into default context packs
 
 ### Agent Prohibitions
 
 Agents using this pack must NOT:
-
+- Include Tier 0 content in default context packs
 - Infer obligation from folder hierarchy
 - Special-case README or index files for elevated inclusion
 - Promote Tier 3 content to higher detail for convenience
 - Summarize or synthesize documentation content
-- Apply heuristics that override tier-to-detail mapping
 
 ## Usage
 
-### Option 1: Public URL (no clone required)
+### Option 1: Public URL (after deployment)
 
 ```
 https://main.klappy-dev-agent-skill.pages.dev/v1.4/prd-guide-pack.md
@@ -50,10 +49,8 @@ https://main.klappy-dev-agent-skill.pages.dev/v1.4/prd-guide-pack.md
 
 Copy the pack from `prd-guide-pack.md` and paste it into your AI context.
 
-## Canon Version
+## Status
 
-This pack was compiled against canon v0.11.0.
+**NOT YET CHAMPION** — Awaiting human review.
 
-## Prior Version
-
-- [v1.3.1](../v1.3.1/) — Canon refresh v0.10.0 (added terminology.md)
+Current champion remains v1.3.1.

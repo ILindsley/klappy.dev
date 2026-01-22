@@ -18,7 +18,8 @@ For future vision, see [ROADMAP.md](../ROADMAP.md).
 | [H0006](./H0006-v1.2.3-champion.md) | v1.2.3 | Champion — Canon refresh v0.5.4 + ODD compliance | 2026-01-21 |
 | [H0007](./H0007-v1.2.4-champion.md) | v1.2.4 | Champion — Canon refresh v0.8.0 (path fixes + new content) | 2026-01-21 |
 | [H0008](./H0008-v1.3-champion.md) | v1.3 | Champion — PRD Elicitation Enhancement (interview mechanics, stage typing) | 2026-01-21 |
-| [H0009](./H0009-v1.4-closed.md) | v1.4 | Closed — Tiered Context Construction (awaiting human review) | 2026-01-22 |
+| [H0009](./H0009-v1.4-attempt-001-failed.md) | v1.4 | FAILED (attempt-001) — Authority violation, missing Tier 0 | 2026-01-22 |
+| H0010 | v1.4 | attempt-002 CLOSED — Tiered Context Construction with Tier 0 | 2026-01-22 |
 
 ---
 

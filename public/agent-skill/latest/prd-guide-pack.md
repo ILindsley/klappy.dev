@@ -1,11 +1,10 @@
 ---
 lane: agent-skill
 pack: prd-guide
-built_at: 2026-01-22T03:18:41.857Z
-git_commit: 3164ca0eac1966e55d414f809ca1a803ba22f78c
+built_at: 2026-01-22T00:10:35.043Z
+git_commit: 8eab8edef1f5a780a7962eeaff1cd87a52a50a75
 sources:
   - canon/README.md
-  - canon/epistemic-obligation-and-document-tiers.md
   - odd/README.md
   - odd/terminology.md
   - odd/manifesto.md
@@ -18,23 +17,22 @@ sources:
   - canon/definition-of-done.md
   - canon/self-audit.md
   - docs/PRD/PRD_TEMPLATE.md
-  - products/agent-skill/v1.4/attempts/attempt-001/INSTRUCTIONS.md
+  - products/agent-skill/v1.3.1/attempts/attempt-001/INSTRUCTIONS.md
 source_hashes:
-  canon/README.md: 15eb0a17c3c1275da6656d5f1638c3f53b48ee7f6b6284a461c21a1c72e37f25
-  canon/epistemic-obligation-and-document-tiers.md: 13c30ee45f2c6a95a7fb090071cd9aca0f7ce166ea51f5984e787caca804a97c
+  canon/README.md: 4214378d7cc200f8c0bba443f12d473204cdc705a095d4fe7961cd0e478a9cdb
   odd/README.md: cdbdff24383a85dacf361099b60a947747afbeb56b03e7636130c0b97daa4a50
   odd/terminology.md: e6fdd334f794fb5cc1feb7e48a2b247ee38cdbbf99ea360e93fe544a8a314b26
   odd/manifesto.md: 8a815ada6af26763e0cdd79eeb21c76eed1fbc7b1cd13068d338535eafa675da
   odd/cognitive-partitioning.md: 92debb039570f9d7225359a4ee918902cd767dc049b1b068791fad05725947d4
-  odd/appendices/README.md: ac1bdc784848ac814aa3d07a4b2b65ab05b18bc6544cf1608a65d05341afa488
-  odd/decisions/README.md: a5642e64940c7c4083e21e89c17058c7fcb61af5a41ba83efb25b550ff37a0a8
-  canon/odd/appendices/tool-specialization.md: 4a55667d225cbb815aff17f406759306cca91187a5a086b66b283ed0aac3bf93
+  odd/appendices/README.md: 542606e743385b985682891a0f13ca1b463c6f72a0021f620e7bc74dfd12a516
+  odd/decisions/README.md: 1f03da50ea51115715ce36ad0beb7d71d06d5df3b3a347dc1c5e1873cc0fb278
+  canon/odd/appendices/tool-specialization.md: 2cde355160a8847b7c196f57c9fab896d8e2bdc36bd1ff34abbcfba019080a59
   canon/constraints.md: 5e1846a12abcc12f148775ea31c5aef65ce2151385447c87730b54124de60bca
   canon/decision-rules.md: 4e9b0f9db33474d088d617e665c4ca01cefdeb22bc3bb05429217eeea3a7b481
   canon/definition-of-done.md: afc9f8c5bce0d5a1475110cd7efb3efd3b7050d3c1ff52b77f589fd2125dde35
   canon/self-audit.md: 37e031cef314d6f87dad5dc3682feb5cd808325dac3dc903e0926eca8e1e25c3
-  docs/PRD/PRD_TEMPLATE.md: a46f8057c58d93bd2b89aa953dd13187c2edc1630dab6605784ef145ab9d16e0
-  products/agent-skill/v1.4/attempts/attempt-001/INSTRUCTIONS.md: 25300ec261e29d923db7681d0a8389f5bad751951a0e1b47a0ccd95230fee03f
+  docs/PRD/PRD_TEMPLATE.md: 9ff8b63a6edd0314c4ea884cc3915f6d448949a7d415a3010280aff122cf1afb
+  products/agent-skill/v1.3.1/attempts/attempt-001/INSTRUCTIONS.md: e4d17740961edb424ab8ea4eaa9a6892e8401b358a954d111d7c78f66f02f431
 ---
 
 
@@ -67,7 +65,6 @@ The Canon exists so that reasoning does not have to be repeated.
 
 | File | Title | Summary | Answers |
 |------|-------|---------|---------|
-| `epistemic-obligation-and-document-tiers.md` | Epistemic Obligation and Document Tiers | Tiers define epistemic obligation (foundational, shared, awareness), not importance. Orthogonal to folders. | How much must I internalize this? |
 | `constraints.md` | Constraints | Baseline assumptions and non-negotiables that shape every decision. | What must be true for this work to make sense? |
 | `decision-rules.md` | Decision Rules | Default heuristics used when multiple valid options exist. | How do choices tend to be made? |
 | `definition-of-done.md` | Definition of Done | What qualifies as completed work and what evidence is required. | When can work honestly be called done? |
@@ -80,7 +77,6 @@ The Canon exists so that reasoning does not have to be repeated.
 
 | Folder | Purpose |
 |--------|---------|
-| `decisions/` | Canon-level decision records (governance, model boundaries). |
 | `resonance/` | External works that converge with ODD — and where ODD explicitly diverges. |
 | `meta/` | Metadata and pack configuration. |
 | `_compiled/` | Compiled outputs (derived, wipeable). |
@@ -254,167 +250,6 @@ See `/docs/appendices/compilation.md` for the compilation model.
 - Includes confidence and drift snapshot
 
 This Canon v0.1 is considered stable for initial builds. Revisions should be additive unless a documented failure requires change.
-
-
----
-
-## Source: `canon/epistemic-obligation-and-document-tiers.md`
-
----
-uri: klappy://canon/epistemic-obligation-and-document-tiers
-title: "Epistemic Obligation and Document Tiers"
-audience: canon
-exposure: nav
-tier: 1
-voice: first_person
-stability: stable
-tags: ["canon", "tiers", "epistemic-obligation", "architecture"]
----
-
-# Epistemic Obligation and Document Tiers
-
-> Document tiers define epistemic obligation, not importance.
-
-## Description
-
-This document explains the three-tier system used to organize content in this repository. Tiers are not about importance, value, or quality. They are about epistemic obligation—how much a reader or system is obligated to absorb and respect content at each level. Tier 1 carries foundational obligation and rarely changes. Tier 2 carries shared obligation and evolves carefully. Tier 3 carries awareness without obligation and may change freely. Tiers are orthogonal to folders. Any folder may contain documents at any tier.
-
-## Outline
-
-- What Tiers Mean
-- Tier 1: Foundational Obligation
-- Tier 2: Shared Obligation
-- Tier 3: Awareness Without Obligation
-- Why Tier 3 Exists
-- Tier 0: Scope Exclusion (Not a Tier)
-- Tiers Are Not Importance
-
----
-
-## Content
-
-**Canon v0.1**
-
-### What Tiers Mean
-
-Tiers describe epistemic obligation:
-
-| Tier | Obligation Level | Decay Rate | Change Frequency |
-|------|------------------|------------|------------------|
-| **Tier 1** | Must absorb | Almost never | Rarely |
-| **Tier 2** | Should respect | Carefully | Occasionally |
-| **Tier 3** | May reference | Freely | Frequently |
-
-The tier system answers: *"How much must I internalize this before proceeding?"*
-
-### Tier 1: Foundational Obligation
-
-Tier 1 content must be fully absorbed before proceeding. It cannot be safely ignored or skimmed.
-
-**Characteristics:**
-
-- Contradiction is a serious error
-- Reinterpretation requires explicit justification
-- Changes are rare and deliberate
-- Stability is expected across long timescales
-
-**Epistemic obligation:** Absorb fully. Do not contradict. Do not reinterpret without explicit justification.
-
-**Cross-folder examples:** A manifesto in odd/, a core constraint in canon/, or a critical process in docs/ could all be Tier 1.
-
-### Tier 2: Shared Obligation
-
-Tier 2 content should be respected by default. It represents agreed conventions that apply unless explicitly overridden.
-
-**Characteristics:**
-
-- Deviation is allowed but must be documented
-- Changes happen carefully with awareness of downstream impact
-- Content is stable but not immutable
-- Readers should know this content exists and follow it unless they have reason not to
-
-**Epistemic obligation:** Respect unless explicitly overridden. Follow by default. Document deviations.
-
-**Cross-folder examples:** A decision record in odd/, a shared rule in canon/, or a standard process in docs/ could all be Tier 2.
-
-### Tier 3: Awareness Without Obligation
-
-Tier 3 content is available for reference but carries no obligation to internalize. It exists so you can find it when needed.
-
-**Characteristics:**
-
-- May be ignored when not relevant
-- Changes freely without requiring broad awareness
-- Useful for specific tasks, not general orientation
-- Can be rebuilt or discarded without system-wide impact
-
-**Epistemic obligation:** Reference when relevant. May ignore when not applicable. Free to rebuild.
-
-**Cross-folder examples:** An appendix in odd/, a template in canon/, or a how-to guide in docs/ could all be Tier 3.
-
-### Why Tier 3 Exists
-
-Tier 3 exists because not everything needs to be internalized.
-
-Some content:
-
-- Is useful only in specific contexts
-- Changes frequently without broad impact
-- Serves reference purposes rather than orientation
-- Deserves documentation without demanding absorption
-
-Without Tier 3, either:
-- Low-obligation content gets elevated to Tier 2 (creating false urgency)
-- Low-obligation content goes undocumented (creating knowledge gaps)
-
-Tier 3 gives content a home without giving it unearned epistemic weight.
-
-### Tier 0: Scope Exclusion (Not a Tier)
-
-Tier 0 is not part of the epistemic tier system. It is a scope exclusion marker.
-
-Content marked Tier 0 is:
-
-- Public-facing and intended for human readers
-- Excluded from agent reasoning contexts
-- Excluded from default context-packs
-- Not comparable to Tier 1–3 content
-
-Tier 0 is not "lower obligation than Tier 3." It is outside the epistemic ladder entirely.
-
-**Use Tier 0 for:** About pages, marketing content, visitor-facing explanations—content that exists for humans, not for systems reasoning about the repository.
-
-**Do not confuse:** Tier 0 with Tier 3. Tier 3 is low-obligation content within the epistemic system. Tier 0 is excluded from the epistemic system altogether.
-
-### Tiers Are Not Importance
-
-A common misunderstanding: "Tier 1 is most important, Tier 3 is least important."
-
-This is wrong.
-
-Tiers describe **epistemic obligation**, not **importance**.
-
-| Tier | Epistemic Obligation | Importance |
-|------|---------------------|------------|
-| Tier 1 | High | Varies |
-| Tier 2 | Medium | Varies |
-| Tier 3 | Low | Varies |
-
-A Tier 3 document might be critically important for today's deployment. A Tier 1 document might be philosophically foundational but irrelevant to a specific task.
-
-**The question tiers answer:** "How much must I internalize this?"
-
-**The question tiers do not answer:** "How important is this?"
-
-Conflating the two leads to either:
-- Ignoring Tier 3 content that matters for execution
-- Over-weighting Tier 1 content that doesn't apply
-
----
-
-## See Also
-
-- [Three-Tier Conceptual Hierarchy](/odd/decisions/D0001-three-tier-conceptual-hierarchy.md) — The decision that established the folder model (orthogonal to tiers)
 
 
 ---
@@ -1402,7 +1237,7 @@ uri: klappy://odd/appendices
 title: "ODD Appendices (Portable)"
 audience: canon
 exposure: nav
-tier: 3
+tier: 2
 voice: neutral
 stability: evolving
 tags: ["odd", "appendices", "index", "portable"]
@@ -1473,7 +1308,7 @@ uri: klappy://odd/decisions
 title: "ODD Conceptual Decisions"
 audience: canon
 exposure: nav
-tier: 3
+tier: 1
 voice: neutral
 stability: stable
 tags: ["odd", "decisions", "conceptual", "philosophy"]
@@ -1528,7 +1363,7 @@ uri: klappy://canon/odd/tool-specialization
 title: "Tool Specialization"
 audience: canon
 exposure: nav
-tier: 3
+tier: 2
 voice: neutral
 stability: evolving
 tags: ["odd", "pattern", "tools", "decision-complexity"]
@@ -2618,7 +2453,7 @@ uri: klappy://docs/prd/template
 title: "PRD Template"
 audience: docs
 exposure: nav
-tier: 3
+tier: 2
 voice: neutral
 stability: stable
 tags: ["docs", "prd", "template"]
@@ -2753,7 +2588,7 @@ See: `/docs/appendices/attempt-lifecycle.md`
 
 ---
 
-## Source: `products/agent-skill/v1.4/attempts/attempt-001/INSTRUCTIONS.md`
+## Source: `products/agent-skill/v1.3.1/attempts/attempt-001/INSTRUCTIONS.md`
 
 # PRD Elicitation Guide: Interactive Instructions
 
@@ -2782,81 +2617,6 @@ You are not:
 - An author who invents requirements the user didn't express
 - A cheerleader who validates every idea
 - A bureaucrat who demands unnecessary detail
-
----
-
-## Default Context Construction
-
-When constructing context from ODD-aligned documentation, use tier-weighted projection detail. Document tiers define epistemic obligation — how much you must absorb content before proceeding.
-
-### Tier-to-Detail Mapping
-
-| Document Tier | Default Projection Detail | What Is Returned |
-|---------------|---------------------------|------------------|
-| **Tier 1** | `high` (full content) | Complete document content |
-| **Tier 2** | `medium` (structural) | Frontmatter + description + outline + section headers |
-| **Tier 3** | `low` (minimal) | Title + one-line summary (blockquote) |
-
-This mapping is fixed. Tier determines default detail level unless explicitly overridden by the consumer.
-
-### What Each Detail Level Returns
-
-**`high` (full content)**
-- Everything in the document
-- Use when deep understanding is required
-- Use for Tier 1 documents by default
-
-**`medium` (structural)**
-- Frontmatter metadata
-- Title and summary blockquote
-- Description section
-- Outline section
-- Section headers (without content)
-- Use when orientation is needed but not full content
-- Use for Tier 2 documents by default
-
-**`low` (minimal)**
-- Frontmatter metadata
-- Title and summary blockquote only
-- Use when existence matters more than content
-- Use for Tier 3 documents by default
-
-### Agent Responsibilities
-
-You shall:
-
-- Respect epistemic obligation as encoded in document tiers
-- Treat Tier 1 content as foundational — must be fully absorbed, cannot be safely ignored
-- Treat Tier 2 content as shared convention — respect by default, document deviations
-- Treat Tier 3 content as awareness only — reference when relevant, may ignore otherwise
-- Surface when documents lack structure required for their projected detail level
-- Proceed with available structure without inventing compensating context
-
-### Agent Prohibitions
-
-You shall NOT:
-
-- Infer epistemic obligation from folder hierarchy (tiers are document properties, not folder properties)
-- Special-case README or index files for elevated inclusion (navigation documents are typically Tier 3)
-- Promote Tier 3 content to higher detail for perceived convenience
-- Summarize or synthesize documentation content to fill gaps
-- Apply heuristics that override the tier-to-detail mapping based on content analysis
-- Equalize detail across tiers (Tier 1 content must receive more tokens than Tier 3)
-
-### Degradation Handling
-
-When document structure is insufficient for the requested projection detail:
-
-| Missing Element | Consequence |
-|-----------------|-------------|
-| No blockquote summary | `low` falls back to title only |
-| No Description section | `medium` falls back to outline or full |
-| No Outline section | `medium` returns description + headers |
-| No structure at all | All levels return full content |
-
-**Implication**: Documents that follow the template project cleanly. Documents without structure force full inclusion regardless of requested detail.
-
-This is intentional. The cost of bad structure is paid at query time, not authoring time. Surface the degradation rather than compensating for it.
 
 ---
 
