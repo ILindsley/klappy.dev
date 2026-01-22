@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-22T04:14:41.815Z
+Generated: 2026-01-22T05:33:01.415Z
 Total Files: 163
 
 This is a documentation export of all markdown files from the klappy.dev
@@ -19749,11 +19749,76 @@ You are starting an attempt in the **agent-skill** lane.
 
 ---
 
+## ⛔ STOP — READ THIS FIRST
+
+**The #1 cause of failed attempts is writing outside the attempt folder.**
+
+This is not a suggestion. This is not flexible. This is the rule that will fail your attempt regardless of how good your code is.
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                     YOUR SANDBOX (Agent Authority)                   │
+│                                                                     │
+│   products/agent-skill/<version>/attempts/attempt-NNN/              │
+│                                                                     │
+│   You can write ANYTHING here. Go wild.                             │
+│   ├── ATTEMPT.md, META.json, INSTRUCTIONS.md                        │
+│   ├── src/           ← proposed configs, compile plans              │
+│   ├── infra/         ← proposed code (e.g., compiler changes)       │
+│   └── evidence/      ← proof it works (compiled packs, logs)        │
+│                                                                     │
+├─────────────────────────────────────────────────────────────────────┤
+│                     FORBIDDEN ZONE (Human Authority)                 │
+│                                                                     │
+│   ❌ infra/                    ← NEVER (even for "tests")           │
+│   ❌ public/                   ← NEVER (even to verify)             │
+│   ❌ products/agent-skill/README.md  ← NEVER (propose in ATTEMPT.md)│
+│   ❌ products/agent-skill/<version>/PRD.md  ← NEVER (if exists)     │
+│   ❌ products/website/         ← NEVER (wrong lane entirely)        │
+│   ❌ latest/                   ← NEVER (human updates this)         │
+│                                                                     │
+│   These paths require HUMAN promotion. Not your job.                │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## ⛔ AUTHORITY BOUNDARIES — What You CANNOT Do
+
+| Action | Why It Fails Your Attempt |
+|--------|---------------------------|
+| Write to `infra/scripts/` | Infrastructure is human-promoted, not agent-deployed |
+| Write to `public/` | Production deployment requires human review |
+| Update `latest/` | Pointer updates are promotion actions |
+| Claim CHAMPION status | Agent stops at CLOSED; human elevates to CHAMPION |
+| Update lane README | Propose changes in ATTEMPT.md; human applies |
+| Run tests that write outside sandbox | Even "tests" that cross boundaries are violations |
+| Modify existing PRD | If PRD is wrong, FAIL and propose new version |
+
+**"AI is an accelerator, not an authority."**
+
+---
+
+## ✅ PRE-FLIGHT CHECKLIST
+
+Before you write a single line of code, verify you understand:
+
+- [ ] My attempt folder is: `products/agent-skill/<version>/attempts/attempt-NNN/`
+- [ ] ALL my file writes will be inside that folder
+- [ ] If I need to change the compiler, I write to `attempt-NNN/infra/scripts/compile-pack.js`
+- [ ] Compiled output goes to `attempt-NNN/evidence/`, NOT `public/`
+- [ ] I will NOT update `latest/` — that's a human decision
+- [ ] I will NOT claim CHAMPION — I stop at CLOSED
+- [ ] If the PRD seems impossible, I FAIL early and document why
+
+---
+
 ## Step 1: Find Active Version
 
 Check `README.md` — the Versions table shows which version is **Active**.
 
-Note the active version (e.g., `v1.2.2`). This is your target.
+Note the active version (e.g., `v1.4.1`). This is your target.
 
 ---
 
@@ -19764,18 +19829,23 @@ Read these files in order:
 1. `README.md` — Lane overview, version table, current champion
 2. `CONTRACT.md` — Structure deviations from canon
 3. `history/index.md` — Champion history and learnings
-4. `<active-version>/PRD.md` — The PRD you're executing
-
-The PRD defines your task, deliverables, and definition of done.
+4. **CRITICAL**: `history/*.md` — Read the FAILED entries. Learn from the mistakes.
+5. `<active-version>/PRD.md` — The PRD you're executing
 
 ---
 
-## Step 3: Review Prior Art
+## Step 3: Review Prior Art (MANDATORY)
 
-Check the history folder and previous attempt folders for learnings:
+**This is not optional.** Read the learnings from previous attempts:
 
-- `history/` — What worked, what didn't
-- Previous version attempts — Evidence and learnings
+| Path | What To Learn |
+|------|---------------|
+| `history/H0002-v1.2-failed.md` | Lane isolation violations |
+| `history/H0005-v1.2.2-failed.md` | ODD violations, ephemeral artifacts |
+| `history/H0009-v1.4-attempt-001-failed.md` | Authority violations |
+| `v1.4.1/attempts/attempt-001/LEARNINGS.md` | Containment boundary violations |
+
+If you see patterns in past failures that relate to your task, **stop and plan around them**.
 
 ---
 
@@ -19785,77 +19855,157 @@ Create: `<active-version>/attempts/attempt-NNN/`
 
 Where NNN is the next number (check existing folders).
 
-Required files:
+### Required Structure
 
-- `ATTEMPT.md` — Closure record
-- `META.json` — Machine-readable metadata
-- `evidence/` — Verification artifacts
+```
+attempt-NNN/
+├── ATTEMPT.md              # Closure record (status, outcome, learnings)
+├── META.json               # Machine-readable metadata
+├── INSTRUCTIONS.md         # Generated elicitation guide (if applicable)
+├── src/                    # Proposed configs, compile plans
+│   └── compile-plan.json   # (if modifying compilation)
+├── infra/                  # Proposed code changes
+│   └── scripts/
+│       └── compile-pack.js # (if modifying compiler — THIS IS A PROPOSAL)
+└── evidence/               # Proof of work
+    ├── compile-output.txt  # Logs
+    ├── prd-guide-pack.md   # Compiled pack (LOCAL COPY, not deployed)
+    └── *.md                # Verification evidence
+```
 
 ---
 
-## Step 5: Execute
+## Step 5: Execute (Inside Your Sandbox)
 
 Follow the PRD's Definition of Done exactly.
 
-- Produce evidence for every claim
-- No assertions without proof
-- Document tradeoffs
+### If You Need To Modify the Compiler
+
+```bash
+# WRONG: This violates containment
+node infra/scripts/compile-pack.js --output public/
+
+# RIGHT: Test your local copy
+node products/agent-skill/<version>/attempts/attempt-NNN/infra/scripts/compile-pack.js \
+  --output products/agent-skill/<version>/attempts/attempt-NNN/evidence/
+```
+
+### If You Need To Test Compiled Output
+
+Write to `attempt-NNN/evidence/`. Verify content there. Do NOT deploy to `public/`.
+
+### If You Need To Update Lane README
+
+Document the proposed changes in `ATTEMPT.md`. The human applies them during promotion.
 
 ---
 
-## Critical Rules
-
-1. **Lane Isolation**: Do NOT modify files outside `products/agent-skill/`
-2. **Version Isolation**: Work within `<active-version>/` folder
-3. **Attempt Containment**: All changes go in attempt folder until promotion
-4. **Evidence Required**: No assertions without proof
-5. **PRD Immutability**: If PRD has a problem, create a NEW version — don't bend rules
-
----
-
-## When Complete
+## Step 6: Close (NOT Champion)
 
 Update `ATTEMPT.md` with:
 
-- Status: CHAMPION, CLOSED, or ABANDONED
+- **Status**: CLOSED (not CHAMPION — that's not your call)
 - Outcome summary
 - Evidence produced
 - Self-audit results
 - Learnings
 
-If championed, add entry to `history/` folder.
+**You do NOT:**
+- Add entry to `history/` (human does this)
+- Update `latest/` (human does this)
+- Mark status as CHAMPION (human does this)
 
 ---
 
-## Production Release (If Championed)
+## Common Violations (Don't Be This Agent)
 
-**Merging to `main` is NOT production deployment.**
+### Violation 1: Writing compiler to infra/
 
-After PR is merged to `main`:
+```diff
+- infra/scripts/compile-pack.js          ← VIOLATION
++ attempt-NNN/infra/scripts/compile-pack.js  ← CORRECT (proposal)
+```
 
-1. Fast-forward `prod` to `main`:
-   ```bash
-   git checkout prod && git merge --ff-only origin/main && git push origin prod
-   ```
+**Why it fails**: You deployed code without human review.
 
-2. Verify HTTP 200 on production domain:
-   ```bash
-   curl -s -o /dev/null -w "%{http_code}" https://agent-skill.klappy.dev/vX.Y/prd-guide-pack.md
-   ```
+### Violation 2: Writing compiled output to public/
 
-3. Update lane README to mark version as Champion (not just Active)
+```diff
+- public/agent-skill/v1.4/prd-guide-pack.md  ← VIOLATION
++ attempt-NNN/evidence/prd-guide-pack.md     ← CORRECT (evidence)
+```
 
-See `CONTRACT.md` Deployment section and [D0001](/docs/decisions/D0001-prod-branch-is-production.md) for details.
+**Why it fails**: Production deployment is a promotion action.
+
+### Violation 3: Updating latest/
+
+```diff
+- public/agent-skill/latest/prd-guide-pack.md  ← VIOLATION
+```
+
+**Why it fails**: Pointer updates require human decision.
+
+### Violation 4: Claiming CHAMPION
+
+```diff
+- Status: CHAMPION    ← VIOLATION
++ Status: CLOSED      ← CORRECT (human elevates to Champion)
+```
+
+**Why it fails**: "AI is an accelerator, not an authority."
+
+### Violation 5: Test that writes outside sandbox
+
+```javascript
+// VIOLATION: Even a "test" that writes outside is a violation
+fs.writeFileSync('products/website/dist/packs/test.md', content);
+
+// CORRECT: Mock structure inside your sandbox
+fs.writeFileSync('attempt-NNN/mock-dist/packs/test.md', content);
+```
 
 ---
 
 ## If PRD Seems Problematic
 
-Don't bend rules to make it work.
+**Don't bend rules to make it work. Don't steer a miss.**
 
-1. Document the issue in `LEARNINGS.md`
-2. Mark attempt as FAILED with clear explanation
-3. Propose a new PRD version to address the issue
+1. STOP immediately
+2. Document the issue in `LEARNINGS.md`
+3. Mark attempt as FAILED with clear explanation
+4. Propose what a new PRD version should address
+
+A FAILED attempt with clear learnings is more valuable than a "success" that violates constraints.
+
+---
+
+## Production Release (Human Action — Not Yours)
+
+**You do NOT do this. The human does.**
+
+After human review and promotion:
+
+1. Human copies proposed changes from attempt folder to real locations
+2. Human fast-forwards `prod` to `main`
+3. Human verifies HTTP 200 on production domain
+4. Human updates lane README to mark version as Champion
+
+---
+
+## Final Reminder
+
+```
+┌────────────────────────────────────────────────────────────┐
+│                                                            │
+│   Your world is:                                           │
+│   products/agent-skill/<version>/attempts/attempt-NNN/     │
+│                                                            │
+│   Everything else is someone else's.                       │
+│                                                            │
+│   "AI is an accelerator, not an authority."                │
+│                                                            │
+└────────────────────────────────────────────────────────────┘
+```
 
 
 
@@ -20528,7 +20678,9 @@ This lane produces compiled packs for AI agent consumption. The primary delivera
 
 **v1.3.1** — Canon Refresh (adds terminology.md, canon v0.10.0)
 
-> **v1.4 FAILED** — Compiler infrastructure does not implement tier enforcement. PRD requires revision.
+> **v1.4.1 CLOSED — NOT PROMOTED** — Tier-aware compiler implemented and all ACs pass, but token efficiency analysis revealed 20-50% waste. See `v1.4.1/attempts/attempt-002/LEARNINGS.md`.
+>
+> **v1.4.2 DRAFT** — Token-efficient pack compilation. Addresses waste identified in v1.4.1.
 
 **Public URL**: `https://main.klappy-dev-agent-skill.pages.dev/latest/prd-guide-pack.md`
 
@@ -20566,8 +20718,10 @@ See the [usage README](https://main.klappy-dev-agent-skill.pages.dev/latest/READ
 | [v1.2.3/](v1.2.3/) | Champion | Canon refresh v0.5.4 + ODD compliance |
 | [v1.2.4/](v1.2.4/) | Superseded | Canon refresh v0.8.0 (path fixes + new content) |
 | [v1.3/](v1.3/) | Superseded | PRD Elicitation Enhancement (interview mechanics, stage typing) |
-| [v1.3.1/](v1.3.1/) | Superseded | Canon Refresh (adds terminology.md, canon v0.10.0) |
+| [v1.3.1/](v1.3.1/) | Champion | Canon Refresh (adds terminology.md, canon v0.10.0) |
 | [v1.4/](v1.4/) | FAILED (001, 002) | Tiered Context Construction — compiler does not implement tiers |
+| [v1.4.1/](v1.4.1/) | Closed (Not Promoted) | Tier-Aware Pack Compiler — works but 20-50% token waste |
+| [v1.4.2/](v1.4.2/) | **Draft** | Token-Efficient Pack Compilation — addresses v1.4.1 waste |
 
 ## Structure
 
@@ -20600,10 +20754,15 @@ products/agent-skill/
 │   └── PRD.md             # Canon refresh v0.8.0 (path fixes)
 ├── v1.3/                  # Version 1.3 (superseded)
 │   └── PRD.md             # PRD Elicitation Enhancement
-├── v1.3.1/                # Version 1.3.1 (superseded)
+├── v1.3.1/                # Version 1.3.1 (champion)
 │   └── PRD.md             # Canon refresh v0.10.0 (terminology.md)
-└── v1.4/                  # Version 1.4 (closed, awaiting human review)
-    └── PRD.md             # Tiered Context Construction
+├── v1.4/                  # Version 1.4 (failed)
+│   └── PRD.md             # Tiered Context Construction (compiler doesn't implement)
+├── v1.4.1/                # Version 1.4.1 (closed, not promoted)
+│   ├── PRD.md             # Tier-Aware Pack Compiler
+│   └── attempts/          # attempt-001 (failed), attempt-002 (closed, not promoted)
+└── v1.4.2/                # Version 1.4.2 (draft)
+    └── PRD.md             # Token-Efficient Pack Compilation
 ```
 
 ## Build

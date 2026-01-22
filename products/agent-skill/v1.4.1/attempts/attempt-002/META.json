@@ -1,0 +1,43 @@
+{
+  "attempt": "attempt-002",
+  "prd_version": "v1.4.1",
+  "status": "CLOSED",
+  "promoted": false,
+  "promotion_blocker": "token_efficiency",
+  "started": "2026-01-22",
+  "closed": "2026-01-22",
+  "lane": "agent-skill",
+  "containment": {
+    "write_fence": true,
+    "allowed_output": "products/agent-skill/v1.4.1/attempts/attempt-002/evidence/",
+    "forbidden_paths": ["public/", "infra/"],
+    "plan_loading": "explicit --plan-file"
+  },
+  "token_analysis": {
+    "prd_guide_pack": {
+      "estimated_tokens": "12-14K",
+      "waste_ratio": "20-23%"
+    },
+    "default_odd_context_pack": {
+      "estimated_tokens": "25-33K",
+      "waste_ratio": "40-50%"
+    }
+  },
+  "evidence_files": [
+    "compile-output.txt",
+    "plan-output-prd-guide.json",
+    "plan-output-prd-guide.txt",
+    "prd-guide-pack.md",
+    "plan-output-default-odd-context.json",
+    "plan-output-default-odd-context.txt",
+    "default-odd-context-pack.md",
+    "tier-verification.md",
+    "acceptance-criteria.md",
+    "determinism.md",
+    "no-source-writes.md"
+  ],
+  "reflection_files": [
+    "LEARNINGS.md",
+    "PROMOTION_NOTES.md"
+  ]
+}
