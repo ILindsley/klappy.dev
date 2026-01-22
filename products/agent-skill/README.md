@@ -4,7 +4,7 @@ This lane produces compiled packs for AI agent consumption. The primary delivera
 
 ## Current Champion
 
-**v1.3.1** — Canon Refresh (adds terminology.md, canon v0.10.0)
+**v1.4** — Tiered Context Construction (tier-weighted projection, canon v0.11.0)
 
 **Public URL**: `https://main.klappy-dev-agent-skill.pages.dev/latest/prd-guide-pack.md`
 
@@ -43,7 +43,7 @@ See the [usage README](https://main.klappy-dev-agent-skill.pages.dev/latest/READ
 | [v1.2.4/](v1.2.4/) | Superseded | Canon refresh v0.8.0 (path fixes + new content) |
 | [v1.3/](v1.3/) | Superseded | PRD Elicitation Enhancement (interview mechanics, stage typing) |
 | [v1.3.1/](v1.3.1/) | Superseded | Canon Refresh (adds terminology.md, canon v0.10.0) |
-| [v1.4/](v1.4/) | **Active** | Tiered Context Construction (tier-weighted projection) |
+| [v1.4/](v1.4/) | **Champion** | Tiered Context Construction (tier-weighted projection) |
 
 ## Structure
 
@@ -78,7 +78,7 @@ products/agent-skill/
 │   └── PRD.md             # PRD Elicitation Enhancement
 ├── v1.3.1/                # Version 1.3.1 (superseded)
 │   └── PRD.md             # Canon refresh v0.10.0 (terminology.md)
-└── v1.4/                  # Version 1.4 (active)
+└── v1.4/                  # Version 1.4 (champion)
     └── PRD.md             # Tiered Context Construction
 ```
 

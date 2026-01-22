@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-22T03:20:36.558Z
-Total Files: 162
+Generated: 2026-01-22T03:24:07.055Z
+Total Files: 163
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -24,7 +24,7 @@ details (attempts, version folders, source code).
 - **Infrastructure** (9 files)
 - **Interfaces & Contracts** (6 files)
 - **ODD (Outcomes-Driven Development)** (22 files)
-- **Products** (32 files)
+- **Products** (33 files)
 - **Projects** (6 files)
 - **Visual Design System** (5 files)
 
@@ -20284,7 +20284,7 @@ This lane produces compiled packs for AI agent consumption. The primary delivera
 
 ## Current Champion
 
-**v1.3.1** — Canon Refresh (adds terminology.md, canon v0.10.0)
+**v1.4** — Tiered Context Construction (tier-weighted projection, canon v0.11.0)
 
 **Public URL**: `https://main.klappy-dev-agent-skill.pages.dev/latest/prd-guide-pack.md`
 
@@ -20323,7 +20323,7 @@ See the [usage README](https://main.klappy-dev-agent-skill.pages.dev/latest/READ
 | [v1.2.4/](v1.2.4/) | Superseded | Canon refresh v0.8.0 (path fixes + new content) |
 | [v1.3/](v1.3/) | Superseded | PRD Elicitation Enhancement (interview mechanics, stage typing) |
 | [v1.3.1/](v1.3.1/) | Superseded | Canon Refresh (adds terminology.md, canon v0.10.0) |
-| [v1.4/](v1.4/) | **Active** | Tiered Context Construction (tier-weighted projection) |
+| [v1.4/](v1.4/) | **Champion** | Tiered Context Construction (tier-weighted projection) |
 
 ## Structure
 
@@ -20358,7 +20358,7 @@ products/agent-skill/
 │   └── PRD.md             # PRD Elicitation Enhancement
 ├── v1.3.1/                # Version 1.3.1 (superseded)
 │   └── PRD.md             # Canon refresh v0.10.0 (terminology.md)
-└── v1.4/                  # Version 1.4 (active)
+└── v1.4/                  # Version 1.4 (champion)
     └── PRD.md             # Tiered Context Construction
 ```
 
@@ -21787,6 +21787,53 @@ Key change: Inventory BEFORE Outcome (can't define what you want until you know 
 
 
 --------------------------------------------------------------------------------
+📄 File: products/agent-skill/history/H0009-v1.4-champion.md
+--------------------------------------------------------------------------------
+
+# H0009 — v1.4 Champion
+
+- **Date**: 2026-01-22
+- **Type**: Champion
+- **PRD**: v1.4.0
+- **Attempt**: `v1.4/attempts/attempt-001/`
+
+## Summary
+
+Successfully delivered Tiered Context Construction guidance. The prd-guide pack now teaches agents how to weight content based on document tiers using a fixed tier-to-detail mapping.
+
+## Deliverable
+
+- **Pack**: `public/agent-skill/v1.4/prd-guide-pack.md`
+- **Latest**: `public/agent-skill/latest/prd-guide-pack.md`
+- **Preview URL**: `https://main.klappy-dev-agent-skill.pages.dev/v1.4/prd-guide-pack.md`
+- **Size**: ~19K tokens
+
+## What Worked
+
+- Clean execution from PRD to deployment
+- Fixed tier-to-detail mapping is simple and unambiguous
+- Agent prohibitions make non-goals explicit and testable
+- Degradation handling documented clearly
+
+## What Didn't
+
+- Nothing significant — clean one-shot execution
+
+## Learnings
+
+- Compile plan path in `infra/compile/plans/` must be updated when changing INSTRUCTIONS.md version
+- Preview URL testing works immediately after push to main; production requires separate `prod` branch deployment
+- INSTRUCTIONS.md is the primary deliverable — canon sources provide context, but the instructions drive agent behavior
+
+## Follow-up
+
+- Fast-forward `prod` branch to deploy to production domain (`agent-skill.klappy.dev`)
+- Monitor agent behavior with new tier-weighted guidance
+- Consider v1.5 for role-specific packs or multi-pack compilation
+
+
+
+--------------------------------------------------------------------------------
 📄 File: products/agent-skill/history/index.md
 --------------------------------------------------------------------------------
 
@@ -21810,6 +21857,7 @@ For future vision, see [ROADMAP.md](../ROADMAP.md).
 | [H0006](./H0006-v1.2.3-champion.md) | v1.2.3 | Champion — Canon refresh v0.5.4 + ODD compliance | 2026-01-21 |
 | [H0007](./H0007-v1.2.4-champion.md) | v1.2.4 | Champion — Canon refresh v0.8.0 (path fixes + new content) | 2026-01-21 |
 | [H0008](./H0008-v1.3-champion.md) | v1.3 | Champion — PRD Elicitation Enhancement (interview mechanics, stage typing) | 2026-01-21 |
+| [H0009](./H0009-v1.4-champion.md) | v1.4 | Champion — Tiered Context Construction (tier-weighted projection) | 2026-01-22 |
 
 ---
 
