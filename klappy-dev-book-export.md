@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-22T20:45:13.702Z
+Generated: 2026-01-22T20:49:00.584Z
 Total Files: 164
 
 This is a documentation export of all markdown files from the klappy.dev
@@ -12908,6 +12908,18 @@ Outcomes-Driven Development (ODD) is an approach to building software that prior
 In an environment where AI can generate code, interfaces, and entire applications quickly, the limiting factor is no longer production speed—it is clarity of intent, quality of verification, and the ability to choose among many possible outcomes.
 
 ODD exists to make those constraints explicit.
+
+---
+
+## ⚠️ System Constraint (Read Before Adding Structure)
+
+ODD is governed by a single, non-negotiable constraint:
+
+**→ [`Use Only What Hurts`](constraint/use-only-what-hurts.md)**
+
+This document has **supremacy** over all other ODD documents.
+
+If a proposed pattern, principle, or addition conflicts with it, the proposal is invalid.
 
 ---
 

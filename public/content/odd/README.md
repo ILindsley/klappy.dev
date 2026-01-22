@@ -20,6 +20,18 @@ ODD exists to make those constraints explicit.
 
 ---
 
+## ⚠️ System Constraint (Read Before Adding Structure)
+
+ODD is governed by a single, non-negotiable constraint:
+
+**→ [`Use Only What Hurts`](constraint/use-only-what-hurts.md)**
+
+This document has **supremacy** over all other ODD documents.
+
+If a proposed pattern, principle, or addition conflicts with it, the proposal is invalid.
+
+---
+
 ## The Core Idea
 
 Traditional software development often optimizes for outputs:
