@@ -2,7 +2,7 @@
 
 - **Date Started**: 2026-01-22
 - **PRD**: v1.4.0
-- **Status**: IN_PROGRESS
+- **Status**: CLOSED
 
 ---
 
@@ -43,10 +43,40 @@ Execute PRD v1.4.0 with corrected INSTRUCTIONS.md that includes Tier 0 → exclu
 
 ## Self-Audit
 
-[To be completed]
+### Intended Outcome
+Add Tier 0 → excluded to INSTRUCTIONS.md, compile pack, deploy to preview.
+
+### Constraints Applied
+- Lane isolation: all changes within agent-skill lane
+- Ephemeral artifacts: INSTRUCTIONS.md generated per-attempt
+- Evidence over assertion: HTTP 200 verified, diffs provided
+- Agent does NOT update latest/ or claim Champion
+
+### Decision Rules Followed
+- KISS: Fixed tier-to-detail mapping, no smart exceptions
+- Explicit tradeoffs: Non-goals clearly documented
+- Prefer one-shot builds: Clean attempt-002, not steering attempt-001
+
+### Verification Performed
+- Compiled pack with `npm run lane:compile`
+- Verified Tier 0 → excluded present in compiled output
+- Verified HTTP 200 on preview URL
+- Verified latest/ points to v1.3.1 (not v1.4)
+
+### Evidence Produced
+- evidence/compile-output.txt
+- evidence/prd-guide-pack.md
+- evidence/tier-verification.md
+- evidence/http-verification.md
+
+### Confidence Level
+High (0.85) — Work is complete and verified. Human review required for promotion.
 
 ---
 
 ## Seal
 
-[Pending closure]
+This attempt is CLOSED.
+Work is complete. Evidence is collected.
+Agent does NOT update latest/ or promote to Champion.
+Human review required for any promotion decision.
