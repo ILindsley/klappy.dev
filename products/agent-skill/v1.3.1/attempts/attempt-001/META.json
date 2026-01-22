@@ -2,7 +2,7 @@
   "attempt_id": "attempt-001",
   "prd_version": "v1.3.1",
   "lane": "agent-skill",
-  "status": "in_progress",
+  "status": "champion",
   "started": "2026-01-22T00:00:00.000Z",
   "canon_version": "0.10.0",
   "pack": "prd-guide",

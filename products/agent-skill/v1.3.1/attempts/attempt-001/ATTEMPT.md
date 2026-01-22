@@ -4,7 +4,7 @@
 |-------|-------|
 | **Attempt** | attempt-001 |
 | **PRD Version** | v1.3.1 |
-| **Status** | IN_PROGRESS |
+| **Status** | CHAMPION |
 | **Started** | 2026-01-22 |
 | **Canon Version** | 0.10.0 |
 
@@ -65,7 +65,7 @@ This is a **canon refresh** — same INSTRUCTIONS.md content, updated canon sour
 - [x] `public/agent-skill/v1.3.1/prd-guide-pack.md` created
 - [x] `public/agent-skill/latest/prd-guide-pack.md` updated
 - [x] `public/agent-skill/latest/README.md` updated (version reference)
-- [ ] Public URL verified with HTTP 200 (pending deployment)
+- [x] Main preview URL verified with HTTP 200
 
 ### Verification
 - [x] Pack hash different from v1.3 (new canon source added)
@@ -75,8 +75,8 @@ This is a **canon refresh** — same INSTRUCTIONS.md content, updated canon sour
 ### Evidence Required
 - [x] Hash comparison showing v1.3 → v1.3.1 changes
 - [x] Log of successful compile output
-- [ ] HTTP 200 verification of preview URL (pending deployment)
-- [ ] Self-audit completed
+- [x] HTTP 200 verification of preview URL
+- [x] Self-audit completed
 
 ---
 
@@ -100,10 +100,16 @@ Refresh canon sources to v0.10.0, adding terminology.md for constrained vocabula
 - **Explicit tradeoffs**: None — this is additive change only
 
 ### 4. Verification Performed
-_To be completed_
+- Compiled pack with 14 sources
+- Verified terminology.md hash in provenance header
+- Verified INSTRUCTIONS.md hash matches v1.3
+- Verified HTTP 200 on main preview URLs
 
 ### 5. Evidence Produced
-_To be completed_
+- `compile-output.txt` — Source list and compile result
+- `hash-comparison.md` — v1.3 vs v1.3.1 hash comparison
+- `prd-guide-pack.md` — Full compiled pack with provenance
+- `deployment-verification.md` — HTTP 200 verification log
 
 ### 6. UX & Behavior Check
 N/A — No UI changes (text artifact only)
@@ -118,10 +124,29 @@ N/A — No UI changes (text artifact only)
 - Would be understood by someone else
 
 ### 9. Confidence Level
-_To be completed_
+- **Content**: High — Pack includes terminology.md, all sources verified
+- **Compilation**: High — Hashes verified, provenance correct
+- **Deployment**: High — HTTP 200 verified on all main preview URLs
+- **Behavior**: High — INSTRUCTIONS.md unchanged from v1.3 (proven flow)
 
 ---
 
 ## Closure
 
-_To be completed when attempt is finished_
+All Definition of Done criteria met. Status: **CHAMPION**
+
+- Commit: 1b58011
+- Main Preview: https://main.klappy-dev-agent-skill.pages.dev/v1.3.1/prd-guide-pack.md
+- HTTP 200 verified on v1.3.1 and latest URLs
+
+### Production Release (pending)
+
+To deploy to production:
+```bash
+git checkout prod && git merge --ff-only origin/main && git push origin prod
+```
+
+Then verify:
+```bash
+curl -s -o /dev/null -w "%{http_code}" https://agent-skill.klappy.dev/v1.3.1/prd-guide-pack.md
+```

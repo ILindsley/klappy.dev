@@ -12,16 +12,17 @@
 
 ## Deployment Status
 
-**Status**: PENDING — Awaiting PR merge and deployment
+**Status**: VERIFIED — Main branch preview deployed successfully
 
-### Expected URLs (after deployment)
+### Main Branch Preview URLs (verified)
 
-| URL | Expected Status |
-|-----|-----------------|
-| `https://main.klappy-dev-agent-skill.pages.dev/v1.3.1/prd-guide-pack.md` | HTTP 200 |
-| `https://main.klappy-dev-agent-skill.pages.dev/latest/prd-guide-pack.md` | HTTP 200 |
+| URL | Status | Verified |
+|-----|--------|----------|
+| `https://main.klappy-dev-agent-skill.pages.dev/v1.3.1/prd-guide-pack.md` | HTTP 200 | 2026-01-22T01:21:23Z |
+| `https://main.klappy-dev-agent-skill.pages.dev/latest/prd-guide-pack.md` | HTTP 200 | 2026-01-22T01:21:23Z |
+| `https://main.klappy-dev-agent-skill.pages.dev/v1.3.1/README.md` | HTTP 200 | 2026-01-22T01:21:23Z |
 
-### Production URLs (after prod ff)
+### Production URLs (pending prod branch ff)
 
 | URL | Expected Status |
 |-----|-----------------|
@@ -30,15 +31,13 @@
 
 ## Verification Steps
 
-1. [ ] Push changes to branch
-2. [ ] Create PR
-3. [ ] Verify preview URL returns HTTP 200
-4. [ ] Merge to main
-5. [ ] Verify main preview URL returns HTTP 200
-6. [ ] Fast-forward prod to main
-7. [ ] Verify production URL returns HTTP 200
+1. [x] Push changes to main
+2. [x] Verify main preview URL returns HTTP 200
+3. [ ] Fast-forward prod to main
+4. [ ] Verify production URL returns HTTP 200
 
 ## Notes
 
-- Preview URL will be available after PR is created
+- Main preview deployment verified
 - Production URL requires ff of prod branch to main
+- Commit: 1b58011
