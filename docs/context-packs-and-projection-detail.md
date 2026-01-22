@@ -47,6 +47,18 @@ A Tier 1 Canon document (high epistemic obligation) might be projected at:
 
 The tier doesn't change. The projection does.
 
+### Tier 0 Content
+
+Tier 0 is a scope exclusion marker, not an epistemic tier.
+
+Tier 0 content is:
+
+- Never included in default context-packs
+- Excluded from agent reasoning contexts
+- Not subject to projection detail levels
+
+Projection detail (full, medium, low) applies only to Tier 1–3 content. Tier 0 content is simply absent from the epistemic system.
+
 ---
 
 ## Detail Levels Explained
