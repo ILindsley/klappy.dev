@@ -6,7 +6,9 @@ This lane produces compiled packs for AI agent consumption. The primary delivera
 
 **v1.3.1** — Canon Refresh (adds terminology.md, canon v0.10.0)
 
-> **v1.4 FAILED** — Compiler infrastructure does not implement tier enforcement. PRD requires revision.
+> **v1.4.1 CLOSED — NOT PROMOTED** — Tier-aware compiler implemented and all ACs pass, but token efficiency analysis revealed 20-50% waste. See `v1.4.1/attempts/attempt-002/LEARNINGS.md`.
+>
+> **v1.4.2 DRAFT** — Token-efficient pack compilation. Addresses waste identified in v1.4.1.
 
 **Public URL**: `https://main.klappy-dev-agent-skill.pages.dev/latest/prd-guide-pack.md`
 
@@ -44,8 +46,10 @@ See the [usage README](https://main.klappy-dev-agent-skill.pages.dev/latest/READ
 | [v1.2.3/](v1.2.3/) | Champion | Canon refresh v0.5.4 + ODD compliance |
 | [v1.2.4/](v1.2.4/) | Superseded | Canon refresh v0.8.0 (path fixes + new content) |
 | [v1.3/](v1.3/) | Superseded | PRD Elicitation Enhancement (interview mechanics, stage typing) |
-| [v1.3.1/](v1.3.1/) | Superseded | Canon Refresh (adds terminology.md, canon v0.10.0) |
+| [v1.3.1/](v1.3.1/) | Champion | Canon Refresh (adds terminology.md, canon v0.10.0) |
 | [v1.4/](v1.4/) | FAILED (001, 002) | Tiered Context Construction — compiler does not implement tiers |
+| [v1.4.1/](v1.4.1/) | Closed (Not Promoted) | Tier-Aware Pack Compiler — works but 20-50% token waste |
+| [v1.4.2/](v1.4.2/) | **Draft** | Token-Efficient Pack Compilation — addresses v1.4.1 waste |
 
 ## Structure
 
@@ -78,10 +82,15 @@ products/agent-skill/
 │   └── PRD.md             # Canon refresh v0.8.0 (path fixes)
 ├── v1.3/                  # Version 1.3 (superseded)
 │   └── PRD.md             # PRD Elicitation Enhancement
-├── v1.3.1/                # Version 1.3.1 (superseded)
+├── v1.3.1/                # Version 1.3.1 (champion)
 │   └── PRD.md             # Canon refresh v0.10.0 (terminology.md)
-└── v1.4/                  # Version 1.4 (closed, awaiting human review)
-    └── PRD.md             # Tiered Context Construction
+├── v1.4/                  # Version 1.4 (failed)
+│   └── PRD.md             # Tiered Context Construction (compiler doesn't implement)
+├── v1.4.1/                # Version 1.4.1 (closed, not promoted)
+│   ├── PRD.md             # Tier-Aware Pack Compiler
+│   └── attempts/          # attempt-001 (failed), attempt-002 (closed, not promoted)
+└── v1.4.2/                # Version 1.4.2 (draft)
+    └── PRD.md             # Token-Efficient Pack Compilation
 ```
 
 ## Build
