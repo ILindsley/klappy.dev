@@ -3,7 +3,7 @@ uri: klappy://docs/decisions
 title: "Implementation Decision Log"
 audience: docs
 exposure: nav
-tier: 1
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["docs", "decisions", "adr", "implementation", "reference", "index"]

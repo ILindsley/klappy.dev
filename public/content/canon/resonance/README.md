@@ -3,7 +3,7 @@ uri: klappy://canon/resonance
 title: "Resonance Index"
 audience: canon
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["resonance", "index", "principles", "divergence"]

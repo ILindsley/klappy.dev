@@ -3,7 +3,7 @@ uri: klappy://docs/appendices/repo-topology
 title: "Repository Topology"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: semi_stable
 tags: ["odd", "topology", "structure", "decoupling"]

@@ -3,7 +3,7 @@ uri: klappy://docs/appendices/product-lanes
 title: "Product Lanes in Outcome-Driven Development"
 audience: docs
 exposure: hidden
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["odd", "prd", "architecture", "lanes", "orientation"]

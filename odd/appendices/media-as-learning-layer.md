@@ -3,7 +3,7 @@ uri: klappy://odd/media-as-learning-layer
 title: "Media as a Learning Layer"
 audience: canon
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["odd", "media", "learning", "progressive-disclosure", "website"]

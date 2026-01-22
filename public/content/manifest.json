@@ -16,7 +16,7 @@
       "type": "text/markdown",
       "audience": "public",
       "exposure": "nav",
-      "tier": 1,
+      "tier": 0,
       "voice": "neutral",
       "stability": "semi_stable",
       "tags": [
@@ -32,7 +32,7 @@
       "type": "text/markdown",
       "audience": "public",
       "exposure": "nav",
-      "tier": 2,
+      "tier": 3,
       "voice": "neutral",
       "stability": "evolving",
       "tags": [
@@ -48,7 +48,7 @@
       "type": "text/markdown",
       "audience": "public",
       "exposure": "nav",
-      "tier": 2,
+      "tier": 3,
       "voice": "neutral",
       "stability": "evolving",
       "tags": [
@@ -83,7 +83,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
-      "tier": 2,
+      "tier": 3,
       "voice": "neutral",
       "stability": "stable",
       "tags": [
@@ -101,7 +101,7 @@
       "type": "text/markdown",
       "audience": "public",
       "exposure": "nav",
-      "tier": 1,
+      "tier": 0,
       "voice": "first_person",
       "stability": "semi_stable",
       "tags": [
@@ -116,7 +116,7 @@
       "type": "text/markdown",
       "audience": "internal",
       "exposure": "internal",
-      "tier": 2,
+      "tier": 3,
       "voice": "neutral",
       "stability": "frozen",
       "tags": [
@@ -149,7 +149,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "hidden",
-      "tier": 2,
+      "tier": 3,
       "voice": "neutral",
       "stability": "stable",
       "tags": [
@@ -164,7 +164,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
-      "tier": 2,
+      "tier": 3,
       "voice": "neutral",
       "stability": "semi_stable",
       "tags": [
@@ -197,7 +197,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
-      "tier": 2,
+      "tier": 3,
       "voice": "neutral",
       "stability": "evolving",
       "tags": [
@@ -214,7 +214,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
-      "tier": 2,
+      "tier": 3,
       "voice": "first_person",
       "stability": "evolving",
       "tags": [
@@ -244,7 +244,7 @@
       "type": "text/markdown",
       "audience": "public",
       "exposure": "nav",
-      "tier": 1,
+      "tier": 0,
       "voice": "neutral",
       "stability": "semi_stable",
       "tags": [
@@ -341,7 +341,7 @@
       "type": "text/markdown",
       "audience": "public",
       "exposure": "nav",
-      "tier": 2,
+      "tier": 0,
       "voice": "neutral",
       "stability": "evolving",
       "tags": [
@@ -377,7 +377,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
-      "tier": 2,
+      "tier": 3,
       "voice": "neutral",
       "stability": "stable",
       "tags": [
@@ -413,7 +413,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
-      "tier": 2,
+      "tier": 3,
       "voice": "neutral",
       "stability": "semi_stable",
       "tags": [
@@ -429,7 +429,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
-      "tier": 2,
+      "tier": 3,
       "voice": "neutral",
       "stability": "evolving",
       "tags": [
@@ -446,7 +446,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "hidden",
-      "tier": 2,
+      "tier": 3,
       "voice": "neutral",
       "stability": "stable",
       "tags": [
@@ -462,7 +462,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "hidden",
-      "tier": 2,
+      "tier": 3,
       "voice": "neutral",
       "stability": "stable",
       "tags": [
@@ -477,7 +477,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
-      "tier": 1,
+      "tier": 3,
       "voice": "neutral",
       "stability": "stable",
       "tags": [
@@ -564,7 +564,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
-      "tier": 2,
+      "tier": 3,
       "voice": "neutral",
       "stability": "stable",
       "tags": [
@@ -661,7 +661,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
-      "tier": 2,
+      "tier": 3,
       "voice": "neutral",
       "stability": "semi_stable",
       "tags": [
@@ -679,7 +679,7 @@
       "type": "text/markdown",
       "audience": "public",
       "exposure": "nav",
-      "tier": 2,
+      "tier": 3,
       "voice": "neutral",
       "stability": "evolving",
       "tags": [
@@ -694,7 +694,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
-      "tier": 2,
+      "tier": 3,
       "voice": "neutral",
       "stability": "stable",
       "tags": [
@@ -711,7 +711,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "hidden",
-      "tier": 2,
+      "tier": 3,
       "voice": "neutral",
       "stability": "stable",
       "tags": [
@@ -741,7 +741,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
-      "tier": 2,
+      "tier": 3,
       "voice": "neutral",
       "stability": "stable",
       "tags": [
@@ -759,7 +759,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
-      "tier": 2,
+      "tier": 3,
       "voice": "neutral",
       "stability": "stable",
       "tags": [
@@ -794,7 +794,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
-      "tier": 2,
+      "tier": 3,
       "voice": "neutral",
       "stability": "evolving",
       "tags": [
@@ -811,7 +811,7 @@
       "type": "text/markdown",
       "audience": "canon",
       "exposure": "nav",
-      "tier": 2,
+      "tier": 3,
       "voice": "neutral",
       "stability": "semi_stable",
       "tags": [

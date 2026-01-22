@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-22T02:56:07.119Z
+Generated: 2026-01-22T03:11:22.850Z
 Total Files: 162
 
 This is a documentation export of all markdown files from the klappy.dev
@@ -186,7 +186,7 @@ uri: klappy://about
 title: "About"
 audience: public
 exposure: nav
-tier: 1
+tier: 0
 voice: neutral
 stability: semi_stable
 tags: ["about", "author", "index"]
@@ -251,7 +251,7 @@ uri: klappy://about/bio
 title: "Bio"
 audience: public
 exposure: nav
-tier: 1
+tier: 0
 voice: first_person
 stability: semi_stable
 tags: ["about", "bio"]
@@ -280,7 +280,7 @@ uri: klappy://about/credibility
 title: "Credibility"
 audience: public
 exposure: nav
-tier: 1
+tier: 0
 voice: neutral
 stability: semi_stable
 tags: ["about", "credibility", "trust"]
@@ -320,7 +320,7 @@ uri: klappy://about/faq
 title: "FAQ"
 audience: public
 exposure: nav
-tier: 2
+tier: 0
 voice: neutral
 stability: evolving
 tags: ["about", "faq"]
@@ -1390,7 +1390,7 @@ uri: klappy://docs/attempt-record-pack
 title: "Attempt Record Packs"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["docs", "implementation", "attempts", "records", "evidence"]
@@ -1606,7 +1606,7 @@ uri: klappy://docs/distillation-classification
 title: "Canon Distillation Classification"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["docs", "implementation", "distillation", "classification", "archive"]
@@ -1817,7 +1817,7 @@ uri: klappy://docs/prd/template
 title: "PRD Template"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["docs", "prd", "template"]
@@ -2099,7 +2099,7 @@ uri: klappy://docs/prd/website/legacy-v0.3
 title: "Website PRD (Legacy v0.3)"
 audience: docs
 exposure: hidden
-tier: 2
+tier: 3
 voice: neutral
 stability: deprecated
 status: deprecated
@@ -2716,7 +2716,7 @@ uri: klappy://docs/preview
 title: "Previewing Lanes and Attempts"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["docs", "implementation", "preview", "cloudflare", "local"]
@@ -2983,7 +2983,7 @@ uri: klappy://docs/template
 title: "Article Template"
 audience: docs
 exposure: hidden
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["template", "article"]
@@ -3179,7 +3179,7 @@ uri: klappy://docs/template-readme
 title: "README Index Template"
 audience: docs
 exposure: hidden
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["template", "readme", "index"]
@@ -3606,7 +3606,7 @@ uri: klappy://docs/agent-architecture/sub-agents
 title: "Sub-Agents"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["agents", "tools", "mcp", "implementation"]
@@ -3704,7 +3704,7 @@ uri: klappy://docs/appendices
 title: "Implementation Appendices"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["docs", "appendices", "implementation", "reference", "index"]
@@ -4364,7 +4364,7 @@ uri: klappy://docs/appendices/canonical-compression
 title: Canonical Compression
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["odd", "compression", "compiled", "epochs", "drift"]
@@ -4576,7 +4576,7 @@ uri: klappy://docs/appendices/compilation-targets
 title: "Compilation Targets"
 audience: docs
 exposure: public
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["odd", "compilation", "memory", "portability", "packs", "lanes"]
@@ -4679,7 +4679,7 @@ uri: klappy://docs/appendices/compilation
 title: Compilation
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["odd", "compilation", "memory", "context", "packs"]
@@ -4853,7 +4853,7 @@ uri: klappy://docs/appendices/compiled-memory
 title: "Compiled Memory"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["odd", "compiled", "memory", "drift"]
@@ -5086,7 +5086,7 @@ uri: klappy://docs/appendices/drift-checks
 title: "Drift Checks"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["odd", "drift", "verification", "contracts"]
@@ -5385,7 +5385,7 @@ uri: klappy://docs/appendices/evidence
 title: "Evidence"
 audience: docs
 exposure: nav
-tier: 1
+tier: 2
 voice: first_person
 stability: stable
 tags: ["evidence", "verification"]
@@ -5471,7 +5471,7 @@ uri: klappy://docs/appendices/lane-build-layout
 title: "Lane Build Layout"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["odd", "lanes", "build", "layout", "deploy"]
@@ -5569,7 +5569,7 @@ uri: klappy://docs/appendices/lane-implementation-surfaces
 title: "Lane-Scoped Implementation Surfaces"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["odd", "lanes", "deployment", "contract", "build"]
@@ -5708,7 +5708,7 @@ uri: klappy://docs/appendices/memory-architecture
 title: "Memory Architecture"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["odd", "memory", "elevation", "portability"]
@@ -6053,7 +6053,7 @@ uri: klappy://docs/appendices/product-lanes
 title: "Product Lanes in Outcome-Driven Development"
 audience: docs
 exposure: hidden
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["odd", "prd", "architecture", "lanes", "orientation"]
@@ -6334,7 +6334,7 @@ uri: klappy://docs/appendices/repo-topology
 title: "Repository Topology"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: semi_stable
 tags: ["odd", "topology", "structure", "decoupling"]
@@ -6567,7 +6567,7 @@ uri: klappy://docs/appendices/repo-truth-audit
 title: "Repo Truth Audit (Epistemic Audit)"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: semi_stable
 tags: ["odd", "repo-truth", "epistemic", "audit", "drift"]
@@ -6711,7 +6711,7 @@ uri: klappy://docs/appendices/repo-truth
 title: "Repository Truth & Epistemic Hygiene"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["odd", "epistemic", "hygiene", "truth", "cleanup"]
@@ -8324,7 +8324,7 @@ uri: klappy://docs/decisions/D0012
 title: "D0012: E0002 Transition Interpretation (Truth vs Enforcement Lag)"
 audience: docs
 exposure: internal
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["odd", "decisions", "epochs", "lanes", "drift", "interfaces", "tooling"]
@@ -8610,7 +8610,7 @@ uri: klappy://docs/decisions
 title: "Implementation Decision Log"
 audience: docs
 exposure: nav
-tier: 1
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["docs", "decisions", "adr", "implementation", "reference", "index"]
@@ -8749,7 +8749,7 @@ uri: klappy://docs/decisions/template
 title: "Decision Template"
 audience: docs
 exposure: hidden
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["template", "decision", "adr"]
@@ -9009,7 +9009,7 @@ uri: klappy://meta/changelog
 title: "Canon Changelog"
 audience: canon
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: semi_stable
 tags: ["meta", "changelog", "versioning"]
@@ -9021,6 +9021,48 @@ This changelog tracks changes to the **Canon pack** as a whole.
 
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
+
+## 0.12.0 — 2026-01-22
+
+**Tier Reclassification — Epistemic Obligation Applied**
+
+This release applies the epistemic obligation model to all documentation files, introducing Tier 3 for reference-only content and properly scoping Tier 0 for public-facing content outside the epistemic system.
+
+### Changed
+
+- **47 files reclassified** based on epistemic obligation analysis:
+  - 40 files: Tier 2 → Tier 3 (templates, indexes, resonance, historical artifacts)
+  - 2 files: Tier 1 → Tier 3 (decision/appendix index READMEs)
+  - 1 file: Tier 1 → Tier 2 (`docs/appendices/evidence.md`)
+  - 4 files: Tier 1/2 → Tier 0 (`about/` content now scoped outside epistemic system)
+
+### Distribution After Reclassification
+
+| Tier | Count | Role |
+|------|-------|------|
+| Tier 0 | 8 | Scope exclusion (public-facing) |
+| Tier 1 | 20 | Foundational obligation |
+| Tier 2 | 37 | Shared obligation |
+| Tier 3 | 52 | Reference only |
+
+### Philosophy
+
+- **Tier 3 now exists** — Low-obligation content no longer artificially elevated to Tier 2
+- **Tier 0 properly scopes public content** — About pages excluded from epistemic system
+- **Index READMEs demoted** — Wayfinding pages carry no internalization obligation
+- **Templates demoted** — Reference material for authoring, not required reading
+- **Resonance demoted** — Explicitly not required to understand ODD (per README)
+- **Core READMEs preserved** — `odd/README.md`, `canon/README.md`, `docs/README.md` unchanged pending README vs Index distinction formalization
+
+### Invariants Held
+
+- Tier ≠ folder
+- Tier ≠ filename
+- Tier = epistemic obligation
+- Tier 0 is scope exclusion, not demotion
+- Foundational orientation preserved at Tier 1
+
+---
 
 ## 0.11.0 — 2026-01-22
 
@@ -10240,7 +10282,7 @@ uri: klappy://canon/template
 title: "Canon Article Template"
 audience: canon
 exposure: hidden
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["canon", "template"]
@@ -10426,7 +10468,7 @@ uri: klappy://canon/compiled/epoch-e0002-readme
 title: "Compiled Canon Outputs (Epoch E0002)"
 audience: canon
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["canon", "compiled", "epoch", "e0002"]
@@ -10454,7 +10496,7 @@ uri: klappy://canon/completion-report-template
 title: "Completion Report Template"
 audience: canon
 exposure: nav
-tier: 2
+tier: 3
 voice: first_person
 stability: evolving
 tags: ["completion-report", "template"]
@@ -11740,7 +11782,7 @@ uri: klappy://canon/odd/tool-specialization
 title: "Tool Specialization"
 audience: canon
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["odd", "pattern", "tools", "decision-complexity"]
@@ -11834,7 +11876,7 @@ uri: klappy://canon/resonance
 title: "Resonance Index"
 audience: canon
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["resonance", "index", "principles", "divergence"]
@@ -11952,7 +11994,7 @@ uri: klappy://canon/resonance/template
 title: "Resonance Page Template"
 audience: canon
 exposure: hidden
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["resonance", "template"]
@@ -12117,7 +12159,7 @@ If all three are yes, the resonance page belongs.
 uri: klappy://canon/resonance/antifragile
 title: "Antifragile"
 audience: canon
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["resonance", "antifragile", "antifragility", "failure", "optionality"]
@@ -12197,7 +12239,7 @@ ODD treats antifragility as insufficient on its own. Stress must be captured, in
 uri: klappy://canon/resonance/lean-startup
 title: "The Lean Startup"
 audience: canon
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["resonance", "lean-startup", "feedback", "learning", "iteration"]
@@ -12281,7 +12323,7 @@ ODD absorbs Lean Startup's speed while rejecting its tolerance for epistemic amn
 uri: klappy://canon/resonance/ooda-loop
 title: "OODA Loop"
 audience: canon
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["resonance", "ooda-loop", "orientation", "decision-making", "feedback"]
@@ -12360,7 +12402,7 @@ ODD treats orientation as cumulative capital. By externalizing it into artifacts
 uri: klappy://canon/resonance/sprint
 title: "Sprint"
 audience: canon
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["resonance", "sprint", "convergence", "constraints", "decision-making"]
@@ -13019,7 +13061,7 @@ uri: klappy://odd/template
 title: "ODD Article Template"
 audience: canon
 exposure: hidden
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["odd", "template"]
@@ -13197,7 +13239,7 @@ uri: klappy://odd/appendices
 title: "ODD Appendices (Portable)"
 audience: canon
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["odd", "appendices", "index", "portable"]
@@ -13269,7 +13311,7 @@ uri: klappy://odd/appendices/template
 title: "ODD Appendix Template"
 audience: canon
 exposure: hidden
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["odd", "appendices", "template"]
@@ -13852,7 +13894,7 @@ uri: klappy://odd/media-as-learning-layer
 title: "Media as a Learning Layer"
 audience: canon
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["odd", "media", "learning", "progressive-disclosure", "website"]
@@ -14174,7 +14216,7 @@ uri: klappy://odd/quantum-development
 title: "Quantum Development"
 audience: canon
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: semi_stable
 tags: ["odd", "quantum", "attempts", "uncertainty", "orientation"]
@@ -14420,7 +14462,7 @@ uri: klappy://odd/visual-evolution
 title: "Visual Evolution"
 audience: canon
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: semi_stable
 tags: ["odd", "visual", "evolution", "interfaces"]
@@ -15050,7 +15092,7 @@ uri: klappy://odd/decisions
 title: "ODD Conceptual Decisions"
 audience: canon
 exposure: nav
-tier: 1
+tier: 3
 voice: neutral
 stability: stable
 tags: ["odd", "decisions", "conceptual", "philosophy"]
@@ -16088,7 +16130,7 @@ uri: klappy://odd/orientation-map
 title: "ODD + Canon + Evidence — Orientation Map"
 audience: canon
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: semi_stable
 tags: ["odd", "orientation", "mental-model"]
@@ -16659,7 +16701,7 @@ uri: klappy://projects/adding-a-project
 title: "Adding a Project"
 audience: public
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["projects", "contributing", "guide"]
@@ -16876,7 +16918,7 @@ uri: klappy://projects/agentic-memory-portability
 title: "Agentic Memory Portability"
 audience: public
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["projects", "agents", "memory", "odd"]
@@ -16993,7 +17035,7 @@ uri: klappy://projects/repo-as-a-system/build-prompt-phase1
 title: "Build Prompt — Phase 1"
 audience: internal
 exposure: internal
-tier: 2
+tier: 3
 voice: neutral
 stability: frozen
 tags: ["projects", "repo-as-a-system", "build-prompt", "internal"]
@@ -17125,7 +17167,7 @@ uri: klappy://projects/repo-as-a-system
 title: "Repo-as-a-System"
 audience: public
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["projects", "repo-as-a-system"]
@@ -17762,7 +17804,7 @@ uri: klappy://visual
 title: "Visual Design System"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["visual", "design", "interfaces", "index"]
@@ -18287,7 +18329,7 @@ uri: klappy://infra
 title: "Infrastructure"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["infra", "scripts", "tooling", "index"]
@@ -18491,7 +18533,7 @@ uri: klappy://infra/prompts
 title: "Prompts"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["infra", "prompts", "agents", "index"]
@@ -21962,7 +22004,7 @@ uri: klappy://products/ai-navigation
 title: "AI Navigation Lane"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["products", "ai-navigation", "lane", "index", "planned"]
@@ -22322,7 +22364,7 @@ uri: klappy://products/website
 title: "Website Lane"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["products", "website", "lane", "index"]

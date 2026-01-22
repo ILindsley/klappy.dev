@@ -3,7 +3,7 @@ uri: klappy://products/ai-navigation
 title: "AI Navigation Lane"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["products", "ai-navigation", "lane", "index", "planned"]

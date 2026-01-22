@@ -3,7 +3,7 @@ uri: klappy://odd/visual-evolution
 title: "Visual Evolution"
 audience: canon
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: semi_stable
 tags: ["odd", "visual", "evolution", "interfaces"]

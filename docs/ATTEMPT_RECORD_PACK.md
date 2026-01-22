@@ -3,7 +3,7 @@ uri: klappy://docs/attempt-record-pack
 title: "Attempt Record Packs"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["docs", "implementation", "attempts", "records", "evidence"]

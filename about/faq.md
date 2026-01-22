@@ -3,7 +3,7 @@ uri: klappy://about/faq
 title: "FAQ"
 audience: public
 exposure: nav
-tier: 2
+tier: 0
 voice: neutral
 stability: evolving
 tags: ["about", "faq"]

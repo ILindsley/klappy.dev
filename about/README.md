@@ -3,7 +3,7 @@ uri: klappy://about
 title: "About"
 audience: public
 exposure: nav
-tier: 1
+tier: 0
 voice: neutral
 stability: semi_stable
 tags: ["about", "author", "index"]

@@ -2,7 +2,7 @@
 uri: klappy://canon/resonance/ooda-loop
 title: "OODA Loop"
 audience: canon
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["resonance", "ooda-loop", "orientation", "decision-making", "feedback"]

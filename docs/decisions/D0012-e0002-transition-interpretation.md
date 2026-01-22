@@ -3,7 +3,7 @@ uri: klappy://docs/decisions/D0012
 title: "D0012: E0002 Transition Interpretation (Truth vs Enforcement Lag)"
 audience: docs
 exposure: internal
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["odd", "decisions", "epochs", "lanes", "drift", "interfaces", "tooling"]

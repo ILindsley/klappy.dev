@@ -3,7 +3,7 @@ uri: klappy://about/bio
 title: "Bio"
 audience: public
 exposure: nav
-tier: 1
+tier: 0
 voice: first_person
 stability: semi_stable
 tags: ["about", "bio"]

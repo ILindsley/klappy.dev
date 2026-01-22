@@ -3,7 +3,7 @@ uri: klappy://odd/appendices
 title: "ODD Appendices (Portable)"
 audience: canon
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["odd", "appendices", "index", "portable"]

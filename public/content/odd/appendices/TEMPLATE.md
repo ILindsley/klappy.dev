@@ -3,7 +3,7 @@ uri: klappy://odd/appendices/template
 title: "ODD Appendix Template"
 audience: canon
 exposure: hidden
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["odd", "appendices", "template"]

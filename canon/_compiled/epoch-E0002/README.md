@@ -3,7 +3,7 @@ uri: klappy://canon/compiled/epoch-e0002-readme
 title: "Compiled Canon Outputs (Epoch E0002)"
 audience: canon
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["canon", "compiled", "epoch", "e0002"]

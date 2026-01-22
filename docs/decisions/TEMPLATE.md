@@ -3,7 +3,7 @@ uri: klappy://docs/decisions/template
 title: "Decision Template"
 audience: docs
 exposure: hidden
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["template", "decision", "adr"]

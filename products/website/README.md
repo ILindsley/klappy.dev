@@ -3,7 +3,7 @@ uri: klappy://products/website
 title: "Website Lane"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["products", "website", "lane", "index"]

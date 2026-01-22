@@ -3,7 +3,7 @@ uri: klappy://docs/appendices/compilation-targets
 title: "Compilation Targets"
 audience: docs
 exposure: public
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["odd", "compilation", "memory", "portability", "packs", "lanes"]

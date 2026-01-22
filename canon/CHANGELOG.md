@@ -3,7 +3,7 @@ uri: klappy://meta/changelog
 title: "Canon Changelog"
 audience: canon
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: semi_stable
 tags: ["meta", "changelog", "versioning"]
@@ -15,6 +15,48 @@ This changelog tracks changes to the **Canon pack** as a whole.
 
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
+
+## 0.12.0 — 2026-01-22
+
+**Tier Reclassification — Epistemic Obligation Applied**
+
+This release applies the epistemic obligation model to all documentation files, introducing Tier 3 for reference-only content and properly scoping Tier 0 for public-facing content outside the epistemic system.
+
+### Changed
+
+- **47 files reclassified** based on epistemic obligation analysis:
+  - 40 files: Tier 2 → Tier 3 (templates, indexes, resonance, historical artifacts)
+  - 2 files: Tier 1 → Tier 3 (decision/appendix index READMEs)
+  - 1 file: Tier 1 → Tier 2 (`docs/appendices/evidence.md`)
+  - 4 files: Tier 1/2 → Tier 0 (`about/` content now scoped outside epistemic system)
+
+### Distribution After Reclassification
+
+| Tier | Count | Role |
+|------|-------|------|
+| Tier 0 | 8 | Scope exclusion (public-facing) |
+| Tier 1 | 20 | Foundational obligation |
+| Tier 2 | 37 | Shared obligation |
+| Tier 3 | 52 | Reference only |
+
+### Philosophy
+
+- **Tier 3 now exists** — Low-obligation content no longer artificially elevated to Tier 2
+- **Tier 0 properly scopes public content** — About pages excluded from epistemic system
+- **Index READMEs demoted** — Wayfinding pages carry no internalization obligation
+- **Templates demoted** — Reference material for authoring, not required reading
+- **Resonance demoted** — Explicitly not required to understand ODD (per README)
+- **Core READMEs preserved** — `odd/README.md`, `canon/README.md`, `docs/README.md` unchanged pending README vs Index distinction formalization
+
+### Invariants Held
+
+- Tier ≠ folder
+- Tier ≠ filename
+- Tier = epistemic obligation
+- Tier 0 is scope exclusion, not demotion
+- Foundational orientation preserved at Tier 1
+
+---
 
 ## 0.11.0 — 2026-01-22
 

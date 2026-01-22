@@ -3,7 +3,7 @@ uri: klappy://docs/appendices/drift-checks
 title: "Drift Checks"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["odd", "drift", "verification", "contracts"]

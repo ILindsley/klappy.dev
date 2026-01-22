@@ -3,7 +3,7 @@ uri: klappy://projects/repo-as-a-system/build-prompt-phase1
 title: "Build Prompt — Phase 1"
 audience: internal
 exposure: internal
-tier: 2
+tier: 3
 voice: neutral
 stability: frozen
 tags: ["projects", "repo-as-a-system", "build-prompt", "internal"]

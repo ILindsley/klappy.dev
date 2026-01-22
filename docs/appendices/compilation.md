@@ -3,7 +3,7 @@ uri: klappy://docs/appendices/compilation
 title: Compilation
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["odd", "compilation", "memory", "context", "packs"]

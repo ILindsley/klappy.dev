@@ -3,7 +3,7 @@ uri: klappy://canon/completion-report-template
 title: "Completion Report Template"
 audience: canon
 exposure: nav
-tier: 2
+tier: 3
 voice: first_person
 stability: evolving
 tags: ["completion-report", "template"]

@@ -3,7 +3,7 @@ uri: klappy://docs/agent-architecture/sub-agents
 title: "Sub-Agents"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["agents", "tools", "mcp", "implementation"]

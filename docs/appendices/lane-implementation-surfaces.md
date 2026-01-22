@@ -3,7 +3,7 @@ uri: klappy://docs/appendices/lane-implementation-surfaces
 title: "Lane-Scoped Implementation Surfaces"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["odd", "lanes", "deployment", "contract", "build"]

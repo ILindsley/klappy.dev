@@ -3,7 +3,7 @@ uri: klappy://odd/quantum-development
 title: "Quantum Development"
 audience: canon
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: semi_stable
 tags: ["odd", "quantum", "attempts", "uncertainty", "orientation"]

@@ -3,7 +3,7 @@ uri: klappy://infra/prompts
 title: "Prompts"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["infra", "prompts", "agents", "index"]

@@ -3,7 +3,7 @@ uri: klappy://docs/appendices/lane-build-layout
 title: "Lane Build Layout"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["odd", "lanes", "build", "layout", "deploy"]

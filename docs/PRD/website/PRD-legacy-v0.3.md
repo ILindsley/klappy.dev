@@ -3,7 +3,7 @@ uri: klappy://docs/prd/website/legacy-v0.3
 title: "Website PRD (Legacy v0.3)"
 audience: docs
 exposure: hidden
-tier: 2
+tier: 3
 voice: neutral
 stability: deprecated
 status: deprecated

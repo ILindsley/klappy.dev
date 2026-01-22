@@ -3,7 +3,7 @@ uri: klappy://canon/resonance/template
 title: "Resonance Page Template"
 audience: canon
 exposure: hidden
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["resonance", "template"]

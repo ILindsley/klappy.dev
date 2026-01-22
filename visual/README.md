@@ -3,7 +3,7 @@ uri: klappy://visual
 title: "Visual Design System"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: evolving
 tags: ["visual", "design", "interfaces", "index"]

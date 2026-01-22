@@ -2,7 +2,7 @@
 uri: klappy://canon/resonance/lean-startup
 title: "The Lean Startup"
 audience: canon
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["resonance", "lean-startup", "feedback", "learning", "iteration"]

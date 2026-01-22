@@ -2,7 +2,7 @@
 uri: klappy://canon/resonance/antifragile
 title: "Antifragile"
 audience: canon
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["resonance", "antifragile", "antifragility", "failure", "optionality"]

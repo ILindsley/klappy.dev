@@ -3,7 +3,7 @@ uri: klappy://odd/orientation-map
 title: "ODD + Canon + Evidence — Orientation Map"
 audience: canon
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: semi_stable
 tags: ["odd", "orientation", "mental-model"]

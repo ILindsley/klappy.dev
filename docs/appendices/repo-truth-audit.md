@@ -3,7 +3,7 @@ uri: klappy://docs/appendices/repo-truth-audit
 title: "Repo Truth Audit (Epistemic Audit)"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: semi_stable
 tags: ["odd", "repo-truth", "epistemic", "audit", "drift"]

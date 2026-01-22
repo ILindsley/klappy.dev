@@ -3,7 +3,7 @@ uri: klappy://canon/template
 title: "Canon Article Template"
 audience: canon
 exposure: hidden
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["canon", "template"]

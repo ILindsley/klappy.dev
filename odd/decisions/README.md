@@ -3,7 +3,7 @@ uri: klappy://odd/decisions
 title: "ODD Conceptual Decisions"
 audience: canon
 exposure: nav
-tier: 1
+tier: 3
 voice: neutral
 stability: stable
 tags: ["odd", "decisions", "conceptual", "philosophy"]

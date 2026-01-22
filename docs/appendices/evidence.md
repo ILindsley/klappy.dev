@@ -3,7 +3,7 @@ uri: klappy://docs/appendices/evidence
 title: "Evidence"
 audience: docs
 exposure: nav
-tier: 1
+tier: 2
 voice: first_person
 stability: stable
 tags: ["evidence", "verification"]

@@ -3,7 +3,7 @@ uri: klappy://docs/appendices/canonical-compression
 title: Canonical Compression
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["odd", "compression", "compiled", "epochs", "drift"]

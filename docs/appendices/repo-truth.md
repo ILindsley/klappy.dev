@@ -3,7 +3,7 @@ uri: klappy://docs/appendices/repo-truth
 title: "Repository Truth & Epistemic Hygiene"
 audience: docs
 exposure: nav
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["odd", "epistemic", "hygiene", "truth", "cleanup"]

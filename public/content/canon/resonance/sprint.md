@@ -2,7 +2,7 @@
 uri: klappy://canon/resonance/sprint
 title: "Sprint"
 audience: canon
-tier: 2
+tier: 3
 voice: neutral
 stability: stable
 tags: ["resonance", "sprint", "convergence", "constraints", "decision-making"]
