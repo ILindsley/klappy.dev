@@ -1,9 +1,9 @@
 {
   "lane": "agent-skill",
   "pack": "prd-guide",
-  "mode": "concat",
+  "mode": "curated",
   "canon_version": "0.11.0",
-  "output": "products/agent-skill/dist/prd-guide-pack.md",
+  "output": "public/agent-skill/v1.4.1/prd-guide-pack.md",
   "sources": [
     "canon/README.md",
     "canon/epistemic-obligation-and-document-tiers.md",
@@ -19,9 +19,10 @@
     "canon/definition-of-done.md",
     "canon/self-audit.md",
     "docs/PRD/PRD_TEMPLATE.md",
-    "products/agent-skill/v1.4/attempts/attempt-002/INSTRUCTIONS.md"
+    "products/agent-skill/v1.4.1/attempts/attempt-001/INSTRUCTIONS.md"
   ],
   "notes": {
-    "instructions_md": "INSTRUCTIONS.md is generated per-attempt (ephemeral). Path points to current attempt during compilation."
+    "instructions_md": "INSTRUCTIONS.md is generated per-attempt (ephemeral). Path points to v1.4.1 attempt-001.",
+    "tier_enforcement": "v1.4.1 compiler enforces tier rules. Tier 0 files (e.g., odd/README.md) will be excluded even if listed."
   }
 }

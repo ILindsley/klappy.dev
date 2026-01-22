@@ -2,33 +2,47 @@
 
 This folder contains the current champion version of the ODD PRD Guide pack.
 
-**Current champion**: v1.3.1
+**Current champion**: v1.4.1
 
 ## Contents
 
 - [`prd-guide-pack.md`](./prd-guide-pack.md) — The compiled pack (~17K tokens)
 
-## What's New in v1.3.1
+## What's New in v1.4.1
 
-Canon refresh from v0.8.0 to v0.10.0:
+**Tier-Aware Pack Compiler** — The compiler now enforces epistemic obligation in code.
 
-- **Added `odd/terminology.md`** — Constrained vocabulary and disambiguation for ODD terms
-- All other content unchanged from v1.3
+### Key Changes
 
-### Key Terms Added
+| Feature | Description |
+|---------|-------------|
+| **Tier Metadata Parsing** | Compiler reads `tier: 0\|1\|2\|3` from frontmatter |
+| **Tier 0 Exclusion** | Tier 0 files are never included (hard rule) |
+| **Tier-Based Projection** | Tier 1→high, Tier 2→medium, Tier 3→low |
+| **Discovery Mode** | Automatic file selection for default packs |
+| **Auditability** | `--plan` flag outputs per-file decisions |
 
-| Term | ODD Meaning |
-|------|-------------|
-| Outcome | A verifiable state of reality that can be demonstrated |
-| Evidence | Observable proof that an outcome occurred |
-| Artifact | A byproduct of work — ephemeral by default |
+### Tier System
+
+| Tier | Epistemic Obligation | Projection |
+|------|---------------------|------------|
+| **Tier 0** | Scope exclusion | Excluded |
+| **Tier 1** | Foundational — must absorb | Full content |
+| **Tier 2** | Shared — should respect | Frontmatter + outline |
+| **Tier 3** | Awareness — may reference | Title + summary |
+
+### What This Means
+
+- Documents are now included at detail levels matching their epistemic importance
+- Tier 0 files (scope exclusions) are never included, even if explicitly listed
+- The pack teaches agents about tier-aware context construction
 
 ## Usage
 
 Copy the pack contents and paste into your AI context.
 
-See [`../v1.3.1/README.md`](../v1.3.1/README.md) for detailed usage instructions.
+See [`../v1.4.1/README.md`](../v1.4.1/README.md) for detailed usage instructions.
 
 ## Stability
 
-This folder always points to the current champion. If you need stability, pin to a specific version (e.g., `../v1.3.1/`).
+This folder always points to the current champion. If you need stability, pin to a specific version (e.g., `../v1.4.1/`).
