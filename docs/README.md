@@ -73,6 +73,7 @@ tags: ["docs", "implementation", "reference", "index"]
 | [TRUTH_MAP.md](./TRUTH_MAP.md) | Authoritative source for each domain |
 | [PRD.md](./PRD.md) | PRD orientation and routing |
 | [WHAT_THIS_REPO_IS_NOT.md](./WHAT_THIS_REPO_IS_NOT.md) | Scope boundaries |
+| [context-packs-and-projection-detail.md](./context-packs-and-projection-detail.md) | Detail levels for context pack projection (full, medium, low) |
 
 ### Templates
 

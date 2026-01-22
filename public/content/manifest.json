@@ -284,6 +284,23 @@
       ]
     },
     {
+      "uri": "klappy://canon/epistemic-obligation-and-document-tiers",
+      "path": "/canon/epistemic-obligation-and-document-tiers.md",
+      "title": "Epistemic Obligation and Document Tiers",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 1,
+      "voice": "first_person",
+      "stability": "stable",
+      "tags": [
+        "canon",
+        "tiers",
+        "epistemic-obligation",
+        "architecture"
+      ]
+    },
+    {
       "uri": "klappy://odd/evolution-not-automation",
       "path": "/odd/appendices/evolution-not-automation.md",
       "title": "Evolution, Not Automation",
@@ -369,6 +386,24 @@
         "learning",
         "progressive-disclosure",
         "website"
+      ]
+    },
+    {
+      "uri": "klappy://canon/decisions/models-do-not-mutate-canon",
+      "path": "/canon/decisions/models-do-not-mutate-canon.md",
+      "title": "Models Do Not Mutate Canon",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 1,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "canon",
+        "decisions",
+        "models",
+        "mutation",
+        "governance"
       ]
     },
     {

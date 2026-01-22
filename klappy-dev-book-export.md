@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-22T01:22:09.858Z
-Total Files: 159
+Generated: 2026-01-22T02:28:35.765Z
+Total Files: 162
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -19,8 +19,8 @@ details (attempts, version folders, source code).
 
 - **Root** (1 files)
 - **About** (6 files)
-- **Canon** (17 files)
-- **Documentation** (55 files)
+- **Canon** (19 files)
+- **Documentation** (56 files)
 - **Infrastructure** (9 files)
 - **Interfaces & Contracts** (6 files)
 - **ODD (Outcomes-Driven Development)** (22 files)
@@ -2899,6 +2899,7 @@ tags: ["docs", "implementation", "reference", "index"]
 | [TRUTH_MAP.md](./TRUTH_MAP.md) | Authoritative source for each domain |
 | [PRD.md](./PRD.md) | PRD orientation and routing |
 | [WHAT_THIS_REPO_IS_NOT.md](./WHAT_THIS_REPO_IS_NOT.md) | Scope boundaries |
+| [context-packs-and-projection-detail.md](./context-packs-and-projection-detail.md) | Detail levels for context pack projection (full, medium, low) |
 
 ### Templates
 
@@ -7026,6 +7027,183 @@ None of those should re-litigate the ideas above.
 
 
 --------------------------------------------------------------------------------
+📄 File: docs/context-packs-and-projection-detail.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/context-packs-and-projection-detail
+title: "Context Packs and Projection Detail"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["docs", "context-packs", "projection", "detail-levels"]
+---
+
+# Context Packs and Projection Detail
+
+> Detail levels control how much content is returned, not which content is relevant.
+
+## Description
+
+This document explains how context packs use projection detail to control output density. Document tiers determine epistemic obligation (what must be absorbed). Query-time detail levels determine how much of that content is returned (full, medium, low). These are orthogonal concepts. A Tier 1 document can be projected at low detail. A Tier 3 document can be projected at full detail. Detail controls density; tiers control obligation.
+
+## Outline
+
+- Document Tiers vs Query-Time Detail
+- Detail Levels Explained
+- How Detail Affects Output
+- Degradation When Structure Is Missing
+- Common Misunderstandings
+
+---
+
+## Document Tiers vs Query-Time Detail
+
+Two different axes control what appears in a context pack:
+
+| Axis | Question Answered | Set By |
+|------|-------------------|--------|
+| **Tier** | "How much must I absorb this?" | Document author |
+| **Detail** | "How much should I return?" | Query/consumer |
+
+Tiers are fixed properties of documents. Detail is a runtime choice.
+
+**Example:**
+
+A Tier 1 Canon document (high epistemic obligation) might be projected at:
+- `full` — return the complete document
+- `medium` — return description + outline
+- `low` — return title + one-line summary
+
+The tier doesn't change. The projection does.
+
+---
+
+## Detail Levels Explained
+
+Three detail levels are supported:
+
+### `full`
+
+Returns the complete document content.
+
+**Use when:**
+- Deep understanding is required
+- The document is directly relevant to the task
+- Token budget allows
+
+### `medium`
+
+Returns structural content: frontmatter, description, outline, section headers.
+
+**Use when:**
+- Orientation is needed but not full content
+- Multiple documents must fit in context
+- The document is relevant but not primary
+
+### `low`
+
+Returns minimal content: title, one-line summary (blockquote), and possibly description.
+
+**Use when:**
+- Existence matters more than content
+- Many documents must be referenced
+- Token budget is constrained
+
+---
+
+## How Detail Affects Output
+
+Given a well-structured document:
+
+```markdown
+---
+uri: klappy://example
+title: "Example Document"
+---
+
+# Example Document
+
+> One-line summary of what this is.
+
+## Description
+
+Two paragraphs explaining the document's purpose and scope.
+
+## Outline
+
+- Section 1
+- Section 2
+- Section 3
+
+---
+
+## Section 1
+
+[Full content...]
+
+## Section 2
+
+[Full content...]
+```
+
+**Projection at different detail levels:**
+
+| Level | Returns |
+|-------|---------|
+| `full` | Everything |
+| `medium` | Frontmatter + title + summary + description + outline |
+| `low` | Frontmatter + title + summary |
+
+---
+
+## Degradation When Structure Is Missing
+
+Detail projection depends on document structure. When structure is missing, projection degrades:
+
+| Missing Element | Consequence |
+|-----------------|-------------|
+| No blockquote summary | `low` falls back to title only |
+| No Description section | `medium` falls back to outline or full |
+| No Outline section | `medium` returns description + headers |
+| No structure at all | All levels return full content |
+
+**Implication:** Documents that follow the template project cleanly. Documents without structure force full inclusion regardless of requested detail.
+
+This is intentional. The cost of bad structure is paid at query time, not authoring time.
+
+---
+
+## Common Misunderstandings
+
+### "Higher detail means more important"
+
+No. Detail controls density, not importance. A `low` detail projection of a critical Tier 1 document is still critical—just compressed.
+
+### "Tier controls how much is returned"
+
+No. Tier controls epistemic obligation. A Tier 3 document at `full` detail returns everything. A Tier 1 document at `low` detail returns minimal content.
+
+### "Detail is set per-document"
+
+No. Detail is set per-query. The same document can be projected at different detail levels for different purposes.
+
+### "Missing structure is fine"
+
+Technically yes. Practically, missing structure means the document cannot be compressed. It will consume full tokens regardless of requested detail.
+
+---
+
+## See Also
+
+- [Epistemic Obligation and Document Tiers](/canon/epistemic-obligation-and-document-tiers.md) — What tiers mean
+- [Article Template](/docs/TEMPLATE.md) — Standard structure for projectable documents
+
+
+
+--------------------------------------------------------------------------------
 📄 File: docs/decisions/D0001-prod-branch-is-production.md
 --------------------------------------------------------------------------------
 
@@ -8832,6 +9010,42 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.11.0 — 2026-01-22
+
+**Epistemic Obligation and Document Tiers — Axis Separation**
+
+This release formalizes document tiers as epistemic obligation (not importance) and establishes that tiers are orthogonal to folders. Also adds model mutation boundary and context pack projection detail documentation.
+
+### Added
+
+- **Epistemic Obligation and Document Tiers** (`/canon/epistemic-obligation-and-document-tiers.md`) — Defines Tier 1 (foundational obligation), Tier 2 (shared obligation), Tier 3 (awareness without obligation). Explicitly states tiers are orthogonal to folders.
+- **Models Do Not Mutate Canon** (`/canon/decisions/models-do-not-mutate-canon.md`) — Decision record establishing that AI models may analyze/report on Canon but may not edit it directly.
+- **Context Packs and Projection Detail** (`/docs/context-packs-and-projection-detail.md`) — Explains detail levels (full, medium, low) for context pack projection, separate from tier/obligation.
+- **canon/decisions/** folder — Canon-level decision records for governance boundaries.
+
+### Changed
+
+- **canon/README.md** — Added epistemic tiers doc to Core Documents, added decisions/ to Subfolders
+- **docs/README.md** — Added context-packs doc to Reference Documents
+- **Compile Plans** — Added epistemic tiers to all packs:
+  - `infra/compile/plans/website/author.json`
+  - `infra/compile/plans/website/visitor.json`
+  - `products/agent-skill/src/compile-plan.json`
+
+### Philosophy
+
+- **Tiers are orthogonal to folders** — Any folder may contain documents at any tier; tier definitions must not smell like folder names
+- **Model boundaries are explicit** — Canon remains human-governed; models assist but do not mutate
+- **Detail is runtime, tier is authorship** — Projection detail is chosen at query time; tier is set by the document author
+
+### Invariant Locked
+
+> If a tier definition can be guessed from the folder name, it is wrong.
+
+This invariant prevents axis collapse between the folder/domain axis and the tier/obligation axis.
+
+---
+
 ## 0.10.0 — 2026-01-21
 
 **ODD Terminology — Language Governance Before Elevation**
@@ -9815,6 +10029,7 @@ The Canon exists so that reasoning does not have to be repeated.
 
 | File | Title | Summary | Answers |
 |------|-------|---------|---------|
+| `epistemic-obligation-and-document-tiers.md` | Epistemic Obligation and Document Tiers | Tiers define epistemic obligation (foundational, shared, awareness), not importance. Orthogonal to folders. | How much must I internalize this? |
 | `constraints.md` | Constraints | Baseline assumptions and non-negotiables that shape every decision. | What must be true for this work to make sense? |
 | `decision-rules.md` | Decision Rules | Default heuristics used when multiple valid options exist. | How do choices tend to be made? |
 | `definition-of-done.md` | Definition of Done | What qualifies as completed work and what evidence is required. | When can work honestly be called done? |
@@ -9827,6 +10042,7 @@ The Canon exists so that reasoning does not have to be repeated.
 
 | Folder | Purpose |
 |--------|---------|
+| `decisions/` | Canon-level decision records (governance, model boundaries). |
 | `resonance/` | External works that converge with ODD — and where ODD explicitly diverges. |
 | `meta/` | Metadata and pack configuration. |
 | `_compiled/` | Compiled outputs (derived, wipeable). |
@@ -11011,6 +11227,120 @@ Agents and collaborators should:
 
 
 --------------------------------------------------------------------------------
+📄 File: canon/decisions/models-do-not-mutate-canon.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/decisions/models-do-not-mutate-canon
+title: "Models Do Not Mutate Canon"
+audience: canon
+exposure: nav
+tier: 1
+voice: neutral
+stability: stable
+tags: ["canon", "decisions", "models", "mutation", "governance"]
+---
+
+# Models Do Not Mutate Canon
+
+> Models may analyze and report on Canon, but may not edit it.
+
+## Description
+
+This decision records that AI models (LLMs, agents, assistants) are not permitted to directly edit Canon content. Models may read, analyze, summarize, and report on Canon. They may draft proposed changes. But the act of mutation—writing changes to Canon files—requires human review and approval. This preserves Canon's role as stable, human-governed truth.
+
+## Outline
+
+- Decision
+- Status
+- Context
+- Alternatives Considered
+- Consequences
+
+---
+
+## Content
+
+## Decision
+
+Models may not mutate Canon.
+
+Specifically:
+
+| Action | Permitted |
+|--------|-----------|
+| Read Canon | ✓ Yes |
+| Analyze Canon | ✓ Yes |
+| Summarize Canon | ✓ Yes |
+| Report on Canon | ✓ Yes |
+| Draft proposed changes | ✓ Yes |
+| Write changes to Canon files | ✗ No |
+
+## Status
+
+**Active**
+
+## Context
+
+Canon exists to preserve stable, shared truth across this program. Its value depends on:
+
+- Careful curation
+- Intentional change
+- Human accountability
+
+Models are powerful tools for analysis and drafting. However, models:
+
+- Optimize for plausibility, not correctness
+- Cannot be held accountable for mistakes
+- May introduce subtle drift through well-meaning edits
+
+Allowing models to directly mutate Canon would erode the trust boundary that makes Canon useful.
+
+## Alternatives Considered
+
+### 1. Models may edit Canon freely
+
+**Rejected.** This removes the human governance layer that makes Canon authoritative. Canon would become another generated artifact rather than curated truth.
+
+### 2. Models may edit Canon with approval workflow
+
+**Rejected for now.** An approval workflow could work, but adds complexity. The simpler rule—no model mutation—is clearer and easier to enforce.
+
+### 3. Models may edit Tier 3 but not Tier 1-2
+
+**Rejected.** This creates a confusing boundary. The rule should be simple: Canon does not get edited by models.
+
+## Consequences
+
+### Enables
+
+- Canon remains human-governed
+- Changes to Canon are intentional and traceable
+- Models can still provide value through analysis and drafting
+- Clear boundary for model behavior
+
+### Prevents
+
+- Subtle drift from well-meaning model edits
+- Accountability gaps
+- Canon becoming "just another generated file"
+
+### Costs
+
+- Slower Canon updates (requires human action)
+- Models cannot self-correct Canon errors they detect
+- Human bottleneck for Canon maintenance
+
+---
+
+## See Also
+
+- [Epistemic Obligation and Document Tiers](/canon/epistemic-obligation-and-document-tiers.md)
+- [Constraints](/canon/constraints.md) — AI as Accelerator, Not Authority
+
+
+
+--------------------------------------------------------------------------------
 📄 File: canon/definition-of-done.md
 --------------------------------------------------------------------------------
 
@@ -11224,6 +11554,150 @@ It is meant to stop work from being incorrectly declared finished.
 
 - Canon v0.1 — Definition of Done & Evidence Policy complete
 - Ready to proceed to Canon v0.1 — Self-Audit Checklist
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/epistemic-obligation-and-document-tiers.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/epistemic-obligation-and-document-tiers
+title: "Epistemic Obligation and Document Tiers"
+audience: canon
+exposure: nav
+tier: 1
+voice: first_person
+stability: stable
+tags: ["canon", "tiers", "epistemic-obligation", "architecture"]
+---
+
+# Epistemic Obligation and Document Tiers
+
+> Document tiers define epistemic obligation, not importance.
+
+## Description
+
+This document explains the three-tier system used to organize content in this repository. Tiers are not about importance, value, or quality. They are about epistemic obligation—how much a reader or system is obligated to absorb and respect content at each level. Tier 1 carries foundational obligation and rarely changes. Tier 2 carries shared obligation and evolves carefully. Tier 3 carries awareness without obligation and may change freely. Tiers are orthogonal to folders. Any folder may contain documents at any tier.
+
+## Outline
+
+- What Tiers Mean
+- Tier 1: Foundational Obligation
+- Tier 2: Shared Obligation
+- Tier 3: Awareness Without Obligation
+- Why Tier 3 Exists
+- Tiers Are Not Importance
+
+---
+
+## Content
+
+**Canon v0.1**
+
+### What Tiers Mean
+
+Tiers describe epistemic obligation:
+
+| Tier | Obligation Level | Decay Rate | Change Frequency |
+|------|------------------|------------|------------------|
+| **Tier 1** | Must absorb | Almost never | Rarely |
+| **Tier 2** | Should respect | Carefully | Occasionally |
+| **Tier 3** | May reference | Freely | Frequently |
+
+The tier system answers: *"How much must I internalize this before proceeding?"*
+
+### Tier 1: Foundational Obligation
+
+Tier 1 content must be fully absorbed before proceeding. It cannot be safely ignored or skimmed.
+
+**Characteristics:**
+
+- Contradiction is a serious error
+- Reinterpretation requires explicit justification
+- Changes are rare and deliberate
+- Stability is expected across long timescales
+
+**Epistemic obligation:** Absorb fully. Do not contradict. Do not reinterpret without explicit justification.
+
+**Cross-folder examples:** A manifesto in odd/, a core constraint in canon/, or a critical process in docs/ could all be Tier 1.
+
+### Tier 2: Shared Obligation
+
+Tier 2 content should be respected by default. It represents agreed conventions that apply unless explicitly overridden.
+
+**Characteristics:**
+
+- Deviation is allowed but must be documented
+- Changes happen carefully with awareness of downstream impact
+- Content is stable but not immutable
+- Readers should know this content exists and follow it unless they have reason not to
+
+**Epistemic obligation:** Respect unless explicitly overridden. Follow by default. Document deviations.
+
+**Cross-folder examples:** A decision record in odd/, a shared rule in canon/, or a standard process in docs/ could all be Tier 2.
+
+### Tier 3: Awareness Without Obligation
+
+Tier 3 content is available for reference but carries no obligation to internalize. It exists so you can find it when needed.
+
+**Characteristics:**
+
+- May be ignored when not relevant
+- Changes freely without requiring broad awareness
+- Useful for specific tasks, not general orientation
+- Can be rebuilt or discarded without system-wide impact
+
+**Epistemic obligation:** Reference when relevant. May ignore when not applicable. Free to rebuild.
+
+**Cross-folder examples:** An appendix in odd/, a template in canon/, or a how-to guide in docs/ could all be Tier 3.
+
+### Why Tier 3 Exists
+
+Tier 3 exists because not everything needs to be internalized.
+
+Some content:
+
+- Is useful only in specific contexts
+- Changes frequently without broad impact
+- Serves reference purposes rather than orientation
+- Deserves documentation without demanding absorption
+
+Without Tier 3, either:
+- Low-obligation content gets elevated to Tier 2 (creating false urgency)
+- Low-obligation content goes undocumented (creating knowledge gaps)
+
+Tier 3 gives content a home without giving it unearned epistemic weight.
+
+### Tiers Are Not Importance
+
+A common misunderstanding: "Tier 1 is most important, Tier 3 is least important."
+
+This is wrong.
+
+Tiers describe **epistemic obligation**, not **importance**.
+
+| Tier | Epistemic Obligation | Importance |
+|------|---------------------|------------|
+| Tier 1 | High | Varies |
+| Tier 2 | Medium | Varies |
+| Tier 3 | Low | Varies |
+
+A Tier 3 document might be critically important for today's deployment. A Tier 1 document might be philosophically foundational but irrelevant to a specific task.
+
+**The question tiers answer:** "How much must I internalize this?"
+
+**The question tiers do not answer:** "How important is this?"
+
+Conflating the two leads to either:
+- Ignoring Tier 3 content that matters for execution
+- Over-weighting Tier 1 content that doesn't apply
+
+---
+
+## See Also
+
+- [Three-Tier Conceptual Hierarchy](/odd/decisions/D0001-three-tier-conceptual-hierarchy.md) — The decision that established the folder model (orthogonal to tiers)
 
 
 

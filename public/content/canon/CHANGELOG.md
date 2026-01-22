@@ -16,6 +16,42 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.11.0 — 2026-01-22
+
+**Epistemic Obligation and Document Tiers — Axis Separation**
+
+This release formalizes document tiers as epistemic obligation (not importance) and establishes that tiers are orthogonal to folders. Also adds model mutation boundary and context pack projection detail documentation.
+
+### Added
+
+- **Epistemic Obligation and Document Tiers** (`/canon/epistemic-obligation-and-document-tiers.md`) — Defines Tier 1 (foundational obligation), Tier 2 (shared obligation), Tier 3 (awareness without obligation). Explicitly states tiers are orthogonal to folders.
+- **Models Do Not Mutate Canon** (`/canon/decisions/models-do-not-mutate-canon.md`) — Decision record establishing that AI models may analyze/report on Canon but may not edit it directly.
+- **Context Packs and Projection Detail** (`/docs/context-packs-and-projection-detail.md`) — Explains detail levels (full, medium, low) for context pack projection, separate from tier/obligation.
+- **canon/decisions/** folder — Canon-level decision records for governance boundaries.
+
+### Changed
+
+- **canon/README.md** — Added epistemic tiers doc to Core Documents, added decisions/ to Subfolders
+- **docs/README.md** — Added context-packs doc to Reference Documents
+- **Compile Plans** — Added epistemic tiers to all packs:
+  - `infra/compile/plans/website/author.json`
+  - `infra/compile/plans/website/visitor.json`
+  - `products/agent-skill/src/compile-plan.json`
+
+### Philosophy
+
+- **Tiers are orthogonal to folders** — Any folder may contain documents at any tier; tier definitions must not smell like folder names
+- **Model boundaries are explicit** — Canon remains human-governed; models assist but do not mutate
+- **Detail is runtime, tier is authorship** — Projection detail is chosen at query time; tier is set by the document author
+
+### Invariant Locked
+
+> If a tier definition can be guessed from the folder name, it is wrong.
+
+This invariant prevents axis collapse between the folder/domain axis and the tier/obligation axis.
+
+---
+
 ## 0.10.0 — 2026-01-21
 
 **ODD Terminology — Language Governance Before Elevation**

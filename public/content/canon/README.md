@@ -23,6 +23,7 @@ The Canon exists so that reasoning does not have to be repeated.
 
 | File | Title | Summary | Answers |
 |------|-------|---------|---------|
+| `epistemic-obligation-and-document-tiers.md` | Epistemic Obligation and Document Tiers | Tiers define epistemic obligation (foundational, shared, awareness), not importance. Orthogonal to folders. | How much must I internalize this? |
 | `constraints.md` | Constraints | Baseline assumptions and non-negotiables that shape every decision. | What must be true for this work to make sense? |
 | `decision-rules.md` | Decision Rules | Default heuristics used when multiple valid options exist. | How do choices tend to be made? |
 | `definition-of-done.md` | Definition of Done | What qualifies as completed work and what evidence is required. | When can work honestly be called done? |
@@ -35,6 +36,7 @@ The Canon exists so that reasoning does not have to be repeated.
 
 | Folder | Purpose |
 |--------|---------|
+| `decisions/` | Canon-level decision records (governance, model boundaries). |
 | `resonance/` | External works that converge with ODD — and where ODD explicitly diverges. |
 | `meta/` | Metadata and pack configuration. |
 | `_compiled/` | Compiled outputs (derived, wipeable). |
