@@ -1,14 +1,42 @@
-# PRD: ODD Agent Skill — Tiered Context Construction
+# PRD: ODD Agent Skill — Tier-Aware Pack Compiler
 
 | Field             | Value       |
 | ----------------- | ----------- |
-| **PRD Version**   | v1.4.0      |
+| **PRD Version**   | v1.4.1      |
 | **Lane**          | agent-skill |
 | **Status**        | Active      |
 | **Created**       | 2026-01-21  |
 | **Updated**       | 2026-01-22  |
 | **Author**        | Chris Klapp |
 | **Canon Version** | 0.10.0      |
+
+---
+
+## v1.4.1 Scope
+
+**Release: v1.4.1 — Tier-Aware Pack Compiler**
+
+**Goal:** Make pack compilation tier-aware by implementing:
+
+1. **Discovery** — for default pack types (folder scan + filters)
+2. **Tier 0 exclusion** — always, even if explicitly listed
+3. **Tier-based projection** — Tier 1/2/3 → high/medium/low
+4. **Auditability** — via `--plan` output and CI checks
+
+**v1.4.1 explicitly includes:**
+
+- Tier-aware compilation (discovery + exclusion + projection + plan)
+
+**v1.4.1 fixes:**
+
+- Tier 0 inclusion bug (docs marked `tier: 0` were being included)
+- Tier projection ignored bug (all docs compiled at full detail)
+
+**Non-goals (explicit):**
+
+- No new projection formats beyond existing high/medium/low definitions
+- No content rewrites of docs in this release
+- No new UI/UX changes outside CLI/compiler outputs
 
 ---
 
@@ -57,11 +85,106 @@ The pack teaches agents how ODD works, but does not fully teach agents how to el
 - Resequenced Interview Loop with Inventory and Ambiguity Capture
 - Asset Intake Contract with guidance for partial information
 
-**v1.4 addresses**: Tiered context construction with projection detail, previously deferred from v1.3.
+**v1.4.0 defined**: Tiered context construction requirements (what the system should do).
+
+**v1.4.1 implements**: The compiler changes to actually enforce those requirements.
 
 ---
 
-## Core Requirements (v1.4)
+## Current Behavior (Bug)
+
+The current compiler does not enforce the tier system:
+
+| Issue | Current Behavior | Required Behavior |
+|-------|------------------|-------------------|
+| Selection mode | Explicit whitelist only | Support discovery + curated |
+| Tier 0 handling | Included if in whitelist | Always excluded |
+| Projection | Full detail for all tiers | Tier 1→high, Tier 2→medium, Tier 3→low |
+| Tier metadata | Ignored | Read from frontmatter, enforce |
+| Auditability | None | `--plan` output with decisions |
+
+**Critical example — Tier 0 violation:**
+
+`odd/README.md` has `tier: 0` (scope exclusion) but was included in compiled packs because the compiler uses a whitelist that ignores tier metadata.
+
+**Root cause:** The compiler concatenates files from an explicit list without reading or enforcing tier frontmatter.
+
+---
+
+## Functional Requirements (v1.4.1)
+
+### FR-1: Tier Metadata Parsing
+
+The compiler must read frontmatter and determine `tier: 0|1|2|3` per file.
+
+**Missing tier handling:**
+
+- Default: missing tier → Tier 3 (include at low projection)
+- Must emit a warning in plan/audit output when tier is missing
+
+**Implementation:** `readFrontmatterTier(filePath) → { tier, warnings }`
+
+### FR-2: Tier 0 Exclusion Rule (Hard Rule)
+
+Tier 0 files must never be included in any pack output.
+
+- This includes explicitly listed/whitelisted files
+- Tier 0 exclusion must be visible in `--plan` output with `reason: excluded:tier0`
+- No exceptions, no overrides
+
+### FR-3: Pack Selection Modes
+
+Support two pack selection modes:
+
+| Mode | Description | Example |
+|------|-------------|---------|
+| `curated` | Explicit file list | prd-guide (existing behavior, but now tier-enforced) |
+| `discovered` | Folder scan + filters | default-odd-context (new) |
+
+Both modes must enforce:
+
+- Tier 0 exclusion
+- Tier-based projection
+
+### FR-4: Tier-Based Projection
+
+Projection must happen per-file before concatenation.
+
+| Tier | Projection | Output |
+|------|------------|--------|
+| Tier 1 | `high` | Full content |
+| Tier 2 | `medium` | Frontmatter + description + outline |
+| Tier 3 | `low` | Title + one-line summary |
+
+**Implementation:** `projectFile(file, projection) → projectedText`
+
+### FR-5: Auditability (`--plan`)
+
+Add a compiler flag `--plan` that outputs per-file decisions:
+
+| Field | Description |
+|-------|-------------|
+| `path` | File path |
+| `tier` | 0, 1, 2, or 3 |
+| `selected_by` | `curated` or `discovered` |
+| `projection` | `high`, `medium`, `low`, or `excluded` |
+| `included` | `true` or `false` |
+| `reason` | `tier0`, `missing`, `filtered`, etc. |
+| `tokens` | Estimated token count (recommended) |
+
+Output format: table (human) or JSON (CI).
+
+### FR-6: Deterministic Ordering
+
+Pack output ordering must be deterministic:
+
+- Sort by path (or explicit stable ordering rules)
+- Plan output must reflect final order
+- Same inputs → same output across runs
+
+---
+
+## Core Requirements (v1.4.0, retained)
 
 ### Default Context Construction
 
@@ -221,7 +344,7 @@ Guidance:
 
 ---
 
-## Explicitly Out of Scope (v1.4)
+## Explicitly Out of Scope (v1.4.1)
 
 - Changes to distribution architecture (Cloudflare Pages setup unchanged)
 - Multi-pack compilation (that's v1.5+)
@@ -229,27 +352,145 @@ Guidance:
 - Renaming the pack (keep "prd-guide" for now)
 - Override mechanisms for tier-to-detail mapping (future consideration)
 - Dynamic detail adjustment based on token budget (future consideration)
+- New projection formats (stick to high/medium/low)
+- Content rewrites of existing docs
+
+---
+
+## Implementation Plan (v1.4.1)
+
+### Task 1: Create Tier Reader
+
+Implement `readFrontmatterTier(filePath)`:
+
+- Returns `{ tier: number, warnings: string[] }`
+- Parses YAML frontmatter
+- Returns tier value (0, 1, 2, or 3)
+- Missing tier → 3 with warning
+
+### Task 2: Implement Selection Modes
+
+**Curated mode:** `selectFilesCurated(packConfig)`
+
+- Read explicit file list from config
+- Pass to tier enforcement
+
+**Discovered mode:** `selectFilesDiscovered(packConfig)`
+
+- Allowed roots (e.g., `canon/`, `odd/`, `docs/`)
+- Ignore patterns (e.g., `**/node_modules/**`)
+- Only markdown (`.md` files)
+
+### Task 3: Apply Tier Enforcement + Projection
+
+Implement `applyTierRules(files)`:
+
+- Returns `decisions[]` with per-file outcomes
+- Enforce Tier 0 exclude (hard rule)
+- Assign projection per tier (1→high, 2→medium, 3→low)
+
+### Task 4: Projection Execution
+
+Implement `projectFile(file, projection)`:
+
+- `high`: return full content
+- `medium`: return frontmatter + description + outline
+- `low`: return title + one-line summary (blockquote)
+- Concatenate projected results
+
+### Task 5: Add `--plan` Flag
+
+- Output table (human readable) and/or JSON (CI)
+- Include: path, tier, selected_by, projection, included, reason
+- Include token/word estimates (recommended)
+
+### Task 6: CI Tests
+
+Add automated checks for:
+
+- AC-1: Tier 0 exclusion
+- AC-2: Projection correctness
+- AC-3: Discovery coverage threshold
+- AC-4: Curated pack tier enforcement
+- AC-5: Plan artifact generation
+
+---
+
+## Acceptance Criteria (v1.4.1)
+
+These are CI-friendly gates written as Given/When/Then.
+
+### AC-1: Tier 0 Never Included
+
+```
+Given a Tier 0 doc exists (e.g., odd/README.md with tier: 0)
+When any pack is compiled
+Then Tier 0 docs are excluded
+And appear as excluded in --plan output with reason: tier0
+```
+
+### AC-2: Projection Correctness
+
+```
+Given Tier 2 and Tier 3 docs exist
+When a pack is compiled
+Then Tier 2 docs are NOT compiled at high detail
+And Tier 3 docs are NOT compiled at high detail
+And Tier 1 docs ARE compiled at high detail
+```
+
+### AC-3: Discovery Coverage Guardrail
+
+```
+Given repo has >100 eligible docs (Tier 1-3)
+When compiling default-odd-context via discovery
+Then compiled file count >= 60 (catches regression to whitelist)
+```
+
+### AC-4: Curated Pack Still Tier-Enforces
+
+```
+Given prd-guide uses a curated list
+When compiling prd-guide
+Then Tier 0 files in list are excluded
+And Tier 2/3 files are projected (not full detail)
+```
+
+### AC-5: `--plan` Required in CI
+
+```
+Given CI runs on PR
+When pack compilation runs
+Then CI produces a plan artifact
+And CI fails if any Tier 0 inclusion occurs
+```
 
 ---
 
 ## Success Criteria
 
-### v1.4 — Tiered Context Construction
+### v1.4.1 — Tier-Aware Compiler
+
+- [ ] Compiler reads tier from frontmatter
+- [ ] Tier 0 docs are never included (hard rule)
+- [ ] Tier 1 → high, Tier 2 → medium, Tier 3 → low projection
+- [ ] `--plan` flag outputs per-file decisions
+- [ ] Discovery mode works for default-odd-context
+- [ ] Curated mode still works for prd-guide (with tier enforcement)
+- [ ] Output ordering is deterministic
+- [ ] Missing tier defaults to Tier 3 with warning
+
+### v1.4.0 — Tiered Context Construction (retained)
 
 - [ ] Default context pack assembles with tier-weighted detail mapping
-- [ ] Tier 1 documents receive `high` detail projection
-- [ ] Tier 2 documents receive `medium` detail projection
-- [ ] Tier 3 documents receive `low` detail projection
 - [ ] No tier-flattening occurs in assembled context
 - [ ] Degradation is surfaced when document structure is insufficient
 - [ ] README/index files do not receive elevated detail due to file type
 
-### v1.4 — Acceptance Criteria (Testable)
+### v1.4.0 — Agent Behavior (retained)
 
 - [ ] Agent behavior demonstrates tier-weighted context usage
 - [ ] Tier 3 documents do not materially influence agent reasoning unless explicitly requested
-- [ ] Removing README content does not change agent conclusions
-- [ ] Increasing detail for Tier 1 documents materially improves reasoning depth
 - [ ] Agent does not synthesize context to compensate for missing document structure
 
 ### v1.3 — Elicitation Enhancement (retained)
@@ -271,20 +512,30 @@ Guidance:
 
 An attempt against this PRD is complete when:
 
-### Context Construction (v1.4)
+### v1.4.1 — Compiler Implementation
+
+- [ ] `default-odd-context` compiles via discovery (not whitelist)
+- [ ] Tier 0 exclusion is enforced in all packs
+- [ ] Tier 1/2/3 projection mapping enforced
+- [ ] `--plan` flag exists and outputs readable decisions
+- [ ] CI blocks Tier 0 inclusion
+- [ ] CI blocks projection violations
+- [ ] Pack compilation is deterministic across runs
+- [ ] Missing tier defaults to Tier 3 with warning
+
+### v1.4.1 — Acceptance Criteria Verification
+
+- [ ] AC-1 passes: Tier 0 never included
+- [ ] AC-2 passes: Projection correctness verified
+- [ ] AC-3 passes: Discovery coverage >= threshold
+- [ ] AC-4 passes: Curated packs tier-enforce
+- [ ] AC-5 passes: `--plan` in CI with failure on Tier 0
+
+### Context Construction (v1.4.0, retained)
 
 - [ ] Context pack assembly implements tier-to-detail mapping
-- [ ] Tier 1 → `high`, Tier 2 → `medium`, Tier 3 → `low`
 - [ ] No special-casing for README or index files
 - [ ] Degradation surfaced when structure missing
-- [ ] No context synthesis or summarization
-
-### Context Verification (v1.4)
-
-- [ ] Tier-weighted context demonstrably affects agent output
-- [ ] Tier 3 content removal does not alter reasoning conclusions
-- [ ] Tier 1 content at high detail produces deeper reasoning than low detail
-- [ ] Agent does not infer tier from folder location
 
 ### INSTRUCTIONS.md Content (v1.3, retained)
 
@@ -293,37 +544,28 @@ An attempt against this PRD is complete when:
 - [ ] Inventory (Phase 2) defined with asset intake questions
 - [ ] Ambiguity Capture (Phase 6) defined with uncertainty documentation
 - [ ] Interview loop has 8 phases (0-7) in correct order
-- [ ] Stage Typing table includes all 5 types with implications
 
 ### Compilation
 
-- [ ] Compile succeeds using lane-owned `src/compile-plan.json`
+- [ ] Compile succeeds with new tier-aware compiler
 - [ ] Output written to attempt's `evidence/` folder
+- [ ] Plan output included in evidence
 - [ ] Provenance header shows canon v0.10.0 source hashes
-- [ ] INSTRUCTIONS.md generated fresh (not copied from persisted source)
 
 ### Distribution
 
-- [ ] `public/agent-skill/v1.4/prd-guide-pack.md` created
+- [ ] `public/agent-skill/v1.4.1/prd-guide-pack.md` created
 - [ ] `public/agent-skill/latest/prd-guide-pack.md` updated
 - [ ] `public/agent-skill/latest/README.md` updated (version reference)
 - [ ] Public URL verified with HTTP 200
 
-### Verification
-
-- [ ] INSTRUCTIONS.md demonstrably different from v1.3
-- [ ] Agent using pack asks about PRD type before jumping to outcomes
-- [ ] Agent using pack asks about existing assets before defining scope
-- [ ] Ambiguity capture section present and functional
-- [ ] Context pack demonstrates tier-weighted detail allocation
-
 ### Evidence Required
 
-- [ ] Diff showing tier-weighted context construction
+- [ ] `--plan` output showing tier enforcement
+- [ ] Diff showing Tier 0 exclusion vs previous version
 - [ ] Screenshot or log of successful compile output
 - [ ] HTTP 200 verification of preview URL
-- [ ] Sample conversation demonstrating elicitation flow
-- [ ] Evidence that Tier 3 removal does not change conclusions
+- [ ] CI run showing AC-1 through AC-5 passing
 - [ ] Self-audit completed
 
 ---
@@ -378,12 +620,12 @@ The compiled pack concatenates these files:
 
 | Risk | Mitigation |
 |------|------------|
-| Tier 3 at low detail may appear to exclude useful content | Document explicitly that tier is obligation, not importance; users can request higher detail |
-| Documents lacking structure degrade projection | Degradation is explicit by design; documents should follow templates for clean projection |
-| Future engineers may add "smart" exceptions | Non-goals section explicitly forbids; acceptance criteria test for absence of special-casing |
-| README removal test may seem counter-intuitive | Document rationale: navigation files are Tier 3 awareness, not reasoning input |
-| Elicitation loop changes may require iteration | v1.4 can have patch versions (v1.4.1, v1.4.2) |
-| Stage typing may not cover all cases | Include "Other" type with fallback to generic flow |
+| Missing tier defaults to Tier 3 may silently include docs at low fidelity | Emit warnings in plan output; clean up missing tiers in follow-up |
+| Discovery may balloon pack size if ignore rules wrong | Thresholds + token estimates in plan; AC-3 guards against regression |
+| Projection quality depends on projector implementation | Deterministic projection; snapshot tests; explicit degradation |
+| Tier 0 enforcement may break existing workflows | Tier 0 is explicit opt-out; docs must be updated if incorrectly marked |
+| Future engineers may add "smart" exceptions | Non-goals section explicitly forbids; acceptance criteria test for absence |
+| Documents lacking structure degrade projection | Degradation is explicit by design; documents should follow templates |
 
 ---
 
@@ -395,7 +637,7 @@ This PRD may be attempted multiple times.
 - Failed attempts inform future attempts or PRD revisions
 - Attempts are sealed when CLOSED or ABANDONED
 
-Attempts live at: `v1.4/attempts/attempt-NNN/`
+Attempts live at: `v1.4.1/attempts/attempt-NNN/`
 
 ---
 
