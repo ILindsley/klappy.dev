@@ -1,6 +1,5 @@
 # Failed attempt - code not promoted
 src/
-evidence/
 test-results/
 playwright-report/
 node_modules/
