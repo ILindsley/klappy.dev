@@ -1,18 +1,11 @@
-# Dependencies
+# Attempt code - not promoted to champion
+src/
+test-results/
+playwright-report/
 node_modules/
-
-# Build output
-dist/
-
-# Cloudflare
+package.json
+package-lock.json
+wrangler.toml
+playwright.config.js
+*.spec.js
 .wrangler/
-
-# OS files
-.DS_Store
-
-# Editor
-.vscode/
-*.swp
-
-# Logs
-*.log
