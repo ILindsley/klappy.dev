@@ -829,6 +829,24 @@
       "tags": []
     },
     {
+      "uri": "klappy://canon/verification-and-evidence",
+      "path": "/canon/verification-and-evidence.md",
+      "title": "Verification & Evidence",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 1,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "verification",
+        "evidence",
+        "trust",
+        "epistemology",
+        "agents"
+      ]
+    },
+    {
       "uri": "klappy://odd/visual-evolution",
       "path": "/odd/appendices/visual-evolution.md",
       "title": "Visual Evolution",

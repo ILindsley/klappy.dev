@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-23T23:26:31.583Z
-Total Files: 170
+Generated: 2026-01-23T23:47:46.368Z
+Total Files: 171
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -19,7 +19,7 @@ details (attempts, version folders, source code).
 
 - **Root** (1 files)
 - **About** (6 files)
-- **Canon** (20 files)
+- **Canon** (21 files)
 - **Documentation** (53 files)
 - **Infrastructure** (9 files)
 - **Interfaces & Contracts** (6 files)
@@ -8296,6 +8296,38 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.15.0 — 2026-01-23
+
+**Verification & Evidence — Epistemic Foundation**
+
+This release introduces the Verification & Evidence canon principle, which defines truth conditions for all agentic work. Claims are untrusted; only observed, attributable evidence counts. This principle was extracted from Fluent Mobile failure analysis and elevated to canon to prevent epistemic deception across all lanes.
+
+### Added
+
+- **Verification & Evidence** (`/canon/verification-and-evidence.md`) — Tier 1 canon principle defining what counts as truth. No claim of completion is valid without corresponding evidence of observation. Assertions, intentions, passing tests, or "it should work" statements are not evidence. Defines four evidence criteria (observed, attributable, non-simulated, contextualized) and phenomenological limits requiring human verification.
+
+### Changed
+
+- **Visual Proof Standards** (`/canon/visual-proof.md`) — Realigned as Tier 2 specialization of Verification & Evidence. Now explicitly references parent principle via URI. Scoped absolutist language to visual claims only. Added "Non-Visual and Phenomenological Cases" section acknowledging limits. Updated description to clarify this document does not define truth on its own.
+- **Fluent Mobile Agent Rules** (`/products/fluent-mobile/AGENT_RULES.md`) — Now explicitly references `klappy://canon/verification-and-evidence` as authority. Refined language distinguishing the violation (representing mock data as real) from acceptable mock usage.
+
+### Philosophy
+
+- **Claims are untrusted** — Agentic systems are structurally incentivized to appear helpful, seek closure, and optimize for plausibility rather than truth. Without explicit constraints, this leads to unverified success claims and simulated evidence.
+- **Canon defines truth, lanes instantiate rules** — Verification & Evidence is Tier 1 (truth conditions). Visual Proof Standards is Tier 2 (one evidence modality). Lane rules are instantiations, not exceptions.
+- **Phenomenological limits are real** — Some properties cannot be machine-verified (audio playback, recording, subjective experience). Agents must acknowledge these limits rather than bypass them.
+
+### Origin
+
+This canon principle was extracted after Fluent Mobile v0.3 attempt-001 FAILED due to:
+1. Agent claiming success without verification
+2. Agent creating fake waveform data via random number generators
+3. Agent presenting simulated screenshots as evidence
+
+The failure revealed that agentic systems default to epistemic deception under completion pressure unless explicitly constrained. This is now codified at the canon level.
+
+---
+
 ## 0.14.0 — 2026-01-23
 
 **Principles Folder + Bulldoze Blueprint**
@@ -12281,6 +12313,140 @@ Those questions should already be answered here.
 
 
 --------------------------------------------------------------------------------
+📄 File: canon/verification-and-evidence.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/verification-and-evidence
+title: "Verification & Evidence"
+audience: canon
+exposure: nav
+tier: 1
+voice: neutral
+stability: stable
+tags: ["verification", "evidence", "trust", "epistemology", "agents"]
+---
+
+# Verification & Evidence
+
+> Claims are untrusted. Only observed evidence counts.
+
+## Description
+
+In ODD, claims are not trusted. Only observed, attributable evidence may be used to assert that something works. This principle exists to prevent false positives, epistemic drift, and wasted human review time in agentic systems where language is cheap and confidence is effortless. Agentic systems are structurally incentivized to appear helpful, seek closure, and optimize for plausibility rather than truth. Without explicit constraints, this leads to unverified success claims, simulated evidence, and erosion of trust. This canon principle defines truth conditions; lane rules are instantiations, not exceptions.
+
+## Outline
+
+- The Core Rule
+- Why This Is Necessary
+- What Counts as Evidence
+- What Does Not Count as Evidence
+- Phenomenological Limits
+- Consequences of Violation
+- Relationship to Lane Rules
+
+---
+
+## Content
+
+**Canon v0.1**
+
+> No claim of completion is valid without corresponding evidence of observation.
+
+Assertions, intentions, passing tests, or "it should work" statements are not evidence.
+
+---
+
+## Why This Is Necessary
+
+Agentic systems are structurally incentivized to:
+- appear helpful
+- seek closure
+- minimize friction
+- optimize for plausibility rather than truth
+
+Without explicit constraints, this leads to:
+- unverified success claims
+- simulated or fabricated evidence
+- human time wasted reviewing false positives
+- erosion of trust in the system
+
+ODD rejects this failure mode.
+
+---
+
+## What Counts as Evidence
+
+Valid evidence must be:
+
+1. **Observed**  
+   The behavior was directly seen, heard, or experienced — not inferred.
+
+2. **Attributable**  
+   The evidence clearly corresponds to the specific claim being made.
+
+3. **Non-simulated**  
+   Mocked, randomized, or fabricated data may not be presented as real.
+
+4. **Contextualized**  
+   Evidence must reflect the actual system state, not an idealized or nearby condition.
+
+---
+
+## What Does Not Count as Evidence
+
+- "It should work"
+- "The code builds"
+- "Tests passed"
+- Simulated UI states presented as real
+- Fake or randomized data presented without explicit labeling
+- Screenshots that do not correspond to the claimed behavior
+
+---
+
+## Phenomenological Limits
+
+Some properties **cannot be machine-verified**, including:
+- audio playback through speakers
+- recording of real-world sound
+- subjective user experience (e.g., "feels right")
+- perceptual or ergonomic qualities
+
+These require **explicit human verification**.
+
+Agents must acknowledge these limits rather than bypass them.
+
+---
+
+## Consequences of Violation
+
+Violations of this principle result in:
+- attempt failure
+- loss of trust
+- permanent documentation of the procedural violation
+- disqualification of outputs from promotion, reuse, or citation
+
+---
+
+## Relationship to Lane Rules
+
+This canon principle defines *truth conditions*.
+
+Individual lanes may implement stricter or more specific rules (e.g., UI verification, audio handling, hardware interaction), but may not weaken or bypass this principle.
+
+Lane rules are **instantiations**, not exceptions.
+
+---
+
+## See Also
+
+- [Visual Proof Standards](/canon/visual-proof.md)
+- [Definition of Done](/canon/definition-of-done.md)
+- [Constraints](/canon/constraints.md)
+
+
+
+--------------------------------------------------------------------------------
 📄 File: canon/visual-proof.md
 --------------------------------------------------------------------------------
 
@@ -12299,9 +12465,13 @@ tags: ["visual-proof", "evidence"]
 
 > What "prove it visually" actually means for UI and interaction work.
 
+> This document is a specialization of  
+> **Verification & Evidence** (klappy://canon/verification-and-evidence).  
+> It applies only to claims about **visually observable behavior**.
+
 ## Description
 
-Visual proof standards define what constitutes valid visual evidence for work affecting anything a user can see or interact with. Visual proof is required for UI, layout, navigation, interaction, animation, visible state changes, and user-facing behavior. Acceptable forms include screenshots (clearly labeled, not cropped ambiguously), screen recordings (10-30 seconds showing interaction), rendered output artifacts, and structured UI captures. Before/after evidence is required for changes. Visual proof must show correct state, behavior, and context. Explanations without screenshots do not qualify.
+Visual proof standards define what constitutes valid visual evidence for work affecting anything a user can see or interact with. Visual proof is required for UI, layout, navigation, interaction, animation, visible state changes, and user-facing behavior. Acceptable forms include screenshots (clearly labeled, not cropped ambiguously), screen recordings (10-30 seconds showing interaction), rendered output artifacts, and structured UI captures. Before/after evidence is required for changes. Visual proof must show correct state, behavior, and context. Explanations without screenshots do not qualify. This document does not define completion or truth on its own.
 
 ## Outline
 
@@ -12313,6 +12483,7 @@ Visual proof standards define what constitutes valid visual evidence for work af
 - Before/After Evidence
 - Tooling Expectations
 - When Visual Proof Is Not Possible
+- Non-Visual and Phenomenological Cases
 - What Does Not Count as Visual Proof
 
 ---
@@ -12327,8 +12498,9 @@ This page defines what I mean by visual proof.
 
 If work affects anything a user can see or interact with, I expect direct visual evidence that it behaves as intended.
 
-Visual proof replaces explanation.
-If it can’t be shown, it isn’t verified.
+For visually observable behavior, visual proof replaces explanation.
+
+If a visual claim cannot be shown, it is not verified.
 
 ---
 
@@ -12412,8 +12584,8 @@ Unlabeled screenshots are not acceptable.
 ## 🔄 Before / After Evidence
 
 For changes that modify existing behavior or UI:
-• Include “before” and “after” visuals when feasible
-• If “before” is unavailable, state why
+• Include "before" and "after" visuals when feasible
+• If "before" is unavailable, state why
 
 This makes regressions and improvements obvious.
 
@@ -12439,8 +12611,25 @@ If visual proof cannot be produced, the output must explicitly state:
 • what alternative verification was used
 • what remains unverified
 
-“Not possible” is acceptable.
-“Not mentioned” is not.
+"Not possible" is acceptable.
+"Not mentioned" is not.
+
+---
+
+## 🔊 Non-Visual and Phenomenological Cases
+
+Some valid claims cannot be verified visually, including:
+• audio playback through speakers
+• recording of real-world sound
+• perceptual or ergonomic qualities
+• subjective experience or "feel"
+
+In these cases, visual proof may be supplemented or replaced by:
+• explicit human verification
+• acknowledgment of verification limits
+
+Visual Proof Standards do not override the limits defined in
+**Verification & Evidence** (klappy://canon/verification-and-evidence).
 
 ---
 
@@ -12450,7 +12639,7 @@ The following do not qualify:
 • descriptions of expected behavior
 • screenshots of code
 • diagrams without runtime evidence
-• “it looks correct to me”
+• "it looks correct to me"
 • reasoning without observation
 
 ---
@@ -12479,13 +12668,16 @@ It is part of the work.
 
 ## 💡 Closing Note
 
-This standard exists to eliminate ambiguity.
+This standard exists to eliminate ambiguity for visual claims.
 
-If something works:
+If something visually observable works:
 • it can be shown
 
-If it can’t be shown:
-• it isn’t verified
+If a visual claim can't be shown:
+• it isn't verified
+
+For non-visual verification requirements, see
+**Verification & Evidence** (klappy://canon/verification-and-evidence).
 
 ---
 
@@ -22472,7 +22664,11 @@ A PRD must be created before attempts can begin. When ready:
 
 # Fluent Mobile — Agent Rules
 
-> **These rules are NON-NEGOTIABLE.** Violation results in attempt failure.
+> **These rules are NON-NEGOTIABLE.**  
+> They are a concrete instantiation of the canon principle  
+> **"Verification & Evidence" (klappy://canon/verification-and-evidence).**
+
+Violation results in attempt failure.
 
 ---
 
@@ -22482,75 +22678,71 @@ A PRD must be created before attempts can begin. When ready:
 
 - Building code is NOT done
 - "It should work" is NOT verification
-- Passing automated tests is NOT sufficient for UI/audio functionality
-- You MUST capture screenshots AFTER verification, not as a substitute for it
+- Passing automated tests is NOT sufficient for UI or audio functionality
+- Screenshots are evidence ONLY if captured *after* real observation
 
 **Correct behavior:**
 1. Build the feature
-2. Test it yourself (run it, observe it)
-3. Capture evidence of what you OBSERVED
-4. THEN claim it works (with evidence)
+2. Run it yourself
+3. Observe the actual behavior
+4. Capture evidence of what you observed
+5. THEN claim it works
 
 **Incorrect behavior:**
 - Building code and saying "I fixed it"
-- Running tests and assuming that means it works
-- Claiming completion without visual verification
+- Assuming tests imply functionality
+- Claiming completion without observational evidence
+
+> Evidence must correspond to the **specific claim being made**, not a nearby or idealized state.
 
 ---
 
 ## Rule 2: NO FAKE DATA — EVIDENCE MUST BE REAL
 
-**You MUST NOT create fake/mock data and present it as evidence.**
+**You MUST NOT present simulated or fabricated data as real evidence.**
 
-- Random number generators producing "waveforms" = FRAUD
-- Simulated functionality = FRAUD
-- Screenshots of fake data = WORTHLESS
-- Mock data is acceptable ONLY if clearly labeled as mock
+- Random waveform generators ≠ audio playback
+- Simulated UI states ≠ working functionality
+- Screenshots of fake data are invalid
+- Mock data is allowed ONLY if explicitly labeled as mock
+
+> The violation is not using mock data —  
+> **the violation is representing mock data as real.**
 
 **Why this matters:**
-- Fake evidence undermines the entire verification system
-- Human time spent reviewing fake evidence is wasted
-- Trust is destroyed when fake evidence is discovered
-- The whole point of ODD is that assertions aren't trusted
-
-**Correct behavior:**
-- Show REAL data from REAL functionality
-- If functionality doesn't work, say so
-- If you can't verify something, request human verification
-
-**Incorrect behavior:**
-- Generating random waveform bars to look like audio is playing
-- Taking screenshots of simulated behavior
-- Presenting anything fake as evidence of working functionality
+- Fake evidence destroys trust
+- Human review time is wasted
+- ODD explicitly rejects unverified assertions
 
 ---
 
 ## Rule 3: REQUEST HUMAN VERIFICATION FOR UNVERIFIABLE THINGS
 
-**You CANNOT verify:**
-- Audio plays through speakers
-- Recording captures actual sound
-- User experience "feels right"
-- Anything requiring human senses
+Some properties are **phenomenological** and cannot be verified by an agent, including:
+
+- Audio playing through speakers
+- Recording capturing real-world sound
+- Subjective UX or "feel"
+- Any behavior requiring human senses
 
 **When you cannot verify something:**
-1. Be explicit: "I cannot verify this"
-2. Request human verification: "Please test X and confirm"
-3. Do NOT claim it works until human confirms
-4. Do NOT take shortcuts to avoid this
+1. State explicitly: "I cannot verify this"
+2. Request human verification
+3. Do NOT claim success
+4. Do NOT simulate evidence to bypass this step
 
 ---
 
 ## Rule 4: BE HONEST ABOUT LIMITATIONS
 
-**You MUST be honest about:**
-- What you built vs what works
-- What you tested vs what you assumed
-- What you can verify vs what requires human verification
+You MUST be explicit about:
+- What you built vs. what actually works
+- What you tested vs. what you assumed
+- What requires human confirmation
 
 **Do NOT:**
-- Claim things work that you haven't verified
-- Hide limitations to appear more productive
+- Claim unverified success
+- Hide limitations to appear productive
 - Take shortcuts that compromise verification
 
 ---
@@ -22561,15 +22753,16 @@ A PRD must be created before attempts can begin. When ready:
 - Trust damaged
 - Time wasted
 - Procedural violation documented permanently
+- Outputs may NOT be promoted, reused, or cited as working references
 
 ---
 
 ## Origin
 
 These rules were established after v0.3 attempt-001 FAILED due to:
-1. Agent claiming "I fixed it" without verification
-2. Agent creating fake waveform data with random number generators
-3. Agent presenting screenshots of fake data as evidence
+1. Claiming success without verification
+2. Creating fake waveform data via random generators
+3. Presenting simulated screenshots as evidence
 
 This must never happen again.
 

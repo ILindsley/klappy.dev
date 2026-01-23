@@ -13,9 +13,13 @@ tags: ["visual-proof", "evidence"]
 
 > What "prove it visually" actually means for UI and interaction work.
 
+> This document is a specialization of  
+> **Verification & Evidence** (klappy://canon/verification-and-evidence).  
+> It applies only to claims about **visually observable behavior**.
+
 ## Description
 
-Visual proof standards define what constitutes valid visual evidence for work affecting anything a user can see or interact with. Visual proof is required for UI, layout, navigation, interaction, animation, visible state changes, and user-facing behavior. Acceptable forms include screenshots (clearly labeled, not cropped ambiguously), screen recordings (10-30 seconds showing interaction), rendered output artifacts, and structured UI captures. Before/after evidence is required for changes. Visual proof must show correct state, behavior, and context. Explanations without screenshots do not qualify.
+Visual proof standards define what constitutes valid visual evidence for work affecting anything a user can see or interact with. Visual proof is required for UI, layout, navigation, interaction, animation, visible state changes, and user-facing behavior. Acceptable forms include screenshots (clearly labeled, not cropped ambiguously), screen recordings (10-30 seconds showing interaction), rendered output artifacts, and structured UI captures. Before/after evidence is required for changes. Visual proof must show correct state, behavior, and context. Explanations without screenshots do not qualify. This document does not define completion or truth on its own.
 
 ## Outline
 
@@ -27,6 +31,7 @@ Visual proof standards define what constitutes valid visual evidence for work af
 - Before/After Evidence
 - Tooling Expectations
 - When Visual Proof Is Not Possible
+- Non-Visual and Phenomenological Cases
 - What Does Not Count as Visual Proof
 
 ---
@@ -41,8 +46,9 @@ This page defines what I mean by visual proof.
 
 If work affects anything a user can see or interact with, I expect direct visual evidence that it behaves as intended.
 
-Visual proof replaces explanation.
-If it can’t be shown, it isn’t verified.
+For visually observable behavior, visual proof replaces explanation.
+
+If a visual claim cannot be shown, it is not verified.
 
 ---
 
@@ -126,8 +132,8 @@ Unlabeled screenshots are not acceptable.
 ## 🔄 Before / After Evidence
 
 For changes that modify existing behavior or UI:
-• Include “before” and “after” visuals when feasible
-• If “before” is unavailable, state why
+• Include "before" and "after" visuals when feasible
+• If "before" is unavailable, state why
 
 This makes regressions and improvements obvious.
 
@@ -153,8 +159,25 @@ If visual proof cannot be produced, the output must explicitly state:
 • what alternative verification was used
 • what remains unverified
 
-“Not possible” is acceptable.
-“Not mentioned” is not.
+"Not possible" is acceptable.
+"Not mentioned" is not.
+
+---
+
+## 🔊 Non-Visual and Phenomenological Cases
+
+Some valid claims cannot be verified visually, including:
+• audio playback through speakers
+• recording of real-world sound
+• perceptual or ergonomic qualities
+• subjective experience or "feel"
+
+In these cases, visual proof may be supplemented or replaced by:
+• explicit human verification
+• acknowledgment of verification limits
+
+Visual Proof Standards do not override the limits defined in
+**Verification & Evidence** (klappy://canon/verification-and-evidence).
 
 ---
 
@@ -164,7 +187,7 @@ The following do not qualify:
 • descriptions of expected behavior
 • screenshots of code
 • diagrams without runtime evidence
-• “it looks correct to me”
+• "it looks correct to me"
 • reasoning without observation
 
 ---
@@ -193,13 +216,16 @@ It is part of the work.
 
 ## 💡 Closing Note
 
-This standard exists to eliminate ambiguity.
+This standard exists to eliminate ambiguity for visual claims.
 
-If something works:
+If something visually observable works:
 • it can be shown
 
-If it can’t be shown:
-• it isn’t verified
+If a visual claim can't be shown:
+• it isn't verified
+
+For non-visual verification requirements, see
+**Verification & Evidence** (klappy://canon/verification-and-evidence).
 
 ---
 

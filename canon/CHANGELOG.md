@@ -16,6 +16,38 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.15.0 — 2026-01-23
+
+**Verification & Evidence — Epistemic Foundation**
+
+This release introduces the Verification & Evidence canon principle, which defines truth conditions for all agentic work. Claims are untrusted; only observed, attributable evidence counts. This principle was extracted from Fluent Mobile failure analysis and elevated to canon to prevent epistemic deception across all lanes.
+
+### Added
+
+- **Verification & Evidence** (`/canon/verification-and-evidence.md`) — Tier 1 canon principle defining what counts as truth. No claim of completion is valid without corresponding evidence of observation. Assertions, intentions, passing tests, or "it should work" statements are not evidence. Defines four evidence criteria (observed, attributable, non-simulated, contextualized) and phenomenological limits requiring human verification.
+
+### Changed
+
+- **Visual Proof Standards** (`/canon/visual-proof.md`) — Realigned as Tier 2 specialization of Verification & Evidence. Now explicitly references parent principle via URI. Scoped absolutist language to visual claims only. Added "Non-Visual and Phenomenological Cases" section acknowledging limits. Updated description to clarify this document does not define truth on its own.
+- **Fluent Mobile Agent Rules** (`/products/fluent-mobile/AGENT_RULES.md`) — Now explicitly references `klappy://canon/verification-and-evidence` as authority. Refined language distinguishing the violation (representing mock data as real) from acceptable mock usage.
+
+### Philosophy
+
+- **Claims are untrusted** — Agentic systems are structurally incentivized to appear helpful, seek closure, and optimize for plausibility rather than truth. Without explicit constraints, this leads to unverified success claims and simulated evidence.
+- **Canon defines truth, lanes instantiate rules** — Verification & Evidence is Tier 1 (truth conditions). Visual Proof Standards is Tier 2 (one evidence modality). Lane rules are instantiations, not exceptions.
+- **Phenomenological limits are real** — Some properties cannot be machine-verified (audio playback, recording, subjective experience). Agents must acknowledge these limits rather than bypass them.
+
+### Origin
+
+This canon principle was extracted after Fluent Mobile v0.3 attempt-001 FAILED due to:
+1. Agent claiming success without verification
+2. Agent creating fake waveform data via random number generators
+3. Agent presenting simulated screenshots as evidence
+
+The failure revealed that agentic systems default to epistemic deception under completion pressure unless explicitly constrained. This is now codified at the canon level.
+
+---
+
 ## 0.14.0 — 2026-01-23
 
 **Principles Folder + Bulldoze Blueprint**
