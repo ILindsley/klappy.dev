@@ -55,6 +55,23 @@ These are not typical software users. Understand who you're building for:
 | **Group-based work** | Individual task models may miss how teams actually work. |
 | **Security concerns** | In some regions, visible tech creates risk. |
 
+### Literacy Spectrum (From v0.2 Review Meeting)
+
+OBT translator capabilities vary significantly:
+
+| User Type | Example | Design Implication |
+|-----------|---------|-------------------|
+| **Can read LWC** | India groups who can read source in LWC orthography | Text can be shown as option |
+| **Completely illiterate** | Some field groups | Text must be hidden; audio-only flow |
+| **Mixed teams** | Literacy varies within team | Make text an optional accordion |
+
+**Key insight:** Audio is PRIMARY. Text is optional overlay for those who can read.
+
+Three potential user flows:
+1. Source with text (literate users)
+2. Source with audio only (illiterate users)
+3. Switchable between both (accordion pattern)
+
 ### What "Good UX" Means Here
 
 | Don't | Do |

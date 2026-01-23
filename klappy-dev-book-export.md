@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-23T21:27:00.213Z
+Generated: 2026-01-23T22:22:24.828Z
 Total Files: 167
 
 This is a documentation export of all markdown files from the klappy.dev
@@ -22282,6 +22282,23 @@ These are not typical software users. Understand who you're building for:
 | **Group-based work** | Individual task models may miss how teams actually work. |
 | **Security concerns** | In some regions, visible tech creates risk. |
 
+### Literacy Spectrum (From v0.2 Review Meeting)
+
+OBT translator capabilities vary significantly:
+
+| User Type | Example | Design Implication |
+|-----------|---------|-------------------|
+| **Can read LWC** | India groups who can read source in LWC orthography | Text can be shown as option |
+| **Completely illiterate** | Some field groups | Text must be hidden; audio-only flow |
+| **Mixed teams** | Literacy varies within team | Make text an optional accordion |
+
+**Key insight:** Audio is PRIMARY. Text is optional overlay for those who can read.
+
+Three potential user flows:
+1. Source with text (literate users)
+2. Source with audio only (illiterate users)
+3. Switchable between both (accordion pattern)
+
 ### What "Good UX" Means Here
 
 | Don't | Do |
@@ -23011,7 +23028,7 @@ Stop if:
 
 # Fluent Mobile PRD — Active Version
 
-**Current Active PRD:** [v0.2](attempts/prd-v0.2/PRD.md)
+**Current Active PRD:** v0.3 (to be created)
 
 ---
 
@@ -23019,8 +23036,77 @@ Stop if:
 
 | Version | Status | Location | Attempts |
 |---------|--------|----------|----------|
-| **v0.2** | **ACTIVE** | [attempts/prd-v0.2/PRD.md](attempts/prd-v0.2/PRD.md) | None yet |
+| **v0.3** | **PENDING** | To be created | — |
+| v0.2 | CLOSED | [attempts/prd-v0.2/PRD.md](attempts/prd-v0.2/PRD.md) | [001](attempts/prd-v0.2/attempt-001/) (SUCCESS) |
 | v0.1 | CLOSED | [attempts/prd-v0.1/PRD.md](attempts/prd-v0.1/PRD.md) | [001](attempts/prd-v0.1/attempt-001/) (SUCCESS) |
+
+---
+
+## v0.3 Requirements (From v0.2 Learnings + Review Meeting)
+
+### Must Address
+
+1. **Single Draft Section**
+   - Consolidate recording + playback into one section
+   - One audio, one waveform, one source of truth
+   - Eliminates "same audio in two places" confusion
+
+2. **Waveform Dual-Mode**
+   - Live mode: Animated during recording/playback (confirms "it's working")
+   - Timeline mode: Static when stopped, enables seeking (like YouTube seek bar)
+   - Fixed-size regardless of duration
+   - Shows amplitude (silence vs. speech)
+
+3. **Lane-Level Infrastructure**
+   - Establish `infra/` folder at lane level
+   - Attempts copy, iterate, merge back if accepted
+   - Pattern: Don't rebuild CI/CD each attempt
+
+4. **Play/Pause Functionality**
+   - Add pause to preserve position
+   - Pause triggers timeline mode on waveform
+   - Critical for longer verses
+
+### Should Address
+
+1. **Reduce Scrolling**
+   - Balance large touch targets with screen efficiency
+   - "Most phones can squish more" — optimize space
+   - Full workflow visible without scrolling if possible
+
+2. **Record Continue vs. Overwrite**
+   - Differentiate "continue recording" (append) from "start new" (overwrite)
+   - Current behavior overwrites without warning
+
+3. **No Multiple Drafts (Yet)**
+   - One recording per stage
+   - Scribe experience: multiple versions caused confusion
+   - Avoid version management complexity for now
+
+### Future Considerations (Not v0.3)
+
+1. **Timestamped Comments**
+   - Tap waveform to add comment at specific time
+   - Waveform-as-timeline enables this
+
+2. **User Literacy Spectrum**
+   - Text as optional accordion (hidden by default)
+   - Three flows: text source, audio source, switchable
+   - Audio is PRIMARY, text is overlay
+
+3. **AI Features (Web-Only?)**
+   - Audio-to-text conversion
+   - AI evaluation/analysis
+   - Audio cleanup
+   - Consider: Mobile captures, Web processes
+
+4. **Editing Primitives**
+   - Cut/insert/trim
+   - Much later — after core flow validated
+
+### See Also
+
+- [v0.2 Attempt 001 Learnings](attempts/prd-v0.2/attempt-001/evidence/LEARNINGS.md)
 
 ---
 

@@ -1,10 +1,17 @@
 # PRD: Fluent Mobile (PoC)
 
+> **This PRD version is CLOSED.** See [v0.3 requirements](../../PRD.md) for what comes next.
+> 
+> **Key learnings from v0.2:**
+> - Consolidate draft/review into single section
+> - Waveform needs dual modes (live vs. timeline)
+> - Infrastructure should live at lane level
+
 | Field           | Value            |
 |-----------------|------------------|
 | **PRD Version** | v0.2             |
 | **Lane**        | fluent-mobile    |
-| **Status**      | Active |
+| **Status**      | CLOSED (superseded by v0.3) |
 | **Created**     | 2026-01-23       |
 | **Updated**     | 2026-01-23       |
 | **Author**      | Chris Klapp      |

@@ -1,8 +1,16 @@
 # Fluent Mobile — PRD v0.2 Attempts
 
-**PRD Status:** ACTIVE
+**PRD Status:** CLOSED (superseded by v0.3)
 **PRD Location:** [PRD.md](PRD.md)
 **Prior Version:** [v0.1](../prd-v0.1/PRD.md)
+
+---
+
+## Attempt Index
+
+| Attempt | Status | Key Learnings |
+|---------|--------|---------------|
+| [001](attempt-001/) | SUCCESS | Dual-section UX confusing; waveform dual-mode needed; lane-level infra pattern |
 
 ---
 
