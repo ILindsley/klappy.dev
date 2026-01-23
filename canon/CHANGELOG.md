@@ -16,6 +16,30 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.14.0 — 2026-01-23
+
+**Principles Folder + Bulldoze Blueprint**
+
+This release introduces the `canon/principles/` folder and adds the first principle: "Bulldoze the App, Keep the Blueprint" — a tier 2 canon document articulating how AI collapsed the scarcity of code generation and shifted the asset to durable intent, constraints, decisions, and evidence.
+
+### Added
+
+- **Principles folder** (`/canon/principles/`) — New canon category for principle articulations grounded in lived evidence
+- **Bulldoze the App, Keep the Blueprint** (`/canon/principles/bulldoze-but-keep-the-blueprint.md`) — When code stops being the scarce resource. Documents the cost-model inversion caused by AI: code is disposable, blueprints (intent, constraints, decisions, evidence) are durable. Grounded in AAG Risk Dashboard and BT tooling experience.
+
+### Philosophy
+
+- **Code is disposable, blueprints are not** — If regeneration is cheaper than understanding, delete the code. What stays: testable requirements, verifiable constraints, evidence tied to observable outcomes.
+- **Restartability is instrumentation, not waste** — Attempts as controlled experiments preserve learning while bounding context drift.
+- **Evidence beats explanation** — In AI-assisted work, explanations are cheap. Proof is not.
+
+### Notes
+
+- Tier 2: Durable but experiential and explanatory rather than axiomatic
+- Challenge acknowledged: blueprints rot too if not executable, not tied to verification, or if they become narrative instead of constraint
+
+---
+
 ## 0.13.0 — 2026-01-23
 
 **Lane Self-Containment Constraint**
