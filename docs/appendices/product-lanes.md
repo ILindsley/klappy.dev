@@ -220,14 +220,43 @@ Lane isolation prevents cascading reruns.
 
 ## Implications for Tooling and Docs
 
-### Where PRDs Live
+### Lane Self-Containment (Critical)
+
+**A product lane MUST be self-contained.**
+
+All artifacts required to understand and execute against a lane live within `products/<lane>/`:
 
 ```
-/docs/PRD/
+/products/<lane>/
+  PRD.md                              # Lane PRD (authoritative)
+  README.md                           # Lane overview
+  KICKOFF.md                          # Attempt instructions
+  attempts/prd-vX.Y/attempt-NNN/      # Attempt artifacts
+  src/                                # Implementation source
+  dist/                               # Build output (if applicable)
+```
+
+**Why this matters:**
+- Agents can load a single directory and have complete context
+- No cross-directory dependencies to track
+- Lane can be moved, copied, or archived as a unit
+- Documentation drift cannot split a lane's truth across locations
+
+**If you find yourself creating lane artifacts outside `products/<lane>/`, stop.**
+
+### Where PRDs Live
+
+PRDs are lane-contained:
+
+```
+/products/
   website/PRD.md
   ai-navigation/PRD.md
   agent-skill/PRD.md
+  fluent-mobile/PRD.md
 ```
+
+> ⚠️ **Not** `/docs/PRD/<lane>/PRD.md`. That path pattern is deprecated.
 
 ### Where Attempts Live
 
@@ -238,6 +267,7 @@ Attempts are lane-contained:
   website/attempts/prd-vX.Y/attempt-NNN/
   ai-navigation/attempts/prd-vX.Y/attempt-NNN/
   agent-skill/attempts/prd-vX.Y/attempt-NNN/
+  fluent-mobile/attempts/prd-vX.Y/attempt-NNN/
 ```
 
 Note: Root `/attempts/**` is legacy (read-only). See `/attempts/README.md`.

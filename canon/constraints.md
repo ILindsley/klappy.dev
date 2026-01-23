@@ -15,7 +15,7 @@ tags: ["constraints", "assumptions"]
 
 ## Description
 
-Constraints define the baseline assumptions and design defaults applied to most work. They cover offline-first design, long-term maintainability, interoperability, stateless architectures, AI as accelerator (not authority), evidence over assertion, contextual UX, ephemeral artifacts, and explicit tradeoffs. Each constraint includes what is assumed, why it matters, what it forces, and when it does not apply. These are not universal best practices but reflect specific environments and problems.
+Constraints define the baseline assumptions and design defaults applied to most work. They cover offline-first design, long-term maintainability, interoperability, stateless architectures, AI as accelerator (not authority), evidence over assertion, contextual UX, ephemeral artifacts, explicit tradeoffs, and lane self-containment. Each constraint includes what is assumed, why it matters, what it forces, and when it does not apply. These are not universal best practices but reflect specific environments and problems.
 
 ## Outline
 
@@ -29,6 +29,7 @@ Constraints define the baseline assumptions and design defaults applied to most 
 - UX Is Contextual, Not Universal
 - Ephemeral Artifacts Are Acceptable
 - Explicit Tradeoffs
+- Lane Self-Containment
 
 ---
 
@@ -271,6 +272,31 @@ Every decision excludes alternatives. Unspoken tradeoffs cause confusion later.
 
 **When this does not apply**
 • Truly trivial decisions
+
+---
+
+## 11. Lane Self-Containment
+
+I require product lanes to be self-contained units.
+
+**Why this matters**
+
+When lane artifacts are scattered across directories:
+• Agents load incomplete context
+• Documentation drifts from implementation
+• Lanes cannot be moved, archived, or reasoned about as units
+• "Where does X live?" becomes a recurring question
+
+**What this forces**
+• PRD, README, attempts, src, and all lane artifacts live within `products/<lane>/`
+• No cross-directory dependencies for lane-specific content
+• A lane can be understood by reading only its directory
+• If creating lane artifacts outside the lane folder, stop and reconsider
+
+**When this does not apply**
+• Shared canon (which lanes reference but do not own)
+• Cross-lane tooling (which is lane-agnostic by design)
+• Legacy paths being migrated (must be documented and time-boxed)
 
 ---
 

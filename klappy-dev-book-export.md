@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-22T20:49:00.584Z
-Total Files: 164
+Generated: 2026-01-23T20:28:03.463Z
+Total Files: 167
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -20,11 +20,11 @@ details (attempts, version folders, source code).
 - **Root** (1 files)
 - **About** (6 files)
 - **Canon** (19 files)
-- **Documentation** (56 files)
+- **Documentation** (53 files)
 - **Infrastructure** (9 files)
 - **Interfaces & Contracts** (6 files)
 - **ODD (Outcomes-Driven Development)** (23 files)
-- **Products** (33 files)
+- **Products** (39 files)
 - **Projects** (6 files)
 - **Visual Design System** (5 files)
 
@@ -1948,762 +1948,6 @@ _Additional context, references, or considerations._
 - Attempts are sealed when CLOSED or ABANDONED
 
 See: `/docs/appendices/attempt-lifecycle.md`
-
-
-
---------------------------------------------------------------------------------
-📄 File: docs/PRD/ai-navigation/PRD.md
---------------------------------------------------------------------------------
-
-# PRD: AI Navigation Interface
-
-| Field           | Value            |
-|-----------------|------------------|
-| **PRD Version** | v1.0             |
-| **Lane**        | ai-navigation    |
-| **Status**      | Active           |
-| **Created**     | 2026-01-17       |
-| **Author**      | Chris Klapp      |
-
----
-
-## Interface Contracts
-
-This lane MUST remain compatible with:
-
-- manifest >=2.0.0 <3.0.0
-- build-output >=3.0.0 <4.0.0
-- attempt-cli >=2.0.0 <3.0.0
-
-If MCP is used, it is currently draft (`mcp@0.1.x`) and MUST be treated as unstable.
-
----
-
-## Objective
-
-Enable humans to ask questions of the ODD corpus and be:
-
-- Answered accurately
-- Guided progressively
-- Linked to the right documents
-- Without reading everything
-
----
-
-## Background
-
-This is an AI layer over the documentation.
-
-It helps humans understand ODD through conversation.
-
-This is NOT agent tooling.
-This is NOT teaching agents to execute ODD.
-This is AI helping humans navigate and understand.
-
----
-
-## Core Capability
-
-- Load all site content + Medium articles into retrievable context
-- Answer questions conversationally
-- Navigate users to relevant docs
-- Respect progressive disclosure tiers
-
----
-
-## In Scope
-
-- RAG over markdown content
-- Citation + linking to canon/docs
-- Progressive depth control ("go deeper", "show sources")
-- Conversational Q&A interface
-- Eventually voice (explicitly deferred to future version)
-
----
-
-## Explicitly Out of Scope
-
-- Teaching agents how to execute ODD (belongs to agent-skill lane)
-- Modifying the canon
-- Running attempts
-- Enforcing process
-- Website UI/UX concerns (belongs to website lane)
-
----
-
-## Success Criteria
-
-- [ ] User can ask "What is ODD?" and get a correct summary + links
-- [ ] Follow-up questions narrow scope instead of expanding noise
-- [ ] Responses always cite source docs
-- [ ] No hallucinated concepts outside corpus
-- [ ] Progressive disclosure respected (Tier 0 answers don't dump Tier 2 content)
-
----
-
-## Definition of Done
-
-An attempt against this PRD is complete when:
-
-- [ ] RAG retrieval working over canon + docs
-- [ ] Test questions answered correctly with citations
-- [ ] Hallucination check passed (no invented concepts)
-- [ ] Progressive depth demonstrated (follow-up narrows, doesn't explode)
-- [ ] Self-audit completed with explicit tradeoffs
-
----
-
-## Primary User
-
-Humans trying to understand and evaluate ODD.
-
----
-
-## Constraints
-
-This PRD is shaped by Canon constraints:
-
-- Evidence over assertion
-- AI as accelerator, not authority
-- Grounding required (no unmoored responses)
-- Maintainability over cleverness
-
----
-
-## Attempt Policy
-
-This PRD may be attempted multiple times.
-
-- Each attempt is evaluated independently
-- Failed attempts inform future attempts or PRD revisions
-- Attempts are sealed when CLOSED or ABANDONED
-
-Attempts live at: `/attempts/ai-navigation/prd-v1.0/attempt-NNN/`
-
----
-
-## Related Documents
-
-- Lane architecture: `/docs/appendices/product-lanes.md`
-- Canon constraints: `/canon/constraints.md`
-- Definition of Done: `/canon/definition-of-done.md`
-
-
-
---------------------------------------------------------------------------------
-📄 File: docs/PRD/website/PRD-legacy-v0.3.md
---------------------------------------------------------------------------------
-
----
-uri: klappy://docs/prd/website/legacy-v0.3
-title: "Website PRD (Legacy v0.3)"
-audience: docs
-exposure: hidden
-tier: 3
-voice: neutral
-stability: deprecated
-status: deprecated
-superseded_by: PRD.md
-tags: ["docs", "prd", "website", "legacy", "deprecated"]
----
-
-# PRD Identity (LEGACY)
-
-> **DEPRECATED:** This PRD has been superseded by [PRD.md](PRD.md) (v1.2).
-> This file is preserved for historical reference only.
-
-| Field                       | Value       |
-| --------------------------- | ----------- |
-| **PRD Version**             | v0.3        |
-| **Status**                  | Deprecated  |
-| **Created**                 | 2026-01-16  |
-| **Author**                  | Chris Klapp |
-| **Preview Deploy Required** | Yes         |
-| **Superseded By**           | PRD.md (v1.2) |
-
----
-
-## Objective
-
-Make klappy.dev feel like a usable 2026 portfolio experience (not just a functional proof) by adding shareable deep links, real LLM integration, mobile-responsive navigation, and verified Cloudflare Pages branch deploys.
-
----
-
-## Background
-
-PRD v0.1 proved Phase 1 mechanics (manifest-driven content, three-pane UI, deterministic action primitives) across multiple independent attempts.
-
-However, attempt records explicitly left critical user-facing gaps unproven or unimplemented:
-
-- Deep linking / shareable state (not implemented)
-- Real LLM integration (mock provider only)
-- Cloudflare Pages deploy verification (not tested)
-
-In parallel, live-site UX feedback shows the UI is currently experienced as a barrier:
-
-- No navigational deep links (resource or section)
-- Navigation density causes visual fatigue
-- Mobile usability is effectively broken
-- Visual polish does not match 2026 portfolio expectations (should be modern, legible, and worthy of the content)
-
-This PRD exists to convert those gaps into explicit, testable requirements.
-
----
-
-## Success Criteria
-
-- [ ] **Deep links work**: the URL can represent the current resource and optional section anchor; copying the URL + reloading restores the same state.
-- [ ] **Section linkability is real**: major headings are anchorable and can be navigated to reliably (no collisions).
-- [ ] **Navigation is usable**: sidebar is no longer a wall of items; hierarchy is visible and progressive disclosure exists.
-- [ ] **Mobile is supported**: navigation and chat are usable on phones and tablets (portrait/landscape) without obscuring reading.
-- [ ] **Real LLM integration works**: chat uses a real model (default: GPT-4o-mini unless a smaller GPT-5 tier is available) via a Worker-compatible endpoint; no client-side secrets.
-- [ ] **Cloudflare Pages branch deploys are verified**: preview deploys exist for branches, and an attempt can record a working preview URL as evidence.
-- [ ] **Evidence bundle closes the loop**: build + verification + screenshots (desktop + mobile) are produced and indexed per attempt.
-
----
-
-## Non-Goals (Anti-Scope)
-
-- Not: SSR, Next.js migration, or multi-page routing.
-- Not: Authentication, user accounts, or multi-user chat history.
-- Not: Perfect SEO parity with a multi-page docs site (deep links + sane metadata only).
-- Not: Full MCP export (may remain future phase).
-- Not: A “portfolio template” or heavy visual animation system.
-
----
-
-## Approach
-
-This is a UI/UX + integration upgrade that preserves the v0.1 content model:
-
-- Canonical content remains static and local (synced to `/public/content/`)
-- Manifest remains the authoritative inventory surface
-- The UI becomes linkable and responsive
-- The chat becomes real (LLM-backed) while remaining constrained and evidence-oriented
-
----
-
-## Requirements
-
-### 1) Navigation & Linkability
-
-**1.1 URL contract**
-
-The application MUST encode navigable state into the URL such that it is shareable and reload-safe.
-
-- URL MUST represent:
-  - resource (by `uri`, not by title)
-  - optional section anchor (heading id)
-- URL SHOULD be human-legible (query + hash), but correctness is primary.
-
-Recommended contract (example):
-
-- `/?r=klappy://canon/constraints#offline-first-default`
-
-**1.2 Restore on load**
-
-On initial load and on browser navigation (back/forward), the app MUST:
-
-- Open the resource referenced by `r` if present
-- Scroll to and briefly highlight the section referenced by the hash if present
-
-**1.2.1 Round-trip integrity**
-
-A deep link is considered valid only if:
-
-- Loading the URL opens the same resource and section
-- Navigating away and using browser back/forward restores the same state
-- Invalid or unknown resources degrade gracefully (default entrypoint + no crash)
-- Invalid anchors do not break reading or navigation
-
-**1.3 Anchor stability**
-
-- Heading anchors MUST be URL-safe and stable.
-- Duplicate headings within a document MUST produce unique anchors (e.g., `heading`, `heading-2`, ...).
-
-**1.4 UI affordance**
-
-- Headings SHOULD expose a “copy link” affordance (hover on desktop, tap-accessible on mobile).
-
----
-
-### 2) Information Architecture (reduce cognitive load)
-
-**2.1 Progressive disclosure**
-
-- Navigation MUST provide collapsible groupings (at minimum by top-level category).
-- Default view MUST not render as an unbounded wall of items on first load.
-
-**2.2 Orientation-first defaults**
-
-- Navigation SHOULD prioritize the most important entrypoints for first-time visitors (e.g., public ODD + Canon index + projects index).
-- Navigation SHOULD support “recently opened” resources (local-only).
-
-**2.3 Active state clarity**
-
-- Current resource MUST be visually distinct.
-- When a section anchor is active, the reading pane MUST communicate it (scroll + highlight).
-
-**2.4 Cognitive load constraint**
-
-On first load, the navigation MUST expose no more than one screen-height of primary options without interaction.
-
-Additional content MUST be revealed progressively (collapse, expand, filter, or context).
-
-**2.5 Progressive Disclosure Model**
-
-Goal: Prevent overwhelm by default. Reveal complexity only after user intent.
-
-Disclosure tiers:
-
-- **Tier 0 (Immediate Orientation)**: Minimal, calming entry. One obvious next step. No decisions required.
-- **Tier 1 (Tell Me More)**: Core principles + curated entrypoints. Hints that deeper structure exists.
-- **Tier 2 (Machinery)**: Full canon, appendices, attempts, CLI/process, lifecycle mechanics.
-
-Tier assignments are encoded in the manifest via the `tier` field.
-
-**2.6 Repo Disclosure Requirements**
-
-Progressive disclosure applies to documentation, not just UI:
-
-- `README.md` MUST be a narrative scroll (no folder trees, no path dumps up front).
-- `README.md` MUST NOT enumerate all subfolders or file paths in the first screen.
-- `canon/index.md` MUST present a "Start here / Go deeper / Edge cases" structure without enumerating all files.
-- Tier 2 content (appendices, lifecycle, confidence scores) MUST appear only after explicit scroll or navigation.
-
-**2.7 Manifest Contract: Tier Field**
-
-Each resource in `manifest.json` MUST include a `tier` field:
-
-- `tier`: 0, 1, or 2
-
-Tier assignment rules:
-
-- **Tier 0**: Public entrypoints (ODD public, Why This Exists, Projects Index)
-- **Tier 1**: Core canon (Canon Index, Constraints, Definition of Done, Bio, Credibility)
-- **Tier 2**: Everything else (appendices, templates, internal docs, changelogs)
-
-The manifest is the authoritative source for tier assignments. UI and agents MUST respect these tiers.
-
-**2.8 Site Disclosure Requirements**
-
-- Sidebar MUST NOT render the full manifest as a wall by default.
-- Sidebar MUST show Tier 0 + Tier 1 resources first.
-- Tier 2 resources MUST require explicit expansion ("Show more", "Expand", or equivalent affordance).
-- Default view MUST expose no more than 7 nav items without scrolling (desktop).
-- On mobile, navigation MUST NOT exceed a single-column view on first load.
-
-**2.9 Progressive Disclosure Acceptance Criteria**
-
-An attempt satisfies progressive disclosure requirements if:
-
-- [ ] First load shows ≤ 7 nav items visible without scrolling (desktop).
-- [ ] First load shows single-column navigation (mobile).
-- [ ] A visitor can reach any Tier 2 resource in ≤ 2 intentional actions.
-- [ ] No information is deleted; only the default revelation order changes.
-- [ ] `README.md` contains no folder paths in its first 3 sections.
-- [ ] `canon/index.md` does not enumerate all files in its first screen.
-
-These criteria are testable via visual inspection and interaction audit.
-
----
-
-### 3) Responsive Layout (mobile and tablet)
-
-**3.1 Supported devices**
-
-The site MUST work on:
-
-- phones
-- tablets
-- desktops
-- portrait and landscape orientations
-
-**3.2 Small-screen navigation**
-
-On small screens, navigation MUST be usable without consuming the entire viewport:
-
-- Sidebar MUST be collapsible (drawer / overlay)
-- Chat MUST be accessible without permanently obscuring reading (sheet / tab switch / split depending on breakpoint)
-
-**3.3 No horizontal scrolling**
-
-- The UI MUST avoid horizontal scroll in primary reading flows on mobile.
-
-**3.4 Reading-first invariant**
-
-On mobile:
-
-- Reading content MUST always have a clear, unobstructed path
-- Chat and navigation MAY overlay or drawer-in, but MUST not permanently obscure reading
-- At least one mode must prioritize uninterrupted reading
-
----
-
-### 4) Visual Design (2026 polish, “quantum development vibe”)
-
-**4.1 Design goals**
-
-The UI MUST feel modern and intentional while remaining non-distracting:
-
-- clean typography and spacing
-- clear hierarchy
-- intentional color system with accessible contrast
-- subtle interaction feedback (active states, transitions)
-
-**4.2 “Quantum development vibe” (interpretation)**
-
-The UI SHOULD communicate:
-
-- exploration
-- clarity under uncertainty
-- progressive disclosure
-
-This should be achieved through layout, hierarchy, and feedback—not through heavy animation.
-
-The “quantum development vibe” SHOULD be conveyed through:
-
-- progressive disclosure
-- reversible actions
-- visible state changes tied to intent
-
-Not through heavy animation, novelty UI, or visual noise.
-
----
-
-### 5) Real LLM Integration
-
-**5.1 Model**
-
-- Default model: GPT-4o-mini
-- If a smaller GPT-5 tier exists and is appropriate, it MAY replace GPT-4o-mini.
-
-**5.2 Security**
-
-- API keys MUST NOT be shipped to the client.
-- LLM calls MUST be made through a Worker-compatible API surface (Cloudflare Worker / Pages Functions).
-
-**5.3 Retrieval grounding**
-
-- The model MUST be grounded in local canonical content.
-- The implementation MUST define what content is sent to the model (scope limits are required).
-
-**5.4 Failure behavior**
-
-- If the model call fails, the UI MUST remain usable (reading + navigation still function).
-
----
-
-### 6) Cloudflare Pages Deployment (branch deploys)
-
-**6.1 Preview deploys**
-
-- Branch deploy previews MUST be enabled and verified.
-- The workflow MUST support capturing a preview URL per attempt as evidence.
-
-**6.2 Production deploy**
-
-- Production deploys from the `prod` branch (fast-forwarded from `main` after champion promotion).
-- Champion code lives on `main`; `prod` is the deploy target.
-
-**6.3 Infrastructure artifact (when deploy behavior is in scope)**
-
-When deploy behavior is in scope for an attempt, the attempt MUST include an infrastructure note describing how branch previews, evidence capture, and rollback are expected to work.
-
-Canonical location: `/docs/infra/cloudflare-branch-deploys.md`
-
----
-
-## Phases
-
-| Phase   | Scope                                               | Deliverable                                                                   |
-| ------- | --------------------------------------------------- | ----------------------------------------------------------------------------- |
-| Phase 1 | Deep links + URL state contract + anchor stability  | Shareable resource + section URLs that round-trip on reload                   |
-| Phase 2 | Responsive navigation + IA hierarchy                | Collapsible nav + mobile-friendly layout that preserves reading + chat access |
-| Phase 3 | Real LLM integration via Worker-compatible endpoint | Chat backed by real model, grounded in canon, no client secrets               |
-| Phase 4 | Cloudflare branch deploy verification               | Preview URLs captured as evidence, repeatable deploy story                    |
-| Phase 5 | Visual polish pass                                  | Typography/spacing/hierarchy refresh consistent with goals                    |
-
----
-
-## Definition of Done (for attempts against this PRD)
-
-- [ ] Build output produced (`npm run build`) and output captured in evidence.
-- [ ] Verification performed and recorded (at minimum: deep link round-trip, mobile layout verification, LLM call success/failure behavior).
-- [ ] Visual proof captured:
-  - desktop layout screenshot(s)
-  - mobile layout screenshot(s) (phone width)
-  - at least one deep-link screenshot showing URL + correct section state
-- [ ] If Cloudflare branch preview is in scope for the attempt: preview URL captured in attempt `META.json`.
-- [ ] If deploy behavior is in scope: the infrastructure artifact exists and is referenced (`/docs/infra/cloudflare-branch-deploys.md`).
-- [ ] Self-audit completed with explicit tradeoffs and remaining gaps.
-
----
-
-## Constraints
-
-This PRD is shaped by Canon constraints and decision rules, especially:
-
-- Evidence over assertion
-- AI as accelerator, not authority
-- Maintainability over cleverness
-- Explicit tradeoffs
-- UX should carry the explanation (reduce text compensation)
-
----
-
-## Risks
-
-- **Scope creep**: “make it look modern” becomes unbounded without measurable criteria.
-- **Over-navigation**: adding hierarchy/search can reintroduce complexity without reducing cognitive load.
-- **LLM grounding drift**: model responses become unmoored without strict retrieval and scoping.
-- **Mobile regressions**: responsive behavior can break reading if overlays are not carefully constrained.
-
----
-
-## Notes
-
-- PRD v0.1 proved mechanics; v0.2 targeted linkability, usability, and credible polish; v0.3 adds explicit progressive disclosure requirements (Tier model, manifest contract, repo/site disclosure).
-- Attempts should be bounded: if a phase fails, start a new attempt rather than extending a drifting implementation.
-
----
-
-## Attempt Policy
-
-**This PRD may be attempted multiple times.**
-
-- For UX-heavy requirements, multiple independent attempts may be required before judging the PRD itself.
-- Do not extend a failed attempt; start a new attempt folder.
-- Each attempt is evaluated independently against this PRD.
-- Failed attempts inform future attempts or PRD revisions.
-- Attempts are sealed when CLOSED or ABANDONED.
-
-Independence enforcement:
-
-- Do not “promote” an attempt folder into `/src/` as a substitute for sealing.
-- Attempts are sealed records; `/src/` remains disposable and may be rebuilt between attempts.
-
-See: `/docs/appendices/attempt-lifecycle.md`
-
-
-
---------------------------------------------------------------------------------
-📄 File: docs/PRD/website/PRD.md
---------------------------------------------------------------------------------
-
-# PRD: Public Website
-
-| Field           | Value            |
-|-----------------|------------------|
-| **PRD Version** | v1.1             |
-| **Lane**        | website          |
-| **Status**      | Active           |
-| **Created**     | 2026-01-17       |
-| **Author**      | Chris Klapp      |
-
----
-
-## Interface Contracts
-
-This lane MUST remain compatible with:
-
-- manifest >=2.0.0 <3.0.0
-- build-output >=3.0.0 <4.0.0
-- attempt-cli >=2.0.0 <3.0.0
-
----
-
-## Visual Interfaces
-
-This product MUST remain compatible with:
-
-- color-system >=1.0.0 <2.0.0
-- typography >=1.0.0 <2.0.0
-- spacing >=1.0.0 <2.0.0
-
-This product does NOT define colors, fonts, or spacing directly.
-It consumes visual interfaces.
-
-See `/odd/appendices/visual-evolution.md` for the visual evolution model.
-
----
-
-## Objective
-
-Create a public website that allows humans to:
-
-- Understand what ODD is
-- Explore it progressively without overwhelm
-- Verify credibility
-- Navigate to deeper material intentionally
-
----
-
-## Background
-
-This is the human-facing orientation surface for ODD.
-
-It is portfolio, explanation, credibility layer.
-
-It does NOT teach agents how to think.
-It does NOT execute ODD.
-It explains ODD progressively to humans.
-
----
-
-## In Scope
-
-- Progressive disclosure UX
-- Canon browsing
-- Essays / articles (including Medium content)
-- Clear entry points ("Start here", "Go deeper")
-- Mobile usability
-- Visual calm
-- Deep links / shareable URLs
-
----
-
-## Explicitly Out of Scope
-
-- AI chat (belongs to ai-navigation lane)
-- Agent execution (belongs to agent-skill lane)
-- Process enforcement
-- MCP servers
-- "How to run ODD" instructions for agents
-
----
-
-## Success Criteria
-
-- [ ] First load shows no more than 7 navigational items
-- [ ] Mobile usable without horizontal scrolling
-- [ ] Canon discoverable without file paths exposed
-- [ ] No agent instructions present in UI
-- [ ] No CLI/process language exposed to visitors
-- [ ] Deep links work (URL represents resource + section)
-- [ ] Progressive disclosure tiers respected (Tier 0/1/2)
-
----
-
-## Definition of Done
-
-An attempt against this PRD is complete when:
-
-- [ ] Build output produced (`npm run build -- --lane website`)
-- [ ] Visual proof captured (desktop + mobile screenshots)
-- [ ] First load shows ≤7 nav items (verified via screenshot)
-- [ ] Mobile layout verified (no horizontal scroll)
-- [ ] Deep link round-trip tested
-- [ ] Self-audit completed with explicit tradeoffs
-- [ ] **Cloudflare Preview URL provided** (branch must be pushed)
-- [ ] **Evidence URL provided** (viewable online without local code)
-
----
-
-## Online Evidence (Required)
-
-A website lane attempt is **not complete** unless:
-
-1. The attempt branch is pushed to `origin`.
-2. Cloudflare Pages generates a Preview Deployment URL for that branch.
-3. The attempt includes an Evidence URL viewable online without running code locally.
-
-Local preview instructions are allowed during development, but they **do not satisfy attempt completion**.
-
-If an agent cannot provide both URLs, the attempt is **INVALID**.
-
-See `/docs/appendices/online-evidence.md` for the full requirement.
-
----
-
-## Primary User
-
-Human developers, peers, evaluators exploring ODD.
-
----
-
-## Constraints
-
-This PRD is shaped by Canon constraints:
-
-- Evidence over assertion
-- UX should carry the explanation (reduce text compensation)
-- Maintainability over cleverness
-- Progressive disclosure required
-
----
-
-## Media (Learning Layer)
-
-This lane follows: `/odd/appendices/media-as-learning-layer.md`
-
-Media is:
-- optional (progressive disclosure)
-- non-blocking (site must work with media collapsed)
-- never autoplayed
-- attached to stable pages only
-
-### Initial Assets (Phase 0)
-
-**Home (`/`)**
-- Hero diagram (image): `/assets/home/hero-odd-diagram.png`
-- Orientation map (image): `/assets/home/orientation-map-diagram.png`
-- ODD explainer (video): `/assets/home/outcomes-driven_development.mp4`
-
-**ODD (`/odd/...`)**
-- ODD in practice (video): `/assets/odd/odd-in-practice.mp4`
-- ODD is not a framework (image): `/assets/odd/odd-is-not-a-framework.png`
-- Why evidence beats confidence (audio): `/assets/odd/why-evidence-beats-confidence.m4a`
-
-### Requirements
-
-- The default experience must not require media consumption to understand the page.
-- Media must be user-initiated (explicit Watch/Listen/View affordances).
-- No autoplay video or audio.
-- Media must not add to the primary navigation item count.
-
----
-
-## Attempt Policy
-
-This PRD may be attempted multiple times.
-
-- Each attempt is evaluated independently
-- Failed attempts inform future attempts or PRD revisions
-- Attempts are sealed when CLOSED or ABANDONED
-
-Attempts live at: `/attempts/website/prd-v1.0/attempt-NNN/`
-
----
-
-## Compiled Pack (Phase 0)
-
-The website lane MUST support generating a wipeable "visitor pack" used for progressive disclosure and AI-friendly context.
-
-### Command
-- `npm run lane:compile -- --lane website --pack visitor`
-
-### Output
-- `public/_compiled/website/visitor-pack.md`
-- `public/_compiled/website/_meta/COMPILE_META.json`
-
-### Verification
-- `npm run verify:compiled -- --lane website --pack visitor`
-
-### Contract
-- The compiled pack MUST include a provenance header as defined in:
-  - `klappy://docs/appendices/compilation`
-
----
-
-## Related Documents
-
-- Lane architecture: `/docs/appendices/product-lanes.md`
-- Canon constraints: `/canon/constraints.md`
-- Definition of Done: `/canon/definition-of-done.md`
-- Legacy PRD (v0.3): `/docs/PRD/website/PRD-legacy-v0.3.md`
-- Compilation: `/docs/appendices/compilation.md`
-- Media philosophy: `/odd/appendices/media-as-learning-layer.md`
 
 
 
@@ -6270,14 +5514,43 @@ Lane isolation prevents cascading reruns.
 
 ## Implications for Tooling and Docs
 
-### Where PRDs Live
+### Lane Self-Containment (Critical)
+
+**A product lane MUST be self-contained.**
+
+All artifacts required to understand and execute against a lane live within `products/<lane>/`:
 
 ```
-/docs/PRD/
+/products/<lane>/
+  PRD.md                              # Lane PRD (authoritative)
+  README.md                           # Lane overview
+  KICKOFF.md                          # Attempt instructions
+  attempts/prd-vX.Y/attempt-NNN/      # Attempt artifacts
+  src/                                # Implementation source
+  dist/                               # Build output (if applicable)
+```
+
+**Why this matters:**
+- Agents can load a single directory and have complete context
+- No cross-directory dependencies to track
+- Lane can be moved, copied, or archived as a unit
+- Documentation drift cannot split a lane's truth across locations
+
+**If you find yourself creating lane artifacts outside `products/<lane>/`, stop.**
+
+### Where PRDs Live
+
+PRDs are lane-contained:
+
+```
+/products/
   website/PRD.md
   ai-navigation/PRD.md
   agent-skill/PRD.md
+  fluent-mobile/PRD.md
 ```
+
+> ⚠️ **Not** `/docs/PRD/<lane>/PRD.md`. That path pattern is deprecated.
 
 ### Where Attempts Live
 
@@ -6288,6 +5561,7 @@ Attempts are lane-contained:
   website/attempts/prd-vX.Y/attempt-NNN/
   ai-navigation/attempts/prd-vX.Y/attempt-NNN/
   agent-skill/attempts/prd-vX.Y/attempt-NNN/
+  fluent-mobile/attempts/prd-vX.Y/attempt-NNN/
 ```
 
 Note: Root `/attempts/**` is legacy (read-only). See `/attempts/README.md`.
@@ -9022,6 +8296,40 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.13.0 — 2026-01-23
+
+**Lane Self-Containment Constraint**
+
+This release adds Constraint #11 (Lane Self-Containment) to canon and fixes misleading documentation about PRD locations.
+
+### Added
+
+- **Constraint #11: Lane Self-Containment** (`/canon/constraints.md`) — Product lanes MUST be self-contained units. All artifacts required to understand and execute against a lane live within `products/<lane>/`. If creating lane artifacts outside the lane folder, stop and reconsider.
+
+### Changed
+
+- **Product Lanes documentation** (`/docs/appendices/product-lanes.md`) — Fixed "Where PRDs Live" section which incorrectly stated PRDs live at `/docs/PRD/<lane>/PRD.md`. PRDs are lane-contained at `products/<lane>/PRD.md`. Added "Lane Self-Containment (Critical)" section with explicit rules and deprecation warning.
+
+### Added (Lane)
+
+- **Fluent Mobile Lane** (`/products/fluent-mobile/`) — New PoC lane for mobile-first OBT companion app exploration:
+  - `PRD.md` — PoC PRD v0.1 with 6 hypotheses to test
+  - `KICKOFF.md` — PoC-specific attempt instructions with sandbox rules
+  - `INSTRUCTIONS.md` — Field testing guide and hypothesis validation protocols
+  - `ATTEMPT_KICKOFF.md` — Entry point for agents starting attempts
+
+### Philosophy
+
+- **Evidence over assertion** — Documentation said one thing, actual lanes showed another. Reality wins.
+- **Lane self-containment prevents drift** — If lane artifacts scatter across directories, agents load incomplete context and documentation drifts from implementation.
+- **Constraint in canon > fix in docs** — Docs can drift; canon constraints are compiled into agent context packs.
+
+### Root Cause Documented
+
+This change was triggered by an agent creating `docs/PRD/fluent-mobile/PRD.md` based on outdated documentation, instead of the correct `products/fluent-mobile/PRD.md`. The misleading docs were fixed AND a canon constraint was added to prevent recurrence across all lanes.
+
+---
+
 ## 0.12.0 — 2026-01-22
 
 **Tier Reclassification — Epistemic Obligation Applied**
@@ -10706,7 +10014,7 @@ tags: ["constraints", "assumptions"]
 
 ## Description
 
-Constraints define the baseline assumptions and design defaults applied to most work. They cover offline-first design, long-term maintainability, interoperability, stateless architectures, AI as accelerator (not authority), evidence over assertion, contextual UX, ephemeral artifacts, and explicit tradeoffs. Each constraint includes what is assumed, why it matters, what it forces, and when it does not apply. These are not universal best practices but reflect specific environments and problems.
+Constraints define the baseline assumptions and design defaults applied to most work. They cover offline-first design, long-term maintainability, interoperability, stateless architectures, AI as accelerator (not authority), evidence over assertion, contextual UX, ephemeral artifacts, explicit tradeoffs, and lane self-containment. Each constraint includes what is assumed, why it matters, what it forces, and when it does not apply. These are not universal best practices but reflect specific environments and problems.
 
 ## Outline
 
@@ -10720,6 +10028,7 @@ Constraints define the baseline assumptions and design defaults applied to most 
 - UX Is Contextual, Not Universal
 - Ephemeral Artifacts Are Acceptable
 - Explicit Tradeoffs
+- Lane Self-Containment
 
 ---
 
@@ -10962,6 +10271,31 @@ Every decision excludes alternatives. Unspoken tradeoffs cause confusion later.
 
 **When this does not apply**
 • Truly trivial decisions
+
+---
+
+## 11. Lane Self-Containment
+
+I require product lanes to be self-contained units.
+
+**Why this matters**
+
+When lane artifacts are scattered across directories:
+• Agents load incomplete context
+• Documentation drifts from implementation
+• Lanes cannot be moved, archived, or reasoned about as units
+• "Where does X live?" becomes a recurring question
+
+**What this forces**
+• PRD, README, attempts, src, and all lane artifacts live within `products/<lane>/`
+• No cross-directory dependencies for lane-specific content
+• A lane can be understood by reading only its directory
+• If creating lane artifacts outside the lane folder, stop and reconsider
+
+**When this does not apply**
+• Shared canon (which lanes reference but do not own)
+• Cross-lane tooling (which is lane-agnostic by design)
+• Legacy paths being migrated (must be documented and time-boxed)
 
 ---
 
@@ -22632,6 +21966,145 @@ If the PRD seems problematic:
 
 
 --------------------------------------------------------------------------------
+📄 File: products/ai-navigation/PRD.md
+--------------------------------------------------------------------------------
+
+# PRD: AI Navigation Interface
+
+| Field           | Value            |
+|-----------------|------------------|
+| **PRD Version** | v1.0             |
+| **Lane**        | ai-navigation    |
+| **Status**      | Active           |
+| **Created**     | 2026-01-17       |
+| **Author**      | Chris Klapp      |
+
+---
+
+## Interface Contracts
+
+This lane MUST remain compatible with:
+
+- manifest >=2.0.0 <3.0.0
+- build-output >=3.0.0 <4.0.0
+- attempt-cli >=2.0.0 <3.0.0
+
+If MCP is used, it is currently draft (`mcp@0.1.x`) and MUST be treated as unstable.
+
+---
+
+## Objective
+
+Enable humans to ask questions of the ODD corpus and be:
+
+- Answered accurately
+- Guided progressively
+- Linked to the right documents
+- Without reading everything
+
+---
+
+## Background
+
+This is an AI layer over the documentation.
+
+It helps humans understand ODD through conversation.
+
+This is NOT agent tooling.
+This is NOT teaching agents to execute ODD.
+This is AI helping humans navigate and understand.
+
+---
+
+## Core Capability
+
+- Load all site content + Medium articles into retrievable context
+- Answer questions conversationally
+- Navigate users to relevant docs
+- Respect progressive disclosure tiers
+
+---
+
+## In Scope
+
+- RAG over markdown content
+- Citation + linking to canon/docs
+- Progressive depth control ("go deeper", "show sources")
+- Conversational Q&A interface
+- Eventually voice (explicitly deferred to future version)
+
+---
+
+## Explicitly Out of Scope
+
+- Teaching agents how to execute ODD (belongs to agent-skill lane)
+- Modifying the canon
+- Running attempts
+- Enforcing process
+- Website UI/UX concerns (belongs to website lane)
+
+---
+
+## Success Criteria
+
+- [ ] User can ask "What is ODD?" and get a correct summary + links
+- [ ] Follow-up questions narrow scope instead of expanding noise
+- [ ] Responses always cite source docs
+- [ ] No hallucinated concepts outside corpus
+- [ ] Progressive disclosure respected (Tier 0 answers don't dump Tier 2 content)
+
+---
+
+## Definition of Done
+
+An attempt against this PRD is complete when:
+
+- [ ] RAG retrieval working over canon + docs
+- [ ] Test questions answered correctly with citations
+- [ ] Hallucination check passed (no invented concepts)
+- [ ] Progressive depth demonstrated (follow-up narrows, doesn't explode)
+- [ ] Self-audit completed with explicit tradeoffs
+
+---
+
+## Primary User
+
+Humans trying to understand and evaluate ODD.
+
+---
+
+## Constraints
+
+This PRD is shaped by Canon constraints:
+
+- Evidence over assertion
+- AI as accelerator, not authority
+- Grounding required (no unmoored responses)
+- Maintainability over cleverness
+
+---
+
+## Attempt Policy
+
+This PRD may be attempted multiple times.
+
+- Each attempt is evaluated independently
+- Failed attempts inform future attempts or PRD revisions
+- Attempts are sealed when CLOSED or ABANDONED
+
+Attempts live at: `/attempts/ai-navigation/prd-v1.0/attempt-NNN/`
+
+---
+
+## Related Documents
+
+- Lane architecture: `/docs/appendices/product-lanes.md`
+- Canon constraints: `/canon/constraints.md`
+- Definition of Done: `/canon/definition-of-done.md`
+
+
+
+--------------------------------------------------------------------------------
 📄 File: products/ai-navigation/README.md
 --------------------------------------------------------------------------------
 
@@ -22707,6 +22180,1219 @@ A PRD must be created before attempts can begin. When ready:
 
 1. Create `/products/ai-navigation/PRD.md`
 2. Follow standard attempt workflow from `/docs/ATTEMPTS.md`
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/fluent-mobile/ATTEMPT_KICKOFF.md
+--------------------------------------------------------------------------------
+
+# Fluent Mobile — Start Attempt
+
+## Step 1: Load ODD Canon
+
+Read and internalize: `public/agent-skill/latest/prd-guide-pack.md`
+
+This gives you the foundational thinking — constraints, decision rules, evidence policy.
+
+---
+
+## Step 2: Load PoC Context
+
+Read and internalize: `products/fluent-mobile/INSTRUCTIONS.md`
+
+This gives you the PoC-specific mindset — hypotheses, guardrails, what success looks like.
+
+---
+
+## Step 3: Follow Kickoff
+
+Read and follow: `products/fluent-mobile/KICKOFF.md`
+
+This gives you the execution steps — where to work, what to produce, what not to touch.
+
+---
+
+## Critical Reminder
+
+This is a **Proof of Concept**. Learning is the outcome. Failure with fast learning is a win.
+
+If you find yourself building features instead of testing hypotheses, stop.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/fluent-mobile/INSTRUCTIONS.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://fluent-mobile/instructions
+title: "Fluent Mobile PoC Instructions"
+tier: 1
+voice: neutral
+stability: evolving
+---
+
+# Fluent Mobile PoC: Field Testing Instructions
+
+**Purpose**: Guide agents and humans through PoC execution with a focus on hypothesis validation and field learning.
+
+---
+
+## PoC Mindset
+
+### You Are Not Building an App
+
+You are testing whether a mobile-first OBT companion app is:
+
+- **Realistic** — Can it actually work on the devices and connectivity available?
+- **Culturally viable** — Does it fit how teams actually work?
+- **Performant** — Is it fast and reliable enough to sustain usage?
+
+If you catch yourself polishing UI or handling edge cases, stop. That's not the job.
+
+### The Goal Is Learning, Not Delivery
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                                                                     │
+│   "Failure with fast learning is a win."                           │
+│                                                                     │
+│   A PoC that proves the idea doesn't work has succeeded.           │
+│   A PoC that produces working code but no learnings has failed.    │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## User Context
+
+### Primary Users: OBT Translators
+
+These are not typical software users. Understand who you're building for:
+
+| Characteristic | Implication |
+|----------------|-------------|
+| **Low literacy** | Text-heavy UI will fail. Audio and icons must carry meaning. |
+| **Low tech familiarity** | Gestures that feel "obvious" to you may not be to them. |
+| **Audio-first workflows** | Reading/writing is secondary. Listening/speaking is primary. |
+| **Intermittent connectivity** | "Always online" assumptions will break in the field. |
+| **Shared devices** | Personal phone assumptions may not hold. |
+| **Group-based work** | Individual task models may miss how teams actually work. |
+| **Security concerns** | In some regions, visible tech creates risk. |
+
+### What "Good UX" Means Here
+
+| Don't | Do |
+|-------|-----|
+| Assume users read instructions | Make the happy path obvious without reading |
+| Use technical language | Use simple, universal concepts |
+| Require multiple gestures | One tap does one thing |
+| Make audio secondary | Audio is the primary interface |
+| Assume stable power | Optimize for battery, handle interruption |
+| Assume personal devices | Support device sharing scenarios |
+
+---
+
+## Hypothesis Testing Guide
+
+### Hypothesis 1: Mobile Viability
+
+**Question**: Can translators realistically draft and review OBT audio using a mobile companion app?
+
+**What to test**:
+- Can users record audio of acceptable quality?
+- Can users navigate between source and draft?
+- Can users complete a drafting cycle end-to-end?
+
+**Evidence needed**:
+- Task completion rate (% who finish)
+- Time to complete drafting cycle
+- User-reported blockers
+
+**Warning signs**:
+- Users give up mid-task
+- Users need constant facilitator help
+- Audio quality is unacceptable for workflow
+
+---
+
+### Hypothesis 2: Performance
+
+**Question**: Does app performance on real, low-to-mid-tier Android devices sustain usage without frustration?
+
+**What to test**:
+- App launch time on low-end devices
+- Audio playback latency
+- Recording start/stop responsiveness
+- Behavior under memory pressure
+- Behavior with full storage
+
+**Evidence needed**:
+- Performance metrics from real devices (not emulators)
+- User frustration observations
+- Crash/hang logs
+
+**Warning signs**:
+- Users complain about slowness
+- App crashes on older devices
+- Audio skips or stutters
+- Users wait noticeably between actions
+
+**Device tiers to test**:
+| Tier | Example Devices | Priority |
+|------|-----------------|----------|
+| Low | $50-100 Android, 2-3GB RAM, older chipset | HIGH — this is the target |
+| Mid | $150-250 Android, 4GB RAM, recent chipset | Medium |
+| High | Flagship phones | Low — not representative |
+
+---
+
+### Hypothesis 3: Workflow Usability
+
+**Question**: Do audio-centric workflows (listen → record → review → comment) feel natural and non-patronizing?
+
+**What to test**:
+- Is the listen → record → review flow intuitive?
+- Can users pause/resume without losing work?
+- Is the UI guidance helpful or condescending?
+- Do users feel in control?
+
+**Evidence needed**:
+- User journey observations
+- Quotes about what felt easy/hard
+- Points of confusion or frustration
+- Time spent figuring out vs. doing
+
+**Warning signs**:
+- Users feel "talked down to"
+- Users skip guidance but then get stuck
+- Workflow feels like a checklist, not natural work
+- Users ask "what do I do now?"
+
+**UX Tone Check**:
+| Patronizing ❌ | Confusing ❌ | Good ✅ |
+|---------------|-------------|---------|
+| "Great job! Now tap the blue button!" | "Invoke the audio buffer" | "Record" (with mic icon) |
+| "You did it perfectly!" | "Error: null reference" | "Recording saved" |
+| Tutorial that can't be skipped | No tutorial at all | Tutorial on first use, accessible later |
+
+---
+
+### Hypothesis 4: Task Clarity
+
+**Question**: Can users understand what to do next with minimal or no training?
+
+**What to test**:
+- Can a new user start without verbal instructions?
+- Is the current state always clear?
+- Is the next action always obvious?
+- Do users recover from mistakes easily?
+
+**Evidence needed**:
+- First-use success rate without training
+- Questions users ask
+- Missteps and recovery patterns
+
+**Warning signs**:
+- Users ask "what do I do?" repeatedly
+- Users tap wrong things
+- Users can't find how to continue
+- Users need external help to proceed
+
+**Test scenarios**:
+1. Hand device to user, observe without helping
+2. Note every question they ask
+3. Note every wrong tap
+4. Note moments of hesitation
+
+---
+
+### Hypothesis 5: Authentication & Trust
+
+**Question**: Is QR-based identity/assignment handoff understandable and trustworthy in real contexts?
+
+**What to test**:
+- Do users understand what the QR code does?
+- Do users trust the QR process?
+- Does the QR → identity → assignment flow feel secure?
+- Can users re-authenticate if needed?
+
+**Evidence needed**:
+- User explanations of what they think happened
+- Trust statements/concerns
+- Re-auth success rate
+- Security concerns raised
+
+**Warning signs**:
+- Users don't trust QR ("what is this tracking?")
+- Users can't explain what the QR did
+- Identity confusion (wrong person, wrong project)
+- Panic when re-auth is needed
+
+**Cultural considerations**:
+- Some cultures are suspicious of scanning things
+- Some users may not have personal phones
+- Device sharing changes identity assumptions
+
+---
+
+### Hypothesis 6: Cultural Fit
+
+**Question**: Does the approach work across diverse regions and team dynamics?
+
+**What to test**:
+- How do different regions use the app differently?
+- Does the group/individual workflow assumption hold?
+- Are there cultural barriers to adoption?
+- Does device sharing affect the design?
+
+**Evidence needed**:
+- Observations from multiple regions (at least 2)
+- Workflow variations between groups
+- Cultural friction points
+- Successful adaptations
+
+**Warning signs**:
+- Works in one region, fails in another
+- Individual workflow doesn't match group reality
+- Cultural barriers to audio recording
+- Facilitators become bottlenecks
+
+**What to look for**:
+| Assumption | Reality Check |
+|------------|---------------|
+| Users work individually | Some teams work in groups of 3-5 |
+| One device per user | Devices may be shared |
+| Audio recording is normal | Some cultures have privacy concerns |
+| Written comments work | Some users prefer audio comments |
+| English UI is fine | Language barriers may exist |
+
+---
+
+## Field Testing Protocol
+
+### Before Testing
+
+1. **Identify test users** — Actual OBT translators, not proxies
+2. **Identify test locations** — Actual field conditions, not offices
+3. **Prepare devices** — The devices users actually have
+4. **Prepare scenarios** — Realistic tasks, not artificial demos
+5. **Prepare evidence capture** — How you'll record learnings
+
+### During Testing
+
+**Do:**
+- Observe without helping (unless they're completely stuck)
+- Note every question, hesitation, and misstep
+- Record user quotes verbatim
+- Capture device/context details
+- Let users fail if they're going to fail
+
+**Don't:**
+- Guide users to success
+- Explain how things work
+- Fix problems users encounter
+- Test on your own device
+- Assume you know what users think
+
+### After Testing
+
+1. **Document immediately** — Memory degrades fast
+2. **Capture quotes exactly** — Paraphrase loses nuance
+3. **Note context** — Device, location, connectivity, group size
+4. **Identify patterns** — What repeated across users?
+5. **Validate/invalidate hypotheses** — With evidence, not opinion
+
+---
+
+## Evidence Template
+
+For each testing session:
+
+```markdown
+## Field Testing Session: [Date/Location]
+
+### Context
+- **Location**: [Where]
+- **Participants**: [N users, roles]
+- **Devices**: [What phones/tablets]
+- **Connectivity**: [WiFi/cellular/intermittent/offline]
+- **Duration**: [How long]
+
+### Hypotheses Tested
+- [x] H2: Performance
+- [x] H3: Workflow Usability
+- [ ] H5: Auth & Trust (not tested this session)
+
+### Observations
+
+#### What Worked
+- [Observation 1]
+- [Observation 2]
+
+#### What Didn't Work
+- [Observation 1] — *User quote: "..."*
+- [Observation 2]
+
+#### Surprises
+- [Something unexpected]
+
+### User Quotes
+> "Quote 1" — [User role/context]
+> "Quote 2" — [User role/context]
+
+### Hypothesis Conclusions
+
+| Hypothesis | Result | Evidence | Confidence |
+|------------|--------|----------|------------|
+| H2: Performance | VALIDATED | 4/5 completed on low-end devices | High |
+| H3: Workflow Usability | INCONCLUSIVE | Mixed results, need more data | Medium |
+
+### Next Steps
+- [What to do differently next time]
+- [What to test next]
+```
+
+---
+
+## Core Capabilities Reference
+
+These are the minimum capabilities for PoC testing. Don't over-build.
+
+### 5.1 Project & Assignment Access
+
+| Must Have | Nice to Have | Don't Build |
+|-----------|--------------|-------------|
+| QR code scans | Offline QR caching | User management system |
+| Identity established | Error recovery | Multi-org support |
+| Assignment context loaded | Progress indicators | Admin dashboard |
+
+### 5.2 Audio-Centric Drafting
+
+| Must Have | Nice to Have | Don't Build |
+|-----------|--------------|-------------|
+| Play source audio | Playback speed control | Audio editing |
+| Record draft audio | Pause/resume recording | Noise reduction |
+| Playback recorded audio | Waveform visualization | Multi-track recording |
+| Basic comments | Audio comments | Comment threads |
+
+### 5.3 Resources (Minimal)
+
+| Must Have | Nice to Have | Don't Build |
+|-----------|--------------|-------------|
+| View limited resources | Offline resource caching | Full resource library |
+| | Search | AI integration |
+
+### 5.4 Offline Tolerance
+
+| Must Have | Nice to Have | Don't Build |
+|-----------|--------------|-------------|
+| Works when offline | Sync status indicator | Full offline-first architecture |
+| Syncs when online | Conflict logging | Conflict resolution UI |
+| No data loss | Background sync | Real-time sync |
+
+---
+
+## What Success Looks Like
+
+### Minimum Success
+
+You have achieved minimum success when:
+
+- [ ] At least one hypothesis is clearly validated OR invalidated
+- [ ] Evidence is field-based (real users, real devices, real conditions)
+- [ ] Learnings are documented regardless of outcome
+- [ ] The team knows what to do next (continue, pivot, pause, or stop)
+
+### Aspirational Success
+
+You have achieved aspirational success when:
+
+- [ ] Two teams complete at least one chapter draft on mobile
+- [ ] Users express willingness to use it again
+- [ ] Multiple hypotheses validated with high confidence
+- [ ] Clear path to pilot phase defined
+
+---
+
+## When to Stop
+
+**Stop this PoC if:**
+
+- Learning has slowed significantly
+- The same blockers keep appearing without solutions
+- It's starting to feel like a production project
+- The team is optimizing instead of learning
+- Core assumptions have been invalidated
+
+**Stopping is success** if you learned why it won't work.
+**Continuing is failure** if you're just building without learning.
+
+---
+
+## Related Documents
+
+- [PRD](PRD.md) — Full PoC requirements
+- [KICKOFF](/products/fluent-mobile/KICKOFF.md) — Attempt structure and sandbox rules
+- [Canon Constraints](/canon/constraints.md) — Baseline assumptions
+- [Definition of Done](/canon/definition-of-done.md) — Evidence requirements
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/fluent-mobile/KICKOFF.md
+--------------------------------------------------------------------------------
+
+# Fluent Mobile — Attempt Kickoff
+
+You are starting an attempt in the **fluent-mobile** lane.
+
+**This is a Proof of Concept lane.** The rules are different here.
+
+---
+
+## ⚠️ THIS IS NOT A PRODUCTION LANE
+
+Before you do anything, internalize this:
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                     POC MINDSET (Non-Negotiable)                    │
+│                                                                     │
+│   You are here to LEARN, not to BUILD.                             │
+│                                                                     │
+│   ✅ Test hypotheses                                                │
+│   ✅ Gather evidence about what works/doesn't                       │
+│   ✅ Document learnings regardless of outcome                       │
+│   ✅ Fail fast if something doesn't work                           │
+│                                                                     │
+│   ❌ Build polished features                                        │
+│   ❌ Solve architectural problems completely                        │
+│   ❌ Optimize for production readiness                              │
+│   ❌ Get attached to code that "almost works"                       │
+│                                                                     │
+│   "Failure with fast learning is a win."                           │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## ⛔ STOP — READ THIS FIRST
+
+**The #1 cause of failed PoC attempts is building features instead of testing hypotheses.**
+
+This PoC exists to answer:
+
+> Whether a mobile-first OBT companion app is a realistic, culturally viable, and performant solution to real field problems — not just a convincing idea in our heads.
+
+This is NOT a feature test. This is a **shared mental model test**.
+
+---
+
+## 🎯 Hypotheses Being Tested
+
+Every action you take should connect to one of these:
+
+| # | Hypothesis | How You'll Know |
+|---|------------|-----------------|
+| 1 | **Mobile Viability** | Translators can draft and review OBT audio on mobile |
+| 2 | **Performance** | App works smoothly on low-to-mid-tier Android devices |
+| 3 | **Workflow Usability** | Audio workflows (listen → record → review) feel natural |
+| 4 | **Task Clarity** | Users know what to do next without training |
+| 5 | **Auth & Trust** | QR-based identity handoff is understandable and trusted |
+| 6 | **Cultural Fit** | Approach works across diverse regions and team dynamics |
+
+**If your work doesn't test at least one of these, ask yourself why you're doing it.**
+
+---
+
+## 🚫 Non-Negotiable Guardrails
+
+This PoC must:
+
+| Guardrail | Why It Matters |
+|-----------|----------------|
+| 🚫 Not imply production readiness | Users must not expect this to "just work" forever |
+| 🚫 Not block or slow web app progress | This is parallel exploration, not a dependency |
+| 🚫 Not encode org-specific workflows | Must remain adaptable to learnings |
+| 🚫 Not imply Paratext replacement | Different purpose entirely |
+| ✅ Be quick to test | Speed of learning > polish |
+| ✅ Be easy to discard | No sunk cost fallacy |
+| ✅ Be fast to iterate | Learnings inform next attempt |
+
+---
+
+## 📁 Your Sandbox
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                     YOUR SANDBOX (Agent Authority)                   │
+│                                                                     │
+│   products/fluent-mobile/attempts/prd-v0.1/attempt-NNN/             │
+│                                                                     │
+│   You can write ANYTHING here.                                      │
+│   ├── ATTEMPT.md          — Closure record, learnings               │
+│   ├── META.json           — Machine-readable metadata               │
+│   ├── HYPOTHESES.md       — Which hypotheses tested, results        │
+│   ├── src/                — PoC implementation code                 │
+│   └── evidence/           — Field feedback, screenshots, logs       │
+│                                                                     │
+├─────────────────────────────────────────────────────────────────────┤
+│                     FORBIDDEN ZONE (Human Authority)                 │
+│                                                                     │
+│   ❌ products/fluent-mobile/PRD.md   — Only human revises PRD       │
+│   ❌ products/fluent-mobile/README.md — Only human updates README   │
+│   ❌ docs/PRD/fluent-mobile/         — Canon location, human-owned  │
+│   ❌ products/website/               — Wrong lane entirely          │
+│   ❌ products/agent-skill/           — Wrong lane entirely          │
+│   ❌ public/                         — Production deployment        │
+│                                                                     │
+│   "AI is an accelerator, not an authority."                         │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## ✅ PRE-FLIGHT CHECKLIST
+
+Before you write a single line of code:
+
+- [ ] I read `public/agent-skill/latest/prd-guide-pack.md` (ODD canon)
+- [ ] I read `products/fluent-mobile/INSTRUCTIONS.md` (PoC context)
+- [ ] I understand which hypotheses I'm testing
+- [ ] I understand my work is exploratory, not production
+- [ ] My attempt folder is: `products/fluent-mobile/attempts/prd-v0.1/attempt-NNN/`
+- [ ] ALL my file writes will be inside that folder
+- [ ] I will NOT claim "production ready" — this is a PoC
+- [ ] I will document learnings regardless of success/failure
+
+---
+
+## 📋 Step 1: Create Attempt Folder
+
+Create: `products/fluent-mobile/attempts/prd-v0.1/attempt-NNN/`
+
+Where NNN is the next number (check existing folders, start with 001).
+
+### Required Structure
+
+```
+attempt-NNN/
+├── ATTEMPT.md              # Closure record (status, hypotheses tested, learnings)
+├── META.json               # Machine-readable metadata
+├── HYPOTHESES.md           # Which hypotheses were tested and results
+├── src/                    # PoC implementation (disposable)
+│   └── ...                 # Whatever the PoC needs
+└── evidence/               # Proof of learning
+    ├── field-feedback.md   # What real users said/did
+    ├── performance-logs/   # Device performance data
+    └── screenshots/        # Visual evidence
+```
+
+---
+
+## 📋 Step 2: Pick Your Hypotheses
+
+You don't have to test all 6 hypotheses in one attempt. Pick 1-3 that you can meaningfully test.
+
+Update `HYPOTHESES.md` with:
+
+```markdown
+# Hypotheses Under Test
+
+## Attempt-NNN Scope
+
+| # | Hypothesis | Testing Approach | Expected Evidence |
+|---|------------|------------------|-------------------|
+| 2 | Performance | Build minimal audio player, test on 3 device tiers | FPS logs, load times, user feedback |
+| 3 | Workflow Usability | Simple record → playback flow | Task completion time, error rate, user quotes |
+
+## Not Testing This Attempt
+
+| # | Hypothesis | Why Deferred |
+|---|------------|--------------|
+| 1 | Mobile Viability | Too broad for first attempt |
+| 5 | Auth & Trust | Requires backend we don't have yet |
+| 6 | Cultural Fit | Requires multi-region field access |
+```
+
+---
+
+## 📋 Step 3: Build the Minimum to Test
+
+Build ONLY what you need to test your hypotheses.
+
+**Good PoC code:**
+- Gets to testable state fast
+- Is obviously disposable
+- Prioritizes real-device testing over local simulation
+- Collects evidence of what worked/didn't
+
+**Bad PoC code:**
+- Has elaborate architecture
+- Handles edge cases that don't matter yet
+- Optimizes for maintainability (this code will be thrown away)
+- Looks production-ready
+
+---
+
+## 📋 Step 4: Gather Evidence
+
+Evidence in a PoC is about learning, not proving success.
+
+### What Counts as Evidence
+
+| Type | Examples | Why It Matters |
+|------|----------|----------------|
+| **Field Feedback** | User quotes, observed behaviors, confusion points | Tests hypotheses 3, 4, 5, 6 |
+| **Performance Data** | Load times, FPS, memory usage on real devices | Tests hypothesis 2 |
+| **Task Completion** | Did users complete the workflow? How long? | Tests hypothesis 4 |
+| **Cultural Observations** | Group dynamics, language barriers, device sharing | Tests hypothesis 6 |
+| **Failure Documentation** | What broke, why, what it taught us | ALL hypotheses |
+
+### Evidence Format
+
+For each hypothesis tested, document:
+
+```markdown
+## Hypothesis N: [Name]
+
+**Approach:** [How we tested it]
+
+**Observations:**
+- [What happened]
+- [What users said/did]
+- [What surprised us]
+
+**Conclusion:** VALIDATED | INVALIDATED | INCONCLUSIVE
+
+**Learnings:**
+- [What we now know]
+- [What this implies for next iteration]
+
+**Evidence:**
+- [Links to screenshots, logs, recordings]
+```
+
+---
+
+## 📋 Step 5: Close the Attempt
+
+Update `ATTEMPT.md` with:
+
+```markdown
+# Attempt NNN — Closure
+
+## Status: CLOSED
+
+## Hypotheses Tested
+
+| # | Hypothesis | Result | Confidence |
+|---|------------|--------|------------|
+| 2 | Performance | VALIDATED | High — tested on 5 devices |
+| 3 | Workflow Usability | INCONCLUSIVE | Medium — need more users |
+
+## Key Learnings
+
+1. [Learning 1]
+2. [Learning 2]
+3. [Learning 3]
+
+## Recommendation
+
+[ ] Continue — learnings support viability
+[ ] Pivot — learnings suggest different approach
+[ ] Pause — need more information before deciding
+[ ] Stop — fundamental assumptions invalidated
+
+## Next Steps
+
+If continuing:
+- [Specific recommendation 1]
+- [Specific recommendation 2]
+
+## Self-Audit
+
+- [ ] Tested hypotheses, not features
+- [ ] Evidence is field-based, not simulated
+- [ ] Learnings are documented regardless of outcome
+- [ ] Recommendations connect to evidence
+```
+
+---
+
+## ⚠️ Common PoC Violations
+
+### Violation 1: Building Features Instead of Testing Hypotheses
+
+```diff
+- "I'll add dark mode and accessibility features"
++ "I'll test if users can complete the record → playback flow"
+```
+
+**Why it fails**: Features don't prove viability. Evidence does.
+
+### Violation 2: Polishing Disposable Code
+
+```diff
+- Refactoring the audio recorder for maintainability
++ Testing if the audio recorder works on low-end phones
+```
+
+**Why it fails**: PoC code will be thrown away. Polish is waste.
+
+### Violation 3: Simulating Instead of Field Testing
+
+```diff
+- "I tested on the iOS simulator and it works great"
++ "I tested on a $50 Android phone in low-connectivity and..."
+```
+
+**Why it fails**: Simulators don't test real constraints.
+
+### Violation 4: Claiming Success Without Evidence
+
+```diff
+- "The PoC is successful because the code works"
++ "Hypothesis 2 (Performance) validated: 3/5 users completed workflow on low-end devices"
+```
+
+**Why it fails**: Working code is not the outcome. Learning is.
+
+---
+
+## 🎯 Success Criteria for This Lane
+
+### Minimum Success
+
+- [ ] Clear understanding of why the PoC succeeded or struggled
+- [ ] Field feedback that directly informs next iteration
+- [ ] At least one hypothesis validated or invalidated with evidence
+
+### Aspirational Success
+
+- [ ] Two teams complete at least one chapter draft on mobile
+- [ ] Users express willingness to use it again
+- [ ] Multiple hypotheses validated with high confidence
+
+---
+
+## 🚪 Exit Criteria
+
+This PoC should be **easy to abandon**.
+
+Stop if:
+- Learning slows
+- Confidence drops
+- It begins to resemble a production commitment
+- Fundamental assumptions are invalidated
+
+**Stopping is not failure. Continuing past useful learning is.**
+
+---
+
+## 📚 Related Documents
+
+- [PRD](PRD.md) — Full PoC requirements
+- [INSTRUCTIONS](/products/fluent-mobile/INSTRUCTIONS.md) — Field testing guidance
+- [Product Lanes](/docs/appendices/product-lanes.md) — Lane architecture
+- [Definition of Done](/canon/definition-of-done.md) — Evidence requirements
+- [ODD Canon](/public/agent-skill/latest/prd-guide-pack.md) — Foundational thinking
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/fluent-mobile/PRD.md
+--------------------------------------------------------------------------------
+
+# PRD: Fluent Mobile (PoC)
+
+| Field           | Value            |
+|-----------------|------------------|
+| **PRD Version** | v0.1             |
+| **Lane**        | fluent-mobile    |
+| **Status**      | Draft (Exploratory) |
+| **Created**     | 2026-01-23       |
+| **Author**      | Chris Klapp      |
+| **Stage**       | Proof of Concept / Exploration |
+| **Confidence**  | Intentionally low (learning-focused) |
+
+---
+
+## Alignment Lock
+
+**What this PoC exists to resolve:**
+
+Whether a mobile-first OBT companion app is a realistic, culturally viable, and performant solution to real field problems — not just a convincing idea in our heads.
+
+This is not a feature test. This is a shared mental model test.
+
+---
+
+## Problem Statement
+
+Field teams engaged in Oral Bible Translation (OBT) face real constraints that make laptop-based workflows impractical or unsafe (e.g., power availability, security risk, cultural visibility).
+
+While a mobile-first approach appears promising, we do not yet know whether:
+
+- A mobile app can realistically support OBT drafting workflows
+- The performance and usability on real devices is acceptable long-term
+- Our internal vision aligns with real-world field experience
+
+Without a strong PoC tested in real contexts, the team risks building toward divergent mental models, leading to misalignment and costly rework.
+
+---
+
+## Objective
+
+Test whether a mobile-first OBT companion app is viable, usable, and culturally appropriate through field-tested learning — not feature delivery.
+
+---
+
+## Hypotheses (What This PoC Tries to Prove)
+
+| # | Hypothesis | Description |
+|---|------------|-------------|
+| 1 | Mobile Viability | Translators can realistically draft and review OBT audio using a mobile companion app |
+| 2 | Performance | App performance on real, low-to-mid-tier Android devices is sufficient to sustain usage without frustration |
+| 3 | Workflow Usability | Audio-centric workflows (listen → record → review → comment) feel natural and non-patronizing |
+| 4 | Task Clarity | Users can understand what to do next with minimal or no training |
+| 5 | Authentication & Trust | QR-based identity/assignment handoff is understandable and trustworthy in real contexts |
+| 6 | Cultural Fit | The approach works across diverse regions and team dynamics, not just in a single cultural context |
+
+---
+
+## Primary Risks (Ordered)
+
+1. **Performance as a foundational feature**
+   If it feels slow, clunky, or fragile on real phones → it fails, regardless of features.
+
+2. **Audio workflow usability**
+   Recording, playback, review must feel natural, not "techy."
+
+3. **UX tone**
+   Avoids being patronizing without being confusing.
+
+4. **Task clarity**
+   Users know what to do next without training.
+
+5. **Authentication & sync trust**
+   QR → identity → offline → sync must feel reliable.
+
+6. **Cultural fit across regions**
+   Especially for group-based, oral-first workflows.
+
+---
+
+## Non-Goals (Explicitly Out of Scope)
+
+This PoC will NOT attempt to:
+
+| Non-Goal | Rationale |
+|----------|-----------|
+| Deliver a production-ready mobile app | This is exploration, not delivery |
+| Fully solve offline-first architecture | Speed of learning > architectural purity |
+| Implement full org-specific workflows | Must remain adaptable |
+| Provide studio-quality audio tooling | Basic is sufficient for PoC |
+| Replace or compete with Paratext | Different purpose entirely |
+| Solve all checking stages end-to-end | Out of scope for PoC |
+| Guarantee long-term data durability | Learning phase only |
+
+**Anything suggesting permanence is a failure of scope discipline.**
+
+---
+
+## Target Users
+
+### Primary
+
+- OBT translators
+- Low literacy
+- Low tech familiarity
+- Audio-first workflows
+- Intermittent connectivity
+
+### Secondary
+
+- Project managers (web-based)
+- Facilitators assisting mobile users
+
+---
+
+## Core PoC Capabilities (Minimal but Sufficient)
+
+These are enabling capabilities, not features to polish.
+
+### 5.1 Project & Assignment Access
+
+- Projects created on the web
+- Mobile app acts as a companion
+- Users receive assignments via QR code
+- QR code establishes identity + assignment context
+
+> ⚠️ Assumption: QR is adaptable even if it proves imperfect.
+
+### 5.2 Audio-Centric Drafting
+
+- Listen to source audio/text
+- Record draft audio
+- Playback recorded audio
+- Make basic comments (audio/text)
+
+No studio tooling. No advanced editing.
+
+### 5.3 Resources (Minimal)
+
+- View/listen to a limited set of resources
+- Resource selection controlled upstream (web/org)
+
+No deep AI integration required for PoC.
+
+### 5.4 Offline Tolerance (Not Full Offline-First)
+
+- App must tolerate temporary offline use
+- Sync occurs when connectivity returns
+- Conflicts handled minimally (logging > resolution)
+
+> ⚠️ Trade-off: Speed of learning > architectural purity.
+
+---
+
+## UX Principles (Non-Functional Requirements)
+
+These are pass/fail criteria:
+
+- Performance is treated as a foundational feature
+- "Happy path" is the easiest path
+- UI avoids being:
+  - Patronizing
+  - Over-scripted
+  - Toy-like
+- Users are treated as capable adults
+- Guidance exists without rigid enforcement
+
+**Failure here invalidates the PoC regardless of feature completeness.**
+
+---
+
+## Success Criteria
+
+### Minimum Success
+
+- [ ] Clear understanding of why the PoC failed or struggled
+- [ ] Field feedback that directly informs next iteration
+
+### Aspirational Success
+
+- [ ] Two teams complete at least one chapter draft on mobile
+- [ ] Users express willingness to use it again
+
+---
+
+## Definition of Done (PoC)
+
+The PoC is complete when:
+
+- [ ] It has been tested with real users in field contexts
+- [ ] Feedback is collected and documented
+- [ ] Assumptions are validated or invalidated
+- [ ] The team can confidently decide: Continue, Pivot, Pause, or Stop
+
+---
+
+## Exit Criteria
+
+This PoC should be easy to abandon.
+
+If learning slows, confidence drops, or it begins to resemble a production commitment → stop.
+
+---
+
+## Key Risks & Open Questions
+
+| Risk/Question | Status |
+|---------------|--------|
+| Is mobile performance acceptable on real devices? | Unknown |
+| Does QR-based identity scale socially and culturally? | Unknown |
+| Where does "guided" become "patronizing"? | Unknown |
+| How much offline support is "enough" for trust? | Unknown |
+| Do users prefer fewer options or more flexibility? | Unknown |
+| Are assumptions consistent across regions? | Unknown |
+
+These are expected unknowns, not gaps.
+
+---
+
+## Non-Negotiable Guardrails
+
+This PoC must:
+
+- 🚫 Not imply production readiness
+- 🚫 Not block or slow web app progress
+- 🚫 Not encode org-specific workflows
+- 🚫 Not imply Paratext replacement
+- ✅ Be quick to test, easy to discard, fast to iterate
+
+---
+
+## Constraints
+
+This PRD is shaped by Canon constraints:
+
+- Evidence over assertion
+- Learning over delivery
+- Minimal viable scope
+- Progressive disclosure of complexity
+
+---
+
+## Attempt Policy
+
+This PRD may be attempted multiple times.
+
+- Each attempt is evaluated independently
+- Failed attempts inform future attempts or PRD revisions
+- Attempts are sealed when CLOSED or ABANDONED
+- **Failure with fast learning is a win**
+
+Attempts live at: `/products/fluent-mobile/attempts/prd-vX.Y/attempt-NNN/`
+
+---
+
+## Meta
+
+This PRD:
+
+- ✔️ Is deliberately incomplete
+- ✔️ Prioritizes learning over delivery
+- ✔️ Protects against premature commitment
+- ✔️ Is usable by an agent or a human
+
+---
+
+## Related Documents
+
+- Lane README: `README.md`
+- Lane KICKOFF: `KICKOFF.md`
+- Lane INSTRUCTIONS: `INSTRUCTIONS.md`
+- Lane architecture: `/docs/appendices/product-lanes.md`
+- Canon constraints: `/canon/constraints.md`
+- Definition of Done: `/canon/definition-of-done.md`
+- Attempt lifecycle: `/docs/appendices/attempt-lifecycle.md`
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/fluent-mobile/README.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://products/fluent-mobile
+title: "Fluent Mobile Lane"
+audience: docs
+exposure: nav
+tier: 3
+voice: neutral
+stability: evolving
+tags: ["products", "fluent-mobile", "lane", "poc", "obt", "mobile"]
+---
+
+# Fluent Mobile Lane
+
+> Mobile-first OBT companion app — Proof of Concept.
+
+## Description
+
+The fluent-mobile lane explores whether a mobile-first companion app is viable for Oral Bible Translation (OBT) field workflows. This is a learning-focused PoC, not a production delivery. The primary goal is to test hypotheses about mobile viability, performance, usability, and cultural fit before committing to a larger build.
+
+## Outline
+
+- Contents
+- Lane Status
+- Key Constraints
+- Starting an Attempt
+- What Success Looks Like
+
+---
+
+## Contents
+
+| File | Purpose |
+|------|---------|
+| [`ATTEMPT_KICKOFF.md`](ATTEMPT_KICKOFF.md) | Copy/paste prompt to start an attempt |
+| [`KICKOFF.md`](KICKOFF.md) | Full attempt instructions (PoC-specific) |
+| [`INSTRUCTIONS.md`](INSTRUCTIONS.md) | Field testing and hypothesis validation guide |
+| `attempts/` | Attempt artifacts |
+| `src/` | Implementation source (when applicable) |
+
+**PRD Location:** `PRD.md` (in this lane)
+
+---
+
+## Lane Status
+
+| Field | Value |
+|-------|-------|
+| **PRD Version** | v0.1 |
+| **Stage** | Proof of Concept / Exploration |
+| **Status** | Draft |
+| **Confidence** | Intentionally low (learning-focused) |
+
+---
+
+## Key Constraints
+
+- This is a **shared mental model test**, not a feature test
+- Performance is treated as a **foundational feature**
+- Must be quick to test, easy to discard, fast to iterate
+- **Failure with fast learning is a win**
+- Must NOT imply production readiness
+- Must NOT block or slow web app progress
+
+---
+
+## What Success Looks Like
+
+### Minimum Success
+
+- Clear understanding of why the PoC failed or struggled
+- Field feedback that directly informs next iteration
+
+### Aspirational Success
+
+- Two teams complete at least one chapter draft on mobile
+- Users express willingness to use it again
+
+---
+
+## Starting an Attempt
+
+1. Read [`ATTEMPT_KICKOFF.md`](ATTEMPT_KICKOFF.md) — loads context packs, points to detailed instructions
+2. Read [`KICKOFF.md`](KICKOFF.md) — sandbox rules, attempt structure, PoC mindset
+3. Read [`INSTRUCTIONS.md`](INSTRUCTIONS.md) — hypothesis testing guide, user context, field testing protocol
+4. Create attempt folder at `attempts/prd-v0.1/attempt-NNN/`
+5. Test hypotheses — don't build features
+6. Document learnings regardless of outcome
+
+---
+
+## Exit Criteria
+
+This PoC should be **easy to abandon**.
+
+If learning slows, confidence drops, or it begins to resemble a production commitment → stop.
+
+---
+
+## See Also
+
+- [PRD](PRD.md) — Current requirements
+- [Product Lanes](/docs/appendices/product-lanes.md) — Lane architecture
+- [Attempt Lifecycle](/docs/appendices/attempt-lifecycle.md) — How attempts work
 
 
 

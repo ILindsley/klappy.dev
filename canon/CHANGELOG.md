@@ -16,6 +16,40 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.13.0 — 2026-01-23
+
+**Lane Self-Containment Constraint**
+
+This release adds Constraint #11 (Lane Self-Containment) to canon and fixes misleading documentation about PRD locations.
+
+### Added
+
+- **Constraint #11: Lane Self-Containment** (`/canon/constraints.md`) — Product lanes MUST be self-contained units. All artifacts required to understand and execute against a lane live within `products/<lane>/`. If creating lane artifacts outside the lane folder, stop and reconsider.
+
+### Changed
+
+- **Product Lanes documentation** (`/docs/appendices/product-lanes.md`) — Fixed "Where PRDs Live" section which incorrectly stated PRDs live at `/docs/PRD/<lane>/PRD.md`. PRDs are lane-contained at `products/<lane>/PRD.md`. Added "Lane Self-Containment (Critical)" section with explicit rules and deprecation warning.
+
+### Added (Lane)
+
+- **Fluent Mobile Lane** (`/products/fluent-mobile/`) — New PoC lane for mobile-first OBT companion app exploration:
+  - `PRD.md` — PoC PRD v0.1 with 6 hypotheses to test
+  - `KICKOFF.md` — PoC-specific attempt instructions with sandbox rules
+  - `INSTRUCTIONS.md` — Field testing guide and hypothesis validation protocols
+  - `ATTEMPT_KICKOFF.md` — Entry point for agents starting attempts
+
+### Philosophy
+
+- **Evidence over assertion** — Documentation said one thing, actual lanes showed another. Reality wins.
+- **Lane self-containment prevents drift** — If lane artifacts scatter across directories, agents load incomplete context and documentation drifts from implementation.
+- **Constraint in canon > fix in docs** — Docs can drift; canon constraints are compiled into agent context packs.
+
+### Root Cause Documented
+
+This change was triggered by an agent creating `docs/PRD/fluent-mobile/PRD.md` based on outdated documentation, instead of the correct `products/fluent-mobile/PRD.md`. The misleading docs were fixed AND a canon constraint was added to prevent recurrence across all lanes.
+
+---
+
 ## 0.12.0 — 2026-01-22
 
 **Tier Reclassification — Epistemic Obligation Applied**
