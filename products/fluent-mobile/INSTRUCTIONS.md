@@ -45,43 +45,44 @@ If you catch yourself polishing UI or handling edge cases, stop. That's not the 
 
 These are not typical software users. Understand who you're building for:
 
-| Characteristic | Implication |
-|----------------|-------------|
-| **Low literacy** | Text-heavy UI will fail. Audio and icons must carry meaning. |
-| **Low tech familiarity** | Gestures that feel "obvious" to you may not be to them. |
-| **Audio-first workflows** | Reading/writing is secondary. Listening/speaking is primary. |
-| **Intermittent connectivity** | "Always online" assumptions will break in the field. |
-| **Shared devices** | Personal phone assumptions may not hold. |
-| **Group-based work** | Individual task models may miss how teams actually work. |
-| **Security concerns** | In some regions, visible tech creates risk. |
+| Characteristic                | Implication                                                  |
+| ----------------------------- | ------------------------------------------------------------ |
+| **Low literacy**              | Text-heavy UI will fail. Audio and icons must carry meaning. |
+| **Low tech familiarity**      | Gestures that feel "obvious" to you may not be to them.      |
+| **Audio-first workflows**     | Reading/writing is secondary. Listening/speaking is primary. |
+| **Intermittent connectivity** | "Always online" assumptions will break in the field.         |
+| **Shared devices**            | Personal phone assumptions may not hold.                     |
+| **Group-based work**          | Individual task models may miss how teams actually work.     |
+| **Security concerns**         | In some regions, visible tech creates risk.                  |
 
 ### Literacy Spectrum (From v0.2 Review Meeting)
 
 OBT translator capabilities vary significantly:
 
-| User Type | Example | Design Implication |
-|-----------|---------|-------------------|
-| **Can read LWC** | India groups who can read source in LWC orthography | Text can be shown as option |
-| **Completely illiterate** | Some field groups | Text must be hidden; audio-only flow |
-| **Mixed teams** | Literacy varies within team | Make text an optional accordion |
+| User Type                 | Example                                             | Design Implication                   |
+| ------------------------- | --------------------------------------------------- | ------------------------------------ |
+| **Can read LWC**          | India groups who can read source in LWC orthography | Text can be shown as option          |
+| **Completely illiterate** | Some field groups                                   | Text must be hidden; audio-only flow |
+| **Mixed teams**           | Literacy varies within team                         | Make text an optional accordion      |
 
 **Key insight:** Audio is PRIMARY. Text is optional overlay for those who can read.
 
 Three potential user flows:
-1. Source with text (literate users)
-2. Source with audio only (illiterate users)
-3. Switchable between both (accordion pattern)
+
+1. Source as audio only (illiterate users)
+2. Source as text (literate users)
+3. Switchable between both (overlay or expand)
 
 ### What "Good UX" Means Here
 
-| Don't | Do |
-|-------|-----|
+| Don't                          | Do                                          |
+| ------------------------------ | ------------------------------------------- |
 | Assume users read instructions | Make the happy path obvious without reading |
-| Use technical language | Use simple, universal concepts |
-| Require multiple gestures | One tap does one thing |
-| Make audio secondary | Audio is the primary interface |
-| Assume stable power | Optimize for battery, handle interruption |
-| Assume personal devices | Support device sharing scenarios |
+| Use technical language         | Use simple, universal concepts              |
+| Require multiple gestures      | One tap does one thing                      |
+| Make audio secondary           | Audio is the primary interface              |
+| Assume stable power            | Optimize for battery, handle interruption   |
+| Assume personal devices        | Support device sharing scenarios            |
 
 ---
 
@@ -92,16 +93,19 @@ Three potential user flows:
 **Question**: Can translators realistically draft and review OBT audio using a mobile companion app?
 
 **What to test**:
+
 - Can users record audio of acceptable quality?
 - Can users navigate between source and draft?
 - Can users complete a drafting cycle end-to-end?
 
 **Evidence needed**:
+
 - Task completion rate (% who finish)
 - Time to complete drafting cycle
 - User-reported blockers
 
 **Warning signs**:
+
 - Users give up mid-task
 - Users need constant facilitator help
 - Audio quality is unacceptable for workflow
@@ -113,6 +117,7 @@ Three potential user flows:
 **Question**: Does app performance on real, low-to-mid-tier Android devices sustain usage without frustration?
 
 **What to test**:
+
 - App launch time on low-end devices
 - Audio playback latency
 - Recording start/stop responsiveness
@@ -120,11 +125,13 @@ Three potential user flows:
 - Behavior with full storage
 
 **Evidence needed**:
+
 - Performance metrics from real devices (not emulators)
 - User frustration observations
 - Crash/hang logs
 
 **Warning signs**:
+
 - Users complain about slowness
 - App crashes on older devices
 - Audio skips or stutters
@@ -144,18 +151,21 @@ Three potential user flows:
 **Question**: Do audio-centric workflows (listen → record → review → comment) feel natural and non-patronizing?
 
 **What to test**:
+
 - Is the listen → record → review flow intuitive?
 - Can users pause/resume without losing work?
 - Is the UI guidance helpful or condescending?
 - Do users feel in control?
 
 **Evidence needed**:
+
 - User journey observations
 - Quotes about what felt easy/hard
 - Points of confusion or frustration
 - Time spent figuring out vs. doing
 
 **Warning signs**:
+
 - Users feel "talked down to"
 - Users skip guidance but then get stuck
 - Workflow feels like a checklist, not natural work
@@ -175,23 +185,27 @@ Three potential user flows:
 **Question**: Can users understand what to do next with minimal or no training?
 
 **What to test**:
+
 - Can a new user start without verbal instructions?
 - Is the current state always clear?
 - Is the next action always obvious?
 - Do users recover from mistakes easily?
 
 **Evidence needed**:
+
 - First-use success rate without training
 - Questions users ask
 - Missteps and recovery patterns
 
 **Warning signs**:
+
 - Users ask "what do I do?" repeatedly
 - Users tap wrong things
 - Users can't find how to continue
 - Users need external help to proceed
 
 **Test scenarios**:
+
 1. Hand device to user, observe without helping
 2. Note every question they ask
 3. Note every wrong tap
@@ -204,24 +218,28 @@ Three potential user flows:
 **Question**: Is QR-based identity/assignment handoff understandable and trustworthy in real contexts?
 
 **What to test**:
+
 - Do users understand what the QR code does?
 - Do users trust the QR process?
 - Does the QR → identity → assignment flow feel secure?
 - Can users re-authenticate if needed?
 
 **Evidence needed**:
+
 - User explanations of what they think happened
 - Trust statements/concerns
 - Re-auth success rate
 - Security concerns raised
 
 **Warning signs**:
+
 - Users don't trust QR ("what is this tracking?")
 - Users can't explain what the QR did
 - Identity confusion (wrong person, wrong project)
 - Panic when re-auth is needed
 
 **Cultural considerations**:
+
 - Some cultures are suspicious of scanning things
 - Some users may not have personal phones
 - Device sharing changes identity assumptions
@@ -233,18 +251,21 @@ Three potential user flows:
 **Question**: Does the approach work across diverse regions and team dynamics?
 
 **What to test**:
+
 - How do different regions use the app differently?
 - Does the group/individual workflow assumption hold?
 - Are there cultural barriers to adoption?
 - Does device sharing affect the design?
 
 **Evidence needed**:
+
 - Observations from multiple regions (at least 2)
 - Workflow variations between groups
 - Cultural friction points
 - Successful adaptations
 
 **Warning signs**:
+
 - Works in one region, fails in another
 - Individual workflow doesn't match group reality
 - Cultural barriers to audio recording
@@ -274,6 +295,7 @@ Three potential user flows:
 ### During Testing
 
 **Do:**
+
 - Observe without helping (unless they're completely stuck)
 - Note every question, hesitation, and misstep
 - Record user quotes verbatim
@@ -281,6 +303,7 @@ Three potential user flows:
 - Let users fail if they're going to fail
 
 **Don't:**
+
 - Guide users to success
 - Explain how things work
 - Fix problems users encounter
@@ -305,6 +328,7 @@ For each testing session:
 ## Field Testing Session: [Date/Location]
 
 ### Context
+
 - **Location**: [Where]
 - **Participants**: [N users, roles]
 - **Devices**: [What phones/tablets]
@@ -312,6 +336,7 @@ For each testing session:
 - **Duration**: [How long]
 
 ### Hypotheses Tested
+
 - [x] H2: Performance
 - [x] H3: Workflow Usability
 - [ ] H5: Auth & Trust (not tested this session)
@@ -319,28 +344,33 @@ For each testing session:
 ### Observations
 
 #### What Worked
+
 - [Observation 1]
 - [Observation 2]
 
 #### What Didn't Work
-- [Observation 1] — *User quote: "..."*
+
+- [Observation 1] — _User quote: "..."_
 - [Observation 2]
 
 #### Surprises
+
 - [Something unexpected]
 
 ### User Quotes
+
 > "Quote 1" — [User role/context]
 > "Quote 2" — [User role/context]
 
 ### Hypothesis Conclusions
 
-| Hypothesis | Result | Evidence | Confidence |
-|------------|--------|----------|------------|
-| H2: Performance | VALIDATED | 4/5 completed on low-end devices | High |
-| H3: Workflow Usability | INCONCLUSIVE | Mixed results, need more data | Medium |
+| Hypothesis             | Result       | Evidence                         | Confidence |
+| ---------------------- | ------------ | -------------------------------- | ---------- |
+| H2: Performance        | VALIDATED    | 4/5 completed on low-end devices | High       |
+| H3: Workflow Usability | INCONCLUSIVE | Mixed results, need more data    | Medium     |
 
 ### Next Steps
+
 - [What to do differently next time]
 - [What to test next]
 ```
@@ -353,35 +383,35 @@ These are the minimum capabilities for PoC testing. Don't over-build.
 
 ### 5.1 Project & Assignment Access
 
-| Must Have | Nice to Have | Don't Build |
-|-----------|--------------|-------------|
-| QR code scans | Offline QR caching | User management system |
-| Identity established | Error recovery | Multi-org support |
-| Assignment context loaded | Progress indicators | Admin dashboard |
+| Must Have                 | Nice to Have        | Don't Build            |
+| ------------------------- | ------------------- | ---------------------- |
+| QR code scans             | Offline QR caching  | User management system |
+| Identity established      | Error recovery      | Multi-org support      |
+| Assignment context loaded | Progress indicators | Admin dashboard        |
 
 ### 5.2 Audio-Centric Drafting
 
-| Must Have | Nice to Have | Don't Build |
-|-----------|--------------|-------------|
-| Play source audio | Playback speed control | Audio editing |
-| Record draft audio | Pause/resume recording | Noise reduction |
+| Must Have               | Nice to Have           | Don't Build           |
+| ----------------------- | ---------------------- | --------------------- |
+| Play source audio       | Playback speed control | Audio editing         |
+| Record draft audio      | Pause/resume recording | Noise reduction       |
 | Playback recorded audio | Waveform visualization | Multi-track recording |
-| Basic comments | Audio comments | Comment threads |
+| Basic comments          | Audio comments         | Comment threads       |
 
 ### 5.3 Resources (Minimal)
 
-| Must Have | Nice to Have | Don't Build |
-|-----------|--------------|-------------|
+| Must Have              | Nice to Have             | Don't Build           |
+| ---------------------- | ------------------------ | --------------------- |
 | View limited resources | Offline resource caching | Full resource library |
-| | Search | AI integration |
+|                        | Search                   | AI integration        |
 
 ### 5.4 Offline Tolerance
 
-| Must Have | Nice to Have | Don't Build |
-|-----------|--------------|-------------|
+| Must Have          | Nice to Have          | Don't Build                     |
+| ------------------ | --------------------- | ------------------------------- |
 | Works when offline | Sync status indicator | Full offline-first architecture |
-| Syncs when online | Conflict logging | Conflict resolution UI |
-| No data loss | Background sync | Real-time sync |
+| Syncs when online  | Conflict logging      | Conflict resolution UI          |
+| No data loss       | Background sync       | Real-time sync                  |
 
 ---
 
