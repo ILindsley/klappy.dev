@@ -127,6 +127,18 @@
       ]
     },
     {
+      "uri": "klappy://canon/principles/bulldoze-blueprint",
+      "path": "/canon/principles/bulldoze-but-keep-the-blueprint.md",
+      "title": "Bulldoze the App, Keep the Blueprint",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": []
+    },
+    {
       "uri": "klappy://canon",
       "path": "/canon/README.md",
       "title": "Canon",

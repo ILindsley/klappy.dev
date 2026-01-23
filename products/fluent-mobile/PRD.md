@@ -1,6 +1,6 @@
 # Fluent Mobile PRD — Active Version
 
-**Current Active PRD:** v0.3 (to be created)
+**Current Active PRD:** [v0.3](attempts/prd-v0.3/PRD.md)
 
 ---
 
@@ -8,7 +8,7 @@
 
 | Version | Status | Location | Attempts |
 |---------|--------|----------|----------|
-| **v0.3** | **PENDING** | To be created | — |
+| **v0.3** | **ACTIVE** | [attempts/prd-v0.3/PRD.md](attempts/prd-v0.3/PRD.md) | [001](attempts/prd-v0.3/attempt-001/) (FAILED) |
 | v0.2 | CLOSED | [attempts/prd-v0.2/PRD.md](attempts/prd-v0.2/PRD.md) | [001](attempts/prd-v0.2/attempt-001/) (SUCCESS) |
 | v0.1 | CLOSED | [attempts/prd-v0.1/PRD.md](attempts/prd-v0.1/PRD.md) | [001](attempts/prd-v0.1/attempt-001/) (SUCCESS) |
 

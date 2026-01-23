@@ -6,6 +6,18 @@ You are starting an attempt in the **fluent-mobile** lane.
 
 ---
 
+## ⛔ MANDATORY: READ AGENT RULES FIRST
+
+**Before proceeding, read and internalize: [AGENT_RULES.md](AGENT_RULES.md)**
+
+These rules exist because v0.3 attempt-001 FAILED due to:
+1. Agent claiming completion without verification
+2. Agent fabricating evidence with fake data
+
+**Violations result in attempt failure.**
+
+---
+
 ## ⚠️ THIS IS NOT A PRODUCTION LANE
 
 Before you do anything, internalize this:
