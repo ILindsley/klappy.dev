@@ -46,6 +46,7 @@ Architecture Decision Records (ADRs) specific to the klappy.dev repository imple
 | [D0012](./D0012-e0002-transition-interpretation.md) | E0002 transition interpretation (truth can lead enforcement) | **Active** |
 | [D0013](./D0013-build-output-lane-scoped-dist.md) | Build output truth is lane-scoped (`products/<lane>/dist`) | **Active** |
 | [D0014](./D0014-e0003-evidence-first-era.md) | E0003 evidence-first era (deployment proof required) | **Active** |
+| [D0015](./D0015-lane-prd-structure-alignment.md) | Lane-root PRD must be authoritative, not an index | **Active** |
 
 ### Repository Hygiene
 
@@ -109,7 +110,7 @@ Each decision file follows this structure:
 ## Evidence
 
 - Commit: `abc1234`
-- Attempt: `/products/<lane>/attempts/prd-vX.Y/attempt-NNN/`
+- Attempt: `/products/<lane>/attempts/v{VERSION}/attempt-NNN/`
 ```
 
 ---
