@@ -1,8 +1,8 @@
-# Fluent Mobile — PRD v0.2 Attempts
+# Fluent Mobile — v0.2 Attempts
 
 **PRD Status:** CLOSED (superseded by v0.3)
-**PRD Location:** [PRD.md](PRD.md)
-**Prior Version:** [v0.1](../prd-v0.1/PRD.md)
+**PRD Location:** [PRD.md](PRD.md) (frozen snapshot)
+**Prior Version:** [v0.1](../v0.1/PRD.md)
 
 ---
 
@@ -17,12 +17,12 @@
 Attempts against PRD v0.2 live here.
 
 ```
-/products/fluent-mobile/attempts/prd-v0.2/attempt-NNN/
+/products/fluent-mobile/attempts/v0.2/attempt-NNN/
 ```
 
 ## What Changed from v0.1
 
-Based on [Attempt 001 learnings](../prd-v0.1/attempt-001/evidence/LEARNINGS.md):
+Based on [Attempt 001 learnings](../v0.1/attempt-001/evidence/LEARNINGS.md):
 
 | Requirement | v0.1 | v0.2 |
 |-------------|------|------|
@@ -66,6 +66,7 @@ attempt-NNN/
 
 ## Related
 
-- PRD: `../../PRD.md` (v0.2)
-- Prior version: `../prd-v0.1/`
-- Attempt 001 learnings: `../prd-v0.1/attempt-001/evidence/LEARNINGS.md`
+- PRD: `../../PRD.md` (lane-root, authoritative)
+- Frozen snapshot: [PRD.md](PRD.md)
+- Prior version: `../v0.1/`
+- Attempt 001 learnings: `../v0.1/attempt-001/evidence/LEARNINGS.md`

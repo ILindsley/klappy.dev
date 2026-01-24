@@ -31,13 +31,14 @@ The fluent-mobile lane explores whether a mobile-first companion app is viable f
 
 | File | Purpose |
 |------|---------|
-| [`ATTEMPT_KICKOFF.md`](ATTEMPT_KICKOFF.md) | Copy/paste prompt to start an attempt |
+| [`PRD.md`](PRD.md) | Active PRD (authoritative requirements) |
+| [`HISTORY.md`](HISTORY.md) | PRD version history and learnings links |
+| [`AGENT_RULES.md`](AGENT_RULES.md) | Non-negotiable agent constraints |
 | [`KICKOFF.md`](KICKOFF.md) | Full attempt instructions (PoC-specific) |
 | [`INSTRUCTIONS.md`](INSTRUCTIONS.md) | Field testing and hypothesis validation guide |
-| `attempts/` | Attempt artifacts |
+| [`ATTEMPT_KICKOFF.md`](ATTEMPT_KICKOFF.md) | Copy/paste prompt to start an attempt |
+| `attempts/` | Attempt artifacts by version |
 | `src/` | Implementation source (when applicable) |
-
-**PRD Location:** `PRD.md` (in this lane)
 
 ---
 
@@ -45,9 +46,9 @@ The fluent-mobile lane explores whether a mobile-first companion app is viable f
 
 | Field | Value |
 |-------|-------|
-| **PRD Version** | v0.1 |
+| **PRD Version** | See [PRD.md](PRD.md) |
 | **Stage** | Proof of Concept / Exploration |
-| **Status** | Draft |
+| **Status** | Active |
 | **Confidence** | Intentionally low (learning-focused) |
 
 ---
@@ -79,12 +80,14 @@ The fluent-mobile lane explores whether a mobile-first companion app is viable f
 
 ## Starting an Attempt
 
-1. Read [`ATTEMPT_KICKOFF.md`](ATTEMPT_KICKOFF.md) — loads context packs, points to detailed instructions
+1. Read [`PRD.md`](PRD.md) — current requirements
 2. Read [`KICKOFF.md`](KICKOFF.md) — sandbox rules, attempt structure, PoC mindset
 3. Read [`INSTRUCTIONS.md`](INSTRUCTIONS.md) — hypothesis testing guide, user context, field testing protocol
-4. Create attempt folder at `attempts/prd-v0.1/attempt-NNN/`
-5. Test hypotheses — don't build features
-6. Document learnings regardless of outcome
+4. Read [`AGENT_RULES.md`](AGENT_RULES.md) — non-negotiable verification rules
+5. Create attempt folder at `attempts/v{VERSION}/attempt-NNN/`
+6. Copy frozen PRD snapshot to `attempts/v{VERSION}/PRD.md` if not exists
+7. Test hypotheses — don't build features
+8. Document learnings regardless of outcome
 
 ---
 
@@ -99,5 +102,7 @@ If learning slows, confidence drops, or it begins to resemble a production commi
 ## See Also
 
 - [PRD](PRD.md) — Current requirements
+- [HISTORY](HISTORY.md) — Version evolution and learnings
 - [Product Lanes](/docs/appendices/product-lanes.md) — Lane architecture
 - [Attempt Lifecycle](/docs/appendices/attempt-lifecycle.md) — How attempts work
+- [Verification & Evidence](/canon/verification-and-evidence.md) — Evidence requirements

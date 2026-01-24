@@ -185,4 +185,4 @@ See [evidence/LEARNINGS.md](evidence/LEARNINGS.md) for full details including me
 - [evidence/LEARNINGS.md](evidence/LEARNINGS.md) — Full learnings document
 - [HYPOTHESES.md](HYPOTHESES.md) — Hypothesis details
 - [PRD](../PRD.md) — v0.2 PRD
-- [v0.1 Learnings](../../prd-v0.1/attempt-001/evidence/LEARNINGS.md) — What informed this attempt
+- [v0.1 Learnings](../../v0.1/attempt-001/evidence/LEARNINGS.md) — What informed this attempt

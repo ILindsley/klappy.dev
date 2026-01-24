@@ -2,7 +2,7 @@
 
 **PRD Status:** CLOSED
 **PRD Location:** [PRD.md](PRD.md)
-**Superseded By:** [v0.2](../prd-v0.2/PRD.md)
+**Superseded By:** [v0.2](../v0.2/PRD.md)
 
 ---
 
@@ -30,7 +30,7 @@ See [Attempt 001 Learnings](attempt-001/evidence/LEARNINGS.md) for details.
 ## Structure
 
 ```
-prd-v0.1/
+v0.1/
 ├── PRD.md              # Frozen PRD for this version
 ├── README.md           # This file
 └── attempt-001/        # Sealed attempt (SUCCESS)

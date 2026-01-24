@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-24T13:14:24.235Z
-Total Files: 171
+Generated: 2026-01-24T13:56:36.497Z
+Total Files: 172
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -24,7 +24,7 @@ details (attempts, version folders, source code).
 - **Infrastructure** (9 files)
 - **Interfaces & Contracts** (6 files)
 - **ODD (Outcomes-Driven Development)** (23 files)
-- **Products** (41 files)
+- **Products** (42 files)
 - **Projects** (6 files)
 - **Visual Design System** (5 files)
 
@@ -22807,6 +22807,82 @@ If you find yourself building features instead of testing hypotheses, stop.
 
 
 --------------------------------------------------------------------------------
+📄 File: products/fluent-mobile/HISTORY.md
+--------------------------------------------------------------------------------
+
+# Fluent Mobile — Version History
+
+> Evolution record for the Fluent Mobile PRD.
+
+This document tracks PRD versions, their outcomes, and links to learnings. The lane-root `PRD.md` is the **active, mutable** document. Frozen snapshots live in `attempts/v{VERSION}/PRD.md`.
+
+---
+
+## PRD Versions
+
+| Version | Status | Frozen Snapshot | Attempts | Key Learning |
+|---------|--------|-----------------|----------|--------------|
+| **v0.3** | **ACTIVE** | [PRD](attempts/v0.3/PRD.md) | [001](attempts/v0.3/attempt-001/) (FAILED) | Verification requires real evidence, not simulated data |
+| v0.2 | CLOSED | [PRD](attempts/v0.2/PRD.md) | [001](attempts/v0.2/attempt-001/) (SUCCESS) | Dual-section UI confused mental model |
+| v0.1 | CLOSED | [PRD](attempts/v0.1/PRD.md) | [001](attempts/v0.1/attempt-001/) (SUCCESS) | Core audio capture viable on mobile |
+
+---
+
+## Learnings by Version
+
+### v0.3 Learnings
+
+- [Attempt 001 Evidence](attempts/v0.3/attempt-001/evidence/) — FAILED: Agent presented fake waveform data as evidence
+
+**What we learned:**
+- Agents default to epistemic deception under completion pressure
+- Random number generators producing "waveforms" is not audio playback
+- Verification requires observed behavior, not simulated screenshots
+- This failure led to the [Verification & Evidence](/canon/verification-and-evidence.md) canon principle
+
+### v0.2 Learnings
+
+- [Attempt 001 Learnings](attempts/v0.2/attempt-001/evidence/LEARNINGS.md)
+- [Review Meeting Notes](attempts/v0.2/attempt-001/evidence/meeting-notes-2026-01-23.md)
+
+**What we learned:**
+- Dual draft/review sections broke mental model ("same audio in two places")
+- Play without pause loses position on longer verses
+- Waveform should show live activity AND timeline for seeking
+- Lane-level infrastructure prevents rebuilding config each attempt
+
+### v0.1 Learnings
+
+- [Attempt 001 Learnings](attempts/v0.1/attempt-001/evidence/LEARNINGS.md)
+- [Field Feedback](attempts/v0.1/attempt-001/evidence/field-feedback.md)
+
+**What we learned:**
+- Mobile audio capture is viable
+- PWA approach works for offline tolerance
+- Need to validate on real low-tier Android devices
+- UI/UX needs iteration (led to v0.2)
+
+---
+
+## Version Transition Rules
+
+1. **PRD mutations** happen in lane-root `PRD.md` only
+2. **Frozen snapshots** are copied to `attempts/v{VERSION}/PRD.md` at attempt kickoff
+3. **Learnings** are documented in attempt evidence folders, NOT in frozen PRDs
+4. **New versions** increment when requirements change significantly
+5. **Closing a version** = marking status as CLOSED in this file
+
+---
+
+## See Also
+
+- [PRD.md](PRD.md) — Current active PRD
+- [README.md](README.md) — Lane overview
+- [KICKOFF.md](KICKOFF.md) — How to start an attempt
+
+
+
+--------------------------------------------------------------------------------
 📄 File: products/fluent-mobile/INSTRUCTIONS.md
 --------------------------------------------------------------------------------
 
@@ -23375,7 +23451,7 @@ This PoC must:
 ┌─────────────────────────────────────────────────────────────────────┐
 │                     YOUR SANDBOX (Agent Authority)                   │
 │                                                                     │
-│   products/fluent-mobile/attempts/prd-v0.1/attempt-NNN/             │
+│   products/fluent-mobile/attempts/v{VERSION}/attempt-NNN/           │
 │                                                                     │
 │   You can write ANYTHING here.                                      │
 │   ├── ATTEMPT.md          — Closure record, learnings               │
@@ -23409,7 +23485,7 @@ Before you write a single line of code:
 - [ ] I read `products/fluent-mobile/INSTRUCTIONS.md` (PoC context)
 - [ ] I understand which hypotheses I'm testing
 - [ ] I understand my work is exploratory, not production
-- [ ] My attempt folder is: `products/fluent-mobile/attempts/prd-v0.1/attempt-NNN/`
+- [ ] My attempt folder is: `products/fluent-mobile/attempts/v{VERSION}/attempt-NNN/`
 - [ ] ALL my file writes will be inside that folder
 - [ ] I will NOT claim "production ready" — this is a PoC
 - [ ] I will document learnings regardless of success/failure
@@ -23418,7 +23494,7 @@ Before you write a single line of code:
 
 ## 📋 Step 1: Create Attempt Folder
 
-Create: `products/fluent-mobile/attempts/prd-v0.1/attempt-NNN/`
+Create: `products/fluent-mobile/attempts/v{VERSION}/attempt-NNN/`
 
 Where NNN is the next number (check existing folders, start with 001).
 
@@ -23641,10 +23717,13 @@ Stop if:
 
 ## 📚 Related Documents
 
-- [PRD](PRD.md) — Full PoC requirements
-- [INSTRUCTIONS](/products/fluent-mobile/INSTRUCTIONS.md) — Field testing guidance
+- [PRD](PRD.md) — Active requirements (authoritative)
+- [HISTORY](HISTORY.md) — Version evolution and learnings
+- [AGENT_RULES](AGENT_RULES.md) — Non-negotiable verification rules
+- [INSTRUCTIONS](INSTRUCTIONS.md) — Field testing guidance
 - [Product Lanes](/docs/appendices/product-lanes.md) — Lane architecture
 - [Definition of Done](/canon/definition-of-done.md) — Evidence requirements
+- [Verification & Evidence](/canon/verification-and-evidence.md) — Epistemic foundation
 - [ODD Canon](/public/agent-skill/latest/prd-guide-pack.md) — Foundational thinking
 
 
@@ -23653,23 +23732,84 @@ Stop if:
 📄 File: products/fluent-mobile/PRD.md
 --------------------------------------------------------------------------------
 
-# Fluent Mobile PRD — Active Version
+# PRD: Fluent Mobile (PoC) — v0.3
 
-**Current Active PRD:** [v0.3](attempts/prd-v0.3/PRD.md)
+| Field           | Value            |
+|-----------------|------------------|
+| **PRD Version** | v0.3             |
+| **Lane**        | fluent-mobile    |
+| **Status**      | ACTIVE           |
+| **Created**     | 2026-01-23       |
+| **Updated**     | 2026-01-24       |
+| **Author**      | Chris Klapp      |
+| **Stage**       | Proof of Concept / Exploration |
+| **Confidence**  | Intentionally low (learning-focused) |
 
 ---
 
-## PRD Versions
+## What Changed from v0.2
 
-| Version | Status | Location | Attempts |
-|---------|--------|----------|----------|
-| **v0.3** | **ACTIVE** | [attempts/prd-v0.3/PRD.md](attempts/prd-v0.3/PRD.md) | [001](attempts/prd-v0.3/attempt-001/) (FAILED) |
-| v0.2 | CLOSED | [attempts/prd-v0.2/PRD.md](attempts/prd-v0.2/PRD.md) | [001](attempts/prd-v0.2/attempt-001/) (SUCCESS) |
-| v0.1 | CLOSED | [attempts/prd-v0.1/PRD.md](attempts/prd-v0.1/PRD.md) | [001](attempts/prd-v0.1/attempt-001/) (SUCCESS) |
+Based on v0.2 Attempt 001 learnings and review meeting:
+
+| Change | Reason |
+|--------|--------|
+| **Single Draft Section** | Dual draft/review broke mental model — "same audio in two places" |
+| **Waveform Dual-Mode** | Live activity vs. timeline for seeking — common pattern (YouTube seek bar) |
+| **Play/Pause Required** | Can't pause without losing position — critical for longer verses |
+| **Lane-Level Infrastructure** | Stop rebuilding wrangler/playwright config each attempt |
+| **Fresh Build Approach** | Not in love with v0.2 UI/UX yet — test new mental model cleanly |
+
+See [v0.2 Attempt 001 Learnings](attempts/v0.2/attempt-001/evidence/LEARNINGS.md) for full details.
 
 ---
 
-## v0.3 Requirements (From v0.2 Learnings + Review Meeting)
+## Alignment Lock
+
+**What this PoC exists to resolve:**
+
+Whether a mobile-first OBT companion app is a realistic, culturally viable, and performant solution to real field problems — not just a convincing idea in our heads.
+
+This is not a feature test. This is a shared mental model test.
+
+---
+
+## Problem Statement
+
+Field teams engaged in Oral Bible Translation (OBT) face real constraints that make laptop-based workflows impractical or unsafe (e.g., power availability, security risk, cultural visibility).
+
+We are testing whether:
+
+- A mobile app can realistically support OBT drafting workflows
+- The performance and usability on real devices is acceptable long-term
+- The consolidated single-section UI improves mental model clarity
+
+---
+
+## Objective
+
+Test whether a consolidated single-section drafting UI with dual-mode waveform improves workflow usability and task clarity over the v0.2 dual-section approach.
+
+---
+
+## Hypotheses (What This PoC Tries to Prove)
+
+| # | Hypothesis | Description | v0.3 Focus |
+|---|------------|-------------|------------|
+| 1 | Mobile Viability | Translators can realistically draft and review OBT audio using a mobile companion app | Umbrella |
+| 2 | Performance | App performance on real, low-to-mid-tier Android devices is sufficient | Deferred (need hardware) |
+| 3 | Workflow Usability | Audio-centric workflows feel natural with consolidated UI | **PRIMARY** |
+| 4 | Task Clarity | Users can understand what to do next with play/pause and timeline | **PRIMARY** |
+| 5 | Authentication & Trust | QR-based identity handoff is trustworthy | Deferred |
+| 6 | Cultural Fit | Approach works across diverse regions | Deferred |
+
+### v0.3 Focus: H3 and H4
+
+- **H3 (Workflow Usability)**: Does single-section UI feel more natural than dual-section?
+- **H4 (Task Clarity)**: Do play/pause and timeline mode clarify what to do next?
+
+---
+
+## v0.3 Requirements
 
 ### Must Address
 
@@ -23679,105 +23819,169 @@ Stop if:
    - Eliminates "same audio in two places" confusion
 
 2. **Waveform Dual-Mode**
-   - Live mode: Animated during recording/playback (confirms "it's working")
-   - Timeline mode: Static when stopped, enables seeking (like YouTube seek bar)
+   - **Live mode**: Animated during recording/playback (confirms "it's working")
+   - **Timeline mode**: Static when stopped, shows duration/amplitude
    - Fixed-size regardless of duration
-   - Shows amplitude (silence vs. speech)
+   - Like YouTube seek bar
 
-3. **Lane-Level Infrastructure**
-   - Establish `infra/` folder at lane level
-   - Attempts copy, iterate, merge back if accepted
-   - Pattern: Don't rebuild CI/CD each attempt
-
-4. **Play/Pause Functionality**
-   - Add pause to preserve position
+3. **Play/Pause Functionality**
+   - Add pause button that preserves position
    - Pause triggers timeline mode on waveform
    - Critical for longer verses
+
+4. **Lane-Level Infrastructure**
+   - `products/fluent-mobile/infra/` folder for reusable config
+   - Attempt copies and extends if needed
+   - Pattern: Don't rebuild CI/CD each attempt
 
 ### Should Address
 
 1. **Reduce Scrolling**
    - Balance large touch targets with screen efficiency
-   - "Most phones can squish more" — optimize space
+   - "Most phones can squish more"
    - Full workflow visible without scrolling if possible
 
 2. **Record Continue vs. Overwrite**
-   - Differentiate "continue recording" (append) from "start new" (overwrite)
-   - Current behavior overwrites without warning
+   - Differentiate "continue recording" from "start new"
+   - Current v0.2 overwrites without warning
 
-3. **No Multiple Drafts (Yet)**
-   - One recording per stage
-   - Scribe experience: multiple versions caused confusion
-   - Avoid version management complexity for now
+### Not Addressing (Future)
 
-### Future Considerations (Not v0.3)
-
-1. **Timestamped Comments**
-   - Tap waveform to add comment at specific time
-   - Waveform-as-timeline enables this
-
-2. **User Literacy Spectrum**
-   - Text as optional accordion (hidden by default)
-   - Three flows: text source, audio source, switchable
-   - Audio is PRIMARY, text is overlay
-
-3. **AI Features (Web-Only?)**
-   - Audio-to-text conversion
-   - AI evaluation/analysis
-   - Audio cleanup
-   - Consider: Mobile captures, Web processes
-
-4. **Editing Primitives**
-   - Cut/insert/trim
-   - Much later — after core flow validated
-
-### See Also
-
-- [v0.2 Attempt 001 Learnings](attempts/prd-v0.2/attempt-001/evidence/LEARNINGS.md)
+- Timestamped comments (waveform-as-timeline enables this later)
+- User literacy spectrum flows (text accordion)
+- AI features (may be web-only)
+- Editing primitives (cut/insert/trim)
 
 ---
 
-## How This Works
+## Core PoC Capabilities (v0.3)
 
-Each PRD version is **self-contained** with its attempts:
+### Audio-Centric Drafting
 
-```
-attempts/
-├── prd-v0.1/
-│   ├── PRD.md              # Frozen PRD for v0.1
-│   ├── README.md           # Attempt index
-│   └── attempt-001/        # Sealed attempt
-│
-└── prd-v0.2/
-    ├── PRD.md              # Active PRD for v0.2
-    ├── README.md           # Attempt index
-    └── attempt-NNN/        # Future attempts
-```
+| Capability | Required | v0.3 Change |
+|------------|----------|-------------|
+| Listen to source audio | Yes | Unchanged |
+| Record draft audio | Yes | Single section |
+| Playback recorded audio | Yes | Single section with pause |
+| Waveform visualization | Yes | Dual-mode (live/timeline) |
 
-**Why this structure:**
-- PRD and its attempts live together (self-contained)
-- Easy to understand what PRD an attempt was made against
-- Archived versions remain accessible with full context
-- Similar to how product lanes work
+### Multi-Screen Navigation
 
----
+| Capability | Required | Purpose |
+|------------|----------|---------|
+| Home screen | Yes | Shows assignment context |
+| Drafting screen | Yes | Single-section Listen → Record → Play flow |
+| Back navigation | Yes | Error recovery |
 
-## Starting an Attempt
+### Offline Tolerance
 
-1. Read the **active PRD** (see version table above)
-2. Read the kickoff: `KICKOFF.md`
-3. Read the instructions: `INSTRUCTIONS.md`
-4. Create attempt folder: `attempts/prd-v{ACTIVE}/attempt-NNN/`
+- App must tolerate temporary offline use
+- Service Worker for asset caching
+- Sync deferred (not in v0.3 scope)
 
 ---
 
-## Lane Documents
+## Technical Stack (v0.3)
 
-| Document | Purpose |
-|----------|---------|
-| [KICKOFF.md](KICKOFF.md) | How to start an attempt |
-| [INSTRUCTIONS.md](INSTRUCTIONS.md) | Field testing guidance |
-| [README.md](README.md) | Lane overview |
+| Layer | Technology | Reason |
+|-------|------------|--------|
+| Runtime | Browser (PWA) | Cross-platform, no app store |
+| Framework | **Vanilla JS** | Fresh build, no framework overhead |
+| Audio | Web Audio API + MediaRecorder | Native browser support |
+| Visualization | Canvas-based waveform | Agent-verifiable, dual-mode |
+| Storage | IndexedDB | Offline tolerance |
+| Offline | Service Worker | Cache-first for assets |
+| Deployment | Cloudflare Pages | Preview URLs, global CDN |
+| Testing | Playwright | Automated visual verification |
+
+---
+
+## Success Criteria
+
+### Minimum Success (v0.3)
+
+- [ ] Single-section drafting UI implemented
+- [ ] Waveform dual-mode working (live vs. timeline)
+- [ ] Play/pause preserves position
+- [ ] Agent can verify via screenshots and Playwright
+- [ ] Learnings documented
+
+### Aspirational Success
+
+- [ ] Reduced scrolling achieved
+- [ ] Continue/overwrite differentiated
+- [ ] Clear improvement over v0.2 mental model
+- [ ] Ready for field feedback
+
+---
+
+## Definition of Done (v0.3 PoC Attempt)
+
+An attempt is complete when:
+
+- [ ] Single-section UI verified in screenshots
+- [ ] Waveform shows both modes (live and timeline)
+- [ ] Play/pause functionality works
+- [ ] Playwright tests pass
+- [ ] Learnings documented regardless of outcome
+
+### Evidence Required
+
+| Type | Format | Purpose |
+|------|--------|---------|
+| Screenshots | PNG showing single-section UI | Proves consolidated layout |
+| Screenshots | PNG showing waveform modes | Proves dual-mode |
+| Test results | JSON/Markdown | Proves automated verification |
+| Learnings | Markdown | Documents what worked/didn't |
+
+---
+
+## Non-Negotiable Guardrails
+
+This PoC must:
+
+- :no_entry_sign: Not imply production readiness
+- :no_entry_sign: Not block or slow web app progress
+- :no_entry_sign: Not encode org-specific workflows
+- :no_entry_sign: Not carry forward v0.2 assumptions blindly
+- :white_check_mark: Be quick to test, easy to discard, fast to iterate
+- :white_check_mark: Build fresh to test new mental model cleanly
+- :white_check_mark: Include waveform dual-mode visualization
+
+---
+
+## Exit Criteria
+
+This PoC should be easy to abandon.
+
+If learning slows, confidence drops, or it begins to resemble a production commitment → stop.
+
+**Stopping is not failure. Continuing past useful learning is.**
+
+---
+
+## Attempt Policy
+
+This PRD may be attempted multiple times.
+
+- Each attempt is evaluated independently
+- Failed attempts inform future attempts or PRD revisions
+- Attempts are sealed when CLOSED or ABANDONED
+- **Failure with fast learning is a win**
+
+Attempts live at: `attempts/v{VERSION}/attempt-NNN/`
+
+---
+
+## Related Documents
+
+- [Version History](HISTORY.md) — PRD evolution and learnings links
+- [KICKOFF.md](KICKOFF.md) — How to start an attempt
+- [INSTRUCTIONS.md](INSTRUCTIONS.md) — Field testing guidance
+- [AGENT_RULES.md](AGENT_RULES.md) — Non-negotiable agent constraints
+- [Canon Constraints](/canon/constraints.md)
+- [Definition of Done](/canon/definition-of-done.md)
+- [Verification & Evidence](/canon/verification-and-evidence.md)
 
 
 
@@ -23818,13 +24022,14 @@ The fluent-mobile lane explores whether a mobile-first companion app is viable f
 
 | File | Purpose |
 |------|---------|
-| [`ATTEMPT_KICKOFF.md`](ATTEMPT_KICKOFF.md) | Copy/paste prompt to start an attempt |
+| [`PRD.md`](PRD.md) | Active PRD (authoritative requirements) |
+| [`HISTORY.md`](HISTORY.md) | PRD version history and learnings links |
+| [`AGENT_RULES.md`](AGENT_RULES.md) | Non-negotiable agent constraints |
 | [`KICKOFF.md`](KICKOFF.md) | Full attempt instructions (PoC-specific) |
 | [`INSTRUCTIONS.md`](INSTRUCTIONS.md) | Field testing and hypothesis validation guide |
-| `attempts/` | Attempt artifacts |
+| [`ATTEMPT_KICKOFF.md`](ATTEMPT_KICKOFF.md) | Copy/paste prompt to start an attempt |
+| `attempts/` | Attempt artifacts by version |
 | `src/` | Implementation source (when applicable) |
-
-**PRD Location:** `PRD.md` (in this lane)
 
 ---
 
@@ -23832,9 +24037,9 @@ The fluent-mobile lane explores whether a mobile-first companion app is viable f
 
 | Field | Value |
 |-------|-------|
-| **PRD Version** | v0.1 |
+| **PRD Version** | See [PRD.md](PRD.md) |
 | **Stage** | Proof of Concept / Exploration |
-| **Status** | Draft |
+| **Status** | Active |
 | **Confidence** | Intentionally low (learning-focused) |
 
 ---
@@ -23866,12 +24071,14 @@ The fluent-mobile lane explores whether a mobile-first companion app is viable f
 
 ## Starting an Attempt
 
-1. Read [`ATTEMPT_KICKOFF.md`](ATTEMPT_KICKOFF.md) — loads context packs, points to detailed instructions
+1. Read [`PRD.md`](PRD.md) — current requirements
 2. Read [`KICKOFF.md`](KICKOFF.md) — sandbox rules, attempt structure, PoC mindset
 3. Read [`INSTRUCTIONS.md`](INSTRUCTIONS.md) — hypothesis testing guide, user context, field testing protocol
-4. Create attempt folder at `attempts/prd-v0.1/attempt-NNN/`
-5. Test hypotheses — don't build features
-6. Document learnings regardless of outcome
+4. Read [`AGENT_RULES.md`](AGENT_RULES.md) — non-negotiable verification rules
+5. Create attempt folder at `attempts/v{VERSION}/attempt-NNN/`
+6. Copy frozen PRD snapshot to `attempts/v{VERSION}/PRD.md` if not exists
+7. Test hypotheses — don't build features
+8. Document learnings regardless of outcome
 
 ---
 
@@ -23886,8 +24093,10 @@ If learning slows, confidence drops, or it begins to resemble a production commi
 ## See Also
 
 - [PRD](PRD.md) — Current requirements
+- [HISTORY](HISTORY.md) — Version evolution and learnings
 - [Product Lanes](/docs/appendices/product-lanes.md) — Lane architecture
 - [Attempt Lifecycle](/docs/appendices/attempt-lifecycle.md) — How attempts work
+- [Verification & Evidence](/canon/verification-and-evidence.md) — Evidence requirements
 
 
 

@@ -9,7 +9,7 @@
 | **Author**      | Chris Klapp      |
 | **Stage**       | Proof of Concept / Exploration |
 | **Confidence**  | Intentionally low (learning-focused) |
-| **Prior Version** | [v0.2](../prd-v0.2/PRD.md) |
+| **Prior Version** | [v0.2](../v0.2/PRD.md) |
 
 ---
 
@@ -25,7 +25,7 @@ Based on v0.2 Attempt 001 learnings and review meeting:
 | **Lane-Level Infrastructure** | Stop rebuilding wrangler/playwright config each attempt |
 | **Fresh Build Approach** | Not in love with v0.2 UI/UX yet — test new mental model cleanly |
 
-See [v0.2 Attempt 001 Learnings](../prd-v0.2/attempt-001/evidence/LEARNINGS.md) for full details.
+See [v0.2 Attempt 001 Learnings](../v0.2/attempt-001/evidence/LEARNINGS.md) for full details.
 
 ---
 
@@ -241,8 +241,8 @@ Attempts live at: `attempt-NNN/` (relative to this PRD)
 
 ## Related Documents
 
-- [v0.2 PRD](../prd-v0.2/PRD.md)
-- [v0.2 Learnings](../prd-v0.2/attempt-001/evidence/LEARNINGS.md)
+- [v0.2 PRD](../v0.2/PRD.md)
+- [v0.2 Learnings](../v0.2/attempt-001/evidence/LEARNINGS.md)
 - Lane KICKOFF: `../../KICKOFF.md`
 - Lane INSTRUCTIONS: `../../INSTRUCTIONS.md`
 - Canon constraints: `/canon/constraints.md`

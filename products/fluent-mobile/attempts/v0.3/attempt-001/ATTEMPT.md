@@ -160,4 +160,4 @@ User expectation: If draft shows waveform during recording, source should show w
 
 - [HYPOTHESES.md](HYPOTHESES.md)
 - [PRD](../PRD.md)
-- [v0.2 Learnings](../../prd-v0.2/attempt-001/evidence/LEARNINGS.md)
+- [v0.2 Learnings](../../v0.2/attempt-001/evidence/LEARNINGS.md)

@@ -3,14 +3,14 @@
 Canonical attempt artifacts live here:
 
 ```
-/products/fluent-mobile/attempts/prd-vX.Y/attempt-NNN/
+/products/fluent-mobile/attempts/v{VERSION}/attempt-NNN/
 ```
 
 ## Structure
 
 ```
 attempts/
-  prd-v0.1/
+  v0.1/
     PRD.md              # frozen PRD snapshot
     _runs/              # in-progress runs (before finalize)
       <run_id>/
@@ -53,5 +53,6 @@ An attempt fails if it:
 ## Related
 
 - PRD: `../PRD.md`
+- Version History: `../HISTORY.md`
 - Lane README: `/products/fluent-mobile/README.md`
 - Attempt lifecycle: `/docs/appendices/attempt-lifecycle.md`

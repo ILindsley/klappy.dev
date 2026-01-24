@@ -10,7 +10,7 @@
 | **Author**      | Chris Klapp      |
 | **Stage**       | Proof of Concept / Exploration |
 | **Confidence**  | Intentionally low (learning-focused) |
-| **Superseded By** | [v0.2](../prd-v0.2/PRD.md) |
+| **Superseded By** | [v0.2](../v0.2/PRD.md) |
 
 ---
 

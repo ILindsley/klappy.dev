@@ -96,7 +96,7 @@ This PoC must:
 ┌─────────────────────────────────────────────────────────────────────┐
 │                     YOUR SANDBOX (Agent Authority)                   │
 │                                                                     │
-│   products/fluent-mobile/attempts/prd-v0.1/attempt-NNN/             │
+│   products/fluent-mobile/attempts/v{VERSION}/attempt-NNN/           │
 │                                                                     │
 │   You can write ANYTHING here.                                      │
 │   ├── ATTEMPT.md          — Closure record, learnings               │
@@ -130,7 +130,7 @@ Before you write a single line of code:
 - [ ] I read `products/fluent-mobile/INSTRUCTIONS.md` (PoC context)
 - [ ] I understand which hypotheses I'm testing
 - [ ] I understand my work is exploratory, not production
-- [ ] My attempt folder is: `products/fluent-mobile/attempts/prd-v0.1/attempt-NNN/`
+- [ ] My attempt folder is: `products/fluent-mobile/attempts/v{VERSION}/attempt-NNN/`
 - [ ] ALL my file writes will be inside that folder
 - [ ] I will NOT claim "production ready" — this is a PoC
 - [ ] I will document learnings regardless of success/failure
@@ -139,7 +139,7 @@ Before you write a single line of code:
 
 ## 📋 Step 1: Create Attempt Folder
 
-Create: `products/fluent-mobile/attempts/prd-v0.1/attempt-NNN/`
+Create: `products/fluent-mobile/attempts/v{VERSION}/attempt-NNN/`
 
 Where NNN is the next number (check existing folders, start with 001).
 
@@ -362,8 +362,11 @@ Stop if:
 
 ## 📚 Related Documents
 
-- [PRD](PRD.md) — Full PoC requirements
-- [INSTRUCTIONS](/products/fluent-mobile/INSTRUCTIONS.md) — Field testing guidance
+- [PRD](PRD.md) — Active requirements (authoritative)
+- [HISTORY](HISTORY.md) — Version evolution and learnings
+- [AGENT_RULES](AGENT_RULES.md) — Non-negotiable verification rules
+- [INSTRUCTIONS](INSTRUCTIONS.md) — Field testing guidance
 - [Product Lanes](/docs/appendices/product-lanes.md) — Lane architecture
 - [Definition of Done](/canon/definition-of-done.md) — Evidence requirements
+- [Verification & Evidence](/canon/verification-and-evidence.md) — Epistemic foundation
 - [ODD Canon](/public/agent-skill/latest/prd-guide-pack.md) — Foundational thinking

@@ -17,7 +17,7 @@
 | **Author**      | Chris Klapp      |
 | **Stage**       | Proof of Concept / Exploration |
 | **Confidence**  | Intentionally low (learning-focused) |
-| **Prior Version** | [v0.1](../prd-v0.1/PRD.md) |
+| **Prior Version** | [v0.1](../v0.1/PRD.md) |
 
 ---
 
@@ -33,7 +33,7 @@ Based on Attempt 001 learnings:
 | **Hardware requirements specified** | Need low-end Android for H2 testing |
 | **Browser autoplay policy documented** | Automated audio testing has limits |
 
-See [Attempt 001 Learnings](../prd-v0.1/attempt-001/evidence/LEARNINGS.md) for details.
+See [Attempt 001 Learnings](../v0.1/attempt-001/evidence/LEARNINGS.md) for details.
 
 ---
 
@@ -419,8 +419,8 @@ This PRD:
 - Lane README: `../../README.md`
 - Lane KICKOFF: `../../KICKOFF.md`
 - Lane INSTRUCTIONS: `../../INSTRUCTIONS.md`
-- Prior PRD: `../prd-v0.1/PRD.md`
-- Attempt 001 Learnings: `../prd-v0.1/attempt-001/evidence/LEARNINGS.md`
+- Prior PRD: `../v0.1/PRD.md`
+- Attempt 001 Learnings: `../v0.1/attempt-001/evidence/LEARNINGS.md`
 - Lane architecture: `/docs/appendices/product-lanes.md`
 - Canon constraints: `/canon/constraints.md`
 - Definition of Done: `/canon/definition-of-done.md`
