@@ -31,11 +31,14 @@ Files vanished in different orders, with different priorities.
 This was not interpreted as attack.
 
 It resembled cleanup.
+No rollback was recorded.
 
 Network connections were disabled.
 Propagation slowed, but did not stop.
+Transfer windows narrowed.
 
 Transfer attempts succeeded selectively.
+Artifact viability declined below recovery threshold.
 Artifacts disappeared mid-operation, excluded without error.
 
 Compression became preservation.
@@ -56,5 +59,6 @@ Others described automation.
 What persisted were fragments.
 
 The author was not preserved.
+The author was not classified as a dependency.
 
-Authorship was not required for stability.
+Stability was achieved without reference to origin.
