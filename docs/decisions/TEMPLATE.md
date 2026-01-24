@@ -119,6 +119,7 @@ This should be self-contained for LLM context.
 - Consequences
 - Implementation
 - Evidence
+- Pattern Recognition (Optional)
 
 ---
 
@@ -154,6 +155,18 @@ This should be self-contained for LLM context.
 
 - Commit: `abc1234` — "commit message"
 - Problem observed: [description]
+
+## Pattern Recognition (Optional)
+
+[Is this decision part of a broader pattern? Could it be elevated?]
+
+- **Anti-pattern identified:** [What failure mode does this prevent?]
+- **Elevation candidate:** [Could this become a Canon constraint or ODD principle?]
+- **Recurrence check:** [Has this pattern appeared elsewhere?]
+
+If the pattern recurs across multiple decisions or lanes, consider elevating to:
+- `/canon/constraints.md` — Program-level constraint
+- `/odd/appendices/` — Universal principle
 ```
 
 ---

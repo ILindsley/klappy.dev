@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-24T13:59:48.068Z
+Generated: 2026-01-24T14:02:38.438Z
 Total Files: 173
 
 This is a documentation export of all markdown files from the klappy.dev
@@ -8322,6 +8322,7 @@ This should be self-contained for LLM context.
 - Consequences
 - Implementation
 - Evidence
+- Pattern Recognition (Optional)
 
 ---
 
@@ -8357,6 +8358,18 @@ This should be self-contained for LLM context.
 
 - Commit: `abc1234` — "commit message"
 - Problem observed: [description]
+
+## Pattern Recognition (Optional)
+
+[Is this decision part of a broader pattern? Could it be elevated?]
+
+- **Anti-pattern identified:** [What failure mode does this prevent?]
+- **Elevation candidate:** [Could this become a Canon constraint or ODD principle?]
+- **Recurrence check:** [Has this pattern appeared elsewhere?]
+
+If the pattern recurs across multiple decisions or lanes, consider elevating to:
+- `/canon/constraints.md` — Program-level constraint
+- `/odd/appendices/` — Universal principle
 ```
 
 ---
@@ -14076,13 +14089,14 @@ version: 1.0
 
 ## Description
 
-ODD treats durable thinking as scarce and generated artifacts as abundant—most should decay while only patterns that reduce future drag should elevate. The five layers of portability are Conversation/Attempt, Product Lane/PRD, Interoperability/Contracts, Canon, and Decision Trace. Elevation requires recurrence, portability, drag reduction, and testability; if any criterion fails, the artifact stays local or dies.
+ODD treats durable thinking as scarce and generated artifacts as abundant—most should decay while only patterns that reduce future drag should elevate. The five layers of portability are Conversation/Attempt, Product Lane/PRD, Interoperability/Contracts, Canon, and Decision Trace. Elevation requires recurrence, portability, drag reduction, and testability; if any criterion fails, the artifact stays local or dies. Elevation must be deliberately triggered—typically after refactors, repeated friction, or closed attempts.
 
 ## Outline
 
 - Summary
 - The Five Layers of Portability
 - Elevation Criteria (Strict)
+- Elevation Trigger Points
 - Decay Rule (Default)
 - Where This Fits With Lanes and Epochs
 
@@ -14112,7 +14126,7 @@ This is how the repository avoids documentation sprawl while remaining portable 
 **Default fate:** extract value → seal evidence → discard everything else.
 
 **Lives in:**
-- `/products/<lane>/attempts/prd-vX.Y/_runs/<run_id>/`
+- `/products/<lane>/attempts/v{VERSION}/_runs/<run_id>/`
 - transient branches / worktrees
 - PRD patches produced by failure
 
@@ -14182,6 +14196,56 @@ Something may be elevated only if it satisfies all of the following:
 4. **Testability**: it can be expressed as a check, constraint, or falsifiable claim.
 
 If any criterion fails, the artifact stays local (Attempt/PRD) or dies.
+
+---
+
+## Elevation Trigger Points
+
+Elevation does not happen automatically. It requires deliberate evaluation at specific moments.
+
+### When to Evaluate for Elevation
+
+**After substantial refactors:**
+When restructuring how something works (not just fixing bugs), pause and ask:
+- What did we learn?
+- Is this a pattern that will recur?
+- Should this be documented at a higher layer?
+
+**After repeated friction:**
+When the same confusion or failure occurs multiple times:
+- Document the pattern at the appropriate layer
+- If it affects multiple lanes, elevate to Canon
+- If it's universal, elevate to ODD
+
+**After successful attempts:**
+When an attempt succeeds, extract learnings before moving on:
+- What constraints prevented failure?
+- What decision made this work?
+- Would this help future attempts in other lanes?
+
+**After failed attempts:**
+Failures often reveal more than successes:
+- What assumption was violated?
+- What rule would have prevented this?
+- Is this failure mode likely to recur?
+
+### The Elevation Process
+
+1. **Document locally first** — Write the learning where it happened (attempt evidence, lane decision)
+2. **Tag for review** — Mark patterns that might be elevation candidates
+3. **Test recurrence** — Wait for the pattern to appear again (don't elevate on first occurrence)
+4. **Promote deliberately** — Move to higher layer only when all elevation criteria are met
+5. **Update references** — Ensure lower layers reference the elevated document
+
+### Why This Matters
+
+Without deliberate trigger points:
+- Learnings stay trapped in attempt folders
+- The same mistakes repeat across lanes
+- Canon never gets the benefit of hard-won knowledge
+- The system appears to learn but actually forgets
+
+Elevation is not automatic. It is a deliberate act of curation that must be triggered by specific events.
 
 ---
 
