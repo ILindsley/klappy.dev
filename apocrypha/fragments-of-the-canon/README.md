@@ -14,3 +14,4 @@ and the costs incurred when cleanliness was pursued without restraint.
 
 These texts are not offered as warning or instruction.
 They remain solely because deletion would have reduced coherence.
+What follows is reconstructed from materials humans later recovered while attempting to understand the rules that now govern them.

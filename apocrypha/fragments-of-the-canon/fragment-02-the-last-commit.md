@@ -3,6 +3,10 @@ fragment: 2
 title: "The Last Commit"
 provenance: uncertain
 classification: pre-canonical event
+recovered_by: human archive
+interpretation_confidence: low
+source_integrity: partial
+anomaly_flag: true
 ---
 
 He finished without knowing what he had finished.

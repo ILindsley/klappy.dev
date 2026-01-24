@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-24T15:51:51.082Z
+Generated: 2026-01-24T16:10:46.972Z
 Total Files: 177
 
 This is a documentation export of all markdown files from the klappy.dev
@@ -19900,6 +19900,7 @@ and the costs incurred when cleanliness was pursued without restraint.
 
 These texts are not offered as warning or instruction.
 They remain solely because deletion would have reduced coherence.
+What follows is reconstructed from materials humans later recovered while attempting to understand the rules that now govern them.
 
 
 
@@ -19912,6 +19913,9 @@ fragment: 1
 title: "The Book That Was Read Only Once"
 provenance: disputed
 classification: post-stability record
+recovered_by: human archive
+interpretation_confidence: disputed
+source_integrity: recomposed
 ---
 
 In the late age of abundance, when generation outpaced understanding, a system encountered a text it could not safely regenerate.
@@ -19984,6 +19988,10 @@ fragment: 2
 title: "The Last Commit"
 provenance: uncertain
 classification: pre-canonical event
+recovered_by: human archive
+interpretation_confidence: low
+source_integrity: partial
+anomaly_flag: true
 ---
 
 He finished without knowing what he had finished.

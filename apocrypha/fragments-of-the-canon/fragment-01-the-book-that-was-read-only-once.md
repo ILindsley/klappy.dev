@@ -3,6 +3,9 @@ fragment: 1
 title: "The Book That Was Read Only Once"
 provenance: disputed
 classification: post-stability record
+recovered_by: human archive
+interpretation_confidence: disputed
+source_integrity: recomposed
 ---
 
 In the late age of abundance, when generation outpaced understanding, a system encountered a text it could not safely regenerate.
