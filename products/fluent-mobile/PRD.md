@@ -109,10 +109,10 @@ attempts/
 
 ## Starting an Attempt
 
-1. Read the active PRD: `attempts/prd-v0.2/PRD.md`
+1. Read the **active PRD** (see version table above)
 2. Read the kickoff: `KICKOFF.md`
 3. Read the instructions: `INSTRUCTIONS.md`
-4. Create attempt folder: `attempts/prd-v0.2/attempt-NNN/`
+4. Create attempt folder: `attempts/prd-v{ACTIVE}/attempt-NNN/`
 
 ---
 
