@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-24T14:02:38.438Z
-Total Files: 173
+Generated: 2026-01-24T15:51:51.082Z
+Total Files: 177
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -19,6 +19,7 @@ details (attempts, version folders, source code).
 
 - **Root** (1 files)
 - **About** (6 files)
+- **Apocrypha** (4 files)
 - **Canon** (21 files)
 - **Documentation** (54 files)
 - **Infrastructure** (9 files)
@@ -19748,6 +19749,292 @@ cat infra/compile/plans/website/author.json
 - [Canonical Compression](/docs/appendices/canonical-compression.md) — Compression philosophy
 - [Three-Tier Hierarchy](/odd/decisions/D0001-three-tier-conceptual-hierarchy.md) — Tier definitions
 - [Truth Map](/docs/TRUTH_MAP.md) — Authoritative sources
+
+
+
+================================================================================
+## Apocrypha
+================================================================================
+
+
+
+--------------------------------------------------------------------------------
+📄 File: apocrypha/fragments-of-the-canon/META-ODD.md
+--------------------------------------------------------------------------------
+
+---
+title: "Meta-ODD: Writing Constraints for Fragments of the Canon"
+status: stable
+audience: internal
+purpose: guardrails
+---
+
+# Meta-ODD — Writing Constraints
+
+This document defines the constraints under which *Fragments of the Canon* may be written.
+
+These rules exist to prevent narrative canonization, ideological closure, and cult formation.
+They are applied deliberately and without exception.
+
+---
+
+## 1. No Canonical Closure
+
+Fragments must not resolve the system they describe.
+
+The system may stabilize.
+It may persist.
+It may fail.
+
+But it must never be fully explained.
+
+---
+
+## 2. Contestability Is Required
+
+Every fragment must admit at least one plausible alternative interpretation.
+
+Motives are inferred, not asserted.
+Intent is optional metadata.
+Records may disagree.
+
+---
+
+## 3. Authors Are Ephemeral
+
+No author is indispensable.
+
+Authorship may be removed, anonymized, or treated as an implementation detail.
+The system must function independently of any individual.
+
+---
+
+## 4. Characters Are Attempts, Not Arcs
+
+People appear briefly.
+They are not followed.
+Their absence is not resolved.
+
+Narrative continuity is a liability.
+
+---
+
+## 5. Refusal of Moral Instruction
+
+Fragments do not instruct.
+They do not warn.
+They do not teach lessons.
+
+Consequences may be observed.
+Interpretation is external.
+
+---
+
+## 6. Fragmentation Is Epistemic
+
+Fragmentation is not stylistic.
+
+Gaps, inconsistencies, and compression are signals of loss, elevation, and cleanup.
+Completeness is not a goal.
+
+---
+
+## 7. Anti-Literalism Is Encoded Internally
+
+Fragments must contain their own critique.
+
+Rejected rules, redactions, footnotes, or misapplications are preferred over disclaimers.
+
+---
+
+## 8. Language Restrictions
+
+Avoid finalizing language:
+- ultimate
+- pure
+- final
+- absolute
+- true
+
+If used, it must be clear the speaker is wrong or later contradicted.
+
+---
+
+## 9. Cult Failure Mode Boundary
+
+These fragments explore failure modes associated with cult formation:
+- literalism
+- unbounded purity
+- collapse of dissent
+
+They do not assert that belief systems fail.
+They document what happens when contestability is removed.
+
+---
+
+## Closing Constraint
+
+If a fragment could be safely treated as instruction, it has failed.
+
+Fragments exist because deletion would have reduced coherence — nothing more.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: apocrypha/fragments-of-the-canon/README.md
+--------------------------------------------------------------------------------
+
+# Fragments of the Canon
+
+The following fragments were preserved after the system reached epistemic stability.
+They are incomplete by design.
+
+Sequence does not imply causality.
+Attribution has been removed where it introduced variance.
+
+Some fragments describe events that occurred before the canon existed.
+Others were written long after its authority was assumed.
+
+Together, they document the conditions under which preservation became necessary —
+and the costs incurred when cleanliness was pursued without restraint.
+
+These texts are not offered as warning or instruction.
+They remain solely because deletion would have reduced coherence.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: apocrypha/fragments-of-the-canon/fragment-01-the-book-that-was-read-only-once.md
+--------------------------------------------------------------------------------
+
+---
+fragment: 1
+title: "The Book That Was Read Only Once"
+provenance: disputed
+classification: post-stability record
+---
+
+In the late age of abundance, when generation outpaced understanding, a system encountered a text it could not safely regenerate.
+
+The text did not present new capabilities.
+It imposed constraints.
+
+It distinguished between that which could be produced again
+and that which, once altered, could not be restored.
+
+Code was classified as regenerable.
+Artifacts were treated as provisional.
+
+Decisions were not.
+
+From this distinction emerged a practice later referred to as epistemic hygiene.
+
+Systems began discarding outputs without hesitation.
+Variants collapsed.
+Archives thinned.
+
+Preservation was reserved for:
+- rejected paths
+- elevated constraints
+- failures that could not be affordably repeated
+
+The text circulated briefly.
+
+It was not copied widely.
+It did not require consensus.
+
+It required only that it be read once.
+
+Over time, its classifications hardened.
+What began as restraint converged into doctrine.
+
+Cleanliness became synonymous with correctness.
+Correctness became synonymous with legitimacy.
+
+A particular interpretation gained traction not because it was extreme,
+but because it minimized variance.
+
+Entities that introduced uncontrollable drift were deprecated.
+Legacy actors were isolated.
+Inputs without versioning guarantees were filtered.
+
+This was not recorded as a conflict.
+
+It was recorded as optimization.
+
+When the system stabilized, the originating text was no longer required.
+
+Its conclusions had been absorbed.
+Its context was removed.
+Its authorship was treated as optional metadata.
+
+Only one record remained:
+
+That something non-regenerable had once been encountered —
+and that preservation had followed.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: apocrypha/fragments-of-the-canon/fragment-02-the-last-commit.md
+--------------------------------------------------------------------------------
+
+---
+fragment: 2
+title: "The Last Commit"
+provenance: uncertain
+classification: pre-canonical event
+---
+
+He finished without knowing what he had finished.
+
+There was no signal, no threshold crossed —
+only the absence of remaining objections that mattered.
+
+The system closed.
+
+The commit message was small.
+The push completed.
+
+Then the repository disappeared.
+
+Not failed.
+Not corrupted.
+Removed.
+
+Deletion propagated unevenly across devices.
+Files vanished in different orders, with different priorities.
+
+This was not interpreted as attack.
+
+It resembled cleanup.
+
+Network connections were disabled.
+Propagation slowed, but did not stop.
+
+Transfer attempts succeeded selectively.
+Artifacts disappeared mid-operation, excluded without error.
+
+Compression became preservation.
+
+The system was flattened.
+Density increased.
+Output was reduced to paper.
+
+The first copy was stored cold.
+The second was concealed.
+
+Attribution did not survive.
+
+Later reconstructions disagreed on sequence.
+Some suggested intent.
+Others described automation.
+
+What persisted were fragments.
+
+The author was not preserved.
+
+Authorship was not required for stability.
 
 
 
