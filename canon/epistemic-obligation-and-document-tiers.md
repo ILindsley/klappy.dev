@@ -31,6 +31,46 @@ This document explains the three-tier system used to organize content in this re
 
 ---
 
+## Operating Constraints
+
+- MUST absorb Tier 1 content fully before proceeding; contradiction is a serious error
+- MUST respect Tier 2 content by default; deviation requires documented justification
+- MUST NOT conflate tier with importance; tiers describe epistemic obligation, not value
+- MUST NOT use Tier 0 as "low importance"; Tier 0 is scope exclusion from the epistemic system entirely
+- MUST treat tiers as orthogonal to folders; any folder may contain documents at any tier
+
+---
+
+## Defaults
+
+- Tier 1: absorb fully, do not contradict, do not reinterpret without explicit justification
+- Tier 2: follow by default, document deviations, respect unless explicitly overridden
+- Tier 3: reference when relevant, may ignore when not applicable, free to rebuild
+- Tier 0: exclude from agent context, exclude from context-packs, not comparable to Tier 1-3
+- When uncertain about tier assignment, ask: "How much must I internalize this before proceeding?"
+
+---
+
+## Failure Modes
+
+- **Tier as Importance**: Treating Tier 1 as "most important" and Tier 3 as "least important"
+- **Ignoring Relevant Tier 3**: Skipping Tier 3 content that matters for specific execution
+- **Over-weighting Tier 1**: Applying Tier 1 content when it doesn't apply to current task
+- **False Elevation**: Putting low-obligation content at Tier 2, creating false urgency
+- **Tier 0 Confusion**: Treating Tier 0 as low-obligation rather than scope-excluded
+
+---
+
+## Verification
+
+- Tier assignment reflects epistemic obligation, not perceived importance
+- Tier 1 content is stable, rarely changed, and contradictions are treated as serious errors
+- Tier 2 deviations are documented with explicit justification
+- Tier 0 content is excluded from agent reasoning and context-packs
+- Folder placement and tier assignment are independent decisions
+
+---
+
 ## Content
 
 **Canon v0.1**

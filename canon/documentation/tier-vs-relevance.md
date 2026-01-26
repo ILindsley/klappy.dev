@@ -83,3 +83,42 @@ It answers: *"Is this topic useful for making or supporting decisions?"*
 - Inferring relevance from tier automatically
 
 If any of the above occur, fix the metadata — not the compiler.
+
+---
+
+## Operating Constraints
+
+- MUST NOT use tier to decide context-pack inclusion; use relevance instead
+- MUST NOT infer relevance from tier automatically
+- MUST declare relevance explicitly on each document
+- MUST keep tier and relevance as independent axes
+- MUST fix metadata errors, not compiler behavior, when conflation occurs
+
+---
+
+## Defaults
+
+- Tier defaults to 2 (secondary/discoverable) when not specified
+- Relevance defaults to supporting when not specified
+- When uncertain whether content is decision-grade, start at supporting and upgrade based on observed impact
+- Treat tier as UI-facing only; treat relevance as execution-facing only
+
+---
+
+## Failure Modes
+
+- **Tier as Agent Signal**: Using tier: 1 to mean "important for agents"
+- **Numeric Depth Encoding**: Using tier numbers to encode execution priority
+- **Automatic Inference**: Deriving relevance from tier programmatically
+- **Axis Conflation**: Treating visibility and usability as the same concern
+- **Pack Bloat**: Including content in context packs based on tier instead of relevance
+
+---
+
+## Verification
+
+- Context pack inclusion is determined by relevance, not tier
+- Tier assignment reflects human navigation needs only
+- Relevance assignment reflects agent decision-making needs only
+- Metadata explicitly declares both values when both apply
+- Changes to tier do not affect context pack composition

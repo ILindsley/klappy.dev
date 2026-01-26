@@ -29,6 +29,44 @@ This decision records that AI models (LLMs, agents, assistants) are not permitte
 
 ---
 
+## Operating Constraints
+
+- MUST NOT allow models to write changes directly to Canon files
+- MUST allow models to read, analyze, summarize, and report on Canon
+- MUST allow models to draft proposed changes for human review
+- MUST require human review and approval for all Canon mutations
+- MUST treat Canon as human-governed truth, not generated artifact
+
+---
+
+## Defaults
+
+- Models draft, humans commit
+- When a model detects a Canon error, report it rather than fix it
+- Treat any model attempt to edit Canon as a boundary violation
+- Prefer slower Canon updates over model-driven drift
+
+---
+
+## Failure Modes
+
+- **Direct Mutation**: Model writes to Canon files, bypassing human review
+- **Subtle Drift**: Well-meaning model edits introduce gradual inaccuracy
+- **Accountability Gap**: No human responsible for model-introduced changes
+- **Authority Erosion**: Canon becomes "just another generated file" when models edit freely
+- **Approval Theater**: Rubber-stamping model changes without genuine review
+
+---
+
+## Verification
+
+- No commits to Canon files have model as author without human approval
+- Canon changes are traceable to human decisions
+- Models produce drafts and reports, not direct mutations
+- Boundary is enforced in tooling and process, not just policy
+
+---
+
 ## Content
 
 ## Decision

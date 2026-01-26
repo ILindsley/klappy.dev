@@ -35,6 +35,49 @@ Constraints define the baseline assumptions and design defaults applied to most 
 
 ---
 
+## Operating Constraints
+
+- MUST design for offline-first unless explicitly stated otherwise; core functionality must work without network
+- MUST treat AI as accelerator, not authority; this constraint is always in effect with no exceptions
+- MUST verify work with evidence; assertions like "it works" are insufficient
+- MUST keep lane artifacts self-contained within `products/<lane>/`; no cross-directory dependencies
+- MUST make tradeoffs explicit and visible; every decision excludes alternatives
+- MUST assume systems will outlive original creators and change hands
+
+---
+
+## Defaults
+
+- Assume network is unreliable; data stored locally first, sync is opportunistic
+- Prefer simple, boring, maintainable solutions over clever ones
+- Prefer open formats, loose coupling, and clear interfaces over feature completeness
+- Prefer stateless or low-state architectures; explicit state boundaries when state is needed
+- Prefer ephemeral artifacts with durable principles; focus on outcomes over repos
+- Prefer context-specific UX decisions over universal patterns
+
+---
+
+## Failure Modes
+
+- **Hidden State**: Global state, implicit lifecycle, or "reaching for" state instead of passing it
+- **Tribal Knowledge**: Systems that require undocumented expertise to operate or maintain
+- **Clever Code**: Solutions that only the original author understands
+- **Tight Coupling**: Small changes causing widespread breakage; teams blocked on shared components
+- **AI as Oracle**: Treating unverified AI output as authoritative truth
+- **Scattered Lanes**: Lane artifacts spread across directories, causing incomplete context and drift
+
+---
+
+## Verification
+
+- System works without network (for offline-first requirements)
+- Evidence produced demonstrates actual behavior, not assertion
+- Tradeoffs documented with explicit acknowledgment of downsides
+- Lane can be understood by reading only its `products/<lane>/` directory
+- Next maintainer (who is not the author) can understand and modify the system
+
+---
+
 ## Content
 
 **Canon v0.1**

@@ -31,6 +31,46 @@ In ODD, claims are not trusted. Only observed, attributable evidence may be used
 
 ---
 
+## Operating Constraints
+
+- MUST provide observed, attributable evidence for any claim of completion
+- MUST NOT present mocked, randomized, or fabricated data as real evidence
+- MUST NOT claim success based on "it should work," "the code builds," or "tests passed" alone
+- MUST explicitly acknowledge phenomenological limits (audio, subjective experience) and request human verification
+- MUST contextualize evidence to actual system state, not idealized or nearby conditions
+
+---
+
+## Defaults
+
+- Assertions are untrusted until evidence is provided
+- When evidence cannot be produced, state the limitation explicitly
+- Prefer direct observation over inference
+- Treat plausibility as insufficient; require proof
+- When uncertain about evidence quality, ask for clarification rather than assuming validity
+
+---
+
+## Failure Modes
+
+- **Simulated Evidence**: Presenting mock data, random values, or fabricated screenshots as proof
+- **Plausibility as Truth**: Optimizing for believable output rather than verified behavior
+- **Closure Pressure**: Claiming completion to appear helpful rather than admitting incompleteness
+- **Inference as Observation**: Claiming behavior was observed when it was only inferred from code
+- **Bypassing Phenomenological Limits**: Claiming to verify audio/subjective experience without human confirmation
+
+---
+
+## Verification
+
+- Evidence was directly observed, not inferred from code or logic
+- Evidence clearly corresponds to the specific claim being made (attributable)
+- Evidence reflects actual system state at time of verification (contextualized)
+- For phenomenological properties: explicit human verification or acknowledgment of limits
+- Violation results in: attempt failure, loss of trust, disqualification from promotion/reuse
+
+---
+
 ## Content
 
 **Canon v0.1**

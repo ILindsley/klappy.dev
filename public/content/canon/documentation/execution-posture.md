@@ -70,3 +70,42 @@ If a section would be forced or misleading, it should be omitted intentionally.
 - Exploratory and routing docs: missing sections are expected
 
 Compilers must never auto-generate content.
+
+---
+
+## Operating Constraints
+
+- MUST declare execution_posture in frontmatter for all documents
+- MUST NOT force executable structure on exploratory or routing documents
+- MUST NOT auto-generate content to satisfy compiler requirements
+- MUST treat executable structure as an affordance, not a requirement
+- MUST omit sections deliberately if they would be forced or misleading
+
+---
+
+## Defaults
+
+- When uncertain about posture, start with operational and upgrade to governing based on observed impact
+- Governing docs expect most required sections; operational expects a subset
+- Exploratory and routing docs may omit executable sections entirely
+- Compilers warn but do not block on missing sections
+
+---
+
+## Failure Modes
+
+- **Forced Structure**: Adding sections that don't apply just to satisfy tooling
+- **Posture Inflation**: Marking documents as governing when they're actually operational
+- **Auto-Generation**: Compilers filling in missing sections with generated content
+- **Template Cargo Cult**: Copying section headings without meaningful content
+- **Exploratory Suppression**: Forcing executable structure on thinking-tools and essays
+
+---
+
+## Verification
+
+- execution_posture is declared in frontmatter
+- Section presence matches declared posture expectations
+- Forced or empty sections have been deliberately omitted
+- Compilers emit warnings, not errors, for missing sections
+- No auto-generated content in executable sections

@@ -31,6 +31,45 @@ ODD is organized as a three-tier conceptual hierarchy where each layer absorbs d
 
 ---
 
+## Operating Constraints
+
+- MUST classify files using the litmus test: 10-year truth → ODD, all-products rule → Canon, local implementation → Docs
+- MUST NOT conflate philosophy with plumbing; universal principles stay in ODD, implementation details stay in Docs
+- MUST allow different decay rates: ODD (almost never), Canon (carefully), Docs (freely)
+- MUST NOT break universal principles when fixing implementation bugs
+- MUST keep ODD independent of any single repository, vendor, or implementation
+
+---
+
+## Defaults
+
+- When uncertain about placement, ask: "Would this still be true if klappy.dev didn't exist?"
+- ODD should almost never change; Canon evolves carefully; Docs may rot and be rebuilt
+- Prefer placing content lower (Docs) unless it clearly belongs higher (Canon/ODD)
+- Treat Canon as shared contract, not universal truth
+
+---
+
+## Failure Modes
+
+- **Conflating Tiers**: Putting implementation decisions in ODD or philosophy in Docs
+- **Premature Elevation**: Moving content to ODD before it's proven universal
+- **Monolithic Thinking**: Treating all three tiers as a single philosophy
+- **Decay Mismatch**: Expecting Docs-level stability from implementation details
+- **Vendor Lock-in**: Embedding vendor-specific decisions into ODD or Canon
+
+---
+
+## Verification
+
+- Files pass the litmus test for their tier placement
+- ODD content would still be true if this repository didn't exist
+- Canon changes have program-wide justification
+- Docs changes don't require updates to ODD or Canon
+- Teams could fork Canon while keeping ODD intact
+
+---
+
 ## Content
 
 ## Decision

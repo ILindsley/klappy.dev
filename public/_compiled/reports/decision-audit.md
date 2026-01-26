@@ -1,6 +1,6 @@
 # Decision Document Audit Report
 
-> Generated: 2026-01-26T20:49:22.160Z
+> Generated: 2026-01-26T21:07:55.204Z
 
 ## Summary
 
@@ -8,9 +8,9 @@
 |--------|-------|
 | Total content files | 58 |
 | Decision/governing files | 14 |
-| ✅ Passing | 2 |
-| ❌ Failing | 12 |
-| ⚠️ With warnings | 0 |
+| ✅ Passing | 14 |
+| ❌ Failing | 0 |
+| ⚠️ With warnings | 6 |
 
 ## Required Headings
 
@@ -21,107 +21,62 @@ All `relevance: decision` + `execution_posture: governing` documents must have:
 - `## Failure Modes`
 - `## Verification`
 
-## ❌ Failing Documents
-
-These documents are missing required headings:
+## ✅ Passing Documents
 
 ### `canon/constraints.md`
 
-**Failures:**
-- Missing required heading: '## Operating Constraints'
-- Missing required heading: '## Defaults'
-- Missing required heading: '## Failure Modes'
-- Missing required heading: '## Verification'
+Sections found: Operating Constraints, Defaults, Failure Modes, Verification
 
 ### `canon/decision-rules.md`
 
-**Failures:**
-- Missing required heading: '## Operating Constraints'
-- Missing required heading: '## Defaults'
-- Missing required heading: '## Failure Modes'
-- Missing required heading: '## Verification'
+Sections found: Operating Constraints, Defaults, Failure Modes, Verification
 
-### `canon/decisions/models-do-not-mutate-canon.md`
+### `canon/decisions/models-do-not-mutate-canon.md` ⚠️
 
-**Failures:**
-- Missing required heading: '## Operating Constraints'
-- Missing required heading: '## Defaults'
-- Missing required heading: '## Failure Modes'
-- Missing required heading: '## Verification'
+Sections found: Operating Constraints, Defaults, Failure Modes, Verification
+
+**Warnings:**
+- 'Verification' section lacks evidence keywords
 
 ### `canon/definition-of-done.md`
 
-**Failures:**
-- Missing required heading: '## Operating Constraints'
-- Missing required heading: '## Defaults'
-- Missing required heading: '## Failure Modes'
-- Missing required heading: '## Verification'
+Sections found: Operating Constraints, Defaults, Failure Modes, Verification
 
 ### `canon/documentation/agent-executable-outline.md`
 
-**Failures:**
-- Missing required heading: '## Operating Constraints'
-- Missing required heading: '## Defaults'
-- Missing required heading: '## Failure Modes'
-- Missing required heading: '## Verification'
+Sections found: Operating Constraints, Defaults, Failure Modes, Verification
 
-### `canon/documentation/execution-posture.md`
+### `canon/documentation/execution-posture.md` ⚠️
 
-**Failures:**
-- Missing required heading: '## Operating Constraints'
-- Missing required heading: '## Defaults'
-- Missing required heading: '## Failure Modes'
-- Missing required heading: '## Verification'
+Sections found: Operating Constraints, Defaults, Failure Modes, Verification
 
-### `canon/documentation/slice-contract-sml.md`
+**Warnings:**
+- 'Verification' section lacks evidence keywords
 
-**Failures:**
-- Missing required heading: '## Operating Constraints'
-- Missing required heading: '## Defaults'
-- Missing required heading: '## Failure Modes'
-- Missing required heading: '## Verification'
+### `canon/documentation/slice-contract-sml.md` ⚠️
 
-### `canon/documentation/tier-vs-relevance.md`
+Sections found: Operating Constraints, Defaults, Failure Modes, Verification
 
-**Failures:**
-- Missing required heading: '## Operating Constraints'
-- Missing required heading: '## Defaults'
-- Missing required heading: '## Failure Modes'
-- Missing required heading: '## Verification'
+**Warnings:**
+- 'Verification' section lacks evidence keywords
 
-### `canon/epistemic-obligation-and-document-tiers.md`
+### `canon/documentation/tier-vs-relevance.md` ⚠️
 
-**Failures:**
-- Missing required heading: '## Operating Constraints'
-- Missing required heading: '## Defaults'
-- Missing required heading: '## Failure Modes'
-- Missing required heading: '## Verification'
+Sections found: Operating Constraints, Defaults, Failure Modes, Verification
+
+**Warnings:**
+- 'Verification' section lacks evidence keywords
+
+### `canon/epistemic-obligation-and-document-tiers.md` ⚠️
+
+Sections found: Operating Constraints, Defaults, Failure Modes, Verification
+
+**Warnings:**
+- 'Verification' section lacks evidence keywords
 
 ### `canon/verification-and-evidence.md`
 
-**Failures:**
-- Missing required heading: '## Operating Constraints'
-- Missing required heading: '## Defaults'
-- Missing required heading: '## Failure Modes'
-- Missing required heading: '## Verification'
-
-### `odd/contract.md`
-
-**Failures:**
-- Missing required heading: '## Operating Constraints'
-- Missing required heading: '## Defaults'
-- Missing required heading: '## Failure Modes'
-- Missing required heading: '## Verification'
-
-### `odd/decisions/D0001-three-tier-conceptual-hierarchy.md`
-
-**Failures:**
-- Missing required heading: '## Operating Constraints'
-- Missing required heading: '## Defaults'
-- Missing required heading: '## Failure Modes'
-- Missing required heading: '## Verification'
-
-## ✅ Passing Documents
+Sections found: Operating Constraints, Defaults, Failure Modes, Verification
 
 ### `canon/visual-proof.md`
 
@@ -130,6 +85,17 @@ Sections found: Operating Constraints, Defaults, Failure Modes, Verification
 ### `odd/constraint/use-only-what-hurts.md`
 
 Sections found: Operating Constraints, Defaults, Failure Modes, Verification
+
+### `odd/contract.md`
+
+Sections found: Operating Constraints, Defaults, Failure Modes, Verification
+
+### `odd/decisions/D0001-three-tier-conceptual-hierarchy.md` ⚠️
+
+Sections found: Operating Constraints, Defaults, Failure Modes, Verification
+
+**Warnings:**
+- 'Verification' section lacks evidence keywords
 
 ---
 

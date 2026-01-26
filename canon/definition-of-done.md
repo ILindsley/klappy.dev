@@ -34,6 +34,46 @@ This policy defines completion requirements for all work: code, UI, architecture
 
 ---
 
+## Operating Constraints
+
+- MUST include all 5 DoD requirements: Change Description, Verification Performed, Observed Behavior, Evidence Produced, Self-Audit Completed
+- MUST produce evidence after the change, not before or from previous runs
+- MUST demonstrate actual behavior, not expected or intended behavior
+- MUST provide visual proof for any work affecting UI, interaction, layout, or visible state
+- MUST NOT claim "done" without evidence; the correct response is "This is not complete yet"
+- MUST label partial completion explicitly with what was verified and what remains
+
+---
+
+## Defaults
+
+- When uncertain whether evidence is needed: include it
+- Short recordings (10-30 seconds) are usually sufficient for interaction work
+- Self-audit should be brief reflection, not bureaucracy
+- If evidence cannot be produced, state why and propose an alternative
+- Treat ambiguity as worse than incompleteness
+
+---
+
+## Failure Modes
+
+- **"It compiles"**: Treating successful compilation as completion
+- **"The logic is sound"**: Treating reasoning as substitute for verification
+- **"This should work"**: Treating confidence as evidence
+- **"I reviewed the code"**: Treating inspection as observation of behavior
+- **"I didn't have time to test"**: Treating explanation as exemption from evidence
+
+---
+
+## Verification
+
+- System was actually run or exercised (dev server, tests, page load, workflow trigger)
+- Evidence shows actual observed behavior (screenshots, recordings, test logs, DOM snapshots)
+- Evidence is specific to the task and clearly labeled
+- Self-audit includes: intended outcome, constraints applied, decision rules followed, tradeoffs, remaining risks
+
+---
+
 ## Content
 
 **Canon v0.1**

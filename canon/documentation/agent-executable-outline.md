@@ -109,3 +109,43 @@ No explanation.
 ## Final Rule
 
 > **If a section would be forced, omit it deliberately.**
+
+---
+
+## Operating Constraints
+
+- MUST use MUST/MUST NOT/NEVER in Operating Constraints, not prose
+- MUST name Failure Modes concretely after traps actually observed
+- MUST specify evidence requirements in Verification, not just outcomes
+- MUST NOT fill sections just to satisfy tooling; omit deliberately instead
+- MUST keep sections short (3-5 bullets typical); long sections indicate bloat
+
+---
+
+## Defaults
+
+- Start with Subtitle and Operating Constraints only; add others based on observed failures
+- Failure Modes are added when agents repeat known mistakes
+- Verification is added when agents claim success prematurely
+- Defaults are added when agents hesitate on uncertain decisions
+- Background is optional and human-first; not required for execution
+
+---
+
+## Failure Modes
+
+- **Form Filling**: Adding sections to satisfy tooling rather than encoding real constraints
+- **Prose in Constraints**: Using explanatory sentences instead of actionable MUST/MUST NOT
+- **Vague Failure Modes**: Labels without concrete traps (e.g., "Be careful" instead of named mistakes)
+- **Outcome-Only Verification**: Stating what "done" looks like without specifying evidence
+- **Section Bloat**: Long sections that should be split or moved to background
+
+---
+
+## Verification
+
+- Operating Constraints contain verbs and objects ("MUST include X", "MUST NOT do Y")
+- Failure Modes name specific traps observed in practice
+- Verification specifies evidence type, not just desired outcome
+- Sections are short enough for S-slice extraction (under 2000 chars typically)
+- Forced or empty sections were omitted rather than filled with placeholders

@@ -29,6 +29,45 @@ The ODD System Contract versions the three-tier hierarchy (ODD/Canon/Docs), repo
 
 ---
 
+## Operating Constraints
+
+- MUST declare lane for all attempts; attempts without lane declaration are invalid
+- MUST declare epoch in META.json; outcomes are not comparable across epochs without explicit adjustment
+- MUST store attempts under `products/<lane>/attempts/` (lane-contained); root `/attempts/**` is legacy read-only
+- MUST follow three-tier hierarchy: ODD (universal) → Canon (program) → Docs (implementation)
+- MUST NOT compare outcomes across epochs without explicit adjustment for evaluation context differences
+
+---
+
+## Defaults
+
+- When uncertain about file placement, use the litmus test: 10-year truth → ODD, all-products rule → Canon, local implementation → Docs
+- Assume contract 2.x compatibility unless explicitly working with historical E0001 artifacts
+- Treat epoch boundaries as evaluation discontinuities, not version bumps
+- Reference this document for system compatibility questions; individual PRDs have their own versioning
+
+---
+
+## Failure Modes
+
+- **Cross-Epoch Comparison**: Comparing E0001 outcomes to E0002 without adjustment distorts evaluation
+- **Lane Omission**: Running attempts without lane declaration creates orphaned artifacts
+- **Tier Confusion**: Placing implementation details in ODD or universal principles in Docs
+- **Legacy Path Usage**: Writing new attempts to root `/attempts/` instead of lane-contained paths
+- **Implicit Epochs**: Failing to mark historical E0001 artifacts with epoch context
+
+---
+
+## Verification
+
+- META.json contains lane and epoch declarations
+- Attempts are stored under `products/<lane>/attempts/prd-vX.Y/attempt-NNN/`
+- Documents placed according to litmus test (10-year, all-products, local)
+- Epoch boundaries respected in any outcome comparison
+- Historical artifacts marked with appropriate epoch context
+
+---
+
 ## Content
 
 **Current Version:** 2.1.0

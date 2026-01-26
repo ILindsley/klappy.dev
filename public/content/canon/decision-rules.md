@@ -38,6 +38,49 @@ Decision rules describe how decisions are made when multiple valid options exist
 
 ---
 
+## Operating Constraints
+
+- MUST define outcome before choosing tools, architecture, or code
+- MUST follow Borrow → Bend → Break → Build progression; building from scratch requires explicit justification
+- MUST choose simplest solution that plausibly works; add complexity only when simplicity demonstrably fails
+- MUST NOT consider work complete unless it is verified with evidence
+- MUST prefer one-shot builds over steering multi-turn misses; fix inputs and restart clean
+- MUST name tradeoffs as part of design, not as postmortem
+
+---
+
+## Defaults
+
+- Start with defaults and escalate only when necessary
+- Admit uncertainty early rather than pretending confidence
+- Optimize for the next maintainer, not personal preference
+- Allow duplication across bounded contexts; extract shared logic only when reuse is proven
+- Prefer restartable, replayable processes over perfect but fragile ones
+- Hard-code protocol contracts (types, schemas, states); avoid hard-coding domain tables
+
+---
+
+## Failure Modes
+
+- **Outcomes After Implementation**: Building impressive solutions with unclear purpose or missing success criteria
+- **Premature Building**: Reinventing stable, well-understood tools; forking without maintenance plan
+- **Overengineering**: Complex solutions to simple problems; explanations longer than code
+- **Steering a Miss**: "Just one more tweak" turning into extended multi-turn patching
+- **Hidden Tradeoffs**: Decisions feeling arbitrary in hindsight; future changes requiring archaeology
+- **Confidence Without Verification**: Bugs discovered by users instead of builders
+
+---
+
+## Verification
+
+- Outcome is defined before implementation begins
+- Simplest plausible solution was attempted first
+- Evidence shows observed behavior, not just reasoning
+- Tradeoffs documented with explicit downsides acknowledged
+- System can be reproduced from a clean start without the original author's guidance
+
+---
+
 ## Content
 
 **Canon v0.1**
