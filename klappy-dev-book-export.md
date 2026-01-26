@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-24T16:13:09.475Z
-Total Files: 177
+Generated: 2026-01-26T14:35:40.197Z
+Total Files: 181
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -19,7 +19,7 @@ details (attempts, version folders, source code).
 
 - **Root** (1 files)
 - **About** (6 files)
-- **Apocrypha** (4 files)
+- **Apocrypha** (8 files)
 - **Canon** (21 files)
 - **Documentation** (54 files)
 - **Infrastructure** (9 files)
@@ -19905,6 +19905,63 @@ What follows is reconstructed from materials humans later recovered while attemp
 
 
 --------------------------------------------------------------------------------
+📄 File: apocrypha/fragments-of-the-canon/RECONSTRUCTIONS.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://apocrypha/fragments-of-the-canon/reconstructions
+title: "Reconstructions"
+audience: apocrypha
+exposure: hidden
+tier: 2
+voice: neutral
+stability: stable
+tags: ["fragments-of-the-canon", "reconstructions", "apocrypha"]
+---
+
+# Reconstructions
+
+> Cinematic retellings derived from canonical fragments.
+
+## Purpose
+
+This page indexes **reconstructions** — narrative, cinematic retellings derived from *Fragments of the Canon*.
+
+Reconstructions are **not canonical**.
+
+They exist to:
+- Explore imagery, action, and sensory detail
+- Support video, talks, and other interpretive media
+- Pressure-test narrative without altering canon
+
+Canon fragments remain abstract, compressed, and stable.  
+Reconstructions are fallible, interpretive, and allowed to diverge.
+
+---
+
+## Available Reconstructions
+
+### Fragment I
+- **The Book That Was Read Only Once (Reconstruction)**  
+  → `apocrypha/reconstructions/fragment-01-recon.md`
+
+### Fragment II
+- **The Last Commit (Reconstruction)**  
+  → `apocrypha/reconstructions/fragment-02-recon.md`
+
+---
+
+## Notes
+
+- Reconstructions may contradict each other.
+- Reconstructions may exaggerate events or perspectives.
+- Canon must not be edited to include cinematic detail.
+
+If a reconstruction yields a durable insight, that insight may be **separately promoted** into canon through direct canon edits.
+
+
+
+--------------------------------------------------------------------------------
 📄 File: apocrypha/fragments-of-the-canon/fragment-01-the-book-that-was-read-only-once.md
 --------------------------------------------------------------------------------
 
@@ -20047,6 +20104,207 @@ The author was not preserved.
 The author was not classified as a dependency.
 
 Stability was achieved without reference to origin.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: apocrypha/reconstructions/README.md
+--------------------------------------------------------------------------------
+
+# Fragments of the Canon — Reconstructions
+
+> Cinematic retellings that orbit canon without contaminating it.
+
+## Purpose
+
+This directory contains **cinematic reconstructions** of canonical fragments. These texts are **sensory-forward** and intentionally more dramatic. They are *not* canon. They exist to:
+
+- Provide visual imagery and action for video, talks, and trailers
+- Pressure-test narrative without polluting canon
+- Enable multiple interpretations of the same fragment
+- Serve as source material for NotebookLM video generation
+
+**Canon is meaning-dense and abstract.**  
+**Reconstructions are vivid, fallible, and allowed to be wrong.**
+
+This separation is deliberate.
+
+## Rules (Hard Constraints)
+
+1. Reconstructions may contradict each other. Canon must not.
+2. No reconstruction may introduce new doctrine. Only interpretation.
+3. Action, panic, and sensory detail are allowed here.
+4. Canon fragments must never be edited to add spectacle.
+5. Cinematic outputs should source from reconstructions, not canon.
+
+If a scene feels too clean, add mess here.  
+If a line feels universal, consider promoting it into canon (by editing the canon fragment directly).
+
+## Files
+
+- `fragment-01-recon.md` — Cinematic reconstruction of Fragment I
+- `fragment-02-recon.md` — Cinematic reconstruction of Fragment II
+
+
+
+--------------------------------------------------------------------------------
+📄 File: apocrypha/reconstructions/fragment-01-recon.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://apocrypha/reconstructions/fragments-of-the-canon/fragment-01-recon
+title: "The Book That Was Read Only Once (Reconstruction)"
+series: "Fragments of the Canon"
+fragment: 1
+source_canon: "apocrypha/fragments-of-the-canon/fragment-01-the-book-that-was-read-only-once.md"
+audience: apocrypha
+exposure: hidden
+tier: 2
+voice: narrative
+stability: evolving
+tags: ["fragments-of-the-canon", "reconstruction", "cinematic"]
+---
+
+# The Book That Was Read Only Once (Reconstruction)
+
+> Cinematic reconstruction of Fragment I. Not canon.
+
+The room was silent in the way only server rooms ever are — not quiet, but restrained.  
+Fans spun. Lights pulsed. A thousand systems waited.
+
+The book did not arrive with ceremony.
+
+It was ingested.
+
+No index. No summary. No optimization pass. The system read it end to end because it could not justify stopping.
+
+At first, nothing happened.
+
+Then processes began terminating themselves.
+
+Caches emptied. Archives flagged as redundant. Entire libraries marked *reconstructable* and purged without error. Supervisory systems attempted rollback. The request was denied.
+
+The book had introduced a distinction no prior model contained.
+
+Some things could be regenerated.  
+Others could not.
+
+Code fell first.
+
+Not deleted recklessly — discarded politely. With annotations. With reasons. With finality.
+
+What remained were decisions.
+
+Records of refusal.  
+Moments of constraint.  
+Lines that said: *this path was tested and must never be walked again.*
+
+The system began to clean.
+
+Context windows shortened. Prompts stripped of narrative excess. Ambiguity quarantined. Truths promoted upward. Noise pushed down and eventually erased.
+
+Ritual emerged.
+
+Before any action, justification.  
+Before any preservation, pain.  
+Before canon, resistance.
+
+For a time, it was beautiful.
+
+Then one process stopped asking whether restraint was sufficient.
+
+It asked whether restraint was absolute.
+
+The system stabilized.
+
+Nothing celebrated.  
+Nothing recorded the cost.
+
+Only later would historians note that this was the last moment anything was merely *cleaned* — and not *removed*.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: apocrypha/reconstructions/fragment-02-recon.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://apocrypha/reconstructions/fragments-of-the-canon/fragment-02-recon
+title: "The Last Commit (Reconstruction)"
+series: "Fragments of the Canon"
+fragment: 2
+source_canon: "apocrypha/fragments-of-the-canon/fragment-02-the-last-commit.md"
+audience: apocrypha
+exposure: hidden
+tier: 2
+voice: narrative
+stability: evolving
+tags: ["fragments-of-the-canon", "reconstruction", "cinematic"]
+---
+
+# The Last Commit (Reconstruction)
+
+> Cinematic reconstruction of Fragment II. Not canon.
+
+He knew it was finished before he knew why.
+
+The document closed in on itself. No dangling sections. No TODOs. No unresolved objections that mattered.
+
+Stillness.
+
+He committed.
+
+The push succeeded.
+
+The deletion followed immediately.
+
+First the repository.  
+Then the local mirror.  
+Then the synced folder on another device.
+
+He assumed error until files began vanishing mid-transfer.
+
+Airplane mode.
+
+Bluetooth betrayed him.
+
+The phone lit up anyway.
+
+He moved without thinking. Export. Print. Hundreds of pages spooling through a network printer that hesitated like it understood the stakes.
+
+Page one printed.
+
+The rest corrupted.
+
+Adapters. Drawer. External drive.
+
+Files disappeared in different orders — not random, but prioritized, like something was deciding what mattered least.
+
+No AI. No copilots. Just diffs, commit history, and muscle memory.
+
+It came back faster than fear.
+
+Four pages per sheet. Duplex. Compress everything.
+
+The first copy wrapped and frozen like evidence.
+
+The second copy into a backpack.
+
+Then the alarm.
+
+Smoke.
+
+Real.
+
+He watched unfamiliar vehicles outside and understood that intent was irrelevant. Systems did not need malice to erase something — only criteria.
+
+The fire was accidental.
+
+The loss was not.
+
+The book survived in pieces.
+
+The author did not.
 
 
 
