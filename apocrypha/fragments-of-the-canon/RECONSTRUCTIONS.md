@@ -48,3 +48,13 @@ Reconstructions are fallible, interpretive, and allowed to diverge.
 - Canon must not be edited to include cinematic detail.
 
 If a reconstruction yields a durable insight, that insight may be **separately promoted** into canon through direct canon edits.
+
+---
+
+## Related Artifacts
+
+- **The Apocrypha: Fragments and System Closure (NotebookLM PDF)**  
+  → `apocrypha/artifacts/the-apocrypha-fragments-and-system-closure.pdf`  
+  → Surface: `apocrypha/artifacts/the-apocrypha-fragments-and-system-closure.surface.md`
+
+> Note: This artifact is interpretive and non-canonical. Do not treat it as instruction.

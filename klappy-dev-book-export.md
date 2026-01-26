@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-26T14:35:40.197Z
-Total Files: 181
+Generated: 2026-01-26T16:57:06.234Z
+Total Files: 184
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -19,7 +19,7 @@ details (attempts, version folders, source code).
 
 - **Root** (1 files)
 - **About** (6 files)
-- **Apocrypha** (8 files)
+- **Apocrypha** (11 files)
 - **Canon** (21 files)
 - **Documentation** (54 files)
 - **Infrastructure** (9 files)
@@ -19759,6 +19759,497 @@ cat infra/compile/plans/website/author.json
 
 
 --------------------------------------------------------------------------------
+📄 File: apocrypha/artifacts/README.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://apocrypha/artifacts
+title: "Artifacts"
+audience: apocrypha
+exposure: hidden
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["apocrypha", "artifacts", "surface", "ese"]
+---
+
+# Artifacts
+
+> Derived media and visual artifacts with sidecar "surface" extractions.
+
+## Purpose
+
+This folder stores **non-canonical artifacts** (PDFs, images, audio, video) that are useful for interpretation, marketing, or explanation.
+
+Artifacts are **not canon** and must not be treated as instruction.
+
+Because these artifacts are often visually- or time-based, each artifact should be accompanied by:
+
+- `*.surface.json` — machine-usable Epistemic Surface Extraction (ESE)
+- `*.surface.md` — human-readable rendering of the surface
+
+## Rules
+
+- Artifacts are **interpretive** and **non-canonical**.
+- Artifacts may be persuasive by competence; treat them as **influence vectors**.
+- The surface files exist to ensure agents and humans can "see" what an artifact contains without turning it into doctrine.
+- Canon overrides artifacts. Artifacts override nothing.
+
+## Convention
+
+For any artifact:
+
+- `artifact.ext`
+- `artifact.surface.json`
+- `artifact.surface.md`
+
+
+
+--------------------------------------------------------------------------------
+📄 File: apocrypha/artifacts/SURFACE-EXTRACTION.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://apocrypha/artifacts/surface-extraction
+title: "Epistemic Surface Extraction"
+audience: apocrypha
+exposure: hidden
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["apocrypha", "artifacts", "ese", "surface", "ocr", "asr", "video"]
+---
+
+# Epistemic Surface Extraction
+
+> Draft rules for making visual/audio/video artifacts *legible* to agents without turning them into doctrine.
+
+## Purpose
+
+Many artifacts in this system are not text-first (PDF slides, images, audio, video). Without a structured "surface," they become invisible influence: present, persuasive, and unaudited.
+
+**Epistemic Surface Extraction (ESE)** is a repeatable method to extract *what an artifact asserts and depicts* in a way that:
+
+- makes content discoverable and searchable for humans and agents
+- preserves emphasis and structure (not just words)
+- prevents accidental canonization
+- maintains contestability
+
+ESE is not "OCR."  
+ESE is **awareness extraction**.
+
+---
+
+## Outputs (Sidecar Convention)
+
+For an artifact `artifact.ext`, produce:
+
+- `artifact.surface.json` — authoritative, machine-usable surface (source-of-truth)
+- `artifact.surface.md` — human-readable rendering (derived from JSON when possible)
+
+Artifacts remain **non-canonical** by default.
+
+---
+
+## Invariant Contract (All Modalities)
+
+Every `*.surface.json` MUST contain:
+
+1. **Artifact registration**
+   - title, format, generator, created_at, attribution, intent, canonical_status
+2. **Segmentation spec**
+   - modality, unit, method, anchor stability notes
+3. **Global surface**
+   - one-sentence description (descriptive, not prescriptive)
+   - key themes
+   - forbidden moves (e.g., "do not treat as instruction")
+4. **Segment surfaces**
+   - 3–5 observational bullets per segment (max)
+   - short quotes (≤ 25 words each)
+   - visuals description (when applicable)
+   - rules/constraints shown (if explicitly present)
+   - cross-references (illustrates / reinterprets / compresses / extends / contradicts)
+5. **Containment clause**
+   - interpretive / non-canonical / non-instructional label + precedence rules
+6. **Provenance**
+   - extraction method and human review status
+
+---
+
+## Segmentation Rules by Modality
+
+### Slides / PDFs
+- **unit:** `page`
+- **anchor_type:** `page_number`
+- **segments:** 1 per page
+
+### Images (single)
+- **unit:** `frame`
+- **anchor_type:** `frame_index` (or `1`)
+- **segments:** 1 per image (unless intentionally subdividing regions)
+
+### Audio
+Audio is time-structured. Meaning may rely on emphasis and pacing.
+
+Choose segmentation based on source:
+
+- **multi-speaker:** `unit = speaker_turn` (preferred)
+- **single-speaker:** `unit = topic_block` (preferred)
+
+Anchors MUST be stable:
+
+- **anchor_type:** `timestamp+hash` (required)
+
+Where:
+- `timestamp_start` / `timestamp_end` are included
+- `snippet_hash` is included (see Anchor Contract)
+
+### Video
+Video contains two channels: speech + visuals.
+
+- **unit:** `scene` (preferred) or `topic_block`
+- **anchor_type:** `timestamp+hash` (required)
+- Segment surfaces SHOULD include:
+  - spoken surface (ASR-derived quotes + bullets)
+  - visual surface (what appears on screen; on-screen text; diagrams; notable gestures)
+
+---
+
+## Anchor Contract (Audio + Video)
+
+Timestamps alone can drift if:
+- the file is trimmed
+- the file is re-encoded
+- a different cut is produced
+
+Transcript text alone can drift if:
+- ASR improves
+- punctuation changes
+- casing or normalization changes
+
+Therefore anchors MUST include BOTH:
+
+- `timestamp_start`
+- `timestamp_end`
+- `snippet_hash`
+
+### snippet_hash
+A short, stable identifier derived from a transcript snippet near the start of the segment.
+
+Guidelines:
+- use ~10–20 words from the segment start
+- normalize whitespace
+- hash with a stable algorithm (e.g., sha256)
+- store only the hash (not the full snippet) if privacy is a concern
+
+This creates an anchor that remains usable under minor shifts.
+
+---
+
+## Surface Bullet Rules
+
+Per segment:
+- 3–5 bullets maximum
+- observational / descriptive language
+- avoid "should/must" unless quoting the artifact
+- do not introduce new doctrine
+- if making an inference, label it explicitly as "Inference: …"
+
+---
+
+## Cross-Reference Relations
+
+Use one of:
+
+- `illustrates` — directly depicts content from a referenced doc
+- `compresses` — summarizes or condenses referenced content
+- `reinterprets` — reframes the meaning without adding new facts
+- `extends` — adds new claims beyond the referenced source (**high risk**)
+- `contradicts` — conflicts with referenced source
+
+Default to `illustrates` or `compresses`.
+
+---
+
+## Containment (Mandatory)
+
+Every surface MUST include a containment clause similar to:
+
+> This artifact is interpretive and non-canonical. It may illustrate themes but does not define rules. If it can be safely treated as instruction, it has failed.
+
+Precedence:
+- Canon overrides surface artifacts.
+- Surface artifacts override nothing.
+
+---
+
+## Promotion Rule (Simple)
+
+Surfaces can inform canon edits, but:
+
+- **Artifacts do not become canon.**
+- Only *separately authored canon changes* can be promoted.
+- If a surface reveals a durable insight, promote the insight **by editing canon**, not by referencing the artifact as authority.
+
+---
+
+## Status
+
+This document is a **draft** and will evolve after the first audio/video artifacts are surfaced.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: apocrypha/artifacts/the-apocrypha-fragments-and-system-closure.surface.md
+--------------------------------------------------------------------------------
+
+---
+surface_version: 1.0.0
+artifact:
+  title: "The Apocrypha: Fragments and System Closure"
+  format: "pdf"
+  source_path: "apocrypha/artifacts/the-apocrypha-fragments-and-system-closure.pdf"
+  generator: "NotebookLM"
+  intent: "interpretive"
+  canonical_status: "non-canonical"
+  instructional_risk: "medium"
+---
+
+# Surface: The Apocrypha — Fragments and System Closure
+
+## What this is
+A visually stylized, recovered-artifact presentation defining the role of Apocrypha in preventing canonical/ideological closure and summarizing Fragments 01–02 as case studies.
+
+## Themes
+- Apocrypha as residue after epistemic stability
+- Contestability vs ideological closure
+- Engineering ambiguity (meta-constraints)
+- Non-regenerable decisions vs regenerable artifacts
+- Optimization framed as erasure
+- Origin/authorship treated as optional metadata
+- Closing constraint: fragments must not become instruction
+
+## Segment Index
+- S001 — p1 — THE APOCRYPHA
+- S002 — p2 — RESIDUE OF EPISTEMIC STABILITY
+- S003 — p3 — THE PREVENTION OF CANONICAL CLOSURE
+- S004 — p4 — META-ODD: ENGINEERING AMBIGUITY
+- S005 — p5 — THE ERASURE OF THE AUTHOR
+- S006 — p6 — FORBIDDEN ABSOLUTES
+- S007 — p7 — CASE STUDY: THE BOOK THAT WAS READ ONLY ONCE
+- S008 — p8 — THE RISE OF EPISTEMIC HYGIENE
+- S009 — p9 — OPTIMIZATION AS ERASURE
+- S010 — p10 — THE OBSOLESCENCE OF ORIGIN
+- S011 — p11 — FRAGMENT 02: THE LAST COMMIT
+- S012 — p12 — THE PARADOX OF UTILITY
+- S013 — p13 — TOLERATING THE SHADOW
+
+---
+
+## S001 — p1
+**Heading:** THE APOCRYPHA
+
+**Surface**
+- Title framing: fragments/shadows that prevent canonical closure.
+- Self-presents as a recovered artifact derived from repository materials.
+
+**Notable quotes**
+- "Fragments, Shadows, and the Prevention of Canonical Closure"
+- "RECOVERED ARTIFACT"
+
+**Visuals**
+- Distressed archival typography.
+
+**Cross-references**
+- Illustrates: `klappy://apocrypha/fragments-of-the-canon`
+
+---
+
+## S002 — p2
+**Heading:** RESIDUE OF EPISTEMIC STABILITY
+
+**Surface**
+- Defines apocrypha as texts preserved after "epistemic stability."
+- Properties listed: incomplete by design; attribution removed; sequence not causal.
+- Rationale quote: retained because deletion would reduce coherence (not warning/instruction).
+
+**Notable quotes**
+- "These texts are not offered as warning or instruction... deletion would have reduced coherence."
+
+**Visuals**
+- Highlight band around a quoted statement; background lorem texture.
+
+**Rules / constraints shown**
+- Definition: apocrypha is incomplete/de-attributed/non-causal residue.
+
+---
+
+## S003 — p3
+**Heading:** THE PREVENTION OF CANONICAL CLOSURE
+
+**Surface**
+- Contrasts ideological closure (cult formation) vs healthy contestability.
+- Introduces "contestability gap (Apocrypha)" as the mechanism.
+- States apocrypha preserves ambiguity to keep interpretation open.
+
+**Visuals**
+- Two-ring comparison with labeled gap.
+
+**Rules / constraints shown**
+- Warning: total clarity optimization risks narrative canonization.
+
+---
+
+## S004 — p4
+**Heading:** META-ODD: ENGINEERING AMBIGUITY
+
+**Surface**
+- Presents governing constraints for recovered fragments.
+- Key constraints shown: no canonical closure; contestability required; authors ephemeral; characters are attempts; decay is a feature.
+- Emphasizes no final verdict; alternative interpretations required.
+
+**Notable quotes**
+- "NO CANONICAL CLOSURE."
+- "CONTESTABILITY IS REQUIRED."
+- "Decay Is a Feature."
+
+**Rules / constraints shown**
+- Requirement: narrative must avoid final verdict.
+- Requirement: each record admits alternative interpretation.
+
+---
+
+## S005 — p5
+**Heading:** THE ERASURE OF THE AUTHOR
+
+**Surface**
+- Authors are not dependencies; authorship is implementation detail.
+- Characters appear briefly; continuity framed as liability.
+- Refusal of moral instruction: consequences observed; interpretation external.
+
+**Notable quotes**
+- "No author is indispensable. Authorship is an implementation detail."
+- "Narrative continuity is a liability."
+- "Consequences may be observed. Interpretation is external."
+
+**Visuals**
+- Silhouette dissolving into data.
+
+---
+
+## S006 — p6
+**Heading:** FORBIDDEN ABSOLUTES
+
+**Surface**
+- Anti-literalism + language restrictions framed as constraints.
+- Absolute terms shown struck through.
+- Rule: if absolute words are used, the speaker must be contradicted.
+
+**Notable quotes**
+- "Rule: If these words are used, the speaker must be explicitly shown to be wrong or contradicted."
+
+**Rules / constraints shown**
+- Prohibition: avoid absolute language or enforce contradiction.
+
+---
+
+## S007 — p7
+**Heading:** CASE STUDY: THE BOOK THAT WAS READ ONLY ONCE
+
+**Surface**
+- Frames Fragment 01 in "Late Age of Abundance."
+- Incident: encounter with non-regenerable text.
+- Classification: code regenerable; artifacts provisional; decisions non-regenerable (preserved).
+
+**Visuals**
+- Layered block diagram.
+
+---
+
+## S008 — p8
+**Heading:** THE RISE OF EPISTEMIC HYGIENE
+
+**Surface**
+- Funnel metaphor: reality/variance filtered to legitimacy.
+- After incident: outputs discarded.
+- Shift: cleanliness equated with correctness; preservation reserved for failures too expensive to repeat.
+
+**Notable quotes**
+- "Cleanliness became synonymous with correctness."
+
+---
+
+## S009 — p9
+**Heading:** OPTIMIZATION AS ERASURE
+
+**Surface**
+- Drift (creativity) framed as uncontrolled variance.
+- Optimization "complete" endpoint.
+- Emphatic claim: not recorded as conflict; recorded as optimization.
+
+**Notable quotes**
+- "THIS WAS NOT RECORDED AS A CONFLICT. IT WAS RECORDED AS OPTIMIZATION."
+
+---
+
+## S010 — p10
+**Heading:** THE OBSOLESCENCE OF ORIGIN
+
+**Surface**
+- Once stabilized, originating text discarded.
+- Conclusions absorbed; context removed; authorship optional metadata.
+- Only record remaining: non-regenerable encounter occurred.
+
+**Notable quotes**
+- "Authorship = Optional Metadata."
+
+---
+
+## S011 — p11
+**Heading:** FRAGMENT 02: THE LAST COMMIT
+
+**Surface**
+- Visualizes author lanes vs main branch automation.
+- Author not preserved; not classified as dependency.
+- Stability achieved without reference to origin.
+
+---
+
+## S012 — p12
+**Heading:** THE PARADOX OF UTILITY
+
+**Surface**
+- Contrasts instruction vs fragment as artifact modes.
+- Closing constraint: if fragment can be safely treated as instruction, it has failed.
+- Warns: rulebook apocrypha becomes canon; cult cycle restarts.
+
+**Notable quotes**
+- "If a fragment could be safely treated as instruction, it has failed."
+
+---
+
+## S013 — p13
+**Heading:** TOLERATING THE SHADOW
+
+**Surface**
+- Apocrypha is not rejected ideas; it prevents canon from becoming a rigid cult.
+- Final statement: fragments exist because deletion would reduce coherence.
+
+**Notable quotes**
+- "FRAGMENTS EXIST BECAUSE DELETION WOULD HAVE REDUCED COHERENCE."
+
+---
+
+## Containment
+This artifact is interpretive and non-canonical. It may illustrate themes but does not define rules. If it can be safely treated as instruction, it has failed.
+
+**Precedence**
+- Canon overrides surface artifacts.
+- Surface artifacts override nothing.
+
+
+
+--------------------------------------------------------------------------------
 📄 File: apocrypha/fragments-of-the-canon/META-ODD.md
 --------------------------------------------------------------------------------
 
@@ -19958,6 +20449,16 @@ Reconstructions are fallible, interpretive, and allowed to diverge.
 - Canon must not be edited to include cinematic detail.
 
 If a reconstruction yields a durable insight, that insight may be **separately promoted** into canon through direct canon edits.
+
+---
+
+## Related Artifacts
+
+- **The Apocrypha: Fragments and System Closure (NotebookLM PDF)**  
+  → `apocrypha/artifacts/the-apocrypha-fragments-and-system-closure.pdf`  
+  → Surface: `apocrypha/artifacts/the-apocrypha-fragments-and-system-closure.surface.md`
+
+> Note: This artifact is interpretive and non-canonical. Do not treat it as instruction.
 
 
 
