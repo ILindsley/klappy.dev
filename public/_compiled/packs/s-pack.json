@@ -1,0 +1,76 @@
+{
+  "type": "s-pack",
+  "generated_at": "2026-01-26T20:59:11.042Z",
+  "description": "Executable context for agent behavior",
+  "sections_extracted": [
+    "Operating Constraints",
+    "Defaults",
+    "Failure Modes",
+    "Verification"
+  ],
+  "document_count": 2,
+  "documents": [
+    {
+      "path": "canon/visual-proof.md",
+      "uri": "klappy://canon/visual-proof",
+      "title": "Visual Proof Standards",
+      "subtitle": "What \"prove it visually\" actually means for UI and interaction work.",
+      "sections_found": [
+        "Operating Constraints",
+        "Defaults",
+        "Failure Modes",
+        "Verification"
+      ]
+    },
+    {
+      "path": "odd/constraint/use-only-what-hurts.md",
+      "uri": "klappy://odd/constraint/use-only-what-hurts",
+      "title": "Use Only What Hurts",
+      "subtitle": null,
+      "sections_found": [
+        "Operating Constraints",
+        "Defaults",
+        "Failure Modes",
+        "Verification"
+      ]
+    }
+  ],
+  "slices": [
+    {
+      "path": "canon/visual-proof.md",
+      "uri": "klappy://canon/visual-proof",
+      "title": "Visual Proof Standards",
+      "subtitle": "What \"prove it visually\" actually means for UI and interaction work.",
+      "sections": {
+        "Operating Constraints": "- MUST provide visual proof for any work affecting user-visible behavior\n- MUST label all screenshots with a caption stating what the proof demonstrates\n- MUST NOT crop screenshots ambiguously\n- MUST include before/after evidence for changes to existing behavior\n- MUST explicitly state why visual proof was not possible if it cannot be produced\n- MUST NOT claim completion without visual evidence or explicit acknowledgment of verification limits\n\n---",
+        "Defaults": "- When uncertain whether visual proof is needed: include it\n- Prefer screen recordings (10-30 seconds) for interaction work\n- One sentence caption is sufficient for labeling\n- When \"before\" state is unavailable, state why rather than omitting\n\n---",
+        "Failure Modes": "- **Screenshot of Code**: Showing code instead of rendered output; code proves nothing about visual behavior\n- **Diagram Without Runtime**: Diagrams of intended behavior without evidence the system actually ran\n- **Ambiguous Crop**: Cropping screenshots to hide context or adjacent failures\n- **Reasoning Without Observation**: \"It looks correct to me\" or \"it should work\" without visual evidence\n- **Unlabeled Evidence**: Screenshots without captions explaining what they demonstrate\n\n---",
+        "Verification": "- Screenshot or recording showing correct state, behavior, and context\n- Before/after evidence for any change to existing behavior\n- Caption explaining which outcome the proof supports\n- For phenomenological cases (audio, feel): explicit acknowledgment of verification limits\n- Evidence URL or artifact path must be provided, not just assertion of existence\n\n---"
+      },
+      "foundSections": [
+        "Operating Constraints",
+        "Defaults",
+        "Failure Modes",
+        "Verification"
+      ]
+    },
+    {
+      "path": "odd/constraint/use-only-what-hurts.md",
+      "uri": "klappy://odd/constraint/use-only-what-hurts",
+      "title": "Use Only What Hurts",
+      "subtitle": null,
+      "sections": {
+        "Operating Constraints": "- MUST only introduce structure, abstraction, or tooling in response to a concrete, experienced pain\n- MUST NOT add systems, layers, or rules \"just in case\" or based on anticipated scale\n- MUST treat felt friction as the prerequisite for architectural change\n- MUST prefer temporary discomfort over premature optimization\n- MUST preserve the ability to delete or reverse structure once pain subsides\n\n---",
+        "Defaults": "- If no specific pain can be named, do nothing\n- If the pain is tolerable, tolerate it\n- If multiple pains exist, address the one causing the most drag first\n- When unsure whether to add structure, delay and observe longer\n- Prefer manual or ad-hoc solutions until repetition becomes painful\n\n---",
+        "Failure Modes": "- **Premature Abstraction**: Adding abstraction because it feels \"cleaner\" rather than because something hurts\n- **Anticipated Pain**: Building generalized systems to avoid anticipated future pain\n- **Elegance as Justification**: Treating elegance or completeness as sufficient justification for new structure\n- **Preference as Constraint**: Encoding preferences or aesthetics as constraints\n- **Intellectual vs Operational**: Mistaking intellectual discomfort for operational pain\n\n---",
+        "Verification": "- A named pain must be stated explicitly before new structure is introduced\n- The pain must be observable in actual workflow, not hypothetical scenarios\n- The introduced structure must demonstrably reduce the stated pain\n- If no measurable reduction occurs, the structure should be removed\n- Verification should be possible by inspecting recent attempts or friction points\n\n---"
+      },
+      "foundSections": [
+        "Operating Constraints",
+        "Defaults",
+        "Failure Modes",
+        "Verification"
+      ]
+    }
+  ]
+}
