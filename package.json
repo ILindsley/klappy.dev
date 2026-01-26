@@ -24,6 +24,8 @@
     "attempt:promote": "node infra/scripts/attempt-cli.js promote",
     "attempt:cleanup": "node infra/scripts/attempt-cli.js cleanup",
     "book": "node infra/scripts/export-book.js",
+    "packs": "node infra/scripts/compile-s-pack.js",
+    "packs:flat": "node infra/scripts/compile-flat-packs.js",
     "prepare": "husky"
   },
   "dependencies": {
