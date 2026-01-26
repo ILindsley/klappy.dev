@@ -1,8 +1,8 @@
-# S-Pack: Decision/Governing Documents
+# S-Pack: All decision/governing documents
 
-> Executable context for agent behavior. Extract of Operating Constraints, Defaults, Failure Modes, and Verification from all decision/governing documents.
+> Executable context for agent behavior. Extract of Operating Constraints, Defaults, Failure Modes, and Verification.
 
-> Generated: 2026-01-26T21:08:01.804Z
+> Generated: 2026-01-26T21:11:07.261Z
 
 ---
 

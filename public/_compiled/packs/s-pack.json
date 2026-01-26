@@ -1,7 +1,9 @@
 {
   "type": "s-pack",
-  "generated_at": "2026-01-26T21:08:01.805Z",
-  "description": "Executable context for agent behavior",
+  "profile": "all",
+  "name": "S-Pack",
+  "generated_at": "2026-01-26T21:11:07.261Z",
+  "description": "All decision/governing documents",
   "sections_extracted": [
     "Operating Constraints",
     "Defaults",
