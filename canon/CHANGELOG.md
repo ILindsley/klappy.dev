@@ -16,6 +16,32 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.16.0 — 2026-01-26
+
+**Agent-Aware Documentation Infrastructure**
+
+This release introduces a balanced documentation framework that preserves human-first writing while enabling agent-executable structure where appropriate. The four new documents establish shared vocabulary and principled separation between visibility (tier) and usability (relevance).
+
+### Added
+
+- **Tier vs Relevance** (`/canon/documentation/tier-vs-relevance.md`) — Defines separation between tier (human progressive disclosure) and relevance (context pack inclusion). Tier controls visibility; relevance controls usability. Hard rule: they must never substitute for each other.
+- **Execution Posture** (`/canon/documentation/execution-posture.md`) — Declares how strongly a document intends to govern behavior. Four values: governing, operational, exploratory, routing. Executable structure is an affordance, not a requirement.
+- **Slice Contract S/M/L** (`/canon/documentation/slice-contract-sml.md`) — Defines extraction depth per topic. S (execution slice), M (execution + correctness), L (full topic), XL (book export). Invariant: if a slice does not change behavior, it does not belong in S.
+- **Agent-Executable Documentation Outline** (`/canon/documentation/agent-executable-outline.md`) — Templates for agent-useful sections (Subtitle, Operating Constraints, Defaults, Failure Modes, Verification). Final rule: if a section would be forced, omit it deliberately.
+
+### Philosophy
+
+- **Humans and agents are different consumers** — Tier serves human progressive disclosure; relevance serves agent context selection. Conflation leads to bloated packs and degraded behavior.
+- **Executable structure is opt-in** — Documents should be as executable as they naturally allow, no more, no less. Forcing structure creates noise.
+- **Skip is legitimate** — Explicitly stating that forced sections should be omitted prevents the most common failure mode: people filling sections just to satisfy tooling.
+- **Failure-driven encoding** — Add Defaults when agents hesitate, Failure Modes when they make known mistakes, Verification when they claim success too early. Let failure tell you what to encode.
+
+### Usage
+
+Pick 2-3 governing canon docs. Add `relevance: decision` and `execution_posture: governing`. Add only Subtitle and Operating Constraints. Compile S pack. Iterate surgically based on observed agent behavior.
+
+---
+
 ## 0.15.0 — 2026-01-23
 
 **Verification & Evidence — Epistemic Foundation**

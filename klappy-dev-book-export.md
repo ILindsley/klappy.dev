@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-26T16:57:06.234Z
-Total Files: 184
+Generated: 2026-01-26T20:08:00.034Z
+Total Files: 188
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -20,7 +20,7 @@ details (attempts, version folders, source code).
 - **Root** (1 files)
 - **About** (6 files)
 - **Apocrypha** (11 files)
-- **Canon** (21 files)
+- **Canon** (25 files)
 - **Documentation** (54 files)
 - **Infrastructure** (9 files)
 - **Interfaces & Contracts** (6 files)
@@ -8493,6 +8493,32 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.16.0 — 2026-01-26
+
+**Agent-Aware Documentation Infrastructure**
+
+This release introduces a balanced documentation framework that preserves human-first writing while enabling agent-executable structure where appropriate. The four new documents establish shared vocabulary and principled separation between visibility (tier) and usability (relevance).
+
+### Added
+
+- **Tier vs Relevance** (`/canon/documentation/tier-vs-relevance.md`) — Defines separation between tier (human progressive disclosure) and relevance (context pack inclusion). Tier controls visibility; relevance controls usability. Hard rule: they must never substitute for each other.
+- **Execution Posture** (`/canon/documentation/execution-posture.md`) — Declares how strongly a document intends to govern behavior. Four values: governing, operational, exploratory, routing. Executable structure is an affordance, not a requirement.
+- **Slice Contract S/M/L** (`/canon/documentation/slice-contract-sml.md`) — Defines extraction depth per topic. S (execution slice), M (execution + correctness), L (full topic), XL (book export). Invariant: if a slice does not change behavior, it does not belong in S.
+- **Agent-Executable Documentation Outline** (`/canon/documentation/agent-executable-outline.md`) — Templates for agent-useful sections (Subtitle, Operating Constraints, Defaults, Failure Modes, Verification). Final rule: if a section would be forced, omit it deliberately.
+
+### Philosophy
+
+- **Humans and agents are different consumers** — Tier serves human progressive disclosure; relevance serves agent context selection. Conflation leads to bloated packs and degraded behavior.
+- **Executable structure is opt-in** — Documents should be as executable as they naturally allow, no more, no less. Forcing structure creates noise.
+- **Skip is legitimate** — Explicitly stating that forced sections should be omitted prevents the most common failure mode: people filling sections just to satisfy tooling.
+- **Failure-driven encoding** — Add Defaults when agents hesitate, Failure Modes when they make known mistakes, Verification when they claim success too early. Let failure tell you what to encode.
+
+### Usage
+
+Pick 2-3 governing canon docs. Add `relevance: decision` and `execution_posture: governing`. Add only Subtitle and Operating Constraints. Compile S pack. Iterate surgically based on observed agent behavior.
+
+---
+
 ## 0.15.0 — 2026-01-23
 
 **Verification & Evidence — Epistemic Foundation**
@@ -11195,6 +11221,394 @@ It is meant to stop work from being incorrectly declared finished.
 
 - Canon v0.1 — Definition of Done & Evidence Policy complete
 - Ready to proceed to Canon v0.1 — Self-Audit Checklist
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/documentation/agent-executable-outline.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/documentation/agent-executable-outline
+title: "Agent-Executable Documentation Outline"
+audience: canon
+exposure: nav
+tier: 1
+relevance: decision
+voice: neutral
+stability: stable
+tags: ["templates", "agents", "documentation"]
+---
+
+# Agent-Executable Documentation Outline
+
+> Supplement human-readable documentation with decision leverage.
+
+## Purpose
+
+This outline defines **agent-useful sections** that may be added where appropriate.
+It supplements catalog information without replacing it.
+
+Only documents intended to influence behavior should use this structure fully.
+
+---
+
+## Section Contracts
+
+### Subtitle — Trigger + Scope
+**One sentence.**
+When does this apply? What decision does it govern?
+
+Good:
+> "Use when validating user-visible changes; screenshots alone can falsely signal success."
+
+---
+
+### Description — Decision Model
+1–2 short paragraphs.
+What decision does this document govern?
+What invariant must hold?
+What goes wrong if ignored?
+
+This is a compressed stance, not a catalog summary.
+
+---
+
+### Operating Constraints
+Non-negotiables.
+Use MUST / MUST NOT / NEVER.
+No prose.
+
+---
+
+### Defaults
+What to do when uncertain.
+Heuristics, not rules.
+
+---
+
+### Failure Modes
+Named traps you've actually seen.
+Concrete and specific.
+
+---
+
+### Verification
+What counts as "done."
+Evidence required.
+Unacceptable substitutes.
+
+---
+
+### Summary
+Working-memory compression.
+No history.
+At least one testable heuristic.
+
+---
+
+### Examples
+Minimal.
+Good vs bad preferred.
+
+---
+
+### Background / Rationale
+Optional.
+Human-first.
+Not required for execution.
+
+---
+
+### Related
+Explicit links only.
+No explanation.
+
+---
+
+## Applicability by Execution Posture
+
+- Governing: most sections expected
+- Operational: subset expected
+- Exploratory: optional, light use
+- Routing: usually omitted
+
+---
+
+## Final Rule
+
+> **If a section would be forced, omit it deliberately.**
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/documentation/execution-posture.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/documentation/execution-posture
+title: "Execution Posture"
+audience: canon
+exposure: nav
+tier: 1
+relevance: decision
+voice: neutral
+stability: stable
+tags: ["documentation", "agents", "governance"]
+---
+
+# Execution Posture
+
+> How strongly a document is expected to govern behavior.
+
+## Summary
+
+Execution posture declares **how executable a document intends to be**.
+It prevents forced structure while still enabling agent usefulness.
+
+Documents should be **as executable as they naturally allow — no more, no less**.
+
+---
+
+## Allowed Values
+
+### `governing`
+- Defines constraints, rules, or standards
+- Expected to change agent behavior
+- High extraction value for context packs
+
+### `operational`
+- Guides action without strict enforcement
+- Playbooks, workflows, how-tos
+- Moderate extraction expectations
+
+### `exploratory`
+- Thinking tools, essays, design exploration
+- Human-first
+- Minimal or no executable structure required
+
+### `routing`
+- Indexes, maps, glossaries
+- Exists to point, not to govern
+- Extraction focuses on links and triggers only
+
+---
+
+## Required Frontmatter Field
+
+```yaml
+execution_posture: governing | operational | exploratory | routing
+```
+
+---
+
+## Governing Principle
+
+Executable structure is an affordance, not a requirement.
+
+If a section would be forced or misleading, it should be omitted intentionally.
+
+---
+
+## Compiler Expectations
+- Governing docs: missing executable sections should WARN
+- Operational docs: missing sections may WARN
+- Exploratory and routing docs: missing sections are expected
+
+Compilers must never auto-generate content.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/documentation/slice-contract-sml.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/documentation/slice-contract-sml
+title: "Slice Contract: S / M / L"
+audience: canon
+exposure: nav
+tier: 1
+relevance: decision
+voice: neutral
+stability: stable
+tags: ["context-packs", "extraction"]
+---
+
+# Slice Contract: S / M / L
+
+> How much to extract from each included topic.
+
+## Summary
+
+S/M/L define **extraction depth per topic**, not topic inclusion.
+
+Topic inclusion is controlled by `relevance`.
+Extraction depth is controlled by slice size.
+
+---
+
+## Required Headings (when applicable)
+
+Documents with `relevance: decision` are expected to use these headings where appropriate:
+
+- `## Operating Constraints`
+- `## Defaults`
+- `## Failure Modes`
+- `## Verification`
+
+Recommended:
+- `## Summary`
+- `## Examples`
+- `## Related`
+
+---
+
+## Slice Definitions
+
+### S — Execution Slice
+Extract:
+- Title
+- Subtitle
+- Description
+- Operating Constraints
+- Defaults
+- Failure Modes
+- Verification
+
+Purpose: change behavior immediately.
+
+---
+
+### M — Execution + Correctness
+Extract:
+- Everything in S
+- Summary
+- Examples (if present)
+
+Purpose: reduce errors and misapplication.
+
+---
+
+### L — Full Topic
+Extract:
+- Everything in M
+- Any additional background or rationale sections
+
+Purpose: deep understanding and auditability.
+
+---
+
+### XL — Book Export
+- Entire document
+- No slicing
+- Not intended for execution packs
+
+---
+
+## Rules
+
+- Extraction is structural only (heading-to-heading)
+- No summarization or rewriting
+- Missing sections are skipped, not fabricated
+- Warnings may be emitted for governing docs
+
+---
+
+## Invariant
+
+> **If a slice does not change behavior, it does not belong in S.**
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/documentation/tier-vs-relevance.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/documentation/tier-vs-relevance
+title: "Tier vs Relevance"
+audience: canon
+exposure: nav
+tier: 1
+relevance: decision
+voice: neutral
+stability: stable
+tags: ["metadata", "documentation", "context-packs"]
+---
+
+# Tier vs Relevance
+
+> Two different axes with different purposes. Do not conflate them.
+
+## Summary
+
+This document defines the difference between **tier** and **relevance** metadata.
+They solve different problems, apply to different consumers, and must remain independent.
+
+Confusing them leads to bloated context packs, misplaced authority, and degraded agent behavior.
+
+---
+
+## Tier (Human Progressive Disclosure)
+
+**Tier controls how content is surfaced to humans.**
+
+It exists to prevent overwhelm in navigation, indexes, and reading flows.
+
+Tier does **not** imply importance, correctness, or authority.
+
+### Allowed Values
+
+- `tier: 0` — hidden or internal
+- `tier: 1` — default surfaced
+- `tier: 2` — secondary / discoverable
+- `tier: 3` — deep reference / long-form
+
+### Rules
+
+- Tier is UI-facing only
+- Tier must never be used to decide context-pack inclusion
+- Tier may be omitted on purely agent-facing documents
+
+---
+
+## Relevance (Context Pack Inclusion)
+
+**Relevance controls whether a topic participates in agent context packs.**
+
+It answers: *"Is this topic useful for making or supporting decisions?"*
+
+### Allowed Values
+
+- `decision` — changes what an agent should do next
+- `supporting` — improves correctness and judgment
+- `background` — provides understanding, narrative, or rationale
+- `routing` — helps find other content
+
+### Rules
+
+- Relevance is execution-facing
+- Relevance does not imply truth ranking
+- A document must explicitly declare relevance
+- Relevance is evaluated per topic/file, not per heading
+
+---
+
+## Hard Rule
+
+> **Tier controls visibility. Relevance controls usability.  
+> They must never substitute for each other.**
+
+---
+
+## Common Mistakes
+
+- Treating `tier: 1` as "important for agents"
+- Using numeric tiers to encode execution depth
+- Inferring relevance from tier automatically
+
+If any of the above occur, fix the metadata — not the compiler.
 
 
 

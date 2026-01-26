@@ -42,6 +42,22 @@
       ]
     },
     {
+      "uri": "klappy://canon/documentation/agent-executable-outline",
+      "path": "/canon/documentation/agent-executable-outline.md",
+      "title": "Agent-Executable Documentation Outline",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 1,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "templates",
+        "agents",
+        "documentation"
+      ]
+    },
+    {
       "uri": "klappy://projects/agentic-memory-portability",
       "path": "/projects/agentic-memory-portability.md",
       "title": "Agentic Memory Portability",
@@ -327,6 +343,22 @@
         "evolution",
         "automation",
         "orientation"
+      ]
+    },
+    {
+      "uri": "klappy://canon/documentation/execution-posture",
+      "path": "/canon/documentation/execution-posture.md",
+      "title": "Execution Posture",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 1,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "documentation",
+        "agents",
+        "governance"
       ]
     },
     {
@@ -747,6 +779,21 @@
       ]
     },
     {
+      "uri": "klappy://canon/documentation/slice-contract-sml",
+      "path": "/canon/documentation/slice-contract-sml.md",
+      "title": "Slice Contract: S / M / L",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 1,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "context-packs",
+        "extraction"
+      ]
+    },
+    {
       "uri": "klappy://canon/resonance/sprint",
       "path": "/canon/resonance/sprint.md",
       "title": "Sprint",
@@ -797,6 +844,22 @@
         "architecture",
         "conceptual-model",
         "philosophy"
+      ]
+    },
+    {
+      "uri": "klappy://canon/documentation/tier-vs-relevance",
+      "path": "/canon/documentation/tier-vs-relevance.md",
+      "title": "Tier vs Relevance",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 1,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "metadata",
+        "documentation",
+        "context-packs"
       ]
     },
     {
