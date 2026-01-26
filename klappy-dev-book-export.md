@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-26T20:38:45.354Z
+Generated: 2026-01-26T20:49:36.576Z
 Total Files: 188
 
 This is a documentation export of all markdown files from the klappy.dev
@@ -15408,19 +15408,15 @@ uri: klappy://odd/constraint/use-only-what-hurts
 title: "Use Only What Hurts"
 audience: system
 exposure: constraint
-tier: constraint
+tier: 1
 voice: direct
 stability: constrained
 context:
   include: always
   priority: highest
-tags:
+tags: ["odd", "constraint", "tension-wire", "non-framework"]
 relevance: decision
 execution_posture: governing
-  - odd
-  - constraint
-  - tension-wire
-  - non-framework
 ---
 
 # Use Only What Hurts
@@ -15432,6 +15428,46 @@ It is a system-level constraint.
 It exists to prevent ODD from becoming heavy, coercive, or self-justifying as it grows.
 
 If there is ever a conflict between this document and any other part of ODD, this document wins.
+
+---
+
+## Operating Constraints
+
+- MUST only introduce structure, abstraction, or tooling in response to a concrete, experienced pain
+- MUST NOT add systems, layers, or rules "just in case" or based on anticipated scale
+- MUST treat felt friction as the prerequisite for architectural change
+- MUST prefer temporary discomfort over premature optimization
+- MUST preserve the ability to delete or reverse structure once pain subsides
+
+---
+
+## Defaults
+
+- If no specific pain can be named, do nothing
+- If the pain is tolerable, tolerate it
+- If multiple pains exist, address the one causing the most drag first
+- When unsure whether to add structure, delay and observe longer
+- Prefer manual or ad-hoc solutions until repetition becomes painful
+
+---
+
+## Failure Modes
+
+- **Premature Abstraction**: Adding abstraction because it feels "cleaner" rather than because something hurts
+- **Anticipated Pain**: Building generalized systems to avoid anticipated future pain
+- **Elegance as Justification**: Treating elegance or completeness as sufficient justification for new structure
+- **Preference as Constraint**: Encoding preferences or aesthetics as constraints
+- **Intellectual vs Operational**: Mistaking intellectual discomfort for operational pain
+
+---
+
+## Verification
+
+- A named pain must be stated explicitly before new structure is introduced
+- The pain must be observable in actual workflow, not hypothetical scenarios
+- The introduced structure must demonstrably reduce the stated pain
+- If no measurable reduction occurs, the structure should be removed
+- Verification should be possible by inspecting recent attempts or friction points
 
 ---
 

@@ -1,6 +1,6 @@
 # Decision Document Audit Report
 
-> Generated: 2026-01-26T20:38:16.392Z
+> Generated: 2026-01-26T20:49:22.160Z
 
 ## Summary
 
@@ -8,8 +8,8 @@
 |--------|-------|
 | Total content files | 58 |
 | Decision/governing files | 14 |
-| ✅ Passing | 1 |
-| ❌ Failing | 13 |
+| ✅ Passing | 2 |
+| ❌ Failing | 12 |
 | ⚠️ With warnings | 0 |
 
 ## Required Headings
@@ -105,14 +105,6 @@ These documents are missing required headings:
 - Missing required heading: '## Failure Modes'
 - Missing required heading: '## Verification'
 
-### `odd/constraint/use-only-what-hurts.md`
-
-**Failures:**
-- Missing required heading: '## Operating Constraints'
-- Missing required heading: '## Defaults'
-- Missing required heading: '## Failure Modes'
-- Missing required heading: '## Verification'
-
 ### `odd/contract.md`
 
 **Failures:**
@@ -132,6 +124,10 @@ These documents are missing required headings:
 ## ✅ Passing Documents
 
 ### `canon/visual-proof.md`
+
+Sections found: Operating Constraints, Defaults, Failure Modes, Verification
+
+### `odd/constraint/use-only-what-hurts.md`
 
 Sections found: Operating Constraints, Defaults, Failure Modes, Verification
 

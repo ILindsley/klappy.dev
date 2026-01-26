@@ -886,10 +886,15 @@
       "type": "text/markdown",
       "audience": "system",
       "exposure": "constraint",
-      "tier": 2,
+      "tier": 1,
       "voice": "direct",
       "stability": "constrained",
-      "tags": []
+      "tags": [
+        "odd",
+        "constraint",
+        "tension-wire",
+        "non-framework"
+      ]
     },
     {
       "uri": "klappy://canon/verification-and-evidence",

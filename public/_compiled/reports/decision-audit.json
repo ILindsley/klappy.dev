@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-01-26T20:38:16.392Z",
+  "generated_at": "2026-01-26T20:49:22.160Z",
   "summary": {
     "total_files": 58,
     "decision_governing_files": 14,
-    "passing": 1,
-    "failing": 13,
+    "passing": 2,
+    "failing": 12,
     "with_warnings": 0
   },
   "required_headings": [
@@ -115,16 +115,6 @@
       "warnings": []
     },
     {
-      "path": "odd/constraint/use-only-what-hurts.md",
-      "failures": [
-        "Missing required heading: '## Operating Constraints'",
-        "Missing required heading: '## Defaults'",
-        "Missing required heading: '## Failure Modes'",
-        "Missing required heading: '## Verification'"
-      ],
-      "warnings": []
-    },
-    {
       "path": "odd/contract.md",
       "failures": [
         "Missing required heading: '## Operating Constraints'",
@@ -148,6 +138,17 @@
   "passing_docs": [
     {
       "path": "canon/visual-proof.md",
+      "sections_found": [
+        "Operating Constraints",
+        "Defaults",
+        "Failure Modes",
+        "Verification"
+      ],
+      "sections_missing": [],
+      "warnings": []
+    },
+    {
+      "path": "odd/constraint/use-only-what-hurts.md",
       "sections_found": [
         "Operating Constraints",
         "Defaults",
