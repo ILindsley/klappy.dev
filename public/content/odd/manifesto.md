@@ -7,6 +7,8 @@ tier: 2
 voice: neutral
 stability: stable
 tags: ["odd", "philosophy"]
+relevance: background
+execution_posture: exploratory
 ---
 
 # ODD Manifesto v1.1 (Extended)

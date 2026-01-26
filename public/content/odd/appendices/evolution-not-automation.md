@@ -7,6 +7,8 @@ tier: 2
 voice: neutral
 stability: semi_stable
 tags: ["odd", "evolution", "automation", "orientation"]
+relevance: supporting
+execution_posture: operational
 ---
 
 # Evolution, Not Automation

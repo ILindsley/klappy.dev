@@ -7,6 +7,8 @@ tier: 3
 voice: neutral
 stability: stable
 tags: ["odd", "template"]
+relevance: routing
+execution_posture: routing
 ---
 
 # ODD Article Template

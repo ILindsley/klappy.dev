@@ -7,6 +7,8 @@ tier: 0
 voice: neutral
 stability: semi_stable
 tags: ["about", "philosophy", "overview"]
+relevance: background
+execution_posture: exploratory
 ---
 
 # 💡 Why This Exists

@@ -8,6 +8,7 @@ relevance: decision
 voice: neutral
 stability: stable
 tags: ["templates", "agents", "documentation"]
+execution_posture: governing
 ---
 
 # Agent-Executable Documentation Outline

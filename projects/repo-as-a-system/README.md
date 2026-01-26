@@ -7,6 +7,8 @@ tier: 3
 voice: neutral
 stability: evolving
 tags: ["projects", "repo-as-a-system"]
+relevance: routing
+execution_posture: routing
 ---
 
 # 🧪 This Repository as a System

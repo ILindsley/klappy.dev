@@ -7,6 +7,8 @@ tier: 1
 voice: first_person
 stability: stable
 tags: ["constraints", "assumptions"]
+relevance: decision
+execution_posture: governing
 ---
 
 # Constraints

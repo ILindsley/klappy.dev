@@ -6,6 +6,8 @@ tier: 3
 voice: neutral
 stability: stable
 tags: ["resonance", "antifragile", "antifragility", "failure", "optionality"]
+relevance: background
+execution_posture: exploratory
 ---
 
 # Antifragile (Resonance)

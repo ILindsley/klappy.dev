@@ -7,6 +7,8 @@ tier: 1
 voice: neutral
 stability: stable
 tags: ["odd", "index"]
+relevance: routing
+execution_posture: routing
 ---
 
 # 🎯 Outcomes-Driven Development (ODD)

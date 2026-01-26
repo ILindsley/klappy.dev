@@ -7,6 +7,8 @@ tier: 2
 voice: neutral
 stability: stable
 tags: ["odd", "alignment", "drift", "hygiene", "selection-pressure"]
+relevance: supporting
+execution_posture: operational
 ---
 
 # Alignment Reviews

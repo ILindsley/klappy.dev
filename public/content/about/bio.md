@@ -7,6 +7,8 @@ tier: 0
 voice: first_person
 stability: semi_stable
 tags: ["about", "bio"]
+relevance: background
+execution_posture: exploratory
 ---
 
 # 👤 Bio — Who I Am

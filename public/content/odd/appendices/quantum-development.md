@@ -7,6 +7,8 @@ tier: 3
 voice: neutral
 stability: semi_stable
 tags: ["odd", "quantum", "attempts", "uncertainty", "orientation"]
+relevance: supporting
+execution_posture: operational
 ---
 
 # Quantum Development

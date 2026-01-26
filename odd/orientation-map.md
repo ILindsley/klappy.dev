@@ -7,6 +7,8 @@ tier: 3
 voice: neutral
 stability: semi_stable
 tags: ["odd", "orientation", "mental-model"]
+relevance: supporting
+execution_posture: operational
 ---
 
 # ODD + Canon + Evidence — Orientation Map

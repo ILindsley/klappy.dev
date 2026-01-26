@@ -7,6 +7,8 @@ tier: 3
 voice: neutral
 stability: stable
 tags: ["canon", "template"]
+relevance: routing
+execution_posture: routing
 ---
 
 # Canon Article Template

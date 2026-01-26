@@ -10,6 +10,8 @@ context:
   include: always
   priority: highest
 tags:
+relevance: decision
+execution_posture: governing
   - odd
   - constraint
   - tension-wire

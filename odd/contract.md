@@ -7,6 +7,8 @@ tier: 1
 voice: neutral
 stability: stable
 tags: ["odd", "contract", "version", "semver", "compatibility"]
+relevance: decision
+execution_posture: governing
 ---
 
 # ODD System Contract

@@ -7,6 +7,8 @@ tier: 2
 voice: first_person
 stability: stable
 tags: ["decision-rules", "heuristics"]
+relevance: decision
+execution_posture: governing
 ---
 
 # Decision Rules

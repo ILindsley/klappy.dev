@@ -7,6 +7,8 @@ tier: 3
 voice: neutral
 stability: evolving
 tags: ["odd", "appendices", "index", "portable"]
+relevance: routing
+execution_posture: routing
 ---
 
 # ODD Appendices (Portable)

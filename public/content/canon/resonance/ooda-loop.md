@@ -6,6 +6,8 @@ tier: 3
 voice: neutral
 stability: stable
 tags: ["resonance", "ooda-loop", "orientation", "decision-making", "feedback"]
+relevance: background
+execution_posture: exploratory
 ---
 
 # OODA Loop (Resonance)

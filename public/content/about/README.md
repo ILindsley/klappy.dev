@@ -7,6 +7,8 @@ tier: 0
 voice: neutral
 stability: semi_stable
 tags: ["about", "author", "index"]
+relevance: background
+execution_posture: exploratory
 ---
 
 # About

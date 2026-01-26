@@ -7,6 +7,8 @@ tier: 1
 voice: first_person
 stability: semi_stable
 tags: ["definition-of-done", "evidence"]
+relevance: decision
+execution_posture: governing
 ---
 
 # Definition of Done & Evidence Policy

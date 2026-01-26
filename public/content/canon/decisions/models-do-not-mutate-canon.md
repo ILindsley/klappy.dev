@@ -7,6 +7,8 @@ tier: 1
 voice: neutral
 stability: stable
 tags: ["canon", "decisions", "models", "mutation", "governance"]
+relevance: decision
+execution_posture: governing
 ---
 
 # Models Do Not Mutate Canon

@@ -7,6 +7,8 @@ tier: 3
 voice: neutral
 stability: evolving
 tags: ["odd", "pattern", "tools", "decision-complexity"]
+relevance: supporting
+execution_posture: operational
 ---
 
 # Tool Specialization

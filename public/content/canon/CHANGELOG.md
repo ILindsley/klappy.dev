@@ -7,6 +7,8 @@ tier: 3
 voice: neutral
 stability: semi_stable
 tags: ["meta", "changelog", "versioning"]
+relevance: background
+execution_posture: exploratory
 ---
 
 # 📜 Canon Changelog

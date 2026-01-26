@@ -7,6 +7,8 @@ tier: 1
 voice: neutral
 stability: stable
 tags: ["verification", "evidence", "trust", "epistemology", "agents"]
+relevance: decision
+execution_posture: governing
 ---
 
 # Verification & Evidence

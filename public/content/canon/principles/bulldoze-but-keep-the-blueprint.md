@@ -8,6 +8,8 @@ tier: 2
 voice: neutral
 stability: stable
 tags:
+relevance: supporting
+execution_posture: operational
   - ai-development
   - regeneration
   - restartability

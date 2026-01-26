@@ -8,6 +8,7 @@ relevance: decision
 voice: neutral
 stability: stable
 tags: ["context-packs", "extraction"]
+execution_posture: governing
 ---
 
 # Slice Contract: S / M / L

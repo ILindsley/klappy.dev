@@ -6,6 +6,8 @@ tier: 3
 voice: neutral
 stability: stable
 tags: ["resonance", "sprint", "convergence", "constraints", "decision-making"]
+relevance: background
+execution_posture: exploratory
 ---
 
 # Sprint (Resonance)

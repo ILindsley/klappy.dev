@@ -6,6 +6,8 @@ tier: 3
 voice: neutral
 stability: stable
 tags: ["resonance", "lean-startup", "feedback", "learning", "iteration"]
+relevance: background
+execution_posture: exploratory
 ---
 
 # The Lean Startup (Resonance)

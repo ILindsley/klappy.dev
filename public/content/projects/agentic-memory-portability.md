@@ -7,6 +7,8 @@ tier: 3
 voice: neutral
 stability: evolving
 tags: ["projects", "agents", "memory", "odd"]
+relevance: routing
+execution_posture: routing
 ---
 
 # Agentic Memory Portability

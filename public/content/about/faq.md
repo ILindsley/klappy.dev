@@ -7,6 +7,8 @@ tier: 0
 voice: neutral
 stability: evolving
 tags: ["about", "faq"]
+relevance: background
+execution_posture: exploratory
 ---
 
 # ❓ FAQ — Frequently Asked Questions

@@ -7,6 +7,8 @@ tier: 3
 voice: neutral
 stability: stable
 tags: ["odd", "media", "learning", "progressive-disclosure", "website"]
+relevance: supporting
+execution_posture: operational
 ---
 
 # Media as a Learning Layer

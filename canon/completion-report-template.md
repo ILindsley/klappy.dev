@@ -7,6 +7,8 @@ tier: 3
 voice: first_person
 stability: evolving
 tags: ["completion-report", "template"]
+relevance: routing
+execution_posture: routing
 ---
 
 # Completion Report Template

@@ -7,6 +7,8 @@ tier: 0
 voice: neutral
 stability: stable
 tags: ["home", "orientation", "media"]
+relevance: background
+execution_posture: exploratory
 assets: {"hero_image":"/assets/home/hero-odd-diagram.png","orientation_map":"/assets/home/orientation-map-diagram.png","explainer_video":"/assets/home/outcomes-driven_development.mp4"}
 ---
 

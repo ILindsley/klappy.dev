@@ -7,6 +7,8 @@ tier: 0
 voice: neutral
 stability: evolving
 tags: ["projects", "index"]
+relevance: routing
+execution_posture: routing
 ---
 
 # 📁 Projects

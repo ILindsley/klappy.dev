@@ -7,6 +7,8 @@ tier: 1
 voice: neutral
 stability: stable
 tags: ["odd", "memory", "portability", "elevation", "decay"]
+relevance: supporting
+execution_posture: operational
 status: canonical
 category: odd-appendix
 version: 1.0

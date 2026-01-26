@@ -8,6 +8,7 @@ relevance: decision
 voice: neutral
 stability: stable
 tags: ["metadata", "documentation", "context-packs"]
+execution_posture: governing
 ---
 
 # Tier vs Relevance

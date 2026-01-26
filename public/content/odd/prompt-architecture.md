@@ -7,6 +7,8 @@ tier: 2
 voice: neutral
 stability: semi_stable
 tags: ["odd", "prompt-architecture", "orchestration"]
+relevance: supporting
+execution_posture: operational
 ---
 
 # Prompt Architecture (Orientation)

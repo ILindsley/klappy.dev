@@ -7,6 +7,8 @@ tier: 2
 voice: neutral
 stability: evolving
 tags: ["odd", "misuse", "failure-modes"]
+relevance: supporting
+execution_posture: operational
 ---
 
 # ODD Misuse Patterns

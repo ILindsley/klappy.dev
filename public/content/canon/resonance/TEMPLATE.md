@@ -7,6 +7,8 @@ tier: 3
 voice: neutral
 stability: stable
 tags: ["resonance", "template"]
+relevance: routing
+execution_posture: routing
 ---
 
 # Resonance Page Template

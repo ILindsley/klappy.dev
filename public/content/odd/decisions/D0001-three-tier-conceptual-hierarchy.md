@@ -7,6 +7,8 @@ tier: 1
 voice: neutral
 stability: stable
 tags: ["odd", "architecture", "conceptual-model", "philosophy"]
+relevance: decision
+execution_posture: governing
 ---
 
 # Three-Tier Conceptual Hierarchy

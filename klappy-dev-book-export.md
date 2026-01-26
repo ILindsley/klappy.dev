@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-26T20:20:43.532Z
+Generated: 2026-01-26T20:32:29.407Z
 Total Files: 188
 
 This is a documentation export of all markdown files from the klappy.dev
@@ -191,6 +191,8 @@ tier: 0
 voice: neutral
 stability: semi_stable
 tags: ["about", "author", "index"]
+relevance: background
+execution_posture: exploratory
 ---
 
 # About
@@ -256,6 +258,8 @@ tier: 0
 voice: first_person
 stability: semi_stable
 tags: ["about", "bio"]
+relevance: background
+execution_posture: exploratory
 ---
 
 # 👤 Bio — Who I Am
@@ -285,6 +289,8 @@ tier: 0
 voice: neutral
 stability: semi_stable
 tags: ["about", "credibility", "trust"]
+relevance: background
+execution_posture: exploratory
 ---
 
 # 🏛️ Credibility — Why Trust My Work
@@ -325,6 +331,8 @@ tier: 0
 voice: neutral
 stability: evolving
 tags: ["about", "faq"]
+relevance: background
+execution_posture: exploratory
 ---
 
 # ❓ FAQ — Frequently Asked Questions
@@ -380,6 +388,8 @@ tier: 0
 voice: neutral
 stability: stable
 tags: ["home", "orientation", "media"]
+relevance: background
+execution_posture: exploratory
 assets: {"hero_image":"/assets/home/hero-odd-diagram.png","orientation_map":"/assets/home/orientation-map-diagram.png","explainer_video":"/assets/home/outcomes-driven_development.mp4"}
 ---
 
@@ -404,6 +414,8 @@ tier: 0
 voice: neutral
 stability: semi_stable
 tags: ["about", "philosophy", "overview"]
+relevance: background
+execution_posture: exploratory
 ---
 
 # 💡 Why This Exists
@@ -8484,6 +8496,8 @@ tier: 3
 voice: neutral
 stability: semi_stable
 tags: ["meta", "changelog", "versioning"]
+relevance: background
+execution_posture: exploratory
 ---
 
 # 📜 Canon Changelog
@@ -9689,6 +9703,8 @@ tier: 1
 voice: neutral
 stability: stable
 tags: ["canon", "index", "orientation"]
+relevance: routing
+execution_posture: routing
 ---
 
 # 🧭 Canon
@@ -9908,6 +9924,8 @@ tier: 3
 voice: neutral
 stability: stable
 tags: ["canon", "template"]
+relevance: routing
+execution_posture: routing
 ---
 
 # Canon Article Template
@@ -10122,6 +10140,8 @@ tier: 3
 voice: first_person
 stability: evolving
 tags: ["completion-report", "template"]
+relevance: routing
+execution_posture: routing
 ---
 
 # Completion Report Template
@@ -10320,6 +10340,8 @@ tier: 1
 voice: first_person
 stability: stable
 tags: ["constraints", "assumptions"]
+relevance: decision
+execution_posture: governing
 ---
 
 # Constraints
@@ -10644,6 +10666,8 @@ tier: 2
 voice: first_person
 stability: stable
 tags: ["decision-rules", "heuristics"]
+relevance: decision
+execution_posture: governing
 ---
 
 # Decision Rules
@@ -10941,6 +10965,8 @@ tier: 1
 voice: neutral
 stability: stable
 tags: ["canon", "decisions", "models", "mutation", "governance"]
+relevance: decision
+execution_posture: governing
 ---
 
 # Models Do Not Mutate Canon
@@ -11055,6 +11081,8 @@ tier: 1
 voice: first_person
 stability: semi_stable
 tags: ["definition-of-done", "evidence"]
+relevance: decision
+execution_posture: governing
 ---
 
 # Definition of Done & Evidence Policy
@@ -11273,6 +11301,7 @@ relevance: decision
 voice: neutral
 stability: stable
 tags: ["templates", "agents", "documentation"]
+execution_posture: governing
 ---
 
 # Agent-Executable Documentation Outline
@@ -11390,6 +11419,7 @@ relevance: decision
 voice: neutral
 stability: stable
 tags: ["documentation", "agents", "governance"]
+execution_posture: governing
 ---
 
 # Execution Posture
@@ -11468,6 +11498,7 @@ relevance: decision
 voice: neutral
 stability: stable
 tags: ["context-packs", "extraction"]
+execution_posture: governing
 ---
 
 # Slice Contract: S / M / L
@@ -11570,6 +11601,7 @@ relevance: decision
 voice: neutral
 stability: stable
 tags: ["metadata", "documentation", "context-packs"]
+execution_posture: governing
 ---
 
 # Tier vs Relevance
@@ -11660,6 +11692,8 @@ tier: 1
 voice: first_person
 stability: stable
 tags: ["canon", "tiers", "epistemic-obligation", "architecture"]
+relevance: decision
+execution_posture: governing
 ---
 
 # Epistemic Obligation and Document Tiers
@@ -11822,6 +11856,8 @@ tier: 3
 voice: neutral
 stability: evolving
 tags: ["odd", "pattern", "tools", "decision-complexity"]
+relevance: supporting
+execution_posture: operational
 ---
 
 # Tool Specialization
@@ -11917,6 +11953,8 @@ tier: 2
 voice: neutral
 stability: stable
 tags:
+relevance: supporting
+execution_posture: operational
   - ai-development
   - regeneration
   - restartability
@@ -12175,6 +12213,8 @@ tier: 3
 voice: neutral
 stability: stable
 tags: ["resonance", "index", "principles", "divergence"]
+relevance: routing
+execution_posture: routing
 ---
 
 # Resonance
@@ -12293,6 +12333,8 @@ tier: 3
 voice: neutral
 stability: stable
 tags: ["resonance", "template"]
+relevance: routing
+execution_posture: routing
 ---
 
 # Resonance Page Template
@@ -12458,6 +12500,8 @@ tier: 3
 voice: neutral
 stability: stable
 tags: ["resonance", "antifragile", "antifragility", "failure", "optionality"]
+relevance: background
+execution_posture: exploratory
 ---
 
 # Antifragile (Resonance)
@@ -12538,6 +12582,8 @@ tier: 3
 voice: neutral
 stability: stable
 tags: ["resonance", "lean-startup", "feedback", "learning", "iteration"]
+relevance: background
+execution_posture: exploratory
 ---
 
 # The Lean Startup (Resonance)
@@ -12622,6 +12668,8 @@ tier: 3
 voice: neutral
 stability: stable
 tags: ["resonance", "ooda-loop", "orientation", "decision-making", "feedback"]
+relevance: background
+execution_posture: exploratory
 ---
 
 # OODA Loop (Resonance)
@@ -12701,6 +12749,8 @@ tier: 3
 voice: neutral
 stability: stable
 tags: ["resonance", "sprint", "convergence", "constraints", "decision-making"]
+relevance: background
+execution_posture: exploratory
 ---
 
 # Sprint (Resonance)
@@ -12782,6 +12832,8 @@ tier: 2
 voice: first_person
 stability: evolving
 tags: ["self-audit", "verification"]
+relevance: supporting
+execution_posture: operational
 ---
 
 # Self-Audit Checklist
@@ -12971,6 +13023,8 @@ tier: 1
 voice: neutral
 stability: stable
 tags: ["verification", "evidence", "trust", "epistemology", "agents"]
+relevance: decision
+execution_posture: governing
 ---
 
 # Verification & Evidence
@@ -13105,6 +13159,8 @@ tier: 2
 voice: first_person
 stability: semi_stable
 tags: ["visual-proof", "evidence"]
+relevance: decision
+execution_posture: governing
 ---
 
 # Visual Proof Standards
@@ -13353,6 +13409,8 @@ tier: 0
 voice: neutral
 stability: semi_stable
 tags: ["odd", "public", "overview"]
+relevance: routing
+execution_posture: routing
 assets: {"practice_video":"/assets/odd/odd-in-practice.mp4","misconception_image":"/assets/odd/odd-is-not-a-framework.png","deep_dive_audio":"/assets/odd/why-evidence-beats-confidence.m4a"}
 ---
 
@@ -13532,6 +13590,8 @@ tier: 3
 voice: neutral
 stability: stable
 tags: ["odd", "template"]
+relevance: routing
+execution_posture: routing
 ---
 
 # ODD Article Template
@@ -13710,6 +13770,8 @@ tier: 3
 voice: neutral
 stability: evolving
 tags: ["odd", "appendices", "index", "portable"]
+relevance: routing
+execution_posture: routing
 ---
 
 # ODD Appendices (Portable)
@@ -13782,6 +13844,8 @@ tier: 3
 voice: neutral
 stability: stable
 tags: ["odd", "appendices", "template"]
+relevance: routing
+execution_posture: routing
 ---
 
 # ODD Appendix Template
@@ -13957,6 +14021,8 @@ tier: 2
 voice: neutral
 stability: stable
 tags: ["odd", "alignment", "drift", "hygiene", "selection-pressure"]
+relevance: supporting
+execution_posture: operational
 ---
 
 # Alignment Reviews
@@ -14103,6 +14169,8 @@ tier: 2
 voice: neutral
 stability: semi_stable
 tags: ["odd", "evolution", "automation", "orientation"]
+relevance: supporting
+execution_posture: operational
 ---
 
 # Evolution, Not Automation
@@ -14243,6 +14311,8 @@ tier: 2
 voice: neutral
 stability: stable
 tags: ["canon", "evolution", "modularity", "regenerability"]
+relevance: supporting
+execution_posture: operational
 ---
 
 # Failure-Driven Modularity
@@ -14365,6 +14435,8 @@ tier: 3
 voice: neutral
 stability: stable
 tags: ["odd", "media", "learning", "progressive-disclosure", "website"]
+relevance: supporting
+execution_posture: operational
 ---
 
 # Media as a Learning Layer
@@ -14528,6 +14600,8 @@ tier: 1
 voice: neutral
 stability: stable
 tags: ["odd", "memory", "portability", "elevation", "decay"]
+relevance: supporting
+execution_posture: operational
 status: canonical
 category: odd-appendix
 version: 1.0
@@ -14738,6 +14812,8 @@ tier: 3
 voice: neutral
 stability: semi_stable
 tags: ["odd", "quantum", "attempts", "uncertainty", "orientation"]
+relevance: supporting
+execution_posture: operational
 ---
 
 # Quantum Development
@@ -14984,6 +15060,8 @@ tier: 3
 voice: neutral
 stability: semi_stable
 tags: ["odd", "visual", "evolution", "interfaces"]
+relevance: supporting
+execution_posture: operational
 ---
 
 # Visual Evolution
@@ -15186,6 +15264,8 @@ tier: 1
 voice: neutral
 stability: evolving
 tags: ["odd", "cognition", "scaling", "decision-load"]
+relevance: supporting
+execution_posture: operational
 ---
 
 # Cognitive Partitioning
@@ -15295,6 +15375,8 @@ context:
   include: always
   priority: highest
 tags:
+relevance: decision
+execution_posture: governing
   - odd
   - constraint
   - tension-wire
@@ -15440,6 +15522,8 @@ tier: 1
 voice: neutral
 stability: stable
 tags: ["odd", "contract", "version", "semver", "compatibility"]
+relevance: decision
+execution_posture: governing
 ---
 
 # ODD System Contract
@@ -15584,6 +15668,8 @@ tier: 1
 voice: neutral
 stability: stable
 tags: ["odd", "architecture", "conceptual-model", "philosophy"]
+relevance: decision
+execution_posture: governing
 ---
 
 # Three-Tier Conceptual Hierarchy
@@ -15762,6 +15848,8 @@ tier: 3
 voice: neutral
 stability: stable
 tags: ["odd", "decisions", "conceptual", "philosophy"]
+relevance: routing
+execution_posture: routing
 ---
 
 # ODD Conceptual Decisions
@@ -15818,6 +15906,8 @@ tier: 1
 voice: neutral
 stability: stable
 tags: ["odd", "index"]
+relevance: routing
+execution_posture: routing
 ---
 
 # 🎯 Outcomes-Driven Development (ODD)
@@ -15881,6 +15971,8 @@ tier: 2
 voice: neutral
 stability: stable
 tags: ["odd", "philosophy"]
+relevance: background
+execution_posture: exploratory
 ---
 
 # ODD Manifesto v1.1 (Extended)
@@ -16353,6 +16445,8 @@ tier: 2
 voice: first_person
 stability: semi_stable
 tags: ["maturity", "governance"]
+relevance: supporting
+execution_posture: operational
 ---
 
 # Project Maturity & Progressive Governance
@@ -16597,6 +16691,8 @@ tier: 2
 voice: neutral
 stability: evolving
 tags: ["odd", "misuse", "failure-modes"]
+relevance: supporting
+execution_posture: operational
 ---
 
 # ODD Misuse Patterns
@@ -16800,6 +16896,8 @@ tier: 3
 voice: neutral
 stability: semi_stable
 tags: ["odd", "orientation", "mental-model"]
+relevance: supporting
+execution_posture: operational
 ---
 
 # ODD + Canon + Evidence — Orientation Map
@@ -16959,6 +17057,8 @@ tier: 2
 voice: neutral
 stability: semi_stable
 tags: ["odd", "prompt-architecture", "orchestration"]
+relevance: supporting
+execution_posture: operational
 ---
 
 # Prompt Architecture (Orientation)
@@ -17132,6 +17232,8 @@ tier: 1
 voice: neutral
 stability: evolving
 tags: ["odd", "terminology", "disambiguation", "boundary"]
+relevance: supporting
+execution_posture: operational
 ---
 
 # 📖 ODD Terminology & Disambiguation
@@ -17371,6 +17473,8 @@ tier: 3
 voice: neutral
 stability: evolving
 tags: ["projects", "contributing", "guide"]
+relevance: routing
+execution_posture: routing
 ---
 
 # How to Add a Project
@@ -17588,6 +17692,8 @@ tier: 3
 voice: neutral
 stability: evolving
 tags: ["projects", "agents", "memory", "odd"]
+relevance: routing
+execution_posture: routing
 ---
 
 # Agentic Memory Portability
@@ -17650,6 +17756,8 @@ tier: 0
 voice: neutral
 stability: evolving
 tags: ["projects", "index"]
+relevance: routing
+execution_posture: routing
 ---
 
 # 📁 Projects
@@ -17705,6 +17813,8 @@ tier: 3
 voice: neutral
 stability: frozen
 tags: ["projects", "repo-as-a-system", "build-prompt", "internal"]
+relevance: routing
+execution_posture: routing
 ---
 
 # Build Prompt (Phase 1)
@@ -17837,6 +17947,8 @@ tier: 3
 voice: neutral
 stability: evolving
 tags: ["projects", "repo-as-a-system"]
+relevance: routing
+execution_posture: routing
 ---
 
 # 🧪 This Repository as a System

@@ -7,6 +7,8 @@ tier: 1
 voice: neutral
 stability: stable
 tags: ["canon", "index", "orientation"]
+relevance: routing
+execution_posture: routing
 ---
 
 # 🧭 Canon

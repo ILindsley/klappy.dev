@@ -7,6 +7,8 @@ tier: 2
 voice: first_person
 stability: semi_stable
 tags: ["maturity", "governance"]
+relevance: supporting
+execution_posture: operational
 ---
 
 # Project Maturity & Progressive Governance

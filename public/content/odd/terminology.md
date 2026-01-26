@@ -9,6 +9,8 @@ tier: 1
 voice: neutral
 stability: evolving
 tags: ["odd", "terminology", "disambiguation", "boundary"]
+relevance: supporting
+execution_posture: operational
 ---
 
 # 📖 ODD Terminology & Disambiguation

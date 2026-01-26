@@ -7,6 +7,8 @@ tier: 3
 voice: neutral
 stability: frozen
 tags: ["projects", "repo-as-a-system", "build-prompt", "internal"]
+relevance: routing
+execution_posture: routing
 ---
 
 # Build Prompt (Phase 1)

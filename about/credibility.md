@@ -7,6 +7,8 @@ tier: 0
 voice: neutral
 stability: semi_stable
 tags: ["about", "credibility", "trust"]
+relevance: background
+execution_posture: exploratory
 ---
 
 # 🏛️ Credibility — Why Trust My Work

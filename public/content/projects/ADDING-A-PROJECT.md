@@ -7,6 +7,8 @@ tier: 3
 voice: neutral
 stability: evolving
 tags: ["projects", "contributing", "guide"]
+relevance: routing
+execution_posture: routing
 ---
 
 # How to Add a Project

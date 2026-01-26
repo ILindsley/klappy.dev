@@ -7,6 +7,8 @@ tier: 3
 voice: neutral
 stability: stable
 tags: ["odd", "decisions", "conceptual", "philosophy"]
+relevance: routing
+execution_posture: routing
 ---
 
 # ODD Conceptual Decisions

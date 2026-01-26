@@ -7,6 +7,8 @@ tier: 2
 voice: first_person
 stability: semi_stable
 tags: ["visual-proof", "evidence"]
+relevance: decision
+execution_posture: governing
 ---
 
 # Visual Proof Standards

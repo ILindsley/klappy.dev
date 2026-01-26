@@ -7,6 +7,8 @@ tier: 3
 voice: neutral
 stability: stable
 tags: ["resonance", "index", "principles", "divergence"]
+relevance: routing
+execution_posture: routing
 ---
 
 # Resonance

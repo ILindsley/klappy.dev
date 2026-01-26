@@ -8,6 +8,7 @@ relevance: decision
 voice: neutral
 stability: stable
 tags: ["documentation", "agents", "governance"]
+execution_posture: governing
 ---
 
 # Execution Posture
