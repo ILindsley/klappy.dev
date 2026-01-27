@@ -27,6 +27,7 @@
     "packs": "node infra/scripts/compile-s-pack.js",
     "packs:flat": "node infra/scripts/compile-flat-packs.js",
     "packs:recipe": "node infra/scripts/compile-recipe.js",
+    "discovery": "node infra/runners/run-recipe-pack.js --id prd-discovery.s",
     "prepare": "husky"
   },
   "dependencies": {

@@ -3,7 +3,7 @@
   "version": "v0",
   "stability": "experimental",
   "description": "PRD discovery with S-slice context (execution focus)",
-  "generated_at": "2026-01-27T18:57:25.509Z",
+  "generated_at": "2026-01-27T19:01:26.952Z",
   "source_recipe": "docs/agents/discovery/recipes/prd-discovery.s.recipe.json",
   "resolved": {
     "overlays": [
