@@ -2,6 +2,8 @@
 
 This lane produces compiled packs for AI agent consumption. The primary deliverable is a portable context artifact that enables any LLM to guide humans through ODD-aligned PRD creation.
 
+> **Note:** Agent behavior contracts (overlays, protocols, recipes) are authored in `docs/agents/`, not here. This lane is for **compilation and distribution** only.
+
 ## Current Champion
 
 **v1.3.1** — Canon Refresh (adds terminology.md, canon v0.10.0)
