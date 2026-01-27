@@ -1,0 +1,26 @@
+{
+  "name": "prd-discovery.s",
+  "version": "v0",
+  "stability": "experimental",
+  "description": "PRD discovery with S-slice context (execution focus)",
+  "base": "agent-skills-core",
+  "overlays": [
+    "discovery-role-overlay"
+  ],
+  "context_packs": [
+    "s-core"
+  ],
+  "protocol_modules": [
+    "prd-core",
+    "feature-scope",
+    "bugfix-repro"
+  ],
+  "budgets": {
+    "max_tokens": 6000,
+    "notes": "S-core is ~2k tokens, overlay is ~1k, leaves ~3k for protocol modules"
+  },
+  "notes": {
+    "usage": "Use for discovery sessions where you need behavioral constraints but not full documentation",
+    "variants": "Create .m and .l variants by swapping context_packs to s-meta or all.s"
+  }
+}
