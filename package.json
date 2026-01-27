@@ -26,6 +26,7 @@
     "book": "node infra/scripts/export-book.js",
     "packs": "node infra/scripts/compile-s-pack.js",
     "packs:flat": "node infra/scripts/compile-flat-packs.js",
+    "packs:recipe": "node infra/scripts/compile-recipe.js",
     "prepare": "husky"
   },
   "dependencies": {
