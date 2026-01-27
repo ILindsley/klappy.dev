@@ -39,6 +39,10 @@ Reconstructions are fallible, interpretive, and allowed to diverge.
 - **The Last Commit (Reconstruction)**  
   → `apocrypha/reconstructions/fragment-02-recon.md`
 
+### Fragment III
+- **Nothing Exceeded the Threshold (Reconstruction)**  
+  → `apocrypha/reconstructions/fragment-03-recon.md`
+
 ---
 
 ## Notes

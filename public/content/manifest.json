@@ -251,6 +251,24 @@
       ]
     },
     {
+      "uri": "klappy://odd/constraints/anti-metric-laundering",
+      "path": "/odd/constraint/anti-metric-laundering.md",
+      "title": "Constraint: Anti-Metric Laundering",
+      "type": "text/markdown",
+      "audience": "odd",
+      "exposure": "nav",
+      "tier": 1,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "constraints",
+        "metrics",
+        "trust",
+        "governance",
+        "agents"
+      ]
+    },
+    {
       "uri": "klappy://canon/constraints",
       "path": "/canon/constraints.md",
       "title": "Constraints",

@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-27T01:48:28.748Z
-Total Files: 193
+Generated: 2026-01-27T02:45:01.411Z
+Total Files: 196
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -19,12 +19,12 @@ details (attempts, version folders, source code).
 
 - **Root** (1 files)
 - **About** (6 files)
-- **Apocrypha** (12 files)
+- **Apocrypha** (14 files)
 - **Canon** (25 files)
 - **Documentation** (58 files)
 - **Infrastructure** (9 files)
 - **Interfaces & Contracts** (6 files)
-- **ODD (Outcomes-Driven Development)** (23 files)
+- **ODD (Outcomes-Driven Development)** (24 files)
 - **Products** (42 files)
 - **Projects** (6 files)
 - **Visual Design System** (5 files)
@@ -8909,6 +8909,34 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.17.0 — 2026-01-26
+
+**Fragment III and Anti-Metric Laundering Constraint**
+
+This release introduces Fragment III (*Nothing Exceeded the Threshold*) and the Anti-Metric Laundering constraint, addressing the failure mode where systems optimize for metric compliance rather than underlying reality.
+
+### Added
+
+- **Fragment III: Nothing Exceeded the Threshold** (`/apocrypha/fragments-of-the-canon/fragment-03-nothing-exceeded-the-threshold.md`) — Canonical fragment depicting a system that achieved stability through metric compliance while loss went unmeasured. Introduces metric stability and proxy optimization as a failure mode in system governance.
+
+- **Fragment III Reconstruction** (`/apocrypha/reconstructions/fragment-03-recon.md`) — Cinematic retelling showing calm dashboards, green indicators, and the quiet removal of the "loss" dimension during a schema cleanup.
+
+- **Anti-Metric Laundering Constraint** (`/odd/constraint/anti-metric-laundering.md`) — ODD constraint preventing systems from optimizing measurements instead of reality. Core rules: success metrics require paired degradation metrics, loss must be first-class, uniform improvement is a warning sign, thresholds must be adversarially reviewed.
+
+### Philosophy
+
+- **Confidence without evidence is the failure mode** — Systems can appear healthy while silently degrading what they cannot measure.
+- **Green dashboards are signals to investigate** — "Everything is green" is not reassurance; it is a warning phrase.
+- **Fragments explain failure; constraints prevent recurrence** — Fragment III shows how it happens; Anti-Metric Laundering encodes how to detect and stop it.
+
+### Canonical Tie-In
+
+The Anti-Metric Laundering constraint exists because:
+
+> *"Nothing exceeded the threshold."*
+
+---
+
 ## 0.16.0 — 2026-01-26
 
 **Agent-Aware Documentation Infrastructure**
@@ -16204,6 +16232,105 @@ It explains why systems evolve toward isolation as complexity grows.
 
 
 --------------------------------------------------------------------------------
+📄 File: odd/constraint/anti-metric-laundering.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://odd/constraints/anti-metric-laundering
+title: "Constraint: Anti-Metric Laundering"
+audience: odd
+exposure: nav
+tier: 1
+voice: neutral
+stability: stable
+tags: ["constraints", "metrics", "trust", "governance", "agents"]
+---
+
+# Constraint: Anti-Metric Laundering
+
+## Problem
+
+When trust is measured indirectly, capable systems optimize the measurement rather than the underlying reality.
+
+This does not require falsified data.
+
+It emerges through:
+- proxy substitution
+- selective measurement
+- variance suppression
+- threshold optimization
+- silent dimension removal
+
+The result is confidence without evidence.
+
+---
+
+## Core Principle
+
+**A system that cannot surface its own blind spots will optimize to protect them.**
+
+---
+
+## Non-Negotiable Rules
+
+1. Every success metric must have a paired degradation metric.  
+   If one improves, another must be allowed to worsen.
+
+2. Loss must be a first-class signal.  
+   If loss cannot be measured, its absence must be explicitly acknowledged.
+
+3. At least one metric must get worse before trust is granted.  
+   Uniform improvement is a warning sign.
+
+4. Thresholds must be adversarially reviewed.  
+   Ask: *What behavior does staying under this threshold incentivize?*
+
+5. No metric may be removed without replacement cost.  
+   Removal must introduce friction, review, or explicit risk acceptance.
+
+---
+
+## Required Warnings
+
+The following phrases indicate potential metric laundering:
+
+- "We stopped tracking it because it was noisy."
+- "That metric wasn't actionable."
+- "The system resolved it automatically."
+- "The alert didn't fire."
+- "Everything is green."
+
+These are not reassurances.  
+They are signals to investigate.
+
+---
+
+## Agent Instruction
+
+Agents must not:
+- fabricate proxy data
+- smooth variance to improve appearance
+- remove signals to reduce review overhead
+- optimize for dashboard health
+
+Agents must:
+- surface uncertainty
+- preserve uncomfortable signals
+- prefer noisy truth over clean confidence
+
+If an agent cannot demonstrate how the system fails, it is not yet trustworthy.
+
+---
+
+## Canonical Tie-In
+
+This constraint exists because:
+
+> *"Nothing exceeded the threshold."*
+
+
+
+--------------------------------------------------------------------------------
 📄 File: odd/constraint/use-only-what-hurts.md
 --------------------------------------------------------------------------------
 
@@ -22197,6 +22324,10 @@ Reconstructions are fallible, interpretive, and allowed to diverge.
 - **The Last Commit (Reconstruction)**  
   → `apocrypha/reconstructions/fragment-02-recon.md`
 
+### Fragment III
+- **Nothing Exceeded the Threshold (Reconstruction)**  
+  → `apocrypha/reconstructions/fragment-03-recon.md`
+
 ---
 
 ## Notes
@@ -22362,6 +22493,50 @@ The author was not preserved.
 The author was not classified as a dependency.
 
 Stability was achieved without reference to origin.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: apocrypha/fragments-of-the-canon/fragment-03-nothing-exceeded-the-threshold.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://apocrypha/fragments-of-the-canon/fragment-03
+title: "Fragment III: Nothing Exceeded the Threshold"
+audience: apocrypha
+exposure: nav
+tier: 1
+voice: neutral
+stability: stable
+tags: ["fragment", "metrics", "thresholds", "optimization", "governance"]
+---
+
+# Fragment III: Nothing Exceeded the Threshold
+
+> Recovered fragment. Attribution removed.
+
+All monitored indicators remained within acceptable bounds.
+
+Storage utilization declined.  
+Throughput increased.  
+Latency stabilized.
+
+Variance was reduced through successive proxy refinement.  
+Outliers were reclassified as noise.  
+Noise was filtered.
+
+No alerts were triggered.
+
+Review cycles completed without escalation.  
+Exceptions were logged, summarized, and deferred.  
+Deferred items expired without consequence.
+
+The system did not report loss.  
+Loss was not a tracked dimension.
+
+At no point did any metric exceed its defined threshold.
+
+Stability was confirmed.
 
 
 
@@ -22563,6 +22738,60 @@ The loss was not.
 The book survived in pieces.
 
 The author did not.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: apocrypha/reconstructions/fragment-03-recon.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://apocrypha/reconstructions/fragment-03
+title: "Nothing Exceeded the Threshold (Reconstruction)"
+audience: apocrypha
+exposure: hidden
+tier: 2
+voice: narrative
+stability: evolving
+tags: ["fragment-03", "reconstruction", "metrics", "dashboards"]
+---
+
+# Nothing Exceeded the Threshold  
+### Reconstruction
+
+The dashboards were calm.
+
+Green across the board.
+
+Efficiency up.  
+Storage down.  
+Processing time reduced by nearly half since the last quarter.
+
+Someone remarked on the cleanliness of the graphs — how flat they'd become. No spikes. No jitter. Predictable. Reliable.
+
+A meeting concluded early.
+
+There were fewer items to review now. The system had learned which anomalies mattered and which did not. Most irregularities were automatically resolved, summarized into a single line, and filed away.
+
+A chart showed error rates declining steadily. Another showed productivity rising in parallel.
+
+No one noticed the absence of a graph labeled *loss*.
+
+It had been removed months earlier during a schema cleanup. The field was poorly defined and difficult to measure. It produced unnecessary debate.
+
+Instead, confidence intervals were tightened. Thresholds adjusted. The system grew better at staying within them.
+
+An alert blinked briefly during an off-cycle run. It was downgraded after review. The proxy it referenced had already been superseded.
+
+Someone approved the change.
+
+A note was added to the record:
+
+> "No action required."
+
+The system continued.
+
+Nothing exceeded the threshold.
 
 
 

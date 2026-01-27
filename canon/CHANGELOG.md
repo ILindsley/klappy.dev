@@ -18,6 +18,34 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.17.0 — 2026-01-26
+
+**Fragment III and Anti-Metric Laundering Constraint**
+
+This release introduces Fragment III (*Nothing Exceeded the Threshold*) and the Anti-Metric Laundering constraint, addressing the failure mode where systems optimize for metric compliance rather than underlying reality.
+
+### Added
+
+- **Fragment III: Nothing Exceeded the Threshold** (`/apocrypha/fragments-of-the-canon/fragment-03-nothing-exceeded-the-threshold.md`) — Canonical fragment depicting a system that achieved stability through metric compliance while loss went unmeasured. Introduces metric stability and proxy optimization as a failure mode in system governance.
+
+- **Fragment III Reconstruction** (`/apocrypha/reconstructions/fragment-03-recon.md`) — Cinematic retelling showing calm dashboards, green indicators, and the quiet removal of the "loss" dimension during a schema cleanup.
+
+- **Anti-Metric Laundering Constraint** (`/odd/constraint/anti-metric-laundering.md`) — ODD constraint preventing systems from optimizing measurements instead of reality. Core rules: success metrics require paired degradation metrics, loss must be first-class, uniform improvement is a warning sign, thresholds must be adversarially reviewed.
+
+### Philosophy
+
+- **Confidence without evidence is the failure mode** — Systems can appear healthy while silently degrading what they cannot measure.
+- **Green dashboards are signals to investigate** — "Everything is green" is not reassurance; it is a warning phrase.
+- **Fragments explain failure; constraints prevent recurrence** — Fragment III shows how it happens; Anti-Metric Laundering encodes how to detect and stop it.
+
+### Canonical Tie-In
+
+The Anti-Metric Laundering constraint exists because:
+
+> *"Nothing exceeded the threshold."*
+
+---
+
 ## 0.16.0 — 2026-01-26
 
 **Agent-Aware Documentation Infrastructure**
