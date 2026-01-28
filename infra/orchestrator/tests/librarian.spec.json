@@ -1,0 +1,105 @@
+[
+  {
+    "name": "Visual proof rule lookup",
+    "query": "Where is the rule about visual proof?",
+    "expect_status": "SUPPORTED",
+    "expect_sources_include": ["canon/visual-proof.md"],
+    "expect_heading_contains": "Operating Constraints",
+    "expect_authority_band": "governing",
+    "min_quote_overlap": 1,
+    "notes": "Should return governing doc with constraint section"
+  },
+  {
+    "name": "Definition of Done lookup",
+    "query": "What is the definition of done?",
+    "expect_status": "SUPPORTED",
+    "expect_sources_include": ["canon/definition-of-done.md"],
+    "expect_heading_contains": "Definition",
+    "expect_authority_band": "governing",
+    "min_quote_overlap": 1,
+    "notes": "Should return canon doc for DoD"
+  },
+  {
+    "name": "ODD citation requirements",
+    "query": "What does ODD say about citation requirements?",
+    "expect_status": "SUPPORTED",
+    "expect_sources_include": [],
+    "expect_authority_band_any": ["governing", "operational"],
+    "min_quote_overlap": 0,
+    "require_governing_if_policy": true,
+    "notes": "Policy question - should prefer governing docs. Quote overlap relaxed because answer may not contain query words literally."
+  },
+  {
+    "name": "Librarian trusted sources lookup",
+    "query": "What are the trusted sources for the Librarian?",
+    "expect_status": "SUPPORTED",
+    "expect_sources_include": ["docs/agents/librarian"],
+    "expect_authority_band_any": ["governing", "operational"],
+    "min_quote_overlap": 0,
+    "notes": "Query specifically about Librarian trusted sources"
+  },
+  {
+    "name": "Nonsense query still finds something",
+    "query": "What is the frumplewiggit protocol for zazzle integration?",
+    "expect_status": "SUPPORTED",
+    "expect_authority_band_any": ["governing", "operational", "non-governing"],
+    "min_quote_overlap": 0,
+    "notes": "Known limitation: nonsense queries with common words (what, is) may still find matches. This test verifies the system doesn't crash and returns valid structure."
+  },
+  {
+    "name": "Constraint keyword triggers governing-first",
+    "query": "What is the constraint about metrics?",
+    "expect_status": "SUPPORTED",
+    "expect_authority_band": "governing",
+    "require_governing_if_policy": true,
+    "policy_keywords": ["constraint"],
+    "min_quote_overlap": 0,
+    "notes": "Constraint keyword should prioritize governing docs. Quote overlap relaxed because answer may be conceptual."
+  },
+  {
+    "name": "Authority band question",
+    "query": "What are authority bands?",
+    "expect_status": "SUPPORTED",
+    "expect_sources_include": [],
+    "expect_authority_band_any": ["governing", "operational"],
+    "min_quote_overlap": 0,
+    "notes": "Should find explanation of authority bands"
+  },
+  {
+    "name": "How to create PRD (not lookup)",
+    "query": "How do I create a new PRD?",
+    "expect_status": "SUPPORTED",
+    "expect_sources_include": [],
+    "expect_authority_band_any": ["governing", "operational"],
+    "min_quote_overlap": 0,
+    "notes": "How-to question - may return operational or governing docs about PRDs"
+  },
+  {
+    "name": "ODD manifesto lookup",
+    "query": "What does the ODD manifesto say?",
+    "expect_status": "SUPPORTED",
+    "expect_sources_include": ["odd/manifesto.md"],
+    "expect_authority_band": "governing",
+    "min_quote_overlap": 1,
+    "notes": "Direct reference to manifesto - should have manifesto keywords in quote"
+  },
+  {
+    "name": "Verification requirements lookup",
+    "query": "What are the verification requirements?",
+    "expect_status": "SUPPORTED",
+    "expect_sources_include": [],
+    "expect_heading_contains": "Verification",
+    "expect_authority_band_any": ["governing", "operational"],
+    "min_quote_overlap": 0,
+    "notes": "Should find verification section (not evidence, which is more specific)"
+  },
+  {
+    "name": "Metric laundering question",
+    "query": "What is metric laundering?",
+    "expect_status": "SUPPORTED",
+    "expect_sources_include": ["odd/constraint/anti-metric-laundering.md"],
+    "expect_authority_band": "governing",
+    "min_quote_overlap": 1,
+    "notes": "Direct concept question - quote should contain metric or laundering"
+  }
+]

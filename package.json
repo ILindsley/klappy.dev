@@ -27,6 +27,9 @@
     "packs": "node infra/scripts/compile-s-pack.js",
     "packs:flat": "node infra/scripts/compile-flat-packs.js",
     "packs:recipe": "node infra/scripts/compile-recipe.js",
+    "docs:index": "node infra/scripts/build-docs-index.js",
+    "orchestrator:dry": "node infra/orchestrator/run/handle-message.js",
+    "orchestrator:test": "node infra/orchestrator/tests/run-tests.js",
     "discovery": "node infra/runners/run-recipe-pack.js --id prd-discovery.s",
     "prepare": "husky"
   },
