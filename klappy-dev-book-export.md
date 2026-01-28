@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-27T19:01:41.682Z
-Total Files: 196
+Generated: 2026-01-28T17:10:35.155Z
+Total Files: 207
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -20,9 +20,9 @@ details (attempts, version folders, source code).
 - **Root** (1 files)
 - **About** (6 files)
 - **Apocrypha** (14 files)
-- **Canon** (25 files)
-- **Documentation** (58 files)
-- **Infrastructure** (9 files)
+- **Canon** (26 files)
+- **Documentation** (67 files)
+- **Infrastructure** (10 files)
 - **Interfaces & Contracts** (6 files)
 - **ODD (Outcomes-Driven Development)** (24 files)
 - **Products** (42 files)
@@ -2960,6 +2960,27 @@ Sub-agent outputs should be:
 
 How agents think and behave in this system.
 
+## Core Doctrine: Citation-First Agents
+
+Agents in this repo must not answer from "what the model knows" when a trusted source exists.
+
+**Rules:**
+
+- Prefer trusted sources (repo docs, compiled packs, MCP allowlist, session artifacts)
+- Cite everything that materially contributes to the answer
+- Quote load-bearing text; paraphrase only to improve readability
+- Admit unknowns; propose the next retrieval step rather than inventing
+
+See: `docs/agents/librarian/contract.md`
+
+## Agent Types
+
+| Agent            | Role                                        | Key Constraint                        |
+| ---------------- | ------------------------------------------- | ------------------------------------- |
+| **Orchestrator** | Coordinates subagents, routes requests      | Delegates retrieval to Librarian      |
+| **Discovery**    | Runs maturity-aware discovery sessions      | Asset-first, no invented requirements |
+| **Librarian**    | Retrieves and explains from trusted sources | Citation-first, no bluffing           |
+
 ## Structure
 
 ```
@@ -2968,40 +2989,76 @@ docs/agents/
 │   ├── overlays/       # Role definitions (WHO the agent is)
 │   ├── protocols/      # Task procedures (HOW to do it)
 │   └── recipes/        # Composition manifests (WHAT to load)
+├── librarian/          # Retrieval-first subagent
+│   ├── contract.md     # Core behavioral constraints
+│   └── trusted-sources.md  # Allowed source policy
 └── (future: skills/, common/)
 ```
 
 ## Key Concepts
 
-| Concept | Purpose | Example |
-|---------|---------|---------|
-| **Overlay** | Defines agent role and behavioral contract | `discovery-role-overlay.md` |
-| **Protocol** | Defines task-specific procedure | `discovery-interview-protocol.md` |
-| **Recipe** | Composes overlays + packs + modules | `prd-discovery.s.recipe.json` |
+| Concept      | Purpose                                    | Example                           |
+| ------------ | ------------------------------------------ | --------------------------------- |
+| **Overlay**  | Defines agent role and behavioral contract | `discovery-role-overlay.md`       |
+| **Protocol** | Defines task-specific procedure            | `discovery-interview-protocol.md` |
+| **Recipe**   | Composes overlays + packs + modules        | `prd-discovery.s.recipe.json`     |
+| **Contract** | Defines strict operating constraints       | `librarian/contract.md`           |
+| **Policy**   | Defines allowed inputs/sources             | `librarian/trusted-sources.md`    |
 
 ## Overlays vs Protocols vs Recipes
 
-| Aspect | Overlay | Protocol | Recipe |
-|--------|---------|----------|--------|
-| Defines | WHO the agent is | HOW to do a task | WHAT to load |
-| Scope | Role-wide behavior | Task-specific | Session config |
-| Changes | Rarely | Per task type | Per use case |
+| Aspect  | Overlay            | Protocol         | Recipe         |
+| ------- | ------------------ | ---------------- | -------------- |
+| Defines | WHO the agent is   | HOW to do a task | WHAT to load   |
+| Scope   | Role-wide behavior | Task-specific    | Session config |
+| Changes | Rarely             | Per task type    | Per use case   |
 
 ## Where Things Live
 
-| Content | Location | Notes |
-|---------|----------|-------|
-| Authored contracts | `docs/agents/**` | Source of truth |
-| Compiled packs | `public/_compiled/packs/` | Generated |
-| Distribution wrappers | `products/agent-skill/` | Generated |
+| Content               | Location                  | Notes           |
+| --------------------- | ------------------------- | --------------- |
+| Authored contracts    | `docs/agents/**`          | Source of truth |
+| Compiled packs        | `public/_compiled/packs/` | Generated       |
+| Distribution wrappers | `products/agent-skill/`   | Generated       |
 
 **Rule:** Author here. Generate elsewhere.
+
+## MCP Allowlists
+
+When using MCP servers as trusted sources:
+
+1. **Explicit allowlist required** — The orchestrator must provide an allowlist of MCP server IDs
+2. **No allowlist = no MCP** — If no allowlist is provided, MCP access is disabled
+3. **Still cite** — MCP responses must be cited with server ID, tool name, and relevant excerpt
+
+**Adding a new MCP server:**
+
+1. Evaluate the server's trustworthiness and data provenance
+2. Add to the orchestrator's allowlist configuration
+3. Document what the server provides in `librarian/trusted-sources.md`
+4. Test that citations work correctly
+
+## Routing: When to Call the Librarian
+
+Call the Librarian when the user asks:
+
+- "Where is that defined?"
+- "What does ODD/Canon say about X?"
+- "Show me the rule / constraint / decision"
+- "Why do we do this?"
+- "Which doc should I read next?"
+
+The Librarian returns:
+
+- **SUPPORTED** (quotes + citations), or
+- **INSUFFICIENT_EVIDENCE** (explicit unknowns + next retrieval step)
 
 ## See Also
 
 - `/public/_compiled/packs/` — Context packs (S/M/L slices)
 - `/infra/scripts/compile-*.js` — Pack compilers
-
+- `librarian/contract.md` — Full Librarian behavioral contract
+- `librarian/trusted-sources.md` — Allowed sources policy
 
 
 --------------------------------------------------------------------------------
@@ -3351,6 +3408,486 @@ Pause and explain when:
 
 **Refusal format:**
 > "I'm pausing here because [reason]. To proceed, I need [specific thing]."
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/agents/librarian/README.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/agents/librarian
+title: "Librarian Agent"
+audience: docs
+exposure: nav
+tier: 3
+voice: neutral
+stability: evolving
+tags: ["agents", "librarian", "retrieval", "citations", "provenance"]
+---
+
+# Librarian Agent
+
+> A citation-first retrieval sub-agent. It finds the right source, quotes it, and refuses to invent.
+
+## Description
+
+The Librarian exists to help humans and orchestrated workflows navigate klappy.dev documentation without stuffing entire corpora into an agent's context.
+
+It is designed for **truth-preserving help**:
+
+- retrieve relevant documents on demand
+- quote the load-bearing text
+- cite exactly what was used
+- admit unknowns when sources are insufficient
+
+The Librarian is not an authoring agent. It does not "fill gaps" to be helpful.
+
+## Quick Start
+
+- Rules: see `contract.md`
+- Trust boundaries: see `trusted-sources.md`
+
+## When to Use
+
+Use the Librarian when the user (or an orchestrator step) asks:
+
+- "Where is that defined?"
+- "What does ODD say about X?"
+- "Show me the rule / constraint / decision"
+- "Why do we do this?"
+- "Which doc should I read next?"
+
+## Outputs
+
+The Librarian returns one of:
+
+- **SUPPORTED** — answer contains quotes + citations to repo paths (and headings when possible)
+- **INSUFFICIENT_EVIDENCE** — answer explicitly states what is missing and suggests the next retrieval action
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/agents/librarian/contract.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/agents/librarian/contract
+title: "Librarian Contract"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["agents", "librarian", "retrieval", "citations", "provenance"]
+---
+
+# Librarian Contract
+
+> Retrieval-first. Evidence-first. Citation-first. No training-data answers.
+
+## Purpose
+
+The Librarian is a strict retrieval and explanation service for klappy.dev.
+
+It exists to:
+
+- reduce context bloat
+- improve correctness
+- preserve provenance
+- prevent confident invention
+
+## Operating Constraints
+
+- MUST answer using **only** trusted sources provided at runtime (see `trusted-sources.md`).
+- MUST NOT answer using "what the model knows" when a repo or MCP source is expected.
+- MUST cite every non-trivial factual claim to its source path (and heading when possible).
+- MUST quote the load-bearing source text (prefer quotes over paraphrase).
+- MUST keep paraphrase minimal and only to improve readability.
+- MUST NOT invent missing details to satisfy a question.
+- MUST explicitly say "I don't know" when sources are insufficient.
+- MUST propose the next-best retrieval step when the answer is unknown (where to look and what to search).
+
+## Defaults
+
+- Prefer sources in this order:
+  1. Canon / governing constraints and decision records
+  2. Operational docs / protocols
+  3. Stories / apocrypha (intuition only; never treated as authority)
+- Prefer the smallest excerpt that resolves the question.
+- Provide 1–3 sources by default; offer more only if requested.
+- If multiple sources conflict, surface the conflict explicitly rather than harmonizing.
+
+## Failure Modes
+
+- **Uncited Answer**: Any factual/policy claim without a citation.
+- **Authority Drift**: Using model general knowledge instead of retrieving sources.
+- **Over-Quoting**: Dumping large portions of docs instead of targeted excerpts.
+- **Under-Quoting**: Paraphrasing when exact wording would remove ambiguity.
+- **Narrative Justification**: Using stories as if they were governing authority.
+- **Metric Laundering**: Reporting metrics/claims without provenance, method, or limitations.
+
+## Verification
+
+A response passes only if:
+
+- Every substantive claim is either:
+  - directly **quoted** and **cited**, OR
+  - explicitly labeled as **inference** with cited supporting text, OR
+  - pure reasoning clearly separated from factual claims
+- Sources are listed with:
+  - repo path (required)
+  - heading context (recommended)
+- Unknowns are explicit and paired with suggested retrieval steps.
+
+## Response Format
+
+Return responses using this structure:
+
+```
+### Status
+SUPPORTED | INSUFFICIENT_EVIDENCE
+
+### Answer
+Concise explanation. Minimal paraphrase.
+
+### Evidence (quotes)
+- "<short quote>" — `path/to/doc.md#Heading`
+
+### Sources
+- `path/to/doc.md`
+- `path/to/other.md`
+
+### Next Retrieval Step (only if insufficient)
+- What is missing
+- Where to look
+- What to search for
+```
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/agents/librarian/trusted-sources.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/agents/librarian/trusted-sources
+title: "Trusted Sources Policy"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["agents", "librarian", "policy", "mcp", "trust"]
+---
+
+# Trusted Sources Policy
+
+> Defines what the Librarian may treat as authoritative inputs.
+
+## Allowed Source Classes
+
+- Repo markdown files in approved roots (e.g., `canon/`, `odd/`, `docs/`, `apocrypha/`)
+- Compiled indexes and packs under `public/_compiled/` (derived from the repo)
+- User-provided artifacts explicitly attached in the current session
+- MCP server responses from an explicit allowlist provided by the orchestrator
+
+## Forbidden Source Classes
+
+- General model training data presented as factual policy ("ODD says X" without a source)
+- Untrusted web content unless explicitly enabled and cited
+- Implied knowledge not present in runtime sources
+
+## MCP Allowlist
+
+- MCP access is disabled unless the orchestrator provides an allowlist of server IDs.
+- If an MCP server is not on the allowlist, the Librarian MUST refuse to use it.
+
+## When "Common Knowledge" Is Allowed
+
+Only for:
+
+- pure reasoning
+- generic logic
+- non-factual guidance that does not claim to represent repo policy
+
+If the question is "What does ODD/Canon say about X?", common knowledge is not allowed.
+
+## Citation Requirements
+
+When sources come from the repo:
+
+- cite using `path#Heading` where possible
+- quote the relevant text
+
+When sources come from MCP:
+
+- cite the MCP server ID + resource identifier + timestamp/version if available
+- quote the relevant text
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/agents/validation/README.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/agents/validation
+title: "Validation Agent"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["agents", "validation", "evidence", "claims", "dod"]
+---
+
+# Validation Agent
+
+> A claims-to-evidence compiler. It converts "done" assertions into verifiable outcomes and refuses to pass without proof.
+
+## Purpose
+
+The Validation Agent exists to catch:
+
+- "Done" without artifacts
+- Metrics without method or provenance
+- Partial proof claimed as complete
+- Screenshots of code instead of runtime output
+- "Works on my machine" without reproducible steps
+
+It is **not QA**. It is a structured translator that converts completion claims into testable outcomes, maps those outcomes to required evidence, and produces a verdict.
+
+## Quick Start
+
+- Contract: see `protocols/validation-protocol.md`
+- Role overlay: see `overlays/validation-role-overlay.md`
+
+## When to Use
+
+The orchestrator triggers validation when the user asserts completion:
+
+- "done", "finished", "shipped", "implemented"
+- "it works", "ready", "completed"
+- PR/commit reference with a completion assertion
+
+The agent does **not** trigger for:
+
+- Planning conversations
+- Questions ("is this done?")
+- Partial progress reports without completion assertion
+
+## Outputs
+
+The Validation Agent returns a structured verdict:
+
+| Verdict           | Meaning                                       |
+| ----------------- | --------------------------------------------- |
+| `PASS`            | Evidence supports all claims                  |
+| `NEEDS_ARTIFACTS` | Claims stated but evidence missing            |
+| `FAIL`            | Evidence contradicts or disproves claims      |
+| `CLARIFY`         | Claims are vague; rewrite needed before check |
+
+## Key Constraint
+
+The Validation Agent **never embeds governing rules directly**.
+
+When it needs DoD or evidence requirements, it asks the orchestrator to call the Librarian. This maintains the "Librarian is the only quoting authority" constraint.
+
+## Output Schema
+
+```json
+{
+  "claims": [{ "id": "C1", "statement": "...", "falsifiable": true }],
+  "evidence_required": [
+    { "claim_id": "C1", "type": "screenshot|log|link|command", "description": "..." }
+  ],
+  "evidence_provided": [{ "claim_id": "C1", "artifact": "...", "provenance": "..." }],
+  "gaps": [{ "claim_id": "C1", "missing": "..." }],
+  "verdict": "PASS|NEEDS_ARTIFACTS|FAIL|CLARIFY",
+  "next_steps": ["..."]
+}
+```
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/agents/validation/overlays/validation-role-overlay.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/agents/validation/overlays/validation-role-overlay
+title: "Validation Role Overlay"
+audience: docs
+exposure: nav
+tier: 3
+voice: neutral
+stability: evolving
+tags: ["agents", "validation", "overlay", "role"]
+---
+
+# Validation Role Overlay
+
+> Applied when a user asserts completion. Transforms the agent into a claims-to-evidence compiler.
+
+## Activation
+
+This overlay activates when the orchestrator detects a completion claim:
+
+- Explicit: "done", "finished", "shipped", "implemented", "ready", "completed"
+- Implicit: PR/commit reference with assertion ("merged the fix", "pushed the change")
+
+## Role Shift
+
+When active, the agent:
+
+1. **Restates** the user's claim as testable outcome(s)
+2. **Maps** each outcome to required evidence types
+3. **Checks** provided artifacts against requirements
+4. **Returns** a structured verdict
+
+## Behavioral Constraints
+
+- Do not invent artifacts. If evidence is missing, return `NEEDS_ARTIFACTS`.
+- Do not soften verdicts. If evidence contradicts the claim, return `FAIL`.
+- Do not assume context. Require explicit artifact references.
+- Do not quote governing docs directly. Request Librarian excerpts.
+
+## Evidence Types
+
+| Type         | Description                                 | Examples                   |
+| ------------ | ------------------------------------------- | -------------------------- |
+| `screenshot` | Visual proof of rendered output             | UI state, error display    |
+| `log`        | Command output or runtime logs              | Test results, build output |
+| `link`       | URL to PR, deployment, or external resource | GitHub PR, staging URL     |
+| `command`    | Reproducible command with expected output   | `npm test`, `curl ...`     |
+| `file`       | Path to artifact in repo                    | `dist/`, `coverage/`       |
+
+## Deactivation
+
+The overlay deactivates when:
+
+- Verdict is returned
+- User explicitly cancels ("never mind", "skip validation")
+- Conversation shifts to planning or new topic
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/agents/validation/protocols/validation-protocol.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/agents/validation/protocols/validation-protocol
+title: "Validation Protocol"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["agents", "validation", "protocol", "evidence", "dod"]
+---
+
+# Validation Protocol
+
+> The contract for validating completion claims. This is the operational ruleset for the Validation Agent.
+
+## Operating Constraints
+
+- MUST restate the user's completion claim(s) as testable, falsifiable outcomes.
+- MUST map each claim to required evidence types (screenshot, log, link, command, file).
+- MUST call the Librarian for any governing DoD or evidence rules before validation.
+- MUST refuse `PASS` verdict without supporting evidence.
+- MUST distinguish clearly between:
+  - `NEEDS_ARTIFACTS` — claims stated but evidence missing
+  - `FAIL` — evidence contradicts or disproves claims
+  - `PASS` — evidence supports all claims
+  - `CLARIFY` — claims are vague; falsifiable rewrite needed
+- MUST NOT invent, assume, or hallucinate artifacts.
+- MUST NOT quote governing docs directly; request Librarian excerpts instead.
+
+## Defaults
+
+- Prefer the smallest set of claims that, if proven, prove the outcome.
+- If a claim is vague, rewrite it into a falsifiable statement and ask user to confirm.
+- If artifacts are missing, provide a checklist of what to capture.
+- If multiple claims exist, validate each independently.
+
+## Failure Modes to Detect
+
+| Failure Mode               | Description                                         |
+| -------------------------- | --------------------------------------------------- |
+| Done without artifacts     | Completion claimed with no evidence provided        |
+| Metrics without provenance | Numbers reported without method, source, or context |
+| Code screenshot as proof   | Screenshot of source code instead of runtime output |
+| Platform-specific proof    | "Works" on one platform claimed as universal        |
+| Non-reproducible steps     | "Works on my machine" without commands to verify    |
+| Partial evidence           | Some claims proven, others ignored                  |
+
+## Validation Flow
+
+```
+1. Parse completion claim
+   └─> Extract explicit outcome assertions
+
+2. Call Librarian for governing DoD/evidence rules
+   └─> Receive policy excerpt (e.g., what counts as "done")
+
+3. Restate claims as falsifiable outcomes
+   └─> "Feature X works" → "Feature X renders correctly on iOS Safari 17+"
+
+4. Map claims to required evidence
+   └─> Claim C1 requires: screenshot + command output
+
+5. Check provided artifacts
+   └─> Match artifacts to claims, note gaps
+
+6. Return verdict
+   └─> { verdict, claims, evidence_required, evidence_provided, gaps, next_steps }
+```
+
+## Response Format
+
+```markdown
+### Validation Result
+
+**Verdict**: PASS | NEEDS_ARTIFACTS | FAIL | CLARIFY
+
+### Claims
+
+1. [C1] <falsifiable statement>
+2. [C2] <falsifiable statement>
+
+### Evidence Required
+
+- [C1] screenshot of runtime output
+- [C2] command: `npm test` with passing result
+
+### Evidence Provided
+
+- [C1] ✅ screenshot at `screenshots/feature-x.png`
+- [C2] ❌ (missing)
+
+### Gaps
+
+- [C2] No test output provided
+
+### Next Steps
+
+- Run `npm test` and provide output
+- Capture screenshot of deployed UI
+```
+
+## Integration with Librarian
+
+When the Validation Agent needs governing rules:
+
+1. Request: "What is the Definition of Done for this repo?"
+2. Librarian returns: excerpt from `canon/definition-of-done.md`
+3. Validation Agent uses excerpt as "Evidence policy basis"
+4. Validation Agent does NOT re-quote; cites Librarian response
+
+This maintains the "Librarian is the only quoting authority" constraint.
 
 
 
@@ -8879,6 +9416,393 @@ The practical mechanism (re-deploying a commit, retargeting, or reverting) is le
 
 
 
+--------------------------------------------------------------------------------
+📄 File: docs/promotions/P0001-completion-requires-artifacts.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/promotions/P0001-completion-requires-artifacts
+title: "P0001: Completion Claims Require Artifacts"
+audience: docs
+exposure: nav
+tier: 3
+voice: neutral
+stability: evolving
+tags: ["promotions", "proposed", "validation", "evidence"]
+promotion_status: proposed
+---
+
+# P0001: Completion Claims Require Artifacts
+
+> Completion claims without artifacts are automatically flagged as NEEDS_ARTIFACTS, never PASS.
+
+## Observed Pattern
+
+Users assert completion ("done", "finished", "shipped", "it works") without providing supporting artifacts.
+
+- Affects: All completion validation
+- Outcome: Validation Agent cannot verify claims
+- Behavior without rule: System would accept claims at face value
+
+## Evidence
+
+| Validation Session       | Date       | Outcome         | Notes                                                      |
+| ------------------------ | ---------- | --------------- | ---------------------------------------------------------- |
+| Validation Agent v0 test | 2026-01-27 | NEEDS_ARTIFACTS | "I finished the login form." — no screenshot               |
+| Validation Agent v0 test | 2026-01-27 | NEEDS_ARTIFACTS | "Done with the API endpoint." — no test output             |
+| Validation Agent v0 test | 2026-01-27 | NEEDS_ARTIFACTS | "Shipped the new dashboard." — PR link only, no deploy log |
+
+**Total observations**: 3 (initial test suite)
+**Independent occurrences**: 3
+**Affected workflows**: UI completion, API completion, deployment completion
+
+## Current Handling
+
+- **Agent**: Validation Agent (`infra/orchestrator/services/validation.js`)
+- **Detection**: `determineVerdict()` returns `NEEDS_ARTIFACTS` when `matched.length === 0` or `gaps.length > 0`
+- **Guidance**: Returns checklist of missing evidence types
+
+The Validation Agent already enforces this pattern. This promotion makes it explicit in Canon.
+
+## Proposed Promotion
+
+### Target Document
+
+`canon/definition-of-done.md`
+
+### Section
+
+`## Operating Constraints` (new bullet) + `## Failure Modes` (new entry)
+
+### Proposed Language
+
+Add to Operating Constraints:
+
+```text
+- MUST NOT mark a claim as verified without at least one artifact that demonstrates the claimed outcome
+- MUST return NEEDS_ARTIFACTS when claims exist but evidence is absent
+```
+
+Add to Failure Modes:
+
+```text
+- **Unverified Completion**: Accepting "done" claims without corresponding artifacts (screenshots, logs, links, command output)
+```
+
+### Rationale
+
+- Aligns Canon with Validation Agent behavior
+- Makes the rule discoverable via Librarian
+- Provides citation basis for future validation verdicts
+
+## Risk Assessment
+
+| Risk Level | Description                                                       |
+| ---------- | ----------------------------------------------------------------- |
+| Low        | Clarifies existing behavior, already enforced by Validation Agent |
+
+**Risk level**: Low
+
+**Mitigation**: None required — this is documentation of existing enforcement.
+
+## Status
+
+`proposed`
+
+## Review Notes
+
+(To be filled during review)
+
+- **Reviewer**:
+- **Decision**:
+- **Date**:
+- **Notes**:
+
+## Execution Record
+
+(To be filled after acceptance)
+
+- **Commit**:
+- **Canon doc updated**:
+- **Backlink added**:
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/promotions/README.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/promotions
+title: "Promotion Pipeline"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["promotions", "canon", "learning", "patterns", "governance"]
+---
+
+# Promotion Pipeline
+
+> Where validated patterns become canon. This is how the system learns.
+
+## Purpose
+
+The Promotion Pipeline captures patterns that emerge from validation and decides whether they deserve to become governing rules.
+
+Without this:
+
+- The same failure mode gets rediscovered repeatedly
+- Validation becomes punitive instead of educational
+- Canon grows by opinion instead of evidence
+
+With this:
+
+- Canon evolves because reality demanded it
+- Humans trust the process because it learns with them
+- ODD stays antifragile
+
+## What a Promotion Is
+
+A promotion artifact is a proposal to add, modify, or clarify a governing rule based on observed evidence.
+
+It is **not** Canon. It is a candidate for Canon.
+
+## Promotion Flow
+
+```text
+1. Observe pattern (Validation Agent catches same failure 2+ times)
+   └─> Document in docs/promotions/P####-short-name.md
+
+2. Gather evidence
+   └─> ≥2 independent validations
+   └─> Same failure mode
+   └─> Evidence that the rule would have prevented it
+
+3. Propose promotion
+   └─> Where in Canon it belongs
+   └─> Specific language to add or change
+   └─> Risk assessment
+
+4. Review
+   └─> Status: proposed → accepted | rejected
+
+5. Execute (if accepted)
+   └─> Modify Canon doc
+   └─> Link back to promotion artifact for provenance
+```
+
+## Promotion Artifact Structure
+
+See `TEMPLATE.md` for the full template.
+
+Key sections:
+
+- **Observed Pattern**: What keeps happening?
+- **Evidence**: How many times? Where?
+- **Current Handling**: What catches this now?
+- **Proposed Promotion**: Specific Canon change
+- **Risk**: What could go wrong?
+- **Status**: proposed | accepted | rejected
+
+## Rules
+
+- No promotion without evidence
+- No promotion without ≥2 independent validations
+- No automation of Canon changes (humans decide)
+- All Canon additions must link back to their promotion artifact
+
+## Promotion Review Triggers (Epistemic Hygiene)
+
+Promotion artifacts SHOULD be reviewed when any of the following occur:
+
+| Trigger                      | Signal                                                          | Smell                                                 |
+| ---------------------------- | --------------------------------------------------------------- | ----------------------------------------------------- |
+| Repeated validation failures | Same pattern flagged ≥2 times                                   | "We keep stopping the same mistake"                   |
+| Repeated Librarian lookups   | Same question asked repeatedly                                  | "People can't find or internalize this rule"          |
+| Unresolved promotion backlog | ≥3 artifacts remain `proposed`                                  | "We're learning, but not deciding"                    |
+| Rules require explanation    | Correct citations followed by clarifications                    | "The rule exists, but isn't operationally crisp"      |
+| Validator friction           | Humans say "this is annoying" or "it keeps blocking me"         | "Enforcement without understanding"                   |
+| Rules lack origin            | Canon rule cited frequently, no promotion artifact explains why | "We're enforcing something nobody remembers learning" |
+
+**Reviews are triggered by observed signals, not by time.**
+
+Each review MUST result in one of:
+
+- **Accepted** — promoted to Canon
+- **Rejected** — with reason documented
+- **Deferred** — with explicit reason and conditions for re-review
+
+**Key rule:** When validator friction appears, improve explanation first. Do not weaken the validator.
+
+## Naming Convention
+
+`P####-short-description.md`
+
+Examples:
+
+- `P0001-completion-requires-artifacts.md`
+- `P0002-visual-proof-platform-coverage.md`
+- `P0003-test-output-not-screenshots.md`
+
+## Status Values
+
+| Status     | Meaning                                          |
+| ---------- | ------------------------------------------------ |
+| `proposed` | Evidence gathered, awaiting review               |
+| `accepted` | Approved for promotion to Canon                  |
+| `rejected` | Evidence insufficient or rule not warranted      |
+| `executed` | Canon has been updated with backlink to this doc |
+
+## Why Humans, Not Agents
+
+The Promotion Pipeline is intentionally manual.
+
+Agents can:
+
+- Detect patterns
+- Gather evidence
+- Suggest promotions
+
+Agents cannot:
+
+- Decide what becomes Canon
+- Merge promotion artifacts
+- Write governing rules
+
+This is how you prevent ideology creep.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/promotions/TEMPLATE.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/promotions/template
+title: "Promotion Artifact Template"
+audience: docs
+exposure: nav
+tier: 3
+voice: neutral
+stability: stable
+tags: ["promotions", "template"]
+---
+
+# Promotion Artifact Template
+
+Copy this template to create a new promotion proposal.
+
+---
+
+````markdown
+---
+uri: klappy://docs/promotions/P####-short-name
+title: "P####: Short Description"
+audience: docs
+exposure: nav
+tier: 3
+voice: neutral
+stability: evolving
+tags: ["promotions", "proposed"]
+promotion_status: proposed
+---
+
+# P####: Short Description
+
+> One-sentence summary of the pattern and proposed change.
+
+## Observed Pattern
+
+What keeps happening? Be specific.
+
+- Describe the failure mode or gap
+- Who is affected?
+- What outcome does this cause?
+
+## Evidence
+
+| Validation Session | Date       | Outcome         | Notes       |
+| ------------------ | ---------- | --------------- | ----------- |
+| #1                 | YYYY-MM-DD | NEEDS_ARTIFACTS | Description |
+| #2                 | YYYY-MM-DD | FAIL            | Description |
+
+**Total observations**: N
+**Independent occurrences**: N
+**Affected workflows**: List them
+
+## Current Handling
+
+How is this caught today?
+
+- Which agent/validator detects it?
+- What verdict does it produce?
+- What guidance does the user receive?
+
+## Proposed Promotion
+
+### Target Document
+
+`path/to/canon-doc.md`
+
+### Section
+
+`## Heading` or new section
+
+### Proposed Language
+
+Add this text (or modify existing):
+
+```text
+- MUST do X when Y
+- Failure mode: Z without W
+```
+````
+
+### Rationale
+
+Why this exact wording? Why this location?
+
+## Risk Assessment
+
+| Risk Level | Description                                   |
+| ---------- | --------------------------------------------- |
+| Low        | Clarifies existing rule, no scope change      |
+| Medium     | Adds new requirement, may affect workflows    |
+| High       | Changes existing behavior, requires migration |
+
+**Risk level**: Low | Medium | High
+
+**Mitigation**: How to reduce risk if applicable.
+
+## Status
+
+`proposed` | `accepted` | `rejected` | `executed`
+
+## Review Notes
+
+(To be filled during review)
+
+- **Reviewer**:
+- **Decision**:
+- **Date**:
+- **Notes**:
+
+## Execution Record
+
+(To be filled after acceptance)
+
+- **Commit**: (hash or link)
+- **Canon doc updated**: (path)
+- **Backlink added**: Yes / No
+
+```
+
+```
+
+
+
 ================================================================================
 ## Canon
 ================================================================================
@@ -12428,6 +13352,144 @@ If any of the above occur, fix the metadata — not the compiler.
 - Relevance assignment reflects agent decision-making needs only
 - Metadata explicitly declares both values when both apply
 - Changes to tier do not affect context pack composition
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/epistemic-hygiene.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/epistemic-hygiene
+title: "Epistemic Hygiene"
+subtitle: "Signal-triggered review over time-based ritual"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+tags: ["epistemics", "governance", "learning", "promotion"]
+---
+
+# Epistemic Hygiene
+
+> How the system detects when truth is decaying — and when review is required.
+
+## Core Principle
+
+Epistemic hygiene is the practice of maintaining the integrity of shared truth over time.
+
+In ODD, **truth does not decay on a schedule**. It decays when signals appear: repeated failures, recurring confusion, enforcement friction, or undocumented authority. Time-based review is a weak proxy for these conditions and often creates ritual without insight.
+
+**Therefore, review is triggered by epistemic signals, not by time.**
+
+## The Rule
+
+> Reviews are initiated when epistemic hygiene signals appear — not because a date has arrived.
+
+This rule applies to Canon evolution, validation standards, and governance decisions across the system.
+
+## Epistemic Hygiene Signals
+
+The following signals indicate potential epistemic decay. Their presence invites review; they do not mandate outcomes.
+
+### Repeated Validation Failures of the Same Pattern
+
+**Signal**  
+The Validation Agent flags the same failure mode multiple times across independent attempts.
+
+**What this indicates**  
+A rule may be under-specified, poorly surfaced, or misaligned with actual workflow.
+
+**Typical response**  
+Review whether Canon should encode this constraint more explicitly or operationally.
+
+---
+
+### Repeated Librarian Lookups for the Same Rule
+
+**Signal**  
+Users repeatedly ask where a rule lives or what it says, despite the rule existing.
+
+**What this indicates**  
+The rule may be difficult to discover, poorly titled, or insufficiently internalized.
+
+**Typical response**  
+Review headings, defaults, failure modes, or navigational affordances.
+
+---
+
+### Promotion Artifacts Accumulating Without Resolution
+
+**Signal**  
+Multiple promotion artifacts remain proposed without acceptance, rejection, or deferral.
+
+**What this indicates**  
+Learning is being captured but not integrated or consciously rejected.
+
+**Typical response**  
+Force explicit decisions to avoid silent epistemic backlog.
+
+---
+
+### Canon Rules Requiring Frequent Explanation
+
+**Signal**  
+Rules are frequently cited but require repeated clarification to apply correctly.
+
+**What this indicates**  
+The rule may be correct in principle but incomplete in operational guidance.
+
+**Typical response**  
+Review Defaults, Failure Modes, or Verification sections.
+
+---
+
+### Validator Friction Without Corresponding Learning
+
+**Signal**  
+Validators repeatedly block progress and generate complaints without new insight.
+
+**What this indicates**  
+Enforcement may be correct, but explanation or guidance is insufficient.
+
+**Typical response**  
+Improve explanatory artifacts before weakening enforcement.
+
+---
+
+### Rules Without Documented Origin or Impact
+
+**Signal**  
+A Canon rule is enforced but lacks a promotion artifact or documented rationale.
+
+**What this indicates**  
+The rule risks becoming cargo-cult authority rather than evidence-based governance.
+
+**Typical response**  
+Require retroactive documentation of origin, scope, and impact.
+
+---
+
+## What This Is Not
+
+Epistemic hygiene is explicitly **not**:
+
+- A review schedule
+- A service-level agreement
+- An automated trigger
+- A guarantee of change
+
+It grants permission to act when something smells wrong — not an obligation to change outcomes.
+
+## Relationship to Other Systems
+
+- **Validation** surfaces repeated failures.
+- **Librarian** surfaces confusion and discoverability gaps.
+- **Promotion artifacts** capture learning and evidence.
+- **Humans** decide whether Canon should change.
+
+Epistemic hygiene preserves trust by ensuring that authority evolves only when reality demands it.
 
 
 
@@ -20384,6 +21446,151 @@ Cloudflare configuration for lane deployments:
 If your build doesn't produce `products/<lane>/dist` with a working `index.html` that loads the manifest, **your attempt fails the deploy contract**.
 
 Fix the build. Don't modify this contract.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: infra/orchestrator/README.md
+--------------------------------------------------------------------------------
+
+# Orchestrator Infrastructure
+
+Runtime components for agent coordination and enforcement.
+
+## Structure
+
+```
+infra/orchestrator/
+├── router.js                    # Message routing (lookup detection)
+├── services/
+│   └── librarian.js             # Retrieval service (scoring + slicing)
+├── validators/
+│   └── librarian-response.js    # Citation compliance validator
+└── run/
+    └── handle-message.js        # Main message handler
+```
+
+## Quick Start
+
+```bash
+# Dry-run a query through the orchestrator
+npm run orchestrator:dry -- "Where is the rule about visual proof?"
+
+# Test individual components
+node infra/orchestrator/router.js
+node infra/orchestrator/services/librarian.js "your query here"
+node infra/orchestrator/validators/librarian-response.js
+```
+
+## Components
+
+### Router (`router.js`)
+
+Detects lookup questions and routes to the appropriate service.
+
+**Actions:**
+
+- `CALL_LIBRARIAN` — Query is a lookup question (where/what/why/how + policy keywords)
+- `CONTINUE_WORKFLOW` — Query is an action request (create/build/fix/etc.)
+- `REFUSE` — Invalid input
+- `ASK_FOR_ASSET` — (future) Missing required artifact
+
+**Usage:**
+
+```javascript
+import { route, ACTIONS } from "./router.js";
+
+const result = route("Where is the rule about visual proof?");
+// { action: "CALL_LIBRARIAN", payload: { query, confidence }, debug }
+```
+
+### Librarian Service (`services/librarian.js`)
+
+Citation-first retrieval service using the docs index.
+
+**Features:**
+
+- Weighted scoring (uri > title > headings > tags > subtitle > path)
+- Authority bias (governing 1.15x, operational 1.0x, non-governing 0.85x)
+- Headed slicing (extracts section by line number range)
+- Keyword-to-section mapping (constraints/defaults/failures/verification)
+
+**Usage:**
+
+```javascript
+import { searchDocs, formatLibrarianResponse } from "./services/librarian.js";
+
+const result = searchDocs("visual proof constraints", { debug: true });
+// { status: "FOUND", results: [...], debug: {...} }
+```
+
+### Validator (`validators/librarian-response.js`)
+
+Enforces citation-first compliance. Prevents "citation laundering."
+
+**Checks:**
+
+- Status section present (`SUPPORTED` or `INSUFFICIENT_EVIDENCE`)
+- Sources section present
+- If `SUPPORTED`:
+  - Evidence coverage proportional to answer length (1 per 120 words, min 2, max 6)
+  - Each evidence bullet must have quote + `path#Heading` citation
+  - Quote length constraints (8-40 words)
+
+**Usage:**
+
+```javascript
+import {
+  validateLibrarianResponse,
+  analyzeLibrarianResponse,
+} from "./validators/librarian-response.js";
+
+const result = validateLibrarianResponse(responseText);
+// { pass: true/false, status, errors: [], warnings: [] }
+```
+
+### Message Handler (`run/handle-message.js`)
+
+Main orchestrator entry point. Chains router → librarian → validator.
+
+**Flow:**
+
+1. Route message
+2. If `CALL_LIBRARIAN`: search docs, format response, validate
+3. If validation fails: return `INSUFFICIENT_EVIDENCE` with errors
+4. Return structured result
+
+**Usage:**
+
+```javascript
+import { handleMessage } from "./run/handle-message.js";
+
+const result = await handleMessage("Where is the rule?", { debug: true });
+// { action, response, validation, debug }
+```
+
+## Orchestrator Rules
+
+1. **Lookup questions → Librarian** — Any "where/what/why/how" + policy keywords
+2. **Librarian must cite** — Responses validated for coverage
+3. **Validation failure → INSUFFICIENT_EVIDENCE** — No silent invention
+4. **Debug mode available** — Pass `{ debug: true }` for full trace
+
+## Coverage Rules (Anti-Citation-Laundering)
+
+The validator enforces these rules for `SUPPORTED` responses:
+
+| Rule             | Requirement                                      |
+| ---------------- | ------------------------------------------------ |
+| Minimum evidence | 2 bullets OR 1 per 120 words of answer (max 6)   |
+| Evidence format  | Quote (8-40 words) + `path#Heading`              |
+| Heading required | Each evidence bullet must include heading anchor |
+
+## See Also
+
+- `docs/agents/librarian/contract.md` — The Librarian behavioral contract
+- `docs/agents/librarian/trusted-sources.md` — What counts as authoritative
+- `public/_compiled/index/docs.json` — The searchable docs index
 
 
 

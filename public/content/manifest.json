@@ -330,6 +330,23 @@
       ]
     },
     {
+      "uri": "klappy://canon/epistemic-hygiene",
+      "path": "/canon/epistemic-hygiene.md",
+      "title": "Epistemic Hygiene",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "epistemics",
+        "governance",
+        "learning",
+        "promotion"
+      ]
+    },
+    {
       "uri": "klappy://canon/epistemic-obligation-and-document-tiers",
       "path": "/canon/epistemic-obligation-and-document-tiers.md",
       "title": "Epistemic Obligation and Document Tiers",
