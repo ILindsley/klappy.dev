@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-01-28T19:31:13.693Z",
+  "generated_at": "2026-01-28T22:17:40.465Z",
   "description": "Fast-lookup index for Librarian retrieval. Per docs/agents/librarian/contract.md",
   "schema_notes": {
     "authority_band": "Resolved authority (frontmatter override > inferred from root)",
@@ -30,20 +30,20 @@
     }
   },
   "stats": {
-    "total_documents": 140,
-    "with_frontmatter": 134,
-    "with_headings": 138,
+    "total_documents": 142,
+    "with_frontmatter": 135,
+    "with_headings": 140,
     "by_root": {
       "apocrypha": 14,
       "canon": 25,
-      "docs": 71,
+      "docs": 73,
       "interfaces": 6,
       "odd": 24
     },
     "by_authority": {
       "non-governing": 14,
       "governing": 49,
-      "operational": 77
+      "operational": 79
     },
     "with_authority_override": 0,
     "with_authority_warning": 0
@@ -9191,6 +9191,32 @@
       "has_frontmatter": false
     },
     {
+      "path": "docs/oddkit/ABOUT.md",
+      "root": "docs",
+      "authority_band": "operational",
+      "authority_inferred": "operational",
+      "uri": null,
+      "title": "About oddkit",
+      "subtitle": null,
+      "tags": [],
+      "stability": null,
+      "tier": null,
+      "audience": null,
+      "exposure": null,
+      "voice": null,
+      "relevance": null,
+      "execution_posture": null,
+      "headings": [
+        {
+          "level": 1,
+          "text": "About oddkit",
+          "line": 1
+        }
+      ],
+      "heading_count": 1,
+      "has_frontmatter": false
+    },
+    {
       "path": "docs/orchestrator/QUICKSTART.md",
       "root": "docs",
       "authority_band": "operational",
@@ -10461,6 +10487,57 @@
         }
       ],
       "heading_count": 6,
+      "has_frontmatter": true
+    },
+    {
+      "path": "docs/WHY.md",
+      "root": "docs",
+      "authority_band": "operational",
+      "authority_inferred": "operational",
+      "uri": "oddkit://why",
+      "title": "Why oddkit Exists",
+      "subtitle": "oddkit helps agents verify truth — not remember conversations.",
+      "tags": [
+        "orientation",
+        "oddkit",
+        "agents",
+        "epistemic-hygiene"
+      ],
+      "stability": "stable",
+      "tier": "1",
+      "audience": "human",
+      "exposure": "nav",
+      "voice": "neutral",
+      "relevance": null,
+      "execution_posture": null,
+      "headings": [
+        {
+          "level": 1,
+          "text": "Why oddkit Exists",
+          "line": 2
+        },
+        {
+          "level": 2,
+          "text": "What oddkit Is (and Is Not)",
+          "line": 20
+        },
+        {
+          "level": 2,
+          "text": "When oddkit Is Used",
+          "line": 40
+        },
+        {
+          "level": 2,
+          "text": "Why This Is Different",
+          "line": 57
+        },
+        {
+          "level": 2,
+          "text": "How to Learn More",
+          "line": 71
+        }
+      ],
+      "heading_count": 5,
       "has_frontmatter": true
     },
     {

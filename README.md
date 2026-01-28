@@ -7,6 +7,18 @@ It is a public record of thinking, constraints, and proofs of concept that evolv
 
 ---
 
+## Start Here
+
+If you are new:
+
+- oddkit is not an agent — it is a librarian and validator used _by_ agents
+- It exists to prevent hallucination, misalignment, and "done without proof"
+
+Read this first:
+→ `docs/WHY.md`
+
+---
+
 ## What This Repository Is
 
 - A portfolio of projects and proofs of concept
@@ -81,18 +93,15 @@ Reuse is encouraged.
 If you're new and want a concrete path, here's a reasonable order:
 
 1. **About** — context and trust surface
-
    - `/about/bio.md`
    - `/about/credibility.md`
    - `/about/faq.md`
 
 2. **ODD (Outcomes-Driven Development)** — the core philosophy
-
    - `/odd/README.md` (public-facing)
    - `/odd/manifesto.md` (extended)
 
 3. **Canon** — how decisions and verification are shaped
-
    - `/canon/index.md` (orientation)
    - Supporting documents on constraints, decision rules, evidence, and verification
 
