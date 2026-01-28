@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-01-28T17:11:39.413Z",
+  "generated_at": "2026-01-28T19:31:13.693Z",
   "description": "Fast-lookup index for Librarian retrieval. Per docs/agents/librarian/contract.md",
   "schema_notes": {
     "authority_band": "Resolved authority (frontmatter override > inferred from root)",
@@ -30,20 +30,20 @@
     }
   },
   "stats": {
-    "total_documents": 136,
-    "with_frontmatter": 130,
-    "with_headings": 134,
+    "total_documents": 140,
+    "with_frontmatter": 134,
+    "with_headings": 138,
     "by_root": {
       "apocrypha": 14,
       "canon": 25,
-      "docs": 67,
+      "docs": 71,
       "interfaces": 6,
       "odd": 24
     },
     "by_authority": {
       "non-governing": 14,
       "governing": 49,
-      "operational": 73
+      "operational": 77
     },
     "with_authority_override": 0,
     "with_authority_warning": 0
@@ -9189,6 +9189,286 @@
       ],
       "heading_count": 6,
       "has_frontmatter": false
+    },
+    {
+      "path": "docs/orchestrator/QUICKSTART.md",
+      "root": "docs",
+      "authority_band": "operational",
+      "authority_inferred": "operational",
+      "uri": "klappy://docs/orchestrator/quickstart",
+      "title": "Orchestrator Quickstart",
+      "subtitle": "The shortest path from \"fresh clone\" to \"useful answers with receipts.\"",
+      "tags": [
+        "orchestrator",
+        "librarian",
+        "validation",
+        "promotions",
+        "quickstart"
+      ],
+      "stability": "evolving",
+      "tier": "2",
+      "audience": "docs",
+      "exposure": "nav",
+      "voice": "neutral",
+      "relevance": null,
+      "execution_posture": null,
+      "headings": [
+        {
+          "level": 1,
+          "text": "Orchestrator Quickstart",
+          "line": 2
+        },
+        {
+          "level": 2,
+          "text": "What this system is",
+          "line": 6
+        },
+        {
+          "level": 2,
+          "text": "Prerequisites",
+          "line": 16
+        },
+        {
+          "level": 2,
+          "text": "Build the docs index (fast lookup)",
+          "line": 25
+        },
+        {
+          "level": 2,
+          "text": "Run the orchestrator (dry)",
+          "line": 37
+        },
+        {
+          "level": 2,
+          "text": "Run the test harness",
+          "line": 51
+        },
+        {
+          "level": 2,
+          "text": "How to \"use it\" day-to-day",
+          "line": 63
+        },
+        {
+          "level": 3,
+          "text": "Mode A — CLI (fastest)",
+          "line": 67
+        },
+        {
+          "level": 3,
+          "text": "Mode B — Embed into an agent workflow",
+          "line": 76
+        },
+        {
+          "level": 2,
+          "text": "Troubleshooting",
+          "line": 86
+        },
+        {
+          "level": 3,
+          "text": "\"INSUFFICIENT_EVIDENCE\"",
+          "line": 88
+        },
+        {
+          "level": 3,
+          "text": "\"docs.json is stale\"",
+          "line": 102
+        },
+        {
+          "level": 2,
+          "text": "File map (where the important code lives)",
+          "line": 110
+        }
+      ],
+      "heading_count": 13,
+      "has_frontmatter": true
+    },
+    {
+      "path": "docs/orchestrator/USAGE-LIBRARIAN.md",
+      "root": "docs",
+      "authority_band": "operational",
+      "authority_inferred": "operational",
+      "uri": "klappy://docs/orchestrator/usage-librarian",
+      "title": "Using the Librarian",
+      "subtitle": "The Librarian is for \"what's the rule / where is it / what does Canon say?\"",
+      "tags": [
+        "librarian",
+        "citations",
+        "policy",
+        "lookup"
+      ],
+      "stability": "evolving",
+      "tier": "2",
+      "audience": "docs",
+      "exposure": "nav",
+      "voice": "neutral",
+      "relevance": null,
+      "execution_posture": null,
+      "headings": [
+        {
+          "level": 1,
+          "text": "Using the Librarian",
+          "line": 2
+        },
+        {
+          "level": 2,
+          "text": "When to use it",
+          "line": 6
+        },
+        {
+          "level": 2,
+          "text": "How to run it",
+          "line": 23
+        },
+        {
+          "level": 2,
+          "text": "How to interpret the output",
+          "line": 29
+        },
+        {
+          "level": 3,
+          "text": "Status",
+          "line": 31
+        },
+        {
+          "level": 3,
+          "text": "Evidence bullets (load-bearing)",
+          "line": 36
+        },
+        {
+          "level": 3,
+          "text": "Read Next",
+          "line": 49
+        },
+        {
+          "level": 2,
+          "text": "How to ask better questions",
+          "line": 54
+        },
+        {
+          "level": 2,
+          "text": "Expected failure mode (healthy)",
+          "line": 73
+        }
+      ],
+      "heading_count": 9,
+      "has_frontmatter": true
+    },
+    {
+      "path": "docs/orchestrator/USAGE-PROMOTIONS.md",
+      "root": "docs",
+      "authority_band": "operational",
+      "authority_inferred": "operational",
+      "uri": "klappy://docs/orchestrator/usage-promotions",
+      "title": "Using Promotions",
+      "subtitle": "Promotions are system memory. They prevent repeating the same failure forever.",
+      "tags": [
+        "promotions",
+        "learning",
+        "canon",
+        "governance"
+      ],
+      "stability": "evolving",
+      "tier": "2",
+      "audience": "docs",
+      "exposure": "nav",
+      "voice": "neutral",
+      "relevance": null,
+      "execution_posture": null,
+      "headings": [
+        {
+          "level": 1,
+          "text": "Using Promotions",
+          "line": 2
+        },
+        {
+          "level": 2,
+          "text": "What a promotion is",
+          "line": 6
+        },
+        {
+          "level": 2,
+          "text": "Where promotions live",
+          "line": 18
+        },
+        {
+          "level": 2,
+          "text": "When to create a promotion",
+          "line": 27
+        },
+        {
+          "level": 2,
+          "text": "How to create one",
+          "line": 37
+        },
+        {
+          "level": 2,
+          "text": "What happens next",
+          "line": 44
+        }
+      ],
+      "heading_count": 6,
+      "has_frontmatter": true
+    },
+    {
+      "path": "docs/orchestrator/USAGE-VALIDATION.md",
+      "root": "docs",
+      "authority_band": "operational",
+      "authority_inferred": "operational",
+      "uri": "klappy://docs/orchestrator/usage-validation",
+      "title": "Using Validation",
+      "subtitle": "Validation is a claims-to-evidence compiler. It blocks \"done\" without proof.",
+      "tags": [
+        "validation",
+        "evidence",
+        "dod",
+        "claims"
+      ],
+      "stability": "evolving",
+      "tier": "2",
+      "audience": "docs",
+      "exposure": "nav",
+      "voice": "neutral",
+      "relevance": null,
+      "execution_posture": null,
+      "headings": [
+        {
+          "level": 1,
+          "text": "Using Validation",
+          "line": 2
+        },
+        {
+          "level": 2,
+          "text": "When to use it",
+          "line": 6
+        },
+        {
+          "level": 2,
+          "text": "How to run it",
+          "line": 25
+        },
+        {
+          "level": 2,
+          "text": "What verdicts mean",
+          "line": 31
+        },
+        {
+          "level": 2,
+          "text": "What \"evidence\" looks like",
+          "line": 38
+        },
+        {
+          "level": 2,
+          "text": "Example: UI change claim",
+          "line": 48
+        },
+        {
+          "level": 2,
+          "text": "How to use it in practice",
+          "line": 56
+        }
+      ],
+      "heading_count": 7,
+      "has_frontmatter": true
     },
     {
       "path": "docs/PRD.md",

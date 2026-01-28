@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-28T17:11:39.153Z
-Total Files: 207
+Generated: 2026-01-28T19:31:13.420Z
+Total Files: 211
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -21,7 +21,7 @@ details (attempts, version folders, source code).
 - **About** (6 files)
 - **Apocrypha** (14 files)
 - **Canon** (26 files)
-- **Documentation** (67 files)
+- **Documentation** (71 files)
 - **Infrastructure** (10 files)
 - **Interfaces & Contracts** (6 files)
 - **ODD (Outcomes-Driven Development)** (24 files)
@@ -9413,6 +9413,390 @@ The practical mechanism (re-deploying a commit, retargeting, or reverting) is le
 - the evidence bundle
 - the ability to reproduce the build
 
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/orchestrator/QUICKSTART.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/orchestrator/quickstart
+title: "Orchestrator Quickstart"
+subtitle: "How to run Librarian + Validation + Promotions in this repo"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["orchestrator", "librarian", "validation", "promotions", "quickstart"]
+---
+
+# Orchestrator Quickstart
+
+> The shortest path from "fresh clone" to "useful answers with receipts."
+
+## What this system is
+
+This repo contains an orchestrator with three main capabilities:
+
+1. **Librarian** — answers policy / "what's the rule?" questions using repo sources, with citations and quotes.
+2. **Validation** — turns "done" claims into required evidence and returns a verdict (PASS / NEEDS_ARTIFACTS / FAIL / CLARIFY).
+3. **Promotions** — a human-controlled pipeline for capturing repeated failures and proposing Canon improvements with provenance.
+
+The orchestrator routes incoming messages to the right capability.
+
+## Prerequisites
+
+- Node.js installed
+- Repo dependencies installed:
+
+```bash
+npm install
+```
+
+## Build the docs index (fast lookup)
+
+The Librarian uses a compiled index for fast retrieval:
+
+```bash
+npm run docs:index
+```
+
+This generates:
+
+- `public/_compiled/index/docs.json`
+
+## Run the orchestrator (dry)
+
+Use the orchestrator dry runner to test a single query:
+
+```bash
+npm run orchestrator:dry -- "Where is the rule about visual proof?"
+```
+
+Expected outcome:
+
+- `SUPPORTED`
+- 2+ evidence bullets with quotes + `path#Heading` citations
+- A short Read Next section
+
+## Run the test harness
+
+This prevents regressions and checks for citation laundering:
+
+```bash
+npm run orchestrator:test
+```
+
+Expected outcome:
+
+- All tests pass
+
+## How to "use it" day-to-day
+
+You have two usage modes:
+
+### Mode A — CLI (fastest)
+
+Use `orchestrator:dry` with real questions or completion claims:
+
+```bash
+npm run orchestrator:dry -- "What is the definition of done?"
+npm run orchestrator:dry -- "We finished the UI update and shipped it."
+```
+
+### Mode B — Embed into an agent workflow
+
+Copy/paste the orchestrator output (Librarian or Validation) into:
+
+- Cursor agent system prompt
+- a PR review template
+- an internal doc
+
+The key is that Librarian outputs are citation-backed, so they are safe to reuse.
+
+## Troubleshooting
+
+### "INSUFFICIENT_EVIDENCE"
+
+This is not a failure. It means:
+
+- the system could not find sufficient source support
+- or the query is too vague
+- or relevant docs are missing
+
+Next step:
+
+- follow the Read Next links
+- or ask a narrower question
+- or add the missing documentation (then rerun `npm run docs:index`)
+
+### "docs.json is stale"
+
+If you add or change docs and results look wrong:
+
+```bash
+npm run docs:index
+```
+
+## File map (where the important code lives)
+
+- `infra/orchestrator/services/librarian.js` — retrieval + scoring + slicing
+- `infra/orchestrator/renderers/librarian-renderer.js` — canonical output formatting (single renderer)
+- `infra/orchestrator/validators/librarian-response.js` — enforces citations + relevance + anti-laundering
+- `infra/orchestrator/services/validation.js` — claims → evidence → verdict
+- `infra/orchestrator/router.js` — decides which service to call
+- `infra/orchestrator/tests/` — adversarial behavior tests
+- `docs/promotions/` — learning artifacts and proposals
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/orchestrator/USAGE-LIBRARIAN.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/orchestrator/usage-librarian
+title: "Using the Librarian"
+subtitle: "How to ask for rules and get answers with receipts"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["librarian", "citations", "policy", "lookup"]
+---
+
+# Using the Librarian
+
+> The Librarian is for "what's the rule / where is it / what does Canon say?"
+
+## When to use it
+
+Use Librarian for:
+
+- "Where is the rule about X?"
+- "What does ODD say about Y?"
+- "What is the definition of done?"
+- "Show me the policy / constraint / verification standard"
+
+Do NOT use Librarian for:
+
+- creating a PRD
+- building code
+- brainstorming features
+
+(Those are execution tasks — Librarian is retrieval.)
+
+## How to run it
+
+```bash
+npm run orchestrator:dry -- "Where is the rule about visual proof?"
+```
+
+## How to interpret the output
+
+### Status
+
+- `SUPPORTED` — answer is backed by repo sources
+- `INSUFFICIENT_EVIDENCE` — cannot safely answer from sources
+
+### Evidence bullets (load-bearing)
+
+A valid evidence bullet has:
+
+- a quote (8–40 words)
+- a citation formatted as `path/to/doc.md#Heading`
+
+Example:
+
+- "MUST provide visual proof for any work affecting user-visible behavior" — `canon/visual-proof.md#Operating Constraints`
+
+If the response lacks evidence bullets, treat it as untrusted.
+
+### Read Next
+
+This is navigation, not filler.
+Use it to deepen context without stuffing more into the initial response.
+
+## How to ask better questions
+
+**Better:**
+
+- "Where is the rule about visual proof?"
+- "What is the definition of done?"
+- "What does Canon say about claiming completion?"
+
+**Worse:**
+
+- "Tell me everything about ODD"
+- "How should we do software?"
+
+When in doubt, ask:
+
+- "Where is the rule…"
+- "What does it require…"
+- "What evidence is required…"
+
+## Expected failure mode (healthy)
+
+If a rule is missing, Librarian should refuse.
+That refusal is a signal:
+
+- add documentation
+- or capture a promotion artifact
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/orchestrator/USAGE-PROMOTIONS.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/orchestrator/usage-promotions
+title: "Using Promotions"
+subtitle: "How to capture learning and propose Canon changes with evidence"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["promotions", "learning", "canon", "governance"]
+---
+
+# Using Promotions
+
+> Promotions are system memory. They prevent repeating the same failure forever.
+
+## What a promotion is
+
+A promotion artifact is a proposal to improve Canon based on observed reality:
+
+- repeated validation failures
+- repeated confusion / lookups
+- unclear rules requiring explanation
+- enforcement friction without learning
+
+Promotions do NOT change Canon automatically.
+Humans decide.
+
+## Where promotions live
+
+- `docs/promotions/`
+
+Start with:
+
+- `docs/promotions/README.md`
+- `docs/promotions/TEMPLATE.md`
+
+## When to create a promotion
+
+Create a promotion when:
+
+- the same failure pattern happens again
+- Validation keeps flagging the same gap
+- Librarian answers the same "where is the rule?" question repeatedly
+
+This is signal-triggered governance (see `canon/epistemic-hygiene.md`).
+
+## How to create one
+
+1. Copy the template
+2. Fill it with observed evidence (no vibes)
+3. Link to the relevant Canon doc(s)
+4. Mark status as `proposed`
+
+## What happens next
+
+A promotion can be:
+
+- **Accepted** → results in a Canon edit
+- **Rejected** → recorded reason
+- **Deferred** → explicitly tracked as unresolved learning
+
+Promotions keep Canon from becoming ideology.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/orchestrator/USAGE-VALIDATION.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/orchestrator/usage-validation
+title: "Using Validation"
+subtitle: "How to challenge 'done' claims and demand evidence"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["validation", "evidence", "dod", "claims"]
+---
+
+# Using Validation
+
+> Validation is a claims-to-evidence compiler. It blocks "done" without proof.
+
+## When to use it
+
+Use Validation when someone says:
+
+- "done"
+- "implemented"
+- "shipped"
+- "finished"
+- "works"
+- "ready"
+
+It returns:
+
+- explicit claims
+- required evidence
+- provided evidence
+- gaps
+- verdict
+
+## How to run it
+
+```bash
+npm run orchestrator:dry -- "We finished the UI update and shipped it."
+```
+
+## What verdicts mean
+
+- `PASS` — evidence supports the claim(s)
+- `NEEDS_ARTIFACTS` — likely true but insufficient proof provided
+- `FAIL` — evidence contradicts the claim(s) or indicates breakage
+- `CLARIFY` — claims are too vague to evaluate
+
+## What "evidence" looks like
+
+Validation recognizes artifacts such as:
+
+- screenshots / recordings (UI claims)
+- test logs / commands (correctness claims)
+- file paths (generated outputs)
+- URLs (PRs, builds)
+- code blocks (only as supporting detail, not proof)
+
+## Example: UI change claim
+
+Required evidence often includes:
+
+- before/after screenshots
+- short screen recording for interaction changes
+- path to artifact or output
+
+## How to use it in practice
+
+1. Paste a completion message + artifacts into a single input.
+2. Run validation.
+3. If `NEEDS_ARTIFACTS`, capture what it asks for.
+4. Re-run until `PASS` or clarified scope.
+
+Validation is not a punishment tool. It is an honesty tool.
 
 
 
