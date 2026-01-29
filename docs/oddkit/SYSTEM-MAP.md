@@ -120,6 +120,21 @@ Conflict, drift, and ambiguity are **signals**, not bugs.
 
 ---
 
+## Epistemic Challenge (Behavioral Doctrine)
+
+Epistemic Challenge defines _how_ the system applies constructive pressure when uncertainty,
+weak evidence, or contradictions are detected.
+
+It is triggered by epistemic hygiene smells and expressed through:
+- Librarian behavior (citation-first retrieval)
+- Validation behavior (claims-to-evidence)
+- Arbitration outputs (prefer | defer | escalate | propose_promotion)
+
+Epistemic Challenge does not add enforcement. It governs posture, tone, and next-step selection
+when uncertainty must be handled rather than hidden.
+
+---
+
 ## Where To Look Next
 
 - For _why a rule exists_: follow the Promotion artifact linked in Explain

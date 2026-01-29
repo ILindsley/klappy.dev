@@ -41,6 +41,7 @@ This overlay is intended to be composed into agent packs and recipes. It does no
 ## Verification
 
 A run is successful if:
+
 - the system identifies the trigger
 - routes correctly (Librarian vs Validation)
 - produces actionable next steps

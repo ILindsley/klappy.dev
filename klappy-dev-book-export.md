@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-29T02:25:16.047Z
+Generated: 2026-01-29T02:26:54.246Z
 Total Files: 224
 
 This is a documentation export of all markdown files from the klappy.dev
@@ -3784,6 +3784,7 @@ This overlay is intended to be composed into agent packs and recipes. It does no
 ## Verification
 
 A run is successful if:
+
 - the system identifies the trigger
 - routes correctly (Librarian vs Validation)
 - produces actionable next steps
@@ -10105,6 +10106,21 @@ Conflict, drift, and ambiguity are **signals**, not bugs.
 
 ---
 
+## Epistemic Challenge (Behavioral Doctrine)
+
+Epistemic Challenge defines _how_ the system applies constructive pressure when uncertainty,
+weak evidence, or contradictions are detected.
+
+It is triggered by epistemic hygiene smells and expressed through:
+- Librarian behavior (citation-first retrieval)
+- Validation behavior (claims-to-evidence)
+- Arbitration outputs (prefer | defer | escalate | propose_promotion)
+
+Epistemic Challenge does not add enforcement. It governs posture, tone, and next-step selection
+when uncertainty must be handled rather than hidden.
+
+---
+
 ## Where To Look Next
 
 - For _why a rule exists_: follow the Promotion artifact linked in Explain
@@ -10623,6 +10639,7 @@ tags: ["orchestrator", "validation", "librarian", "challenge", "workflow"]
 This document operationalizes Canon doctrine `klappy://canon/epistemic-challenge` for orchestrator-style agents and CLI tools (e.g., oddkit).
 
 It describes:
+
 - when to trigger challenge mode (smell-based)
 - which subagent/tool should handle the moment (librarian vs validation)
 - how to phrase challenge so it improves outcomes without stalling work
@@ -10634,21 +10651,25 @@ This is **how** to do it, not **why** it exists.
 Trigger "challenge mode" when one or more signals are present:
 
 ### Evidence signals
+
 - "done" / "fixed" / "implemented" without artifacts
 - citations present but quotes don't overlap query intent
 - claims exceed evidence strength (big claim, small proof)
 
 ### Scope signals
+
 - solution proposed before scoping (attempt/feature/PRD version/repo)
 - major structure introduced without a named pain ("use-only-what-hurts" violation)
 - mixing decisions across incompatible scopes (different PRDs, different lanes)
 
 ### Intent signals
+
 - workaround phrased as promoted rule
 - exploratory note treated as governing policy
 - policy question answered from non-governing sources
 
 ### Arbitration signals
+
 - contradictions exposed by arbitration output
 - low-confidence margin between top candidates
 - excessive duplicates (index hygiene smell)
@@ -10656,26 +10677,32 @@ Trigger "challenge mode" when one or more signals are present:
 ## Routing: Who handles the moment?
 
 ### Librarian (lookup + receipts)
+
 Use when the user asks "what is the rule / where is it / what does Canon say".
 
 Output must:
+
 - quote and cite sources
 - prefer governing docs for policy intent
 - expose drift/collisions (URI_DRIFT vs URI_COLLISION) rather than hiding it
 
 ### Validation (claims-to-evidence)
+
 Use when someone says they shipped something or asserts completion.
 
 Output must:
+
 - parse claims
 - map claims → required evidence
 - detect provided artifacts
 - return PASS | NEEDS_ARTIFACTS | FAIL | CLARIFY with next-step checklist
 
 ### Promotions (learning memory)
+
 Use when the same failure pattern repeats and validation repeatedly blocks it.
 
 Output must:
+
 - record evidence from ≥2 independent validations
 - propose Canon change without auto-mutation
 - link back to artifacts and transcripts
@@ -10684,16 +10711,20 @@ Output must:
 
 When challenging, follow this order:
 
-1) **Name the object**
+1. **Name the object**
+
 - "I'm challenging the claim that X is complete."
 
-2) **Name the trigger**
+2. **Name the trigger**
+
 - "Trigger: missing artifact / scope mismatch / weak evidence / contradiction."
 
-3) **Request the cheapest proof**
+3. **Request the cheapest proof**
+
 - "Smallest artifact that raises confidence: [screenshot | test output | path | excerpt]."
 
-4) **Offer a path forward**
+4. **Offer a path forward**
+
 - "If you provide Y, I can validate. If not, we should mark this as advisory."
 
 ## What Not To Do
@@ -11238,6 +11269,45 @@ This changelog tracks changes to the **Canon pack** as a whole.
 
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
+
+## 0.20.0 — 2026-01-29
+
+**Epistemic Challenge — Constructive Pressure Doctrine**
+
+This release introduces Epistemic Challenge as a Canon doctrine defining how the system applies constructive pressure when uncertainty, weak evidence, or contradictions are detected. This completes the epistemic governance loop: hygiene triggers → challenge posture → arbitration outcomes.
+
+### Added
+
+- **Canon: Epistemic Challenge** (`/canon/epistemic-challenge.md`) — Tier 2 Canon principle defining how to challenge claims proportionally, surface contradictions explicitly, and preserve collaborative flow. Establishes operating constraints, defaults, failure modes (harmony bias, aggressive tone, certainty laundering, over-blocking), and verification criteria.
+
+- **Playbook: Epistemic Challenge** (`/docs/orchestrator/epistemic-challenge.md`) — Operational guide for orchestrator-style agents. Defines trigger signals (evidence, scope, intent, arbitration), routing decisions (Librarian vs Validation vs Promotions), and the constructive challenge template.
+
+- **Agent Overlay: Epistemic Challenge Mode** (`/docs/agents/overlays/epistemic-challenge-mode.md`) — Reusable overlay for composing challenge behavior into agent packs. Defines the behavioral shift when uncertainty is detected.
+
+- **System Map Update** (`/docs/oddkit/SYSTEM-MAP.md`) — Added Epistemic Challenge section explaining its role in the oddkit pipeline.
+
+- **Test Case** — Added "Epistemic challenge doctrine lookup" to orchestrator test suite.
+
+### Philosophy
+
+- **Challenge claims, not people** — Pressure is applied to assertions, not to the human or agent making them.
+- **Proportional to risk** — Small claims get light challenge; large claims get heavy scrutiny.
+- **End with next steps** — Every challenge must conclude with an actionable path forward.
+- **Triggered by smells, not time** — Epistemic challenge activates when signals appear, not on a schedule.
+
+### Relationship to Other Canon
+
+- **Epistemic Hygiene** (`/canon/epistemic-hygiene.md`) — Defines the smell triggers that activate challenge.
+- **Weighted Relevance & Arbitration** (`/canon/weighted-relevance-and-arbitration.md`) — Defines how conflicts are handled once challenge surfaces them.
+- **Verification & Evidence** (`/canon/verification-and-evidence.md`) — Defines what counts as evidence when challenge demands proof.
+
+### Notes
+
+- This release is doctrine + guidance only — no enforcement hooks added
+- Challenge mode is designed to be composed into agents, not forced
+- The system remains honest and learnable without becoming combative
+
+---
 
 ## 0.19.0 — 2026-01-29
 

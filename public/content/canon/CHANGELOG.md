@@ -18,6 +18,45 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.20.0 — 2026-01-29
+
+**Epistemic Challenge — Constructive Pressure Doctrine**
+
+This release introduces Epistemic Challenge as a Canon doctrine defining how the system applies constructive pressure when uncertainty, weak evidence, or contradictions are detected. This completes the epistemic governance loop: hygiene triggers → challenge posture → arbitration outcomes.
+
+### Added
+
+- **Canon: Epistemic Challenge** (`/canon/epistemic-challenge.md`) — Tier 2 Canon principle defining how to challenge claims proportionally, surface contradictions explicitly, and preserve collaborative flow. Establishes operating constraints, defaults, failure modes (harmony bias, aggressive tone, certainty laundering, over-blocking), and verification criteria.
+
+- **Playbook: Epistemic Challenge** (`/docs/orchestrator/epistemic-challenge.md`) — Operational guide for orchestrator-style agents. Defines trigger signals (evidence, scope, intent, arbitration), routing decisions (Librarian vs Validation vs Promotions), and the constructive challenge template.
+
+- **Agent Overlay: Epistemic Challenge Mode** (`/docs/agents/overlays/epistemic-challenge-mode.md`) — Reusable overlay for composing challenge behavior into agent packs. Defines the behavioral shift when uncertainty is detected.
+
+- **System Map Update** (`/docs/oddkit/SYSTEM-MAP.md`) — Added Epistemic Challenge section explaining its role in the oddkit pipeline.
+
+- **Test Case** — Added "Epistemic challenge doctrine lookup" to orchestrator test suite.
+
+### Philosophy
+
+- **Challenge claims, not people** — Pressure is applied to assertions, not to the human or agent making them.
+- **Proportional to risk** — Small claims get light challenge; large claims get heavy scrutiny.
+- **End with next steps** — Every challenge must conclude with an actionable path forward.
+- **Triggered by smells, not time** — Epistemic challenge activates when signals appear, not on a schedule.
+
+### Relationship to Other Canon
+
+- **Epistemic Hygiene** (`/canon/epistemic-hygiene.md`) — Defines the smell triggers that activate challenge.
+- **Weighted Relevance & Arbitration** (`/canon/weighted-relevance-and-arbitration.md`) — Defines how conflicts are handled once challenge surfaces them.
+- **Verification & Evidence** (`/canon/verification-and-evidence.md`) — Defines what counts as evidence when challenge demands proof.
+
+### Notes
+
+- This release is doctrine + guidance only — no enforcement hooks added
+- Challenge mode is designed to be composed into agents, not forced
+- The system remains honest and learnable without becoming combative
+
+---
+
 ## 0.19.0 — 2026-01-29
 
 **Weighted Relevance & Arbitration — Conflict Handling Doctrine**
