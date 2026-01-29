@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-01-29T00:03:19.102Z",
+  "generated_at": "2026-01-29T01:00:39.702Z",
   "description": "Fast-lookup index for Librarian retrieval. Per docs/agents/librarian/contract.md",
   "schema_notes": {
     "authority_band": "Resolved authority (frontmatter override > inferred from root)",
@@ -30,19 +30,19 @@
     }
   },
   "stats": {
-    "total_documents": 148,
-    "with_frontmatter": 141,
-    "with_headings": 146,
+    "total_documents": 149,
+    "with_frontmatter": 142,
+    "with_headings": 147,
     "by_root": {
       "apocrypha": 14,
-      "canon": 26,
+      "canon": 27,
       "docs": 78,
       "interfaces": 6,
       "odd": 24
     },
     "by_authority": {
       "non-governing": 14,
-      "governing": 50,
+      "governing": 51,
       "operational": 84
     },
     "with_authority_override": 0,
@@ -4234,6 +4234,152 @@
         }
       ],
       "heading_count": 22,
+      "has_frontmatter": true
+    },
+    {
+      "path": "canon/weighted-relevance-and-arbitration.md",
+      "root": "canon",
+      "authority_band": "governing",
+      "authority_inferred": "governing",
+      "uri": "klappy://canon/weighted-relevance-and-arbitration",
+      "title": "Weighted Relevance & Arbitration",
+      "subtitle": "How the system handles conflict between competing truths — and why resolution is not always the goal.",
+      "tags": [
+        "arbitration",
+        "relevance",
+        "epistemic-hygiene",
+        "promotion"
+      ],
+      "stability": "stable",
+      "tier": "2",
+      "audience": "canon",
+      "exposure": "nav",
+      "voice": "neutral",
+      "relevance": null,
+      "execution_posture": null,
+      "headings": [
+        {
+          "level": 1,
+          "text": "Weighted Relevance & Arbitration",
+          "line": 2
+        },
+        {
+          "level": 2,
+          "text": "Problem Statement",
+          "line": 6
+        },
+        {
+          "level": 2,
+          "text": "Core Principle",
+          "line": 16
+        },
+        {
+          "level": 2,
+          "text": "Signals Used in Arbitration",
+          "line": 28
+        },
+        {
+          "level": 3,
+          "text": "Scope Similarity",
+          "line": 32
+        },
+        {
+          "level": 3,
+          "text": "Intent",
+          "line": 46
+        },
+        {
+          "level": 3,
+          "text": "Evidence Strength",
+          "line": 59
+        },
+        {
+          "level": 3,
+          "text": "Recency",
+          "line": 71
+        },
+        {
+          "level": 2,
+          "text": "Hard Constraints",
+          "line": 79
+        },
+        {
+          "level": 3,
+          "text": "Intent-Gated Precedence",
+          "line": 83
+        },
+        {
+          "level": 3,
+          "text": "Evidence Requirement",
+          "line": 87
+        },
+        {
+          "level": 3,
+          "text": "Explicit Supersedes",
+          "line": 91
+        },
+        {
+          "level": 3,
+          "text": "Confidence-Based Escalation",
+          "line": 95
+        },
+        {
+          "level": 2,
+          "text": "Valid Outcomes of Arbitration",
+          "line": 99
+        },
+        {
+          "level": 3,
+          "text": "Prefer",
+          "line": 103
+        },
+        {
+          "level": 3,
+          "text": "Defer",
+          "line": 107
+        },
+        {
+          "level": 3,
+          "text": "Escalate",
+          "line": 111
+        },
+        {
+          "level": 3,
+          "text": "Propose Promotion",
+          "line": 115
+        },
+        {
+          "level": 2,
+          "text": "Relationship to Other Systems",
+          "line": 119
+        },
+        {
+          "level": 2,
+          "text": "Non-Goals",
+          "line": 133
+        },
+        {
+          "level": 3,
+          "text": "Forced Consensus",
+          "line": 137
+        },
+        {
+          "level": 3,
+          "text": "Automatic Canon Mutation",
+          "line": 141
+        },
+        {
+          "level": 3,
+          "text": "Global Truth",
+          "line": 145
+        },
+        {
+          "level": 3,
+          "text": "Elimination of Conflict",
+          "line": 149
+        }
+      ],
+      "heading_count": 24,
       "has_frontmatter": true
     },
     {

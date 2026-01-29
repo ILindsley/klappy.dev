@@ -998,6 +998,23 @@
       ]
     },
     {
+      "uri": "klappy://canon/weighted-relevance-and-arbitration",
+      "path": "/canon/weighted-relevance-and-arbitration.md",
+      "title": "Weighted Relevance & Arbitration",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "arbitration",
+        "relevance",
+        "epistemic-hygiene",
+        "promotion"
+      ]
+    },
+    {
       "uri": "klappy://about/why-this-exists",
       "path": "/about/why-this-exists.md",
       "title": "Why This Exists",
