@@ -18,6 +18,24 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.20.1 — 2026-01-29
+
+**Agents & MCP Orientation Card**
+
+This release adds a minimal on-ramp document for users curious about ODD tooling without implying adoption pressure.
+
+### Added
+
+- **Agents & MCP (Experimental)** (`/odd/getting-started/odd-agents-and-mcp.md`) — Orientation card explaining the three pieces (Canon, oddkit, Subagents), their optionality, and minimal install paths. Explicitly states: "If you don't use agents or MCP, ODD still works."
+
+### Philosophy
+
+- **Concept-first, not tool-first** — This doc lives in `/odd/`, not in oddkit, to prevent "ODD = this tool" framing
+- **Enable experimentation, not adoption** — No tutorials, no best practices, no golden paths
+- **Optionality preserved** — Canon is required conceptually; everything else is optional
+
+---
+
 ## 0.20.0 — 2026-01-29
 
 **Epistemic Challenge — Constructive Pressure Doctrine**

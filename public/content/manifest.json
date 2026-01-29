@@ -75,6 +75,24 @@
       ]
     },
     {
+      "uri": "klappy://odd/getting-started/agents-and-mcp",
+      "path": "/odd/getting-started/odd-agents-and-mcp.md",
+      "title": "Agents & MCP (Experimental)",
+      "type": "text/markdown",
+      "audience": "odd",
+      "exposure": "nav",
+      "tier": 3,
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": [
+        "agents",
+        "mcp",
+        "oddkit",
+        "getting-started",
+        "experimental"
+      ]
+    },
+    {
       "uri": "klappy://odd/alignment-reviews",
       "path": "/odd/appendices/alignment-reviews.md",
       "title": "Alignment Reviews",

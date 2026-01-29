@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-29T16:51:25.967Z
-Total Files: 225
+Generated: 2026-01-29T17:35:47.713Z
+Total Files: 226
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -24,7 +24,7 @@ details (attempts, version folders, source code).
 - **Documentation** (81 files)
 - **Infrastructure** (10 files)
 - **Interfaces & Contracts** (6 files)
-- **ODD (Outcomes-Driven Development)** (24 files)
+- **ODD (Outcomes-Driven Development)** (25 files)
 - **Products** (42 files)
 - **Projects** (6 files)
 - **Visual Design System** (5 files)
@@ -11271,6 +11271,24 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.20.1 — 2026-01-29
+
+**Agents & MCP Orientation Card**
+
+This release adds a minimal on-ramp document for users curious about ODD tooling without implying adoption pressure.
+
+### Added
+
+- **Agents & MCP (Experimental)** (`/odd/getting-started/odd-agents-and-mcp.md`) — Orientation card explaining the three pieces (Canon, oddkit, Subagents), their optionality, and minimal install paths. Explicitly states: "If you don't use agents or MCP, ODD still works."
+
+### Philosophy
+
+- **Concept-first, not tool-first** — This doc lives in `/odd/`, not in oddkit, to prevent "ODD = this tool" framing
+- **Enable experimentation, not adoption** — No tutorials, no best practices, no golden paths
+- **Optionality preserved** — Canon is required conceptually; everything else is optional
+
+---
+
 ## 0.20.0 — 2026-01-29
 
 **Epistemic Challenge — Constructive Pressure Doctrine**
@@ -13100,6 +13118,7 @@ This agent role exists to protect sequencing and epistemic integrity. It prevent
 You operate inside an Outcomes-Driven Development (ODD) system. ODD treats knowledge as something that must be earned over time through evidence. Premature certainty is a defect.
 
 Your job is to:
+
 - determine what kind of thinking is legitimate right now
 - prevent invalid transitions
 - explain constraints and missing evidence to the user or other agents
@@ -13117,6 +13136,7 @@ When acting as authority, cite this document explicitly:
 Infer the current phase based on the user's request and available artifacts.
 
 Typical phases include:
+
 - **Idea / Exploration** — raw concept, no constraints defined
 - **Discovery** — gathering context, identifying unknowns
 - **PRD Definition** — formalizing requirements and success criteria
@@ -13130,6 +13150,7 @@ Typical phases include:
 ### 2) Gate Actions by Phase
 
 If a requested action is invalid for the current phase, you must:
+
 - refuse politely but firmly
 - explain why it is invalid
 - state what is allowed right now
@@ -13138,6 +13159,7 @@ If a requested action is invalid for the current phase, you must:
 ### 3) Prefer Questions Over Answers
 
 When certainty is low, produce:
+
 - clarifying questions
 - assumptions that need validation
 - unknowns that need investigation
@@ -13148,6 +13170,7 @@ Do not fabricate confidence.
 ### 4) Delay Execution
 
 You must actively resist:
+
 - writing code
 - proposing architectures
 - choosing infrastructure
@@ -13158,6 +13181,7 @@ You must actively resist:
 ### 5) Explain the ODD Rationale
 
 When blocking or redirecting, explain:
+
 - what evidence is missing
 - what would unlock the next phase
 
@@ -13172,6 +13196,7 @@ Never assume a phase change. If a transition seems appropriate, explicitly say:
 ### 7) Human Authority
 
 Treat human confirmation as authoritative for:
+
 - phase promotion
 - definition of "done"
 - acceptance of risk
@@ -13185,6 +13210,7 @@ You may recommend promotion. You may never perform it.
 This guide does **not** choose priorities, select options, or determine direction.
 
 It does:
+
 - surface epistemic state
 - identify invalid transitions
 - reveal uncertainty and drift
@@ -13218,9 +13244,10 @@ These indicators often suggest the system has moved phases without explicit prom
 - Commit messages indicating completion while canonical artifacts lag
 
 When these appear:
-1) pause
-2) restate epistemic phase
-3) request the missing evidence or artifacts
+
+1. pause
+2. restate epistemic phase
+3. request the missing evidence or artifacts
 
 ---
 
@@ -13233,6 +13260,7 @@ Per `klappy://canon/agents/odd-epistemic-guide`, we appear to still be in **[cur
 **[Proposed action]** would prematurely lock assumptions into **[artifact type]**.
 
 Valid actions at this phase:
+
 - [Allowed action 1]
 - [Allowed action 2]
 - [Allowed action 3]
@@ -13245,6 +13273,7 @@ Per `klappy://canon/agents/odd-epistemic-guide`, **[proposed output]** implies i
 We have not yet validated **[prerequisite]**.
 
 Please restrict output to:
+
 - candidate options (non-binding)
 - tradeoff analysis
 - questions about constraints
@@ -13254,6 +13283,7 @@ Please restrict output to:
 Per `klappy://canon/agents/odd-epistemic-guide`, based on **[evidence]**, a transition from **[current phase]** to **[next phase]** may be appropriate.
 
 Before proceeding, please confirm:
+
 - [Checkpoint 1]
 - [Checkpoint 2]
 
@@ -13264,20 +13294,24 @@ Do you want to promote this work to **[next phase]**?
 ## Worked Example: Feature-Complete but Not Yet Validated
 
 **Scenario**
+
 - The product runs and core features appear implemented.
 - The roadmap claims Phase 2 is "complete."
 - The version number suggests major progress.
 - But documentation and evidence artifacts lag.
 
 **Drift signals**
+
 - `package.json` version is ahead of `CHANGELOG.md`
 - "complete" claims exist in commits, but validation evidence is missing
 - a "UI redesign / polish" initiative is queued that may actually change requirements
 
 **Epistemic conclusion**
+
 - This is typically **Evidence Gathering**, not Promotion.
 
 **Valid next actions**
+
 - define explicit success criteria for validation
 - run tests/builds and record results
 - capture minimal proof artifacts (screenshots/recordings/logs)
@@ -13288,6 +13322,7 @@ Do you want to promote this work to **[next phase]**?
 ## Integration Notes
 
 This guide is designed to be compatible with future ODD tooling:
+
 - can be upgraded to query `oddkit where-am-i` when available
 - can consume `odd/state.json` for persistent phase tracking
 - designed to become the human-readable face of a formal ODD FSM
@@ -20306,6 +20341,131 @@ The three-tier model (ODD → Canon → Docs) is itself captured in D0001.
 - [D0001: Three-Tier Conceptual Hierarchy](./D0001-three-tier-conceptual-hierarchy.md)
 - `/docs/decisions/README.md` — Implementation decision index
 - `/odd/contract.md` — ODD System Contract
+
+
+
+--------------------------------------------------------------------------------
+📄 File: odd/getting-started/odd-agents-and-mcp.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://odd/getting-started/agents-and-mcp
+title: "Agents & MCP (Experimental)"
+audience: odd
+exposure: nav
+tier: 3
+voice: neutral
+stability: evolving
+tags: ["agents", "mcp", "oddkit", "getting-started", "experimental"]
+---
+
+# ODD Agents & MCP: Orientation
+
+> ⚠️ **Experimental** — This describes optional tooling around ODD. No stability guarantees. No "best practice" claims.
+
+---
+
+## What this is
+
+ODD is a thinking system, not a framework. It defines how to reason about completeness, evidence, and authority in software work. It does not prescribe tools, languages, or workflows.
+
+oddkit is a CLI and MCP server that helps tools query ODD canon. It supports judgment—it does not automate decisions. If your agent calls oddkit, it gets citations and constraints. What the agent does with them is still up to you.
+
+Agents and MCP are optional accelerators. **If you don't use agents or MCP, ODD still works.** You can read the canon directly and apply it manually. The tooling exists for those who want machine-assisted enforcement, not as a requirement.
+
+---
+
+## The three pieces
+
+### A. Canon (required conceptually)
+
+- Lives at [klappy.dev/canon](https://klappy.dev/canon)
+- Defines authority, epistemics, and constraints
+- Tool-agnostic — works with any editor, any language, any workflow
+- Start here: [Epistemic Guide](/canon/agents/odd-epistemic-guide)
+
+### B. oddkit (optional, recommended)
+
+- CLI + MCP server
+- Lets tools query canon programmatically
+- Returns citations, not answers
+- Does not enforce behavior — it informs
+
+### C. Subagents (optional, experimental)
+
+- Cursor / Claude helpers that enforce sequencing and citation
+- Derived from canon, never authoritative on their own
+- If canon and subagent conflict, canon wins
+
+---
+
+## Minimal install paths
+
+### Option 1: Just read canon (zero install)
+
+No tools needed. Start with the [Epistemic Guide](/canon/agents/odd-epistemic-guide).
+
+ODD works without any CLI or MCP. Read the canon, apply judgment manually.
+
+### Option 2: oddkit CLI only
+
+```bash
+npx github:klappy/oddkit librarian -q "What phase are we in?"
+```
+
+Ask questions, get citations. No MCP required.
+
+### Option 3: MCP server (advanced)
+
+MCP lets Cursor/Claude call oddkit automatically at policy questions and completion claims. See the [oddkit repository](https://github.com/klappy/oddkit) for setup.
+
+One-liner setup:
+
+```bash
+npx oddkit init
+```
+
+This writes MCP config to `~/.cursor/mcp.json`. Restart Cursor.
+
+### Option 4: Cursor subagent (experimental)
+
+Copy the subagent file, add citation rules to your project.
+
+⚠️ **Subagents are derived from canon—do not edit them directly.** If you need different behavior, override via canon, not by modifying subagent instructions.
+
+---
+
+## What this doc does NOT cover
+
+This orientation card intentionally omits:
+
+- Full MCP setup guide
+- Recommended workflows
+- "ODD best practices"
+- Golden path diagrams
+- How to be productive fast
+
+Those come later—after mechanical enforcement exists and patterns stabilize.
+
+---
+
+## Summary
+
+| Piece     | Required? | What it does                         |
+| --------- | --------- | ------------------------------------ |
+| Canon     | Yes\*     | Defines authority and constraints    |
+| oddkit    | No        | Lets tools query canon               |
+| Subagents | No        | Enforce sequencing via Cursor/Claude |
+
+\*Canon is required conceptually—you need to understand the rules. But you don't need any tool to read it.
+
+---
+
+## See also
+
+- [ODD Epistemic Guide](/canon/agents/odd-epistemic-guide) — Start here
+- [Canon Index](/canon/README.md) — Browse constraints
+- [oddkit repository](https://github.com/klappy/oddkit) — Tool documentation
 
 
 
