@@ -126,6 +126,7 @@ Epistemic Challenge defines _how_ the system applies constructive pressure when 
 weak evidence, or contradictions are detected.
 
 It is triggered by epistemic hygiene smells and expressed through:
+
 - Librarian behavior (citation-first retrieval)
 - Validation behavior (claims-to-evidence)
 - Arbitration outputs (prefer | defer | escalate | propose_promotion)

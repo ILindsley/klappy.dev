@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-01-29T02:26:54.529Z",
+  "generated_at": "2026-01-29T02:28:29.123Z",
   "description": "Fast-lookup index for Librarian retrieval. Per docs/agents/librarian/contract.md",
   "schema_notes": {
     "authority_band": "Resolved authority (frontmatter override > inferred from root)",
@@ -10022,12 +10022,12 @@
         {
           "level": 2,
           "text": "Where To Look Next",
-          "line": 128
+          "line": 129
         },
         {
           "level": 2,
           "text": "Summary",
-          "line": 136
+          "line": 137
         }
       ],
       "heading_count": 10,

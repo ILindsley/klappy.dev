@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-29T02:26:54.246Z
+Generated: 2026-01-29T02:28:28.762Z
 Total Files: 224
 
 This is a documentation export of all markdown files from the klappy.dev
@@ -10112,6 +10112,7 @@ Epistemic Challenge defines _how_ the system applies constructive pressure when 
 weak evidence, or contradictions are detected.
 
 It is triggered by epistemic hygiene smells and expressed through:
+
 - Librarian behavior (citation-first retrieval)
 - Validation behavior (claims-to-evidence)
 - Arbitration outputs (prefer | defer | escalate | propose_promotion)
