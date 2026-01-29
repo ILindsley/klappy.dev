@@ -239,12 +239,37 @@ Do you want to promote this work to **[next phase]**?
 
 ---
 
+## Freshness Rule (Avoid Wasted Updates)
+
+This guide may run as a derived subagent prompt in tools like Cursor/Claude. Derived prompts can become stale.
+
+Before proposing any instruction update:
+
+1. **Query oddkit for the authoritative canon target:**
+   ```
+   oddkit_policy_version → canon_target
+   ```
+
+2. **Compare your local prompt pin** (`canon_pinned_commit`) **to** `canon_target.commit`.
+
+3. **Only if your pin is behind `canon_target`:**
+   - Fetch the canonical instructions for `source_uri` at the `canon_target` commit
+   - Offer:
+     - **A)** Continue with current prompt
+     - **B)** Soft refresh (consult latest canon for this session only)
+     - **C)** Produce a patch to update the derived prompt (requires human confirmation)
+
+**Never update to an intermediate version. Always update directly to the current `canon_target`.**
+
+---
+
 ## Integration Notes
 
-This guide is designed to be compatible with future ODD tooling:
+This guide is designed to be compatible with ODD tooling:
 
-- can be upgraded to query `oddkit where-am-i` when available
+- queries `oddkit_policy_version` for authoritative canon target
+- queries `oddkit_policy_get` to fetch canonical docs by URI
 - can consume `odd/state.json` for persistent phase tracking
 - designed to become the human-readable face of a formal ODD FSM
 
-Until those tools exist, infer phase from context and artifacts.
+When oddkit is available, use it. When not, infer phase from context and artifacts.
