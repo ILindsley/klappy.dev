@@ -52,9 +52,10 @@ This release introduces the governing Canon doctrine for how the system handles 
 ### Implementation Reference
 
 oddkit implements this doctrine via:
+
 - Margin-based confidence calculation (reproducible, explainable)
 - Intent-gated precedence as hard veto (not just score multiplier)
-- Typed contradictions (AUTHORITY_, EVIDENCE_, SCOPE_)
+- Typed contradictions (AUTHORITY\_, EVIDENCE\_, SCOPE\_)
 - Explicit `arbitration.outcome` field
 - `advisory` flag separate from status
 
