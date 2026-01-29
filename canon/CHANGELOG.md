@@ -18,6 +18,53 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.18.0 — 2026-01-28
+
+**Epistemic Modes — Tier 1 Canon Foundation**
+
+This release introduces Epistemic Modes as a Tier 1 Canon principle, establishing the foundational distinction between Exploration, Planning, and Execution. Three downstream operational documents hang from this Canon nail, and two implementation instruction sets prepare oddkit for mode-aware behavior.
+
+### Added
+
+- **Canon: Epistemic Modes** (`/canon/epistemic-modes.md`) — Tier 1 Canon principle defining three epistemic modes (Exploration, Planning, Execution), their truth conditions, obligations, and risks. Introduces the Non-Collapse Rule: modes must not be collapsed. Answers the prior question: *Is it legitimate to decide or act at all?*
+
+- **Synthesis Ledger** (`/docs/synthesis-ledger.md`) — Operational doc for preserving learning from Exploration Mode without forcing decisions. Hangs from Epistemic Modes. Defines what belongs in a ledger, anti-patterns, and lifecycle rules.
+
+- **Mode-Separated Conversations** (`/docs/mode-separated-conversations.md`) — Operational doc describing how conversations respect epistemic modes. Defines planning vs execution conversation characteristics and mode signaling patterns.
+
+- **Epistemic Mode Guidance for oddkit** (`/docs/oddkit/modes.md`) — Tooling guidance doc teaching oddkit how to detect modes, respect them, and explain refusals. Defines default mode behavior and interaction with other oddkit capabilities.
+
+- **Implementation Instruction Set A** (`/docs/oddkit/IMPL-A-explain-mode-annotation.md`) — Handoff doc for annotating `oddkit explain` output with detected epistemic mode. Observability without enforcement.
+
+- **Implementation Instruction Set B** (`/docs/oddkit/IMPL-B-mode-headers.md`) — Handoff doc for supporting optional `[Mode: X]` headers in conversations. Voluntary alignment without forced workflows.
+
+### Philosophy
+
+- **Mode separation is epistemic hygiene** — Collapsing exploration into planning or planning into execution produces false confidence, premature convergence, and brittle outcomes.
+- **Trust before control** — Annotation comes before headers; headers come before enforcement. Let reality prove value before adding constraints.
+- **Inaction is legitimate** — Remaining in Exploration or Planning is valid when unknowns materially affect outcomes. Pressure to act is not evidence that action is warranted.
+- **Canon points to nothing** — The Canon doc makes minimal forward references by name only. All downstream docs point up to Canon. No circular dependencies.
+
+### Structure
+
+```
+canon/epistemic-modes.md (Tier 1)
+│
+├── docs/synthesis-ledger.md        (Exploration preservation)
+├── docs/mode-separated-conversations.md (Human collaboration)
+└── docs/oddkit/modes.md            (Agent behavior)
+    ├── IMPL-A-explain-mode-annotation.md (Instruction Set A)
+    └── IMPL-B-mode-headers.md           (Instruction Set B)
+```
+
+### Notes
+
+- No enforcement hooks yet — this is observability and voluntary alignment
+- Implementation instruction sets are handoff-ready for Cursor execution
+- Instruction Set B depends on Instruction Set A being validated first
+
+---
+
 ## 0.17.0 — 2026-01-26
 
 **Fragment III and Anti-Metric Laundering Constraint**

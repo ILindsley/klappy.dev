@@ -1,8 +1,8 @@
 {
   "pack": {
     "name": "klappy-canon",
-    "version": "0.10.0",
-    "updated_at": "2026-01-22",
+    "version": "0.18.0",
+    "updated_at": "2026-01-28",
     "description": "Canonical orientation, constraints, decision rules, evidence policies, and ODD appendices used across klappy.dev.",
     "public_entrypoint": "klappy://public/odd",
     "canon_entrypoint": "klappy://meta/canon-index",
@@ -344,6 +344,22 @@
         "governance",
         "learning",
         "promotion"
+      ]
+    },
+    {
+      "uri": "klappy://canon/epistemic-modes",
+      "path": "/canon/epistemic-modes.md",
+      "title": "Epistemic Modes",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 1,
+      "voice": "neutral",
+      "stability": "stable",
+      "tags": [
+        "epistemology",
+        "decision-making",
+        "governance"
       ]
     },
     {

@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-28T22:17:40.213Z
-Total Files: 213
+Generated: 2026-01-29T00:00:26.268Z
+Total Files: 219
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -20,8 +20,8 @@ details (attempts, version folders, source code).
 - **Root** (1 files)
 - **About** (6 files)
 - **Apocrypha** (14 files)
-- **Canon** (26 files)
-- **Documentation** (73 files)
+- **Canon** (27 files)
+- **Documentation** (78 files)
 - **Infrastructure** (10 files)
 - **Interfaces & Contracts** (6 files)
 - **ODD (Outcomes-Driven Development)** (24 files)
@@ -9527,6 +9527,120 @@ The practical mechanism (re-deploying a commit, retargeting, or reverting) is le
 
 
 --------------------------------------------------------------------------------
+📄 File: docs/mode-separated-conversations.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/mode-separated-conversations
+title: "Mode-Separated Conversations"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["planning", "execution", "collaboration"]
+---
+
+# Mode-Separated Conversations
+
+> Trust emerges when participants know which epistemic mode they are in.
+
+## Relationship to Canon
+
+This document operationalizes:
+
+- **Canon: Epistemic Modes**
+
+It does not redefine modes.
+It describes how conversations respect them.
+
+---
+
+## The Core Insight
+
+Confusion and mistrust arise when:
+
+- planning conversations pretend to execute
+- execution conversations reopen exploration
+- critique is misinterpreted as obstruction
+
+Separating conversations by epistemic mode reduces friction without reducing rigor.
+
+---
+
+## Planning Conversations
+
+Purpose:
+
+- clarify intent
+- surface assumptions
+- explore tradeoffs
+
+Characteristics:
+
+- no artifacts required
+- uncertainty is acceptable
+- disagreement is productive
+
+Invalid moves:
+
+- claiming completion
+- demanding proof
+- optimizing prematurely
+
+---
+
+## Execution Conversations
+
+Purpose:
+
+- produce outcomes
+- verify results
+- evaluate completion
+
+Characteristics:
+
+- artifacts required
+- claims must be verifiable
+- scope is constrained
+
+Invalid moves:
+
+- introducing new ideas without acknowledgement
+- reframing goals retroactively
+- debating intent instead of evidence
+
+---
+
+## Mode Signaling
+
+Mode MAY be signaled explicitly:
+
+- "Let's stay in planning for now"
+- "Switching to execution"
+- "This is exploratory"
+
+Explicit signaling prevents accidental collapse.
+
+---
+
+## Reversion Is Allowed
+
+Returning to an earlier mode is not failure.
+It is often evidence of learning.
+
+What matters is **acknowledgement**, not momentum.
+
+---
+
+## Final Note
+
+Mode separation is not rigidity.
+It is how collaboration scales without coercion.
+
+
+
+--------------------------------------------------------------------------------
 📄 File: docs/oddkit/ABOUT.md
 --------------------------------------------------------------------------------
 
@@ -9544,6 +9658,354 @@ Then run:
 ```
 oddkit explain –last
 ```
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/oddkit/IMPL-A-explain-mode-annotation.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/oddkit/impl-a-explain-mode-annotation
+title: "Implementation: Annotate oddkit explain with Epistemic Mode"
+audience: docs
+exposure: internal
+tier: 3
+voice: neutral
+stability: evolving
+tags: ["oddkit", "implementation", "epistemic-modes"]
+---
+
+# Implementation Instruction Set A
+
+## Lightly annotate oddkit explain output with detected epistemic mode
+
+---
+
+## Intent
+
+Surface epistemic context without enforcing it.
+
+The goal is not to control behavior, but to:
+
+- increase user/agent self-awareness
+- make mode mismatches visible
+- preserve trust by explaining why oddkit behaved a certain way
+
+This must remain **advisory, not normative**.
+
+---
+
+## Scope
+
+**Files likely involved** (do not assume exact names):
+
+- `src/explain/*` or renderer responsible for `oddkit explain`
+- any debug or metadata structure already containing mode signals
+
+**DO NOT touch:**
+
+- Canon documents
+- docs (except this instruction set)
+
+---
+
+## Requirements
+
+### 1. Detect epistemic mode
+
+Use existing signals only:
+
+- tool invoked (librarian, validate)
+- presence of artifacts
+- completion claims
+- question vs statement form
+
+**Do NOT invent new heuristics yet.**
+
+### 2. Annotate explain output
+
+Add a small, optional section near the top:
+
+```
+Epistemic Mode (detected): Exploration | Planning | Execution
+Confidence: low | medium | high
+```
+
+This must be:
+
+- informational
+- non-blocking
+- non-judgmental
+
+### 3. Explain impact (one sentence max)
+
+Example:
+
+> "This influenced behavior by deferring validation until artifacts are present."
+
+### 4. Never fail or warn due to mode
+
+- Mode detection must not change verdicts
+- No errors, no refusal, no gating
+
+---
+
+## Acceptance Criteria
+
+- [ ] Running `oddkit explain --last` shows:
+  - detected mode
+  - confidence level
+  - brief explanation
+- [ ] Removing the section would not change system behavior
+- [ ] Users can ignore it without penalty
+
+---
+
+## Explicit Non-Goals
+
+- ❌ No mode enforcement
+- ❌ No policy rules
+- ❌ No promotion logic
+- ❌ No Canon changes
+
+**This is observability, not governance.**
+
+---
+
+## Depends On
+
+- **Canon: Epistemic Modes** — defines the modes
+- **docs/oddkit/modes.md** — defines oddkit's mode behavior contract
+
+---
+
+## Next
+
+After this is validated, proceed to **Instruction Set B** (mode headers).
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/oddkit/IMPL-B-mode-headers.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/oddkit/impl-b-mode-headers
+title: "Implementation: Optional Epistemic Mode Headers"
+audience: docs
+exposure: internal
+tier: 3
+voice: neutral
+stability: evolving
+tags: ["oddkit", "implementation", "epistemic-modes"]
+---
+
+# Implementation Instruction Set B
+
+## Add optional epistemic mode headers in conversations
+
+---
+
+## Intent
+
+Allow humans and agents to explicitly signal epistemic intent without requiring it.
+
+This preserves the separation between:
+
+- idea shaping
+- planning
+- execution
+
+...without turning conversations into ceremony.
+
+---
+
+## Scope
+
+**Where this applies:**
+
+- agent prompts
+- orchestrator inputs
+- oddkit CLI messages
+- conversational interfaces
+
+**Where it does NOT apply:**
+
+- Canon documents
+- Validation logic
+- Librarian retrieval rules
+
+---
+
+## Requirements
+
+### 1. Support optional headers
+
+Recognize (case-insensitive):
+
+```
+[Mode: Exploration]
+[Mode: Planning]
+[Mode: Execution]
+```
+
+Header must:
+
+- be optional
+- appear at the top of a message
+- not affect message content
+
+### 2. Override inference when present
+
+- If header exists, it takes precedence over detection
+- If absent, system falls back to inference
+
+### 3. Expose header to tools
+
+Expose to:
+
+- `oddkit explain`
+- debug output
+- explainable reasoning
+
+**Not** to:
+
+- enforcement logic (yet)
+
+### 4. Never require headers
+
+- No warnings
+- No errors
+- No "best practice" nags
+
+---
+
+## Acceptance Criteria
+
+- [ ] Messages with headers:
+  - are parsed correctly
+  - influence detected mode
+  - are reflected in explain output
+- [ ] Messages without headers behave exactly as before
+- [ ] Removing headers does not break flows
+
+---
+
+## Explicit Non-Goals
+
+- ❌ No forced workflows
+- ❌ No rejection based on mode
+- ❌ No automatic transitions
+- ❌ No requirement that users "get it right"
+
+**This is clarity, not compliance.**
+
+---
+
+## Depends On
+
+- **Canon: Epistemic Modes** — defines the modes
+- **docs/oddkit/modes.md** — defines oddkit's mode behavior contract
+- **Instruction Set A** — must be complete first (explain output must exist)
+
+---
+
+## Sequencing Note
+
+This instruction set should only be executed **after Instruction Set A is validated**.
+
+The order matters:
+
+1. Annotation first → visibility without pressure
+2. Headers second → voluntary alignment
+3. Enforcement only after reality proves the value
+
+Trust before control. Explanation before instruction. Structure that emerges instead of being imposed.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/oddkit/modes.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/oddkit/modes
+title: "Epistemic Mode Guidance for oddkit"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["oddkit", "agents", "epistemic-modes"]
+---
+
+# Epistemic Mode Guidance for oddkit
+
+> oddkit respects epistemic modes defined in Canon and must not collapse them.
+
+## Canon Reference
+
+This document depends on:
+
+- **Canon: Epistemic Modes**
+
+If Canon changes, this document must adapt.
+
+---
+
+## Default Mode Behavior
+
+| Mode        | oddkit Behavior                                        |
+| ----------- | ------------------------------------------------------ |
+| Exploration | Ask questions, surface tensions, record insights       |
+| Planning    | Clarify assumptions, outline intent, avoid claims      |
+| Execution   | Require artifacts, validate outcomes, enforce evidence |
+
+oddkit MUST explain when it refuses an action due to mode mismatch.
+
+---
+
+## Detection (Heuristic)
+
+oddkit MAY infer mode from:
+
+- user language ("what if", "let's plan", "I finished")
+- presence or absence of artifacts
+- explicit user declaration
+
+Inference is always weaker than explicit declaration.
+
+---
+
+## Mode Refusal Examples
+
+Valid refusals:
+
+- "This appears to be exploratory. I can't validate completion yet."
+- "You're asking for execution validation, but no artifacts were provided."
+- "This introduces new alternatives during execution. Do you want to return to planning?"
+
+Refusals MUST cite the epistemic reason, not a tool limitation.
+
+---
+
+## Interaction with Other oddkit Capabilities
+
+- **Librarian** respects mode by:
+  - preferring governing docs in Planning
+  - allowing broader sources in Exploration
+
+- **Validation** triggers only in Execution
+
+- **Promotions** occur only after repeated Execution outcomes
+
+---
+
+## Final Note
+
+oddkit does not decide when to act.
+It enforces clarity about **what kind of thinking is happening**.
 
 
 
@@ -10318,6 +10780,117 @@ Why this exact wording? Why this location?
 
 
 
+--------------------------------------------------------------------------------
+📄 File: docs/synthesis-ledger.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/synthesis-ledger
+title: "Synthesis Ledger"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["exploration", "learning", "synthesis"]
+---
+
+# Synthesis Ledger
+
+> A Synthesis Ledger captures learning from Exploration Mode without forcing decisions or execution.
+
+## Relationship to Canon
+
+This document hangs from:
+
+- **Canon: Epistemic Modes**
+
+The Synthesis Ledger exists **only** in Exploration Mode.
+It MUST NOT be treated as a plan, requirement, or commitment.
+
+---
+
+## Purpose
+
+Exploration produces:
+
+- competing ideas
+- tensions
+- reframed problems
+- partial truths
+
+The Synthesis Ledger preserves these **before they are lost**, while explicitly avoiding:
+
+- premature convergence
+- implicit commitments
+- retroactive justification
+
+---
+
+## What Belongs in the Ledger
+
+Allowed entries:
+
+- Key insights discovered
+- Open questions worth preserving
+- Tradeoffs surfaced but unresolved
+- Patterns noticed across attempts
+- Hypotheses that need testing
+
+Explicitly excluded:
+
+- Decisions
+- Requirements
+- Roadmaps
+- Acceptance criteria
+- Claims of completion
+
+---
+
+## Entry Structure (Minimal)
+
+Each entry SHOULD include:
+
+- **Observation** — what was noticed
+- **Context** — what triggered it
+- **Implication** — why it might matter
+- **Confidence** — low / medium / high
+- **Open Questions** — if any
+
+This structure preserves meaning without asserting truth.
+
+---
+
+## Anti-Patterns
+
+The following are violations:
+
+- Using the ledger as a backlog
+- Treating entries as promises
+- Editing history to match later outcomes
+- Converting ledger entries directly into tasks
+
+If an entry demands action, it has crossed into Planning Mode.
+
+---
+
+## Lifecycle
+
+- Ledger entries may persist indefinitely
+- Entries MAY be referenced by Planning documents
+- Entries MUST NOT be silently promoted into Execution
+
+Promotion requires explicit transition and justification.
+
+---
+
+## Final Note
+
+The Synthesis Ledger is not about being right.
+It is about **not forgetting what mattered before certainty arrived**.
+
+
+
 ================================================================================
 ## Canon
 ================================================================================
@@ -10347,6 +10920,53 @@ This changelog tracks changes to the **Canon pack** as a whole.
 
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
+
+## 0.18.0 — 2026-01-28
+
+**Epistemic Modes — Tier 1 Canon Foundation**
+
+This release introduces Epistemic Modes as a Tier 1 Canon principle, establishing the foundational distinction between Exploration, Planning, and Execution. Three downstream operational documents hang from this Canon nail, and two implementation instruction sets prepare oddkit for mode-aware behavior.
+
+### Added
+
+- **Canon: Epistemic Modes** (`/canon/epistemic-modes.md`) — Tier 1 Canon principle defining three epistemic modes (Exploration, Planning, Execution), their truth conditions, obligations, and risks. Introduces the Non-Collapse Rule: modes must not be collapsed. Answers the prior question: *Is it legitimate to decide or act at all?*
+
+- **Synthesis Ledger** (`/docs/synthesis-ledger.md`) — Operational doc for preserving learning from Exploration Mode without forcing decisions. Hangs from Epistemic Modes. Defines what belongs in a ledger, anti-patterns, and lifecycle rules.
+
+- **Mode-Separated Conversations** (`/docs/mode-separated-conversations.md`) — Operational doc describing how conversations respect epistemic modes. Defines planning vs execution conversation characteristics and mode signaling patterns.
+
+- **Epistemic Mode Guidance for oddkit** (`/docs/oddkit/modes.md`) — Tooling guidance doc teaching oddkit how to detect modes, respect them, and explain refusals. Defines default mode behavior and interaction with other oddkit capabilities.
+
+- **Implementation Instruction Set A** (`/docs/oddkit/IMPL-A-explain-mode-annotation.md`) — Handoff doc for annotating `oddkit explain` output with detected epistemic mode. Observability without enforcement.
+
+- **Implementation Instruction Set B** (`/docs/oddkit/IMPL-B-mode-headers.md`) — Handoff doc for supporting optional `[Mode: X]` headers in conversations. Voluntary alignment without forced workflows.
+
+### Philosophy
+
+- **Mode separation is epistemic hygiene** — Collapsing exploration into planning or planning into execution produces false confidence, premature convergence, and brittle outcomes.
+- **Trust before control** — Annotation comes before headers; headers come before enforcement. Let reality prove value before adding constraints.
+- **Inaction is legitimate** — Remaining in Exploration or Planning is valid when unknowns materially affect outcomes. Pressure to act is not evidence that action is warranted.
+- **Canon points to nothing** — The Canon doc makes minimal forward references by name only. All downstream docs point up to Canon. No circular dependencies.
+
+### Structure
+
+```
+canon/epistemic-modes.md (Tier 1)
+│
+├── docs/synthesis-ledger.md        (Exploration preservation)
+├── docs/mode-separated-conversations.md (Human collaboration)
+└── docs/oddkit/modes.md            (Agent behavior)
+    ├── IMPL-A-explain-mode-annotation.md (Instruction Set A)
+    └── IMPL-B-mode-headers.md           (Instruction Set B)
+```
+
+### Notes
+
+- No enforcement hooks yet — this is observability and voluntary alignment
+- Implementation instruction sets are handoff-ready for Cursor execution
+- Instruction Set B depends on Instruction Set A being validated first
+
+---
 
 ## 0.17.0 — 2026-01-26
 
@@ -14005,6 +14625,214 @@ It grants permission to act when something smells wrong — not an obligation to
 - **Humans** decide whether Canon should change.
 
 Epistemic hygiene preserves trust by ensuring that authority evolves only when reality demands it.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/epistemic-modes.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/epistemic-modes
+title: "Epistemic Modes"
+audience: canon
+exposure: nav
+tier: 1
+voice: neutral
+stability: stable
+tags: ["epistemology", "decision-making", "governance"]
+---
+
+# Epistemic Modes
+
+> Exploration, planning, and execution are not interchangeable.
+> Collapsing them produces false confidence, premature convergence, and brittle outcomes.
+
+## Purpose
+
+This document defines **epistemic modes**: distinct states of reasoning with different
+truth conditions, risks, and obligations.
+
+These modes exist **before** tools, processes, or implementations.
+They govern _when_ it is legitimate to explore, decide, or act.
+
+This is a Canon document because it constrains _how truth is formed_, not merely how work is performed.
+
+---
+
+## The Three Epistemic Modes
+
+### 1. Exploration Mode
+
+**Purpose:**  
+To surface possibilities, tensions, unknowns, and competing frames.
+
+**Characteristics:**
+
+- Questions outnumber answers
+- Inconsistencies are expected
+- Ideas may contradict each other
+- Partial, speculative, or adversarial thinking is allowed
+
+**Truth Condition:**  
+An idea is valid if it **reveals something new**, not if it is correct.
+
+**Obligations:**
+
+- Do not converge prematurely
+- Do not claim decisions
+- Do not optimize or finalize
+
+**Primary Risk:**  
+False closure — mistaking familiarity or coherence for understanding.
+
+Learning generated here may be preserved in a **Synthesis Ledger**.
+
+---
+
+### 2. Planning Mode
+
+**Purpose:**  
+To narrow possibilities into coherent intent and prepare for action.
+
+**Characteristics:**
+
+- Assumptions are made explicit
+- Tradeoffs are articulated
+- Scope and constraints are defined
+- Alternatives are deliberately excluded
+
+**Truth Condition:**  
+A plan is valid if its **assumptions are visible and challengeable**.
+
+**Obligations:**
+
+- Declare what is being assumed
+- Declare what is being deferred
+- Declare what would invalidate the plan
+
+**Primary Risk:**  
+Speculative certainty — treating untested assumptions as facts.
+
+---
+
+### 3. Execution Mode
+
+**Purpose:**  
+To act, build, test, and produce outcomes.
+
+**Characteristics:**
+
+- Commitments are made
+- Changes are concrete and observable
+- Work produces artifacts or evidence
+
+**Truth Condition:**  
+An action is valid if it **produces verifiable outcomes**.
+
+**Obligations:**
+
+- Provide evidence of completion
+- Distinguish effort from results
+- Acknowledge limits of verification
+
+**Primary Risk:**  
+Metric laundering — claiming success without proof.
+
+---
+
+## The Non-Collapse Rule
+
+**Epistemic modes MUST NOT be collapsed.**
+
+In particular:
+
+- Exploration must not pretend to decide
+- Planning must not pretend to execute
+- Execution must not pretend to explore alternatives retroactively
+
+When modes are collapsed:
+
+- Uncertainty is hidden instead of managed
+- Decisions are justified after the fact
+- Confidence increases while truth decreases
+
+Mode separation is not bureaucracy.  
+It is epistemic hygiene.
+
+---
+
+## Mode Transitions
+
+Transitions between modes are **not automatic**.
+
+A transition is legitimate only when:
+
+- The obligations of the current mode have been satisfied
+- The risks of the next mode are explicitly accepted
+
+Reverting to an earlier mode is always allowed.
+Skipping modes is allowed only when explicitly acknowledged.
+
+For practical guidance on mode transitions in conversation, see **Mode-Separated Conversations**.
+
+---
+
+## Legitimacy of Inaction
+
+Not acting is a valid outcome.
+
+Remaining in Exploration or Planning is legitimate when:
+
+- Unknowns materially affect outcomes
+- Evidence is insufficient
+- The cost of premature action exceeds the cost of delay
+
+Pressure to act is not evidence that action is warranted.
+
+---
+
+## Relationship to Other Canon Principles
+
+This document complements:
+
+- **Epistemic Hygiene** — _when review or correction is required_
+- **Verification and Evidence** — _what counts as proof_
+- **Definition of Done** — _what completion means_
+
+Epistemic modes answer a prior question:
+
+> _Is it legitimate to decide or act at all?_
+
+---
+
+## Scope
+
+This principle applies to:
+
+- Humans and agents
+- Design, engineering, research, and governance
+- Early ideation through long-term maintenance
+
+Tools, processes, and workflows may encode or enforce these modes,
+but they do not define them.
+
+---
+
+## Final Note
+
+Clarity of mode creates trust.
+
+When participants know:
+
+- which mode they are in
+- what is expected
+- what is _not_ required yet
+
+Collaboration becomes possible without coercion,
+and learning compounds instead of being overwritten.
+
+This document exists to protect that clarity.
 
 
 
