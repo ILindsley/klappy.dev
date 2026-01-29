@@ -26,7 +26,7 @@ This release introduces Epistemic Modes as a Tier 1 Canon principle, establishin
 
 ### Added
 
-- **Canon: Epistemic Modes** (`/canon/epistemic-modes.md`) — Tier 1 Canon principle defining three epistemic modes (Exploration, Planning, Execution), their truth conditions, obligations, and risks. Introduces the Non-Collapse Rule: modes must not be collapsed. Answers the prior question: *Is it legitimate to decide or act at all?*
+- **Canon: Epistemic Modes** (`/canon/epistemic-modes.md`) — Tier 1 Canon principle defining three epistemic modes (Exploration, Planning, Execution), their truth conditions, obligations, and risks. Introduces the Non-Collapse Rule: modes must not be collapsed. Answers the prior question: _Is it legitimate to decide or act at all?_
 
 - **Synthesis Ledger** (`/docs/synthesis-ledger.md`) — Operational doc for preserving learning from Exploration Mode without forcing decisions. Hangs from Epistemic Modes. Defines what belongs in a ledger, anti-patterns, and lifecycle rules.
 
@@ -69,7 +69,7 @@ canon/epistemic-modes.md (Tier 1)
 
 **Fragment III and Anti-Metric Laundering Constraint**
 
-This release introduces Fragment III (*Nothing Exceeded the Threshold*) and the Anti-Metric Laundering constraint, addressing the failure mode where systems optimize for metric compliance rather than underlying reality.
+This release introduces Fragment III (_Nothing Exceeded the Threshold_) and the Anti-Metric Laundering constraint, addressing the failure mode where systems optimize for metric compliance rather than underlying reality.
 
 ### Added
 
@@ -89,7 +89,7 @@ This release introduces Fragment III (*Nothing Exceeded the Threshold*) and the 
 
 The Anti-Metric Laundering constraint exists because:
 
-> *"Nothing exceeded the threshold."*
+> _"Nothing exceeded the threshold."_
 
 ---
 
@@ -99,7 +99,7 @@ The Anti-Metric Laundering constraint exists because:
 
 This release introduces a foundational documentation framework that preserves human-first writing while enabling agent-executable structure where appropriate.
 
-**Why this matters:** for the first time, agents can be given *decision-shaping context* without bloating prompts or forcing documents into rigid templates.
+**Why this matters:** for the first time, agents can be given _decision-shaping context_ without bloating prompts or forcing documents into rigid templates.
 
 This release establishes shared vocabulary, clear separation of concerns, and extraction rules that make context packs smaller, more reliable, and easier to evolve over time.
 
@@ -108,7 +108,7 @@ This release establishes shared vocabulary, clear separation of concerns, and ex
 ### Added (Source Doctrine)
 
 - **Tier vs Relevance** (`/canon/documentation/tier-vs-relevance.md`)  
-  Defines a hard separation between *tier* (human progressive disclosure) and *relevance* (agent context inclusion).  
+  Defines a hard separation between _tier_ (human progressive disclosure) and _relevance_ (agent context inclusion).  
   Tier controls visibility. Relevance controls usability. They must never substitute for each other.
 
 - **Execution Posture** (`/canon/documentation/execution-posture.md`)  
@@ -178,6 +178,7 @@ This release introduces the Verification & Evidence canon principle, which defin
 ### Origin
 
 This canon principle was extracted after Fluent Mobile v0.3 attempt-001 FAILED due to:
+
 1. Agent claiming success without verification
 2. Agent creating fake waveform data via random number generators
 3. Agent presenting simulated screenshots as evidence
@@ -260,12 +261,12 @@ This release applies the epistemic obligation model to all documentation files, 
 
 ### Distribution After Reclassification
 
-| Tier | Count | Role |
-|------|-------|------|
-| Tier 0 | 8 | Scope exclusion (public-facing) |
-| Tier 1 | 20 | Foundational obligation |
-| Tier 2 | 37 | Shared obligation |
-| Tier 3 | 52 | Reference only |
+| Tier   | Count | Role                            |
+| ------ | ----- | ------------------------------- |
+| Tier 0 | 8     | Scope exclusion (public-facing) |
+| Tier 1 | 20    | Foundational obligation         |
+| Tier 2 | 37    | Shared obligation               |
+| Tier 3 | 52    | Reference only                  |
 
 ### Philosophy
 
@@ -868,6 +869,7 @@ This release adds automated content compilation via a pre-commit git hook, ensur
 ### Behavior
 
 On every `git commit`:
+
 1. `npm run sync` runs (copies content to `/public/content/`, generates `manifest.json`)
 2. `npm run book` runs (generates `klappy-dev-book-export.md`)
 3. Generated files are auto-staged for inclusion in the commit
@@ -1061,10 +1063,10 @@ This release introduces the multi-lane PRD architecture, epochs for comparabilit
 
 ### Epochs
 
-| Epoch | Contract | Description |
-|-------|----------|-------------|
-| E0001-single-prd-era | 1.x | Single PRD world (`/docs/PRD.md`) |
-| E0002-multi-lane-era | 2.x | Multi-lane world (`/docs/PRD/<lane>/PRD.md`) |
+| Epoch                | Contract | Description                                  |
+| -------------------- | -------- | -------------------------------------------- |
+| E0001-single-prd-era | 1.x      | Single PRD world (`/docs/PRD.md`)            |
+| E0002-multi-lane-era | 2.x      | Multi-lane world (`/docs/PRD/<lane>/PRD.md`) |
 
 ### Breaking Changes
 
