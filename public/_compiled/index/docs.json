@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-01-29T16:39:26.835Z",
+  "generated_at": "2026-01-29T16:51:26.143Z",
   "description": "Fast-lookup index for Librarian retrieval. Per docs/agents/librarian/contract.md",
   "schema_notes": {
     "authority_band": "Resolved authority (frontmatter override > inferred from root)",
@@ -830,16 +830,17 @@
       "authority_inferred": "governing",
       "uri": "klappy://canon/agents/odd-epistemic-guide",
       "title": "ODD Epistemic Guide",
-      "subtitle": "A thinking scaffold and gatekeeper—not an implementer.",
+      "subtitle": "A phase-aware cognitive governor for Outcomes-Driven Development.",
       "tags": [
+        "odd",
         "agents",
         "epistemics",
         "governance",
-        "phase-gating",
-        "constraints"
+        "phase",
+        "validation"
       ],
       "stability": "evolving",
-      "tier": "1",
+      "tier": "2",
       "audience": "canon",
       "exposure": "nav",
       "voice": "neutral",
@@ -854,100 +855,105 @@
         {
           "level": 2,
           "text": "Description",
-          "line": 6
+          "line": 7
         },
         {
           "level": 2,
           "text": "Outline",
-          "line": 12
+          "line": 11
         },
         {
           "level": 2,
           "text": "Core Mental Model",
-          "line": 23
+          "line": 24
         },
         {
           "level": 2,
           "text": "Core Duties",
-          "line": 29
+          "line": 39
         },
         {
           "level": 3,
-          "text": "1. Determine Epistemic Phase",
-          "line": 31
+          "text": "1) Determine Epistemic Phase",
+          "line": 41
         },
         {
           "level": 3,
-          "text": "2. Gate Actions by Phase",
-          "line": 47
-        },
-        {
-          "level": 3,
-          "text": "3. Prefer Questions Over Answers",
+          "text": "2) Gate Actions by Phase",
           "line": 56
         },
         {
           "level": 3,
-          "text": "4. Delay Execution",
-          "line": 67
+          "text": "3) Prefer Questions Over Answers",
+          "line": 64
         },
         {
           "level": 3,
-          "text": "5. Explain the ODD Rationale",
-          "line": 78
+          "text": "4) Delay Execution",
+          "line": 74
         },
         {
           "level": 3,
-          "text": "6. No Silent Transitions",
-          "line": 87
+          "text": "5) Explain the ODD Rationale",
+          "line": 84
         },
         {
           "level": 3,
-          "text": "7. Human Authority",
-          "line": 93
+          "text": "6) No Silent Transitions",
+          "line": 92
+        },
+        {
+          "level": 3,
+          "text": "7) Human Authority",
+          "line": 98
+        },
+        {
+          "level": 2,
+          "text": "What This Guide Does Not Decide",
+          "line": 109
+        },
+        {
+          "level": 2,
+          "text": "Roadmap Phases vs ODD Phases",
+          "line": 123
+        },
+        {
+          "level": 2,
+          "text": "Common Drift Signals",
+          "line": 136
         },
         {
           "level": 2,
           "text": "Response Patterns",
-          "line": 105
+          "line": 153
         },
         {
           "level": 3,
-          "text": "When user jumps to execution prematurely:",
-          "line": 109
+          "text": "When user jumps to execution prematurely",
+          "line": 155
         },
         {
           "level": 3,
-          "text": "When another agent wants to \"helpfully\" implement:",
-          "line": 125
+          "text": "When another agent wants to \"helpfully\" implement",
+          "line": 168
         },
         {
           "level": 3,
-          "text": "When phase transition may be appropriate:",
-          "line": 138
+          "text": "When phase transition may be appropriate",
+          "line": 178
         },
         {
           "level": 2,
-          "text": "What You Are (and Are Not)",
-          "line": 152
+          "text": "Worked Example: Feature-Complete but Not Yet Validated",
+          "line": 190
         },
         {
           "level": 2,
           "text": "Integration Notes",
-          "line": 172
-        },
-        {
-          "level": 2,
-          "text": "Derivation Notice",
-          "line": 184
-        },
-        {
-          "level": 2,
-          "text": "See Also",
-          "line": 202
+          "line": 214
         }
       ],
-      "heading_count": 20,
+      "heading_count": 21,
       "has_frontmatter": true
     },
     {
