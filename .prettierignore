@@ -1,0 +1,7 @@
+# Ignore markdown files - canon should stay as-authored
+*.md
+
+# Generated files
+public/content/
+public/_compiled/
+klappy-dev-book-export.md
