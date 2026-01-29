@@ -601,6 +601,24 @@
       ]
     },
     {
+      "uri": "klappy://canon/agents/odd-epistemic-guide",
+      "path": "/canon/agents/odd-epistemic-guide.md",
+      "title": "ODD Epistemic Guide",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 1,
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": [
+        "agents",
+        "epistemics",
+        "governance",
+        "phase-gating",
+        "constraints"
+      ]
+    },
+    {
       "uri": "klappy://odd/manifesto",
       "path": "/odd/manifesto.md",
       "title": "ODD Manifesto — Extended",
