@@ -44,6 +44,7 @@ Arbitration considers multiple signals. None of these signals alone determines o
 How close is the source to the current context?
 
 Sources are considered in order of proximity:
+
 - Same attempt
 - Same feature
 - Same PRD
@@ -58,6 +59,7 @@ A source from the same attempt is more relevant than one from baseline, all else
 What was the purpose of the source when it was created?
 
 Intent categories, from least to most durable:
+
 - **Workaround** — Temporary solution to unblock progress
 - **Experiment** — Exploratory work without commitment
 - **Operational** — Documentation of current practice
@@ -71,6 +73,7 @@ A workaround is not expected to persist. A promoted pattern is expected to gover
 How well is the claim supported by verifiable artifacts?
 
 Evidence levels:
+
 - **None** — Assertion without support
 - **Weak** — Partial or anecdotal support
 - **Medium** — Reproducible but limited scope

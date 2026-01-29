@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-29T01:00:39.422Z
+Generated: 2026-01-29T01:15:29.378Z
 Total Files: 220
 
 This is a documentation export of all markdown files from the klappy.dev
@@ -10921,6 +10921,54 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.19.0 — 2026-01-29
+
+**Weighted Relevance & Arbitration — Conflict Handling Doctrine**
+
+This release introduces the governing Canon doctrine for how the system handles conflict between competing truths. Per this doctrine, handling conflict is not the same as resolving conflict — uncertainty is a valid outcome, and forced convergence is epistemically harmful.
+
+### Added
+
+- **Canon: Weighted Relevance & Arbitration** (`/canon/weighted-relevance-and-arbitration.md`) — Tier 2 Canon principle defining how arbitration occurs across Librarian, Validation, Promotions, and oddkit. Establishes signals (scope, intent, evidence, recency), hard constraints (intent-gated precedence, explicit supersedes only), and valid outcomes (prefer, defer, escalate, propose promotion).
+
+### Philosophy
+
+- **Handling conflict ≠ resolving conflict** — Arbitration produces recommendations, deferrals, or escalations. It does not force a winner when evidence doesn't justify one.
+- **Scores recommend, they do not decide** — A high score indicates relevance, not authority. A low score indicates reduced signal, not invalidity.
+- **Uncertainty is a valid outcome** — When signals conflict or evidence is weak, the system surfaces uncertainty rather than masking it with confident-sounding answers.
+- **Forced convergence is epistemically harmful** — Selecting one truth to avoid presenting ambiguity teaches the system to lie by omission.
+
+### Hard Constraints Codified
+
+1. **Intent-gated precedence** — A newer workaround or experiment MUST NOT outrank an older promoted or pattern unless it explicitly supersedes it.
+2. **Evidence requirement** — Claims without evidence trigger an epistemic hygiene smell. They cannot be preferred over evidenced claims.
+3. **Explicit supersedes** — Supersession is never inferred from recency, scope, or content similarity. If a document does not declare what it supersedes, it supersedes nothing.
+4. **Confidence-based escalation** — If arbitration confidence is low, the system must escalate or defer. Low-confidence results presented as high-confidence are prohibited.
+
+### Valid Arbitration Outcomes
+
+- **Prefer** — One source is clearly more relevant; system recommends it with explanation.
+- **Defer** — Multiple sources conflict; evidence does not clearly favor one; result is unresolved.
+- **Escalate** — Human judgment required; system cannot arbitrate without additional context.
+- **Propose promotion** — A pattern has emerged; conflict reveals a gap in governing documentation.
+
+### Implementation Reference
+
+oddkit implements this doctrine via:
+- Margin-based confidence calculation (reproducible, explainable)
+- Intent-gated precedence as hard veto (not just score multiplier)
+- Typed contradictions (AUTHORITY_, EVIDENCE_, SCOPE_)
+- Explicit `arbitration.outcome` field
+- `advisory` flag separate from status
+
+### Notes
+
+- This Canon document governs all arbitration behavior across the system
+- No automatic Canon mutation — only humans through the promotion pipeline can elevate patterns
+- Conflict carries information; eliminating it destroys signal
+
+---
+
 ## 0.18.0 — 2026-01-28
 
 **Epistemic Modes — Tier 1 Canon Foundation**
@@ -16719,6 +16767,7 @@ Arbitration considers multiple signals. None of these signals alone determines o
 How close is the source to the current context?
 
 Sources are considered in order of proximity:
+
 - Same attempt
 - Same feature
 - Same PRD
@@ -16733,6 +16782,7 @@ A source from the same attempt is more relevant than one from baseline, all else
 What was the purpose of the source when it was created?
 
 Intent categories, from least to most durable:
+
 - **Workaround** — Temporary solution to unblock progress
 - **Experiment** — Exploratory work without commitment
 - **Operational** — Documentation of current practice
@@ -16746,6 +16796,7 @@ A workaround is not expected to persist. A promoted pattern is expected to gover
 How well is the claim supported by verifiable artifacts?
 
 Evidence levels:
+
 - **None** — Assertion without support
 - **Weak** — Partial or anecdotal support
 - **Medium** — Reproducible but limited scope

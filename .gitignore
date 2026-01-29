@@ -28,3 +28,4 @@ yarn-error.log*
 
 # Worktrees (ephemeral, safe to delete anytime)
 .worktrees/
+.oddkit/
