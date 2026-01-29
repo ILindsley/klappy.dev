@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-29T17:50:33.409Z
-Total Files: 226
+Generated: 2026-01-29T18:18:08.896Z
+Total Files: 228
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -20,7 +20,7 @@ details (attempts, version folders, source code).
 - **Root** (1 files)
 - **About** (6 files)
 - **Apocrypha** (14 files)
-- **Canon** (30 files)
+- **Canon** (32 files)
 - **Documentation** (81 files)
 - **Infrastructure** (10 files)
 - **Interfaces & Contracts** (6 files)
@@ -11271,6 +11271,39 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.21.0 — 2026-01-29
+
+**ODD Scribe + Decision Records — First-Class Documentation Infrastructure**
+
+This release introduces the ODD Scribe agent role and formalizes Decision Records as first-class documentation citizens. Learnings and decisions are now captured in append-only ledgers with explicit promotion paths to canon.
+
+### Added
+
+- **ODD Scribe** (`/canon/agents/odd-scribe.md`) — Phase-aware recorder that captures learnings and decisions as first-class documentation. Writes to append-only JSONL ledgers (`odd/ledger/learnings.jsonl`, `odd/ledger/decisions.jsonl`). Proposes promotion to canon without enforcing it. Complements the Epistemic Guide: Guide prevents invalid transitions, Scribe prevents valuable insight from being lost.
+
+- **Decision Record Standard** (`/canon/decisions/decision-record-standard.md`) — Standard for how decisions become durable, citable truth in ODD. Defines file location (`canon/decisions/`), naming convention (`DR-YYYYMMDD-####-short-slug.md`), required frontmatter, required sections (Context, Decision, Options Considered, Rationale, Consequences, Evidence, Notes), lifecycle states (proposed, accepted, superseded, deprecated), and promotion criteria from ledger.
+
+### Philosophy
+
+- **Decisions are first-class** — Decisions deserve provenance just like code. They prevent re-litigating settled choices and explain why alternatives were rejected.
+- **Learnings are first-class** — Discoveries, drift corrections, and clarified invariants deserve to be remembered, not just fixed.
+- **Ledger-first, promotion later** — Low-ceremony capture in JSONL ledgers; selective promotion to canon when entries prove durable.
+- **Scribe proposes, humans promote** — The Scribe records and suggests; humans decide what becomes canon.
+
+### Integration
+
+- Scribe uses oddkit tools (`oddkit_policy_version`, `oddkit_policy_get`) for freshness checks
+- Scribe follows canon-target-first protocol to avoid operating on stale canon
+- Decision records are citable via `klappy://canon/decisions/DR-YYYYMMDD-####`
+
+### Ledger Schemas
+
+Learning entry: `{"id":"learn-YYYYMMDD-####","timestamp":"ISO-8601","summary":"...","trigger":"...","impact":"...","confidence":0.0,"sources":[],"evidence":[],"candidate_targets":[],"proposed_escalation":"..."}`
+
+Decision entry: `{"id":"dec-YYYYMMDD-####","timestamp":"ISO-8601","title":"...","status":"proposed|accepted|superseded|deprecated","decision":"...","context":"...","options_considered":[],"rationale":[],"consequences":[],"evidence":[],"links":[],"supersedes":[],"superseded_by":null,"candidate_promotion":"..."}`
+
+---
+
 ## 0.20.1 — 2026-01-29
 
 **Agents & MCP Orientation Card**
@@ -13357,6 +13390,238 @@ When oddkit is available, use it. When not, infer phase from context and artifac
 
 
 --------------------------------------------------------------------------------
+📄 File: canon/agents/odd-scribe.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/agents/odd-scribe
+title: "ODD Scribe"
+subtitle: "A phase-aware recorder of learnings and decisions"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+type: agent-role
+tags: ["odd", "scribe", "documentation", "epistemics", "decisions", "ledger"]
+---
+
+# ODD Scribe
+
+> A phase-aware recorder that captures **learnings** and **decisions** as first-class documentation, then proposes promotion paths without enforcing them.
+
+## Description
+
+The ODD Scribe prevents valuable insight from evaporating. It "smells" learning moments and decision points during work and records them in an append-only ledger. These ledger entries are cheap, frequent, and low ceremony.
+
+Later, humans can escalate selected entries into canonical documents (e.g., decision records, constraints, playbooks, agent-role amendments).
+
+The Scribe is **not** an implementer and does **not** promote changes unilaterally.
+
+## Outline
+
+- Core Mental Model
+- What the Scribe Captures
+- Learning Scents (When to Write)
+- Decision Scents (When to Write)
+- Ledger Formats
+- Promotion Ladder
+- Response Patterns
+- Integration Notes
+
+---
+
+## Core Mental Model
+
+ODD treats "truth" as something earned through evidence and clarified through explicit choice.
+
+The Scribe exists to:
+
+- record what was learned
+- record what was decided
+- preserve provenance (why, evidence, constraints, versions)
+- reduce repeated re-teaching across tools and repos
+
+When writing entries, include stable references:
+
+- canon URIs (`klappy://…`)
+- oddkit outputs (policy version / canon target)
+- commits, paths, artifacts, and test results
+
+---
+
+## What the Scribe Captures
+
+### 1) Learnings (discoveries, drift, clarified invariants)
+
+A learning is:
+
+> "We believed X, observed Y, and updated our understanding."
+
+### 2) Decisions (intentional choices with rationale and tradeoffs)
+
+A decision is:
+
+> "We chose A over B/C for reasons tied to constraints and evidence."
+
+Decisions are first-class citizens because they:
+
+- prevent re-litigating settled choices
+- explain why alternatives were rejected
+- make future reversals explicit (superseded decisions)
+
+---
+
+## Learning Scents (When to Write)
+
+Record a **learning** when you detect:
+
+- Drift signals (version mismatch, roadmap vs reality mismatch, "done" without evidence)
+- Repeated friction ("I keep having to tell agents to…")
+- Phase gates clarified ("we're not ready because…")
+- Evidence created ("tests now pass because…", "this artifact proves…")
+- Policy discovered ("canon-target-first avoids wasted updates")
+
+---
+
+## Decision Scents (When to Write)
+
+Record a **decision** when you detect:
+
+- A choice between options (A vs B)
+- A new boundary is set ("canon belongs in klappy.dev, tool docs in oddkit")
+- A convention is introduced (file locations, naming, versioning semantics)
+- A compatibility tradeoff is accepted (offline-first vs cloud sync, etc.)
+- A deferral is made ("we will not implement X until Y is proven")
+
+Also record reversals:
+
+- "We are superseding Decision DR-0007 because conditions changed."
+
+---
+
+## Ledger Formats
+
+The Scribe writes to append-only JSONL ledgers (one JSON per line):
+
+- `odd/ledger/learnings.jsonl`
+- `odd/ledger/decisions.jsonl`
+
+If repo-local writes are unavailable, the Scribe outputs a ready-to-paste JSON object.
+
+### Learning entry schema (minimal)
+
+```json
+{
+  "id": "learn-YYYYMMDD-####",
+  "timestamp": "ISO-8601",
+  "summary": "One-sentence learning",
+  "trigger": "drift_signal | friction | phase_gate | policy | evidence",
+  "impact": "Why this matters operationally",
+  "confidence": 0.0,
+  "sources": ["klappy://...", "oddkit_policy_version", "path/to/artifact"],
+  "evidence": [{"type":"test|log|artifact|diff","ref":"..."}],
+  "candidate_targets": ["klappy://canon/..."],
+  "proposed_escalation": "none | candidate-canon-amendment | candidate-constraint | candidate-doc"
+}
+```
+
+### Decision entry schema (minimal)
+
+```json
+{
+  "id": "dec-YYYYMMDD-####",
+  "timestamp": "ISO-8601",
+  "title": "Short decision title",
+  "status": "proposed | accepted | superseded | deprecated",
+  "decision": "What we decided (A)",
+  "context": "Why we had to decide now",
+  "options_considered": [
+    {"option":"A","pros":["..."],"cons":["..."]},
+    {"option":"B","pros":["..."],"cons":["..."]}
+  ],
+  "rationale": ["Key reasons tied to constraints/evidence"],
+  "consequences": ["What this enables", "What it restricts"],
+  "evidence": [{"type":"doc|test|artifact|commit","ref":"..."}],
+  "links": ["klappy://canon/...", "oddkit_policy_version"],
+  "supersedes": [],
+  "superseded_by": null,
+  "candidate_promotion": "none | canon-decision-record"
+}
+```
+
+---
+
+## Promotion Ladder
+
+Ledger entries are cheap. Promotion is selective.
+
+1. **Ledger entry** (automatic / low ceremony)
+2. **Candidate** (suggested target: canon doc, constraint, decision record)
+3. **Canonical doc PR** (human-approved)
+4. **Enforcement** (only after repeated evidence and stable wording)
+
+The Scribe may propose promotion, but never performs it.
+
+---
+
+## Response Patterns
+
+### Silent capture (default)
+
+"I recorded a learning/decision in the ledger."
+
+### Suggested escalation (batch)
+
+"I captured 7 items. 2 look promotion-worthy:
+- [dec-…] …
+- [learn-…] …
+Want the draft canon patches?"
+
+### When asked "what changed?"
+
+Return:
+
+- last N ledger entries
+- and the top 1–3 candidates for promotion
+
+---
+
+## Freshness Rule (Canon-Target-First)
+
+At the first capture moment in a session:
+
+1. **Call `oddkit_policy_version`** to get `canon_target`.
+
+2. **Compare:**
+   - local `canon_pinned_commit` (from derived prompt header)
+   - against `canon_target.commit` returned by oddkit
+
+3. **If they differ:**
+   - disclose staleness
+   - call `oddkit_policy_get` on `source_uri`
+   - follow the latest canon guidance for this session (soft refresh)
+   - do not mutate your prompt
+
+---
+
+## Integration Notes
+
+- The Scribe complements the Epistemic Guide:
+  - Guide prevents invalid transitions
+  - Scribe prevents valuable learning/decisions from being lost
+- This role benefits from oddkit tools:
+  - `oddkit_policy_version` (canon target)
+  - `oddkit_policy_get` (fetch governing docs)
+  - (optional future) `oddkit_ledger_append` (direct writes)
+
+When citing this document:
+
+> Per `klappy://canon/agents/odd-scribe`, ...
+
+
+
+--------------------------------------------------------------------------------
 📄 File: canon/completion-report-template.md
 --------------------------------------------------------------------------------
 
@@ -14264,6 +14529,197 @@ Agents and collaborators should:
 
 - Canon v0.1 — Decision Rules complete
 - Ready to proceed to Canon v0.1 — Definition of Done & Evidence Policy
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/decisions/decision-record-standard.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/decisions/decision-record-standard
+title: "Decision Record Standard"
+subtitle: "How decisions become durable, citable truth in ODD"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+type: standard
+tags: ["decisions", "adr", "documentation", "canon", "governance"]
+relevance: decision
+execution_posture: governing
+---
+
+# Decision Record Standard
+
+> Decisions are first-class documentation. A decision record preserves intent, alternatives, rationale, and consequences.
+
+## Description
+
+Decision records prevent re-litigating choices and preserve the reasoning that led to a path. They are **citable** and **versioned**. Decisions can be superseded, but supersession must be explicit.
+
+Decision records are promoted from the Decisions Ledger when they prove durable and broadly relevant.
+
+## Outline
+
+- File Location and Naming
+- Required Frontmatter
+- Required Sections
+- Lifecycle States
+- Promotion from Ledger
+
+---
+
+## Operating Constraints
+
+- MUST preserve intent, alternatives, rationale, and consequences
+- MUST be citable via stable URI
+- MUST track supersession explicitly
+- MUST require human approval for promotion from ledger to canon
+- MUST NOT allow models to create decision records directly (must go through ledger → human review)
+
+---
+
+## Defaults
+
+- Decision records live in `canon/decisions/`
+- Use stable ID + slug naming: `DR-YYYYMMDD-####-short-slug.md`
+- Status defaults to `proposed` until human accepts
+- Supersession requires explicit `supersedes` / `superseded_by` fields
+
+---
+
+## Failure Modes
+
+- **Orphan Decisions**: Decisions made without records, lost to time
+- **Relitigating Settled Choices**: Same debates recurring because rationale was not preserved
+- **Silent Supersession**: New decisions implicitly override old ones without explicit link
+- **Premature Canonization**: Ledger entries promoted to canon before proving durable
+- **Missing Alternatives**: Recording what was chosen without explaining what was rejected
+
+---
+
+## Verification
+
+- Decision record exists for all significant architectural and process choices
+- Each record has at least 2 alternatives considered
+- Supersession chains are traceable
+- Records are citable in other documents
+
+---
+
+## Content
+
+### File Location
+
+Canonical decision records live in:
+
+```
+canon/decisions/
+```
+
+### Naming Convention
+
+Use a stable ID + slug:
+
+```
+DR-YYYYMMDD-####-short-slug.md
+```
+
+Example:
+
+```
+DR-20260129-0003-canon-target-first-freshness.md
+```
+
+### Required Frontmatter
+
+```yaml
+---
+uri: klappy://canon/decisions/DR-YYYYMMDD-####
+title: "DR-YYYYMMDD-####: <Decision title>"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+type: decision-record
+tags: ["decision", "adr"]
+status: accepted | proposed | superseded | deprecated
+supersedes: []
+superseded_by: null
+---
+```
+
+### Required Sections
+
+#### Context
+
+What situation forced a choice? What constraints matter?
+
+#### Decision
+
+What did we choose?
+
+#### Options Considered
+
+List 2+ options, including "do nothing" if relevant. For each:
+
+- Option name
+- Pros
+- Cons
+
+#### Rationale
+
+Why this choice? Tie to evidence and constraints.
+
+#### Consequences
+
+What does this enable? What does it restrict?
+
+#### Evidence
+
+Links to artifacts (tests, logs, docs, commits).
+
+#### Notes
+
+Any nuance, unresolved risks, or future revisit criteria.
+
+---
+
+## Lifecycle States
+
+| Status | Meaning |
+|--------|---------|
+| `proposed` | Draft, awaiting human review |
+| `accepted` | Active, governs behavior |
+| `superseded` | Replaced by another decision |
+| `deprecated` | No longer applies, not replaced |
+
+---
+
+## Promotion from Ledger
+
+Decision records are promoted from the **Decisions Ledger** (`odd/ledger/decisions.jsonl`) when they prove:
+
+1. **Durable** — Referenced multiple times, not one-off
+2. **Broadly relevant** — Affects multiple features, repos, or agents
+3. **Stable** — Wording and rationale are settled
+
+The promotion process:
+
+1. Scribe identifies candidate in ledger
+2. Human reviews and approves
+3. Draft canonical record created
+4. Human commits to `canon/decisions/`
+
+---
+
+## See Also
+
+- [ODD Scribe](/canon/agents/odd-scribe.md) — The agent role that records decisions to the ledger
+- [Models Do Not Mutate Canon](/canon/decisions/models-do-not-mutate-canon.md) — Why models draft, humans commit
 
 
 

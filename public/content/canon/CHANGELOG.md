@@ -18,6 +18,39 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.21.0 — 2026-01-29
+
+**ODD Scribe + Decision Records — First-Class Documentation Infrastructure**
+
+This release introduces the ODD Scribe agent role and formalizes Decision Records as first-class documentation citizens. Learnings and decisions are now captured in append-only ledgers with explicit promotion paths to canon.
+
+### Added
+
+- **ODD Scribe** (`/canon/agents/odd-scribe.md`) — Phase-aware recorder that captures learnings and decisions as first-class documentation. Writes to append-only JSONL ledgers (`odd/ledger/learnings.jsonl`, `odd/ledger/decisions.jsonl`). Proposes promotion to canon without enforcing it. Complements the Epistemic Guide: Guide prevents invalid transitions, Scribe prevents valuable insight from being lost.
+
+- **Decision Record Standard** (`/canon/decisions/decision-record-standard.md`) — Standard for how decisions become durable, citable truth in ODD. Defines file location (`canon/decisions/`), naming convention (`DR-YYYYMMDD-####-short-slug.md`), required frontmatter, required sections (Context, Decision, Options Considered, Rationale, Consequences, Evidence, Notes), lifecycle states (proposed, accepted, superseded, deprecated), and promotion criteria from ledger.
+
+### Philosophy
+
+- **Decisions are first-class** — Decisions deserve provenance just like code. They prevent re-litigating settled choices and explain why alternatives were rejected.
+- **Learnings are first-class** — Discoveries, drift corrections, and clarified invariants deserve to be remembered, not just fixed.
+- **Ledger-first, promotion later** — Low-ceremony capture in JSONL ledgers; selective promotion to canon when entries prove durable.
+- **Scribe proposes, humans promote** — The Scribe records and suggests; humans decide what becomes canon.
+
+### Integration
+
+- Scribe uses oddkit tools (`oddkit_policy_version`, `oddkit_policy_get`) for freshness checks
+- Scribe follows canon-target-first protocol to avoid operating on stale canon
+- Decision records are citable via `klappy://canon/decisions/DR-YYYYMMDD-####`
+
+### Ledger Schemas
+
+Learning entry: `{"id":"learn-YYYYMMDD-####","timestamp":"ISO-8601","summary":"...","trigger":"...","impact":"...","confidence":0.0,"sources":[],"evidence":[],"candidate_targets":[],"proposed_escalation":"..."}`
+
+Decision entry: `{"id":"dec-YYYYMMDD-####","timestamp":"ISO-8601","title":"...","status":"proposed|accepted|superseded|deprecated","decision":"...","context":"...","options_considered":[],"rationale":[],"consequences":[],"evidence":[],"links":[],"supersedes":[],"superseded_by":null,"candidate_promotion":"..."}`
+
+---
+
 ## 0.20.1 — 2026-01-29
 
 **Agents & MCP Orientation Card**

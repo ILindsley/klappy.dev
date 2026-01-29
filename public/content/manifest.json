@@ -318,6 +318,24 @@
       ]
     },
     {
+      "uri": "klappy://canon/decisions/decision-record-standard",
+      "path": "/canon/decisions/decision-record-standard.md",
+      "title": "Decision Record Standard",
+      "type": "standard",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": [
+        "decisions",
+        "adr",
+        "documentation",
+        "canon",
+        "governance"
+      ]
+    },
+    {
       "uri": "klappy://canon/decision-rules",
       "path": "/canon/decision-rules.md",
       "title": "Decision Rules",
@@ -687,6 +705,25 @@
         "odd",
         "misuse",
         "failure-modes"
+      ]
+    },
+    {
+      "uri": "klappy://canon/agents/odd-scribe",
+      "path": "/canon/agents/odd-scribe.md",
+      "title": "ODD Scribe",
+      "type": "agent-role",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": [
+        "odd",
+        "scribe",
+        "documentation",
+        "epistemics",
+        "decisions",
+        "ledger"
       ]
     },
     {
