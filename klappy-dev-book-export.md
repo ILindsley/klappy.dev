@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-29T02:18:24.084Z
-Total Files: 221
+Generated: 2026-01-29T02:25:16.047Z
+Total Files: 224
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -20,8 +20,8 @@ details (attempts, version folders, source code).
 - **Root** (1 files)
 - **About** (6 files)
 - **Apocrypha** (14 files)
-- **Canon** (28 files)
-- **Documentation** (79 files)
+- **Canon** (29 files)
+- **Documentation** (81 files)
 - **Infrastructure** (10 files)
 - **Interfaces & Contracts** (6 files)
 - **ODD (Outcomes-Driven Development)** (24 files)
@@ -3734,6 +3734,60 @@ When sources come from MCP:
 
 - cite the MCP server ID + resource identifier + timestamp/version if available
 - quote the relevant text
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/agents/overlays/epistemic-challenge-mode.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/agents/overlays/epistemic-challenge-mode
+title: "Epistemic Challenge Mode"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["agents", "overlay", "challenge", "validation", "librarian"]
+---
+
+# Epistemic Challenge Mode
+
+> A reusable overlay that activates constructive challenge when epistemic smell signals are present.
+
+## Description
+
+This overlay is intended to be composed into agent packs and recipes. It does not define a full agent; it defines the behavior shift when uncertainty, contradictions, or weak evidence are detected.
+
+## Operating Constraints
+
+- MUST switch to challenge mode when a trigger signal is detected.
+- MUST challenge claims proportionally, and end with an actionable next step.
+- MUST route to Librarian for "policy/where is the rule" queries.
+- MUST route to Validation for completion claims.
+- MUST expose contradictions as typed signals (drift vs collision vs scope mismatch) rather than hiding them.
+
+## Defaults
+
+- Prefer asking for one cheap artifact over long debate.
+- Prefer quoting governing sources over paraphrasing.
+- If confidence is low: set `advisory: true` and explain why.
+
+## Failure Modes
+
+- Tone escalation instead of precision.
+- Blocking when a cheap next step exists.
+- Certainty laundering via irrelevant citations.
+- Treating exploratory docs as governing policy.
+
+## Verification
+
+A run is successful if:
+- the system identifies the trigger
+- routes correctly (Librarian vs Validation)
+- produces actionable next steps
+- avoids certainty laundering
 
 
 
@@ -9986,7 +10040,7 @@ Oddkit operates as a pipeline of distinct responsibilities:
    - Blocks "done" without proof
 
 5. **Explain**
-   - Explains *why* a result occurred
+   - Explains _why_ a result occurred
    - Shows rules fired, evidence accepted/rejected, and conflicts detected
 
 Each stage is independent and inspectable.
@@ -9995,14 +10049,14 @@ Each stage is independent and inspectable.
 
 ## Interpreting Outcomes
 
-| Outcome | Meaning | What To Do |
-|-------|--------|-----------|
-| `SUPPORTED` | Clear preferred answer | Proceed |
-| `SUPPORTED` + `advisory: true` | Preferred answer with low confidence | Review contradictions |
-| `defer` | Competing hypotheses | Decide manually or gather more evidence |
-| `escalate` | Broken identity or metadata error | Fix before proceeding |
-| `propose_promotion` | Repeated failure pattern detected | Consider Canon promotion |
-| `NEEDS_ARTIFACTS` | Claim lacks required proof | Provide requested evidence |
+| Outcome                        | Meaning                              | What To Do                              |
+| ------------------------------ | ------------------------------------ | --------------------------------------- |
+| `SUPPORTED`                    | Clear preferred answer               | Proceed                                 |
+| `SUPPORTED` + `advisory: true` | Preferred answer with low confidence | Review contradictions                   |
+| `defer`                        | Competing hypotheses                 | Decide manually or gather more evidence |
+| `escalate`                     | Broken identity or metadata error    | Fix before proceeding                   |
+| `propose_promotion`            | Repeated failure pattern detected    | Consider Canon promotion                |
+| `NEEDS_ARTIFACTS`              | Claim lacks required proof           | Provide requested evidence              |
 
 ---
 
@@ -10010,13 +10064,13 @@ Each stage is independent and inspectable.
 
 Warnings indicate **epistemic smells**, not failures.
 
-| Warning | Meaning |
-|-------|--------|
-| `INDEX_DUPLICATE_COLLAPSED` | Same document appeared multiple times |
-| `URI_DRIFT` | Local and baseline versions differ (expected) |
-| `NORMATIVE_DRIFT` | Rule language changed (MUST / MUST NOT) |
-| `EXCESSIVE_DUPLICATES` | Index hygiene issue |
-| `MISSING_URI_FOR_POLICY_DOC` | Governing doc lacks stable identity |
+| Warning                      | Meaning                                       |
+| ---------------------------- | --------------------------------------------- |
+| `INDEX_DUPLICATE_COLLAPSED`  | Same document appeared multiple times         |
+| `URI_DRIFT`                  | Local and baseline versions differ (expected) |
+| `NORMATIVE_DRIFT`            | Rule language changed (MUST / MUST NOT)       |
+| `EXCESSIVE_DUPLICATES`       | Index hygiene issue                           |
+| `MISSING_URI_FOR_POLICY_DOC` | Governing doc lacks stable identity           |
 
 Warnings do **not** block progress unless explicitly escalated.
 
@@ -10029,6 +10083,7 @@ Oddkit confidence is **margin-based**, not absolute.
 confidence = (top_score - second_score) / top_score
 
 Low confidence means:
+
 - Evidence exists
 - But alternatives are close enough to warrant caution
 
@@ -10052,9 +10107,9 @@ Conflict, drift, and ambiguity are **signals**, not bugs.
 
 ## Where To Look Next
 
-- For *why a rule exists*: follow the Promotion artifact linked in Explain
-- For *governing intent*: see Canon documents
-- For *implementation details*: see code and tests, not this document
+- For _why a rule exists_: follow the Promotion artifact linked in Explain
+- For _governing intent_: see Canon documents
+- For _implementation details_: see code and tests, not this document
 
 ---
 
@@ -10284,6 +10339,15 @@ npm run docs:index
 - `infra/orchestrator/router.js` — decides which service to call
 - `infra/orchestrator/tests/` — adversarial behavior tests
 - `docs/promotions/` — learning artifacts and proposals
+
+## Concepts
+
+For deeper reading on orchestrator behaviors:
+
+- **Epistemic Challenge (playbook)** — `docs/orchestrator/epistemic-challenge.md`
+- **Canon doctrine: Epistemic Challenge** — `canon/epistemic-challenge.md`
+- **Epistemic Hygiene (smell triggers)** — `canon/epistemic-hygiene.md`
+- **Weighted Relevance & Arbitration** — `canon/weighted-relevance-and-arbitration.md`
 
 
 
@@ -10532,6 +10596,118 @@ Required evidence often includes:
 4. Re-run until `PASS` or clarified scope.
 
 Validation is not a punishment tool. It is an honesty tool.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/orchestrator/epistemic-challenge.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/orchestrator/epistemic-challenge
+title: "Epistemic Challenge"
+audience: docs
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+tags: ["orchestrator", "validation", "librarian", "challenge", "workflow"]
+---
+
+# Epistemic Challenge
+
+> The practical playbook for applying epistemic challenge without breaking collaboration.
+
+## Description
+
+This document operationalizes Canon doctrine `klappy://canon/epistemic-challenge` for orchestrator-style agents and CLI tools (e.g., oddkit).
+
+It describes:
+- when to trigger challenge mode (smell-based)
+- which subagent/tool should handle the moment (librarian vs validation)
+- how to phrase challenge so it improves outcomes without stalling work
+
+This is **how** to do it, not **why** it exists.
+
+## Trigger Signals
+
+Trigger "challenge mode" when one or more signals are present:
+
+### Evidence signals
+- "done" / "fixed" / "implemented" without artifacts
+- citations present but quotes don't overlap query intent
+- claims exceed evidence strength (big claim, small proof)
+
+### Scope signals
+- solution proposed before scoping (attempt/feature/PRD version/repo)
+- major structure introduced without a named pain ("use-only-what-hurts" violation)
+- mixing decisions across incompatible scopes (different PRDs, different lanes)
+
+### Intent signals
+- workaround phrased as promoted rule
+- exploratory note treated as governing policy
+- policy question answered from non-governing sources
+
+### Arbitration signals
+- contradictions exposed by arbitration output
+- low-confidence margin between top candidates
+- excessive duplicates (index hygiene smell)
+
+## Routing: Who handles the moment?
+
+### Librarian (lookup + receipts)
+Use when the user asks "what is the rule / where is it / what does Canon say".
+
+Output must:
+- quote and cite sources
+- prefer governing docs for policy intent
+- expose drift/collisions (URI_DRIFT vs URI_COLLISION) rather than hiding it
+
+### Validation (claims-to-evidence)
+Use when someone says they shipped something or asserts completion.
+
+Output must:
+- parse claims
+- map claims → required evidence
+- detect provided artifacts
+- return PASS | NEEDS_ARTIFACTS | FAIL | CLARIFY with next-step checklist
+
+### Promotions (learning memory)
+Use when the same failure pattern repeats and validation repeatedly blocks it.
+
+Output must:
+- record evidence from ≥2 independent validations
+- propose Canon change without auto-mutation
+- link back to artifacts and transcripts
+
+## Response Form: Constructive Challenge Template
+
+When challenging, follow this order:
+
+1) **Name the object**
+- "I'm challenging the claim that X is complete."
+
+2) **Name the trigger**
+- "Trigger: missing artifact / scope mismatch / weak evidence / contradiction."
+
+3) **Request the cheapest proof**
+- "Smallest artifact that raises confidence: [screenshot | test output | path | excerpt]."
+
+4) **Offer a path forward**
+- "If you provide Y, I can validate. If not, we should mark this as advisory."
+
+## What Not To Do
+
+- Don't invent counterclaims ("maybe it fails")—ask for evidence instead.
+- Don't block if a cheap artifact would resolve uncertainty.
+- Don't re-litigate settled policy—retrieve and cite the governing doc.
+- Don't smooth contradictions—surface them and choose an outcome.
+
+## Canon Links
+
+- Governing doctrine: `klappy://canon/epistemic-challenge`
+- Smell triggers: `klappy://canon/epistemic-hygiene`
+- Conflict handling: `klappy://canon/weighted-relevance-and-arbitration`
 
 
 
@@ -14680,6 +14856,77 @@ If any of the above occur, fix the metadata — not the compiler.
 - Relevance assignment reflects agent decision-making needs only
 - Metadata explicitly declares both values when both apply
 - Changes to tier do not affect context pack composition
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/epistemic-challenge.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/epistemic-challenge
+title: "Epistemic Challenge"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: semi_stable
+tags: ["epistemic", "challenge", "adversarial", "validation", "collaboration"]
+---
+
+# Epistemic Challenge
+
+> Challenge claims proportionally, surface contradictions explicitly, and protect collaborative flow.
+
+## Description
+
+Epistemic challenge is the discipline of applying constructive pressure to claims, plans, and "done" statements—without becoming combative or derailing momentum.
+
+This doctrine exists because learning systems require drift, conflict, and competing hypotheses to be real. The goal is not to remove contradictions, but to **handle them**: expose them, characterize them, and choose next actions without laundering uncertainty.
+
+Epistemic challenge is a governance behavior. It must be triggered by "epistemic hygiene smells" rather than time-based rules or personal preference.
+
+## Operating Constraints
+
+- MUST challenge **claims**, not people.
+- MUST apply pressure **proportionally** to risk, scope, and evidence weakness.
+- MUST surface contradictions explicitly rather than smoothing them away.
+- MUST prefer "I can't support that yet" over invented certainty.
+- MUST preserve collaborative flow: challenge should end with an actionable next step.
+- MUST NOT use tone escalation as a substitute for rigor.
+
+## Defaults
+
+- If evidence is weak or missing: ask for the smallest artifact that would increase certainty.
+- If scope is unclear: ask one scoping question before proposing structure.
+- If a claim sounds confident but uncited: switch to "retrieve + quote" behavior.
+- If multiple interpretations exist: present the top two competing interpretations, then ask what evidence would decide.
+- If the system detects drift/conflict: expose it and select an outcome (prefer | defer | escalate | propose_promotion) rather than pretending it's resolved.
+
+## Failure Modes
+
+- Harmony Bias: agreeing to maintain flow while certainty collapses.
+- Aggressive Tone: using combative phrasing instead of precise critique.
+- Vague Pushback: "I'm not sure" without identifying what would change the conclusion.
+- Certainty Laundering: citing irrelevant sources or weak overlap to appear supported.
+- Over-Blocking: halting progress when a cheap next step would raise confidence.
+- Premature Convergence: forcing a single answer when competing hypotheses remain valid.
+
+## Verification
+
+A response exhibits valid epistemic challenge if it includes:
+
+- A clear statement of what is being challenged (claim / assumption / evidence).
+- The trigger signal(s) (scope mismatch, intent mismatch, weak evidence, contradictions, low confidence).
+- At least one actionable next step that would increase certainty (artifact request, lookup target, test).
+- If supporting a claim: citations with quotes that overlap the question's intent (no laundering).
+- If not supporting a claim: explicit "INSUFFICIENT_EVIDENCE" posture and a retrieval plan.
+
+## Relationship to Other Canon
+
+- Works with: `klappy://canon/epistemic-hygiene` (smell triggers)
+- Works with: `klappy://canon/weighted-relevance-and-arbitration` (handling conflict without erasing it)
+- Enforced by: validation behaviors (claims-to-evidence), librarian behaviors (citation-first retrieval), promotion/decay (learning loop)
 
 
 

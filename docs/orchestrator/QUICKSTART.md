@@ -127,3 +127,12 @@ npm run docs:index
 - `infra/orchestrator/router.js` — decides which service to call
 - `infra/orchestrator/tests/` — adversarial behavior tests
 - `docs/promotions/` — learning artifacts and proposals
+
+## Concepts
+
+For deeper reading on orchestrator behaviors:
+
+- **Epistemic Challenge (playbook)** — `docs/orchestrator/epistemic-challenge.md`
+- **Canon doctrine: Epistemic Challenge** — `canon/epistemic-challenge.md`
+- **Epistemic Hygiene (smell triggers)** — `canon/epistemic-hygiene.md`
+- **Weighted Relevance & Arbitration** — `canon/weighted-relevance-and-arbitration.md`

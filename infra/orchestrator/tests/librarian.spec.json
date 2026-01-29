@@ -101,5 +101,15 @@
     "expect_authority_band": "governing",
     "min_quote_overlap": 1,
     "notes": "Direct concept question - quote should contain metric or laundering"
+  },
+  {
+    "name": "Epistemic challenge doctrine lookup",
+    "query": "What are the operating constraints for epistemic challenge?",
+    "expect_status": "SUPPORTED",
+    "expect_sources_include": ["canon/epistemic-challenge.md"],
+    "expect_heading_contains": "Operating Constraints",
+    "expect_authority_band": "governing",
+    "min_quote_overlap": 1,
+    "notes": "Should return governing canon doc for epistemic challenge doctrine with constraints section"
   }
 ]

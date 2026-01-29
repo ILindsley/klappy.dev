@@ -55,7 +55,7 @@ Oddkit operates as a pipeline of distinct responsibilities:
    - Blocks "done" without proof
 
 5. **Explain**
-   - Explains *why* a result occurred
+   - Explains _why_ a result occurred
    - Shows rules fired, evidence accepted/rejected, and conflicts detected
 
 Each stage is independent and inspectable.
@@ -64,14 +64,14 @@ Each stage is independent and inspectable.
 
 ## Interpreting Outcomes
 
-| Outcome | Meaning | What To Do |
-|-------|--------|-----------|
-| `SUPPORTED` | Clear preferred answer | Proceed |
-| `SUPPORTED` + `advisory: true` | Preferred answer with low confidence | Review contradictions |
-| `defer` | Competing hypotheses | Decide manually or gather more evidence |
-| `escalate` | Broken identity or metadata error | Fix before proceeding |
-| `propose_promotion` | Repeated failure pattern detected | Consider Canon promotion |
-| `NEEDS_ARTIFACTS` | Claim lacks required proof | Provide requested evidence |
+| Outcome                        | Meaning                              | What To Do                              |
+| ------------------------------ | ------------------------------------ | --------------------------------------- |
+| `SUPPORTED`                    | Clear preferred answer               | Proceed                                 |
+| `SUPPORTED` + `advisory: true` | Preferred answer with low confidence | Review contradictions                   |
+| `defer`                        | Competing hypotheses                 | Decide manually or gather more evidence |
+| `escalate`                     | Broken identity or metadata error    | Fix before proceeding                   |
+| `propose_promotion`            | Repeated failure pattern detected    | Consider Canon promotion                |
+| `NEEDS_ARTIFACTS`              | Claim lacks required proof           | Provide requested evidence              |
 
 ---
 
@@ -79,13 +79,13 @@ Each stage is independent and inspectable.
 
 Warnings indicate **epistemic smells**, not failures.
 
-| Warning | Meaning |
-|-------|--------|
-| `INDEX_DUPLICATE_COLLAPSED` | Same document appeared multiple times |
-| `URI_DRIFT` | Local and baseline versions differ (expected) |
-| `NORMATIVE_DRIFT` | Rule language changed (MUST / MUST NOT) |
-| `EXCESSIVE_DUPLICATES` | Index hygiene issue |
-| `MISSING_URI_FOR_POLICY_DOC` | Governing doc lacks stable identity |
+| Warning                      | Meaning                                       |
+| ---------------------------- | --------------------------------------------- |
+| `INDEX_DUPLICATE_COLLAPSED`  | Same document appeared multiple times         |
+| `URI_DRIFT`                  | Local and baseline versions differ (expected) |
+| `NORMATIVE_DRIFT`            | Rule language changed (MUST / MUST NOT)       |
+| `EXCESSIVE_DUPLICATES`       | Index hygiene issue                           |
+| `MISSING_URI_FOR_POLICY_DOC` | Governing doc lacks stable identity           |
 
 Warnings do **not** block progress unless explicitly escalated.
 
@@ -98,6 +98,7 @@ Oddkit confidence is **margin-based**, not absolute.
 confidence = (top_score - second_score) / top_score
 
 Low confidence means:
+
 - Evidence exists
 - But alternatives are close enough to warrant caution
 
@@ -121,9 +122,9 @@ Conflict, drift, and ambiguity are **signals**, not bugs.
 
 ## Where To Look Next
 
-- For *why a rule exists*: follow the Promotion artifact linked in Explain
-- For *governing intent*: see Canon documents
-- For *implementation details*: see code and tests, not this document
+- For _why a rule exists_: follow the Promotion artifact linked in Explain
+- For _governing intent_: see Canon documents
+- For _implementation details_: see code and tests, not this document
 
 ---
 

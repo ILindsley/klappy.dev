@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-01-29T02:18:24.363Z",
+  "generated_at": "2026-01-29T02:25:16.324Z",
   "description": "Fast-lookup index for Librarian retrieval. Per docs/agents/librarian/contract.md",
   "schema_notes": {
     "authority_band": "Resolved authority (frontmatter override > inferred from root)",
@@ -30,20 +30,20 @@
     }
   },
   "stats": {
-    "total_documents": 150,
-    "with_frontmatter": 143,
-    "with_headings": 148,
+    "total_documents": 153,
+    "with_frontmatter": 146,
+    "with_headings": 151,
     "by_root": {
       "apocrypha": 14,
-      "canon": 27,
-      "docs": 79,
+      "canon": 28,
+      "docs": 81,
       "interfaces": 6,
       "odd": 24
     },
     "by_authority": {
       "non-governing": 14,
-      "governing": 51,
-      "operational": 85
+      "governing": 52,
+      "operational": 87
     },
     "with_authority_override": 0,
     "with_authority_warning": 0
@@ -2806,6 +2806,68 @@
       "has_frontmatter": true
     },
     {
+      "path": "canon/epistemic-challenge.md",
+      "root": "canon",
+      "authority_band": "governing",
+      "authority_inferred": "governing",
+      "uri": "klappy://canon/epistemic-challenge",
+      "title": "Epistemic Challenge",
+      "subtitle": "Challenge claims proportionally, surface contradictions explicitly, and protect collaborative flow.",
+      "tags": [
+        "epistemic",
+        "challenge",
+        "adversarial",
+        "validation",
+        "collaboration"
+      ],
+      "stability": "semi_stable",
+      "tier": "2",
+      "audience": "canon",
+      "exposure": "nav",
+      "voice": "neutral",
+      "relevance": null,
+      "execution_posture": null,
+      "headings": [
+        {
+          "level": 1,
+          "text": "Epistemic Challenge",
+          "line": 2
+        },
+        {
+          "level": 2,
+          "text": "Description",
+          "line": 6
+        },
+        {
+          "level": 2,
+          "text": "Operating Constraints",
+          "line": 14
+        },
+        {
+          "level": 2,
+          "text": "Defaults",
+          "line": 23
+        },
+        {
+          "level": 2,
+          "text": "Failure Modes",
+          "line": 31
+        },
+        {
+          "level": 2,
+          "text": "Verification",
+          "line": 40
+        },
+        {
+          "level": 2,
+          "text": "Relationship to Other Canon",
+          "line": 50
+        }
+      ],
+      "heading_count": 7,
+      "has_frontmatter": true
+    },
+    {
       "path": "canon/epistemic-hygiene.md",
       "root": "canon",
       "authority_band": "governing",
@@ -5031,6 +5093,63 @@
           "level": 2,
           "text": "Citation Requirements",
           "line": 34
+        }
+      ],
+      "heading_count": 6,
+      "has_frontmatter": true
+    },
+    {
+      "path": "docs/agents/overlays/epistemic-challenge-mode.md",
+      "root": "docs",
+      "authority_band": "operational",
+      "authority_inferred": "operational",
+      "uri": "klappy://docs/agents/overlays/epistemic-challenge-mode",
+      "title": "Epistemic Challenge Mode",
+      "subtitle": "A reusable overlay that activates constructive challenge when epistemic smell signals are present.",
+      "tags": [
+        "agents",
+        "overlay",
+        "challenge",
+        "validation",
+        "librarian"
+      ],
+      "stability": "evolving",
+      "tier": "2",
+      "audience": "docs",
+      "exposure": "nav",
+      "voice": "neutral",
+      "relevance": null,
+      "execution_posture": null,
+      "headings": [
+        {
+          "level": 1,
+          "text": "Epistemic Challenge Mode",
+          "line": 2
+        },
+        {
+          "level": 2,
+          "text": "Description",
+          "line": 6
+        },
+        {
+          "level": 2,
+          "text": "Operating Constraints",
+          "line": 10
+        },
+        {
+          "level": 2,
+          "text": "Defaults",
+          "line": 18
+        },
+        {
+          "level": 2,
+          "text": "Failure Modes",
+          "line": 24
+        },
+        {
+          "level": 2,
+          "text": "Verification",
+          "line": 31
         }
       ],
       "heading_count": 6,
@@ -9868,20 +9987,117 @@
         {
           "level": 2,
           "text": "What Oddkit Will Never Do",
-          "line": 98
+          "line": 99
         },
         {
           "level": 2,
           "text": "Where To Look Next",
-          "line": 112
+          "line": 113
         },
         {
           "level": 2,
           "text": "Summary",
-          "line": 120
+          "line": 121
         }
       ],
       "heading_count": 9,
+      "has_frontmatter": true
+    },
+    {
+      "path": "docs/orchestrator/epistemic-challenge.md",
+      "root": "docs",
+      "authority_band": "operational",
+      "authority_inferred": "operational",
+      "uri": "klappy://docs/orchestrator/epistemic-challenge",
+      "title": "Epistemic Challenge",
+      "subtitle": "The practical playbook for applying epistemic challenge without breaking collaboration.",
+      "tags": [
+        "orchestrator",
+        "validation",
+        "librarian",
+        "challenge",
+        "workflow"
+      ],
+      "stability": "evolving",
+      "tier": "2",
+      "audience": "docs",
+      "exposure": "nav",
+      "voice": "neutral",
+      "relevance": null,
+      "execution_posture": null,
+      "headings": [
+        {
+          "level": 1,
+          "text": "Epistemic Challenge",
+          "line": 2
+        },
+        {
+          "level": 2,
+          "text": "Description",
+          "line": 6
+        },
+        {
+          "level": 2,
+          "text": "Trigger Signals",
+          "line": 17
+        },
+        {
+          "level": 3,
+          "text": "Evidence signals",
+          "line": 21
+        },
+        {
+          "level": 3,
+          "text": "Scope signals",
+          "line": 26
+        },
+        {
+          "level": 3,
+          "text": "Intent signals",
+          "line": 31
+        },
+        {
+          "level": 3,
+          "text": "Arbitration signals",
+          "line": 36
+        },
+        {
+          "level": 2,
+          "text": "Routing: Who handles the moment?",
+          "line": 41
+        },
+        {
+          "level": 3,
+          "text": "Librarian (lookup + receipts)",
+          "line": 43
+        },
+        {
+          "level": 3,
+          "text": "Validation (claims-to-evidence)",
+          "line": 51
+        },
+        {
+          "level": 3,
+          "text": "Promotions (learning memory)",
+          "line": 60
+        },
+        {
+          "level": 2,
+          "text": "Response Form: Constructive Challenge Template",
+          "line": 68
+        },
+        {
+          "level": 2,
+          "text": "What Not To Do",
+          "line": 84
+        },
+        {
+          "level": 2,
+          "text": "Canon Links",
+          "line": 91
+        }
+      ],
+      "heading_count": 14,
       "has_frontmatter": true
     },
     {
@@ -9971,9 +10187,14 @@
           "level": 2,
           "text": "File map (where the important code lives)",
           "line": 110
+        },
+        {
+          "level": 2,
+          "text": "Concepts",
+          "line": 120
         }
       ],
-      "heading_count": 13,
+      "heading_count": 14,
       "has_frontmatter": true
     },
     {

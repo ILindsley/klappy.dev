@@ -330,6 +330,24 @@
       ]
     },
     {
+      "uri": "klappy://canon/epistemic-challenge",
+      "path": "/canon/epistemic-challenge.md",
+      "title": "Epistemic Challenge",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "semi_stable",
+      "tags": [
+        "epistemic",
+        "challenge",
+        "adversarial",
+        "validation",
+        "collaboration"
+      ]
+    },
+    {
       "uri": "klappy://canon/epistemic-hygiene",
       "path": "/canon/epistemic-hygiene.md",
       "title": "Epistemic Hygiene",
