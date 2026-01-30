@@ -18,6 +18,40 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.22.0 — 2026-01-29
+
+**Instruction Registry — Dependency Tracking Infrastructure**
+
+This release introduces the instruction registry system for tracking agent instruction files and their dependencies. CI now enforces that all instruction files are registered, and oddkit can detect when upstream dependencies change.
+
+### Added
+
+- **Instruction Registry** (`/canon/instructions/REGISTRY.json`) — Central registry of all agent instruction files with dependency declarations. Tracks `id`, `path`, `uri`, `owner`, `depends_on` for each instruction.
+
+- **Registry State** (`/canon/instructions/REGISTRY.state.json`) — Sync state file tracking dependency hashes for drift detection. Updated by oddkit `instruction_sync` action.
+
+- **Registry CI Check** (`/scripts/check-registry.js`) — CI enforcement script that validates:
+  - All `canon/instructions/*.md` and `canon/agents/*.md` files are registered
+  - No duplicate IDs or paths
+  - All `depends_on` refs use valid protocols (`klappy://` or `oddkit://`)
+  - All owners are allowed (`klappy.dev` or `oddkit`)
+
+- **fast-glob** dev dependency for registry file discovery
+
+### Philosophy
+
+- **Explicit over implicit** — Instruction existence is declared, not discovered
+- **Drift is detectable** — Dependency hash tracking enables staleness detection
+- **No auto-editing** — Registry and sync only report; humans decide what to update
+- **CI enforces coverage** — Unregistered instruction files fail the build
+
+### Initial Registrations
+
+- `odd-epistemic-guide` — ODD Epistemic Guide agent instruction
+- `odd-scribe` — ODD Scribe agent instruction
+
+---
+
 ## 0.21.0 — 2026-01-29
 
 **ODD Scribe + Decision Records — First-Class Documentation Infrastructure**
