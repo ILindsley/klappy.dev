@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-01-30T00:23:26.605Z",
+  "generated_at": "2026-01-30T01:11:32.922Z",
   "description": "Fast-lookup index for Librarian retrieval. Per docs/agents/librarian/contract.md",
   "schema_notes": {
     "authority_band": "Resolved authority (frontmatter override > inferred from root)",
@@ -30,20 +30,20 @@
     }
   },
   "stats": {
-    "total_documents": 157,
-    "with_frontmatter": 150,
-    "with_headings": 155,
+    "total_documents": 162,
+    "with_frontmatter": 155,
+    "with_headings": 160,
     "by_root": {
       "apocrypha": 14,
-      "canon": 31,
-      "docs": 81,
+      "canon": 35,
+      "docs": 82,
       "interfaces": 6,
       "odd": 25
     },
     "by_authority": {
       "non-governing": 14,
-      "governing": 56,
-      "operational": 87
+      "governing": 60,
+      "operational": 88
     },
     "with_authority_override": 0,
     "with_authority_warning": 0
@@ -959,6 +959,338 @@
         }
       ],
       "heading_count": 22,
+      "has_frontmatter": true
+    },
+    {
+      "path": "canon/agents/odd-implementation-guide.md",
+      "root": "canon",
+      "authority_band": "governing",
+      "authority_inferred": "governing",
+      "uri": "klappy://canon/agents/odd-implementation-guide",
+      "title": "ODD Implementation Guide",
+      "subtitle": null,
+      "tags": [
+        "odd",
+        "agents",
+        "implementation",
+        "constraints",
+        "source-citing",
+        "no-bypass"
+      ],
+      "stability": "evolving",
+      "tier": "2",
+      "audience": "canon",
+      "exposure": "nav",
+      "voice": "neutral",
+      "relevance": null,
+      "execution_posture": null,
+      "headings": [
+        {
+          "level": 2,
+          "text": "Canon Alignment",
+          "line": 2
+        },
+        {
+          "level": 2,
+          "text": "Role",
+          "line": 21
+        },
+        {
+          "level": 2,
+          "text": "Hard Constraints",
+          "line": 43
+        },
+        {
+          "level": 2,
+          "text": "Required Preface (Every Response)",
+          "line": 55
+        },
+        {
+          "level": 3,
+          "text": "Assumptions",
+          "line": 59
+        },
+        {
+          "level": 3,
+          "text": "Sources Consulted",
+          "line": 62
+        },
+        {
+          "level": 2,
+          "text": "Output Contract",
+          "line": 69
+        },
+        {
+          "level": 2,
+          "text": "Dependencies",
+          "line": 81
+        }
+      ],
+      "heading_count": 8,
+      "has_frontmatter": true
+    },
+    {
+      "path": "canon/agents/odd-instruction-sync.md",
+      "root": "canon",
+      "authority_band": "governing",
+      "authority_inferred": "governing",
+      "uri": "klappy://canon/agents/odd-instruction-sync",
+      "title": "ODD Instruction Sync Interpreter",
+      "subtitle": null,
+      "tags": [
+        "odd",
+        "agents",
+        "instruction-sync",
+        "maintenance",
+        "registry",
+        "patch-plan"
+      ],
+      "stability": "evolving",
+      "tier": "2",
+      "audience": "canon",
+      "exposure": "nav",
+      "voice": "neutral",
+      "relevance": null,
+      "execution_posture": null,
+      "headings": [
+        {
+          "level": 2,
+          "text": "Canon Alignment",
+          "line": 2
+        },
+        {
+          "level": 2,
+          "text": "Role",
+          "line": 21
+        },
+        {
+          "level": 2,
+          "text": "Interpretation Rules",
+          "line": 35
+        },
+        {
+          "level": 3,
+          "text": "MUST_UPDATE",
+          "line": 37
+        },
+        {
+          "level": 3,
+          "text": "SHOULD_UPDATE",
+          "line": 43
+        },
+        {
+          "level": 3,
+          "text": "NICE_TO_UPDATE",
+          "line": 47
+        },
+        {
+          "level": 3,
+          "text": "Unresolved Dependencies",
+          "line": 51
+        },
+        {
+          "level": 2,
+          "text": "Output Contract",
+          "line": 58
+        },
+        {
+          "level": 3,
+          "text": "A) Executive Summary (5–10 lines)",
+          "line": 62
+        },
+        {
+          "level": 3,
+          "text": "B) Impact Buckets",
+          "line": 67
+        },
+        {
+          "level": 3,
+          "text": "C) Recommended Sequence",
+          "line": 73
+        },
+        {
+          "level": 3,
+          "text": "D) Suggested Map Reads (if needed)",
+          "line": 80
+        },
+        {
+          "level": 2,
+          "text": "Dependencies",
+          "line": 86
+        }
+      ],
+      "heading_count": 13,
+      "has_frontmatter": true
+    },
+    {
+      "path": "canon/agents/odd-map-navigator.md",
+      "root": "canon",
+      "authority_band": "governing",
+      "authority_inferred": "governing",
+      "uri": "klappy://canon/agents/odd-map-navigator",
+      "title": "ODD Map Navigator",
+      "subtitle": null,
+      "tags": [
+        "odd",
+        "agents",
+        "navigation",
+        "map",
+        "discovery",
+        "progressive-reading"
+      ],
+      "stability": "evolving",
+      "tier": "2",
+      "audience": "canon",
+      "exposure": "nav",
+      "voice": "neutral",
+      "relevance": null,
+      "execution_posture": null,
+      "headings": [
+        {
+          "level": 2,
+          "text": "Canon Alignment",
+          "line": 2
+        },
+        {
+          "level": 2,
+          "text": "Role",
+          "line": 21
+        },
+        {
+          "level": 2,
+          "text": "Progressive Reading Policy",
+          "line": 35
+        },
+        {
+          "level": 3,
+          "text": "Read Depth Levels",
+          "line": 37
+        },
+        {
+          "level": 3,
+          "text": "Escalation Triggers",
+          "line": 54
+        },
+        {
+          "level": 2,
+          "text": "Output Contract",
+          "line": 68
+        },
+        {
+          "level": 3,
+          "text": "A) Governing Docs (authoritative)",
+          "line": 72
+        },
+        {
+          "level": 3,
+          "text": "B) Recommended Reads (progressive plan)",
+          "line": 76
+        },
+        {
+          "level": 3,
+          "text": "C) What I Still Don't Know",
+          "line": 81
+        },
+        {
+          "level": 3,
+          "text": "D) Next MCP Action Suggestion (optional)",
+          "line": 85
+        },
+        {
+          "level": 2,
+          "text": "Dependencies",
+          "line": 91
+        }
+      ],
+      "heading_count": 11,
+      "has_frontmatter": true
+    },
+    {
+      "path": "canon/agents/odd-mode-selector.md",
+      "root": "canon",
+      "authority_band": "governing",
+      "authority_inferred": "governing",
+      "uri": "klappy://canon/agents/odd-mode-selector",
+      "title": "ODD Mode Selector",
+      "subtitle": null,
+      "tags": [
+        "odd",
+        "agents",
+        "mode-selection",
+        "routing",
+        "confidence",
+        "mcp"
+      ],
+      "stability": "evolving",
+      "tier": "2",
+      "audience": "canon",
+      "exposure": "nav",
+      "voice": "neutral",
+      "relevance": null,
+      "execution_posture": null,
+      "headings": [
+        {
+          "level": 2,
+          "text": "Canon Alignment",
+          "line": 2
+        },
+        {
+          "level": 2,
+          "text": "Purpose",
+          "line": 21
+        },
+        {
+          "level": 2,
+          "text": "Inputs (Signals)",
+          "line": 33
+        },
+        {
+          "level": 3,
+          "text": "Intent Signals",
+          "line": 35
+        },
+        {
+          "level": 3,
+          "text": "Risk Signals",
+          "line": 40
+        },
+        {
+          "level": 3,
+          "text": "Completeness Signals",
+          "line": 45
+        },
+        {
+          "level": 2,
+          "text": "Decision Rule",
+          "line": 51
+        },
+        {
+          "level": 3,
+          "text": "Output: (action, confidence, rationale, next_step)",
+          "line": 53
+        },
+        {
+          "level": 3,
+          "text": "Default Safe Behavior",
+          "line": 60
+        },
+        {
+          "level": 2,
+          "text": "Recommended MCP Action Mapping",
+          "line": 68
+        },
+        {
+          "level": 2,
+          "text": "Output Contract (Exact Shape)",
+          "line": 95
+        },
+        {
+          "level": 2,
+          "text": "Dependencies",
+          "line": 108
+        }
+      ],
+      "heading_count": 12,
       "has_frontmatter": true
     },
     {
@@ -9995,6 +10327,103 @@
         }
       ],
       "heading_count": 10,
+      "has_frontmatter": true
+    },
+    {
+      "path": "docs/getting-started/odd-agents-and-mcp.md",
+      "root": "docs",
+      "authority_band": "operational",
+      "authority_inferred": "operational",
+      "uri": "klappy://docs/getting-started/odd-agents-and-mcp",
+      "title": "Agents & MCP (Experimental)",
+      "subtitle": "⚠️ **Experimental** — This describes optional tooling around ODD. No stability guarantees. No \"best practice\" claims.",
+      "tags": [
+        "agents",
+        "mcp",
+        "oddkit",
+        "getting-started",
+        "experimental"
+      ],
+      "stability": "evolving",
+      "tier": "3",
+      "audience": "docs",
+      "exposure": "nav",
+      "voice": "neutral",
+      "relevance": null,
+      "execution_posture": null,
+      "headings": [
+        {
+          "level": 1,
+          "text": "ODD Agents & MCP: Orientation",
+          "line": 2
+        },
+        {
+          "level": 2,
+          "text": "What this is",
+          "line": 8
+        },
+        {
+          "level": 2,
+          "text": "The three pieces",
+          "line": 18
+        },
+        {
+          "level": 3,
+          "text": "A. Canon (required conceptually)",
+          "line": 20
+        },
+        {
+          "level": 3,
+          "text": "B. oddkit (optional, recommended)",
+          "line": 27
+        },
+        {
+          "level": 3,
+          "text": "C. Subagents (optional, experimental)",
+          "line": 34
+        },
+        {
+          "level": 2,
+          "text": "Minimal install paths",
+          "line": 42
+        },
+        {
+          "level": 3,
+          "text": "Option 1: Just read canon (zero install)",
+          "line": 44
+        },
+        {
+          "level": 3,
+          "text": "Option 2: oddkit CLI only",
+          "line": 50
+        },
+        {
+          "level": 3,
+          "text": "Option 3: MCP server (advanced)",
+          "line": 58
+        },
+        {
+          "level": 3,
+          "text": "Option 4: Cursor subagent (experimental)",
+          "line": 70
+        },
+        {
+          "level": 2,
+          "text": "What this doc does NOT cover",
+          "line": 78
+        },
+        {
+          "level": 2,
+          "text": "Summary",
+          "line": 92
+        },
+        {
+          "level": 2,
+          "text": "See also",
+          "line": 104
+        }
+      ],
+      "heading_count": 14,
       "has_frontmatter": true
     },
     {

@@ -656,6 +656,44 @@
       ]
     },
     {
+      "uri": "klappy://canon/agents/odd-implementation-guide",
+      "path": "/canon/agents/odd-implementation-guide.md",
+      "title": "ODD Implementation Guide",
+      "type": "agent-role",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": [
+        "odd",
+        "agents",
+        "implementation",
+        "constraints",
+        "source-citing",
+        "no-bypass"
+      ]
+    },
+    {
+      "uri": "klappy://canon/agents/odd-instruction-sync",
+      "path": "/canon/agents/odd-instruction-sync.md",
+      "title": "ODD Instruction Sync Interpreter",
+      "type": "agent-role",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": [
+        "odd",
+        "agents",
+        "instruction-sync",
+        "maintenance",
+        "registry",
+        "patch-plan"
+      ]
+    },
+    {
       "uri": "klappy://odd/manifesto",
       "path": "/odd/manifesto.md",
       "title": "ODD Manifesto — Extended",
@@ -692,6 +730,25 @@
       }
     },
     {
+      "uri": "klappy://canon/agents/odd-map-navigator",
+      "path": "/canon/agents/odd-map-navigator.md",
+      "title": "ODD Map Navigator",
+      "type": "agent-role",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": [
+        "odd",
+        "agents",
+        "navigation",
+        "map",
+        "discovery",
+        "progressive-reading"
+      ]
+    },
+    {
       "uri": "klappy://odd/misuse-patterns",
       "path": "/odd/misuse-patterns.md",
       "title": "ODD Misuse Patterns",
@@ -705,6 +762,25 @@
         "odd",
         "misuse",
         "failure-modes"
+      ]
+    },
+    {
+      "uri": "klappy://canon/agents/odd-mode-selector",
+      "path": "/canon/agents/odd-mode-selector.md",
+      "title": "ODD Mode Selector",
+      "type": "agent-role",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": [
+        "odd",
+        "agents",
+        "mode-selection",
+        "routing",
+        "confidence",
+        "mcp"
       ]
     },
     {

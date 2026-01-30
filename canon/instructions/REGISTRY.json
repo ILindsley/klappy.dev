@@ -21,6 +21,59 @@
       "version": "1.0.0",
       "depends_on": [],
       "last_updated": "2026-01-29T00:00:00Z"
+    },
+    {
+      "id": "odd-map-navigator",
+      "path": "canon/agents/odd-map-navigator.md",
+      "uri": "klappy://canon/agents/odd-map-navigator",
+      "audience": "agent",
+      "owner": "klappy.dev",
+      "version": "1.0.0",
+      "depends_on": [
+        { "ref": "klappy://canon/epistemic-modes", "type": "canon_doc" },
+        { "ref": "oddkit://docs/oddkit/CHARTER", "type": "charter" }
+      ],
+      "last_updated": "2026-01-29T00:00:00Z"
+    },
+    {
+      "id": "odd-mode-selector",
+      "path": "canon/agents/odd-mode-selector.md",
+      "uri": "klappy://canon/agents/odd-mode-selector",
+      "audience": "agent",
+      "owner": "klappy.dev",
+      "version": "1.0.0",
+      "depends_on": [
+        { "ref": "klappy://canon/epistemic-modes", "type": "canon_doc" },
+        { "ref": "oddkit://tools/oddkit.tools.json", "type": "tool_schema" }
+      ],
+      "last_updated": "2026-01-29T00:00:00Z"
+    },
+    {
+      "id": "odd-instruction-sync",
+      "path": "canon/agents/odd-instruction-sync.md",
+      "uri": "klappy://canon/agents/odd-instruction-sync",
+      "audience": "agent",
+      "owner": "klappy.dev",
+      "version": "1.0.0",
+      "depends_on": [
+        { "ref": "oddkit://tools/oddkit.tools.json", "type": "tool_schema" },
+        { "ref": "klappy://canon/agents/odd-map-navigator", "type": "instruction" }
+      ],
+      "last_updated": "2026-01-29T00:00:00Z"
+    },
+    {
+      "id": "odd-implementation-guide",
+      "path": "canon/agents/odd-implementation-guide.md",
+      "uri": "klappy://canon/agents/odd-implementation-guide",
+      "audience": "agent",
+      "owner": "klappy.dev",
+      "version": "1.0.0",
+      "depends_on": [
+        { "ref": "klappy://canon/epistemic-modes", "type": "canon_doc" },
+        { "ref": "klappy://canon/agents/odd-map-navigator", "type": "instruction" },
+        { "ref": "oddkit://docs/oddkit/CHARTER", "type": "charter" }
+      ],
+      "last_updated": "2026-01-29T00:00:00Z"
     }
   ]
 }
