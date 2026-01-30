@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-01-30T01:11:32.745Z
+Generated: 2026-01-30T01:16:03.587Z
 Total Files: 233
 
 This is a documentation export of all markdown files from the klappy.dev
@@ -11395,6 +11395,47 @@ This changelog tracks changes to the **Canon pack** as a whole.
 
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
+
+## 0.23.0 — 2026-01-29
+
+**ODD Agent Roles — Map Navigation, Mode Selection, Instruction Sync, Implementation Guidance**
+
+This release introduces four new agent roles that complete the ODD cognitive topology. These agents operate strictly within the existing ODD / Canon / Docs map without inventing new posture doctrine or principles.
+
+### Added
+
+- **ODD Map Navigator** (`/canon/agents/odd-map-navigator.md`) — Navigate the ODD / Canon / Docs map using progressive reading and explicit uncertainty. Locates governing truth, chooses read depth (SMALL/MEDIUM/LARGE), and returns navigation plans. Enforces progressive reading policy to prevent "load entire file by default" behavior.
+
+- **ODD Mode Selector** (`/canon/agents/odd-mode-selector.md`) — Select the next MCP action using epistemic modes + confidence, without inventing posture. Routes requests to orient/catalog/librarian/preflight/validate/explain/instruction_sync with explicit confidence levels and reasoning.
+
+- **ODD Instruction Sync Interpreter** (`/canon/agents/odd-instruction-sync.md`) — Turn instruction_sync outputs into human-readable risk and sequencing recommendations. Interprets MUST_UPDATE/SHOULD_UPDATE/NICE_TO_UPDATE buckets and recommends update sequencing.
+
+- **ODD Implementation Guide** (`/canon/agents/odd-implementation-guide.md`) — Guide implementation only after governing canon is identified. Requires explicit assumptions and sources in every response. Hard constraint: if governing docs unknown, delegate to Map Navigator.
+
+### Updated
+
+- **Instruction Registry** (`/canon/instructions/REGISTRY.json`) — Added all four new agents with dependency declarations:
+  - `odd-map-navigator` depends on `klappy://canon/epistemic-modes`, `oddkit://docs/oddkit/CHARTER`
+  - `odd-mode-selector` depends on `klappy://canon/epistemic-modes`, `oddkit://tools/oddkit.tools.json`
+  - `odd-instruction-sync` depends on `oddkit://tools/oddkit.tools.json`, `klappy://canon/agents/odd-map-navigator`
+  - `odd-implementation-guide` depends on `klappy://canon/epistemic-modes`, `klappy://canon/agents/odd-map-navigator`, `oddkit://docs/oddkit/CHARTER`
+
+### Philosophy
+
+- **No posture doctrine** — Mode selector uses epistemic modes + MCP action set, not invented posture taxonomy
+- **Progressive reading enforced** — Map Navigator embodies SMALL → MEDIUM → LARGE discipline
+- **Agents don't overlap** — Each agent has a single responsibility; no agent does another's job
+- **Canon Alignment block** — All agents share identical non-negotiables block preventing drift
+
+### Agent Interaction Flow
+
+1. Mode Selector → classifies request, selects MCP action
+2. Map Navigator → finds governing docs, recommends read depth
+3. Librarian/Reader → fetches content at requested depth
+4. Implementation Guide → acts only after constraints are clear
+5. Instruction Sync Agent → interprets maintenance/upgrade impacts
+
+---
 
 ## 0.22.0 — 2026-01-29
 

@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-01-30T01:11:32.922Z",
+  "generated_at": "2026-01-30T01:16:03.760Z",
   "description": "Fast-lookup index for Librarian retrieval. Per docs/agents/librarian/contract.md",
   "schema_notes": {
     "authority_band": "Resolved authority (frontmatter override > inferred from root)",
@@ -1444,7 +1444,7 @@
         },
         {
           "level": 2,
-          "text": "0.22.0 — 2026-01-29",
+          "text": "0.23.0 — 2026-01-29",
           "line": 9
         },
         {
@@ -1454,148 +1454,148 @@
         },
         {
           "level": 3,
+          "text": "Updated",
+          "line": 25
+        },
+        {
+          "level": 3,
           "text": "Philosophy",
-          "line": 29
+          "line": 33
+        },
+        {
+          "level": 3,
+          "text": "Agent Interaction Flow",
+          "line": 40
+        },
+        {
+          "level": 2,
+          "text": "0.22.0 — 2026-01-29",
+          "line": 50
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 56
+        },
+        {
+          "level": 3,
+          "text": "Philosophy",
+          "line": 70
         },
         {
           "level": 3,
           "text": "Initial Registrations",
-          "line": 36
+          "line": 77
         },
         {
           "level": 2,
           "text": "0.21.0 — 2026-01-29",
-          "line": 43
+          "line": 84
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 49
+          "line": 90
         },
         {
           "level": 3,
           "text": "Philosophy",
-          "line": 55
+          "line": 96
         },
         {
           "level": 3,
           "text": "Integration",
-          "line": 62
+          "line": 103
         },
         {
           "level": 3,
           "text": "Ledger Schemas",
-          "line": 68
+          "line": 109
         },
         {
           "level": 2,
           "text": "0.20.1 — 2026-01-29",
-          "line": 76
+          "line": 117
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 82
+          "line": 123
         },
         {
           "level": 3,
           "text": "Philosophy",
-          "line": 86
+          "line": 127
         },
         {
           "level": 2,
           "text": "0.20.0 — 2026-01-29",
-          "line": 94
+          "line": 135
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 100
+          "line": 141
         },
         {
           "level": 3,
           "text": "Philosophy",
-          "line": 112
+          "line": 153
         },
         {
           "level": 3,
           "text": "Relationship to Other Canon",
-          "line": 119
+          "line": 160
         },
         {
           "level": 3,
           "text": "Notes",
-          "line": 125
+          "line": 166
         },
         {
           "level": 2,
           "text": "0.19.0 — 2026-01-29",
-          "line": 133
+          "line": 174
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 139
+          "line": 180
         },
         {
           "level": 3,
           "text": "Philosophy",
-          "line": 143
+          "line": 184
         },
         {
           "level": 3,
           "text": "Hard Constraints Codified",
-          "line": 150
+          "line": 191
         },
         {
           "level": 3,
           "text": "Valid Arbitration Outcomes",
-          "line": 157
+          "line": 198
         },
         {
           "level": 3,
           "text": "Implementation Reference",
-          "line": 164
+          "line": 205
         },
         {
           "level": 3,
           "text": "Notes",
-          "line": 174
+          "line": 215
         },
         {
           "level": 2,
           "text": "0.18.0 — 2026-01-28",
-          "line": 182
+          "line": 223
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 188
-        },
-        {
-          "level": 3,
-          "text": "Philosophy",
-          "line": 202
-        },
-        {
-          "level": 3,
-          "text": "Structure",
-          "line": 209
-        },
-        {
-          "level": 3,
-          "text": "Notes",
-          "line": 221
-        },
-        {
-          "level": 2,
-          "text": "0.17.0 — 2026-01-26",
           "line": 229
-        },
-        {
-          "level": 3,
-          "text": "Added",
-          "line": 235
         },
         {
           "level": 3,
@@ -1604,142 +1604,142 @@
         },
         {
           "level": 3,
-          "text": "Canonical Tie-In",
-          "line": 249
-        },
-        {
-          "level": 2,
-          "text": "0.16.0 — 2026-01-26",
-          "line": 257
-        },
-        {
-          "level": 3,
-          "text": "Added (Source Doctrine)",
-          "line": 269
-        },
-        {
-          "level": 3,
-          "text": "Philosophy Introduced",
-          "line": 289
-        },
-        {
-          "level": 3,
-          "text": "Usage (Initial Adoption)",
-          "line": 306
-        },
-        {
-          "level": 2,
-          "text": "0.15.0 — 2026-01-23",
-          "line": 318
-        },
-        {
-          "level": 3,
-          "text": "Added",
-          "line": 324
-        },
-        {
-          "level": 3,
-          "text": "Changed",
-          "line": 328
-        },
-        {
-          "level": 3,
-          "text": "Philosophy",
-          "line": 333
-        },
-        {
-          "level": 3,
-          "text": "Origin",
-          "line": 339
-        },
-        {
-          "level": 2,
-          "text": "0.14.0 — 2026-01-23",
-          "line": 351
-        },
-        {
-          "level": 3,
-          "text": "Added",
-          "line": 357
-        },
-        {
-          "level": 3,
-          "text": "Philosophy",
-          "line": 362
+          "text": "Structure",
+          "line": 250
         },
         {
           "level": 3,
           "text": "Notes",
-          "line": 368
+          "line": 262
+        },
+        {
+          "level": 2,
+          "text": "0.17.0 — 2026-01-26",
+          "line": 270
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 276
+        },
+        {
+          "level": 3,
+          "text": "Philosophy",
+          "line": 284
+        },
+        {
+          "level": 3,
+          "text": "Canonical Tie-In",
+          "line": 290
+        },
+        {
+          "level": 2,
+          "text": "0.16.0 — 2026-01-26",
+          "line": 298
+        },
+        {
+          "level": 3,
+          "text": "Added (Source Doctrine)",
+          "line": 310
+        },
+        {
+          "level": 3,
+          "text": "Philosophy Introduced",
+          "line": 330
+        },
+        {
+          "level": 3,
+          "text": "Usage (Initial Adoption)",
+          "line": 347
+        },
+        {
+          "level": 2,
+          "text": "0.15.0 — 2026-01-23",
+          "line": 359
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 365
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "line": 369
+        },
+        {
+          "level": 3,
+          "text": "Philosophy",
+          "line": 374
+        },
+        {
+          "level": 3,
+          "text": "Origin",
+          "line": 380
+        },
+        {
+          "level": 2,
+          "text": "0.14.0 — 2026-01-23",
+          "line": 392
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 398
+        },
+        {
+          "level": 3,
+          "text": "Philosophy",
+          "line": 403
+        },
+        {
+          "level": 3,
+          "text": "Notes",
+          "line": 409
         },
         {
           "level": 2,
           "text": "0.13.0 — 2026-01-23",
-          "line": 375
+          "line": 416
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 381
+          "line": 422
         },
         {
           "level": 3,
           "text": "Changed",
-          "line": 385
+          "line": 426
         },
         {
           "level": 3,
           "text": "Added (Lane)",
-          "line": 389
+          "line": 430
         },
         {
           "level": 3,
           "text": "Philosophy",
-          "line": 397
+          "line": 438
         },
         {
           "level": 3,
           "text": "Root Cause Documented",
-          "line": 403
+          "line": 444
         },
         {
           "level": 2,
           "text": "0.12.0 — 2026-01-22",
-          "line": 409
+          "line": 450
         },
         {
           "level": 3,
           "text": "Changed",
-          "line": 415
+          "line": 456
         },
         {
           "level": 3,
           "text": "Distribution After Reclassification",
-          "line": 423
-        },
-        {
-          "level": 3,
-          "text": "Philosophy",
-          "line": 432
-        },
-        {
-          "level": 3,
-          "text": "Invariants Held",
-          "line": 441
-        },
-        {
-          "level": 2,
-          "text": "0.11.0 — 2026-01-22",
-          "line": 451
-        },
-        {
-          "level": 3,
-          "text": "Added",
-          "line": 457
-        },
-        {
-          "level": 3,
-          "text": "Changed",
           "line": 464
         },
         {
@@ -1749,62 +1749,62 @@
         },
         {
           "level": 3,
-          "text": "Invariant Locked",
-          "line": 479
+          "text": "Invariants Held",
+          "line": 482
         },
         {
           "level": 2,
-          "text": "0.10.0 — 2026-01-21",
-          "line": 487
+          "text": "0.11.0 — 2026-01-22",
+          "line": 492
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 493
+          "line": 498
         },
         {
           "level": 3,
           "text": "Changed",
-          "line": 497
-        },
-        {
-          "level": 3,
-          "text": "Philosophy",
           "line": 505
         },
         {
           "level": 3,
-          "text": "Ontology Enforcement",
-          "line": 511
+          "text": "Philosophy",
+          "line": 514
+        },
+        {
+          "level": 3,
+          "text": "Invariant Locked",
+          "line": 520
         },
         {
           "level": 2,
-          "text": "0.9.0 — 2026-01-21",
-          "line": 520
+          "text": "0.10.0 — 2026-01-21",
+          "line": 528
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 526
+          "line": 534
         },
         {
           "level": 3,
           "text": "Changed",
-          "line": 536
+          "line": 538
         },
         {
           "level": 3,
           "text": "Philosophy",
-          "line": 545
+          "line": 546
         },
         {
           "level": 3,
-          "text": "Canon Rule",
+          "text": "Ontology Enforcement",
           "line": 552
         },
         {
           "level": 2,
-          "text": "0.8.0 — 2026-01-21",
+          "text": "0.9.0 — 2026-01-21",
           "line": 561
         },
         {
@@ -1815,556 +1815,546 @@
         {
           "level": 3,
           "text": "Changed",
-          "line": 584
+          "line": 577
         },
         {
           "level": 3,
           "text": "Philosophy",
-          "line": 591
+          "line": 586
+        },
+        {
+          "level": 3,
+          "text": "Canon Rule",
+          "line": 593
         },
         {
           "level": 2,
-          "text": "0.7.0 — 2026-01-21",
-          "line": 600
+          "text": "0.8.0 — 2026-01-21",
+          "line": 602
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 606
+          "line": 608
         },
         {
           "level": 3,
           "text": "Changed",
-          "line": 617
-        },
-        {
-          "level": 3,
-          "text": "Philosophy",
           "line": 625
         },
         {
           "level": 3,
-          "text": "Notes",
+          "text": "Philosophy",
           "line": 632
         },
         {
           "level": 2,
+          "text": "0.7.0 — 2026-01-21",
+          "line": 641
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 647
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "line": 658
+        },
+        {
+          "level": 3,
+          "text": "Philosophy",
+          "line": 666
+        },
+        {
+          "level": 3,
+          "text": "Notes",
+          "line": 673
+        },
+        {
+          "level": 2,
           "text": "0.6.1 — 2026-01-21",
-          "line": 640
+          "line": 681
         },
         {
           "level": 3,
           "text": "Fixed",
-          "line": 646
+          "line": 687
         },
         {
           "level": 3,
           "text": "Changed",
-          "line": 652
+          "line": 693
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 657
-        },
-        {
-          "level": 3,
-          "text": "Philosophy",
-          "line": 665
-        },
-        {
-          "level": 2,
-          "text": "0.6.0 — 2026-01-21",
-          "line": 674
-        },
-        {
-          "level": 3,
-          "text": "Breaking Changes",
-          "line": 680
-        },
-        {
-          "level": 3,
-          "text": "Added",
-          "line": 686
-        },
-        {
-          "level": 3,
-          "text": "Changed",
-          "line": 692
-        },
-        {
-          "level": 3,
-          "text": "Philosophy",
           "line": 698
         },
         {
           "level": 3,
-          "text": "Migration Notes",
-          "line": 704
-        },
-        {
-          "level": 2,
-          "text": "0.5.4 — 2026-01-21",
-          "line": 713
-        },
-        {
-          "level": 3,
-          "text": "Added",
-          "line": 719
-        },
-        {
-          "level": 3,
-          "text": "Changed",
-          "line": 726
-        },
-        {
-          "level": 3,
-          "text": "Removed",
-          "line": 732
-        },
-        {
-          "level": 3,
           "text": "Philosophy",
-          "line": 737
-        },
-        {
-          "level": 3,
-          "text": "Notes",
-          "line": 744
+          "line": 706
         },
         {
           "level": 2,
-          "text": "0.5.3 — 2026-01-21",
-          "line": 751
-        },
-        {
-          "level": 3,
-          "text": "Added",
-          "line": 757
-        },
-        {
-          "level": 3,
-          "text": "Changed",
-          "line": 761
-        },
-        {
-          "level": 3,
-          "text": "Philosophy",
-          "line": 769
-        },
-        {
-          "level": 3,
-          "text": "Notes",
-          "line": 776
-        },
-        {
-          "level": 2,
-          "text": "0.5.2 — 2026-01-20",
-          "line": 784
-        },
-        {
-          "level": 3,
-          "text": "Changed",
-          "line": 790
-        },
-        {
-          "level": 3,
-          "text": "Added",
-          "line": 808
-        },
-        {
-          "level": 3,
-          "text": "Philosophy",
-          "line": 813
-        },
-        {
-          "level": 3,
-          "text": "Notes",
-          "line": 819
-        },
-        {
-          "level": 2,
-          "text": "0.5.1 — 2026-01-20",
-          "line": 826
-        },
-        {
-          "level": 3,
-          "text": "Added",
-          "line": 832
-        },
-        {
-          "level": 3,
-          "text": "Changed",
-          "line": 836
-        },
-        {
-          "level": 3,
-          "text": "Philosophy",
-          "line": 841
-        },
-        {
-          "level": 3,
-          "text": "Notes",
-          "line": 848
-        },
-        {
-          "level": 2,
-          "text": "0.5.0 — 2026-01-19",
-          "line": 855
-        },
-        {
-          "level": 3,
-          "text": "Added",
-          "line": 861
-        },
-        {
-          "level": 3,
-          "text": "Changed",
-          "line": 867
-        },
-        {
-          "level": 3,
-          "text": "Breaking Changes (Epoch Transition)",
-          "line": 872
-        },
-        {
-          "level": 3,
-          "text": "Philosophy",
-          "line": 878
-        },
-        {
-          "level": 3,
-          "text": "Notes",
-          "line": 884
-        },
-        {
-          "level": 2,
-          "text": "0.4.10 — 2026-01-19",
-          "line": 891
-        },
-        {
-          "level": 3,
-          "text": "Added",
-          "line": 897
-        },
-        {
-          "level": 3,
-          "text": "Changed",
-          "line": 901
-        },
-        {
-          "level": 3,
-          "text": "Philosophy",
-          "line": 905
-        },
-        {
-          "level": 3,
-          "text": "Notes",
-          "line": 912
-        },
-        {
-          "level": 2,
-          "text": "0.4.9 — 2026-01-19",
-          "line": 919
-        },
-        {
-          "level": 3,
-          "text": "Added",
-          "line": 925
-        },
-        {
-          "level": 3,
-          "text": "Changed",
-          "line": 930
-        },
-        {
-          "level": 3,
-          "text": "Philosophy",
-          "line": 937
-        },
-        {
-          "level": 3,
-          "text": "Notes",
-          "line": 944
-        },
-        {
-          "level": 2,
-          "text": "0.4.8 — 2026-01-19",
-          "line": 951
-        },
-        {
-          "level": 3,
-          "text": "Added",
-          "line": 957
-        },
-        {
-          "level": 3,
-          "text": "Changed",
-          "line": 962
-        },
-        {
-          "level": 3,
-          "text": "Philosophy",
-          "line": 971
-        },
-        {
-          "level": 3,
-          "text": "Notes",
-          "line": 977
-        },
-        {
-          "level": 2,
-          "text": "0.4.7 — 2026-01-19",
-          "line": 984
-        },
-        {
-          "level": 3,
-          "text": "Added",
-          "line": 990
-        },
-        {
-          "level": 3,
-          "text": "Changed",
-          "line": 995
-        },
-        {
-          "level": 3,
-          "text": "Philosophy",
-          "line": 999
-        },
-        {
-          "level": 3,
-          "text": "Notes",
-          "line": 1006
-        },
-        {
-          "level": 2,
-          "text": "0.4.6 — 2026-01-19",
-          "line": 1013
-        },
-        {
-          "level": 3,
-          "text": "Added",
-          "line": 1019
-        },
-        {
-          "level": 3,
-          "text": "Changed",
-          "line": 1025
-        },
-        {
-          "level": 3,
-          "text": "Behavior",
-          "line": 1030
-        },
-        {
-          "level": 2,
-          "text": "0.4.5 — 2026-01-18",
-          "line": 1041
-        },
-        {
-          "level": 3,
-          "text": "Added",
-          "line": 1047
-        },
-        {
-          "level": 3,
-          "text": "Changed",
-          "line": 1053
-        },
-        {
-          "level": 3,
-          "text": "Philosophy",
-          "line": 1058
-        },
-        {
-          "level": 3,
-          "text": "Notes",
-          "line": 1065
-        },
-        {
-          "level": 2,
-          "text": "0.4.4 — 2026-01-18",
-          "line": 1072
-        },
-        {
-          "level": 3,
-          "text": "Added",
-          "line": 1078
-        },
-        {
-          "level": 3,
-          "text": "Changed",
-          "line": 1085
-        },
-        {
-          "level": 3,
-          "text": "Philosophy",
-          "line": 1091
-        },
-        {
-          "level": 2,
-          "text": "0.4.3 — 2026-01-18",
-          "line": 1099
-        },
-        {
-          "level": 3,
-          "text": "Added",
-          "line": 1107
-        },
-        {
-          "level": 3,
-          "text": "Changed",
-          "line": 1112
-        },
-        {
-          "level": 2,
-          "text": "0.4.2 — 2026-01-17",
-          "line": 1120
-        },
-        {
-          "level": 3,
-          "text": "Added",
-          "line": 1126
-        },
-        {
-          "level": 3,
-          "text": "Changed",
-          "line": 1139
-        },
-        {
-          "level": 3,
-          "text": "Philosophy",
-          "line": 1144
-        },
-        {
-          "level": 2,
-          "text": "0.4.1 — 2026-01-17",
-          "line": 1153
-        },
-        {
-          "level": 3,
-          "text": "Added",
-          "line": 1159
-        },
-        {
-          "level": 3,
-          "text": "Changed",
-          "line": 1169
-        },
-        {
-          "level": 3,
-          "text": "Notes",
-          "line": 1180
-        },
-        {
-          "level": 2,
-          "text": "0.4.0 — 2026-01-17",
-          "line": 1188
-        },
-        {
-          "level": 3,
-          "text": "Added",
-          "line": 1194
-        },
-        {
-          "level": 3,
-          "text": "Changed",
-          "line": 1214
-        },
-        {
-          "level": 3,
-          "text": "Epochs",
-          "line": 1225
+          "text": "0.6.0 — 2026-01-21",
+          "line": 715
         },
         {
           "level": 3,
           "text": "Breaking Changes",
-          "line": 1232
+          "line": 721
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 727
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "line": 733
+        },
+        {
+          "level": 3,
+          "text": "Philosophy",
+          "line": 739
+        },
+        {
+          "level": 3,
+          "text": "Migration Notes",
+          "line": 745
+        },
+        {
+          "level": 2,
+          "text": "0.5.4 — 2026-01-21",
+          "line": 754
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 760
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "line": 767
+        },
+        {
+          "level": 3,
+          "text": "Removed",
+          "line": 773
+        },
+        {
+          "level": 3,
+          "text": "Philosophy",
+          "line": 778
         },
         {
           "level": 3,
           "text": "Notes",
-          "line": 1240
+          "line": 785
+        },
+        {
+          "level": 2,
+          "text": "0.5.3 — 2026-01-21",
+          "line": 792
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 798
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "line": 802
+        },
+        {
+          "level": 3,
+          "text": "Philosophy",
+          "line": 810
+        },
+        {
+          "level": 3,
+          "text": "Notes",
+          "line": 817
+        },
+        {
+          "level": 2,
+          "text": "0.5.2 — 2026-01-20",
+          "line": 825
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "line": 831
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 849
+        },
+        {
+          "level": 3,
+          "text": "Philosophy",
+          "line": 854
+        },
+        {
+          "level": 3,
+          "text": "Notes",
+          "line": 860
+        },
+        {
+          "level": 2,
+          "text": "0.5.1 — 2026-01-20",
+          "line": 867
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 873
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "line": 877
+        },
+        {
+          "level": 3,
+          "text": "Philosophy",
+          "line": 882
+        },
+        {
+          "level": 3,
+          "text": "Notes",
+          "line": 889
+        },
+        {
+          "level": 2,
+          "text": "0.5.0 — 2026-01-19",
+          "line": 896
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 902
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "line": 908
+        },
+        {
+          "level": 3,
+          "text": "Breaking Changes (Epoch Transition)",
+          "line": 913
+        },
+        {
+          "level": 3,
+          "text": "Philosophy",
+          "line": 919
+        },
+        {
+          "level": 3,
+          "text": "Notes",
+          "line": 925
+        },
+        {
+          "level": 2,
+          "text": "0.4.10 — 2026-01-19",
+          "line": 932
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 938
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "line": 942
+        },
+        {
+          "level": 3,
+          "text": "Philosophy",
+          "line": 946
+        },
+        {
+          "level": 3,
+          "text": "Notes",
+          "line": 953
+        },
+        {
+          "level": 2,
+          "text": "0.4.9 — 2026-01-19",
+          "line": 960
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 966
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "line": 971
+        },
+        {
+          "level": 3,
+          "text": "Philosophy",
+          "line": 978
+        },
+        {
+          "level": 3,
+          "text": "Notes",
+          "line": 985
+        },
+        {
+          "level": 2,
+          "text": "0.4.8 — 2026-01-19",
+          "line": 992
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 998
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "line": 1003
+        },
+        {
+          "level": 3,
+          "text": "Philosophy",
+          "line": 1012
+        },
+        {
+          "level": 3,
+          "text": "Notes",
+          "line": 1018
+        },
+        {
+          "level": 2,
+          "text": "0.4.7 — 2026-01-19",
+          "line": 1025
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 1031
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "line": 1036
+        },
+        {
+          "level": 3,
+          "text": "Philosophy",
+          "line": 1040
+        },
+        {
+          "level": 3,
+          "text": "Notes",
+          "line": 1047
+        },
+        {
+          "level": 2,
+          "text": "0.4.6 — 2026-01-19",
+          "line": 1054
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 1060
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "line": 1066
+        },
+        {
+          "level": 3,
+          "text": "Behavior",
+          "line": 1071
+        },
+        {
+          "level": 2,
+          "text": "0.4.5 — 2026-01-18",
+          "line": 1082
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 1088
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "line": 1094
+        },
+        {
+          "level": 3,
+          "text": "Philosophy",
+          "line": 1099
+        },
+        {
+          "level": 3,
+          "text": "Notes",
+          "line": 1106
+        },
+        {
+          "level": 2,
+          "text": "0.4.4 — 2026-01-18",
+          "line": 1113
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 1119
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "line": 1126
+        },
+        {
+          "level": 3,
+          "text": "Philosophy",
+          "line": 1132
+        },
+        {
+          "level": 2,
+          "text": "0.4.3 — 2026-01-18",
+          "line": 1140
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 1148
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "line": 1153
+        },
+        {
+          "level": 2,
+          "text": "0.4.2 — 2026-01-17",
+          "line": 1161
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 1167
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "line": 1180
+        },
+        {
+          "level": 3,
+          "text": "Philosophy",
+          "line": 1185
+        },
+        {
+          "level": 2,
+          "text": "0.4.1 — 2026-01-17",
+          "line": 1194
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 1200
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "line": 1210
+        },
+        {
+          "level": 3,
+          "text": "Notes",
+          "line": 1221
+        },
+        {
+          "level": 2,
+          "text": "0.4.0 — 2026-01-17",
+          "line": 1229
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 1235
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "line": 1255
+        },
+        {
+          "level": 3,
+          "text": "Epochs",
+          "line": 1266
+        },
+        {
+          "level": 3,
+          "text": "Breaking Changes",
+          "line": 1273
+        },
+        {
+          "level": 3,
+          "text": "Notes",
+          "line": 1281
         },
         {
           "level": 2,
           "text": "0.3.1 — 2026-01-17",
-          "line": 1248
+          "line": 1289
         },
         {
           "level": 3,
           "text": "Changed",
-          "line": 1250
+          "line": 1291
         },
         {
           "level": 3,
           "text": "Notes",
-          "line": 1257
+          "line": 1298
         },
         {
           "level": 2,
           "text": "0.3.0 — 2026-01-17",
-          "line": 1263
+          "line": 1304
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 1265
+          "line": 1306
         },
         {
           "level": 3,
           "text": "Changed",
-          "line": 1278
-        },
-        {
-          "level": 3,
-          "text": "Deprecated",
-          "line": 1285
-        },
-        {
-          "level": 3,
-          "text": "Notes",
-          "line": 1292
-        },
-        {
-          "level": 2,
-          "text": "0.1.5 — 2026-01-16 (Superseded by 0.3.0)",
-          "line": 1300
-        },
-        {
-          "level": 3,
-          "text": "Added",
-          "line": 1302
-        },
-        {
-          "level": 3,
-          "text": "Notes",
-          "line": 1313
-        },
-        {
-          "level": 2,
-          "text": "0.1.4 — 2026-01-16",
           "line": 1319
         },
         {
           "level": 3,
-          "text": "Added",
-          "line": 1321
-        },
-        {
-          "level": 3,
-          "text": "Changed",
-          "line": 1329
+          "text": "Deprecated",
+          "line": 1326
         },
         {
           "level": 3,
           "text": "Notes",
-          "line": 1334
+          "line": 1333
         },
         {
           "level": 2,
-          "text": "0.1.3 — 2026-01-16",
+          "text": "0.1.5 — 2026-01-16 (Superseded by 0.3.0)",
           "line": 1341
         },
         {
@@ -2374,23 +2364,18 @@
         },
         {
           "level": 3,
-          "text": "Changed",
-          "line": 1349
-        },
-        {
-          "level": 3,
           "text": "Notes",
-          "line": 1355
+          "line": 1354
         },
         {
           "level": 2,
-          "text": "0.1.2 — 2026-01-16",
-          "line": 1361
+          "text": "0.1.4 — 2026-01-16",
+          "line": 1360
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 1363
+          "line": 1362
         },
         {
           "level": 3,
@@ -2399,51 +2384,91 @@
         },
         {
           "level": 3,
-          "text": "Removed",
-          "line": 1377
+          "text": "Notes",
+          "line": 1375
+        },
+        {
+          "level": 2,
+          "text": "0.1.3 — 2026-01-16",
+          "line": 1382
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 1384
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "line": 1390
         },
         {
           "level": 3,
           "text": "Notes",
-          "line": 1381
+          "line": 1396
+        },
+        {
+          "level": 2,
+          "text": "0.1.2 — 2026-01-16",
+          "line": 1402
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 1404
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "line": 1411
+        },
+        {
+          "level": 3,
+          "text": "Removed",
+          "line": 1418
+        },
+        {
+          "level": 3,
+          "text": "Notes",
+          "line": 1422
         },
         {
           "level": 2,
           "text": "0.1.1 — 2026-01-15",
-          "line": 1387
+          "line": 1428
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 1389
+          "line": 1430
         },
         {
           "level": 3,
           "text": "Established",
-          "line": 1395
+          "line": 1436
         },
         {
           "level": 3,
           "text": "Notes",
-          "line": 1402
+          "line": 1443
         },
         {
           "level": 2,
           "text": "0.1.0 — 2026-01-15",
-          "line": 1410
+          "line": 1451
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 1412
+          "line": 1453
         },
         {
           "level": 3,
           "text": "Notes",
-          "line": 1435
+          "line": 1476
         }
       ],
-      "heading_count": 201,
+      "heading_count": 206,
       "has_frontmatter": true
     },
     {
