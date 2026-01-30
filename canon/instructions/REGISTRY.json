@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-01-29T00:00:00Z",
+  "instructions": [
+    {
+      "id": "odd-epistemic-guide",
+      "path": "canon/agents/odd-epistemic-guide.md",
+      "uri": "klappy://canon/agents/odd-epistemic-guide",
+      "audience": "agent",
+      "owner": "klappy.dev",
+      "version": "1.0.0",
+      "depends_on": [],
+      "last_updated": "2026-01-29T00:00:00Z"
+    },
+    {
+      "id": "odd-scribe",
+      "path": "canon/agents/odd-scribe.md",
+      "uri": "klappy://canon/agents/odd-scribe",
+      "audience": "agent",
+      "owner": "klappy.dev",
+      "version": "1.0.0",
+      "depends_on": [],
+      "last_updated": "2026-01-29T00:00:00Z"
+    }
+  ]
+}
