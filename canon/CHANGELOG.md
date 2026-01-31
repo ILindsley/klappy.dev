@@ -18,6 +18,51 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.27.0 — 2026-01-31
+
+**Scope Over Folders — Path Independence Invariant**
+
+This release introduces a fundamental epistemic invariant: scope is an attribute of a claim, not a property of its storage location. Folders are demoted to furniture — they hold things but do not mean things.
+
+### Added
+
+- **Principle: Scope Over Folders** (`/canon/principles/scope-over-folders.md`) — Tier 2 principle establishing that epistemic scope is metadata, not location. Filesystem paths, branch names, and folder structures are implementation details. Meaning must be explicitly declared and mechanically enforceable. One-liner: "If meaning depends on where a line is stored, you've encoded ritual, not truth."
+
+- **Constraint: Meaning Must Not Depend on Path** (`/canon/constraints/meaning-must-not-depend-on-path.md`) — Tier 1 constraint forbidding path-based semantic inference. No canonical meaning, scope, or lifecycle state may be derived from filesystem paths or branch names. Operational test: "If moving a file changes what it means, the system is invalid."
+
+- **Migration: Scope and Experiments Minimal Migration** (`/docs/migrations/scope-experiments-minimal-migration.md`) — Four-phase migration plan to decouple epistemic meaning from folder topology while preserving current structure. Phases: declare primitives (schema), lanes as view, experiments as enforced state, decouple survivability from champion. Success test: oddkit can reconstruct scope without reading filesystem topology as truth.
+
+- **Rationale: Convention Requires an Enforcer** (`/docs/appendices/convention-requires-an-enforcer.md`) — Explanatory appendix preserving the rationale for mechanical enforcement over social convention. Acknowledges the emotional cost of abandoning folder-based elegance while explaining why tooling enforcement is the only reliable option in distributed, agent-augmented environments. Core insight: "A convention without enforcement is a ritual with a deadline."
+
+- **New Directory:** `/docs/migrations/` — Migration documentation for system-level changes
+
+- **New Directory:** `/docs/history/` — Historical case studies (prepared for forthcoming lanes/attempts case study)
+
+### Philosophy
+
+- **Folders are furniture** — They hold things but do not mean things. Scope, lifecycle, and promotion are now metadata attributes, not path patterns.
+
+- **Convention is upgraded, not abandoned** — The elegance of convention-over-configuration is preserved by relocating it from path conventions (fragile, implicit) to schema conventions (explicit, enforceable).
+
+- **Portability is the payoff** — The same repository can now be reorganized, split, merged, or restructured without semantic drift. Works across monorepos, single repos, submodules, and future reshuffles.
+
+- **Append-only enables concurrency** — The migration's append/merge rules (stable IDs, no retroactive edits) quietly solve agent concurrency, merge conflicts, and accountability without ceremony.
+
+### Relationship
+
+This release builds on:
+
+- `klappy://canon/constraints/humans-are-variable-inputs` — foundational constraint
+- `klappy://canon/principles/ritual-is-a-smell` — related principle
+- `klappy://docs/decisions/D0007` — prior decision establishing branch names as non-authoritative
+
+### Notes
+
+- Historical case study (`docs/history/2026-01-31-lanes-attempts-ritual-failure.md`) is prepared but awaiting evidence/timeline from operational experience
+- Freezing decision record (`D0016-folders-as-views-not-boundaries`) recommended as follow-up to prevent re-litigation
+
+---
+
 ## 0.26.0 — 2026-01-31
 
 **Canon Load-Bearing Objects — Constraint, Principle, Diagnostic, Apocrypha**

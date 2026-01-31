@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-31T22:19:03.203Z
-Total Files: 259
+Generated: 2026-01-31T22:31:22.681Z
+Total Files: 260
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -22,7 +22,7 @@ details (attempts, version folders, source code).
 - **About** (6 files)
 - **Apocrypha** (14 files)
 - **Canon** (48 files)
-- **Documentation** (89 files)
+- **Documentation** (90 files)
 - **Drift-audit** (1 files)
 - **Infrastructure** (10 files)
 - **Interfaces & Contracts** (6 files)
@@ -5368,6 +5368,187 @@ Compiled Memory does not:
 
 It exists to keep context bounded while keeping truth traceable.
 
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/appendices/convention-requires-an-enforcer.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/appendices/convention-requires-an-enforcer
+title: "Convention Requires an Enforcer"
+audience: docs
+exposure: internal
+tier: 3
+voice: neutral
+stability: draft
+tags: ["rationale", "convention", "enforcement", "portability", "oddkit"]
+---
+
+# Convention Requires an Enforcer
+
+## Purpose
+
+This document preserves the rationale behind a key design shift in ODD and oddkit: why convention-over-configuration is insufficient without enforcement, and why enforcement must be mechanical rather than social.
+
+This is not a principle or a constraint. It is an explanatory disclosure meant to prevent future confusion, re-litigation, or regression to path-based conventions.
+
+---
+
+## The Emotional Cost (Acknowledged)
+
+Moving away from folder-based convention feels like a loss.
+
+Convention-over-configuration promises:
+
+- elegance
+- shared intuition
+- low cognitive overhead
+
+Abandoning it can feel like choosing bureaucracy over taste.
+
+That feeling is valid — and misleading.
+
+---
+
+## The Core Truth
+
+Convention only works when there is an enforcer.
+
+Historically, convention-over-configuration is paid for by one (or more) of the following:
+
+1. **Central authority** — a team or individual who polices correctness
+2. **Cultural enforcement** — social pressure, shame, or reputation
+3. **Tooling enforcement** — automated checks that make invalid states impossible
+
+In environments with:
+
+- distributed contributors
+- AI agents
+- forks and submodules
+- high churn and long timelines
+
+Only tooling enforcement remains reliable.
+
+---
+
+## Why Social Convention Fails Here
+
+ODD rests on a non-negotiable constraint:
+
+> Humans are variable inputs.
+
+This means:
+
+- memory fails
+- attention drifts
+- rituals are skipped under pressure
+- "everyone knows the rule" decays over time
+
+Any convention that depends on remembering or behaving correctly will eventually fail.
+
+This is not a moral claim. It is an empirical one.
+
+---
+
+## What Changed (And What Did Not)
+
+**What changed:**
+
+- Convention is no longer encoded in filesystem paths or branch names.
+- Meaning is no longer inferred from location.
+
+**What did not change:**
+
+- There is still a convention.
+- Everyone still follows it.
+
+The difference is where the convention lives.
+
+---
+
+## The New Convention
+
+The convention now lives in:
+
+- **schemas** (required fields)
+- **invariants** (states that must be satisfied)
+- **tooling defaults** (the correct path is the easy path)
+
+Examples:
+
+- A learning must declare scope.
+- An experiment must be exited.
+- A record must have a stable id.
+
+These are conventions — but they are machine-checkable.
+
+---
+
+## Who Enforces the Convention
+
+Enforcement is layered:
+
+1. **oddkit** enforces local correctness during work
+2. **CI** enforces shared correctness before merge
+3. **Canon constraints** enforce epistemic correctness as a normative backstop
+
+This replaces:
+
+- meetings
+- tribal knowledge
+- documentation-as-hope
+
+with deterministic guarantees.
+
+---
+
+## Why This Is More Antifragile
+
+- Repos can be reorganized without semantic drift
+- New contributors do not need oral tradition
+- Agents cannot accidentally violate meaning
+- Failure modes surface immediately, not retroactively
+
+The system becomes harder to misuse as it grows.
+
+---
+
+## Reframing the Loss
+
+This is not abandoning convention-over-configuration.
+
+It is upgrading it:
+
+- from path conventions (fragile, implicit)
+- to schema conventions (explicit, enforceable)
+
+The elegance was not lost.
+
+It was relocated to a layer that can survive reality.
+
+---
+
+## Summary
+
+A convention without enforcement is a ritual with a deadline.
+
+ODD chooses enforcement not because it distrusts people, but because it respects reality.
+
+---
+
+## Relationship
+
+This appendix explains the rationale behind:
+
+- `klappy://canon/principles/scope-over-folders` — the principle that scope is metadata, not location
+- `klappy://canon/constraints/meaning-must-not-depend-on-path` — the tier-1 constraint forbidding path inference
+- `klappy://docs/migrations/scope-experiments-minimal-migration` — the migration plan implementing these invariants
+
+It rests on the foundational constraint:
+
+- `klappy://canon/constraints/humans-are-variable-inputs`
 
 
 
@@ -12096,6 +12277,51 @@ This changelog tracks changes to the **Canon pack** as a whole.
 
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
+
+## 0.27.0 — 2026-01-31
+
+**Scope Over Folders — Path Independence Invariant**
+
+This release introduces a fundamental epistemic invariant: scope is an attribute of a claim, not a property of its storage location. Folders are demoted to furniture — they hold things but do not mean things.
+
+### Added
+
+- **Principle: Scope Over Folders** (`/canon/principles/scope-over-folders.md`) — Tier 2 principle establishing that epistemic scope is metadata, not location. Filesystem paths, branch names, and folder structures are implementation details. Meaning must be explicitly declared and mechanically enforceable. One-liner: "If meaning depends on where a line is stored, you've encoded ritual, not truth."
+
+- **Constraint: Meaning Must Not Depend on Path** (`/canon/constraints/meaning-must-not-depend-on-path.md`) — Tier 1 constraint forbidding path-based semantic inference. No canonical meaning, scope, or lifecycle state may be derived from filesystem paths or branch names. Operational test: "If moving a file changes what it means, the system is invalid."
+
+- **Migration: Scope and Experiments Minimal Migration** (`/docs/migrations/scope-experiments-minimal-migration.md`) — Four-phase migration plan to decouple epistemic meaning from folder topology while preserving current structure. Phases: declare primitives (schema), lanes as view, experiments as enforced state, decouple survivability from champion. Success test: oddkit can reconstruct scope without reading filesystem topology as truth.
+
+- **Rationale: Convention Requires an Enforcer** (`/docs/appendices/convention-requires-an-enforcer.md`) — Explanatory appendix preserving the rationale for mechanical enforcement over social convention. Acknowledges the emotional cost of abandoning folder-based elegance while explaining why tooling enforcement is the only reliable option in distributed, agent-augmented environments. Core insight: "A convention without enforcement is a ritual with a deadline."
+
+- **New Directory:** `/docs/migrations/` — Migration documentation for system-level changes
+
+- **New Directory:** `/docs/history/` — Historical case studies (prepared for forthcoming lanes/attempts case study)
+
+### Philosophy
+
+- **Folders are furniture** — They hold things but do not mean things. Scope, lifecycle, and promotion are now metadata attributes, not path patterns.
+
+- **Convention is upgraded, not abandoned** — The elegance of convention-over-configuration is preserved by relocating it from path conventions (fragile, implicit) to schema conventions (explicit, enforceable).
+
+- **Portability is the payoff** — The same repository can now be reorganized, split, merged, or restructured without semantic drift. Works across monorepos, single repos, submodules, and future reshuffles.
+
+- **Append-only enables concurrency** — The migration's append/merge rules (stable IDs, no retroactive edits) quietly solve agent concurrency, merge conflicts, and accountability without ceremony.
+
+### Relationship
+
+This release builds on:
+
+- `klappy://canon/constraints/humans-are-variable-inputs` — foundational constraint
+- `klappy://canon/principles/ritual-is-a-smell` — related principle
+- `klappy://docs/decisions/D0007` — prior decision establishing branch names as non-authoritative
+
+### Notes
+
+- Historical case study (`docs/history/2026-01-31-lanes-attempts-ritual-failure.md`) is prepared but awaiting evidence/timeline from operational experience
+- Freezing decision record (`D0016-folders-as-views-not-boundaries`) recommended as follow-up to prevent re-litigation
+
+---
 
 ## 0.26.0 — 2026-01-31
 
