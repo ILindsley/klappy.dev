@@ -1,8 +1,8 @@
 {
   "pack": {
     "name": "klappy-canon",
-    "version": "0.24.0",
-    "updated_at": "2026-01-30",
+    "version": "0.25.0",
+    "updated_at": "2026-01-31",
     "description": "Canonical orientation, constraints, decision rules, evidence policies, and ODD appendices used across klappy.dev.",
     "public_entrypoint": "klappy://public/odd",
     "canon_entrypoint": "klappy://meta/canon-index",
@@ -378,6 +378,18 @@
       "tags": []
     },
     {
+      "uri": "klappy://canon/meta/epistemic-architecture",
+      "path": "/canon/meta/epistemic-architecture.md",
+      "title": "Epistemic Architecture",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "long_lived",
+      "tags": []
+    },
+    {
       "uri": "klappy://canon/epistemic-challenge",
       "path": "/canon/epistemic-challenge.md",
       "title": "Epistemic Challenge",
@@ -394,6 +406,18 @@
         "validation",
         "collaboration"
       ]
+    },
+    {
+      "uri": "odd://contract/epistemic-contract",
+      "path": "/odd/contract/epistemic-contract.md",
+      "title": "Epistemic Contract",
+      "type": "text/markdown",
+      "audience": "odd",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "long_lived",
+      "tags": []
     },
     {
       "uri": "klappy://canon/epistemic-hygiene",
@@ -444,6 +468,30 @@
         "epistemic-obligation",
         "architecture"
       ]
+    },
+    {
+      "uri": "klappy://canon/defaults/epistemic-posture",
+      "path": "/canon/defaults/epistemic-posture.md",
+      "title": "Epistemic Posture",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": []
+    },
+    {
+      "uri": "klappy://canon/defaults/evidence-intake",
+      "path": "/canon/defaults/evidence-intake.md",
+      "title": "Evidence Intake",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": []
     },
     {
       "uri": "klappy://odd/evolution-not-automation",

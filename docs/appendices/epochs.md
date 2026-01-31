@@ -15,7 +15,7 @@ tags: ["odd", "epochs", "fitness-landscape", "comparability", "orientation"]
 
 ## Description
 
-An epoch is a named period where "success" meaning is stable enough to compare outcomes. Attempts are individuals, PRDs are fitness functions, Promotion is selection, Canon is inherited traits, and Epochs are shifts in the fitness landscape. An epoch defines evaluation reality: what "done" means, mandatory evidence, binding contracts, acceptable risks, and infrastructure stability. Epochs are not PRDs—they are the context in which PRDs are interpreted. klappy.dev defines E0001 (single-PRD era), E0002 (multi-lane era), and E0003 (evidence-first era with Cloudflare deployment proof required).
+An epoch is a named period where "success" meaning is stable enough to compare outcomes. Attempts are individuals, PRDs are fitness functions, Promotion is selection, Canon is inherited traits, and Epochs are shifts in the fitness landscape. An epoch defines evaluation reality: what "done" means, mandatory evidence, binding contracts, acceptable risks, and infrastructure stability. Epochs are not PRDs—they are the context in which PRDs are interpreted. klappy.dev defines E0001 (single-PRD era), E0002 (multi-lane era), E0003 (evidence-first era with Cloudflare deployment proof required), and E0004 (epistemic separation era with judgment/embodiment distinction).
 
 ## Outline
 
@@ -24,10 +24,11 @@ An epoch is a named period where "success" meaning is stable enough to compare o
 - Relationship to Product Lanes
 - Relationship to PRDs and Attempts
 - When to Start a New Epoch
-- Naming Convention (E0001, E0002, E0003)
+- Naming Convention (E0001, E0002, E0003, E0004)
 - Minimal Epoch Metadata (META.json)
 - Anti-Patterns
 - E0003 — Evidence-First Era (klappy.dev specific)
+- E0004 — Epistemic Separation Era
 
 ---
 
@@ -131,6 +132,7 @@ Examples:
 - `E0001-single-prd-era`
 - `E0002-multi-lane-era`
 - `E0003-evidence-first-era`
+- `E0004-epistemic-separation-era`
 
 The ID is the canonical reference. The name is a hint.
 
@@ -214,3 +216,57 @@ This change alters the repository's selection pressure:
 
 - E0002 attempts remain valid within E0002.
 - E0002 attempts are not comparable to E0003 attempts by default.
+
+---
+
+## E0004 — Epistemic Separation Era
+
+### What changed
+
+E0004 formalizes a distinction that had previously been implicit:
+
+ODD and klappy.dev exist to govern how understanding becomes commitment.
+
+They prioritize the integrity of learning, reasoning, and decision-making before those processes are encoded into documents, plans, policies, or products.
+
+### Core distinction
+
+Written artifacts — including documentation, published work, code, decisions, and deliverables — are treated as secondary traces of epistemic work. They are evidence that learning occurred, not the objective themselves.
+
+This distinction exists because artifacts do more than record intent. Once created, they shape behavior, constrain future choices, and invite trust from others.
+
+### Binding separation
+
+E0004 makes this explicit by separating:
+
+- **epistemic judgment** (what is understood, what is uncertain, and what is safe to commit)
+- **artifact production** (writing, shipping, deciding, and formalizing)
+
+This separation is foundational to:
+
+- refusal when clarity is insufficient
+- interruption when verbal reasoning degrades
+- externalization when words stop being honest
+- evidence intake when prior work exists
+- consistency across human- and agent-facing systems
+
+### Artifact rule
+
+Artifacts are not prohibited.
+
+They are permitted only insofar as they faithfully represent the learning that produced them.
+
+### Why this is a new epoch
+
+This change alters the repository's evaluation posture:
+
+- Success is now gated by epistemic integrity, not just artifact production
+- Judgment and embodiment are explicitly decoupled
+- Surfaces (klappy.dev, oddkit, future tools) must reach the same judgment given the same state
+- Differences in expression are allowed; differences in judgment indicate drift
+
+### Compatibility
+
+- E0003 attempts remain valid within E0003.
+- E0003 attempts are not comparable to E0004 attempts by default.
+- E0004 is LOCKED. No further expansion without a new epoch.

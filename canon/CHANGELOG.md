@@ -18,6 +18,56 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.25.0 — 2026-01-31
+
+**Epoch 4 — Epistemic Separation Era**
+
+This release implements the structural foundation for E0004, formalizing the distinction between epistemic judgment and artifact production. ODD and klappy.dev now explicitly govern how understanding becomes commitment.
+
+### Added
+
+- **Epistemic Contract** (`/odd/contract/epistemic-contract.md`) — Abstract, portable contract defining how epistemic judgment is made independent of surface or tool. Defines core responsibilities: clarity confirmation, incision rules, refusal rights, evidence intake, surface invariance.
+
+- **Epistemic Architecture** (`/canon/meta/epistemic-architecture.md`) — Long-lived document explaining judgment vs embodiment separation. Defines the shared epistemic spine, surfaces (klappy.dev, oddkit, future tools), and the invariance rule.
+
+- **Epistemic Posture Defaults** (`/canon/defaults/epistemic-posture.md`) — Opinionated, overrideable defaults encoding posture, not truth: confirmation over correction, early honesty, externalization before explanation, refusal with care, incompleteness as feature, prior work first.
+
+- **Evidence Intake Defaults** (`/canon/defaults/evidence-intake.md`) — Default requiring prior work retrieval before proceeding, with explicit source vs interpretation distinction.
+
+- **Canon Apocrypha** (`/canon/apocrypha/`) — Stewardship structure for epistemic gravity that cannot be encoded as canon:
+  - `CHARTER.md` — Purpose, voice rules, content rules, stewardship, validation test
+  - `.noindex` — Sentinel file preventing tooling from indexing this directory
+  - `fragments/on-artifacts.md` — First recovered fragment documenting boundary collapse failure mode
+
+- **oddkit Epistemic Instructions** (`/docs/oddkit/epistemic-instructions.md`) — Compliance instructions defining oddkit as a compliance surface, not an epistemic engine. MUST/MUST NOT rules for oddkit behavior.
+
+- **Klappy.dev Website PoC PRD** (`/docs/guiding-artifacts/epoch-4/klappy-dev-poc-prd.md`) — Guiding artifact (not product lane) defining the single-page epistemic experience. Explicitly graduatable with documented path to product embodiment.
+
+- **Website Documentation** (`/docs/klappy-dev/`) — Supporting documentation for the PoC:
+  - `README.md` — Purpose, scope, non-goals, feature creep prevention
+  - `website-closure.md` — Closure statement
+  - `website-telemetry.md` — ODD-safe telemetry specification
+
+### Changed
+
+- **Epochs** (`/docs/appendices/epochs.md`) — Added E0004 (Epistemic Separation Era) section. Epoch 4 separates epistemic judgment from artifact production, gates success by epistemic integrity, and locks after implementation.
+
+### Philosophy
+
+- **Judgment is invariant, embodiment is contextual** — Given the same epistemic state, all surfaces must reach the same epistemic judgment. They may express that judgment differently.
+
+- **Artifacts are secondary traces** — Written artifacts are evidence that learning occurred, not the objective themselves. They are permitted only insofar as they faithfully represent the learning that produced them.
+
+- **Apocrypha gives gravity** — Canon gives legitimacy, ODD governs judgment, Apocrypha preserves failure modes discovered after the fact. They must never be merged.
+
+- **Guiding artifacts graduate** — The PoC PRD is explicitly non-product, explicitly epoch-scoped, and explicitly graduatable when ready for product embodiment.
+
+### Epoch Lock
+
+E0004 is LOCKED. No further expansion without a new epoch.
+
+---
+
 ## 0.24.0 — 2026-01-30
 
 **ODD vs Documentation-Driven Development — Core Distinction**

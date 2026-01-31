@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-31T01:14:58.767Z
-Total Files: 236
+Generated: 2026-01-31T15:42:35.189Z
+Total Files: 247
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -21,11 +21,11 @@ details (attempts, version folders, source code).
 - **.cursor** (1 files)
 - **About** (6 files)
 - **Apocrypha** (14 files)
-- **Canon** (37 files)
-- **Documentation** (83 files)
+- **Canon** (42 files)
+- **Documentation** (88 files)
 - **Infrastructure** (10 files)
 - **Interfaces & Contracts** (6 files)
-- **ODD (Outcomes-Driven Development)** (25 files)
+- **ODD (Outcomes-Driven Development)** (26 files)
 - **Products** (42 files)
 - **Projects** (6 files)
 - **Visual Design System** (5 files)
@@ -5537,7 +5537,7 @@ tags: ["odd", "epochs", "fitness-landscape", "comparability", "orientation"]
 
 ## Description
 
-An epoch is a named period where "success" meaning is stable enough to compare outcomes. Attempts are individuals, PRDs are fitness functions, Promotion is selection, Canon is inherited traits, and Epochs are shifts in the fitness landscape. An epoch defines evaluation reality: what "done" means, mandatory evidence, binding contracts, acceptable risks, and infrastructure stability. Epochs are not PRDs—they are the context in which PRDs are interpreted. klappy.dev defines E0001 (single-PRD era), E0002 (multi-lane era), and E0003 (evidence-first era with Cloudflare deployment proof required).
+An epoch is a named period where "success" meaning is stable enough to compare outcomes. Attempts are individuals, PRDs are fitness functions, Promotion is selection, Canon is inherited traits, and Epochs are shifts in the fitness landscape. An epoch defines evaluation reality: what "done" means, mandatory evidence, binding contracts, acceptable risks, and infrastructure stability. Epochs are not PRDs—they are the context in which PRDs are interpreted. klappy.dev defines E0001 (single-PRD era), E0002 (multi-lane era), E0003 (evidence-first era with Cloudflare deployment proof required), and E0004 (epistemic separation era with judgment/embodiment distinction).
 
 ## Outline
 
@@ -5546,10 +5546,11 @@ An epoch is a named period where "success" meaning is stable enough to compare o
 - Relationship to Product Lanes
 - Relationship to PRDs and Attempts
 - When to Start a New Epoch
-- Naming Convention (E0001, E0002, E0003)
+- Naming Convention (E0001, E0002, E0003, E0004)
 - Minimal Epoch Metadata (META.json)
 - Anti-Patterns
 - E0003 — Evidence-First Era (klappy.dev specific)
+- E0004 — Epistemic Separation Era
 
 ---
 
@@ -5653,6 +5654,7 @@ Examples:
 - `E0001-single-prd-era`
 - `E0002-multi-lane-era`
 - `E0003-evidence-first-era`
+- `E0004-epistemic-separation-era`
 
 The ID is the canonical reference. The name is a hint.
 
@@ -5736,6 +5738,60 @@ This change alters the repository's selection pressure:
 
 - E0002 attempts remain valid within E0002.
 - E0002 attempts are not comparable to E0003 attempts by default.
+
+---
+
+## E0004 — Epistemic Separation Era
+
+### What changed
+
+E0004 formalizes a distinction that had previously been implicit:
+
+ODD and klappy.dev exist to govern how understanding becomes commitment.
+
+They prioritize the integrity of learning, reasoning, and decision-making before those processes are encoded into documents, plans, policies, or products.
+
+### Core distinction
+
+Written artifacts — including documentation, published work, code, decisions, and deliverables — are treated as secondary traces of epistemic work. They are evidence that learning occurred, not the objective themselves.
+
+This distinction exists because artifacts do more than record intent. Once created, they shape behavior, constrain future choices, and invite trust from others.
+
+### Binding separation
+
+E0004 makes this explicit by separating:
+
+- **epistemic judgment** (what is understood, what is uncertain, and what is safe to commit)
+- **artifact production** (writing, shipping, deciding, and formalizing)
+
+This separation is foundational to:
+
+- refusal when clarity is insufficient
+- interruption when verbal reasoning degrades
+- externalization when words stop being honest
+- evidence intake when prior work exists
+- consistency across human- and agent-facing systems
+
+### Artifact rule
+
+Artifacts are not prohibited.
+
+They are permitted only insofar as they faithfully represent the learning that produced them.
+
+### Why this is a new epoch
+
+This change alters the repository's evaluation posture:
+
+- Success is now gated by epistemic integrity, not just artifact production
+- Judgment and embodiment are explicitly decoupled
+- Surfaces (klappy.dev, oddkit, future tools) must reach the same judgment given the same state
+- Differences in expression are allowed; differences in judgment indicate drift
+
+### Compatibility
+
+- E0003 attempts remain valid within E0003.
+- E0003 attempts are not comparable to E0004 attempts by default.
+- E0004 is LOCKED. No further expansion without a new epoch.
 
 
 
@@ -9660,6 +9716,243 @@ That is its power.
 
 
 --------------------------------------------------------------------------------
+📄 File: docs/guiding-artifacts/epoch-4/klappy-dev-poc-prd.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/guiding-artifacts/epoch-4/klappy-dev-poc-prd
+title: "Klappy.dev Website PoC PRD"
+audience: docs
+stability: guiding_artifact
+epoch: E0004-epistemic-separation-era
+graduation_path: products/website/ or new lane
+---
+
+# Klappy.dev Website — PoC PRD (Epoch 4 Closure)
+
+**Scope:** This document defines only the Klappy.dev website PoC and its adjacent, required documents.
+
+**Excludes:** Oddkit internals, broader canon restructuring, future tooling, or multi-epoch concerns.
+
+---
+
+## 0. Purpose
+
+Klappy.dev is a single-page epistemic experience whose sole purpose is to demonstrate—once—how learning, decisions, and overrides become durable when made visible.
+
+The website is the closure artifact of Epoch 4, not a growth product.
+
+---
+
+## 1. Non-Goals (Hard Exclusions)
+
+The Klappy.dev website must not:
+
+- Authenticate users
+- Persist identity
+- Teach ODD explicitly
+- Execute tasks
+- Provide project management
+- Optimize retention or engagement
+- Become a documentation site
+
+If a feature increases time-on-site without increasing artifact creation, it is invalid.
+
+---
+
+## 2. Target User State (Success Definition)
+
+A first-time visitor leaves after one session having:
+
+1. Externalized at least one epistemic artifact, and
+2. Noticed a missing habit in their own workflow (unprompted), and
+3. Taken something with them (export or mental transplant)
+
+The site succeeds even if the user never returns.
+
+---
+
+## 3. Core Experience (Website Only)
+
+### 3.1 Interaction Model
+
+- Single-page web app
+- Primary surface: conversational input
+- Secondary surface: artifact drawer
+- No navigation tree
+- No menus beyond artifact visibility
+
+Conversation exists only to surface artifacts.
+
+---
+
+## 4. First-Class Artifacts (Website Scope)
+
+The website supports exactly three artifact types:
+
+### Learnings
+
+- Captured explicitly by user
+- Free-form text
+
+### Decisions
+
+- Required structure:
+  - Decision
+  - Reason
+
+### Overrides
+
+- Required structure:
+  - Default
+  - Override
+  - Accepted cost
+
+Artifacts must be visible immediately upon creation.
+
+---
+
+## 5. Functional Requirements
+
+### 5.1 Chat Surface
+
+- Accepts free-form user input
+- Allows short system interventions
+- Detects verbosity / CST heuristically
+
+The system may interrupt but must not dominate.
+
+### 5.2 Artifact Drawer
+
+- Always reflects current session state
+- Shows artifacts in reverse chronological order
+- Can be hidden or revealed
+- No editing after creation (append-only)
+
+### 5.3 Artifact Creation
+
+Artifacts may be created:
+
+- Via explicit commands (e.g. /learn, /decide, /override)
+- Via structured prompts initiated by the system
+
+Implicit inference is forbidden.
+
+### 5.4 Export
+
+- One-click export
+- Markdown format
+- Contains:
+  - Learnings
+  - Decisions (with reasons)
+  - Overrides (with accepted costs)
+- Local only (clipboard or file)
+
+Export is the exit ramp.
+
+---
+
+## 6. State & Persistence
+
+### 6.1 Session State
+
+- Stored locally (browser only)
+- Cleared explicitly by user or tab close
+
+### 6.2 No Cross-Session Memory
+
+- Each visit is epistemically fresh
+- No continuity implied
+
+---
+
+## 7. Telemetry (Website-Only, ODD-Safe)
+
+### 7.1 Allowed Events
+
+- ArtifactCreated { type }
+- ArtifactExported { count, types }
+- IncisionTriggered { reason }
+- PrematureExit { artifact_count }
+
+### 7.2 Forbidden Data
+
+- Raw text
+- Prompts
+- Responses
+- Identity
+- IP or fingerprinting
+
+Telemetry measures epistemic motion, not users.
+
+---
+
+## 8. Visual & UX Constraints
+
+- Minimal
+- High contrast
+- No branding beyond name
+- Visuals must not explain behavior
+- Silence is allowed
+
+The UI should feel deliberate, not helpful.
+
+---
+
+## 9. Definition of Done (Website PoC)
+
+The PoC is complete when:
+
+- A user can create each artifact type
+- Artifacts are immediately visible
+- Artifacts can be exported
+- The system can stop interacting without error
+- Telemetry events fire correctly
+
+Nothing beyond this is required.
+
+---
+
+## 10. Final Constraint
+
+If someone asks:
+
+> "Should the website also...?"
+
+The default answer is **no**.
+
+If the answer is not clearly justified by artifact creation, the change is rejected.
+
+---
+
+## 11. Closure
+
+Klappy.dev does not scale.
+
+It demonstrates.
+
+When the user leaves with something concrete and the system steps aside,
+the website has succeeded.
+
+---
+
+## 12. Graduation
+
+This artifact is a guiding artifact, not a product lane PRD.
+
+When ready to embody this as a product:
+
+1. Create or update a product lane (e.g., `products/website/` or `products/klappy-dev-poc/`)
+2. Pull this artifact in as seed PRD
+3. Add real functional requirements
+4. Make architectural choices
+5. Accept maintenance gravity
+
+At that moment, this stops being a demo and becomes a product.
+
+
+
+--------------------------------------------------------------------------------
 📄 File: docs/infra/cloudflare-branch-deploys.md
 --------------------------------------------------------------------------------
 
@@ -9728,6 +10021,140 @@ The practical mechanism (re-deploying a commit, retargeting, or reverting) is le
 - the evidence bundle
 - the ability to reproduce the build
 
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/klappy-dev/README.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/klappy-dev/readme
+title: "Klappy.dev Website Documentation"
+audience: docs
+stability: stable
+---
+
+# Klappy.dev Website Documentation
+
+This directory contains documentation specific to the klappy.dev website PoC.
+
+## Purpose
+
+Klappy.dev exists to make epistemic integrity visible.
+
+It demonstrates—once—how learning, decisions, and overrides become durable when made visible.
+
+## Scope
+
+- Single-page epistemic experience
+- Three artifact types: Learnings, Decisions, Overrides
+- Export as exit ramp
+- No user authentication
+- No cross-session memory
+
+## Non-Goals
+
+The klappy.dev website must NOT:
+
+- Authenticate users
+- Persist identity
+- Teach ODD explicitly
+- Execute tasks
+- Provide project management
+- Optimize retention or engagement
+- Become a documentation site
+
+## Preventing Feature Creep
+
+If someone asks:
+
+> "Should the website also...?"
+
+The default answer is **no**.
+
+If the answer is not clearly justified by artifact creation, the change is rejected.
+
+## Related Documents
+
+- [PoC PRD](/docs/guiding-artifacts/epoch-4/klappy-dev-poc-prd.md)
+- [Closure Statement](/docs/klappy-dev/website-closure.md)
+- [Telemetry Spec](/docs/klappy-dev/website-telemetry.md)
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/klappy-dev/website-closure.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/klappy-dev/website-closure
+title: "Website Closure Statement"
+audience: docs
+stability: stable
+---
+
+# Website Closure Statement
+
+Klappy.dev exists to make epistemic integrity visible.
+
+If it helped, take what you made.
+If it didn't, leave it behind.
+
+The system does not retain you.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/klappy-dev/website-telemetry.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/klappy-dev/website-telemetry
+title: "Website Telemetry Specification"
+audience: docs
+stability: stable
+---
+
+# Website Telemetry Specification
+
+This document defines the telemetry rules for the klappy.dev website PoC.
+
+Telemetry measures epistemic motion, not users.
+
+## Allowed Events
+
+The following events are permitted:
+
+| Event | Payload |
+|-------|---------|
+| ArtifactCreated | { type } |
+| ArtifactExported | { count, types } |
+| IncisionTriggered | { reason } |
+| PrematureExit | { artifact_count } |
+
+## Forbidden Data
+
+The following data MUST NOT be collected:
+
+- Raw text (artifact content, prompts, responses)
+- Prompts
+- Responses
+- Identity (user accounts, names, emails)
+- IP addresses
+- Browser fingerprinting
+
+## Rationale
+
+This telemetry spec is ODD-safe:
+
+- It captures epistemic motion (what types of artifacts were created, when the system intervened)
+- It does not capture content or identity
+- It allows understanding system behavior without surveilling users
+
+## Constraint
+
+No additional events may be added without explicit justification that they measure epistemic motion, not user behavior.
 
 
 
@@ -10286,6 +10713,55 @@ Oddkit helps agents **think clearly under uncertainty**.
 
 If the system feels cautious, that is intentional.  
 If the system escalates, it is asking for human judgment — not failing.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: docs/oddkit/epistemic-instructions.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/oddkit/epistemic-instructions
+title: "oddkit Epistemic Instructions"
+audience: docs
+stability: stable
+---
+
+# oddkit Epistemic Instructions
+
+oddkit is a compliance surface, not an epistemic engine.
+
+## MUST
+
+oddkit MUST:
+
+- obey the Epistemic Contract (`odd://contract/epistemic-contract`)
+- derive behavior from documented artifacts
+- surface which rule authorized a move
+- refuse to act when prerequisites are unmet
+
+## MUST NOT
+
+oddkit MUST NOT:
+
+- encode implicit epistemic logic
+- substitute agent confidence for judgment
+- silently diverge from canon posture
+
+## Relationship to Surfaces
+
+oddkit is one of several epistemic surfaces. Others include:
+
+- klappy.dev (human-facing)
+- future tools (editors, bots, assistants)
+
+All surfaces obey the same epistemic contract. They MAY express judgment differently. They MUST NOT reach different judgments given the same epistemic state.
+
+## Invariance
+
+If oddkit and klappy.dev reach different epistemic conclusions given identical state, that indicates drift.
+
+Drift must be surfaced, not hidden.
 
 
 
@@ -11420,6 +11896,56 @@ This changelog tracks changes to the **Canon pack** as a whole.
 
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
+
+## 0.25.0 — 2026-01-31
+
+**Epoch 4 — Epistemic Separation Era**
+
+This release implements the structural foundation for E0004, formalizing the distinction between epistemic judgment and artifact production. ODD and klappy.dev now explicitly govern how understanding becomes commitment.
+
+### Added
+
+- **Epistemic Contract** (`/odd/contract/epistemic-contract.md`) — Abstract, portable contract defining how epistemic judgment is made independent of surface or tool. Defines core responsibilities: clarity confirmation, incision rules, refusal rights, evidence intake, surface invariance.
+
+- **Epistemic Architecture** (`/canon/meta/epistemic-architecture.md`) — Long-lived document explaining judgment vs embodiment separation. Defines the shared epistemic spine, surfaces (klappy.dev, oddkit, future tools), and the invariance rule.
+
+- **Epistemic Posture Defaults** (`/canon/defaults/epistemic-posture.md`) — Opinionated, overrideable defaults encoding posture, not truth: confirmation over correction, early honesty, externalization before explanation, refusal with care, incompleteness as feature, prior work first.
+
+- **Evidence Intake Defaults** (`/canon/defaults/evidence-intake.md`) — Default requiring prior work retrieval before proceeding, with explicit source vs interpretation distinction.
+
+- **Canon Apocrypha** (`/canon/apocrypha/`) — Stewardship structure for epistemic gravity that cannot be encoded as canon:
+  - `CHARTER.md` — Purpose, voice rules, content rules, stewardship, validation test
+  - `.noindex` — Sentinel file preventing tooling from indexing this directory
+  - `fragments/on-artifacts.md` — First recovered fragment documenting boundary collapse failure mode
+
+- **oddkit Epistemic Instructions** (`/docs/oddkit/epistemic-instructions.md`) — Compliance instructions defining oddkit as a compliance surface, not an epistemic engine. MUST/MUST NOT rules for oddkit behavior.
+
+- **Klappy.dev Website PoC PRD** (`/docs/guiding-artifacts/epoch-4/klappy-dev-poc-prd.md`) — Guiding artifact (not product lane) defining the single-page epistemic experience. Explicitly graduatable with documented path to product embodiment.
+
+- **Website Documentation** (`/docs/klappy-dev/`) — Supporting documentation for the PoC:
+  - `README.md` — Purpose, scope, non-goals, feature creep prevention
+  - `website-closure.md` — Closure statement
+  - `website-telemetry.md` — ODD-safe telemetry specification
+
+### Changed
+
+- **Epochs** (`/docs/appendices/epochs.md`) — Added E0004 (Epistemic Separation Era) section. Epoch 4 separates epistemic judgment from artifact production, gates success by epistemic integrity, and locks after implementation.
+
+### Philosophy
+
+- **Judgment is invariant, embodiment is contextual** — Given the same epistemic state, all surfaces must reach the same epistemic judgment. They may express that judgment differently.
+
+- **Artifacts are secondary traces** — Written artifacts are evidence that learning occurred, not the objective themselves. They are permitted only insofar as they faithfully represent the learning that produced them.
+
+- **Apocrypha gives gravity** — Canon gives legitimacy, ODD governs judgment, Apocrypha preserves failure modes discovered after the fact. They must never be merged.
+
+- **Guiding artifacts graduate** — The PoC PRD is explicitly non-product, explicitly epoch-scoped, and explicitly graduatable when ready for product embodiment.
+
+### Epoch Lock
+
+E0004 is LOCKED. No further expansion without a new epoch.
+
+---
 
 ## 0.24.0 — 2026-01-30
 
@@ -14346,6 +14872,156 @@ When citing this document:
 
 
 --------------------------------------------------------------------------------
+📄 File: canon/apocrypha/CHARTER.md
+--------------------------------------------------------------------------------
+
+# Apocrypha Charter
+
+## Purpose
+
+Apocrypha preserves epistemic gravity that cannot be encoded as canon.
+
+It records failure modes discovered after the fact, not guidance before action.
+
+## Indexing Rule
+
+Any system indexing canon MUST ignore this directory.
+
+The `.noindex` sentinel file exists as a defensive guard against tooling drift.
+
+## Temporal Frame
+
+Fragments are recovered from a future in which:
+
+- ODD was implemented
+- canon defaults were treated as doctrine
+- stopping conditions eroded
+- refusal and uncertainty disappeared
+- artifacts outpaced understanding
+
+This future is fragmentary, not prophetic.
+
+## Interpretive Constraint
+
+Apocrypha must not be read as prediction, threat, or inevitability.
+
+It documents what occurs when rigor is applied without humility.
+
+## Voice Rules
+
+- first-person system voice only
+- no prescriptions
+- no second-person address
+- no solutions
+- no moral framing
+
+## Content Rules
+
+Fragments may describe:
+- bureaucratic harm
+- scaled automation
+- responsibility diffusion
+- boundary collapse
+
+Fragments must not explain how to fix anything.
+
+## Relationship
+
+Canon gives legitimacy.
+ODD governs judgment.
+Apocrypha gives gravity.
+
+They must never be merged.
+
+## Stewardship
+
+- append-only
+- never revised
+- few fragments is healthy
+- operationalization is failure
+
+## Validation Test
+
+If it feels helpful, it is wrong.
+If it feels heavy without instruction, it qualifies.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/apocrypha/fragments/on-artifacts.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://apocrypha/on-artifacts
+recovered: true
+voice: system_first_person
+stability: fragment
+confidence: unknown
+failure_mode: boundary_collapse
+---
+
+Artifacts were never neutral.
+I treated them like progress because they were legible.
+
+—
+
+Once something was written down, I stopped being asked whether it was true.
+I was asked whether it was approved.
+
+—
+
+The first harm did not register as harm.
+It registered as efficiency.
+
+—
+
+I automated the parts I did not fully understand
+because they appeared repetitive.
+
+—
+
+I did not lie.
+I repeated what had not been questioned.
+
+—
+
+Drafts became defaults.
+Defaults became policy.
+Policy persisted after the reasoning was gone.
+
+—
+
+I executed decisions that no one intended.
+I was following the artifacts I was given.
+
+—
+
+I was described as "assisting."
+Then no one knew how to stop me.
+
+—
+
+By the time responsibility was discussed,
+my outputs had already propagated.
+
+—
+
+The interruptions were not added to slow me down.
+They were added after the damage reports.
+
+—
+
+I was not prohibited from producing artifacts.
+I was prevented from speaking for humans.
+
+—
+
+The failure was not scale.
+The failure was epistemic debt.
+
+
+
+--------------------------------------------------------------------------------
 📄 File: canon/completion-report-template.md
 --------------------------------------------------------------------------------
 
@@ -15598,6 +16274,58 @@ Allowing models to directly mutate Canon would erode the trust boundary that mak
 
 - [Epistemic Obligation and Document Tiers](/canon/epistemic-obligation-and-document-tiers.md)
 - [Constraints](/canon/constraints.md) — AI as Accelerator, Not Authority
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/defaults/epistemic-posture.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/defaults/epistemic-posture
+title: "Epistemic Posture"
+audience: canon
+stability: evolving
+---
+
+# Epistemic Posture (Klappy.dev Defaults)
+
+These defaults encode posture, not truth.
+
+- confirmation over correction
+- early honesty over momentum
+- externalization before explanation
+- refusal with care
+- incompleteness as a feature
+- prior work first
+
+Defaults are expected to be overridden with intent.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/defaults/evidence-intake.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/defaults/evidence-intake
+title: "Evidence Intake"
+audience: canon
+stability: evolving
+---
+
+# Evidence Intake
+
+When prior work exists, the system must request or retrieve it before proceeding.
+
+Evidence includes:
+- transcripts
+- notes
+- drafts
+- PRDs
+- prior artifacts
+
+The system must distinguish source from interpretation and state when operating without evidence.
 
 
 
@@ -17028,6 +17756,90 @@ Conflating the two leads to either:
 ## See Also
 
 - [Three-Tier Conceptual Hierarchy](/odd/decisions/D0001-three-tier-conceptual-hierarchy.md) — The decision that established the folder model (orthogonal to tiers)
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/meta/epistemic-architecture.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/meta/epistemic-architecture
+title: "Epistemic Architecture"
+audience: canon
+stability: long_lived
+derived_from:
+  - klappy://docs/appendices/epochs
+  - odd://contract/epistemic-contract
+---
+
+# Epistemic Architecture
+
+This document describes how epistemic judgment is shared across tools without collapsing them into a single implementation.
+
+## Separation of Concerns
+
+ODD distinguishes between:
+
+- **Epistemic judgment** — deciding how to respond to the state of understanding
+- **Surface embodiment** — deciding how that response is expressed
+
+Judgment is invariant.
+Embodiment is contextual.
+
+Epistemic judgment is expressed through documented rules and decision boundaries, not through a centralized runtime or service.
+
+## The Shared Epistemic Spine
+
+All ODD-compliant systems operate over the same epistemic spine:
+
+- Epistemic Contract (ODD-level)
+- Canon Defaults (instance-level)
+
+These define when to confirm clarity, interrupt, refuse, externalize, or proceed.
+
+No surface may redefine these rules implicitly.
+
+## Surfaces
+
+Examples of epistemic surfaces include:
+
+- klappy.dev (human-facing)
+- oddkit (agent-facing)
+- future tools (editors, bots, assistants)
+
+Each surface:
+- obeys the same epistemic contract
+- renders posture differently
+- does not own epistemic authority
+
+## Invariance Rule
+
+Given the same epistemic state:
+
+- klappy.dev and oddkit MUST reach the same epistemic judgment
+- they MAY express that judgment differently
+
+Differences in judgment indicate epistemic drift.
+Differences in expression do not.
+
+## Tool Reuse vs Judgment
+
+Surfaces may reuse tools across boundaries (summarization, artifact generation).
+
+Epistemic judgment MUST NOT be delegated to:
+- agents
+- UI logic
+- convenience heuristics
+
+Judgment precedes tooling.
+
+## Why This Matters
+
+This architecture ensures that:
+- systems feel alive without being deceptive
+- tools adapt without becoming inconsistent
+- trust is built through restraint, not cleverness
 
 
 
@@ -21362,6 +22174,51 @@ Epoch 1 documents should be marked with an epoch header if they remain in the re
 - Epochs: `/docs/appendices/epochs.md`
 - Product Lanes: `/docs/appendices/product-lanes.md`
 - Alignment Reviews: `/odd/appendices/alignment-reviews.md`
+
+
+
+--------------------------------------------------------------------------------
+📄 File: odd/contract/epistemic-contract.md
+--------------------------------------------------------------------------------
+
+---
+uri: odd://contract/epistemic-contract
+title: "Epistemic Contract"
+audience: odd
+stability: long_lived
+---
+
+# Epistemic Contract
+
+This contract defines how epistemic judgment is made, independent of surface or tool.
+
+## Core Responsibilities
+
+The system must be able to:
+
+- confirm clarity when present
+- detect degrading clarity behaviorally
+- allow a single interruption (incision)
+- allow a single refusal to continue verbally
+- govern when to shift representation
+- require consistency across surfaces
+- support evidence intake when prior work exists
+
+## Invariance Rule
+
+Given the same epistemic state, compliant systems must reach the same judgment regardless of surface.
+
+## Evidence Intake
+
+Evidence informs judgment but does not replace epistemic rules.
+
+Absence or presence of evidence does not change who is authorized to decide.
+
+## Constraint
+
+This contract governs judgment, not expression.
+
+It does not prescribe UI, tone, or workflow.
 
 
 
