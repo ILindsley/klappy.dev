@@ -4,6 +4,92 @@ These learnings are duplicated from the product LEDGER to ensure they survive im
 
 ---
 
+## learn-20260131-0000: THE RITUAL IS MIND-NUMBING (Meta-Learning)
+
+- **Trigger:** friction (SEVERE)
+- **Summary:** The attempt workflow requires so many manual steps, branch gymnastics, and ritual compliance that even with an AI assistant AND clear documentation, we still failed multiple times, forgot to close the attempt, put learnings in wrong places, and had to retroactively fix import survival.
+
+### The Confusion Timeline
+
+1. **Started on wrong branch** — Had to stash, checkout main, figure out PRD versioning
+2. **Cherry-pick failed** — Merge conflicts, had to abort and manually copy PRD changes
+3. **Ran register from main** — Tool said "must be on attempt branch first"
+4. **Build failed** — vite.config.js conflict with smart-build.js cwd
+5. **Build failed again** — Evidence path hardcoded wrong in smart-build.js
+6. **Build failed AGAIN** — No screenshots, had to manually capture
+7. **Forgot to close attempt** — META.json left OPEN after deployment complete
+8. **Built wrong thing entirely** — Manual categorization UI instead of LLM detection
+9. **Learnings went to wrong place** — Global odd/ledger/ instead of product LEDGER
+10. **Had to duplicate learnings** — LEDGER.md changes don't survive non-champion import
+11. **Had to manually import** — Switched to main, ran import, pushed
+
+### Time Spent on Ritual vs. Actual Work
+
+- **Ritual/process debugging:** ~70%
+- **Actual product implementation:** ~20%
+- **Understanding what we were supposed to build:** ~10%
+
+### The Cognitive Load
+
+At any given moment, the agent had to track:
+- Current branch name (long, complex)
+- PRD version (main vs attempt branch disagreement)
+- Attempt status (OPEN/CLOSED)
+- META.json fields (status, completed_at, etc.)
+- Evidence requirements (screenshots, paths)
+- Ledger scope (global vs lane-specific)
+- Import mechanics (what survives, what doesn't)
+- Build script behavior (cwd, root, evidence paths)
+
+This is **too much state** for humans OR agents to reliably maintain.
+
+### Evidence of Ritual Failure
+
+User quotes from this session:
+- "WTF are you asking me about keeping files. USE FREAKING oddkit!!!!"
+- "SOMEBODY (ME) FORGOT TO CLOSE THE ATTEMPT BEFORE MOVING ON.... FML"
+- "Don't we have a freaking principle and writings on humans relying on rituals will always FAIL US!!!!!@#$%^&"
+- "This is wasted trash. Nothing better than v1.0"
+- "WTF?! Why did it put attempt/prd/product lane learnings and decisions in the freaking global odd namespace?!"
+- "The ritual is mind-numbing. make sure that persists... I don't want to lose the learning opportunity here. This is so bad, it must be studied."
+
+### Root Cause Analysis
+
+1. **Too many manual steps** — Each step is a failure point
+2. **State scattered across files** — META.json, ATTEMPT.md, EVIDENCE.md, LEDGER.md, branch name
+3. **Implicit dependencies** — Must be on right branch, must have screenshots, must close before import
+4. **No guardrails** — System allows invalid states (OPEN after deployment)
+5. **Scope ambiguity** — Where do learnings go? Global? Lane? Attempt? All three?
+6. **Import asymmetry** — _runs/ imports, but LEDGER.md doesn't
+
+### What Should Have Happened
+
+A single command:
+```
+npm run attempt:complete -- --lane odd-teaser
+```
+
+That automatically:
+- Captures evidence (screenshots via headless browser)
+- Sets META.json status to CLOSED with timestamp
+- Records learnings to both _runs/ AND product LEDGER
+- Validates all requirements
+- Offers to import to main
+
+### Escalation
+
+- **candidate-process-overhaul**: The attempt ritual needs radical simplification
+- **candidate-automation**: Most of these steps should not require human/agent memory
+- **candidate-constraint**: "If a workflow requires more than 3 manual steps, automate it"
+
+### Impact
+
+This session took hours. The actual product code was ~200 lines. The ritual consumed the rest.
+
+**If the process to capture learnings is harder than the work itself, learnings won't be captured.**
+
+---
+
 ## learn-20260131-0001: Manual categorization UX is hostile
 
 - **Trigger:** friction
