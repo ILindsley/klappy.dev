@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-01-31T17:26:14.122Z",
+  "generated_at": "2026-01-31T18:22:16.006Z",
   "description": "Fast-lookup index for Librarian retrieval. Per docs/agents/librarian/contract.md",
   "schema_notes": {
     "authority_band": "Resolved authority (frontmatter override > inferred from root)",
@@ -8103,120 +8103,135 @@
         {
           "level": 2,
           "text": "Outline",
-          "line": 10
+          "line": 14
         },
         {
           "level": 2,
           "text": "Content",
-          "line": 25
+          "line": 30
         },
         {
           "level": 2,
           "text": "Summary",
-          "line": 33
+          "line": 38
         },
         {
           "level": 2,
           "text": "Why PRDs Must Be Decoupled",
-          "line": 43
+          "line": 48
         },
         {
           "level": 2,
-          "text": "The Three Lanes",
-          "line": 60
+          "text": "Active Lanes",
+          "line": 65
         },
         {
           "level": 3,
-          "text": "Lane 1: Public Website (Humans)",
-          "line": 62
+          "text": "odd-teaser (Active)",
+          "line": 67
         },
         {
           "level": 3,
-          "text": "Lane 2: AI Navigation Interface (Humans talking to AI)",
-          "line": 77
+          "text": "agent-skill (Active)",
+          "line": 86
         },
         {
           "level": 3,
-          "text": "Lane 3: Agent Cognitive Skill (Evolution Engine)",
-          "line": 96
+          "text": "fluent-mobile (Active)",
+          "line": 108
+        },
+        {
+          "level": 2,
+          "text": "Deprecated Lanes",
+          "line": 116
+        },
+        {
+          "level": 3,
+          "text": "website (Deprecated)",
+          "line": 118
+        },
+        {
+          "level": 3,
+          "text": "ai-navigation (Deprecated)",
+          "line": 131
         },
         {
           "level": 2,
           "text": "Implementation Surfaces Are Lane-Scoped",
-          "line": 118
+          "line": 144
         },
         {
           "level": 2,
           "text": "Canon Is Not a Product",
-          "line": 133
+          "line": 159
         },
         {
           "level": 2,
           "text": "What Is Shared vs What Is Isolated",
-          "line": 150
+          "line": 176
         },
         {
           "level": 2,
           "text": "Attempt Structure (Locked)",
-          "line": 163
+          "line": 189
         },
         {
           "level": 2,
           "text": "Anti-Patterns",
-          "line": 184
+          "line": 210
         },
         {
           "level": 3,
           "text": "One PRD to Rule Them All",
-          "line": 186
+          "line": 212
         },
         {
           "level": 3,
-          "text": "Treating Agents as UI Features",
-          "line": 194
+          "text": "Treating Artifacts as Features",
+          "line": 220
         },
         {
           "level": 3,
           "text": "Re-running Experiments Across Lanes",
-          "line": 203
+          "line": 227
         },
         {
           "level": 2,
           "text": "Implications for Tooling and Docs",
-          "line": 211
+          "line": 235
         },
         {
           "level": 3,
           "text": "Lane Self-Containment (Critical)",
-          "line": 213
-        },
-        {
-          "level": 3,
-          "text": "Where PRDs Live",
           "line": 237
         },
         {
           "level": 3,
+          "text": "Where PRDs Live",
+          "line": 261
+        },
+        {
+          "level": 3,
           "text": "Where Attempts Live",
-          "line": 251
+          "line": 274
         },
         {
           "level": 3,
           "text": "How Evolution Propagates",
-          "line": 265
+          "line": 287
         },
         {
           "level": 2,
           "text": "Scalability",
-          "line": 274
+          "line": 296
         },
         {
           "level": 2,
           "text": "Related Documents",
-          "line": 290
+          "line": 312
         }
       ],
-      "heading_count": 25,
+      "heading_count": 28,
       "has_frontmatter": true
     },
     {

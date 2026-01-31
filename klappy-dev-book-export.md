@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-31T17:26:13.943Z
-Total Files: 252
+Generated: 2026-01-31T18:22:15.817Z
+Total Files: 256
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -27,7 +27,7 @@ details (attempts, version folders, source code).
 - **Infrastructure** (10 files)
 - **Interfaces & Contracts** (6 files)
 - **ODD (Outcomes-Driven Development)** (26 files)
-- **Products** (42 files)
+- **Products** (46 files)
 - **Projects** (6 files)
 - **Visual Design System** (5 files)
 
@@ -6485,13 +6485,18 @@ tags: ["odd", "prd", "architecture", "lanes", "orientation"]
 
 ## Description
 
-This documents klappy.dev's three product lanes: Website (human-facing orientation), AI Navigation Interface (AI helping humans understand ODD), and Agent Cognitive Skill (reusable agent framework). Each lane has its own PRD at `/docs/PRD/<lane>/PRD.md`, attempts at `/products/<lane>/attempts/`, and independent lifecycle. Lanes share canon, not lifecycle. Implementation surfaces are lane-scoped (`products/<lane>/src` and `products/<lane>/dist`). This prevents scope creep, evidence pollution, and cascading reruns across unrelated products.
+This documents klappy.dev's product lanes. Each lane has its own PRD at `/products/<lane>/PRD.md`, attempts at `/products/<lane>/attempts/`, and independent lifecycle. Lanes share canon, not lifecycle. Implementation surfaces are lane-scoped (`products/<lane>/src` and `products/<lane>/dist`). This prevents scope creep, evidence pollution, and cascading reruns across unrelated products.
+
+**Active lanes:** odd-teaser, agent-skill, fluent-mobile
+
+**Deprecated lanes:** website (superseded by odd-teaser), ai-navigation (superseded by odd-teaser)
 
 ## Outline
 
 - Summary
 - Why PRDs Must Be Decoupled
-- The Three Lanes (Website, AI Navigation, Agent Skill)
+- Active Lanes (odd-teaser, agent-skill, fluent-mobile)
+- Deprecated Lanes (website, ai-navigation)
 - Implementation Surfaces Are Lane-Scoped
 - Canon Is Not a Product
 - What Is Shared vs Isolated
@@ -6537,43 +6542,28 @@ Forcing these into one evolutionary track means:
 
 ---
 
-## The Three Lanes
+## Active Lanes
 
-### Lane 1: Public Website (Humans)
+### odd-teaser (Active)
 
-**Purpose:** A human-facing orientation surface for ODD.
+**Purpose:** Single-session epistemic artifact externalization.
 
-This is portfolio, explanation, credibility.
-It does not teach agents how to think.
-It does not execute ODD.
-It explains ODD progressively to humans.
+This is not explanation, navigation, or engagement.
+This is artifact creation and exit.
 
-**PRD Location:** `/docs/PRD/website/PRD.md`
+The product succeeds even if the user never returns.
 
-**Primary User:** Human developers, peers, evaluators
+**Core constraint:** Klappy.dev must always be easier to leave than to continue.
 
----
+**PRD Location:** `/products/odd-teaser/PRD.md`
 
-### Lane 2: AI Navigation Interface (Humans talking to AI)
+**Primary User:** First-time visitors who externalize artifacts and leave
 
-**Purpose:** An AI layer over documentation that helps humans understand ODD.
-
-This enables humans to ask questions of the ODD corpus and be:
-
-- Answered accurately
-- Guided progressively
-- Linked to the right documents
-- Without reading everything
-
-This is NOT agent tooling. This is AI helping humans navigate.
-
-**PRD Location:** `/docs/PRD/ai-navigation/PRD.md`
-
-**Primary User:** Humans trying to understand and evaluate ODD
+**Supersedes:** website, ai-navigation
 
 ---
 
-### Lane 3: Agent Cognitive Skill (Evolution Engine)
+### agent-skill (Active)
 
 **Purpose:** A reusable agent cognitive framework for ODD reasoning.
 
@@ -6589,9 +6579,45 @@ Enables AI systems to:
 
 This is not tied to this website. It should work on any project.
 
-**PRD Location:** `/docs/PRD/agent-skill/PRD.md`
+**PRD Location:** `/products/agent-skill/PRD.md`
 
 **Primary User:** AI agents executing evolutionary development elsewhere
+
+---
+
+### fluent-mobile (Active)
+
+**Purpose:** Mobile-first artifact capture for ODD workflows.
+
+**PRD Location:** `/products/fluent-mobile/PRD.md`
+
+---
+
+## Deprecated Lanes
+
+### website (Deprecated)
+
+**Status:** DEPRECATED as of 2026-01-31
+
+**Superseded by:** odd-teaser
+
+The website lane focused on progressive disclosure and canon browsing.
+The odd-teaser lane embodies the Epoch 4 philosophy: artifact externalization and exit.
+
+Do not start new attempts against this lane.
+
+---
+
+### ai-navigation (Deprecated)
+
+**Status:** DEPRECATED as of 2026-01-31
+
+**Superseded by:** odd-teaser
+
+The ai-navigation lane focused on conversational navigation and explanation of ODD.
+The odd-teaser lane explicitly rejects teaching and navigation.
+
+Do not start new attempts against this lane.
 
 ---
 
@@ -6650,9 +6676,9 @@ Attempts without a lane are invalid.
 Attempts are **lane-contained** — all artifacts live under the product lane directory.
 
 Valid examples:
-- `/products/website/attempts/prd-v1.0/attempt-001/`
-- `/products/ai-navigation/attempts/prd-v1.0/attempt-001/`
+- `/products/odd-teaser/attempts/prd-v1.0/attempt-001/`
 - `/products/agent-skill/attempts/prd-v1.0/attempt-001/`
+- `/products/fluent-mobile/attempts/prd-v1.0/attempt-001/`
 
 Invalid (do not use):
 - `/attempts/<lane>/prd-vX.Y/attempt-NNN/` (legacy, read-only)
@@ -6671,18 +6697,16 @@ Treating all work as variations of a single product forces:
 - Evidence that doesn't apply
 - Reruns across unrelated changes
 
-### Treating Agents as UI Features
+### Treating Artifacts as Features
 
-The AI navigation interface (Lane 2) is NOT the same as agent cognitive skill (Lane 3).
-
-- Lane 2: AI helps humans understand
-- Lane 3: AI executes ODD autonomously
+The odd-teaser lane exists for artifact externalization and exit.
+The agent-skill lane exists for autonomous ODD execution.
 
 Mixing these creates scope confusion and evidence pollution.
 
 ### Re-running Experiments Across Lanes
 
-A mobile navigation fix (Lane 1) should not invalidate agent skill experiments (Lane 3).
+A UI fix in odd-teaser should not invalidate agent skill experiments.
 
 Lane isolation prevents cascading reruns.
 
@@ -6720,8 +6744,7 @@ PRDs are lane-contained:
 
 ```
 /products/
-  website/PRD.md
-  ai-navigation/PRD.md
+  odd-teaser/PRD.md
   agent-skill/PRD.md
   fluent-mobile/PRD.md
 ```
@@ -6734,8 +6757,7 @@ Attempts are lane-contained:
 
 ```
 /products/
-  website/attempts/prd-vX.Y/attempt-NNN/
-  ai-navigation/attempts/prd-vX.Y/attempt-NNN/
+  odd-teaser/attempts/prd-vX.Y/attempt-NNN/
   agent-skill/attempts/prd-vX.Y/attempt-NNN/
   fluent-mobile/attempts/prd-vX.Y/attempt-NNN/
 ```
@@ -32247,77 +32269,19 @@ Attempts live at: `/attempts/ai-navigation/prd-v1.0/attempt-NNN/`
 --------------------------------------------------------------------------------
 
 ---
-uri: klappy://products/ai-navigation
-title: "AI Navigation Lane"
-audience: docs
-exposure: nav
-tier: 3
-voice: neutral
-stability: evolving
-tags: ["products", "ai-navigation", "lane", "index", "planned"]
+status: DEPRECATED
+superseded_by: products/odd-teaser
+deprecated_date: 2026-01-31
 ---
 
-# AI Navigation Lane
+# AI Navigation Lane (DEPRECATED)
 
-> AI-assisted navigation and chat interface for the website.
+This lane has been superseded by the `odd-teaser` lane.
 
-## Description
+The ai-navigation lane focused on conversational navigation and explanation of ODD.
+The odd-teaser lane explicitly rejects teaching and navigation.
 
-The ai-navigation lane is planned but not yet active. It will provide an AI chat interface that helps visitors navigate ODD content conversationally. This is separate from the website lane (static content) and the agent-skill lane (agent tooling).
-
-## Outline
-
-- Lane Status
-- Planned Scope
-- Relationship to Other Lanes
-
----
-
-## Lane Status
-
-| Field | Value |
-|-------|-------|
-| **Status** | Planned (sparse) |
-| **PRD** | Not yet created |
-| **Epoch** | TBD |
-
----
-
-## Current State
-
-This lane contains only a placeholder:
-
-| Path | Purpose |
-|------|---------|
-| `src/.gitkeep` | Placeholder to preserve directory |
-
----
-
-## Planned Scope
-
-When active, this lane will include:
-
-- AI chat interface for ODD navigation
-- Context-aware responses based on canon/content
-- Integration with website lane for seamless UX
-
----
-
-## Relationship to Other Lanes
-
-| Lane | Relationship |
-|------|--------------|
-| `website` | ai-navigation enhances website with conversational UI |
-| `agent-skill` | ai-navigation consumes agent capabilities, does not define them |
-
----
-
-## Starting an Attempt
-
-A PRD must be created before attempts can begin. When ready:
-
-1. Create `/products/ai-navigation/PRD.md`
-2. Follow standard attempt workflow from `/docs/ATTEMPTS.md`
+**Do not start new attempts against this lane.**
 
 
 
@@ -33818,6 +33782,237 @@ If you improve the config during an attempt:
 
 
 --------------------------------------------------------------------------------
+📄 File: products/odd-teaser/LEDGER.md
+--------------------------------------------------------------------------------
+
+# Odd Teaser — Product Ledger
+
+This ledger is **append-only**.
+
+It records product-level decisions, scope locks, and retirements.
+
+---
+
+## 2026-01-31 — Lane Created
+
+- Lane instantiated to graduate Epoch 4 guiding artifact
+- Supersedes website and ai-navigation lanes
+- Core constraint locked: system must be easier to leave than to continue
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/odd-teaser/PRD.md
+--------------------------------------------------------------------------------
+
+# Klappy.dev — Odd Teaser PRD (v1.0)
+
+---
+
+## Header
+
+- **PRD Version:** v1.0
+- **Lane:** odd-teaser
+- **Status:** Active
+- **Epoch:** E0004 (Epistemic Separation Era)
+- **Graduated from:** klappy://docs/guiding-artifacts/epoch-4/klappy-dev-poc-prd
+- **Supersedes:** website, ai-navigation
+
+---
+
+## Product Definition
+
+Klappy.dev is a **single-session epistemic experience**.
+
+Its sole purpose is to help a visitor externalize at least one epistemic artifact and leave with something concrete.
+
+**Klappy.dev must always be easier to leave than to continue.**
+
+---
+
+## Target User State (Success Definition)
+
+A first-time visitor leaves after one session having:
+
+1. Externalized at least one epistemic artifact
+2. Noticed a missing habit in their own workflow (unprompted)
+3. Taken something with them (export or mental transplant)
+
+The product succeeds even if the user never returns.
+
+---
+
+## Non-Goals (Hard Exclusions)
+
+The product must NOT:
+
+- Authenticate users
+- Persist identity
+- Teach ODD explicitly
+- Execute tasks
+- Provide project management
+- Optimize retention or engagement
+- Become a documentation site
+- Navigate users to canon/docs
+- Answer questions about ODD
+
+If a feature increases time-on-site without increasing artifact creation, it is invalid.
+
+---
+
+## Core Experience
+
+- Single-page web app
+- Primary surface: conversational input
+- Secondary surface: artifact drawer
+- No navigation tree
+- No menus beyond artifact visibility
+
+Supported artifact types:
+- Learnings
+- Decisions
+- Overrides
+
+Export is the **exit ramp** (one-click, Markdown, local-only).
+
+---
+
+## Interface Contracts
+
+- manifest >=2.0.0 <3.0.0
+- build-output >=3.0.0 <4.0.0
+- attempt-cli >=2.0.0 <3.0.0
+
+---
+
+## Visual Interfaces
+
+- color-system >=1.0.0 <2.0.0
+- typography >=1.0.0 <2.0.0
+- spacing >=1.0.0 <2.0.0
+
+---
+
+## Success Criteria
+
+- User can create each artifact type
+- Artifacts are immediately visible upon creation
+- Artifacts can be exported in one click
+- The system can stop interacting without error
+- Telemetry events fire correctly
+- No features that increase time-on-site without increasing artifact creation
+
+---
+
+## Definition of Done
+
+- Build output produced
+- Visual proof captured
+- Artifact creation verified (all 3 types)
+- Export round-trip verified
+- Cloudflare Preview URL provided
+- Evidence URL provided
+- Self-audit confirms no retention/engagement features
+- Self-audit confirms no teaching/navigation features
+
+---
+
+## Telemetry (ODD-Safe)
+
+**Allowed events:**
+- ArtifactCreated { type }
+- ArtifactExported { count, types }
+- IncisionTriggered { reason }
+- PrematureExit { artifact_count }
+
+**Forbidden:**
+- Raw text
+- Prompts
+- Responses
+- Identity
+- IP
+- Fingerprinting
+
+Telemetry measures epistemic motion, not users.
+
+---
+
+## Lifecycle
+
+This product is the **closure artifact of Epoch 4**, not a growth product.
+
+### Graduation / Kill Criteria
+
+- If artifact creation rate drops to zero across 30 days → evaluate for retirement
+- If feature requests accumulate that violate non-goals → scope freeze or retire
+
+---
+
+## Final Constraint
+
+If someone asks: *"Should the product also…?"*
+
+The default answer is **no**.
+
+If the change is not clearly justified by artifact creation, it is rejected.
+
+---
+
+## Graduation
+
+This PRD embodies the philosophy defined in:
+- klappy://docs/guiding-artifacts/epoch-4/klappy-dev-poc-prd
+
+That artifact remains canonical as the philosophical source.
+This PRD accepts the operational gravity of maintaining the product.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/odd-teaser/README.md
+--------------------------------------------------------------------------------
+
+# Odd Teaser Product Lane
+
+This lane embodies the **Epoch 4 guiding artifact philosophy** as a maintained product.
+
+Its purpose is not explanation, navigation, or engagement.
+Its purpose is **epistemic externalization and exit**.
+
+If you are looking to:
+- explain ODD
+- browse canon
+- answer questions
+
+You are in the wrong lane.
+
+See `PRD.md` for authoritative constraints.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: products/odd-teaser/prompts/ATTEMPT_KICKOFF.md
+--------------------------------------------------------------------------------
+
+# Attempt Kickoff — Odd Teaser
+
+You are building a **single-session epistemic experience**.
+
+Your job is NOT to explain.
+Your job is NOT to retain users.
+Your job is NOT to answer questions about ODD.
+
+Your job is to help a user:
+1. Externalize at least one artifact
+2. See it clearly
+3. Take it with them
+4. Leave
+
+If you are unsure whether to add a feature, do not add it.
+
+
+
+--------------------------------------------------------------------------------
 📄 File: products/website/LEDGER.md
 --------------------------------------------------------------------------------
 
@@ -34103,81 +34298,19 @@ The website lane MUST support generating a wipeable "visitor pack" used for prog
 --------------------------------------------------------------------------------
 
 ---
-uri: klappy://products/website
-title: "Website Lane"
-audience: docs
-exposure: nav
-tier: 3
-voice: neutral
-stability: evolving
-tags: ["products", "website", "lane", "index"]
+status: DEPRECATED
+superseded_by: products/odd-teaser
+deprecated_date: 2026-01-31
 ---
 
-# Website Lane
+# Website Lane (DEPRECATED)
 
-> Human-facing orientation surface for ODD.
+This lane has been superseded by the `odd-teaser` lane.
 
-## Description
+The website lane focused on progressive disclosure and canon browsing.
+The odd-teaser lane embodies the Epoch 4 philosophy: artifact externalization and exit.
 
-The website lane produces klappy.dev—the public-facing website that explains ODD progressively to human visitors. This is portfolio, explanation, and credibility layer. It does NOT teach agents how to think or execute ODD; it explains ODD to humans through progressive disclosure UX.
-
-## Outline
-
-- Contents
-- Lane Status
-- Key Constraints
-- Starting an Attempt
-
----
-
-## Contents
-
-| File | Purpose |
-|------|---------|
-| `PRD.md` | Active PRD (v1.2) |
-| `LEDGER.md` | Append-only product memory |
-| `attempts/` | Attempt artifacts |
-| `src/` | Current implementation source |
-| `prompts/` | Lane-specific kickoff prompts |
-
----
-
-## Lane Status
-
-| Field | Value |
-|-------|-------|
-| **PRD Version** | v1.2 |
-| **Epoch** | E0003 (evidence-first) |
-| **Status** | Active |
-| **Last Champion** | PRD v1.0 (promoted 2026-01-19) |
-
----
-
-## Key Constraints
-
-- First load shows ≤7 navigational items
-- Mobile usable without horizontal scrolling
-- Progressive disclosure tiers respected (Tier 0/1/2)
-- **Online evidence required** (Cloudflare Preview URL + Evidence URL)
-
----
-
-## Starting an Attempt
-
-1. Read `/infra/prompts/attempt-kickoff/BOOTSTRAP.md`
-2. Run `attempt:register --lane website`
-3. Run `attempt:nuke --lane website`
-4. Follow `/infra/prompts/attempt-kickoff/website.md`
-
-See `/docs/ATTEMPTS.md` for the full lifecycle.
-
----
-
-## See Also
-
-- [PRD](PRD.md) — Current requirements
-- [Product Lanes](/docs/appendices/product-lanes.md) — Lane architecture
-- [Online Evidence](/docs/appendices/online-evidence.md) — Evidence requirements
+**Do not start new attempts against this lane.**
 
 
 
