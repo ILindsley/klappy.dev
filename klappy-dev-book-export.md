@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-31T21:50:37.418Z
-Total Files: 256
+Generated: 2026-01-31T22:19:03.203Z
+Total Files: 259
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -21,8 +21,8 @@ details (attempts, version folders, source code).
 - **.cursor** (1 files)
 - **About** (6 files)
 - **Apocrypha** (14 files)
-- **Canon** (46 files)
-- **Documentation** (88 files)
+- **Canon** (48 files)
+- **Documentation** (89 files)
 - **Drift-audit** (1 files)
 - **Infrastructure** (10 files)
 - **Interfaces & Contracts** (6 files)
@@ -10182,6 +10182,183 @@ No additional events may be added without explicit justification that they measu
 
 
 --------------------------------------------------------------------------------
+📄 File: docs/migrations/scope-experiments-minimal-migration.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://docs/migrations/scope-experiments-minimal-migration
+title: "Scope and Experiments Minimal Migration"
+audience: docs
+exposure: internal
+tier: 2
+voice: neutral
+stability: draft
+tags: ["migration", "oddkit", "scope", "experiments", "portability"]
+---
+
+# Scope and Experiments Minimal Migration
+
+> Preserve the current repository layout while removing semantic dependence on folder structure.
+
+## Description
+
+This migration enables portability across monorepos, single repos, and submodules without semantic drift. It keeps today's folder structure working while quietly removing path-based meaning.
+
+## Goal
+
+Enable oddkit to reconstruct scope and experiment boundaries without reading filesystem topology as truth.
+
+---
+
+## Phase 0 — Declare Primitives (No Code Changes)
+
+Introduce explicit record headers for all learnings/decisions:
+
+```json
+{
+  "id": "string (stable)",
+  "type": "learning|decision|override",
+  "scope": "global|product:<id>|experiment:<id>",
+  "status": "observed|stabilized|candidate|ratified|archived",
+  "created_at": "ISO timestamp"
+}
+```
+
+This extends the existing schema in `odd/ledger/learnings.jsonl` and does not break existing records.
+
+**What this enables:**
+- Append anywhere, merge safely
+- Scope is data, not layout
+- Existing records remain valid
+
+---
+
+## Phase 1 — Lanes as View (Not Ontology)
+
+- Retain `products/<lane>/` if desired
+- Add `oddkit/scopes.json` mapping friendly names to scope IDs
+- oddkit renders filtered views by scope regardless of file location
+
+**Result:** Lanes remain useful but non-authoritative.
+
+**Example `oddkit/scopes.json`:**
+
+```json
+{
+  "scopes": {
+    "global": { "id": "global", "display": "Global" },
+    "odd-teaser": { "id": "product:odd-teaser", "display": "ODD Teaser" },
+    "agent-skill": { "id": "product:agent-skill", "display": "Agent Skill" },
+    "fluent-mobile": { "id": "product:fluent-mobile", "display": "Fluent Mobile" }
+  }
+}
+```
+
+---
+
+## Phase 2 — Experiments as Enforced State
+
+- oddkit owns experiment state (`ACTIVE` | `EXITED`)
+- State is not inferred from branches
+- New invariant: cannot import, deploy, or close PR with an `ACTIVE` experiment
+
+**New command:**
+
+```bash
+oddkit experiment exit --status success|abandoned
+```
+
+This command:
+- Appends a closing record
+- Captures evidence where possible
+- Transitions experiment state atomically
+
+**State ownership:**
+- Experiment state lives in oddkit's state store, not git branch names
+- Branch names remain conveniences for humans and tools
+- The invariant is enforced at integration points (PR close, deploy, import)
+
+---
+
+## Phase 3 — Decouple Survivability from Champion
+
+- All learnings/decisions import by default
+- "Champion" affects recommendation/ratification status only
+- Prevents loss of learnings from failed or abandoned experiments
+
+**Import rule change:**
+
+| Before | After |
+|--------|-------|
+| Champion imports learnings | All experiments import learnings |
+| Non-champion learnings may be lost | Non-champion learnings persist with `status: observed` |
+| Champion = survivability | Champion = `status: ratified` |
+
+---
+
+## Append / Merge Rules
+
+These rules make concurrent writes survivable:
+
+### 1. Append-only blocks
+
+Never edit prior entries. To correct or supersede, add a new record that references the old one:
+
+```json
+{
+  "id": "learn-20260131-0002",
+  "type": "override",
+  "supersedes": "learn-20260131-0001",
+  "scope": "global",
+  "status": "observed",
+  "created_at": "2026-01-31T14:00:00Z",
+  "summary": "Corrected understanding of..."
+}
+```
+
+### 2. Stable IDs + monotonic ordering
+
+- Each entry has a unique `id`
+- Ordering can be derived deterministically by `id` or `created_at`
+- Git merges resolve cleanly because entries never conflict
+
+---
+
+## Success Test
+
+The migration succeeds only when:
+
+> **oddkit can reconstruct scope and experiment boundaries without reading filesystem topology as truth.**
+
+If this test fails, migration is incomplete.
+
+**Concrete validation:**
+- Move a learning file to a different directory
+- Run `oddkit query --scope global`
+- The learning appears with correct scope
+- If it doesn't, the system is still path-dependent
+
+---
+
+## What Does NOT Change
+
+- Existing folder structure remains valid
+- Existing `products/<lane>/` paths continue to work
+- Existing `odd/ledger/learnings.jsonl` entries remain valid
+- Branch naming conventions remain unchanged (they're just non-authoritative)
+
+---
+
+## Related Documents
+
+- `klappy://canon/principles/scope-over-folders` — the principle this migration enforces
+- `klappy://canon/constraints/meaning-must-not-depend-on-path` — the constraint this migration satisfies
+- `klappy://docs/decisions/D0007` — prior decision establishing branch names as non-authoritative
+- `klappy://docs/appendices/product-lanes` — current lane documentation (remains valid as convenience)
+
+
+
+--------------------------------------------------------------------------------
 📄 File: docs/mode-separated-conversations.md
 --------------------------------------------------------------------------------
 
@@ -15823,6 +16000,71 @@ This constraint is a foundation for principles like:
 
 
 --------------------------------------------------------------------------------
+📄 File: canon/constraints/meaning-must-not-depend-on-path.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/constraints/meaning-must-not-depend-on-path
+title: "Meaning Must Not Depend on Path"
+audience: canon
+exposure: nav
+tier: 1
+voice: first_person
+stability: stable
+tags: ["constraint", "epistemic-safety", "portability", "oddkit"]
+---
+
+# Meaning Must Not Depend on Path
+
+No canonical meaning, scope, or lifecycle state may be inferred from filesystem paths or branch names.
+
+## What this forbids
+
+A design is invalid if it:
+
+- derives scope from folder structure or path patterns
+- infers experiment/attempt state from git branch names
+- uses file relocation as promotion
+- ties survivability to "champion" or merge status
+
+## What this requires
+
+Systems MUST:
+
+- attach explicit scope metadata to all learnings, decisions, and overrides
+- own and enforce lifecycle state via tooling, not convention
+- express promotion as metadata transitions, not file moves
+- preserve learnings regardless of experiment success
+
+## Operational test
+
+If moving a file changes what it means, the system is invalid.
+
+Any system that fails this test must be refactored before extension.
+
+## Design consequences
+
+When this constraint bites, the system response is:
+
+- paths are non-authoritative
+- branch names are conveniences, not truth
+- oddkit must own state transitions and validate invariants
+- views replace directories as the primary navigation surface
+
+## Relationship
+
+This constraint enforces:
+
+- `klappy://canon/principles/scope-over-folders`
+- `klappy://canon/principles/ritual-is-a-smell`
+
+and rests on:
+
+- `klappy://canon/constraints/humans-are-variable-inputs`
+
+
+
+--------------------------------------------------------------------------------
 📄 File: canon/decision-rules.md
 --------------------------------------------------------------------------------
 
@@ -18628,6 +18870,87 @@ When a ritual smell exists, the system must do one of:
 A stateless or low-state system should automate continuity.
 
 It should not delegate continuity to memory.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/principles/scope-over-folders.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/principles/scope-over-folders
+title: "Scope Over Folders"
+audience: canon
+exposure: nav
+tier: 2
+voice: first_person
+stability: draft
+tags: ["epistemic-scope", "portability", "ritual-smell", "oddkit"]
+---
+
+# Scope Over Folders
+
+Epistemic scope is an attribute of a claim, not a property of its storage location.
+
+Where a statement is stored (filesystem path, repo, branch) is an implementation detail. Meaning, applicability, and lifecycle must be explicitly declared and mechanically enforceable.
+
+## Foundational assumptions
+
+This principle rests on:
+
+- `klappy://canon/constraints/humans-are-variable-inputs`
+- `klappy://canon/principles/ritual-is-a-smell`
+
+This principle extends those foundations by identifying path-based meaning as a primary source of ritual and drift.
+
+## What counts as scope-over-folders
+
+Scope-over-folders is present when:
+
+- scope is declared as metadata on each claim (e.g., `global`, `product:<id>`, `experiment:<id>`)
+- scope is queryable, filterable, and portable across repo topologies
+- "lanes" exist as views or filters surfaced by tooling, not ontological truth
+- promotion changes scope/status metadata, not file location
+
+## What does NOT count as scope-over-folders
+
+Scope-over-folders is violated when:
+
+- scope is inferred from folder depth or naming conventions
+- directories are treated as semantic containers of truth
+- branch names or paths imply lifecycle state
+- files are moved to indicate promotion, ratification, or survivability
+
+## Required response when violated
+
+When scope is inferred from location:
+
+1. Treat the system state as epistemically invalid
+2. Record a drift signal
+3. Refactor to explicit scope metadata
+4. Add tooling guardrails to prevent recurrence
+
+## Design target
+
+A system satisfies this principle when:
+
+- oddkit can reconstruct scope and relevance without reading filesystem topology
+- the same repository can be reorganized without semantic drift
+
+## Relationship
+
+This principle builds on:
+
+- `klappy://canon/constraints/humans-are-variable-inputs`
+- `klappy://canon/principles/ritual-is-a-smell`
+
+and is enforced by the constraint:
+
+- `klappy://canon/constraints/meaning-must-not-depend-on-path`
+
+## One-liner
+
+If meaning depends on where a line is stored, you've encoded ritual, not truth.
 
 
 

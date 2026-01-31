@@ -615,6 +615,23 @@
       ]
     },
     {
+      "uri": "klappy://canon/constraints/meaning-must-not-depend-on-path",
+      "path": "/canon/constraints/meaning-must-not-depend-on-path.md",
+      "title": "Meaning Must Not Depend on Path",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 1,
+      "voice": "first_person",
+      "stability": "stable",
+      "tags": [
+        "constraint",
+        "epistemic-safety",
+        "portability",
+        "oddkit"
+      ]
+    },
+    {
       "uri": "klappy://odd/media-as-learning-layer",
       "path": "/odd/appendices/media-as-learning-layer.md",
       "title": "Media as a Learning Layer",
@@ -1094,6 +1111,23 @@
         "stateless",
         "continuity",
         "ergonomics"
+      ]
+    },
+    {
+      "uri": "klappy://canon/principles/scope-over-folders",
+      "path": "/canon/principles/scope-over-folders.md",
+      "title": "Scope Over Folders",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "first_person",
+      "stability": "draft",
+      "tags": [
+        "epistemic-scope",
+        "portability",
+        "ritual-smell",
+        "oddkit"
       ]
     },
     {

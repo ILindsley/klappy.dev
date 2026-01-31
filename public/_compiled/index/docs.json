@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-01-31T21:50:37.608Z",
+  "generated_at": "2026-01-31T22:19:03.391Z",
   "description": "Fast-lookup index for Librarian retrieval. Per docs/agents/librarian/contract.md",
   "schema_notes": {
     "authority_band": "Resolved authority (frontmatter override > inferred from root)",
@@ -30,20 +30,20 @@
     }
   },
   "stats": {
-    "total_documents": 179,
-    "with_frontmatter": 171,
-    "with_headings": 175,
+    "total_documents": 182,
+    "with_frontmatter": 174,
+    "with_headings": 178,
     "by_root": {
       "apocrypha": 14,
-      "canon": 45,
-      "docs": 88,
+      "canon": 47,
+      "docs": 89,
       "interfaces": 6,
       "odd": 26
     },
     "by_authority": {
       "non-governing": 14,
-      "governing": 71,
-      "operational": 94
+      "governing": 73,
+      "operational": 95
     },
     "with_authority_override": 0,
     "with_authority_warning": 0
@@ -2953,6 +2953,62 @@
       "has_frontmatter": true
     },
     {
+      "path": "canon/constraints/meaning-must-not-depend-on-path.md",
+      "root": "canon",
+      "authority_band": "governing",
+      "authority_inferred": "governing",
+      "uri": "klappy://canon/constraints/meaning-must-not-depend-on-path",
+      "title": "Meaning Must Not Depend on Path",
+      "subtitle": null,
+      "tags": [
+        "constraint",
+        "epistemic-safety",
+        "portability",
+        "oddkit"
+      ],
+      "stability": "stable",
+      "tier": "1",
+      "audience": "canon",
+      "exposure": "nav",
+      "voice": "first_person",
+      "relevance": null,
+      "execution_posture": null,
+      "headings": [
+        {
+          "level": 1,
+          "text": "Meaning Must Not Depend on Path",
+          "line": 2
+        },
+        {
+          "level": 2,
+          "text": "What this forbids",
+          "line": 6
+        },
+        {
+          "level": 2,
+          "text": "What this requires",
+          "line": 15
+        },
+        {
+          "level": 2,
+          "text": "Operational test",
+          "line": 24
+        },
+        {
+          "level": 2,
+          "text": "Design consequences",
+          "line": 30
+        },
+        {
+          "level": 2,
+          "text": "Relationship",
+          "line": 39
+        }
+      ],
+      "heading_count": 6,
+      "has_frontmatter": true
+    },
+    {
       "path": "canon/decision-rules.md",
       "root": "canon",
       "authority_band": "governing",
@@ -4590,6 +4646,72 @@
         }
       ],
       "heading_count": 6,
+      "has_frontmatter": true
+    },
+    {
+      "path": "canon/principles/scope-over-folders.md",
+      "root": "canon",
+      "authority_band": "governing",
+      "authority_inferred": "governing",
+      "uri": "klappy://canon/principles/scope-over-folders",
+      "title": "Scope Over Folders",
+      "subtitle": null,
+      "tags": [
+        "epistemic-scope",
+        "portability",
+        "ritual-smell",
+        "oddkit"
+      ],
+      "stability": "draft",
+      "tier": "2",
+      "audience": "canon",
+      "exposure": "nav",
+      "voice": "first_person",
+      "relevance": null,
+      "execution_posture": null,
+      "headings": [
+        {
+          "level": 1,
+          "text": "Scope Over Folders",
+          "line": 2
+        },
+        {
+          "level": 2,
+          "text": "Foundational assumptions",
+          "line": 8
+        },
+        {
+          "level": 2,
+          "text": "What counts as scope-over-folders",
+          "line": 17
+        },
+        {
+          "level": 2,
+          "text": "What does NOT count as scope-over-folders",
+          "line": 26
+        },
+        {
+          "level": 2,
+          "text": "Required response when violated",
+          "line": 35
+        },
+        {
+          "level": 2,
+          "text": "Design target",
+          "line": 44
+        },
+        {
+          "level": 2,
+          "text": "Relationship",
+          "line": 51
+        },
+        {
+          "level": 2,
+          "text": "One-liner",
+          "line": 62
+        }
+      ],
+      "heading_count": 8,
       "has_frontmatter": true
     },
     {
@@ -11340,6 +11462,98 @@
         }
       ],
       "heading_count": 5,
+      "has_frontmatter": true
+    },
+    {
+      "path": "docs/migrations/scope-experiments-minimal-migration.md",
+      "root": "docs",
+      "authority_band": "operational",
+      "authority_inferred": "operational",
+      "uri": "klappy://docs/migrations/scope-experiments-minimal-migration",
+      "title": "Scope and Experiments Minimal Migration",
+      "subtitle": "Preserve the current repository layout while removing semantic dependence on folder structure.",
+      "tags": [
+        "migration",
+        "oddkit",
+        "scope",
+        "experiments",
+        "portability"
+      ],
+      "stability": "draft",
+      "tier": "2",
+      "audience": "docs",
+      "exposure": "internal",
+      "voice": "neutral",
+      "relevance": null,
+      "execution_posture": null,
+      "headings": [
+        {
+          "level": 1,
+          "text": "Scope and Experiments Minimal Migration",
+          "line": 2
+        },
+        {
+          "level": 2,
+          "text": "Description",
+          "line": 6
+        },
+        {
+          "level": 2,
+          "text": "Goal",
+          "line": 10
+        },
+        {
+          "level": 2,
+          "text": "Phase 0 — Declare Primitives (No Code Changes)",
+          "line": 16
+        },
+        {
+          "level": 2,
+          "text": "Phase 1 — Lanes as View (Not Ontology)",
+          "line": 39
+        },
+        {
+          "level": 2,
+          "text": "Phase 2 — Experiments as Enforced State",
+          "line": 62
+        },
+        {
+          "level": 2,
+          "text": "Phase 3 — Decouple Survivability from Champion",
+          "line": 86
+        },
+        {
+          "level": 2,
+          "text": "Append / Merge Rules",
+          "line": 102
+        },
+        {
+          "level": 3,
+          "text": "1. Append-only blocks",
+          "line": 106
+        },
+        {
+          "level": 3,
+          "text": "2. Stable IDs + monotonic ordering",
+          "line": 122
+        },
+        {
+          "level": 2,
+          "text": "Success Test",
+          "line": 130
+        },
+        {
+          "level": 2,
+          "text": "What Does NOT Change",
+          "line": 146
+        },
+        {
+          "level": 2,
+          "text": "Related Documents",
+          "line": 155
+        }
+      ],
+      "heading_count": 13,
       "has_frontmatter": true
     },
     {
