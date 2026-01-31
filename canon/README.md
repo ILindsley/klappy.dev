@@ -34,10 +34,18 @@ The Canon exists so that reasoning does not have to be repeated.
 | `completion-report-template.md` | Completion Report Template | Standard format for reporting completed work. | How should completion be communicated? |
 | `CHANGELOG.md` | Canon Changelog | Version history of canon changes. | What changed and when? |
 
+### Principles
+
+| File | Title | Summary |
+|------|-------|---------|
+| `principles/bulldoze-but-keep-the-blueprint.md` | Bulldoze the App, Keep the Blueprint | When code stops being the scarce resource. Documents the cost-model inversion caused by AI: code is disposable, blueprints (intent, constraints, decisions, evidence) are durable. |
+| `principles/odds-relationship-to-documentation.md` | Documentation Is the Lever, Not the Goal | Clarifies that documentation in ODD is epistemic infrastructure—a forcing function, not an end state. Distinguishes ODD from documentation-driven development. |
+
 ### Subfolders
 
 | Folder | Purpose |
 |--------|---------|
+| `principles/` | Canon-level principle articulations grounded in lived evidence. |
 | `decisions/` | Canon-level decision records (governance, model boundaries). |
 | `resonance/` | External works that converge with ODD — and where ODD explicitly diverges. |
 | `meta/` | Metadata and pack configuration. |

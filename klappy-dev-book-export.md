@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-01-30T01:16:03.587Z
-Total Files: 233
+Generated: 2026-01-31T01:14:58.767Z
+Total Files: 236
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -18,10 +18,11 @@ details (attempts, version folders, source code).
 ================================================================================
 
 - **Root** (1 files)
+- **.cursor** (1 files)
 - **About** (6 files)
 - **Apocrypha** (14 files)
-- **Canon** (36 files)
-- **Documentation** (82 files)
+- **Canon** (37 files)
+- **Documentation** (83 files)
 - **Infrastructure** (10 files)
 - **Interfaces & Contracts** (6 files)
 - **ODD (Outcomes-Driven Development)** (25 files)
@@ -2183,6 +2184,7 @@ tags: ["docs", "implementation", "reference", "index"]
 | [agent-architecture/](./agent-architecture/) | Agent system design patterns | 1 file |
 | [appendices/](./appendices/) | Implementation-specific appendices | 17 files |
 | [decisions/](./decisions/) | Implementation decision records (ADRs) | 14 files |
+| [examples/](./examples/) | Case studies and examples | 1 file |
 | [PRD/](./PRD/) | Lane PRDs and template | 3 files |
 | [infra/](./infra/) | Infrastructure documentation | 1 file |
 
@@ -9510,127 +9512,150 @@ If the pattern recurs across multiple decisions or lanes, consider elevating to:
 
 
 --------------------------------------------------------------------------------
-📄 File: docs/getting-started/odd-agents-and-mcp.md
+📄 File: docs/examples/README.md
 --------------------------------------------------------------------------------
 
 ---
-uri: klappy://docs/getting-started/odd-agents-and-mcp
-title: "Agents & MCP (Experimental)"
+uri: klappy://docs/examples
+title: "Examples Index"
 audience: docs
 exposure: nav
 tier: 3
 voice: neutral
 stability: evolving
-tags: ["agents", "mcp", "oddkit", "getting-started", "experimental"]
+tags: ["docs", "examples", "case-studies", "index"]
 ---
 
-# ODD Agents & MCP: Orientation
+# Examples Index
 
-> ⚠️ **Experimental** — This describes optional tooling around ODD. No stability guarantees. No "best practice" claims.
+> Case studies and examples illustrating ODD principles in practice.
 
----
+## Description
 
-## What this is
+This folder contains concrete examples and case studies that demonstrate how ODD principles translate into real-world behavior changes. These examples ground abstract principles in observable outcomes.
 
-ODD is a thinking system, not a framework. It defines how to reason about completeness, evidence, and authority in software work. It does not prescribe tools, languages, or workflows.
+## Contents
 
-oddkit is a CLI and MCP server that helps tools query ODD canon. It supports judgment—it does not automate decisions. If your agent calls oddkit, it gets citations and constraints. What the agent does with them is still up to you.
-
-Agents and MCP are optional accelerators. **If you don't use agents or MCP, ODD still works.** You can read the canon directly and apply it manually. The tooling exists for those who want machine-assisted enforcement, not as a requirement.
-
----
-
-## The three pieces
-
-### A. Canon (required conceptually)
-
-- Lives at [klappy.dev/canon](https://klappy.dev/canon)
-- Defines authority, epistemics, and constraints
-- Tool-agnostic — works with any editor, any language, any workflow
-- Start here: [Epistemic Guide](/canon/agents/odd-epistemic-guide)
-
-### B. oddkit (optional, recommended)
-
-- CLI + MCP server
-- Lets tools query canon programmatically
-- Returns citations, not answers
-- Does not enforce behavior — it informs
-
-### C. Subagents (optional, experimental)
-
-- Cursor / Claude helpers that enforce sequencing and citation
-- Derived from canon, never authoritative on their own
-- If canon and subagent conflict, canon wins
+| File | Title | Summary |
+|------|-------|---------|
+| `qa-validation-odd-vs-ddd.md` | From Execution to Outcome: A QA Validation Case Study | Illustrates the practical difference between documentation-driven development and outcomes-driven development through a QA validation workflow example. |
 
 ---
 
-## Minimal install paths
+## See Also
 
-### Option 1: Just read canon (zero install)
+- [ODD Relationship to Documentation](/canon/principles/odds-relationship-to-documentation.md) — The principle this example illustrates
+- [ODD Manifesto](/odd/README.md) — Core ODD philosophy
 
-No tools needed. Start with the [Epistemic Guide](/canon/agents/odd-epistemic-guide).
 
-ODD works without any CLI or MCP. Read the canon, apply judgment manually.
 
-### Option 2: oddkit CLI only
-
-```bash
-npx github:klappy/oddkit librarian -q "What phase are we in?"
-```
-
-Ask questions, get citations. No MCP required.
-
-### Option 3: MCP server (advanced)
-
-MCP lets Cursor/Claude call oddkit automatically at policy questions and completion claims. See the [oddkit repository](https://github.com/klappy/oddkit) for setup.
-
-One-liner setup:
-
-```bash
-npx oddkit init
-```
-
-This writes MCP config to `~/.cursor/mcp.json`. Restart Cursor.
-
-### Option 4: Cursor subagent (experimental)
-
-Copy the subagent file, add citation rules to your project.
-
-⚠️ **Subagents are derived from canon—do not edit them directly.** If you need different behavior, override via canon, not by modifying subagent instructions.
+--------------------------------------------------------------------------------
+📄 File: docs/examples/qa-validation-odd-vs-ddd.md
+--------------------------------------------------------------------------------
 
 ---
-
-## What this doc does NOT cover
-
-This orientation card intentionally omits:
-
-- Full MCP setup guide
-- Recommended workflows
-- "ODD best practices"
-- Golden path diagrams
-- How to be productive fast
-
-Those come later—after mechanical enforcement exists and patterns stabilize.
-
+uri: klappy://docs/examples/qa-validation-odd-vs-ddd
+title: "From Execution to Outcome: A QA Validation Case Study"
+audience: practitioners
+exposure: examples
+tier: 2
+stability: evolving
+voice: neutral
+tags:
+  - odd
+  - qa
+  - agents
+  - validation
+  - case-study
 ---
 
-## Summary
+# From Execution to Outcome  
+## A QA Validation Case Study
 
-| Piece     | Required? | What it does                         |
-| --------- | --------- | ------------------------------------ |
-| Canon     | Yes\*     | Defines authority and constraints    |
-| oddkit    | No        | Lets tools query canon               |
-| Subagents | No        | Enforce sequencing via Cursor/Claude |
+This example illustrates the practical difference between documentation-driven development and outcomes-driven development.
 
-\*Canon is required conceptually—you need to understand the rules. But you don't need any tool to read it.
+The scenario involves an AI agent tasked with supporting a QA validation workflow.
 
----
+## The Initial Failure Mode (Without ODD)
 
-## See also
+When given a task without structured epistemic guidance, the agent:
 
-- [ODD Epistemic Guide](/canon/agents/odd-epistemic-guide) — Start here
-- [Canon Index](/canon/README.md) — Browse constraints
-- [oddkit repository](https://github.com/klappy/oddkit) — Tool documentation
+- Quickly executed instructions
+- Generated artifacts that *appeared* complete
+- Skipped critical clarification steps
+- Assumed implicit definitions of "done"
+
+From a surface level, work was happening.  
+From an outcome perspective, validation quality did not improve.
+
+This mirrors a common human failure mode:  
+**motion mistaken for progress.**
+
+## Introducing ODD Constraints
+
+Once ODD constraints were applied, the agent was required to:
+
+- Explicitly define the intended outcome *before* execution
+- Identify what evidence would demonstrate success
+- Surface assumptions about quality thresholds
+- Treat ambiguity as a signal to pause, not proceed
+
+This was not a documentation exercise for record-keeping.  
+It was a behavioral constraint.
+
+Execution was intentionally slowed until outcome clarity improved.
+
+## The Shift in Behavior
+
+With ODD in place, the agent:
+
+- Asked better questions
+- Deferred execution when success criteria were unclear
+- Iterated on the definition of validation itself
+- Produced outputs that were easier to evaluate and trust
+
+Most importantly, the QA manager reviewing the results did not simply receive "better documentation."
+
+She received **leverage**.
+
+## The Outcome Difference
+
+The value was not that the QA manager became more efficient at reviewing artifacts.
+
+The value was that:
+- QA validation aligned more tightly with real needs
+- Fewer false positives passed as "complete"
+- Quality discussions moved upstream, before rework was required
+
+The system improved outcomes *through* her role — not merely her performance.
+
+## Why This Is Not Documentation-Driven Development
+
+A documentation-driven approach would have focused on:
+- Better reports
+- More complete records
+- Clearer explanations after the fact
+
+ODD focused on:
+- Redefining what success meant *before* acting
+- Forcing discomfort around incomplete outcome definitions
+- Treating execution without clarity as a failure condition
+
+Documentation existed — but only as a mechanism to enforce this shift.
+
+## Why This Is Just the Beginning
+
+This example represents an early application of ODD.
+
+As the system matures, QA itself may be re-examined:
+- What counts as "quality"?
+- Who defines it?
+- How early can validation meaningfully occur?
+
+ODD does not answer these questions upfront.  
+It creates the conditions where they cannot be avoided.
+
+That is its power.
 
 
 
@@ -11396,6 +11421,40 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.24.0 — 2026-01-30
+
+**ODD vs Documentation-Driven Development — Core Distinction**
+
+This release adds a foundational principle clarifying that documentation in ODD is epistemic infrastructure—a forcing function, not an end state. Includes both the philosophical distinction and a concrete case study showing the difference in practice.
+
+### Added
+
+- **Documentation Is the Lever, Not the Goal** (`/canon/principles/odds-relationship-to-documentation.md`) — Tier 1 Canon principle clarifying that documentation in ODD exists to answer "How does this improve our ability to achieve better outcomes?" Documentation that does not lead to revised outcomes, clearer decision rules, sharper constraints, or bolder targets is considered inert. Establishes the litmus test: "If the documentation feels comfortable, it is probably incomplete."
+
+- **From Execution to Outcome: A QA Validation Case Study** (`/docs/examples/qa-validation-odd-vs-ddd.md`) — Tier 2 case study illustrating the practical difference between documentation-driven development and outcomes-driven development. Shows how ODD constraints force outcome clarity before execution, creating leverage rather than just better reports.
+
+### Changed
+
+- **Canon README** — Added Principles section listing both existing and new principle documents.
+
+- **Docs README** — Added `examples/` subfolder to Subfolders table.
+
+### Philosophy
+
+- **Documentation is not sufficient** — Documentation that does not actively shape decisions, constrain future work, or provoke re-evaluation of goals is considered a warning sign, not progress.
+
+- **Outcomes have veto power** — In ODD, outcomes always have veto power over documentation. Principles may evolve, constraints may tighten or loosen, plans may be discarded entirely. What persists is the obligation to demonstrate that learning has translated into measurably better outcomes.
+
+- **Pressure is the signal** — ODD documentation should create pressure: to define outcomes before acting, to justify why an outcome is "good enough," to confront risk, ambiguity, and tradeoffs. If documentation merely explains what was done, ODD has failed.
+
+### Notes
+
+- This principle protects ODD from being mislabeled as documentation-driven development
+- The case study grounds the distinction in concrete behavior change
+- Both documents maintain the "this is just the beginning" posture
+
+---
+
 ## 0.23.0 — 2026-01-29
 
 **ODD Agent Roles — Map Navigation, Mode Selection, Instruction Sync, Implementation Guidance**
@@ -12910,10 +12969,18 @@ The Canon exists so that reasoning does not have to be repeated.
 | `completion-report-template.md` | Completion Report Template | Standard format for reporting completed work. | How should completion be communicated? |
 | `CHANGELOG.md` | Canon Changelog | Version history of canon changes. | What changed and when? |
 
+### Principles
+
+| File | Title | Summary |
+|------|-------|---------|
+| `principles/bulldoze-but-keep-the-blueprint.md` | Bulldoze the App, Keep the Blueprint | When code stops being the scarce resource. Documents the cost-model inversion caused by AI: code is disposable, blueprints (intent, constraints, decisions, evidence) are durable. |
+| `principles/odds-relationship-to-documentation.md` | Documentation Is the Lever, Not the Goal | Clarifies that documentation in ODD is epistemic infrastructure—a forcing function, not an end state. Distinguishes ODD from documentation-driven development. |
+
 ### Subfolders
 
 | Folder | Purpose |
 |--------|---------|
+| `principles/` | Canon-level principle articulations grounded in lived evidence. |
 | `decisions/` | Canon-level decision records (governance, model boundaries). |
 | `resonance/` | External works that converge with ODD — and where ODD explicitly diverges. |
 | `meta/` | Metadata and pack configuration. |
@@ -17318,6 +17385,99 @@ This is a claim about a growing class of AI-assisted systems where:
 The question that remains:
 
 > **What would change if we stopped protecting what we can regenerate—and started protecting what makes regeneration trustworthy?**
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/principles/odds-relationship-to-documentation.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/principles/odds-relationship-to-documentation
+title: "Documentation Is the Lever, Not the Goal"
+audience: canon
+exposure: nav
+tier: 1
+stability: semi_stable
+voice: neutral
+tags:
+  - odd
+  - documentation
+  - outcomes
+  - epistemic-hygiene
+---
+
+# Documentation Is the Lever, Not the Goal
+
+ODD (Outcomes-Driven Development) makes heavy use of documentation.  
+This often leads observers to assume ODD is a form of documentation-driven development or knowledge-management-first engineering.
+
+That interpretation is incomplete.
+
+## The Core Distinction
+
+**Documentation in ODD is not an end state.  
+It is a forcing function.**
+
+ODD treats documentation as *epistemic infrastructure* — a system for extracting, stabilizing, and stress-testing what must outlive any single implementation, attempt, or tool.
+
+But documentation is never sufficient on its own.
+
+In ODD, every documented artifact exists to answer a single question:
+
+> **"How does this improve our ability to achieve better outcomes?"**
+
+If a document does not actively shape decisions, constrain future work, or provoke a re-evaluation of goals, it is considered inert.
+
+## Why Documentation Comes First (But Cannot Stop There)
+
+ODD starts with documentation because:
+
+- Most failures are epistemic, not technical  
+- Teams move fast before agreeing on what "success" actually means  
+- Agents (human or AI) default to execution when intent is underspecified  
+
+Documentation is how ODD:
+- Captures learnings without fossilizing them
+- Separates enduring principles from disposable attempts
+- Makes assumptions visible and therefore challengeable
+
+However, **ODD explicitly rejects documentation as a resting place**.
+
+Documentation that does not lead to:
+- revised outcomes,
+- clearer decision rules,
+- sharper constraints,
+- or bolder targets
+
+is considered a warning sign, not progress.
+
+## The Litmus Test
+
+A simple test distinguishes ODD from documentation-driven development:
+
+> **If the documentation feels comfortable, it is probably incomplete.**
+
+ODD documentation should create pressure:
+- pressure to define outcomes before acting
+- pressure to justify why an outcome is "good enough"
+- pressure to confront risk, ambiguity, and tradeoffs
+
+If documentation merely explains what was done, ODD has failed.  
+If documentation forces a decision about what *must be achieved next*, ODD is working.
+
+## Outcomes as the Final Arbiter
+
+In ODD, outcomes always have veto power over documentation.
+
+Principles may evolve.  
+Constraints may tighten or loosen.  
+Plans may be discarded entirely.
+
+What persists is the obligation to demonstrate that learning has translated into **measurably better outcomes** — not just better understanding.
+
+Documentation is the lever.  
+Outcomes are the proof.
 
 
 
@@ -26169,6 +26329,19 @@ cat infra/compile/plans/website/author.json
 - [Canonical Compression](/docs/appendices/canonical-compression.md) — Compression philosophy
 - [Three-Tier Hierarchy](/odd/decisions/D0001-three-tier-conceptual-hierarchy.md) — Tier definitions
 - [Truth Map](/docs/TRUTH_MAP.md) — Authoritative sources
+
+
+
+================================================================================
+## .cursor
+================================================================================
+
+
+
+--------------------------------------------------------------------------------
+📄 File: .cursor/commands/oddkit-scribe.md
+--------------------------------------------------------------------------------
+
 
 
 

@@ -18,6 +18,40 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.24.0 — 2026-01-30
+
+**ODD vs Documentation-Driven Development — Core Distinction**
+
+This release adds a foundational principle clarifying that documentation in ODD is epistemic infrastructure—a forcing function, not an end state. Includes both the philosophical distinction and a concrete case study showing the difference in practice.
+
+### Added
+
+- **Documentation Is the Lever, Not the Goal** (`/canon/principles/odds-relationship-to-documentation.md`) — Tier 1 Canon principle clarifying that documentation in ODD exists to answer "How does this improve our ability to achieve better outcomes?" Documentation that does not lead to revised outcomes, clearer decision rules, sharper constraints, or bolder targets is considered inert. Establishes the litmus test: "If the documentation feels comfortable, it is probably incomplete."
+
+- **From Execution to Outcome: A QA Validation Case Study** (`/docs/examples/qa-validation-odd-vs-ddd.md`) — Tier 2 case study illustrating the practical difference between documentation-driven development and outcomes-driven development. Shows how ODD constraints force outcome clarity before execution, creating leverage rather than just better reports.
+
+### Changed
+
+- **Canon README** — Added Principles section listing both existing and new principle documents.
+
+- **Docs README** — Added `examples/` subfolder to Subfolders table.
+
+### Philosophy
+
+- **Documentation is not sufficient** — Documentation that does not actively shape decisions, constrain future work, or provoke re-evaluation of goals is considered a warning sign, not progress.
+
+- **Outcomes have veto power** — In ODD, outcomes always have veto power over documentation. Principles may evolve, constraints may tighten or loosen, plans may be discarded entirely. What persists is the obligation to demonstrate that learning has translated into measurably better outcomes.
+
+- **Pressure is the signal** — ODD documentation should create pressure: to define outcomes before acting, to justify why an outcome is "good enough," to confront risk, ambiguity, and tradeoffs. If documentation merely explains what was done, ODD has failed.
+
+### Notes
+
+- This principle protects ODD from being mislabeled as documentation-driven development
+- The case study grounds the distinction in concrete behavior change
+- Both documents maintain the "this is just the beginning" posture
+
+---
+
 ## 0.23.0 — 2026-01-29
 
 **ODD Agent Roles — Map Navigation, Mode Selection, Instruction Sync, Implementation Guidance**

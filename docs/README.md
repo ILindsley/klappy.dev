@@ -91,6 +91,7 @@ tags: ["docs", "implementation", "reference", "index"]
 | [agent-architecture/](./agent-architecture/) | Agent system design patterns | 1 file |
 | [appendices/](./appendices/) | Implementation-specific appendices | 17 files |
 | [decisions/](./decisions/) | Implementation decision records (ADRs) | 14 files |
+| [examples/](./examples/) | Case studies and examples | 1 file |
 | [PRD/](./PRD/) | Lane PRDs and template | 3 files |
 | [infra/](./infra/) | Infrastructure documentation | 1 file |
 

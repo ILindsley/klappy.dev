@@ -1,8 +1,8 @@
 {
   "pack": {
     "name": "klappy-canon",
-    "version": "0.18.0",
-    "updated_at": "2026-01-28",
+    "version": "0.24.0",
+    "updated_at": "2026-01-30",
     "description": "Canonical orientation, constraints, decision rules, evidence policies, and ODD appendices used across klappy.dev.",
     "public_entrypoint": "klappy://public/odd",
     "canon_entrypoint": "klappy://meta/canon-index",
@@ -364,6 +364,18 @@
         "definition-of-done",
         "evidence"
       ]
+    },
+    {
+      "uri": "klappy://canon/principles/odds-relationship-to-documentation",
+      "path": "/canon/principles/odds-relationship-to-documentation.md",
+      "title": "Documentation Is the Lever, Not the Goal",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 1,
+      "voice": "neutral",
+      "stability": "semi_stable",
+      "tags": []
     },
     {
       "uri": "klappy://canon/epistemic-challenge",
