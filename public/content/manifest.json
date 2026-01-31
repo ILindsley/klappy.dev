@@ -1,7 +1,7 @@
 {
   "pack": {
     "name": "klappy-canon",
-    "version": "0.25.0",
+    "version": "0.26.0",
     "updated_at": "2026-01-31",
     "description": "Canonical orientation, constraints, decision rules, evidence policies, and ODD appendices used across klappy.dev.",
     "public_entrypoint": "klappy://public/odd",
@@ -366,6 +366,23 @@
       ]
     },
     {
+      "uri": "klappy://canon/diagnostics/ritual-detected",
+      "path": "/canon/diagnostics/ritual-detected.md",
+      "title": "Diagnostic: RITUAL_DETECTED",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 3,
+      "voice": "system_first_person",
+      "stability": "evolving",
+      "tags": [
+        "diagnostic",
+        "smell",
+        "ritual",
+        "lint"
+      ]
+    },
+    {
       "uri": "klappy://canon/principles/odds-relationship-to-documentation",
       "path": "/canon/principles/odds-relationship-to-documentation.md",
       "title": "Documentation Is the Lever, Not the Goal",
@@ -578,6 +595,24 @@
         "orientation_map": "/assets/home/orientation-map-diagram.png",
         "explainer_video": "/assets/home/outcomes-driven_development.mp4"
       }
+    },
+    {
+      "uri": "klappy://canon/constraints/humans-are-variable-inputs",
+      "path": "/canon/constraints/humans-are-variable-inputs.md",
+      "title": "Humans Are Variable Inputs",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 1,
+      "voice": "first_person",
+      "stability": "stable",
+      "tags": [
+        "humans",
+        "variability",
+        "constraints",
+        "ergonomics",
+        "epistemic-discipline"
+      ]
     },
     {
       "uri": "klappy://odd/media-as-learning-layer",
@@ -1040,6 +1075,25 @@
       "tags": [
         "resonance",
         "template"
+      ]
+    },
+    {
+      "uri": "klappy://canon/principles/ritual-is-a-smell",
+      "path": "/canon/principles/ritual-is-a-smell.md",
+      "title": "Ritual Is a Smell",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "first_person",
+      "stability": "semi_stable",
+      "tags": [
+        "ritual",
+        "design-smell",
+        "automation",
+        "stateless",
+        "continuity",
+        "ergonomics"
       ]
     },
     {

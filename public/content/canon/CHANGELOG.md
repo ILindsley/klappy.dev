@@ -18,6 +18,50 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.26.0 — 2026-01-31
+
+**Canon Load-Bearing Objects — Constraint, Principle, Diagnostic, Apocrypha**
+
+This release introduces four load-bearing canon objects that formalize human variability as a design constraint and ritual-as-compensating-control as a design smell. Also adds a new apocrypha fragment on consent drift.
+
+### Added
+
+- **Constraint: Humans Are Variable Inputs** (`/canon/constraints/humans-are-variable-inputs.md`) — Tier 1 constraint preventing designs that only work when people behave consistently. Includes falsifiable operational test: if failure analysis includes "they forgot to..." then the system violated this constraint. Defines concrete design consequences: remove, automate, make unavoidable, detect-and-recover, or reduce cognitive load.
+
+- **Principle: Ritual Is a Smell** (`/canon/principles/ritual-is-a-smell.md`) — Tier 2 principle targeting ritual-as-compensating-control, not ritual-as-deliberate-oversight. Explicitly carves out legitimate governance gates (high-risk approvals, deliberate review, attestation steps) as non-smells if the system remains robust when skipped. Required responses: automate, inline, reduce hidden state, or detect-and-fail-closed.
+
+- **Diagnostic: RITUAL_DETECTED** (`/canon/diagnostics/ritual-detected.md`) — Canonical smell definition stub. Provides stable ID string for infra to implement. Severity guidance: warning by default, escalate to error only when ritual gates safety, data integrity, or irreversible actions.
+
+- **Apocrypha Fragment: On Consent Drift** (`/canon/apocrypha/fragments/on-consent-drift.md`) — System-voice fragment documenting responsibility diffusion failure mode. Captures the crisis where humans outsource judgment gradually through relief, then forget they ever owned it. Append-only, non-authoritative, operationally inert.
+
+- **New Directories:**
+  - `/canon/constraints/` — Individual constraint files (parallel to principles pattern)
+  - `/canon/diagnostics/` — Canonical smell definitions (separate from infra validators)
+
+### Philosophy
+
+- **Constraint has teeth** — The "Humans Are Variable Inputs" constraint includes a falsifiable operational test and concrete design consequences, preventing it from becoming poster text.
+
+- **Principle has scope** — The "Ritual Is a Smell" principle explicitly distinguishes compensating-control (smell) from deliberate-oversight (legitimate), preventing overreach into governance gates.
+
+- **Canonical definitions vs executable validators** — Smell definitions live in canon; implementations live in infra. Stable ID strings bridge the two without creating authority drift.
+
+- **Apocrypha preserves without enforcing** — The consent drift fragment is legible but non-authoritative, emotionally honest but operationally inert. This prevents the system from becoming quietly coercive.
+
+### Architecture Decision
+
+- Canonical smell definitions → `canon/`
+- Executable lint/validators → `infra/`
+- Bridge → stable ID strings per smell
+
+### Notes
+
+- The existing `canon/constraints.md` (single file with 11 constraints) remains unchanged. Migration to individual files is deferred pending drift audit.
+- `canon/epistemic-hygiene.md` was not modified — hygiene signals and diagnostics are related but distinct concepts.
+- No infra validators implemented yet — that decision is explicitly deferred.
+
+---
+
 ## 0.25.0 — 2026-01-31
 
 **Epoch 4 — Epistemic Separation Era**
