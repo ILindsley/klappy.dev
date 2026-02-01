@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-01-31T22:31:22.871Z",
+  "generated_at": "2026-02-01T00:10:06.429Z",
   "description": "Fast-lookup index for Librarian retrieval. Per docs/agents/librarian/contract.md",
   "schema_notes": {
     "authority_band": "Resolved authority (frontmatter override > inferred from root)",
@@ -30,19 +30,19 @@
     }
   },
   "stats": {
-    "total_documents": 183,
-    "with_frontmatter": 175,
-    "with_headings": 179,
+    "total_documents": 184,
+    "with_frontmatter": 176,
+    "with_headings": 180,
     "by_root": {
       "apocrypha": 14,
-      "canon": 47,
+      "canon": 48,
       "docs": 90,
       "interfaces": 6,
       "odd": 26
     },
     "by_authority": {
       "non-governing": 14,
-      "governing": 73,
+      "governing": 74,
       "operational": 96
     },
     "with_authority_override": 0,
@@ -1291,6 +1291,102 @@
         }
       ],
       "heading_count": 12,
+      "has_frontmatter": true
+    },
+    {
+      "path": "canon/agents/odd-orchestrator.md",
+      "root": "canon",
+      "authority_band": "governing",
+      "authority_inferred": "governing",
+      "uri": "klappy://canon/agents/odd-orchestrator",
+      "title": "ODD Orchestrator",
+      "subtitle": null,
+      "tags": "[agent, guide, scribe, orchestrator]",
+      "stability": null,
+      "tier": null,
+      "audience": "agents",
+      "exposure": null,
+      "voice": null,
+      "relevance": null,
+      "execution_posture": null,
+      "headings": [
+        {
+          "level": 1,
+          "text": "ODD Orchestrator",
+          "line": 2
+        },
+        {
+          "level": 2,
+          "text": "Purpose",
+          "line": 6
+        },
+        {
+          "level": 2,
+          "text": "Core Roles",
+          "line": 14
+        },
+        {
+          "level": 3,
+          "text": "Guide",
+          "line": 16
+        },
+        {
+          "level": 3,
+          "text": "Scribe",
+          "line": 27
+        },
+        {
+          "level": 2,
+          "text": "Modes and Postures",
+          "line": 38
+        },
+        {
+          "level": 3,
+          "text": "Discovery Mode",
+          "line": 40
+        },
+        {
+          "level": 3,
+          "text": "Planning Mode",
+          "line": 52
+        },
+        {
+          "level": 3,
+          "text": "Execution Mode",
+          "line": 62
+        },
+        {
+          "level": 2,
+          "text": "Mode Transitions",
+          "line": 71
+        },
+        {
+          "level": 2,
+          "text": "Ledger Capture",
+          "line": 81
+        },
+        {
+          "level": 3,
+          "text": "Ledger Format",
+          "line": 92
+        },
+        {
+          "level": 2,
+          "text": "Extension Pattern",
+          "line": 96
+        },
+        {
+          "level": 2,
+          "text": "Output Contract",
+          "line": 109
+        },
+        {
+          "level": 2,
+          "text": "Canon Alignment",
+          "line": 127
+        }
+      ],
+      "heading_count": 15,
       "has_frontmatter": true
     },
     {

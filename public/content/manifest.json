@@ -896,6 +896,18 @@
       ]
     },
     {
+      "uri": "klappy://canon/agents/odd-orchestrator",
+      "path": "/canon/agents/odd-orchestrator.md",
+      "title": "ODD Orchestrator",
+      "type": "text/markdown",
+      "audience": "agents",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": []
+    },
+    {
       "uri": "klappy://canon/agents/odd-scribe",
       "path": "/canon/agents/odd-scribe.md",
       "title": "ODD Scribe",
