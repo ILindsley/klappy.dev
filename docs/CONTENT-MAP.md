@@ -52,40 +52,48 @@ This map provides navigational links to ALL content in the repository, including
 | File | Purpose |
 |------|---------|
 | [/canon/README.md](/canon/README.md) | Canon index and orientation |
-| [/canon/constraints.md](/canon/constraints.md) | Baseline assumptions |
-| [/canon/definition-of-done.md](/canon/definition-of-done.md) | Completion criteria |
-| [/canon/decision-rules.md](/canon/decision-rules.md) | Decision heuristics |
-| [/canon/verification-and-evidence.md](/canon/verification-and-evidence.md) | Evidence standards |
-| [/canon/epistemic-surface-extraction.md](/canon/epistemic-surface-extraction.md) | **ESE** — Making screenshots/recordings legible |
-| [/canon/visual-proof.md](/canon/visual-proof.md) | Visual proof standards |
-| [/canon/epistemic-hygiene.md](/canon/epistemic-hygiene.md) | Epistemic smell triggers |
-| [/canon/epistemic-modes.md](/canon/epistemic-modes.md) | Operational modes |
+| [/canon/constraints/README.md](/canon/constraints/README.md) | Baseline assumptions |
+| [/canon/constraints/definition-of-done.md](/canon/constraints/definition-of-done.md) | Completion criteria |
+| [/canon/constraints/decision-rules.md](/canon/constraints/decision-rules.md) | Decision heuristics |
+| [/canon/constraints/verification-and-evidence.md](/canon/constraints/verification-and-evidence.md) | Evidence standards |
+| [/canon/constraints/visual-proof.md](/canon/constraints/visual-proof.md) | Visual proof standards |
+| [/canon/constraints/epistemic-challenge.md](/canon/constraints/epistemic-challenge.md) | Epistemic challenge governance |
+| [/canon/methods/epistemic-surface-extraction.md](/canon/methods/epistemic-surface-extraction.md) | **ESE** — Making screenshots/recordings legible |
+| [/canon/diagnostics/epistemic-hygiene.md](/canon/diagnostics/epistemic-hygiene.md) | Epistemic smell triggers |
+| [/canon/definitions/epistemic-modes.md](/canon/definitions/epistemic-modes.md) | Operational modes |
 
 **Subdirectories:**
-- `/canon/agents/` — Agent role definitions
-- `/canon/constraints/` — Specific constraints
+- `/canon/constraints/` — Load-bearing constraints and governance rules
+- `/canon/definitions/` — Formal vocabulary and load-bearing concepts
+- `/canon/diagnostics/` — System health signals and decay detection
+- `/canon/methods/` — Durable application patterns
+- `/canon/principles/` — Canon-level principle articulations
 - `/canon/decisions/` — Canon decision records
-- `/canon/defaults/` — Default postures
-- `/canon/documentation/` — Doc standards
-- `/canon/meta/` — Epistemic architecture
-- `/canon/principles/` — Canon principles
+- `/canon/defaults/` — Default operational postures
+- `/canon/meta/` — Metadata, templates, and architecture
 - `/canon/resonance/` — External pattern alignment (antifragile, lean-startup, ooda-loop, sprint)
+- `/canon/apocrypha/` — Deprecated fragments and system-voice reflections
 
 ### Implementation Docs (`/docs/`)
 
 | File | Purpose |
 |------|---------|
 | [/docs/README.md](/docs/README.md) | Docs index |
-| [/docs/WHY.md](/docs/WHY.md) | **Why oddkit exists** — Start here for oddkit |
-| [/docs/ATTEMPTS.md](/docs/ATTEMPTS.md) | Attempt lifecycle |
+| [/docs/oddkit/WHY.md](/docs/oddkit/WHY.md) | **Why oddkit exists** — Start here for oddkit |
+| [/docs/appendices/ATTEMPTS.md](/docs/appendices/ATTEMPTS.md) | Attempt lifecycle |
 | [/docs/TRUTH_MAP.md](/docs/TRUTH_MAP.md) | Authoritative sources per domain |
 
 **Subdirectories:**
-- `/docs/oddkit/` — oddkit reference (ABOUT, SYSTEM-MAP, modes)
-- `/docs/agents/` — Agent patterns (librarian, validation, discovery)
+- `/docs/oddkit/` — oddkit reference (ABOUT, SYSTEM-MAP, modes, WHY)
+- `/docs/agents/` — Agent role definitions and patterns (librarian, validation, discovery, ODD agents)
 - `/docs/orchestrator/` — Orchestrator guides (QUICKSTART)
 - `/docs/appendices/` — Implementation appendices
 - `/docs/decisions/` — Implementation decision records
+- `/docs/audits/` — Epistemic drift checks, reviews, evaluations
+- `/docs/history/` — What happened, with evidence
+- `/docs/plans/` — Forward-looking design & planning
+- `/docs/migrations/` — How we change the system
+- `/docs/infra/` — Infrastructure documentation
 - `/docs/promotions/` — Canon promotion process
 
 ---
@@ -94,41 +102,49 @@ This map provides navigational links to ALL content in the repository, including
 
 > **Warning:** Apocrypha content is non-canonical, exploratory, and may contain incomplete or contradictory ideas. Use for inspiration, not authority.
 
-### `/apocrypha/` — Fragments and Reconstructions
-
-| File | Purpose |
-|------|---------|
-| [/apocrypha/artifacts/README.md](/apocrypha/artifacts/README.md) | Artifacts index |
-| [/apocrypha/artifacts/SURFACE-EXTRACTION.md](/apocrypha/artifacts/SURFACE-EXTRACTION.md) | **PROMOTED** → [/canon/epistemic-surface-extraction.md](/canon/epistemic-surface-extraction.md) |
-| [/apocrypha/artifacts/apocrypha-visual-language.md](/apocrypha/artifacts/apocrypha-visual-language.md) | Visual language concepts |
-| [/apocrypha/artifacts/the-apocrypha-fragments-and-system-closure.surface.md](/apocrypha/artifacts/the-apocrypha-fragments-and-system-closure.surface.md) | System closure surface |
-
-### `/apocrypha/fragments-of-the-canon/` — Narrative Fragments
-
-| File | Purpose |
-|------|---------|
-| [/apocrypha/fragments-of-the-canon/README.md](/apocrypha/fragments-of-the-canon/README.md) | Fragments index |
-| [/apocrypha/fragments-of-the-canon/META-ODD.md](/apocrypha/fragments-of-the-canon/META-ODD.md) | Meta-ODD exploration |
-| [/apocrypha/fragments-of-the-canon/fragment-01-the-book-that-was-read-only-once.md](/apocrypha/fragments-of-the-canon/fragment-01-the-book-that-was-read-only-once.md) | Fragment 01 |
-| [/apocrypha/fragments-of-the-canon/fragment-02-the-last-commit.md](/apocrypha/fragments-of-the-canon/fragment-02-the-last-commit.md) | Fragment 02 |
-| [/apocrypha/fragments-of-the-canon/fragment-03-nothing-exceeded-the-threshold.md](/apocrypha/fragments-of-the-canon/fragment-03-nothing-exceeded-the-threshold.md) | Fragment 03 |
-| [/apocrypha/fragments-of-the-canon/RECONSTRUCTIONS.md](/apocrypha/fragments-of-the-canon/RECONSTRUCTIONS.md) | Reconstruction notes |
-
-### `/apocrypha/reconstructions/` — Reconstruction Attempts
-
-| File | Purpose |
-|------|---------|
-| [/apocrypha/reconstructions/README.md](/apocrypha/reconstructions/README.md) | Reconstructions index |
-| [/apocrypha/reconstructions/fragment-01-recon.md](/apocrypha/reconstructions/fragment-01-recon.md) | Fragment 01 reconstruction |
-| [/apocrypha/reconstructions/fragment-02-recon.md](/apocrypha/reconstructions/fragment-02-recon.md) | Fragment 02 reconstruction |
-| [/apocrypha/reconstructions/fragment-03-recon.md](/apocrypha/reconstructions/fragment-03-recon.md) | Fragment 03 reconstruction |
-
-### `/canon/apocrypha/` — Canon-Adjacent Apocrypha
+### `/canon/apocrypha/` — Unified Apocrypha
 
 | File | Purpose |
 |------|---------|
 | [/canon/apocrypha/CHARTER.md](/canon/apocrypha/CHARTER.md) | Apocrypha charter |
-| `/canon/apocrypha/fragments/` | On consent-drift, on artifacts |
+
+**`/canon/apocrypha/fragments/`** — System-voice fragments
+
+| File | Purpose | Reconstruction |
+|------|---------|---------------|
+| [on-artifacts.md](/canon/apocrypha/fragments/on-artifacts.md) | On artifacts | *not yet written* |
+| [on-consent-drift.md](/canon/apocrypha/fragments/on-consent-drift.md) | On consent drift | *not yet written* |
+| [when-arbitration-went-global.md](/canon/apocrypha/fragments/when-arbitration-went-global.md) | When arbitration went global | [recon](/canon/apocrypha/reconstructions/when-arbitration-went-global-recon.md) |
+
+**`/canon/apocrypha/artifacts/`** — Derived media and visual artifacts
+
+| File | Purpose |
+|------|---------|
+| [/canon/apocrypha/artifacts/README.md](/canon/apocrypha/artifacts/README.md) | Artifacts index |
+| [/canon/apocrypha/artifacts/SURFACE-EXTRACTION.md](/canon/apocrypha/artifacts/SURFACE-EXTRACTION.md) | **PROMOTED** → [/canon/methods/epistemic-surface-extraction.md](/canon/methods/epistemic-surface-extraction.md) |
+| [/canon/apocrypha/artifacts/apocrypha-visual-language.md](/canon/apocrypha/artifacts/apocrypha-visual-language.md) | Visual language concepts |
+| [/canon/apocrypha/artifacts/the-apocrypha-fragments-and-system-closure.surface.md](/canon/apocrypha/artifacts/the-apocrypha-fragments-and-system-closure.surface.md) | System closure surface |
+
+**`/canon/apocrypha/fragments-of-the-canon/`** — Narrative fragments
+
+| File | Purpose |
+|------|---------|
+| [/canon/apocrypha/fragments-of-the-canon/README.md](/canon/apocrypha/fragments-of-the-canon/README.md) | Fragments index |
+| [/canon/apocrypha/fragments-of-the-canon/META-ODD.md](/canon/apocrypha/fragments-of-the-canon/META-ODD.md) | Meta-ODD exploration |
+| [/canon/apocrypha/fragments-of-the-canon/fragment-01-the-book-that-was-read-only-once.md](/canon/apocrypha/fragments-of-the-canon/fragment-01-the-book-that-was-read-only-once.md) | Fragment 01 |
+| [/canon/apocrypha/fragments-of-the-canon/fragment-02-the-last-commit.md](/canon/apocrypha/fragments-of-the-canon/fragment-02-the-last-commit.md) | Fragment 02 |
+| [/canon/apocrypha/fragments-of-the-canon/fragment-03-nothing-exceeded-the-threshold.md](/canon/apocrypha/fragments-of-the-canon/fragment-03-nothing-exceeded-the-threshold.md) | Fragment 03 |
+| [/canon/apocrypha/fragments-of-the-canon/RECONSTRUCTIONS.md](/canon/apocrypha/fragments-of-the-canon/RECONSTRUCTIONS.md) | Reconstruction notes |
+
+**`/canon/apocrypha/reconstructions/`** — Cinematic retellings
+
+| File | Purpose |
+|------|---------|
+| [/canon/apocrypha/reconstructions/README.md](/canon/apocrypha/reconstructions/README.md) | Reconstructions index |
+| [/canon/apocrypha/reconstructions/fragment-01-recon.md](/canon/apocrypha/reconstructions/fragment-01-recon.md) | Fragment 01 reconstruction |
+| [/canon/apocrypha/reconstructions/fragment-02-recon.md](/canon/apocrypha/reconstructions/fragment-02-recon.md) | Fragment 02 reconstruction |
+| [/canon/apocrypha/reconstructions/fragment-03-recon.md](/canon/apocrypha/reconstructions/fragment-03-recon.md) | Fragment 03 reconstruction |
+| [/canon/apocrypha/reconstructions/when-arbitration-went-global-recon.md](/canon/apocrypha/reconstructions/when-arbitration-went-global-recon.md) | When Arbitration Went Global retelling |
 
 ---
 
@@ -177,7 +193,7 @@ Active product lanes:
 | Acronym | Expansion | Primary Doc |
 |---------|-----------|-------------|
 | **ODD** | Outcomes-Driven Development | [/odd/README.md](/odd/README.md) |
-| **ESE** | Epistemic Surface Extraction | [/canon/epistemic-surface-extraction.md](/canon/epistemic-surface-extraction.md) |
+| **ESE** | Epistemic Surface Extraction | [/canon/methods/epistemic-surface-extraction.md](/canon/methods/epistemic-surface-extraction.md) |
 | **MCP** | Model Context Protocol | `/interfaces/mcp/` |
 | **PRD** | Product Requirements Document | `/docs/PRD.md` |
 | **ADR** | Architecture Decision Record | `/canon/decisions/decision-record-standard.md` |
@@ -190,13 +206,13 @@ Active product lanes:
 2. **Looking for ODD philosophy?** Start at `/odd/README.md`.
 3. **Looking for how-to?** Start at `/docs/README.md`.
 4. **Looking for rules?** Start at `/canon/README.md`.
-5. **Looking for experiments?** Browse `/apocrypha/`.
-6. **Looking for evidence standards?** See `/canon/verification-and-evidence.md` and `/canon/epistemic-surface-extraction.md`.
+5. **Looking for experiments?** Browse `/canon/apocrypha/`.
+6. **Looking for evidence standards?** See `/canon/constraints/verification-and-evidence.md` and `/canon/methods/epistemic-surface-extraction.md`.
 
 ---
 
 ## See Also
 
 - [Orientation Map](/odd/orientation-map.md) — One-page mental model
-- [ODD Map Navigator](/canon/agents/odd-map-navigator.md) — Agent for navigation
+- [ODD Map Navigator](/docs/agents/odd-map-navigator.md) — Agent for navigation
 - [Three-Tier Hierarchy](/odd/decisions/D0001-three-tier-conceptual-hierarchy.md) — Why ODD/Canon/Docs are separate
