@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-02-10T04:11:41.431Z",
+  "generated_at": "2026-02-11T21:54:23.372Z",
   "description": "Fast-lookup index for Librarian retrieval. Per docs/agents/librarian/contract.md",
   "schema_notes": {
     "authority_band": "Resolved authority (frontmatter override > inferred from root)",
@@ -30,17 +30,17 @@
     }
   },
   "stats": {
-    "total_documents": 237,
-    "with_frontmatter": 229,
-    "with_headings": 235,
+    "total_documents": 243,
+    "with_frontmatter": 235,
+    "with_headings": 241,
     "by_root": {
-      "canon": 96,
+      "canon": 102,
       "docs": 109,
       "interfaces": 6,
       "odd": 26
     },
     "by_authority": {
-      "governing": 122,
+      "governing": 128,
       "operational": 115
     },
     "with_authority_override": 0,
@@ -1747,7 +1747,7 @@
         },
         {
           "level": 2,
-          "text": "0.29.0 — 2026-02-08",
+          "text": "0.30.0 — 2026-02-11",
           "line": 9
         },
         {
@@ -1758,401 +1758,396 @@
         {
           "level": 3,
           "text": "Changed",
-          "line": 27
+          "line": 29
         },
         {
-          "level": 3,
-          "text": "Philosophy",
+          "level": 2,
+          "text": "0.29.0 — 2026-02-08",
           "line": 33
         },
         {
           "level": 3,
+          "text": "Added",
+          "line": 39
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "line": 51
+        },
+        {
+          "level": 3,
+          "text": "Philosophy",
+          "line": 57
+        },
+        {
+          "level": 3,
           "text": "Notes",
-          "line": 41
+          "line": 65
         },
         {
           "level": 2,
           "text": "0.28.0 — 2026-02-05",
-          "line": 49
+          "line": 73
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 55
+          "line": 79
         },
         {
           "level": 3,
           "text": "Changed",
-          "line": 61
+          "line": 85
         },
         {
           "level": 3,
           "text": "Philosophy",
-          "line": 74
+          "line": 98
         },
         {
           "level": 3,
           "text": "Notes",
-          "line": 82
+          "line": 106
         },
         {
           "level": 2,
           "text": "0.27.0 — 2026-01-31",
-          "line": 90
+          "line": 114
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 96
-        },
-        {
-          "level": 3,
-          "text": "Philosophy",
-          "line": 110
-        },
-        {
-          "level": 3,
-          "text": "Relationship",
           "line": 120
         },
         {
           "level": 3,
+          "text": "Philosophy",
+          "line": 134
+        },
+        {
+          "level": 3,
+          "text": "Relationship",
+          "line": 144
+        },
+        {
+          "level": 3,
           "text": "Notes",
-          "line": 128
+          "line": 152
         },
         {
           "level": 2,
           "text": "0.26.0 — 2026-01-31",
-          "line": 135
+          "line": 159
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 141
-        },
-        {
-          "level": 3,
-          "text": "Philosophy",
-          "line": 155
-        },
-        {
-          "level": 3,
-          "text": "Architecture Decision",
           "line": 165
         },
         {
           "level": 3,
-          "text": "Notes",
-          "line": 171
-        },
-        {
-          "level": 2,
-          "text": "0.25.0 — 2026-01-31",
+          "text": "Philosophy",
           "line": 179
         },
         {
           "level": 3,
-          "text": "Added",
-          "line": 185
+          "text": "Architecture Decision",
+          "line": 189
         },
         {
           "level": 3,
-          "text": "Changed",
+          "text": "Notes",
+          "line": 195
+        },
+        {
+          "level": 2,
+          "text": "0.25.0 — 2026-01-31",
+          "line": 203
+        },
+        {
+          "level": 3,
+          "text": "Added",
           "line": 209
         },
         {
           "level": 3,
+          "text": "Changed",
+          "line": 233
+        },
+        {
+          "level": 3,
           "text": "Philosophy",
-          "line": 213
+          "line": 237
         },
         {
           "level": 3,
           "text": "Epoch Lock",
-          "line": 223
+          "line": 247
         },
         {
           "level": 2,
           "text": "0.24.0 — 2026-01-30",
-          "line": 229
+          "line": 253
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 235
+          "line": 259
         },
         {
           "level": 3,
           "text": "Changed",
-          "line": 241
+          "line": 265
         },
         {
           "level": 3,
           "text": "Philosophy",
-          "line": 247
+          "line": 271
         },
         {
           "level": 3,
           "text": "Notes",
-          "line": 255
+          "line": 279
         },
         {
           "level": 2,
           "text": "0.23.0 — 2026-01-29",
-          "line": 263
-        },
-        {
-          "level": 3,
-          "text": "Added",
-          "line": 269
-        },
-        {
-          "level": 3,
-          "text": "Updated",
-          "line": 279
-        },
-        {
-          "level": 3,
-          "text": "Philosophy",
           "line": 287
         },
         {
           "level": 3,
+          "text": "Added",
+          "line": 293
+        },
+        {
+          "level": 3,
+          "text": "Updated",
+          "line": 303
+        },
+        {
+          "level": 3,
+          "text": "Philosophy",
+          "line": 311
+        },
+        {
+          "level": 3,
           "text": "Agent Interaction Flow",
-          "line": 294
+          "line": 318
         },
         {
           "level": 2,
           "text": "0.22.0 — 2026-01-29",
-          "line": 304
+          "line": 328
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 310
+          "line": 334
         },
         {
           "level": 3,
           "text": "Philosophy",
-          "line": 324
+          "line": 348
         },
         {
           "level": 3,
           "text": "Initial Registrations",
-          "line": 331
+          "line": 355
         },
         {
           "level": 2,
           "text": "0.21.0 — 2026-01-29",
-          "line": 338
+          "line": 362
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 344
+          "line": 368
         },
         {
           "level": 3,
           "text": "Philosophy",
-          "line": 350
+          "line": 374
         },
         {
           "level": 3,
           "text": "Integration",
-          "line": 357
+          "line": 381
         },
         {
           "level": 3,
           "text": "Ledger Schemas",
-          "line": 363
+          "line": 387
         },
         {
           "level": 2,
           "text": "0.20.1 — 2026-01-29",
-          "line": 371
-        },
-        {
-          "level": 3,
-          "text": "Added",
-          "line": 377
-        },
-        {
-          "level": 3,
-          "text": "Philosophy",
-          "line": 381
-        },
-        {
-          "level": 2,
-          "text": "0.20.0 — 2026-01-29",
-          "line": 389
-        },
-        {
-          "level": 3,
-          "text": "Added",
           "line": 395
         },
         {
           "level": 3,
+          "text": "Added",
+          "line": 401
+        },
+        {
+          "level": 3,
           "text": "Philosophy",
-          "line": 407
+          "line": 405
+        },
+        {
+          "level": 2,
+          "text": "0.20.0 — 2026-01-29",
+          "line": 413
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 419
+        },
+        {
+          "level": 3,
+          "text": "Philosophy",
+          "line": 431
         },
         {
           "level": 3,
           "text": "Relationship to Other Canon",
-          "line": 414
-        },
-        {
-          "level": 3,
-          "text": "Notes",
-          "line": 420
-        },
-        {
-          "level": 2,
-          "text": "0.19.0 — 2026-01-29",
-          "line": 428
-        },
-        {
-          "level": 3,
-          "text": "Added",
-          "line": 434
-        },
-        {
-          "level": 3,
-          "text": "Philosophy",
           "line": 438
         },
         {
           "level": 3,
-          "text": "Hard Constraints Codified",
-          "line": 445
+          "text": "Notes",
+          "line": 444
         },
         {
-          "level": 3,
-          "text": "Valid Arbitration Outcomes",
+          "level": 2,
+          "text": "0.19.0 — 2026-01-29",
           "line": 452
         },
         {
           "level": 3,
-          "text": "Implementation Reference",
-          "line": 459
+          "text": "Added",
+          "line": 458
         },
         {
           "level": 3,
-          "text": "Notes",
+          "text": "Philosophy",
+          "line": 462
+        },
+        {
+          "level": 3,
+          "text": "Hard Constraints Codified",
           "line": 469
         },
         {
-          "level": 2,
-          "text": "0.18.0 — 2026-01-28",
-          "line": 477
+          "level": 3,
+          "text": "Valid Arbitration Outcomes",
+          "line": 476
         },
         {
           "level": 3,
-          "text": "Added",
+          "text": "Implementation Reference",
           "line": 483
         },
         {
           "level": 3,
+          "text": "Notes",
+          "line": 493
+        },
+        {
+          "level": 2,
+          "text": "0.18.0 — 2026-01-28",
+          "line": 501
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 507
+        },
+        {
+          "level": 3,
           "text": "Philosophy",
-          "line": 497
+          "line": 521
         },
         {
           "level": 3,
           "text": "Structure",
-          "line": 504
+          "line": 528
         },
         {
           "level": 3,
           "text": "Notes",
-          "line": 516
+          "line": 540
         },
         {
           "level": 2,
           "text": "0.17.0 — 2026-01-26",
-          "line": 524
+          "line": 548
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 530
+          "line": 554
         },
         {
           "level": 3,
           "text": "Philosophy",
-          "line": 538
+          "line": 562
         },
         {
           "level": 3,
           "text": "Canonical Tie-In",
-          "line": 544
+          "line": 568
         },
         {
           "level": 2,
           "text": "0.16.0 — 2026-01-26",
-          "line": 552
+          "line": 576
         },
         {
           "level": 3,
           "text": "Added (Source Doctrine)",
-          "line": 564
+          "line": 588
         },
         {
           "level": 3,
           "text": "Philosophy Introduced",
-          "line": 584
+          "line": 608
         },
         {
           "level": 3,
           "text": "Usage (Initial Adoption)",
-          "line": 601
+          "line": 625
         },
         {
           "level": 2,
           "text": "0.15.0 — 2026-01-23",
-          "line": 613
+          "line": 637
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 619
+          "line": 643
         },
         {
           "level": 3,
           "text": "Changed",
-          "line": 623
+          "line": 647
         },
         {
           "level": 3,
           "text": "Philosophy",
-          "line": 628
-        },
-        {
-          "level": 3,
-          "text": "Origin",
-          "line": 634
-        },
-        {
-          "level": 2,
-          "text": "0.14.0 — 2026-01-23",
-          "line": 646
-        },
-        {
-          "level": 3,
-          "text": "Added",
           "line": 652
         },
         {
           "level": 3,
-          "text": "Philosophy",
-          "line": 657
-        },
-        {
-          "level": 3,
-          "text": "Notes",
-          "line": 663
+          "text": "Origin",
+          "line": 658
         },
         {
           "level": 2,
-          "text": "0.13.0 — 2026-01-23",
+          "text": "0.14.0 — 2026-01-23",
           "line": 670
         },
         {
@@ -2162,308 +2157,308 @@
         },
         {
           "level": 3,
-          "text": "Changed",
-          "line": 680
-        },
-        {
-          "level": 3,
-          "text": "Added (Lane)",
-          "line": 684
-        },
-        {
-          "level": 3,
           "text": "Philosophy",
-          "line": 692
+          "line": 681
         },
         {
           "level": 3,
-          "text": "Root Cause Documented",
-          "line": 698
+          "text": "Notes",
+          "line": 687
         },
         {
           "level": 2,
-          "text": "0.12.0 — 2026-01-22",
+          "text": "0.13.0 — 2026-01-23",
+          "line": 694
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 700
+        },
+        {
+          "level": 3,
+          "text": "Changed",
           "line": 704
         },
         {
           "level": 3,
+          "text": "Added (Lane)",
+          "line": 708
+        },
+        {
+          "level": 3,
+          "text": "Philosophy",
+          "line": 716
+        },
+        {
+          "level": 3,
+          "text": "Root Cause Documented",
+          "line": 722
+        },
+        {
+          "level": 2,
+          "text": "0.12.0 — 2026-01-22",
+          "line": 728
+        },
+        {
+          "level": 3,
           "text": "Changed",
-          "line": 710
+          "line": 734
         },
         {
           "level": 3,
           "text": "Distribution After Reclassification",
-          "line": 718
+          "line": 742
         },
         {
           "level": 3,
           "text": "Philosophy",
-          "line": 727
+          "line": 751
         },
         {
           "level": 3,
           "text": "Invariants Held",
-          "line": 736
+          "line": 760
         },
         {
           "level": 2,
           "text": "0.11.0 — 2026-01-22",
-          "line": 746
+          "line": 770
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 752
+          "line": 776
         },
         {
           "level": 3,
           "text": "Changed",
-          "line": 759
+          "line": 783
         },
         {
           "level": 3,
           "text": "Philosophy",
-          "line": 768
-        },
-        {
-          "level": 3,
-          "text": "Invariant Locked",
-          "line": 774
-        },
-        {
-          "level": 2,
-          "text": "0.10.0 — 2026-01-21",
-          "line": 782
-        },
-        {
-          "level": 3,
-          "text": "Added",
-          "line": 788
-        },
-        {
-          "level": 3,
-          "text": "Changed",
           "line": 792
         },
         {
           "level": 3,
+          "text": "Invariant Locked",
+          "line": 798
+        },
+        {
+          "level": 2,
+          "text": "0.10.0 — 2026-01-21",
+          "line": 806
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 812
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "line": 816
+        },
+        {
+          "level": 3,
           "text": "Philosophy",
-          "line": 800
+          "line": 824
         },
         {
           "level": 3,
           "text": "Ontology Enforcement",
-          "line": 806
+          "line": 830
         },
         {
           "level": 2,
           "text": "0.9.0 — 2026-01-21",
-          "line": 815
+          "line": 839
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 821
+          "line": 845
         },
         {
           "level": 3,
           "text": "Changed",
-          "line": 831
+          "line": 855
         },
         {
           "level": 3,
           "text": "Philosophy",
-          "line": 840
+          "line": 864
         },
         {
           "level": 3,
           "text": "Canon Rule",
-          "line": 847
+          "line": 871
         },
         {
           "level": 2,
           "text": "0.8.0 — 2026-01-21",
-          "line": 856
+          "line": 880
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 862
+          "line": 886
         },
         {
           "level": 3,
           "text": "Changed",
-          "line": 879
+          "line": 903
         },
         {
           "level": 3,
           "text": "Philosophy",
-          "line": 886
+          "line": 910
         },
         {
           "level": 2,
           "text": "0.7.0 — 2026-01-21",
-          "line": 895
+          "line": 919
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 901
+          "line": 925
         },
         {
           "level": 3,
           "text": "Changed",
-          "line": 912
+          "line": 936
         },
         {
           "level": 3,
           "text": "Philosophy",
-          "line": 920
+          "line": 944
         },
         {
           "level": 3,
           "text": "Notes",
-          "line": 927
+          "line": 951
         },
         {
           "level": 2,
           "text": "0.6.1 — 2026-01-21",
-          "line": 935
+          "line": 959
         },
         {
           "level": 3,
           "text": "Fixed",
-          "line": 941
+          "line": 965
         },
         {
           "level": 3,
           "text": "Changed",
-          "line": 947
+          "line": 971
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 952
+          "line": 976
         },
         {
           "level": 3,
           "text": "Philosophy",
-          "line": 960
+          "line": 984
         },
         {
           "level": 2,
           "text": "0.6.0 — 2026-01-21",
-          "line": 969
-        },
-        {
-          "level": 3,
-          "text": "Breaking Changes",
-          "line": 975
-        },
-        {
-          "level": 3,
-          "text": "Added",
-          "line": 981
-        },
-        {
-          "level": 3,
-          "text": "Changed",
-          "line": 987
-        },
-        {
-          "level": 3,
-          "text": "Philosophy",
           "line": 993
         },
         {
           "level": 3,
-          "text": "Migration Notes",
+          "text": "Breaking Changes",
           "line": 999
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 1005
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "line": 1011
+        },
+        {
+          "level": 3,
+          "text": "Philosophy",
+          "line": 1017
+        },
+        {
+          "level": 3,
+          "text": "Migration Notes",
+          "line": 1023
         },
         {
           "level": 2,
           "text": "0.5.4 — 2026-01-21",
-          "line": 1008
-        },
-        {
-          "level": 3,
-          "text": "Added",
-          "line": 1014
-        },
-        {
-          "level": 3,
-          "text": "Changed",
-          "line": 1021
-        },
-        {
-          "level": 3,
-          "text": "Removed",
-          "line": 1027
-        },
-        {
-          "level": 3,
-          "text": "Philosophy",
           "line": 1032
         },
         {
           "level": 3,
-          "text": "Notes",
-          "line": 1039
-        },
-        {
-          "level": 2,
-          "text": "0.5.3 — 2026-01-21",
-          "line": 1046
-        },
-        {
-          "level": 3,
           "text": "Added",
-          "line": 1052
+          "line": 1038
         },
         {
           "level": 3,
           "text": "Changed",
+          "line": 1045
+        },
+        {
+          "level": 3,
+          "text": "Removed",
+          "line": 1051
+        },
+        {
+          "level": 3,
+          "text": "Philosophy",
           "line": 1056
         },
         {
           "level": 3,
-          "text": "Philosophy",
-          "line": 1064
-        },
-        {
-          "level": 3,
           "text": "Notes",
-          "line": 1071
+          "line": 1063
         },
         {
           "level": 2,
-          "text": "0.5.2 — 2026-01-20",
-          "line": 1079
-        },
-        {
-          "level": 3,
-          "text": "Changed",
-          "line": 1085
+          "text": "0.5.3 — 2026-01-21",
+          "line": 1070
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 1103
+          "line": 1076
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "line": 1080
         },
         {
           "level": 3,
           "text": "Philosophy",
-          "line": 1108
+          "line": 1088
         },
         {
           "level": 3,
           "text": "Notes",
-          "line": 1114
+          "line": 1095
         },
         {
           "level": 2,
-          "text": "0.5.1 — 2026-01-20",
-          "line": 1121
+          "text": "0.5.2 — 2026-01-20",
+          "line": 1103
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "line": 1109
         },
         {
           "level": 3,
@@ -2472,456 +2467,476 @@
         },
         {
           "level": 3,
-          "text": "Changed",
-          "line": 1131
-        },
-        {
-          "level": 3,
           "text": "Philosophy",
-          "line": 1136
+          "line": 1132
         },
         {
           "level": 3,
           "text": "Notes",
-          "line": 1143
+          "line": 1138
+        },
+        {
+          "level": 2,
+          "text": "0.5.1 — 2026-01-20",
+          "line": 1145
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 1151
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "line": 1155
+        },
+        {
+          "level": 3,
+          "text": "Philosophy",
+          "line": 1160
+        },
+        {
+          "level": 3,
+          "text": "Notes",
+          "line": 1167
         },
         {
           "level": 2,
           "text": "0.5.0 — 2026-01-19",
-          "line": 1150
+          "line": 1174
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 1156
+          "line": 1180
         },
         {
           "level": 3,
           "text": "Changed",
-          "line": 1162
-        },
-        {
-          "level": 3,
-          "text": "Breaking Changes (Epoch Transition)",
-          "line": 1167
-        },
-        {
-          "level": 3,
-          "text": "Philosophy",
-          "line": 1173
-        },
-        {
-          "level": 3,
-          "text": "Notes",
-          "line": 1179
-        },
-        {
-          "level": 2,
-          "text": "0.4.10 — 2026-01-19",
           "line": 1186
         },
         {
           "level": 3,
-          "text": "Added",
-          "line": 1192
-        },
-        {
-          "level": 3,
-          "text": "Changed",
-          "line": 1196
+          "text": "Breaking Changes (Epoch Transition)",
+          "line": 1191
         },
         {
           "level": 3,
           "text": "Philosophy",
-          "line": 1200
+          "line": 1197
         },
         {
           "level": 3,
           "text": "Notes",
-          "line": 1207
+          "line": 1203
         },
         {
           "level": 2,
-          "text": "0.4.9 — 2026-01-19",
-          "line": 1214
+          "text": "0.4.10 — 2026-01-19",
+          "line": 1210
         },
         {
           "level": 3,
           "text": "Added",
+          "line": 1216
+        },
+        {
+          "level": 3,
+          "text": "Changed",
           "line": 1220
         },
         {
           "level": 3,
-          "text": "Changed",
-          "line": 1225
-        },
-        {
-          "level": 3,
           "text": "Philosophy",
-          "line": 1232
+          "line": 1224
         },
         {
           "level": 3,
           "text": "Notes",
-          "line": 1239
+          "line": 1231
+        },
+        {
+          "level": 2,
+          "text": "0.4.9 — 2026-01-19",
+          "line": 1238
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 1244
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "line": 1249
+        },
+        {
+          "level": 3,
+          "text": "Philosophy",
+          "line": 1256
+        },
+        {
+          "level": 3,
+          "text": "Notes",
+          "line": 1263
         },
         {
           "level": 2,
           "text": "0.4.8 — 2026-01-19",
-          "line": 1246
+          "line": 1270
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 1252
+          "line": 1276
         },
         {
           "level": 3,
           "text": "Changed",
-          "line": 1257
+          "line": 1281
         },
         {
           "level": 3,
           "text": "Philosophy",
-          "line": 1266
-        },
-        {
-          "level": 3,
-          "text": "Notes",
-          "line": 1272
-        },
-        {
-          "level": 2,
-          "text": "0.4.7 — 2026-01-19",
-          "line": 1279
-        },
-        {
-          "level": 3,
-          "text": "Added",
-          "line": 1285
-        },
-        {
-          "level": 3,
-          "text": "Changed",
           "line": 1290
         },
         {
           "level": 3,
-          "text": "Philosophy",
-          "line": 1294
-        },
-        {
-          "level": 3,
           "text": "Notes",
-          "line": 1301
+          "line": 1296
         },
         {
           "level": 2,
-          "text": "0.4.6 — 2026-01-19",
-          "line": 1308
+          "text": "0.4.7 — 2026-01-19",
+          "line": 1303
         },
         {
           "level": 3,
           "text": "Added",
+          "line": 1309
+        },
+        {
+          "level": 3,
+          "text": "Changed",
           "line": 1314
         },
         {
           "level": 3,
-          "text": "Changed",
-          "line": 1320
+          "text": "Philosophy",
+          "line": 1318
         },
         {
           "level": 3,
-          "text": "Behavior",
+          "text": "Notes",
           "line": 1325
         },
         {
           "level": 2,
-          "text": "0.4.5 — 2026-01-18",
-          "line": 1336
+          "text": "0.4.6 — 2026-01-19",
+          "line": 1332
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 1342
+          "line": 1338
         },
         {
           "level": 3,
           "text": "Changed",
-          "line": 1348
+          "line": 1344
+        },
+        {
+          "level": 3,
+          "text": "Behavior",
+          "line": 1349
+        },
+        {
+          "level": 2,
+          "text": "0.4.5 — 2026-01-18",
+          "line": 1360
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 1366
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "line": 1372
         },
         {
           "level": 3,
           "text": "Philosophy",
-          "line": 1353
+          "line": 1377
         },
         {
           "level": 3,
           "text": "Notes",
-          "line": 1360
+          "line": 1384
         },
         {
           "level": 2,
           "text": "0.4.4 — 2026-01-18",
-          "line": 1367
+          "line": 1391
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 1373
+          "line": 1397
         },
         {
           "level": 3,
           "text": "Changed",
-          "line": 1380
+          "line": 1404
         },
         {
           "level": 3,
           "text": "Philosophy",
-          "line": 1386
+          "line": 1410
         },
         {
           "level": 2,
           "text": "0.4.3 — 2026-01-18",
-          "line": 1394
+          "line": 1418
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 1402
+          "line": 1426
         },
         {
           "level": 3,
           "text": "Changed",
-          "line": 1407
+          "line": 1431
         },
         {
           "level": 2,
           "text": "0.4.2 — 2026-01-17",
-          "line": 1415
+          "line": 1439
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 1421
+          "line": 1445
         },
         {
           "level": 3,
           "text": "Changed",
-          "line": 1434
+          "line": 1458
         },
         {
           "level": 3,
           "text": "Philosophy",
-          "line": 1439
+          "line": 1463
         },
         {
           "level": 2,
           "text": "0.4.1 — 2026-01-17",
-          "line": 1448
+          "line": 1472
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 1454
+          "line": 1478
         },
         {
           "level": 3,
           "text": "Changed",
-          "line": 1464
+          "line": 1488
         },
         {
           "level": 3,
           "text": "Notes",
-          "line": 1475
+          "line": 1499
         },
         {
           "level": 2,
           "text": "0.4.0 — 2026-01-17",
-          "line": 1483
+          "line": 1507
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 1489
+          "line": 1513
         },
         {
           "level": 3,
           "text": "Changed",
-          "line": 1509
+          "line": 1533
         },
         {
           "level": 3,
           "text": "Epochs",
-          "line": 1520
+          "line": 1544
         },
         {
           "level": 3,
           "text": "Breaking Changes",
-          "line": 1527
+          "line": 1551
         },
         {
           "level": 3,
           "text": "Notes",
-          "line": 1535
+          "line": 1559
         },
         {
           "level": 2,
           "text": "0.3.1 — 2026-01-17",
-          "line": 1543
+          "line": 1567
         },
         {
           "level": 3,
           "text": "Changed",
-          "line": 1545
+          "line": 1569
         },
         {
           "level": 3,
           "text": "Notes",
-          "line": 1552
+          "line": 1576
         },
         {
           "level": 2,
           "text": "0.3.0 — 2026-01-17",
-          "line": 1558
+          "line": 1582
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 1560
+          "line": 1584
         },
         {
           "level": 3,
           "text": "Changed",
-          "line": 1573
-        },
-        {
-          "level": 3,
-          "text": "Deprecated",
-          "line": 1580
-        },
-        {
-          "level": 3,
-          "text": "Notes",
-          "line": 1587
-        },
-        {
-          "level": 2,
-          "text": "0.1.5 — 2026-01-16 (Superseded by 0.3.0)",
-          "line": 1595
-        },
-        {
-          "level": 3,
-          "text": "Added",
           "line": 1597
         },
         {
           "level": 3,
+          "text": "Deprecated",
+          "line": 1604
+        },
+        {
+          "level": 3,
           "text": "Notes",
-          "line": 1608
+          "line": 1611
+        },
+        {
+          "level": 2,
+          "text": "0.1.5 — 2026-01-16 (Superseded by 0.3.0)",
+          "line": 1619
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 1621
+        },
+        {
+          "level": 3,
+          "text": "Notes",
+          "line": 1632
         },
         {
           "level": 2,
           "text": "0.1.4 — 2026-01-16",
-          "line": 1614
-        },
-        {
-          "level": 3,
-          "text": "Added",
-          "line": 1616
-        },
-        {
-          "level": 3,
-          "text": "Changed",
-          "line": 1624
-        },
-        {
-          "level": 3,
-          "text": "Notes",
-          "line": 1629
-        },
-        {
-          "level": 2,
-          "text": "0.1.3 — 2026-01-16",
-          "line": 1636
-        },
-        {
-          "level": 3,
-          "text": "Added",
           "line": 1638
         },
         {
           "level": 3,
+          "text": "Added",
+          "line": 1640
+        },
+        {
+          "level": 3,
           "text": "Changed",
-          "line": 1644
+          "line": 1648
         },
         {
           "level": 3,
           "text": "Notes",
-          "line": 1650
+          "line": 1653
+        },
+        {
+          "level": 2,
+          "text": "0.1.3 — 2026-01-16",
+          "line": 1660
+        },
+        {
+          "level": 3,
+          "text": "Added",
+          "line": 1662
+        },
+        {
+          "level": 3,
+          "text": "Changed",
+          "line": 1668
+        },
+        {
+          "level": 3,
+          "text": "Notes",
+          "line": 1674
         },
         {
           "level": 2,
           "text": "0.1.2 — 2026-01-16",
-          "line": 1656
+          "line": 1680
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 1658
-        },
-        {
-          "level": 3,
-          "text": "Changed",
-          "line": 1665
-        },
-        {
-          "level": 3,
-          "text": "Removed",
-          "line": 1672
-        },
-        {
-          "level": 3,
-          "text": "Notes",
-          "line": 1676
-        },
-        {
-          "level": 2,
-          "text": "0.1.1 — 2026-01-15",
           "line": 1682
         },
         {
           "level": 3,
+          "text": "Changed",
+          "line": 1689
+        },
+        {
+          "level": 3,
+          "text": "Removed",
+          "line": 1696
+        },
+        {
+          "level": 3,
+          "text": "Notes",
+          "line": 1700
+        },
+        {
+          "level": 2,
+          "text": "0.1.1 — 2026-01-15",
+          "line": 1706
+        },
+        {
+          "level": 3,
           "text": "Added",
-          "line": 1684
+          "line": 1708
         },
         {
           "level": 3,
           "text": "Established",
-          "line": 1690
+          "line": 1714
         },
         {
           "level": 3,
           "text": "Notes",
-          "line": 1697
+          "line": 1721
         },
         {
           "level": 2,
           "text": "0.1.0 — 2026-01-15",
-          "line": 1705
+          "line": 1729
         },
         {
           "level": 3,
           "text": "Added",
-          "line": 1707
+          "line": 1731
         },
         {
           "level": 3,
           "text": "Notes",
-          "line": 1730
+          "line": 1754
         }
       ],
-      "heading_count": 236,
+      "heading_count": 239,
       "has_frontmatter": true
     },
     {
@@ -4212,6 +4227,92 @@
       "has_frontmatter": true
     },
     {
+      "path": "canon/decisions/DR-20260211-0001-camping-detection-design-constraints.md",
+      "root": "canon",
+      "authority_band": "governing",
+      "authority_inferred": "governing",
+      "uri": "klappy://canon/decisions/DR-20260211-0001-camping-detection-design-constraints",
+      "title": "DR-20260211-0001 \\u2014 Camping Detection Design Constraints",
+      "subtitle": null,
+      "tags": [],
+      "stability": "stable",
+      "tier": "2",
+      "audience": "canon",
+      "exposure": "nav",
+      "voice": "neutral",
+      "relevance": null,
+      "execution_posture": null,
+      "headings": [
+        {
+          "level": 1,
+          "text": "Context",
+          "line": 2
+        },
+        {
+          "level": 1,
+          "text": "Options Considered",
+          "line": 8
+        },
+        {
+          "level": 2,
+          "text": "1. Time-Based Tracking",
+          "line": 10
+        },
+        {
+          "level": 2,
+          "text": "2. Hard Iteration Counters",
+          "line": 14
+        },
+        {
+          "level": 2,
+          "text": "3. Gamification / XP Systems",
+          "line": 18
+        },
+        {
+          "level": 2,
+          "text": "4. Dashboard Instrumentation",
+          "line": 22
+        },
+        {
+          "level": 2,
+          "text": "5. Automatic Hard Refusal",
+          "line": 26
+        },
+        {
+          "level": 2,
+          "text": "6. Heuristic NLX-Driven Detection (Chosen)",
+          "line": 30
+        },
+        {
+          "level": 1,
+          "text": "Decision",
+          "line": 34
+        },
+        {
+          "level": 1,
+          "text": "Rationale",
+          "line": 38
+        },
+        {
+          "level": 1,
+          "text": "Consequences",
+          "line": 49
+        },
+        {
+          "level": 1,
+          "text": "Evidence",
+          "line": 55
+        },
+        {
+          "level": 1,
+          "text": "Notes",
+          "line": 60
+        }
+      ],
+      "heading_count": 13,
+      "has_frontmatter": true
+    },
+    {
       "path": "canon/decisions/models-do-not-mutate-canon.md",
       "root": "canon",
       "authority_band": "governing",
@@ -4400,6 +4501,50 @@
       "has_frontmatter": true
     },
     {
+      "path": "canon/defaults/iteration-bias.md",
+      "root": "canon",
+      "authority_band": "governing",
+      "authority_inferred": "governing",
+      "uri": "klappy://canon/defaults/iteration-bias",
+      "title": "Iteration Bias",
+      "subtitle": null,
+      "tags": [],
+      "acronyms": [
+        "ib"
+      ],
+      "stability": "evolving",
+      "tier": "3",
+      "audience": "canon",
+      "exposure": "nav",
+      "voice": "first_person",
+      "relevance": null,
+      "execution_posture": null,
+      "headings": [
+        {
+          "level": 1,
+          "text": "Iteration Bias (Klappy.dev Defaults)",
+          "line": 2
+        },
+        {
+          "level": 2,
+          "text": "Collaboration Posture",
+          "line": 16
+        },
+        {
+          "level": 2,
+          "text": "Rationale",
+          "line": 24
+        },
+        {
+          "level": 2,
+          "text": "See Also",
+          "line": 28
+        }
+      ],
+      "heading_count": 4,
+      "has_frontmatter": true
+    },
+    {
       "path": "canon/definitions/cognitive-saturation-threshold.md",
       "root": "canon",
       "authority_band": "governing",
@@ -4459,9 +4604,14 @@
           "level": 2,
           "text": "Constraint",
           "line": 70
+        },
+        {
+          "level": 2,
+          "text": "After CST",
+          "line": 78
         }
       ],
-      "heading_count": 7,
+      "heading_count": 8,
       "has_frontmatter": true
     },
     {
@@ -4858,6 +5008,55 @@
       "has_frontmatter": true
     },
     {
+      "path": "canon/diagnostics/camping-risk.md",
+      "root": "canon",
+      "authority_band": "governing",
+      "authority_inferred": "governing",
+      "uri": "klappy://canon/diagnostics/camping-risk",
+      "title": "Camping Risk",
+      "subtitle": "Raise when iteration continues after observable improvement has flattened or inverted, and subjective momentum substitutes for measurable progress.",
+      "tags": [],
+      "acronyms": [
+        "cr"
+      ],
+      "stability": "evolving",
+      "tier": "2",
+      "audience": "canon",
+      "exposure": "nav",
+      "voice": "neutral",
+      "relevance": null,
+      "execution_posture": null,
+      "headings": [
+        {
+          "level": 1,
+          "text": "Camping Risk",
+          "line": 2
+        },
+        {
+          "level": 2,
+          "text": "Summary",
+          "line": 6
+        },
+        {
+          "level": 2,
+          "text": "Trigger",
+          "line": 14
+        },
+        {
+          "level": 2,
+          "text": "Why It Matters",
+          "line": 26
+        },
+        {
+          "level": 2,
+          "text": "Severity",
+          "line": 37
+        }
+      ],
+      "heading_count": 5,
+      "has_frontmatter": true
+    },
+    {
       "path": "canon/diagnostics/epistemic-hygiene.md",
       "root": "canon",
       "authority_band": "governing",
@@ -4944,6 +5143,50 @@
         }
       ],
       "heading_count": 12,
+      "has_frontmatter": true
+    },
+    {
+      "path": "canon/diagnostics/generative-arc-curve.md",
+      "root": "canon",
+      "authority_band": "governing",
+      "authority_inferred": "governing",
+      "uri": "klappy://canon/diagnostics/generative-arc-curve",
+      "title": "Generative Arc Curve",
+      "subtitle": "In generative artifact iteration, coherence often peaks early and degrades under sustained local steering. Inversion is a signal; camping past inversion is the failure.",
+      "tags": [],
+      "acronyms": [
+        "gac"
+      ],
+      "stability": "evolving",
+      "tier": "3",
+      "audience": "canon",
+      "exposure": "nav",
+      "voice": "neutral",
+      "relevance": null,
+      "execution_posture": null,
+      "headings": [
+        {
+          "level": 1,
+          "text": "Generative Arc Curve",
+          "line": 2
+        },
+        {
+          "level": 2,
+          "text": "Summary",
+          "line": 6
+        },
+        {
+          "level": 2,
+          "text": "Pattern",
+          "line": 16
+        },
+        {
+          "level": 2,
+          "text": "See Also",
+          "line": 27
+        }
+      ],
+      "heading_count": 4,
       "has_frontmatter": true
     },
     {
@@ -6013,6 +6256,50 @@
       "has_frontmatter": true
     },
     {
+      "path": "canon/methods/pivot-on-inversion.md",
+      "root": "canon",
+      "authority_band": "governing",
+      "authority_inferred": "governing",
+      "uri": "klappy://canon/methods/pivot-on-inversion",
+      "title": "Pivot on Inversion",
+      "subtitle": "When observable improvement turns negative, change mode. Snapshot, extract invariants, regenerate cleanly.",
+      "tags": [],
+      "acronyms": [
+        "pi"
+      ],
+      "stability": "evolving",
+      "tier": "2",
+      "audience": "canon",
+      "exposure": "nav",
+      "voice": "neutral",
+      "relevance": null,
+      "execution_posture": null,
+      "headings": [
+        {
+          "level": 1,
+          "text": "Pivot on Inversion",
+          "line": 2
+        },
+        {
+          "level": 2,
+          "text": "Description",
+          "line": 6
+        },
+        {
+          "level": 2,
+          "text": "Escalation & Communication",
+          "line": 12
+        },
+        {
+          "level": 2,
+          "text": "Procedure",
+          "line": 31
+        }
+      ],
+      "heading_count": 4,
+      "has_frontmatter": true
+    },
+    {
       "path": "canon/methods/README.md",
       "root": "canon",
       "authority_band": "governing",
@@ -6935,6 +7222,55 @@
           "level": 2,
           "text": "Outcomes as the Final Arbiter",
           "line": 61
+        }
+      ],
+      "heading_count": 5,
+      "has_frontmatter": true
+    },
+    {
+      "path": "canon/principles/persistence-must-be-intentional.md",
+      "root": "canon",
+      "authority_band": "governing",
+      "authority_inferred": "governing",
+      "uri": "klappy://canon/principles/persistence-must-be-intentional",
+      "title": "Persistence Must Be Intentional",
+      "subtitle": "When improvement is no longer observed, continuing without reassessment is escalation, not discipline.",
+      "tags": [],
+      "acronyms": [
+        "pmi"
+      ],
+      "stability": "evolving",
+      "tier": "2",
+      "audience": "canon",
+      "exposure": "nav",
+      "voice": "first_person",
+      "relevance": null,
+      "execution_posture": null,
+      "headings": [
+        {
+          "level": 1,
+          "text": "Persistence Must Be Intentional",
+          "line": 2
+        },
+        {
+          "level": 2,
+          "text": "Summary",
+          "line": 6
+        },
+        {
+          "level": 2,
+          "text": "Rationale",
+          "line": 13
+        },
+        {
+          "level": 2,
+          "text": "Plateau Is Not Failure",
+          "line": 31
+        },
+        {
+          "level": 2,
+          "text": "Boundary — Acute Execution Mode",
+          "line": 49
         }
       ],
       "heading_count": 5,

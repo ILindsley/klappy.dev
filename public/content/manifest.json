@@ -225,6 +225,18 @@
       "tags": []
     },
     {
+      "uri": "klappy://canon/diagnostics/camping-risk",
+      "path": "/canon/diagnostics/camping-risk.md",
+      "title": "Camping Risk",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": []
+    },
+    {
       "uri": "klappy://canon",
       "path": "/canon/README.md",
       "title": "Canon",
@@ -462,6 +474,18 @@
       "tier": 1,
       "voice": "neutral",
       "stability": "semi_stable",
+      "tags": []
+    },
+    {
+      "uri": "klappy://canon/decisions/DR-20260211-0001-camping-detection-design-constraints",
+      "path": "/canon/decisions/DR-20260211-0001-camping-detection-design-constraints.md",
+      "title": "DR-20260211-0001 — Camping Detection Design Constraints",
+      "type": "decision-record",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "stable",
       "tags": []
     },
     {
@@ -760,6 +784,18 @@
       ]
     },
     {
+      "uri": "klappy://canon/diagnostics/generative-arc-curve",
+      "path": "/canon/diagnostics/generative-arc-curve.md",
+      "title": "Generative Arc Curve",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 3,
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": []
+    },
+    {
       "uri": "klappy://public/home",
       "path": "/about/home.md",
       "title": "Home",
@@ -815,6 +851,18 @@
         "commitment",
         "exploration"
       ]
+    },
+    {
+      "uri": "klappy://canon/defaults/iteration-bias",
+      "path": "/canon/defaults/iteration-bias.md",
+      "title": "Iteration Bias",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 3,
+      "voice": "first_person",
+      "stability": "evolving",
+      "tags": []
     },
     {
       "uri": "klappy://canon/constraints/meaning-must-not-depend-on-path",
@@ -1264,6 +1312,30 @@
         "what-is-odd",
         "methodology"
       ]
+    },
+    {
+      "uri": "klappy://canon/principles/persistence-must-be-intentional",
+      "path": "/canon/principles/persistence-must-be-intentional.md",
+      "title": "Persistence Must Be Intentional",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "first_person",
+      "stability": "evolving",
+      "tags": []
+    },
+    {
+      "uri": "klappy://canon/methods/pivot-on-inversion",
+      "path": "/canon/methods/pivot-on-inversion.md",
+      "title": "Pivot on Inversion",
+      "type": "text/markdown",
+      "audience": "canon",
+      "exposure": "nav",
+      "tier": 2,
+      "voice": "neutral",
+      "stability": "evolving",
+      "tags": []
     },
     {
       "uri": "klappy://canon/apocrypha/predocumentaries",

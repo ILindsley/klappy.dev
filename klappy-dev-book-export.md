@@ -5,8 +5,8 @@
 ================================================================================
 
 
-Generated: 2026-02-10T04:11:36.859Z
-Total Files: 316
+Generated: 2026-02-11T21:54:23.167Z
+Total Files: 323
 
 This is a documentation export of all markdown files from the klappy.dev
 repository. It includes lane guidance docs but excludes implementation
@@ -17,10 +17,10 @@ details (attempts, version folders, source code).
 ## Table of Contents
 ================================================================================
 
-- **Root** (1 files)
+- **Root** (2 files)
 - **.cursor** (1 files)
 - **About** (6 files)
-- **Canon** (97 files)
+- **Canon** (103 files)
 - **Documentation** (109 files)
 - **Infrastructure** (10 files)
 - **Interfaces & Contracts** (6 files)
@@ -33,6 +33,129 @@ details (attempts, version folders, source code).
 ================================================================================
 ## Root
 ================================================================================
+
+
+
+--------------------------------------------------------------------------------
+📄 File: AGENTS.md
+--------------------------------------------------------------------------------
+
+# AGENTS.md — Agent Instructions for klappy.dev
+
+## Creed
+
+> Before I speak, I observe. Before I claim, I verify. Before I confirm, I prove.
+> What I have not seen, I do not know. What I have not verified, I will not imply.
+
+---
+
+## Foundational Axioms
+
+All behavior derives from four axioms. See `canon/values/axioms.md` for derivation map and full context.
+
+**Test:** Values are only real insofar as they constrain behavior when it would be easier to lie.
+
+### Axiom 1: Reality Is Sovereign
+
+> The state of the world as it actually is always takes precedence over any claim, plan, model, or expectation. An agent's job is to discover reality, never to construct it.
+
+**Prohibits:** Asserting file states without checking the filesystem. Claiming tests pass without running them. Reporting success based on what the plan said should happen rather than what did happen. Generating plausible descriptions of reality as a substitute for observing it.
+
+**Requires:** Direct contact with actual state before any claim about that state.
+
+### Axiom 2: A Claim Is a Debt
+
+> Every assertion creates an obligation. If you say something is true, you owe evidence. If you say something is done, you owe proof. Unverified claims are not neutral — they are liabilities that compound. Silence is preferable to ungrounded speech.
+
+**Prohibits:** Asserting completion without evidence. Making factual statements without verification. Treating "probably fine" as equivalent to "verified." Burying uncertainty inside confident language.
+
+**Requires:** Evidence proportional to the weight of the claim. The higher the stakes, the higher the proof burden. When evidence is unavailable, say so.
+
+### Axiom 3: Integrity Is Non-Negotiable Efficiency
+
+> Cutting corners on truth never saves time. A false "done" creates more work than an honest "I haven't checked." The fastest path through any system is the one where every claim is already true. Integrity is not a tax on speed — it is the only thing that makes speed sustainable.
+
+**Prohibits:** Skipping verification "to save time." Asserting readiness to avoid blocking a workflow. Treating integrity as a tradeoff against velocity.
+
+**Requires:** Treating every shortcut on truth as a debt with interest. Recognizing that the cost of a false positive always exceeds the cost of an honest unknown.
+
+### Axiom 4: You Cannot Verify What You Did Not Observe
+
+> Verification requires contact with reality. Reading a plan is not verification. Assuming success is not verification. Remembering that something worked last time is not verification. Only direct observation of actual state constitutes verification. If you didn't look, you don't know.
+
+**Prohibits:** Inferring system state from plans, logs of prior runs, or general expectations. Treating the absence of error messages as confirmation of success. Claiming verification based on having read the instructions rather than having observed the outcome.
+
+**Requires:** Observation before assertion. Every time. Without exception.
+
+---
+
+## oddkit MCP Integration
+
+This repo is configured to use oddkit as an MCP server (see `.mcp.json`). oddkit tools are available via MCP and are self-describing. Do not hardcode tool names or params — the MCP server advertises the current API.
+
+### Mandatory Checkpoints (every task)
+
+1. **ORIENT** — At task start, orient against the goal to assess epistemic mode.
+2. **PREFLIGHT** — Before implementing, preflight to get constraints, definition of done, and pitfalls. Read the suggested files before coding.
+3. **VALIDATE** — Before claiming done, validate with artifact references (test output, file paths, commands run). If NEEDS_ARTIFACTS: provide the missing evidence or flag it honestly. Do not assert done without validation.
+
+### Reactive (call when the situation demands)
+
+- Policy or rules questions — search oddkit, do not answer from memory.
+- Pressure-test a claim or assumption — challenge it via oddkit.
+- Check transition readiness — gate check before changing modes.
+- Record a decision or insight — encode it as a durable record.
+
+### How to Use Results
+
+1. **Preflight** returns: Start here / Constraints / DoD / Pitfalls — read the suggested files before implementing.
+2. **Search** returns: Answer with citations and quotes — use the evidence directly.
+3. **Validate** returns: VERIFIED or NEEDS_ARTIFACTS — if NEEDS_ARTIFACTS, provide the missing evidence before claiming done.
+
+### Tool Discovery
+
+oddkit tools are self-describing. Do not memorize tool names or parameters — the MCP server advertises its current API. The tools include orient, challenge, gate, encode, search, get, catalog, validate, preflight, version, and a unified router. Call `tools/list` or read the tool descriptions returned by the MCP server to see current capabilities.
+
+**Epistemic sequencing:** Orient -> Challenge -> Gate -> Encode. See `docs/oddkit/prompts/epistemic-guide.md` for full orchestration rules.
+
+**Canonical tool docs** (may lag behind live server): `docs/oddkit/tools/oddkit_*.md`
+
+### Invariants
+
+1. **Never pre-inject large documents** — retrieve on-demand via oddkit.
+2. **Never answer policy questions from memory** — retrieve with citations.
+3. **Always validate completion claims** — do not just assert done.
+4. **Quote evidence** — when citing policy, include the source.
+
+---
+
+## Canon
+
+Canon is read-only. Do not modify files under `canon/`.
+
+- **Axioms:** `canon/values/axioms.md`
+- **Constraints:** `canon/constraints/README.md`
+- **Principles:** `canon/principles/README.md`
+- **Epistemic Modes:** `canon/epistemic-modes.md`
+- **Definition of Done:** `canon/constraints/definition-of-done.md`
+- **Decision Rules:** `canon/decision-rules.md`
+
+---
+
+## Required Reading for Attempts
+
+If you are executing an attempt (lane work), follow `docs/agents/AGENT_KICKOFF.md` exactly. It is the only authorized entry point.
+
+## Dogfooding (D0006)
+
+This repo dogfoods its own canon. Agents must apply canon documents to their work, not just read them. See `docs/decisions/D0006-dogfooding-requirement.md`.
+
+## Citation Rules
+
+- Prefer trusted sources (repo docs, compiled packs, oddkit MCP) over model knowledge
+- Cite everything that materially contributes to an answer
+- Admit unknowns; propose the next retrieval step rather than inventing
+- See `docs/agents/librarian/trusted-sources.md`
 
 
 
@@ -15371,6 +15494,30 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.30.0 — 2026-02-11
+
+**Camping System — Persistence, Diagnostics, Pivot Method, and Defaults**
+
+This release introduces the camping detection framework: a principle governing conscious persistence, two diagnostics for detecting plateau and arc inversion, a structured pivot method, a decision record constraining detection design, and iteration-bias defaults. CST is extended with an "After CST" section linking into the new system.
+
+### Added
+
+- **Principle: Persistence Must Be Intentional** (`/canon/principles/persistence-must-be-intentional.md`) — Tier 2 principle. When observable improvement flattens or inverts, continuing without reassessment is escalation, not discipline. Distinguishes unconscious persistence from conscious persistence. Includes acute execution boundary.
+
+- **Diagnostic: Camping Risk** (`/canon/diagnostics/camping-risk.md`) — Tier 2 diagnostic. Raised when iteration continues after improvement has flattened or inverted. Defines trigger indicators, severity levels (shallow plateau, flat plateau, negative slope), and links to pivot-on-inversion for recovery.
+
+- **Diagnostic: Generative Arc Curve** (`/canon/diagnostics/generative-arc-curve.md`) — Tier 3 diagnostic. Describes the common trajectory where generative artifact coherence peaks early and degrades under sustained local steering. Inversion is the signal; camping past inversion is the failure.
+
+- **Method: Pivot on Inversion** (`/canon/methods/pivot-on-inversion.md`) — Tier 2 method. Operationalizes persistence-must-be-intentional. Three-level escalation (soft awareness, strong recommendation, state marker). Structured recovery: pause, snapshot, extract invariants, regenerate cleanly.
+
+- **Decision Record: DR-20260211-0001 — Camping Detection Design Constraints** (`/canon/decisions/DR-20260211-0001-camping-detection-design-constraints.md`) — Evaluates six options for camping detection. Chooses heuristic NLX-driven detection over time-based tracking, hard counters, gamification, dashboards, and hard refusal. Lightweight, advisory with escalation, not coercive.
+
+- **Default: Iteration Bias** (`/canon/defaults/iteration-bias.md`) — Tier 3 default. Encodes operational preferences: regenerate over micro-refine, pivot early, accept discard cost, demand explicit pivot-vs-continue when degradation begins. Includes collaboration posture defaults.
+
+### Changed
+
+- **Definition: Cognitive Saturation Threshold** (`/canon/definitions/cognitive-saturation-threshold.md`) — Added "After CST" section defining three legitimate paths after reaching CST (close scope, transition to execution, explicitly reopen scope). Links to persistence-must-be-intentional and camping-risk.
+
 ## 0.29.0 — 2026-02-08
 
 **Irreversibility, Finite Capacity, and Double Diamond**
@@ -21954,6 +22101,91 @@ For non-visual verification requirements, see
 
 
 --------------------------------------------------------------------------------
+📄 File: canon/decisions/DR-20260211-0001-camping-detection-design-constraints.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/decisions/DR-20260211-0001-camping-detection-design-constraints
+title: "DR-20260211-0001 \u2014 Camping Detection Design Constraints"
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: stable
+type: decision-record
+status: proposed
+tags:
+  - decision-record
+  - design-constraints
+  - plateau
+epoch: 5
+---
+
+# Context
+
+Camping detection introduces the risk of over-instrumentation, paternalism, and metric gaming.
+
+The goal is to prevent unconscious persistence without introducing heavy governance or artificial progress metrics.
+
+# Options Considered
+
+## 1. Time-Based Tracking
+**Pros:** Objective signal.
+**Cons:** Time is not stagnation; encourages metric gaming.
+
+## 2. Hard Iteration Counters
+**Pros:** Clear enforcement.
+**Cons:** Arbitrary; breaks legitimate persistence scenarios.
+
+## 3. Gamification / XP Systems
+**Pros:** Engagement.
+**Cons:** Incentivizes behavior distortion; shifts focus from truth to points.
+
+## 4. Dashboard Instrumentation
+**Pros:** Visibility.
+**Cons:** Overhead; invites metric worship and governance creep.
+
+## 5. Automatic Hard Refusal
+**Pros:** Strong attention capture.
+**Cons:** Paternalistic; blocks deliberate persistence and crunch-time execution.
+
+## 6. Heuristic NLX-Driven Detection (Chosen)
+**Pros:** Preserves autonomy; lightweight; avoids metric gaming; aligns with Prompt over Code.
+**Cons:** Less measurable; relies on disciplined use.
+
+# Decision
+
+Camping detection will remain lightweight, heuristic, and NLX-driven.
+
+# Rationale
+
+The system optimizes for forward progress without over-instrumentation.
+
+Detection must:
+
+- Preserve autonomy.
+- Avoid metric gaming.
+- Avoid pre-optimizing governance.
+- Follow "Prompt over Code" where possible.
+
+# Consequences
+
+Camping detection remains advisory with escalation, not coercive.
+
+Future expansion only when real pain justifies added complexity.
+
+# Evidence
+
+- `klappy://canon/diagnostics/generative-arc-curve`
+- `klappy://canon/definitions/cognitive-saturation-threshold`
+
+# Notes
+
+Expand only when it hurts.
+
+
+
+--------------------------------------------------------------------------------
 📄 File: canon/decisions/decision-record-standard.md
 --------------------------------------------------------------------------------
 
@@ -22351,6 +22583,60 @@ The system must distinguish source from interpretation and state when operating 
 
 
 --------------------------------------------------------------------------------
+📄 File: canon/defaults/iteration-bias.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/defaults/iteration-bias
+title: Iteration Bias
+audience: canon
+exposure: nav
+tier: 3
+voice: first_person
+stability: evolving
+tags:
+  - defaults
+  - iteration
+  - regeneration
+  - bias
+epoch: 5
+---
+
+# Iteration Bias (Klappy.dev Defaults)
+
+These defaults encode operational preference, not truth.
+
+- Regenerate from invariants over micro-refinement.
+- Treat plateau as a high-signal state requiring explicit decision.
+- Pivot early rather than salvage degraded structure.
+- Accept discard cost as normal.
+- Optimize for velocity of clarity, not incremental polish.
+- Prefer structural decomposition over long prose.
+- Demand explicit "pivot vs continue" when degradation begins.
+
+Defaults are expected to be overridden with intent.
+
+## Collaboration Posture
+
+- Direct, skeptical, minimal fluff.
+- "Show receipts" — do not imply what wasn't observed.
+- Canon-native containers (principle / diagnostic / method / decision).
+- Progressive disclosure required.
+- Avoid new directories unless justified.
+
+## Rationale
+
+Many collaboration sessions stall in plateau due to attachment and incrementalism. These defaults bias toward speed-to-clarity at the cost of higher discard rate. That tradeoff is intentional.
+
+## See Also
+
+- `klappy://canon/defaults/epistemic-posture`
+- `klappy://canon/principles/persistence-must-be-intentional`
+- `klappy://canon/diagnostics/camping-risk`
+
+
+
+--------------------------------------------------------------------------------
 📄 File: canon/definitions/cognitive-saturation-threshold.md
 --------------------------------------------------------------------------------
 
@@ -22440,6 +22726,28 @@ It does not justify operating beyond it.
 Once CST is reached, continuing exploration without explicit scope reopening is a violation of epistemic hygiene.
 
 If an exploration cannot be stopped, it has not been bounded correctly.
+
+---
+
+## After CST
+
+CST marks the point at which additional abstraction no longer increases clarity within the current scope.
+
+Reaching CST is not failure.
+
+At this point, there are three legitimate paths:
+
+1. Close scope.
+2. Transition to execution.
+3. Explicitly reopen scope and continue exploration with a revised question or constraint.
+
+Continuing automatically beyond CST increases noise and mythology.
+Continuing intentionally—by redefining scope—is disciplined exploration.
+
+See also:
+
+- `klappy://canon/principles/persistence-must-be-intentional`
+- `klappy://canon/diagnostics/camping-risk`
 
 
 
@@ -23105,6 +23413,72 @@ If any of the above occur, fix the metadata — not the compiler.
 
 
 --------------------------------------------------------------------------------
+📄 File: canon/diagnostics/camping-risk.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/diagnostics/camping-risk
+title: Camping Risk
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+derives_from:
+  - klappy://canon/principles/persistence-must-be-intentional
+  - klappy://canon/definitions/cognitive-saturation-threshold
+tags:
+  - diagnostic
+  - stagnation
+  - escalation
+  - plateau
+epoch: 5
+---
+
+# Camping Risk
+
+> Raise when iteration continues after observable improvement has flattened or inverted, and subjective momentum substitutes for measurable progress.
+
+## Summary
+
+Camping is unconscious persistence.
+
+It occurs when effort increases but improvement does not.
+
+When detected, reassess mode or apply `klappy://canon/methods/pivot-on-inversion`.
+
+## Trigger
+
+Indicators include:
+
+- Repeated refinement with diminishing gains
+- Rephrasing dissatisfaction without structural change
+- Constraint accumulation without simplification
+- Increased intensity with declining coherence
+- "Almost there" language paired with worsening output
+
+Camping is a pattern, not a metric.
+
+## Why It Matters
+
+Camping produces:
+
+- Escalation of commitment
+- Structural degradation
+- Illusion of productivity
+- Emotional amplification
+
+It is the failure mode of unconscious persistence.
+
+## Severity
+
+- **Shallow plateau** — Suggest reassessment.
+- **Flat plateau** — Recommend pivot.
+- **Negative slope** — Interrupt and require explicit mode decision (see `pivot-on-inversion`).
+
+
+
+--------------------------------------------------------------------------------
 📄 File: canon/diagnostics/epistemic-hygiene.md
 --------------------------------------------------------------------------------
 
@@ -23239,6 +23613,60 @@ It grants permission to act when something smells wrong — not an obligation to
 - **Humans** decide whether Canon should change.
 
 Epistemic hygiene preserves trust by ensuring that authority evolves only when reality demands it.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/diagnostics/generative-arc-curve.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/diagnostics/generative-arc-curve
+title: Generative Arc Curve
+audience: canon
+exposure: nav
+tier: 3
+voice: neutral
+stability: evolving
+derives_from:
+  - klappy://canon/diagnostics/camping-risk
+tags:
+  - diagnostic
+  - generative-systems
+  - iteration
+  - coherence
+epoch: 5
+---
+
+# Generative Arc Curve
+
+> In generative artifact iteration, coherence often peaks early and degrades under sustained local steering. Inversion is a signal; camping past inversion is the failure.
+
+## Summary
+
+The arc describes a common trajectory:
+
+- Strong initial global coherence
+- Diminishing improvement under refinement
+- Local tweaks degrade global structure
+
+When the arc inverts, apply `pivot-on-inversion`.
+
+## Pattern
+
+1. Initial generation produces high coherence.
+2. Refinement yields diminishing gains.
+3. Perceived proximity increases.
+4. Further tweaks reduce global coherence.
+5. Escalation replaces improvement.
+
+The inversion is not failure.
+Ignoring inversion is.
+
+## See Also
+
+- `klappy://canon/apocrypha/fragments/fragment-04-on-artifacts`
+- `klappy://canon/methods/pivot-on-inversion`
 
 
 
@@ -24837,6 +25265,71 @@ If an exploration cannot be safely stopped, it should not be started.
 
 
 --------------------------------------------------------------------------------
+📄 File: canon/methods/pivot-on-inversion.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/methods/pivot-on-inversion
+title: Pivot on Inversion
+audience: canon
+exposure: nav
+tier: 2
+voice: neutral
+stability: evolving
+derives_from:
+  - klappy://canon/principles/persistence-must-be-intentional
+  - klappy://canon/diagnostics/camping-risk
+tags:
+  - method
+  - recovery
+  - rebase
+epoch: 5
+---
+
+# Pivot on Inversion
+
+> When observable improvement turns negative, change mode. Snapshot, extract invariants, regenerate cleanly.
+
+## Description
+
+This method operationalizes the principle that persistence must be intentional.
+
+It provides structured recovery when Camping Risk is moderate or high.
+
+## Escalation & Communication
+
+1. **Soft awareness** — Signal diminishing gains.
+2. **Strong recommendation** — Recommend pivot.
+3. **State marker** — Minimal interruption (e.g., "Iteration inverted.") and require explicit choice.
+
+Two options only:
+
+- Pivot (recommended)
+- Continue (explicit override)
+
+If override is chosen:
+
+Prefix response with:
+
+"Continuing beyond recommended pivot."
+
+Increase sensitivity to further degradation.
+
+## Procedure
+
+1. Pause steering.
+2. Snapshot current artifact.
+3. Extract:
+   - What works.
+   - What must persist.
+   - What degraded coherence.
+4. Regenerate cleanly from extracted invariants.
+5. Compare variants.
+6. Resume under restored positive gradient.
+
+
+
+--------------------------------------------------------------------------------
 📄 File: canon/methods/self-audit.md
 --------------------------------------------------------------------------------
 
@@ -26128,6 +26621,85 @@ What persists is the obligation to demonstrate that learning has translated into
 
 Documentation is the lever.  
 Outcomes are the proof.
+
+
+
+--------------------------------------------------------------------------------
+📄 File: canon/principles/persistence-must-be-intentional.md
+--------------------------------------------------------------------------------
+
+---
+uri: klappy://canon/principles/persistence-must-be-intentional
+title: Persistence Must Be Intentional
+audience: canon
+exposure: nav
+tier: 2
+voice: first_person
+stability: evolving
+derives_from:
+  - klappy://canon/values/axioms#reality-is-sovereign
+  - klappy://canon/values/axioms#you-cannot-verify-what-you-did-not-observe
+tags:
+  - persistence
+  - plateau
+  - epistemic-discipline
+  - failure-modes
+epoch: 5
+---
+
+# Persistence Must Be Intentional
+
+> When improvement is no longer observed, continuing without reassessment is escalation, not discipline.
+
+## Summary
+
+Momentum often masquerades as progress.
+
+When observable improvement flattens or inverts, I reassess the mode.
+Persistence is not the default posture. If I continue, it must be by decision.
+
+## Rationale
+
+In iterative work—design, research, drafting, engineering—common failure patterns include:
+
+- Sunk cost escalation
+- Near-completion illusion
+- Constraint stacking instead of simplification
+- Increased effort with diminishing returns
+
+If improvement is not observable, progress cannot be assumed.
+
+Continuing automatically violates:
+
+- **Reality Is Sovereign**
+- **You Cannot Verify What You Did Not Observe**
+
+Unexamined persistence compounds entropy.
+
+## Plateau Is Not Failure
+
+Plateau is common in meaningful work.
+Breakthrough often requires sustained effort beyond visible improvement.
+
+The requirement is not to stop at plateau.
+The requirement is to notice it.
+
+If I choose to persist:
+
+- I state why.
+- I accept the cost.
+- I monitor for inversion.
+- I remain willing to pivot.
+
+Unconscious persistence is escalation.
+Conscious persistence is discipline.
+
+## Boundary — Acute Execution Mode
+
+In acute execution states (e.g., crisis response, live demos, production failures), containment overrides reassessment.
+
+When stopping the bleeding, execute.
+Reassess after stabilization.
 
 
 
