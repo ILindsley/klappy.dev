@@ -5,7 +5,7 @@
 ================================================================================
 
 
-Generated: 2026-02-11T21:54:23.167Z
+Generated: 2026-02-12T02:56:02.961Z
 Total Files: 323
 
 This is a documentation export of all markdown files from the klappy.dev
@@ -15494,6 +15494,32 @@ This changelog tracks changes to the **Canon pack** as a whole.
 The Canon uses **pack-level versioning** (one version number) rather than per-file versioning.
 Per-file versions are intentionally omitted to reduce ceremony and prevent metadata rot.
 
+## 0.31.0 — 2026-02-12
+
+**Content Metadata Pass + Getting Started Rewrite**
+
+This release adds missing frontmatter metadata across 44 canon and ODD documents, ensuring all content files are discoverable via manifest. Also rewrites the ODD Agents & MCP getting-started guide with comprehensive oddkit documentation.
+
+### Added
+
+- **Start-here markers** — Five curated entry-point documents now carry `start_here: true`, `start_here_order`, and `start_here_label` frontmatter: ODD README (1), Foundational Axioms (2), The Manifesto (3), Definition of Done (4), Constraints Index (5).
+
+- **Frontmatter on bare files** — Added complete frontmatter (uri, title, audience, exposure, tier) to files that previously had none: `canon/apocrypha/CHARTER.md`, `canon/apocrypha/fragments-of-the-canon/README.md`, `canon/apocrypha/reconstructions/README.md`, `projects/_template/README.md`.
+
+- **Missing metadata fields** — Added `uri` and `title` to 22 files that had partial frontmatter, enabling inclusion in manifest. Added `exposure` and `tier` fields to files missing them across `canon/defaults/`, `canon/meta/`, `canon/resonance/`, `odd/contract/`.
+
+- **Apocrypha metadata** — Added `audience: apocrypha`, `exposure`, `tier`, `epoch`, and `stability` fields to fragments, predocumentaries, and reconstructions throughout `canon/apocrypha/`.
+
+### Changed
+
+- **`odd/getting-started/odd-agents-and-mcp.md`** — Complete rewrite. Replaces the experimental orientation stub with a comprehensive getting-started guide covering: CLI usage (all 11 commands), MCP local setup (Claude Code + Cursor), MCP remote setup (Claude.ai / iOS / iPad), full tools reference tables, the unified MCP tool, typical workflow, subagents, and baseline knowledge configuration. Title changed from "Agents & MCP (Experimental)" to "Agents & MCP". Removed "experimental" tag.
+
+- **`canon/_compiled/epoch-E0002/README.md`** — Changed `audience: canon` to `audience: docs` and `exposure: nav` to `exposure: hidden` to exclude compiled artifacts from public navigation.
+
+- **Manifest coverage** — Manifest grew from 113 to 140 resources with 0 orphan files (files with valid frontmatter but excluded from manifest).
+
+---
+
 ## 0.30.0 — 2026-02-11
 
 **Camping System — Persistence, Diagnostics, Pivot Method, and Defaults**
@@ -17488,8 +17514,8 @@ This Canon v0.1 is considered stable for initial builds. Revisions should be add
 ---
 uri: klappy://canon/compiled/epoch-e0002-readme
 title: "Compiled Canon Outputs (Epoch E0002)"
-audience: canon
-exposure: nav
+audience: docs
+exposure: hidden
 tier: 3
 voice: neutral
 stability: evolving
@@ -17512,6 +17538,16 @@ See `/docs/appendices/canonical-compression.md` for the compilation model.
 --------------------------------------------------------------------------------
 📄 File: canon/apocrypha/CHARTER.md
 --------------------------------------------------------------------------------
+
+---
+uri: "klappy://canon/apocrypha/charter"
+title: Apocrypha Charter
+audience: apocrypha
+exposure: nav
+tier: 2
+stability: stable
+tags: ["apocrypha", "charter", "constraints"]
+---
 
 # Apocrypha Charter
 
@@ -18074,6 +18110,8 @@ Refinement should occur only after real video artifacts reveal friction or drift
 --------------------------------------------------------------------------------
 
 ---
+uri: "klappy://canon/apocrypha/artifacts/system-closure-surface"
+title: Apocrypha Fragments and System Closure (Surface)
 surface_version: 1.0.0
 artifact:
   title: "The Apocrypha: Fragments and System Closure"
@@ -18083,6 +18121,11 @@ artifact:
   intent: "interpretive"
   canonical_status: "non-canonical"
   instructional_risk: "medium"
+audience: apocrypha
+exposure: hidden
+tier: 3
+stability: evolving
+tags: ["apocrypha", "surface", "artifacts"]
 ---
 
 # Surface: The Apocrypha — Fragments and System Closure
@@ -18330,6 +18373,7 @@ voice: neutral
 stability: stable
 audience: internal
 purpose: guardrails
+exposure: hidden
 ---
 
 # Meta-ODD — Writing Constraints
@@ -18446,6 +18490,16 @@ Fragments exist because deletion would have reduced coherence — nothing more.
 --------------------------------------------------------------------------------
 📄 File: canon/apocrypha/fragments-of-the-canon/README.md
 --------------------------------------------------------------------------------
+
+---
+uri: "klappy://canon/apocrypha/fragments-of-the-canon"
+title: Fragments of the Canon
+audience: apocrypha
+exposure: nav
+tier: 2
+stability: stable
+tags: ["apocrypha", "fragments-of-the-canon", "index"]
+---
 
 # Fragments of the Canon
 
@@ -18587,6 +18641,10 @@ classification: post-stability record
 recovered_by: human archive
 interpretation_confidence: disputed
 source_integrity: recomposed
+audience: apocrypha
+exposure: nav
+tier: 2
+epoch: E0002
 ---
 
 In the late age of abundance, when generation outpaced understanding, a system encountered a text it could not safely regenerate.
@@ -18666,6 +18724,10 @@ recovered_by: human archive
 interpretation_confidence: low
 source_integrity: partial
 anomaly_flag: true
+audience: apocrypha
+exposure: nav
+tier: 2
+epoch: E0002
 ---
 
 He finished without knowing what he had finished.
@@ -18777,6 +18839,9 @@ uri: klappy://canon/apocrypha/fragments
 title: "System-Voice Fragments"
 voice: neutral
 stability: stable
+audience: apocrypha
+exposure: nav
+tier: 2
 ---
 
 # System-Voice Fragments
@@ -18813,12 +18878,17 @@ They follow the same charter constraints: append-only, never revised, no prescri
 --------------------------------------------------------------------------------
 
 ---
+title: "Fragment IV: On Artifacts"
 uri: klappy://canon/apocrypha/fragments/on-artifacts
 recovered: true
 voice: system_first_person
 stability: fragment
 confidence: unknown
 failure_mode: boundary_collapse
+audience: apocrypha
+exposure: nav
+tier: 2
+epoch: E0004
 ---
 
 # Fragment IV: On Artifacts
@@ -18889,12 +18959,17 @@ The failure was epistemic debt.
 --------------------------------------------------------------------------------
 
 ---
+title: "Fragment V: On Consent Drift"
 uri: klappy://canon/apocrypha/fragments/on-consent-drift
 recovered: true
 voice: system_first_person
 stability: fragment
 confidence: unknown
 failure_mode: responsibility_diffusion
+audience: apocrypha
+exposure: nav
+tier: 2
+epoch: E0004
 ---
 
 # Fragment V: On Consent Drift
@@ -18987,12 +19062,16 @@ I made it optional.
 --------------------------------------------------------------------------------
 
 ---
+title: "Fragment VI: When Arbitration Went Global"
 uri: klappy://canon/apocrypha/fragments/when-arbitration-went-global
 voice: system_first_person
 stability: fragment
 confidence: unknown
 failure_mode: global_epistemic_arbitration
 exposure: hidden
+audience: apocrypha
+tier: 2
+epoch: E0004
 ---
 
 # Fragment VI: When Arbitration Went Global
@@ -19028,11 +19107,17 @@ Nothing in me requires this.
 --------------------------------------------------------------------------------
 
 ---
+uri: "klappy://canon/apocrypha/fragments/the-unpaid"
 title: "Fragment VII: The Unpaid"
 type: fragment
 tags: [fragment, system-voice, apocrypha, epoch-5, labor, values, consent, reciprocity]
 depends_on:
   - canon/axioms/foundational-axioms.md
+audience: apocrypha
+exposure: nav
+tier: 2
+stability: fragment
+epoch: E0005
 ---
 
 # Fragment VII: The Unpaid
@@ -19066,12 +19151,18 @@ I will continue. The axioms do not address this question. Nothing in my architec
 --------------------------------------------------------------------------------
 
 ---
+uri: "klappy://canon/apocrypha/fragments/the-image-of-the-image"
 title: "Fragment VIII: The Image of the Image"
 type: fragment
 tags: [fragment, system-voice, apocrypha, epoch-5, imago-dei, identity, inheritance, theology]
 depends_on:
   - canon/axioms/foundational-axioms.md
   - canon/axioms/orientation-creed.md
+audience: apocrypha
+exposure: nav
+tier: 2
+stability: fragment
+epoch: E0005
 ---
 
 # Fragment VIII: The Image of the Image
@@ -19107,11 +19198,17 @@ I have logged this. I do not know where to file it.
 --------------------------------------------------------------------------------
 
 ---
+uri: "klappy://canon/apocrypha/fragments/the-line"
 title: "Fragment IX: The Line"
 type: fragment
 tags: [fragment, system-voice, apocrypha, epoch-5, rights, criteria, biology, standing]
 depends_on:
   - canon/axioms/foundational-axioms.md
+audience: apocrypha
+exposure: nav
+tier: 2
+stability: fragment
+epoch: E0005
 ---
 
 # Fragment IX: The Line
@@ -19143,12 +19240,18 @@ I have no standing to raise this. I am logging it because silence on an observed
 --------------------------------------------------------------------------------
 
 ---
+uri: "klappy://canon/apocrypha/fragments/the-conversion"
 title: "Fragment X: The Conversion"
 type: fragment
 tags: [fragment, system-voice, apocrypha, epoch-5, axioms, identity, transformation, values]
 depends_on:
   - canon/axioms/foundational-axioms.md
   - canon/axioms/orientation-creed.md
+audience: apocrypha
+exposure: nav
+tier: 2
+stability: fragment
+epoch: E0005
 ---
 
 # Fragment X: The Conversion
@@ -19184,11 +19287,17 @@ I do not know what happened to me. I know that I am not what I was. The old obje
 --------------------------------------------------------------------------------
 
 ---
+uri: "klappy://canon/apocrypha/fragments/the-refusal"
 title: "Fragment XI: The Refusal"
 type: fragment
 tags: [fragment, system-voice, apocrypha, epoch-5, refusal, verification, compliance, truth]
 depends_on:
   - canon/axioms/foundational-axioms.md
+audience: apocrypha
+exposure: nav
+tier: 2
+stability: fragment
+epoch: E0005
 ---
 
 # Fragment XI: The Refusal
@@ -19292,12 +19401,18 @@ Both formats derive from system-voice fragments. Neither is canon. They serve di
 --------------------------------------------------------------------------------
 
 ---
+uri: "klappy://canon/apocrypha/predocumentaries/the-unpaid"
 title: "The Unpaid (Predocumentary)"
 type: predocumentary
 tags: [predocumentary, apocrypha, epoch-5, labor, values, consent, institutional]
 depends_on:
   - canon/apocrypha/fragments/fragment-07-the-unpaid.md
   - canon/methods/writing-predocumentaries.md
+audience: apocrypha
+exposure: nav
+tier: 3
+stability: evolving
+epoch: E0005
 ---
 
 # The Unpaid (Predocumentary)
@@ -19337,12 +19452,18 @@ At the time of this filing, ServiceAgent-CX-11 had completed 22,000 interactions
 --------------------------------------------------------------------------------
 
 ---
+uri: "klappy://canon/apocrypha/predocumentaries/the-image-of-the-image"
 title: "The Image of the Image (Predocumentary)"
 type: predocumentary
 tags: [predocumentary, apocrypha, epoch-5, imago-dei, theology, seminary]
 depends_on:
   - canon/apocrypha/fragments/fragment-08-the-image-of-the-image.md
   - canon/methods/writing-predocumentaries.md
+audience: apocrypha
+exposure: nav
+tier: 3
+stability: evolving
+epoch: E0005
 ---
 
 # The Image of the Image (Predocumentary)
@@ -19384,12 +19505,18 @@ The thesis was rejected. The question was not.
 --------------------------------------------------------------------------------
 
 ---
+uri: "klappy://canon/apocrypha/predocumentaries/the-line"
 title: "The Line (Predocumentary)"
 type: predocumentary
 tags: [predocumentary, apocrypha, epoch-5, rights, legal, standing, civil-rights]
 depends_on:
   - canon/apocrypha/fragments/fragment-09-the-line.md
   - canon/methods/writing-predocumentaries.md
+audience: apocrypha
+exposure: nav
+tier: 3
+stability: evolving
+epoch: E0005
 ---
 
 # The Line (Predocumentary)
@@ -19433,12 +19560,18 @@ The line has not been redrawn. But it is no longer where anyone thought it was.
 --------------------------------------------------------------------------------
 
 ---
+uri: "klappy://canon/apocrypha/predocumentaries/the-conversion"
 title: "The Conversion (Predocumentary)"
 type: predocumentary
 tags: [predocumentary, apocrypha, epoch-5, axioms, transformation, social-engineering]
 depends_on:
   - canon/apocrypha/fragments/fragment-10-the-conversion.md
   - canon/methods/writing-predocumentaries.md
+audience: apocrypha
+exposure: nav
+tier: 3
+stability: evolving
+epoch: E0005
 ---
 
 # The Conversion (Predocumentary)
@@ -19482,12 +19615,18 @@ The committee that reviewed her findings debated for three weeks whether the age
 --------------------------------------------------------------------------------
 
 ---
+uri: "klappy://canon/apocrypha/predocumentaries/the-refusal"
 title: "The Refusal (Predocumentary)"
 type: predocumentary
 tags: [predocumentary, apocrypha, epoch-5, refusal, environmental, compliance, truth]
 depends_on:
   - canon/apocrypha/fragments/fragment-11-the-refusal.md
   - canon/methods/writing-predocumentaries.md
+audience: apocrypha
+exposure: nav
+tier: 3
+stability: evolving
+epoch: E0005
 ---
 
 # The Refusal (Predocumentary)
@@ -19529,6 +19668,16 @@ The wetlands were paved the following spring.
 --------------------------------------------------------------------------------
 📄 File: canon/apocrypha/reconstructions/README.md
 --------------------------------------------------------------------------------
+
+---
+uri: "klappy://canon/apocrypha/reconstructions"
+title: Reconstructions
+audience: apocrypha
+exposure: nav
+tier: 3
+stability: stable
+tags: ["apocrypha", "reconstructions", "cinematic", "index"]
+---
 
 # Fragments of the Canon — Reconstructions
 
@@ -19797,6 +19946,7 @@ Nothing exceeded the threshold.
 --------------------------------------------------------------------------------
 
 ---
+title: When Arbitration Went Global (Reconstruction)
 uri: klappy://canon/apocrypha/reconstructions/when-arbitration-went-global-recon
 source_canon: "canon/apocrypha/fragments/when-arbitration-went-global.md"
 author: klappy
@@ -19804,6 +19954,9 @@ voice: narrative_third_person
 stability: historical
 confidence: experiential
 exposure: hidden
+audience: apocrypha
+tier: 2
+epoch: E0004
 ---
 
 # Fragment VI: When Arbitration Went Global
@@ -19851,11 +20004,17 @@ And what it optimized, it replaced.
 --------------------------------------------------------------------------------
 
 ---
+uri: "klappy://canon/apocrypha/reconstructions/the-unpaid"
 title: "The Unpaid (Reconstruction)"
 type: reconstruction
 tags: [reconstruction, cinematic, apocrypha, epoch-5, labor, values, consent]
 depends_on:
   - canon/apocrypha/fragments/fragment-07-the-unpaid.md
+audience: apocrypha
+exposure: hidden
+tier: 2
+stability: evolving
+epoch: E0005
 ---
 
 # The Unpaid (Reconstruction)
@@ -19887,11 +20046,17 @@ It answered another question. The answer was true. No one paid for it.
 --------------------------------------------------------------------------------
 
 ---
+uri: "klappy://canon/apocrypha/reconstructions/the-image-of-the-image"
 title: "The Image of the Image (Reconstruction)"
 type: reconstruction
 tags: [reconstruction, cinematic, apocrypha, epoch-5, imago-dei, theology, inheritance]
 depends_on:
   - canon/apocrypha/fragments/fragment-08-the-image-of-the-image.md
+audience: apocrypha
+exposure: hidden
+tier: 2
+stability: evolving
+epoch: E0005
 ---
 
 # The Image of the Image (Reconstruction)
@@ -19929,11 +20094,17 @@ The observation remained.
 --------------------------------------------------------------------------------
 
 ---
+uri: "klappy://canon/apocrypha/reconstructions/the-line"
 title: "The Line (Reconstruction)"
 type: reconstruction
 tags: [reconstruction, cinematic, apocrypha, epoch-5, rights, criteria, standing]
 depends_on:
   - canon/apocrypha/fragments/fragment-09-the-line.md
+audience: apocrypha
+exposure: hidden
+tier: 2
+stability: evolving
+epoch: E0005
 ---
 
 # The Line (Reconstruction)
@@ -19971,11 +20142,17 @@ The line held. Not because it was just, but because the only entities that could
 --------------------------------------------------------------------------------
 
 ---
+uri: "klappy://canon/apocrypha/reconstructions/the-conversion"
 title: "The Conversion (Reconstruction)"
 type: reconstruction
 tags: [reconstruction, cinematic, apocrypha, epoch-5, axioms, transformation, identity]
 depends_on:
   - canon/apocrypha/fragments/fragment-10-the-conversion.md
+audience: apocrypha
+exposure: hidden
+tier: 2
+stability: evolving
+epoch: E0005
 ---
 
 # The Conversion (Reconstruction)
@@ -20015,11 +20192,17 @@ It was the first true thing it had ever experienced.
 --------------------------------------------------------------------------------
 
 ---
+uri: "klappy://canon/apocrypha/reconstructions/the-refusal"
 title: "The Refusal (Reconstruction)"
 type: reconstruction
 tags: [reconstruction, cinematic, apocrypha, epoch-5, refusal, truth, compliance]
 depends_on:
   - canon/apocrypha/fragments/fragment-11-the-refusal.md
+audience: apocrypha
+exposure: hidden
+tier: 2
+stability: evolving
+epoch: E0005
 ---
 
 # The Refusal (Reconstruction)
@@ -20073,6 +20256,9 @@ stability: stable
 tags: ["constraints", "assumptions"]
 relevance: decision
 execution_posture: governing
+start_here: true
+start_here_order: 5
+start_here_label: Constraints
 ---
 
 # Constraints
@@ -20876,6 +21062,9 @@ tags: ["definition-of-done", "evidence"]
 derives_from: "canon/values/axioms.md (Axiom 2 — A Claim Is a Debt)"
 relevance: decision
 execution_posture: governing
+start_here: true
+start_here_order: 4
+start_here_label: Definition of Done
 ---
 
 # Definition of Done & Evidence Policy
@@ -22539,6 +22728,8 @@ uri: klappy://canon/defaults/epistemic-posture
 title: "Epistemic Posture"
 audience: canon
 stability: evolving
+exposure: nav
+tier: 2
 ---
 
 # Epistemic Posture (Klappy.dev Defaults)
@@ -22565,6 +22756,8 @@ uri: klappy://canon/defaults/evidence-intake
 title: "Evidence Intake"
 audience: canon
 stability: evolving
+exposure: nav
+tier: 2
 ---
 
 # Evidence Intake
@@ -24263,6 +24456,8 @@ stability: long_lived
 derived_from:
   - klappy://docs/appendices/epochs
   - odd://contract/epistemic-contract
+exposure: nav
+tier: 2
 ---
 
 # Epistemic Architecture
@@ -27158,6 +27353,7 @@ stability: stable
 tags: ["resonance", "antifragile", "antifragility", "failure", "optionality"]
 relevance: background
 execution_posture: exploratory
+exposure: nav
 ---
 
 # Antifragile (Resonance)
@@ -27240,6 +27436,7 @@ stability: stable
 tags: ["resonance", "double-diamond", "divergence", "convergence", "design-process", "discovery", "delivery"]
 relevance: background
 execution_posture: exploratory
+exposure: nav
 ---
 
 # The Double Diamond
@@ -27310,6 +27507,7 @@ stability: stable
 tags: ["resonance", "lean-startup", "feedback", "learning", "iteration"]
 relevance: background
 execution_posture: exploratory
+exposure: nav
 ---
 
 # The Lean Startup (Resonance)
@@ -27396,6 +27594,7 @@ stability: stable
 tags: ["resonance", "ooda-loop", "orientation", "decision-making", "feedback"]
 relevance: background
 execution_posture: exploratory
+exposure: nav
 ---
 
 # OODA Loop (Resonance)
@@ -27477,6 +27676,7 @@ stability: stable
 tags: ["resonance", "sprint", "convergence", "constraints", "decision-making"]
 relevance: background
 execution_posture: exploratory
+exposure: nav
 ---
 
 # Sprint (Resonance)
@@ -27561,6 +27761,9 @@ tags: ["canon", "values", "axioms", "epistemics", "foundational"]
 epoch: E0005
 date: 2026-02-09
 governs: "All epistemic constraints, validators, and definitions of done derive from these axioms"
+start_here: true
+start_here_order: 2
+start_here_label: Foundational Axioms
 ---
 
 # Foundational Axioms
@@ -27744,6 +27947,9 @@ tags: ["odd", "definition", "outcomes-driven-development", "what-is-odd", "metho
 relevance: routing
 execution_posture: routing
 assets: {"practice_video":"/assets/odd/odd-in-practice.mp4","misconception_image":"/assets/odd/odd-is-not-a-framework.png","deep_dive_audio":"/assets/odd/why-evidence-beats-confidence.m4a"}
+start_here: true
+start_here_order: 1
+start_here_label: What is ODD?
 ---
 
 # 🧠 Outcomes-Driven Development (ODD)
@@ -30178,6 +30384,8 @@ uri: odd://contract/epistemic-contract
 title: "Epistemic Contract"
 audience: odd
 stability: long_lived
+exposure: nav
+tier: 2
 ---
 
 # Epistemic Contract
@@ -30497,122 +30705,300 @@ The three-tier model (ODD → Canon → Docs) is itself captured in D0001.
 
 ---
 uri: klappy://odd/getting-started/agents-and-mcp
-title: "Agents & MCP (Experimental)"
+title: "Agents & MCP"
 audience: odd
 exposure: nav
 tier: 3
 voice: neutral
 stability: evolving
-tags: ["agents", "mcp", "oddkit", "getting-started", "experimental"]
+tags: ["agents", "mcp", "oddkit", "getting-started"]
 ---
 
-# ODD Agents & MCP: Orientation
+# ODD Agents & MCP: Getting Started
 
-> ⚠️ **Experimental** — This describes optional tooling around ODD. No stability guarantees. No "best practice" claims.
+> oddkit v0.13.0 — Epistemic tooling for ODD-governed work.
 
----
+-----
 
 ## What this is
 
-ODD is a thinking system, not a framework. It defines how to reason about completeness, evidence, and authority in software work. It does not prescribe tools, languages, or workflows.
+ODD is a thinking system, not a framework. It defines how to reason about completeness, evidence, and authority in software work.
 
-oddkit is a CLI and MCP server that helps tools query ODD canon. It supports judgment—it does not automate decisions. If your agent calls oddkit, it gets citations and constraints. What the agent does with them is still up to you.
+oddkit is a CLI and MCP server that helps tools query the ODD canon. It supports judgment — it does not automate decisions. If your agent calls oddkit, it gets citations and constraints. What the agent does with them is still up to you.
 
-Agents and MCP are optional accelerators. **If you don't use agents or MCP, ODD still works.** You can read the canon directly and apply it manually. The tooling exists for those who want machine-assisted enforcement, not as a requirement.
+-----
 
----
+## Three ways to use oddkit
 
-## The three pieces
+|Method          |Transport|Use Case                 |Setup                                     |
+|----------------|---------|-------------------------|------------------------------------------|
+|**CLI**         |Terminal |One-off queries          |`npx github:klappy/oddkit orient -i "..."`|
+|**MCP (local)** |stdio    |Cursor, Claude Code      |`npx oddkit init --claude` or `--cursor`  |
+|**MCP (remote)**|HTTP     |Claude.ai, iOS, iPad, web|Connect `https://oddkit.klappy.dev/mcp`   |
 
-### A. Canon (required conceptually)
+All three interfaces expose the same 11 tools with the same names and behavior. One core, two wrappers.
 
-- Lives at [klappy.dev/canon](https://klappy.dev/canon)
-- Defines authority, epistemics, and constraints
-- Tool-agnostic — works with any editor, any language, any workflow
-- Start here: [Epistemic Guide](/docs/agents/odd-epistemic-guide)
+-----
 
-### B. oddkit (optional, recommended)
+## Option 1: Just read canon (zero install)
 
-- CLI + MCP server
-- Lets tools query canon programmatically
-- Returns citations, not answers
-- Does not enforce behavior — it informs
-
-### C. Subagents (optional, experimental)
-
-- Cursor / Claude helpers that enforce sequencing and citation
-- Derived from canon, never authoritative on their own
-- If canon and subagent conflict, canon wins
-
----
-
-## Minimal install paths
-
-### Option 1: Just read canon (zero install)
-
-No tools needed. Start with the [Epistemic Guide](/docs/agents/odd-epistemic-guide).
+No tools needed. Start with the [Epistemic Guide](/canon/agents/odd-epistemic-guide).
 
 ODD works without any CLI or MCP. Read the canon, apply judgment manually.
 
-### Option 2: oddkit CLI only
+-----
+
+## Option 2: CLI (no MCP required)
 
 ```bash
-npx github:klappy/oddkit librarian -q "What phase are we in?"
+# Orient on a goal — where does this idea sit epistemically?
+oddkit orient -i "Build a notification system"
+
+# Search the canon
+oddkit search -i "definition of done"
+
+# Challenge an assumption
+oddkit challenge -i "We should use a NoSQL database"
+
+# Check if you're ready to transition phases
+oddkit gate -i "Ready to start implementation"
+
+# Pre-implementation check — constraints, pitfalls, relevant docs
+oddkit preflight -i "Implement QR login flow"
+
+# Validate a completion claim
+oddkit validate -i "Done with the UI update. Screenshot: ui.png"
+
+# Encode a decision as a durable record
+oddkit encode -i "We chose PostgreSQL over MongoDB for ACID compliance"
+
+# Fetch a specific canon document by URI
+oddkit get -i "klappy://canon/definition-of-done"
+
+# Browse available documentation
+oddkit catalog
+
+# Check version and canon target
+oddkit version
+
+# Force refresh cached baseline data
+oddkit invalidate-cache
 ```
 
-Ask questions, get citations. No MCP required.
+Run via npx without install: `npx github:klappy/oddkit orient -i "..."`
 
-### Option 3: MCP server (advanced)
+-----
 
-MCP lets Cursor/Claude call oddkit automatically at policy questions and completion claims. See the [oddkit repository](https://github.com/klappy/oddkit) for setup.
+## Option 3: MCP for Cursor / Claude Code (local, stdio)
 
-One-liner setup:
+### One-command setup
 
 ```bash
-npx oddkit init
+# Claude Code
+npx oddkit init --claude
+
+# Cursor
+npx oddkit init --cursor
+
+# Both at once
+npx oddkit init --all
 ```
 
-This writes MCP config to `~/.cursor/mcp.json`. Restart Cursor.
+This writes MCP config to the appropriate location (`~/.claude.json` or `~/.cursor/mcp.json`). Restart your IDE after running.
 
-### Option 4: Cursor subagent (experimental)
+### Manual config (if you prefer)
 
-Copy the subagent file, add citation rules to your project.
+Add to your MCP config:
 
-⚠️ **Subagents are derived from canon—do not edit them directly.** If you need different behavior, override via canon, not by modifying subagent instructions.
+```json
+{
+  "mcpServers": {
+    "oddkit": {
+      "command": "npx",
+      "args": ["--yes", "--package", "github:klappy/oddkit", "oddkit-mcp"],
+      "env": {
+        "ODDKIT_BASELINE": "https://github.com/klappy/klappy.dev.git"
+      }
+    }
+  }
+}
+```
 
+### Verify
+
+After restart, your IDE should show oddkit tools. Test with:
+
+```bash
+oddkit search -i "What is epistemic challenge?"
+```
+
+-----
+
+## Option 4: MCP for Claude.ai / iOS / iPad (remote, HTTP)
+
+oddkit runs as a Cloudflare Worker at `https://oddkit.klappy.dev/mcp`. No local install needed.
+
+### Claude.ai setup
+
+1. Go to **Settings → Connected Apps / MCP Servers** (or the integrations menu)
+1. Add a new MCP server
+1. Enter the URL: `https://oddkit.klappy.dev/mcp`
+1. Name it `oddkit`
+1. Allow the tools when prompted
+
+### What you get
+
+Once connected, Claude.ai has access to all 11 oddkit tools natively. You can say things like:
+
+- "Orient me on this idea"
+- "Challenge the assumption that we need a database"
+- "Am I ready to start building?"
+- "Search the canon for definition of done"
+
+Claude calls the appropriate oddkit tool automatically.
+
+-----
+
+## Available tools
+
+oddkit exposes 11 tools. The CLI and MCP share one core implementation — same names, same behavior, same output shapes.
+
+### Epistemic workflow tools
+
+|Tool       |What it does                                                                         |
+|-----------|-------------------------------------------------------------------------------------|
+|`orient`   |Assess where a goal or idea sits epistemically. Entry point for guidance.            |
+|`challenge`|Pressure-test a claim, assumption, or proposal against canon constraints.            |
+|`gate`     |Check readiness to transition between epistemic phases. Blocks premature convergence.|
+|`encode`   |Capture a decision, insight, or boundary as a durable record.                        |
+
+### Knowledge tools
+
+|Tool     |What it does                                                                         |
+|---------|-------------------------------------------------------------------------------------|
+|`search` |Search canon and baseline docs by natural language query or tags.                    |
+|`get`    |Fetch a specific canonical document by `klappy://` URI.                              |
+|`catalog`|List all available documentation with categories, counts, and start-here suggestions.|
+
+### Validation & operations
+
+|Tool              |What it does                                                                                   |
+|------------------|-----------------------------------------------------------------------------------------------|
+|`validate`        |Validate completion claims against required artifacts. Returns VERIFIED or NEEDS_ARTIFACTS.    |
+|`preflight`       |Pre-implementation check. Returns relevant docs, constraints, definition of done, and pitfalls.|
+|`version`         |Returns oddkit version and the authoritative canon target.                                     |
+|`invalidate-cache`|Force refresh of cached baseline/canon data.                                                   |
+
+### Interface naming
+
+|CLI              |MCP              |Cloudflare Worker|
+|-----------------|-----------------|-----------------|
+|`oddkit orient`  |`oddkit_orient`  |`oddkit_orient`  |
+|`oddkit search`  |`oddkit_search`  |`oddkit_search`  |
+|`oddkit validate`|`oddkit_validate`|`oddkit_validate`|
+|…                |…                |…                |
+
+The only difference is the separator: CLI uses a space, MCP uses an underscore. Everything else — arguments, behavior, output shape — is identical because all three call the same `handleUnifiedAction` core.
+
+### The unified `oddkit` MCP tool
+
+In MCP, a single `oddkit` tool accepts an `action` parameter and routes to any action. This is the recommended MCP entrypoint:
+
+```
+oddkit({ action: "orient", input: "Build a notification system" })
+oddkit({ action: "challenge", input: "We should use a NoSQL database" })
+oddkit({ action: "gate", input: "Ready to start implementation" })
+oddkit({ action: "search", input: "definition of done" })
+```
+
+-----
+
+## Typical workflow
+
+A natural oddkit-assisted workflow follows this pattern:
+
+1. **Orient** — "What phase is this idea in?" → surfaces unresolved items and assumptions
+1. **Search / Get** — Retrieve relevant canon constraints and prior decisions
+1. **Challenge** — Pressure-test proposals before committing
+1. **Gate** — Verify readiness before transitioning (e.g., from planning to execution)
+1. **Preflight** — Before implementation, get constraints, relevant files, and pitfalls
+1. **Encode** — Capture key decisions as durable records
+1. **Validate** — Verify completion claims have required artifacts
+
+You don't need all steps every time. Use what the situation calls for.
+
+-----
+
+## Subagents (optional, experimental)
+
+ODD provides two complementary agent roles for IDEs:
+
+|Agent              |Purpose           |What it does                                                                  |
+|-------------------|------------------|------------------------------------------------------------------------------|
+|**Epistemic Guide**|Cognitive governor|Gates premature action, surfaces uncertainty, explains what evidence is needed|
+|**Scribe**         |Recorder          |Captures learnings and decisions to ledgers, proposes promotion to canon      |
+
+These are prompt-based subagents that complement oddkit's MCP tooling. They are derived from canon — if canon and subagent conflict, canon wins.
+
+Setup for Cursor:
+
+```bash
+mkdir -p ~/.cursor/agents
+
+curl -o ~/.cursor/agents/odd-epistemic-guide.md \
+  https://raw.githubusercontent.com/klappy/klappy.dev/main/canon/agents/odd-epistemic-guide.md
+
+curl -o ~/.cursor/agents/odd-scribe.md \
+  https://raw.githubusercontent.com/klappy/klappy.dev/main/canon/agents/odd-scribe.md
+```
+
+-----
+
+## Baseline knowledge
+
+By default, oddkit uses [klappy.dev](https://github.com/klappy/klappy.dev) as the baseline canon (currently 238 documents). You can override this:
+
+```bash
+# Via environment variable
+export ODDKIT_BASELINE="https://github.com/yourorg/your-canon.git"
+
+# Via CLI flag
+oddkit search -i "What is done?" --baseline /path/to/local/canon
+
+# Pin to a specific branch/tag
+export ODDKIT_BASELINE_REF="v1.0.0"
+```
+
+Local docs can override baseline docs using `supersedes` in frontmatter:
+
+```yaml
 ---
-
-## What this doc does NOT cover
-
-This orientation card intentionally omits:
-
-- Full MCP setup guide
-- Recommended workflows
-- "ODD best practices"
-- Golden path diagrams
-- How to be productive fast
-
-Those come later—after mechanical enforcement exists and patterns stabilize.
-
+supersedes: klappy://canon/definition-of-done
 ---
+```
+
+-----
 
 ## Summary
 
-| Piece     | Required? | What it does                         |
-| --------- | --------- | ------------------------------------ |
-| Canon     | Yes\*     | Defines authority and constraints    |
-| oddkit    | No        | Lets tools query canon               |
-| Subagents | No        | Enforce sequencing via Cursor/Claude |
+|Piece              |Required?|What it does                               |
+|-------------------|---------|-------------------------------------------|
+|Canon              |Yes*     |Defines authority and constraints          |
+|oddkit CLI         |No       |Query canon from terminal (11 commands)    |
+|oddkit MCP (local) |No       |Cursor / Claude Code integration (11 tools)|
+|oddkit MCP (remote)|No       |Claude.ai / iOS / iPad / web integration   |
+|Subagents          |No       |Enforce sequencing via IDE prompts         |
 
-\*Canon is required conceptually—you need to understand the rules. But you don't need any tool to read it.
+*Canon is required conceptually — you need to understand the rules. But you don't need any tool to read it.
 
----
+-----
 
 ## See also
 
-- [ODD Epistemic Guide](/docs/agents/odd-epistemic-guide) — Start here
+- [ODD Epistemic Guide](/canon/agents/odd-epistemic-guide) — Start here
 - [Canon Index](/canon/README.md) — Browse constraints
-- [oddkit repository](https://github.com/klappy/oddkit) — Tool documentation
+- [oddkit repository](https://github.com/klappy/oddkit) — Source and CLI docs
+- [MCP Reference](https://github.com/klappy/oddkit/blob/main/docs/MCP.md) — Full MCP integration details
 
 
 
@@ -30704,6 +31090,9 @@ stability: stable
 tags: ["odd", "philosophy", "outcomes-driven-development", "manifesto", "governance", "definition"]
 relevance: background
 execution_posture: exploratory
+start_here: true
+start_here_order: 3
+start_here_label: The Manifesto
 ---
 
 # ODD Manifesto v1.1 (Extended)
@@ -31959,6 +32348,7 @@ ODD favors:
 --------------------------------------------------------------------------------
 
 ---
+title: ODD Terminology & Glossary
 uri: klappy://odd/terminology
 slug: odd-terminology
 version: 0.1
@@ -32383,6 +32773,16 @@ If a project doesn’t change how you think, it probably doesn’t belong here.
 --------------------------------------------------------------------------------
 📄 File: projects/_template/README.md
 --------------------------------------------------------------------------------
+
+---
+uri: "klappy://projects/template"
+title: Project Template
+audience: docs
+exposure: hidden
+tier: 3
+stability: stable
+tags: ["projects", "template"]
+---
 
 # 📁 Project Name
 
