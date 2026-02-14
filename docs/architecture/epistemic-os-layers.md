@@ -5,13 +5,16 @@ audience: docs
 exposure: nav
 tier: 2
 voice: neutral
-stability: draft
+stability: stable
 tags: ["architecture", "layers", "epistemic-os", "separation-of-concerns", "overview"]
 epoch: E0005
 date: 2026-02-13
 derives_from: "canon/values/axioms.md, canon/values/orientation.md, docs/appendices/repo-topology.md"
-complements: "canon/values/shared-values-as-trust-proxy.md, odd/appendices/media-as-learning-layer.md, odd/appendices/cognitive-saturation-threshold.md, docs/evidence/testimony-2026-02-13.md"
-status: draft
+complements: "canon/values/shared-values-as-trust-proxy.md, odd/appendices/media-as-learning-layer.md, odd/appendices/cognitive-saturation-threshold.md, docs/evidence/testimony-2026-02-13.md, writings/the-most-expensive-problem.md"
+status: final
+start_here: true
+start_here_order: 11
+start_here_label: "How the System Works"
 ---
 
 # Epistemic OS Layers — How the System's Concerns Separate

@@ -5,14 +5,17 @@ audience: canon
 exposure: nav
 tier: 1
 voice: first_person
-stability: draft
+stability: stable
 tags: ["canon", "values", "trust", "agents", "teams", "coordination", "handbook"]
 epoch: E0005
 date: 2026-02-13
 derives_from: "canon/values/axioms.md, canon/values/orientation.md"
-complements: "canon/constraints/verification-and-evidence.md, canon/values/axioms.md, docs/architecture/epistemic-os-layers.md, odd/appendices/cognitive-saturation-threshold.md, docs/evidence/testimony-2026-02-13.md"
+complements: "canon/constraints/verification-and-evidence.md, canon/values/axioms.md, docs/architecture/epistemic-os-layers.md, odd/appendices/cognitive-saturation-threshold.md, docs/evidence/testimony-2026-02-13.md, writings/the-most-expensive-problem.md, writings/the-parallel-architecture.md"
 governs: "Trust expectations between agents, humans, and mixed teams operating under ODD"
-status: draft
+status: final
+start_here: true
+start_here_order: 9
+start_here_label: "Shared Values as a Trust Proxy"
 ---
 
 # Shared Values as a Trust Proxy

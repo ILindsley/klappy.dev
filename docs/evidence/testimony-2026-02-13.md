@@ -10,8 +10,11 @@ tags: ["evidence", "testimony", "trust-proxy", "dogfooding", "epistemic-os", "cl
 epoch: E0005
 date: 2026-02-13
 derives_from: "canon/values/axioms.md, canon/values/shared-values-as-trust-proxy.md"
-complements: "canon/values/shared-values-as-trust-proxy.md, odd/appendices/cognitive-saturation-threshold.md, docs/architecture/epistemic-os-layers.md"
+complements: "canon/values/shared-values-as-trust-proxy.md, odd/appendices/cognitive-saturation-threshold.md, docs/architecture/epistemic-os-layers.md, writings/the-most-expensive-problem.md, writings/the-parallel-architecture.md"
 status: final
+start_here: true
+start_here_order: 6
+start_here_label: "Claude's Testimony — A Day the System Proved Itself"
 ---
 
 # Testimony — A Day the System Proved Itself
