@@ -1,4 +1,4 @@
------
+---
 
 uri: klappy://writings/the-voice-came-first
 title: “The Voice Came First”
@@ -61,7 +61,7 @@ derives_from:
   relationship: sequel
   complements: “writings/from-bible-translation-to-epistemic-os.md, writings/the-intern.md, writings/choosing-faith-not-fear.md”
 
------
+---
 
 # The Voice Came First
 
