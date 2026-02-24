@@ -75,11 +75,13 @@ derives_from:
 
 This chapter traces a question through every domain I’ve worked in: what if the technologies we built for knowledge transfer — writing, printing, digital — were never the destination, but byproducts of need? Each solved a real limitation of speech: durability, scale, searchability. But each also introduced costs — loss of voice, loss of context, loss of the person behind the ideas. We accepted those costs because we had no alternative.
 
-In Bible translation, I spent years watching approaches succeed and fail. The ones that produced translations communities trusted, used, and owned tended to start with the community’s voice — listening, discussing, embodying, retelling — and the written form came last. The ones that started with an expert at a desk risked producing shelf translations. That’s not a universal rule, but the pattern was consistent enough to make me wonder.
+You already know this. Every time technology offered a richer medium than text — phone calls, video, podcasts, social media — people took it. The pattern isn’t controversial. But we built our entire knowledge economy around the most compressed medium anyway, because it was the only one that scaled.
+
+In Bible translation, I spent years watching the same pattern play out. The approaches that started with a community’s voice — listening, discussing, embodying, retelling — tended to produce translations people actually used. The written form came last. That’s not a universal rule, but the pattern was consistent enough to make me wonder.
 
 I didn’t realize until this year that I’d been living the same pattern. The book you’re reading was written by talking — to my parents, my son, my colleagues, my AI assistant — and the text you see is what emerged from those conversations. I didn’t sit at a keyboard composing sentences. I spoke, and the system shaped what I said into what you’re reading.
 
-AI is the first technology that can give us the advantages of text — durability, searchability, structure — without requiring us to start from text. The spoken word becomes the written word, the audiobook, the chapter, all of it. So was text ever the point? Or was it always just the best bridge we had — and now a better one has arrived?
+AI is the first technology that can give us the advantages of text — durability, searchability, structure — without requiring us to start from text. So was text ever the point? Or was it always just the best bridge we had — and now a better one has arrived?
 
 I’m not claiming writing is obsolete. I’m asking whether the primacy we give it was always about the medium’s advantages rather than the medium itself.
 
@@ -99,17 +101,41 @@ If you’ve ever stared at a blank page and felt the gap between what you *know*
 
 -----
 
-## The Shelf Translation Problem
+## What We Already Know We Lose
 
-In Bible translation, there’s a failure mode that people in the field talk about more than they’d like to admit. A translation gets produced — sometimes over years of careful work — and it’s technically sound. The grammar is correct. The meaning is preserved. The experts sign off. And then it sits on a shelf. The community it was made for doesn’t use it. Not because it’s wrong. Because it’s not theirs.
+Before I connect this to my own career, I want to point at something you already know. You don’t need me to convince you — you’ve lived it.
 
-It’s not the only reason translations go unused, but it’s the generally accepted one: when the church community isn’t involved in the translation process, the result doesn’t stick. What went wrong isn’t a quality problem. It’s an ownership problem. The expert started with the text. They studied the source languages, consulted the commentaries, labored over word choices, and produced a manuscript. Then they brought it to the community and said: here’s your Bible.
+The most effective delivery of Scripture isn’t reading. It’s preaching, teaching, discipleship — one person speaking to another in a relationship built on trust. The Bible has been in print for centuries, but the way it actually changes lives is almost always through a voice.
 
-But the community hadn’t been part of the journey. They didn’t hear themselves in it. The understanding that makes a translation come alive — the kind of understanding you can see when someone retells a passage in their own words, with their own gestures, in their own rhythm — that understanding was never built. It was bypassed. The expert had it. The community received a product.
+Textbooks exist to support teaching — a person standing in front of a room, explaining, answering questions, adjusting in real time to what the audience needs. PhD candidates write dissertations, but they *defend* them. Verbally. In a room. The presentation is the real test, not the document.
 
-I watched this happen. And I watched the opposite happen — approaches that started with the community’s involvement from the beginning, where understanding was built through listening, discussion, retelling, even acting and singing, before anyone wrote anything down. Oral Bible translation ensures this by design: it starts through orality and community from the first step, which means the process is never expert-driven. The community owns what they create because they were part of creating it. And it’s not just about voice — it’s multimodal, engaging other forms of communication, sensory learning, and expression that text alone can’t capture. The written form came last, as a record of what the community already understood. And those translations? People used them. They preached from them. They sang them. They owned them.
+At work, remote teams have proven the gap. Everyone knows how much is lost over Slack and email. Tone vanishes. Nuance collapses. A message meant to be helpful reads as curt. A question reads as an accusation. Companies spend real money flying remote teams together periodically — not because the work can’t happen over text, but because relational capital drains through text-only communication and has to be replenished in person.
 
-I’m not going to name specific methods or approaches — that’s a conversation with its own politics, and I have no interest in picking sides. What I can tell you is what I observed: when communities were involved from the beginning — especially through oral and multimodal approaches — the translations transferred. When the process started with an expert and a desk, the risk of a shelf translation went up. It wasn’t a universal rule, but the pattern was consistent enough that it shaped how I think about every kind of knowledge transfer.
+Video calls exploded not because they’re convenient — anyone who’s sat through back-to-back Zoom meetings knows they’re exhausting — but because we *need* face-to-face communication to avoid the misunderstandings that text creates. We chose the more demanding medium because the less demanding one kept breaking things.
+
+Even in our closest relationships, the pattern holds. A couple apart prefers phone calls and video calls over text messages. They’ll text for logistics — “picking up groceries, need anything?” — but for anything that matters, they call. Because text strains. Voice sustains. And face-to-face is where the real connection happens.
+
+And look at what happened when the market got to choose. Podcasts and audiobooks exploded — not because blogs died, but because when people had the option to listen instead of read, millions of them took it. YouTube became the world’s second-largest search engine — people would rather *watch* someone explain something than read about it. Instagram, TikTok, Facebook — each one a bet that people will engage more with images, video, and performance than with text alone. Blogs didn’t disappear, but they were eclipsed. Every time a new medium gave people access to richer communication than text, people moved.
+
+The pattern isn’t just voice over text. It’s *full bandwidth over compression*. Text strips out tone, emotion, gesture, facial expression, timing, emphasis — everything that makes human communication human. Voice adds some of it back. Video adds more. Face-to-face is the full signal. And every time technology has lowered the barrier to a richer medium, people have chosen it. That’s not a trend. That’s a preference we couldn’t act on until the technology caught up.
+
+None of this is controversial. Everyone agrees with it. But here’s what I find remarkable: if we already know that richer communication is where understanding actually transfers — in faith, in education, in work, in relationships, in every market where people get to choose — why did we build our entire knowledge economy around the most compressed medium we have? The answer, I think, is that we didn’t have a choice. Text was the only medium that scaled. The only medium that persisted. The only medium you could search, copy, and send across the world.
+
+So we accepted the compression. We traded bandwidth for durability. Presence for portability. And we got so used to the tradeoff that we stopped seeing it as one.
+
+AI is the first technology that might let us stop accepting that compression. Not just by giving us voice back — but by starting to give us the full bandwidth back. Speak, and it transcribes. Show, and it sees. Perform, and it captures. The richest forms of human communication are becoming the *input*, and the durable, searchable, portable artifacts we need are becoming the *output*. We don’t have to start from text anymore. We can start from the full signal and let the machine handle the compression.
+
+-----
+
+## What I Saw Work
+
+I watched this pattern play out for years in Bible translation before I had a name for it.
+
+The approaches that produced translations communities actually used had something in common: they started with the community’s voice. Not with an expert at a desk, but with people — listening, discussing, retelling, even acting and singing, before anyone wrote anything down. Oral Bible translation ensures this by design: it starts through orality and community from the first step, which means the process is never expert-driven. The community owns what they create because they were part of creating it. And it’s not just about voice — it’s multimodal, engaging other forms of communication, sensory learning, and expression that text alone can’t capture. The written form came last, as a record of what the community already understood. And those translations? People used them. They preached from them. They sang them. They owned them.
+
+When it worked the other way — expert starts with text, produces a manuscript, brings it to the community — the result sometimes sat on a shelf. Not because it was wrong. Because it wasn’t theirs. The community hadn’t been part of the journey. They didn’t hear themselves in it.
+
+I’m not going to name specific methods or approaches — that’s a conversation with its own politics, and I have no interest in picking sides. What I can tell you is what I observed: when communities were involved from the beginning — especially through oral and multimodal approaches — the translations transferred. When they weren’t, the risk went up. It wasn’t a universal rule, but the pattern was consistent enough that it shaped how I think about every kind of knowledge transfer.
 
 -----
 
@@ -152,32 +178,6 @@ Not because AI forced us to — although voice interfaces are advancing fast. Be
 Which raises the question I keep coming back to: was text-first ever the ideal? Or was it the most compressed medium we could scale — and we just got so used to the compression that we forgot anything was missing? If AI can give us durability, searchability, and scale starting from the full bandwidth of human communication — voice, video, gesture, presence — does the primacy of text-first workflows still hold?
 
 Ecclesiastes might not be surprised either way.
-
------
-
-## What We Already Know We Lose
-
-Before I connect this to my own experience, I want to point at something you already know. You don’t need me to convince you — you’ve lived it.
-
-The most effective delivery of Scripture isn’t reading. It’s preaching, teaching, discipleship — one person speaking to another in a relationship built on trust. The Bible has been in print for centuries, but the way it actually changes lives is almost always through a voice.
-
-Textbooks exist to support teaching — a person standing in front of a room, explaining, answering questions, adjusting in real time to what the audience needs. PhD candidates write dissertations, but they *defend* them. Verbally. In a room. The presentation is the real test, not the document.
-
-At work, remote teams have proven the gap. Everyone knows how much is lost over Slack and email. Tone vanishes. Nuance collapses. A message meant to be helpful reads as curt. A question reads as an accusation. Companies spend real money flying remote teams together periodically — not because the work can’t happen over text, but because relational capital drains through text-only communication and has to be replenished in person.
-
-Video calls exploded not because they’re convenient — anyone who’s sat through back-to-back Zoom meetings knows they’re exhausting — but because we *need* face-to-face communication to avoid the misunderstandings that text creates. We chose the more demanding medium because the less demanding one kept breaking things.
-
-Even in our closest relationships, the pattern holds. A couple apart prefers phone calls and video calls over text messages. They’ll text for logistics — “picking up groceries, need anything?” — but for anything that matters, they call. Because text strains. Voice sustains. And face-to-face is where the real connection happens.
-
-And look at what happened when the market got to choose. Podcasts and audiobooks exploded — not because blogs died, but because when people had the option to listen instead of read, millions of them took it. YouTube became the world’s second-largest search engine — people would rather *watch* someone explain something than read about it. Instagram, TikTok, Facebook — each one a bet that people will engage more with images, video, and performance than with text alone. Blogs didn’t disappear, but they were eclipsed. Every time a new medium gave people access to richer communication than text, people moved.
-
-The pattern isn’t just voice over text. It’s *full bandwidth over compression*. Text strips out tone, emotion, gesture, facial expression, timing, emphasis — everything that makes human communication human. Voice adds some of it back. Video adds more. Face-to-face is the full signal. And every time technology has lowered the barrier to a richer medium, people have chosen it. That’s not a trend. That’s a preference we couldn’t act on until the technology caught up.
-
-None of this is controversial. Everyone agrees with it. But here’s what I find remarkable: if we already know that richer communication is where understanding actually transfers — in faith, in education, in work, in relationships, in every market where people get to choose — why did we build our entire knowledge economy around the most compressed medium we have? The answer, I think, is that we didn’t have a choice. Text was the only medium that scaled. The only medium that persisted. The only medium you could search, copy, and send across the world.
-
-So we accepted the compression. We traded bandwidth for durability. Presence for portability. And we got so used to the tradeoff that we stopped seeing it as one.
-
-AI is the first technology that might let us stop accepting that compression. Not just by giving us voice back — but by starting to give us the full bandwidth back. Speak, and it transcribes. Show, and it sees. Perform, and it captures. The richest forms of human communication are becoming the *input*, and the durable, searchable, portable artifacts we need are becoming the *output*. We don’t have to start from text anymore. We can start from the full signal and let the machine handle the compression.
 
 -----
 
