@@ -60,7 +60,6 @@ derives_from:
   start_here: true
   start_here_order: 6
   start_here_label: “The Project Journal — Getting Started”
-
 ---
 
 # The Project Journal — Your AI Collaboration’s Memory
