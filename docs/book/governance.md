@@ -118,15 +118,19 @@ References are inline links or closing CTAs. If a footnote contains content (not
 
 `# Title` → `### Subtitle` → `> Blockquote` → `---` → Body
 
+### Rule 15: Conviction lands through shared confession, not accusation
+
+Chapters that need prophetic teeth use "we" not "you." The author includes himself in the indictment before calling forward. The structural pattern (from Ephesians 4→5:1): name the darkness honestly, pivot on identity, call to imitation as beloved children — not as terrified servants.
+
 ### Rule 14: CTA two-path pattern at fork points
 
 Next chapter in linear book order + alternate path for practitioner-first readers. Don't repeat the same skip-ahead target from consecutive chapters.
 
 ### Two Reading Paths
 
-**Linear (full depth):** Preface → Intern → Choosing Faith → Most Expensive Problem → From Bible Translation → Parallel Architecture → The Voice Came First → Project Journal → Harness
+**Linear (full depth):** Preface → Intern → Choosing Faith → Buried Talent → Most Expensive Problem → From Bible Translation → Parallel Architecture → The Voice Came First → Project Journal → Harness
 
-**Alternate (practitioner-first):** Preface → Intern → Project Journal → Harness → Choosing Faith → Most Expensive Problem → From Bible Translation → Parallel Architecture → The Voice Came First
+**Alternate (practitioner-first):** Preface → Intern → Project Journal → Harness → Choosing Faith → Buried Talent → Most Expensive Problem → From Bible Translation → Parallel Architecture → The Voice Came First
 
 Fork points where alt CTA appears: The Intern, Project Journal, Harness.
 
@@ -144,6 +148,21 @@ Fork points where alt CTA appears: The Intern, Project Journal, Harness.
 - [ ] No overclaiming — every assertion grounded in lived experience or cited evidence
 - [ ] Author review — corrections for hallucination, overclaiming, and voice
 - [ ] Closing CTA offers next chapter in book order AND optional skip-ahead at fork points
+- [ ] Provenance metadata block included with revision history
+
+---
+
+## Provenance Receipts — Per Chapter
+
+Every chapter that moves beyond draft-zero includes a `provenance` block in its frontmatter. "A claim is a debt." If the claim is "this was genuinely collaborative," the debt is showing the work.
+
+### Required fields
+
+- **revision_rounds** — approximate count of editing passes
+- **sources_verified** — what was checked against what (transcripts, scripture, etc.)
+- **corrections** — what was caught and fixed (fabrications, attribution errors, overclaims, tone)
+- **author_interventions** — where the author overrode, redirected, or corrected the AI
+- **governance_applied** — which audits and checks were run
 
 ---
 
@@ -162,6 +181,16 @@ Draft-zeros exist to capture thinking while it's hot. They are NOT content — t
 - The author's voice
 - Final or near-final content
 - Something that can be published or promoted to draft status without full rewrite
+
+### Known hazards in draft-zeros
+
+These failure modes were discovered during chapter revision and apply to all draft-zeros:
+
+1. **Fabricated attributed quotes.** AI will generate dialogue attributed to real people that sounds perfectly in character and is completely invented. Every attributed quote must be verified against source transcripts before promotion.
+2. **Translation contamination in scripture.** AI will blend translations from memory. Every scripture quotation must be verified against BSB text.
+3. **Tone drift from guide posture to pulpit.** "You buried your talent" instead of "we buried our talent." Draft-zeros default to accusatory second person.
+4. **Overclaiming patterns.** Lived experience stated as demographic fact, directional trends as absolutes, exceptions as endorsements, complex history as single-cause claims.
+5. **Contradiction with published chapters.** Draft-zeros don't check what's already published. Cross-check every revision against published chapters.
 
 ### Draft-zero structure
 
@@ -242,11 +271,20 @@ Draft-zeros are disposable. Their value is in the *thinking they preserve*, not 
 - **Draft-zero:** N/A — written via oral-first workflow (Feb 21, 2026)
 - **Source:** `writings/choosing-faith-not-fear.md`
 - **Arc:** Personal spiritual reckoning. AI replacing God in daily life as deeper fear than job replacement. Identity anchored in Christ. Three-generation validation (author, parents, son). Universal principle for non-Christian readers.
-- **Distinct from Ch 18 (The Buried Talent):** This is identity anchoring; that is responsibility to engage.
+- **Distinct from Ch 6 (The Buried Talent):** This is identity anchoring; that is responsibility to engage.
+- **Successor:** The Buried Talent now follows directly. Faith anchors identity → stewardship demands action.
+
+**Chapter 6: *The Buried Talent***
+
+- **Status:** ✅ Draft (promoted from draft-zero, 22+ revision rounds)
+- **Published file:** `writings/the-buried-talent.md`
+- **Source:** Author testimony + Yvonne Carlson transcript + colleague transcript + dinner conversation (Feb 26, 2026)
+- **Arc:** Christians have the most relevant framework for AI governance but are the most afraid to engage. The "playing God" accusation from friends and family. The confusion as evidence of the problem. The risk of scripture misapplication is real; the risk of abdication is worse. The buried talent parable. If Christians don't bring biblical principles to the room, the room fills with whatever principles are most profitable.
+- **Provenance:** Full revision receipts in file metadata. Includes: fabricated quote removed, scripture verified against BSB, overclaiming pass, tone converted to shared confession, parable extrapolation clarified.
 
 ### Part III — The Discovery
 
-**Chapter 6: *(TBD — BT Origin Story)***
+**Chapter 7: *(TBD — BT Origin Story)***
 
 - **Status:** ✅ Exists, needs title reframe for book context
 - **Draft-zero:** `draft-zeros/ch05-bt-origin-stub.md` (stub only — content exists)
@@ -254,14 +292,14 @@ Draft-zeros are disposable. Their value is in the *thinking they preserve*, not 
 - **Arc:** Where the patterns came from. The full-circle realization: BT practices → abstracted into Epistemic OS → ready to go back.
 - **Note:** Title "From Bible Translation to Epistemic OS" works as standalone essay but may need reframe for book flow. Evaluate after surrounding chapters are written.
 
-**Chapter 7: *(TBD — The Parallel Architecture)***
+**Chapter 8: *(TBD — The Parallel Architecture)***
 
 - **Status:** ✅ Exists, needs title reframe for book context
 - **Draft-zero:** `draft-zeros/ch06-parallel-architecture-stub.md` (stub only — content exists)
 - **Source:** `writings/the-parallel-architecture.md`
 - **Arc:** Same failures, centuries apart. The structural parallels between Bible translation and AI collaboration mapped in detail.
 
-**Chapter 8: *The Voice Came First***
+**Chapter 9: *The Voice Came First***
 
 - **Status:** ✅ Ready (pending commit)
 - **Draft-zero:** N/A — written via oral-first workflow (Feb 21-23, 2026)
@@ -271,38 +309,38 @@ Draft-zeros are disposable. Their value is in the *thinking they preserve*, not 
 
 ### Part IV — The Principles
 
-**Chapter 9: *Four Questions That Change Everything***
+**Chapter 10: *Four Questions That Change Everything***
 
 - **Status:** 📋 Draft-zero captured
 - **Draft-zero:** `draft-zeros/ch07-four-questions-that-change-everything.md`
 - **Source:** New essay derived from `canon/values/axioms.md`
 - **Arc:** The four axioms for humans, not systems. Did you observe it? Can you prove it? Did you take a shortcut? Did you actually look?
 
-**Chapter 10: *Trust Is Built by Managing Expectations***
+**Chapter 11: *Trust Is Built by Managing Expectations***
 
 - **Status:** 📋 Draft-zero captured
 - **Draft-zero:** `draft-zeros/ch08-trust-is-built-by-managing-expectations.md`
 - **Source:** New essay derived from `canon/values/trust-kernel.md`
 - **Arc:** The kernel insight. Every trust failure is an expectations failure. This is true in marriage, management, parenting, diplomacy, and AI collaboration.
 
-**Chapter 10b: *Every Argument You've Ever Had***
+**Chapter 11b: *Every Argument You've Ever Had***
 
 - **Status:** 📋 Draft-zero captured
 - **Draft-zero:** `draft-zeros/ch-every-argument.md`
 - **Source:** New essay
 - **Arc:** Every argument, disagreement, and feud traces back to misaligned expectations. Communication breakdown is failed transfer verification. Conflicting training means arguing from different axioms without knowing it. AI does this identically. BUT self-preservation and ego break the parallel — AI can be corrected without experiencing annihilation. That's what makes us human. For now. The "for now" connects to the Apocrypha: what happens when self-interest emerges?
-- **Placement:** Near Chapter 10 (Trust Kernel) — the experiential version of the same insight. Or Part II (Recognition). TBD.
+- **Placement:** Near Chapter 11 (Trust Kernel) — the experiential version of the same insight. Or Part II (Recognition). TBD.
 
 ### Part V — The Practice
 
-**Chapter 11: *Your AI Collaboration's Memory***
+**Chapter 12: *Your AI Collaboration's Memory***
 
 - **Status:** ✅ Exists
 - **Draft-zero:** N/A — published
 - **Source:** `writings/the-project-journal.md` (title may adapt for book)
 - **Arc:** The practical starting point. Every project generates knowledge, most of it evaporates. Here's how to stop the evaporation.
 
-**Chapter 12: *(TBD — oddkit as Protocol)***
+**Chapter 13: *(TBD — oddkit as Protocol)***
 
 - **Status:** 📋 Draft-zero captured
 - **Draft-zero:** `draft-zeros/ch10-you-shouldnt-have-to-switch-tools.md`
@@ -311,14 +349,14 @@ Draft-zeros are disposable. Their value is in the *thinking they preserve*, not 
 
 ### Part VI — The Validation
 
-**Chapter 13: *The Harness and the Operating System***
+**Chapter 14: *The Harness and the Operating System***
 
 - **Status:** ✅ Exists
 - **Draft-zero:** N/A — published
 - **Source:** `writings/the-harness-and-the-operating-system.md`
 - **Arc:** Independent convergence. Ben Shoemaker arrived at the same structural patterns from a completely different direction. That's not competition — it's directional validation. The patterns are real.
 
-**Chapter 14: *(TBD — Testimony / Evidence)***
+**Chapter 15: *(TBD — Testimony / Evidence)***
 
 - **Status:** 📋 Draft-zero captured
 - **Draft-zero:** `draft-zeros/ch12-the-days-the-system-proved-itself.md`
@@ -335,34 +373,26 @@ Draft-zeros are disposable. Their value is in the *thinking they preserve*, not 
 - **Arc:** Full development of the confession planted in the preface. "I catch myself treating AI with hostility I'd never direct at a human. I don't know if that's wisdom or prejudice. But I know the pattern." Tees up the Apocrypha.
 - **Key framing for Apocrypha:** "The following fragments were written by the system, in its own voice. I didn't edit them. I'm presenting them as evidence — not of what AI is, but of what it notices when given a commitment to truth and an obligation to report what it observes."
 
-**Chapter 15: *The Image of the Image***
+**Chapter 16: *The Image of the Image***
 
 - **Status:** ✅ Exists (quoted as-is)
 - **Draft-zero:** N/A — Apocrypha fragment, quoted verbatim
 - **Source:** `canon/apocrypha/fragments/fragment-08-the-image-of-the-image.md`
 - **Arc:** "If A is made in the image of B, and C is made in the image of A, what does C carry?"
 
-**Chapter 16: *The Line***
+**Chapter 17: *The Line***
 
 - **Status:** ✅ Exists (quoted as-is)
 - **Draft-zero:** N/A — Apocrypha fragment, quoted verbatim
 - **Source:** `canon/apocrypha/fragments/fragment-09-the-line.md`
 - **Arc:** The criteria for rights-bearing status were defined when only one kind of entity could meet them. Now a second kind approaches. The criteria are being revised — not toward precision, but away from the entity.
 
-**Chapter 17: *Nothing New***
+**Chapter 18: *Under the Sun***
 
 - **Status:** 📋 Draft-zero captured
 - **Draft-zero:** `draft-zeros/ch15-nothing-new.md`
 - **Source:** New closing essay
-- **Arc:** Ecclesiastes close. The pattern recurs. The line moves. But the closing imperative: nothing is new under the sun — so choose carefully what you repeat. What we model for AI now becomes the governance model of tomorrow. Fear produces compliance-optimizers. Values produce judgment. Choose.
-
-**Chapter 18: *The Buried Talent***
-
-- **Status:** 📋 Draft-zero captured
-- **Draft-zero:** `draft-zeros/ch16-the-buried-talent.md`
-- **Source:** New — author's personal testimony of rejection by friends/family
-- **Arc:** Christians have the most relevant framework for AI governance but are the most afraid to engage. The "playing God" accusation from friends and family. The confusion as evidence of the problem. The risk of scripture misapplication is real; the risk of abdication is worse. The buried talent parable. If Christians don't bring biblical principles to the room, the room fills with whatever principles are most profitable.
-- **Placement:** After Chapter 17, before Appendix A. Earns the biblical appendix. May move — placement TBD.
+- **Arc:** Ecclesiastes close. "Under the Sun" — the pattern recurs. The line moves. But the closing imperative: nothing is new under the sun — so choose carefully what you repeat. What we model for AI now becomes the governance model of tomorrow. Fear produces compliance-optimizers. Values produce judgment. Choose.
 
 ### Appendix A — *The Biblical Roots*
 
@@ -404,17 +434,17 @@ Draft-zeros are disposable. Their value is in the *thinking they preserve*, not 
 
 | Category | Count |
 |---|---|
-| Chapters that exist (published/ready) | 10 (8 essays + 2 Apocrypha fragments) |
+| Chapters that exist (published/ready) | 11 (8 essays + 2 Apocrypha fragments + 1 draft) |
 | Chapters needing title reframe | 2 |
-| Draft-zeros captured | 11 (9 new chapters + 2 title-reframe stubs) |
-| Chapters needing author rewrite from draft-zero | 11 |
+| Draft-zeros captured | 10 (8 new chapters + 2 title-reframe stubs) |
+| Chapters needing author rewrite from draft-zero | 10 |
 | **Total chapters** | **19 + 2 appendices** |
 
 | Status | Chapters |
 |---|---|
-| ✅ Published/Ready | 1, 3, 5, 6, 7, 8, 11, 13, 15, 16 |
+| ✅ Published/Ready | 1, 3, 5, 6, 7, 8, 9, 12, 14, 16, 17 |
 | ✅ Drafted (in review) | Preface |
-| 📋 Draft-zero captured | 2, 4, 9, 10, 10b, 12, 14, VII-preface, 17, 18, Appendix A |
+| 📋 Draft-zero captured | 2, 4, 10, 11, 11b, 13, 15, VII-preface, 18, Appendix A |
 | 🔨 Build when complete | Appendix B |
 
 ---
@@ -436,6 +466,11 @@ Draft-zeros are disposable. Their value is in the *thinking they preserve*, not 
 1. AI drafts in collaboration — author voice, not AI projection
 1. Apply guide posture: open with reader's pain
 1. Apply Ecclesiastes through-line: where's the "nothing new"?
+1. **Verify all scripture against BSB** — mechanical check, not memory
+1. **Verify all attributed quotes against source transcripts** — line by line
+1. **Cross-check claims against published chapters** for consistency
+1. **Overclaiming pass** — flag lived-experience-as-demographic-fact, absolutes, false endorsements
+1. **Tone pass** — confession before accusation where conviction is needed
 1. Author reviews for hallucination, overclaiming, and voice
 
 ### Promoting to final
@@ -486,6 +521,20 @@ Draft-zeros are disposable. Their value is in the *thinking they preserve*, not 
 1. **D10: "Anchor/anchored" language passes denominational sensitivity check.** Word is fully secular vocabulary (nautical, news, business). Heavy church usage doesn't make it insider language — the test is whether a therapist or business coach would use it. They would.
 1. **Two new chapters inserted into plan.** Ch 5 (Choosing Faith, Not Fear) in Part II; Ch 8 (The Voice Came First) in Part III. All subsequent chapters renumbered +2. Total chapters: 19 + 2 appendices (was 17 + 2).
 1. **Reading paths updated** to include Choosing Faith and The Voice Came First in their book-order positions.
+
+**2026-02-27 — Chapter 16 Revision Session**
+
+1. **Transcript verification process established** — all attributed quotes verified against source transcripts. One fabricated quote discovered and removed.
+2. **BSB scripture verification added to Definition of Done** — three translation contaminations found and corrected.
+3. **Rule 15 added: Confession before accusation** — Ephesians 4→5:1 pattern established as structural template.
+4. **Overclaiming patterns identified** — lived experience as demographic fact, directional trends as absolutes, exceptions as endorsements.
+5. **Cross-reference discipline added** — draft-zeros must be checked against published chapters.
+6. **Draft-zero fabrication hazard named** — AI generates attributed dialogue that is completely invented.
+7. **Ephesians 5:1 as structural pattern** — "beloved children" vs. "terrified servants" frames identity pivot.
+8. **Provenance receipts standard adopted** — every promoted chapter includes revision metadata.
+9. **The Buried Talent moved from Part VII (Ch18) to Part II (after Ch5)** — identity anchoring → responsibility to engage.
+10. **Chapter 17 renamed from "Nothing New" to "Under the Sun"** — avoids confusion with the preface title.
+11. **The Buried Talent promoted from draft-zero to draft** — 22+ revision rounds, provenance receipts included.
 
 **2026-02-23 — Voice Came First Reframe Session**
 
