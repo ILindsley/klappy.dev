@@ -325,37 +325,3 @@ The servant who buried his talent saw a hard master and hid. The child who knows
 Dig it up. Bring it to the room. The wall won't build itself. And it was never about the wall anyway.
 
 *The previous chapter, [Choosing Faith, Not Fear](klappy://writings/choosing-faith-not-fear), anchors identity in what doesn't change. This chapter asks what that identity demands of us. The appendix, [The Biblical Roots](klappy://draft-zeros/appendix-a-the-biblical-roots), maps the scriptural foundations underneath every principle in this book.*
-
------
-
-## Key Beats to Develop (Author Notes)
-
-- [x] **Yvonne's exact words** — Re-listened to transcript, verified quotes, corrected fabricated quotes, fixed Holocaust attribution, softened narrative claims
-- [ ] **Daniel's voice as audience proxy** — He represents the reader who won't sit down and read but would listen while driving. The chapter's tone should match how you described it to him on the phone
-- [ ] **The "playing God" accusation** — Specific examples from real conversations (anonymized). The draft now has the casual register from the colleague transcript alongside the heavier personal register
-- [ ] **Your writing struggle** — Daniel confirmed it. The system didn't make you a writer. It removed a barrier. Now integrated into the talents-as-force-multiplier section
-- [ ] **"I didn't set out to build this"** — The calling preceded the plan. Now in the Moses-to-Jesus section
-- [ ] **Yvonne's background depth** — Jewish heritage, Holocaust survivor family, IEEE standards, medical devices, performing arts. Verify what she's comfortable sharing publicly
-- [ ] **The live convergence moment** — You and Claude independently identified this as Chapter 18. Yvonne watched it happen. Consider whether to include or save for another context
-- [ ] **Connection to Chapter 5** — "Ignoring it is the buried talent" was planted there. This chapter delivers on that promise. Psalm 121 thread now connects both chapters
-- [ ] **Non-Christian accessibility** — The "force multiplier" argument and "room fills with whatever shows up" are universal. The Christian-specific call is clearly flagged as the author's lens
-- [ ] **Dinner conversation** — The literal/figurative talents collapse needs the author's own phrasing from that moment. The draft projects the argument but isn't the author's voice yet
-- [ ] **Self-control vs. abdication** — From colleague transcript. More in scripture about self-control than avoidance. The biblical answer to dangerous tools has never been "don't touch it"
-- [ ] **TV → Internet → Social Media → AI pattern** — Now has its own section. Author should add specific personal examples from each era if available
-- [ ] **Ian's role** — The dinner conversation was with Ian, but he served as sounding board (the author pitched the whole chapter arc to him in flow), not a quotable source. No content attribution needed. His named appearance is in Ch 5
-
-## Source Material
-
-- Yvonne Carlson transcript, Feb 26 2026
-- Daniel Klapp transcript, Feb 26 2026
-- Colleague transcript (unnamed), Feb 26 2026
-- Dinner conversation, Feb 26 2026 (no transcript — reconstructed from author memory; served as sounding board for chapter arc)
-- Thread map: ch18-thread-map.html
-- canon/values/axioms.md
-- canon/constraints/guide-posture.md
-- canon/meta/writing-canon.md
-- docs/book/governance.md (Chapter 16 entry, Definition of Done)
-- writings/choosing-faith-not-fear.md (sibling chapter, published pattern)
-- Book of Nehemiah (chapters 1-6 especially)
-- Matthew 25:14-30 (Parable of the Talents, BSB)
-- Psalm 121:1-2 (BSB)
