@@ -86,7 +86,7 @@ complements: "writings/choosing-faith-not-fear.md, draft-zeros/appendix-a-the-bi
 
 # The Broken Wall and the Buried Talent
 
-### Two ancient stories collided in a conversation about AI — and I haven't been the same since
+### Two ancient stories collided in a conversation about AI
 
 *"Be imitators of God, therefore, as beloved children."* — Ephesians 5:1 (BSB)
 
