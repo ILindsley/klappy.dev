@@ -4,7 +4,7 @@ title: "The Broken Wall and the Buried Talent"
 subtitle: "Two ancient stories collided in a conversation about AI — and I haven't been the same since"
 author: "Klappy"
 type: article
-status: draft
+status: published
 stability: evolving
 audience: public
 exposure: public
@@ -29,6 +29,10 @@ provenance:
     - "Yvonne Carlson transcript (Feb 26) — quotes checked against audio"
     - "Daniel Klapp transcript (Feb 26) — writing struggle confirmation"
     - "Scripture: Psalm 121:1, Nehemiah 3:5, Matthew 25:26 verified against BSB"
+  speaker_confirmed:
+    - speaker: "Yvonne Carlson"
+      date: 2026-03-17
+      scope: "All directly attributed quotes reviewed and corrected by speaker"
   corrections:
     - "Fabricated Yvonne quote removed (she never said 'the wall is AI governance')"
     - "Holocaust family attribution corrected (wrong family member referenced)"
@@ -36,6 +40,7 @@ provenance:
     - "Parable extrapolation clarified (no implied fourth servant)"
     - "6 overclaims grounded in lived experience or softened"
     - "Accusatory tone converted to shared confession (5 instances)"
+    - "Yvonne Carlson quote corrected: 'there's some there' → 'there's something there' (per Yvonne review, Mar 2026)"
   author_interventions:
     - "Corrected Ian attribution twice"
     - "Directed placement move from Part VII to Part II"
@@ -134,7 +139,7 @@ She described her own organization in the same terms — "people are still livin
 
 Then she said the thing I'll carry into this chapter and probably into the rest of my life:
 
-"It was never about the walls. It was about God's people and calling them back to himself. So I think there's some there — in this process of interacting with AI, can God be calling us back to himself?"
+"It was never about the walls. It was about God's people and calling them back to himself. So I think there's something there — in this process of interacting with AI, can God be calling us back to himself?"
 
 I need to be honest about something here, because integrity matters more than a compelling story. When I left that meeting and called my brother to process what Yvonne had shared, I told him: "I do plan on going back and re-listening to the transcript just to validate and verify how much of that is what she was intending and how much of it is just my own interpretation." I want to give her credit for what she actually said. I don't want to put words in her mouth. The parallels I'm drawing in this chapter are mine. The insight that opened the door was hers.
 
