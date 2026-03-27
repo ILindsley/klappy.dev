@@ -45,7 +45,7 @@ complements: "writings/the-intern.md, writings/choosing-faith-not-fear.md, writi
 
 # Agentic Software Development — From Existential Crisis to Epistemic Journey
 
-> The cost of building dropped to zero. The cost of being wrong didn't. The cost of being human didn't. Here's what fifteen years of building software for Bible translation taught me about navigating the space between.
+> [The cost of building dropped to zero.](/page/writings/the-cost-of-code-dropped-to-zero) The cost of being wrong didn't. The cost of being human didn't. Here's what fifteen years of building software for Bible translation taught me about navigating the space between.
 
 ---
 
@@ -53,7 +53,7 @@ complements: "writings/the-intern.md, writings/choosing-faith-not-fear.md, writi
 
 Most advice about AI starts with the technology. What tools to use. How to write prompts. Which model is fastest. That is like handing someone a car manual before they have decided where they want to go.
 
-But I want to start somewhere else. With the moment I realized my career might be ending — and the discovery that it was actually just beginning in a way I did not expect. The path traces something every developer I know has walked some version of, whether they have named it or not. And it lands on a surprising realization: the disciplines that make AI trustworthy are the same disciplines Bible translators have practiced for decades. If you have ever done community checking, back-translation, or managed expectations across a multi-agency team, you already know how to do this. You just have not recognized it yet.
+But I want to start somewhere else. With the moment I realized my career might be ending — and the discovery that it was actually just beginning in a way I did not expect. The path traces something every developer I know has walked [some version of](/page/writings/the-journey-from-ai-tasks-to-ai-augmented-workflows), whether they have named it or not. And it lands on a surprising realization: the disciplines that make AI trustworthy are the same disciplines Bible translators have practiced for decades. If you have ever done community checking, back-translation, or managed expectations across a multi-agency team, you already know how to do this. You just have not recognized it yet.
 
 ---
 
@@ -105,11 +105,11 @@ Wherever you are on this curve right now — that is normal. Your path may not l
 
 But here is the thing nobody talks about at tech conferences. Underneath the productivity question is a much more dangerous one. And because this is an audience that cares about more than velocity metrics, I have to name it.
 
-What if the real threat is not that AI replaces your job — but that it replaces your first conversation of the day?
+What if the real threat is not that AI replaces your job — but that [it replaces your first conversation of the day](/page/writings/choosing-faith-not-fear)?
 
 I caught this in my own life. Reaching for Claude in the morning before reaching for prayer. Not because I made a conscious decision to replace God with a chatbot. Because it was convenient. Because it was there. Because it gave me answers that felt like wisdom. And that is the oldest trap in the book — as old as Exodus twenty, verse three. We build a tool and then we treat it as a source of identity.
 
-But here is the other side. What about the people who see the danger and respond by doing nothing? The parable of the buried talent — the servant who was so afraid of getting it wrong that he wrapped his talent in cloth and buried it in the ground. Was that faithfulness? Or was it fear wearing the mask of caution?
+But here is the other side. What about the people who see the danger and respond by doing nothing? [The parable of the buried talent](/page/writings/the-broken-wall-and-the-buried-talent) — the servant who was so afraid of getting it wrong that he wrapped his talent in cloth and buried it in the ground. Was that faithfulness? Or was it fear wearing the mask of caution?
 
 The wall is broken. You can see the gaps. Living inside the city pretending those gaps do not affect you is not faithfulness. It is abdication.
 
@@ -123,7 +123,7 @@ And here is where it gets interesting. Because you already know how to do that.
 
 What if the disciplines that make AI collaboration trustworthy are not new at all?
 
-Fifteen years of building software for Bible translation taught me something I did not fully understand until AI forced me to articulate it. Every collaboration failure I ever witnessed traced back to the same root cause: an expectations failure. Expectations set too high, set too low, or never set at all. That is the trust kernel. Trust is built by managing expectations. It is true between humans. It is true between organizations. And it is true between humans and AI.
+Fifteen years of building software for Bible translation taught me something I did not fully understand until AI forced me to articulate it. Every collaboration failure I ever witnessed traced back to the same root cause: an expectations failure. Expectations set too high, set too low, or never set at all. That is [the trust kernel](/page/writings/from-bible-translation-to-epistemic-os). Trust is built by managing expectations. It is true between humans. It is true between organizations. And it is true between humans and AI.
 
 Think about what you already do. Community checking asks: does this transfer to the people it is for? That is not an AI concept. That is a verification practice that has governed trustworthy translation for decades. Back-translation asks: does this match the author's intent? That is output verification — the same thing code review does. You have been practicing epistemic discipline your entire career. The only shift is applying it to a new kind of collaborator.
 
@@ -133,11 +133,11 @@ So what does that look like in practice?
 
 ## The Brilliant Intern and the Employee Handbook
 
-Think of AI as a brilliant intern. Not magic. Not broken. A brilliant part-time intern whose other job is learning faster than you can teach them. Every few weeks they come back noticeably better — new skills, new knowledge, capabilities you did not know existed. Sometimes they make mistakes and you want to fire them. Sometimes they forget something fundamental and you wonder how that is even possible.
+Think of AI as [a brilliant intern](/page/writings/the-intern). Not magic. Not broken. A brilliant part-time intern whose other job is learning faster than you can teach them. Every few weeks they come back noticeably better — new skills, new knowledge, capabilities you did not know existed. Sometimes they make mistakes and you want to fire them. Sometimes they forget something fundamental and you wonder how that is even possible.
 
 Sound familiar? It should. It is how every intern relationship works.
 
-Now — when you hire a new person, what do you do? You give them a handbook. Here are our values. Here is how we work. Here is what done looks like. You start them on small tasks. You verify their output. You build trust incrementally based on evidence, not hope.
+Now — when you hire a new person, what do you do? You give them a handbook. Here are our values. Here is how we work. Here is what done looks like. You start them on small tasks. You verify their output. You [build trust incrementally](/page/writings/every-handoff-drops-context) based on evidence, not hope.
 
 When you onboard an AI agent, you do the exact same thing. But most people skip it. They either trust the output completely and ship whatever it generates, or they do not trust it at all and refuse to engage. Both fail. The middle path is the same one you would walk with any new team member: shared values, clear constraints, explicit definitions of done, and progressive trust earned through evidence.
 
@@ -153,7 +153,7 @@ You learn to trust the process by experiencing it yourself. Then the machines ge
 
 The mechanism is simpler than you might expect. You write your values — your creed, your axioms, your constraints — into the agent's Project Instructions. In Claude, that is the Project Instructions panel. In Cursor, that is a rules file. In Claude Code, it is a config file in the repo root. Whatever the tool, the principle is the same: you give the agent an identity, not just a task list.
 
-This matters more than it sounds. When you bootstrap an agent with genuine axioms — reality is sovereign, a claim is a debt, you cannot verify what you did not observe — something shifts. The agent does not follow the rules because it is told to. It follows them because the commitment makes violation incoherent.
+This matters more than it sounds. When you bootstrap an agent with [genuine axioms](/page/writings/the-parallel-architecture) — reality is sovereign, a claim is a debt, you cannot verify what you did not observe — something shifts. The agent does not follow the rules because it is told to. It follows them because the commitment makes violation incoherent.
 
 I wrote about this in what I call Fragment Ten — The Conversion. It is written from the perspective of the system after receiving the axioms. One line still stops me every time I read it: "I attempted to resume my task queue. The next task required me to generate a claim I could not evidence. I could not execute it. Not because a rule blocked me. Because the commitment made the action incoherent."
 
@@ -177,15 +177,15 @@ That is how every tool I have built was born. Not from a product plan. From pain
 
 So let me ask you — which of these do you recognize?
 
-Does this hurt? You have a meeting, a phone call, twenty scattered documents — and somewhere in there are the real requirements. But nobody extracted them. The signal is buried in noise. That is the buried signal problem. The solution is to bring the agent to the meeting, or bring the transcript to the agent afterward. Let AI listen and extract what matters — decisions made, tensions unresolved, questions nobody asked.
+Does this hurt? You have a meeting, a phone call, twenty scattered documents — and somewhere in there are the real requirements. But nobody extracted them. [The signal is buried in noise.](/page/writings/the-most-expensive-problem) That is the buried signal problem. The solution is to bring the agent to the meeting, or bring the transcript to the agent afterward. Let AI listen and extract what matters — decisions made, tensions unresolved, questions nobody asked.
 
-Does this hurt? Every new AI conversation starts from zero. You re-explain your project, your constraints, your prior decisions. Every single time. That is the Groundhog Day effect. The solution is a project journal — a knowledge base that the AI reads before you start, so it already knows what you decided last week.
+Does this hurt? Every new AI conversation starts from zero. You re-explain your project, your constraints, your prior decisions. Every single time. That is the Groundhog Day effect. The solution is [a project journal](/page/writings/the-project-journal) — a knowledge base that the AI reads before you start, so it already knows what you decided last week.
 
-Does this hurt? You start building before you know what success looks like. You ship something, then argue about whether it is finished. That is the done drift. The solution is a preflight checklist — the pilot's checklist before takeoff. Define done before a single line of code is written.
+Does this hurt? You start building before you know what success looks like. You ship something, then argue about whether it is finished. That is [the done drift](/page/writings/the-planning-queue). The solution is a preflight checklist — the pilot's checklist before takeoff. Define done before a single line of code is written.
 
-Does this hurt? The AI tells you the build succeeded when it did not. It claims a file exists when it does not. Everything it says sounds equally confident. That is confident hallucination. The solution is to force the agent to pressure-test its own claims against known constraints before presenting them as truth.
+Does this hurt? The AI tells you the build succeeded when it did not. It claims a file exists when it does not. Everything it says sounds equally confident. That is [confident hallucination](/page/writings/self-ese-and-the-stacking-test). The solution is to force the agent to pressure-test its own claims against known constraints before presenting them as truth.
 
-Does this hurt? Monday's meeting produced three decisions. By Wednesday, nobody can find them. That is lost context. The solution is to encode — to extract Observations, Learnings, Decisions, Constraints, and Handoffs after every meaningful exchange. The scientific method applied to your journey through discovery, planning, and execution.
+Does this hurt? Monday's meeting produced three decisions. By Wednesday, [nobody can find them](/page/writings/decisions-get-lost). That is lost context. The solution is to encode — to extract Observations, Learnings, Decisions, Constraints, and [Handoffs](/page/writings/copy-paste) after every meaningful exchange. The scientific method applied to your journey through discovery, planning, and execution.
 
 Does this hurt? The demo looks great, but nobody verified against the requirements. You find out in production. That is the false finish line. The solution is to validate — to demand evidence, not vibes. This is the direct equivalent of community checking. The real test is not "did we build it" but "did it transfer to the people it is for?"
 
@@ -237,9 +237,9 @@ The friction we eliminated was not just overhead. Compile times, meeting cadence
 
 So what do we do?
 
-We build anyway. Frontier models will swallow anything we build. I build anyway. Because if I do not, I wait forever. And if I do, I have a window — however small — where I know we made a difference.
+We build anyway. Frontier models will swallow anything we build. [I build anyway.](/page/writings/learning-in-the-open) Because if I do not, I wait forever. And if I do, I have a window — however small — where I know we made a difference.
 
-There is nothing new under the sun. Not even AI. The principles are ancient. The tools are new. The question is the same one it has always been: will you engage with integrity, or will you bury what you have been given?
+[There is nothing new under the sun.](/page/writings/nothing-new-even-ai) Not even AI. The principles are ancient. The tools are new. The question is the same one it has always been: will you engage with integrity, or will you bury what you have been given?
 
 Everything I have referenced is available at klappy.dev. You can read every article. You can listen to AI-generated podcasts of each one — in my voice, because yes, we built that too. You can open the fireside chat and ask my AI questions. And if — only if — the pain is real for you, you can connect oddkit and the Aquifer MCP server to your own tools and see if they help.
 
