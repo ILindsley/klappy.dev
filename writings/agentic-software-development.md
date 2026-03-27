@@ -65,7 +65,7 @@ But the most important thing to understand first is not the tools. It is the hum
 
 What will not be outdated is the emotional journey. The one that my colleague Ian Lindsley and I have talked about for the better part of half a year — an emotional rollercoaster that we did not expect, that genuinely shook us, and that fundamentally changed how we think about our work, our identity, and our craft.
 
-If you do not understand the human journey, the tools will not save you. And if you do understand it, the tools will make sense in a way they never would have otherwise.
+If you do not understand the human journey, the tools will not help you. And if you do understand it, the tools will make sense in a way they never would have otherwise.
 
 Have you ever had a moment where you realized the floor you were standing on was not as solid as you thought?
 
