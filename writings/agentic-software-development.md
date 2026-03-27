@@ -1,6 +1,6 @@
 ---
 uri: "klappy://writings/agentic-software-development"
-title: "Agentic Software Development — From Existential Crisis to Epistemic Mastery"
+title: "Agentic Software Development — From Existential Crisis to Epistemic Journey"
 subtitle: "What fifteen years of building software for Bible translation taught me about trusting AI — and why the hardest part was never the code"
 author: "Klappy"
 type: essay
@@ -16,11 +16,11 @@ date: 2026-03-27
 hook: "The cost of building dropped to zero. The cost of being wrong didn't. The cost of being human didn't. Here's what fifteen years of building software for Bible translation taught me about navigating the space between."
 description: "A developer's honest account of the journey from existential crisis to productive AI collaboration — and the discovery that the disciplines governing trustworthy AI are the same ones Bible translators have practiced for decades."
 slug: agentic-software-development
-og_title: "Agentic Software Development — From Existential Crisis to Epistemic Mastery"
+og_title: "Agentic Software Development — From Existential Crisis to Epistemic Journey"
 og_description: "The cost of code dropped to zero. The cost of being human didn't. A systems architect's journey from fear to trust."
 og_type: article
 twitter_card: summary_large_image
-twitter_title: "Agentic Software Development — From Existential Crisis to Epistemic Mastery"
+twitter_title: "Agentic Software Development — From Existential Crisis to Epistemic Journey"
 twitter_description: "The cost of code dropped to zero. The cost of being human didn't."
 derives_from:
   - "canon/values/axioms.md"
@@ -43,7 +43,7 @@ related:
 complements: "writings/the-intern.md, writings/choosing-faith-not-fear.md, writings/the-cost-of-code-dropped-to-zero.md, writings/from-bible-translation-to-epistemic-os.md, writings/the-most-expensive-problem.md, writings/the-parallel-architecture.md, writings/the-project-journal.md, canon/values/shared-values-as-trust-proxy.md"
 ---
 
-# Agentic Software Development — From Existential Crisis to Epistemic Mastery
+# Agentic Software Development — From Existential Crisis to Epistemic Journey
 
 > The cost of building dropped to zero. The cost of being wrong didn't. The cost of being human didn't. Here's what fifteen years of building software for Bible translation taught me about navigating the space between.
 
