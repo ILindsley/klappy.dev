@@ -1,8 +1,8 @@
 ---
-uri: klappy://writings/agentic-software-development
+uri: "klappy://writings/agentic-software-development"
 title: "Agentic Software Development — From Existential Crisis to Epistemic Mastery"
 subtitle: "What fifteen years of building software for Bible translation taught me about trusting AI — and why the hardest part was never the code"
-author: Klappy
+author: "Klappy"
 type: essay
 public: true
 audience: public
@@ -10,7 +10,7 @@ exposure: public
 tier: 1
 voice: first_person
 stability: evolving
-tags: [writings, essay, agentic, trust, change-curve, epistemic-discipline, bible-translation, oddkit, mcp, presentation, obtc-learnathon]
+tags: ["writings", "essay", "agentic", "trust", "change-curve", "epistemic-discipline", "bible-translation", "oddkit", "mcp", "presentation", "obtc-learnathon"]
 epoch: E0006
 date: 2026-03-27
 hook: "The cost of building dropped to zero. The cost of being wrong didn't. The cost of being human didn't. Here's what fifteen years of building software for Bible translation taught me about navigating the space between."
@@ -23,23 +23,23 @@ twitter_card: summary_large_image
 twitter_title: "Agentic Software Development — From Existential Crisis to Epistemic Mastery"
 twitter_description: "The cost of code dropped to zero. The cost of being human didn't."
 derives_from:
-  - canon/values/axioms.md
-  - canon/values/trust-kernel.md
-  - canon/constraints/guide-posture.md
-  - odd/constraint/use-only-what-hurts.md
+  - "canon/values/axioms.md"
+  - "canon/values/trust-kernel.md"
+  - "canon/constraints/guide-posture.md"
+  - "odd/constraint/use-only-what-hurts.md"
 related:
-  - uri: klappy://writings/the-intern
+  - uri: "klappy://writings/the-intern"
     label: "The Intern — A Mental Model for Starting with AI"
-    relationship: companion
-  - uri: klappy://writings/choosing-faith-not-fear
+    relationship: "companion"
+  - uri: "klappy://writings/choosing-faith-not-fear"
     label: "Choosing Faith, Not Fear"
-    relationship: companion
-  - uri: klappy://writings/the-cost-of-code-dropped-to-zero
+    relationship: "companion"
+  - uri: "klappy://writings/the-cost-of-code-dropped-to-zero"
     label: "The Cost of Code Dropped to Zero"
-    relationship: companion
-  - uri: klappy://writings/from-bible-translation-to-epistemic-os
+    relationship: "companion"
+  - uri: "klappy://writings/from-bible-translation-to-epistemic-os"
     label: "From Bible Translation to Epistemic OS"
-    relationship: companion
+    relationship: "companion"
 complements: "writings/the-intern.md, writings/choosing-faith-not-fear.md, writings/the-cost-of-code-dropped-to-zero.md, writings/from-bible-translation-to-epistemic-os.md, writings/the-most-expensive-problem.md, writings/the-parallel-architecture.md, writings/the-project-journal.md, canon/values/shared-values-as-trust-proxy.md"
 ---
 
