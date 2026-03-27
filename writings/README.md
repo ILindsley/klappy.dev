@@ -33,7 +33,7 @@ tags: ["writings", "index", "essays"]
 | [Copy. Paste.](klappy://writings/copy-paste) | The more you master AI, the more your job description converges on a clipboard — a UX essay |
 | [The Cost of Code Dropped to Zero](klappy://writings/the-cost-of-code-dropped-to-zero) | What happens when AI removes the friction that used to make us stop |
 | [Outcomes, Not Hours](klappy://writings/outcomes-not-hours) | The compensation question everyone else already answered — uncomfortable questions we must ask |
-| [Agentic Software Development](klappy://writings/agentic-software-development) | From existential crisis to epistemic mastery — what building software for Bible translation taught me about trusting AI |
+| [Agentic Software Development](klappy://writings/agentic-software-development) | From existential crisis to epistemic journey — what building software for Bible translation taught me about trusting AI |
 | [Learning in the Open](klappy://writings/learning-in-the-open) | The vulnerability that unlocks everything else — why the messy version you ship teaches more than the perfect version you don't |
 | [Every Handoff Drops Context](klappy://writings/every-handoff-drops-context) | How one shared knowledge base eliminates the re-translation tax across every tool on your team |
 | [Decisions Get Lost](klappy://writings/decisions-get-lost) | The most important decisions happen in meetings and chat — that is also where they go to die |
