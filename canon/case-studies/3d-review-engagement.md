@@ -17,13 +17,13 @@ status: active
 
 # Case Study — ODD Accelerates a Multi-Stakeholder Quality Assessment Tool from Fragmentation to Field Deployment in Five Sessions
 
-> In February–April 2026, a five-person team with 20+ disconnected documents, no working tool, and a hard Southeast Asia deployment date went from fragmentation to a live field deployment across five sessions. Four sessions of meeting time totaling roughly five hours produced a deployable progressive web app. A fifth session happened in Southeast Asia, where Teryl Gonzalez deployed the tool with two translation teams across two languages — and it worked. The pattern: epistemic discipline compounds across sessions and tools. Speed at implementation is downstream of clarity upstream. What survives the field is what was verified before departure.
+> In February–April 2026, a five-person team turned a year of rich methodology work into a live field deployment across five sessions. Four sessions of meeting time totaling roughly five hours produced a deployable progressive web app. A fifth session happened in Southeast Asia, where Teryl deployed the tool with two translation teams across two languages — and it worked. The prior work was the foundation. The sessions provided what was missing: a verified path from knowledge to working software. The pattern: epistemic discipline compounds across sessions and tools. Speed at implementation is downstream of clarity upstream. What survives the field is what was verified before departure.
 
 ---
 
 ## Summary — Five Sessions, Two Languages, One Viable Tool
 
-The 3D Review project assesses Bible translation quality across three dimensions — translation process, community reception, and church affirmation — in a multi-agency ecosystem with no shared quality standard. It carried board-level attention, a hard field deployment date, and documentation scattered across 20+ files with no single source of truth.
+The 3D Review project assesses Bible translation quality across three dimensions — translation process, community reception, and church affirmation — in a multi-agency ecosystem with no shared quality standard. It carried board-level attention, a hard field deployment date, and a year of methodology work, question design, agency partnerships, and framework development. What it did not yet have was a path from that knowledge to working software: no app, no proof of concept, no verified architecture, no single canonical source across the documents.
 
 Session 1 (February 19): Live React prototype built during a Zoom call. ESE produced 14 documented tensions before the next session.
 
