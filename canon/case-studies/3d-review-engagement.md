@@ -17,7 +17,7 @@ status: active
 
 # Case Study — ODD Accelerates a Multi-Stakeholder Quality Assessment Tool from Fragmentation to Field Deployment in Five Sessions
 
-> In February–April 2026, a five-person team with 20+ disconnected documents, no working tool, and a hard Laos deployment date went from fragmentation to a live field deployment across five sessions. Four sessions of meeting time totaling roughly five hours produced a deployable progressive web app. A fifth session happened in Laos, where Teryl Gonzalez deployed the tool with two translation teams across two languages — and it worked. The pattern: epistemic discipline compounds across sessions and tools. Speed at implementation is downstream of clarity upstream. What survives the field is what was verified before departure.
+> In February–April 2026, a five-person team with 20+ disconnected documents, no working tool, and a hard Southeast Asia deployment date went from fragmentation to a live field deployment across five sessions. Four sessions of meeting time totaling roughly five hours produced a deployable progressive web app. A fifth session happened in Southeast Asia, where Teryl Gonzalez deployed the tool with two translation teams across two languages — and it worked. The pattern: epistemic discipline compounds across sessions and tools. Speed at implementation is downstream of clarity upstream. What survives the field is what was verified before departure.
 
 ---
 
@@ -33,7 +33,7 @@ Session 3 (March 9): Listening session — no live build. Requirements refined. 
 
 Session 4 (March 13): Dry run of the Lovable-built PWA. Bugs fixed live. Teryl confirmed: "I feel like we could make it work."
 
-Session 5 (March 23–24, Laos): Field deployment with Beyond Translation across Kriang and Lahu languages. Pastor and consultant surveys completed. Community surveys deferred to April 30 due to Easter and Lao New Year. Bottom line from field: "It worked. I think we have a viable tool."
+Session 5 (March 23–24, Southeast Asia): Field deployment with Beyond Translation across Sela and Kara languages. Pastor and consultant surveys completed. Community surveys deferred to April 30 due to Easter and Lao New Year. Bottom line from field: "It worked. I think we have a viable tool."
 
 ---
 
@@ -73,7 +73,7 @@ The March 3 session's most significant output was the consolidation decision: 19
 
 Architecture decisions locked: puzzle model with role-specific shareable links, self-assessment vs. facilitator mode, no scoring shown to respondents, questions as a swappable data layer, randomized answer options with Other always last, CSV export, print form generation, camera scan ingestion. Each encoded via oddkit before the meeting transcript was no longer fresh.
 
-The conversational AI vision was named and decoupled from the form-based pilot — letting both tracks proceed without confusion about what the Laos test is actually validating.
+The conversational AI vision was named and decoupled from the form-based pilot — letting both tracks proceed without confusion about what the Southeast Asia test is actually validating.
 
 ---
 
@@ -81,7 +81,7 @@ The conversational AI vision was named and decoupled from the form-based pilot �
 
 The March 9 session had no live build. Klappy listened and gathered. Andy named the value explicitly: "I prefer that you listen and kind of gather all of it, and then the next thing takes into account the whole meeting."
 
-Authentication model finalized: admin-only login, survey links unauthenticated. Multi-language hierarchy confirmed: a regional level containing individual language assessments. Steve stated data normalization requirements. Teryl identified that role labels would not be recognizable in Laos.
+Authentication model finalized: admin-only login, survey links unauthenticated. Multi-language hierarchy confirmed: a regional level containing individual language assessments. Steve stated data normalization requirements. Teryl identified that role labels would not be recognizable in Southeast Asia.
 
 After the session, the transcript became a build spec. Lovable built the full PWA in approximately one hour — not because Lovable is fast, but because three sessions of ESE and encoding had resolved the contradictions that would otherwise have required multiple build-test-feedback cycles.
 
@@ -95,9 +95,9 @@ Teryl's close: "I feel like we could make it work."
 
 ---
 
-## Session 5 — Laos Field Deployment
+## Session 5 — Southeast Asia Field Deployment
 
-Teryl deployed the tool March 23–24 with Beyond Translation across two languages: Kriang (ngt) and Lahu (lhu), Matthew through John. MTTs, Quality Checkers, In-Country Trainers, QA Mentors, and one consultant participated. Pastor and consultant surveys were completed. The community pastor for Kriang produced encouraging data about use and impact in his congregation.
+Teryl deployed the tool March 23–24 with Beyond Translation across two languages: Sela (ngt) and Kara (lhu), Matthew through John. MTTs, Quality Checkers, In-Country Trainers, QA Mentors, and one consultant participated. Pastor and consultant surveys were completed. The community pastor for Sela produced encouraging data about use and impact in his congregation.
 
 **What worked:** The tool functioned. Pastor and consultant surveys were completed successfully. Paper forms were used by the teams for village community surveys — the intended workflow for low-tech contexts, designed as Plan A rather than a contingency. Teams used it without hesitation. Teryl's observation on Tuesday confirmed that practice matched what teams had reported in the surveys.
 
@@ -105,13 +105,13 @@ Teryl deployed the tool March 23–24 with Beyond Translation across two languag
 
 The project/assessment hierarchy did not match the cluster model. Language identity fields appeared at the project level rather than the assessment level — meaning there was no field to specify which language an assessment belonged to. Teryl worked around this by putting language information in the Scripture field.
 
-Translator metadata was too burdensome to collect at survey time. Every translator filled out team formation, education level, and role composition before reaching the actual questions. This held everyone up. Santosh, the director of training at Beyond Translation, independently named this as his number one piece of feedback.
+Translator metadata was too burdensome to collect at survey time. Every translator filled out team formation, education level, and role composition before reaching the actual questions. This held everyone up. Daniel, the director of training at Beyond Translation, independently named this as his number one piece of feedback.
 
 The role taxonomy had no category for "middle roles" — QA Checkers, In-Country Trainers, QA Mentors. Beyond Translation has at least three distinct roles between Translator and Consultant, all of whom contribute to quality and have the capacity to assess it. They were directed to use the Translator questions as the closest fit.
 
 Denominational leader responses apply at the cluster level, not the language level. Teryl instructed leaders to pick one assessment and enter their responses there. The data model does not yet support project-level respondent roles.
 
-**What remains outstanding:** Lahu pastor paper form not yet entered digitally. Community surveys deferred to April 30. Paper-to-digital entry required after field teams return. Steve needs to validate CSV export and metadata normalization against actual Laos data before analysis.
+**What remains outstanding:** Kara pastor paper form not yet entered digitally. Community surveys deferred to April 30. Paper-to-digital entry required after field teams return. Steve needs to validate CSV export and metadata normalization against actual Southeast Asia data before analysis.
 
 ---
 
@@ -131,13 +131,13 @@ Denominational leader responses apply at the cluster level, not the language lev
 
 ## Self-Audit
 
-**Intended outcome:** Discoverable canon document encoding the full 3D Review engagement through Laos field deployment as a reusable pattern.
+**Intended outcome:** Discoverable canon document encoding the full 3D Review engagement through Southeast Asia field deployment as a reusable pattern.
 
 **Constraints applied:** Writing Canon progressive disclosure (all five tiers, `canon/meta/writing-canon.md`), Definition of Done evidence policy (`canon/constraints/definition-of-done.md`), META-ODD (no canonical closure, contestability required), Author Identity Language (`canon/constraints/author-identity-language.md` — neutral voice, no identity claims for Klappy), sensitivity pseudonyms applied in public essay only per field lead's explicit request.
 
 **Decision rules followed:** Observation before assertion — every claim sourced from session transcripts, ESE documents, dry run record, and Teryl's field notes. Build-spec-to-Lovable timing (~1 hour) reported from builder's account, not independently verified. Field note claims attributed to Teryl's voice memos, transcribed in real time.
 
-**Known tradeoffs:** Community survey data not yet collected. Laos field outcomes are partial — pastor and consultant dimensions only. Full picture requires April 30 community survey completion and Steve's data validation.
+**Known tradeoffs:** Community survey data not yet collected. Southeast Asia field outcomes are partial — pastor and consultant dimensions only. Full picture requires April 30 community survey completion and Steve's data validation.
 
 **Remaining risks:** Paper-to-digital entry quality unknown. Role taxonomy gaps identified but not yet resolved. Cluster/language hierarchy fix not yet implemented.
 
