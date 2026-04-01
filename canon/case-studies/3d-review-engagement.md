@@ -133,6 +133,8 @@ Denominational leader responses apply at the cluster level, not the language lev
 
 **Intended outcome:** Discoverable canon document encoding the full 3D Review engagement through Laos field deployment as a reusable pattern.
 
+**Constraints applied:** Writing Canon progressive disclosure (all five tiers, `canon/meta/writing-canon.md`), Definition of Done evidence policy (`canon/constraints/definition-of-done.md`), META-ODD (no canonical closure, contestability required), Author Identity Language (`canon/constraints/author-identity-language.md` — neutral voice, no identity claims for Klappy), sensitivity pseudonyms applied in public essay only per field lead's explicit request.
+
 **Decision rules followed:** Observation before assertion — every claim sourced from session transcripts, ESE documents, dry run record, and Teryl's field notes. Build-spec-to-Lovable timing (~1 hour) reported from builder's account, not independently verified. Field note claims attributed to Teryl's voice memos, transcribed in real time.
 
 **Known tradeoffs:** Community survey data not yet collected. Laos field outcomes are partial — pastor and consultant dimensions only. Full picture requires April 30 community survey completion and Steve's data validation.
