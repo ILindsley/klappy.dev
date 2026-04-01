@@ -133,7 +133,9 @@ Denominational leader responses apply at the cluster level, not the language lev
 
 **Intended outcome:** Discoverable canon document encoding the full 3D Review engagement through Southeast Asia field deployment as a reusable pattern.
 
-**Constraints applied:** Writing Canon progressive disclosure (all five tiers, `canon/meta/writing-canon.md`), Definition of Done evidence policy (`canon/constraints/definition-of-done.md`), META-ODD (no canonical closure, contestability required), Author Identity Language (`canon/constraints/author-identity-language.md` — neutral voice, no identity claims for Klappy), sensitivity pseudonyms applied in public essay only per field lead's explicit request.
+**Constraints applied:** Writing Canon progressive disclosure (all five tiers, `canon/meta/writing-canon.md`), Definition of Done evidence policy (`canon/constraints/definition-of-done.md`), META-ODD (no canonical closure, contestability required), Author Identity Language (`canon/constraints/author-identity-language.md` — neutral voice, no identity claims for Klappy).
+
+**Sensitivity disclosure:** For the security of field workers and the language communities they serve, the names of specific countries, languages, and individuals have been changed throughout this document. This substitution is disclosed rather than hidden because silent pseudonymization violates the axiom that a claim is a debt.
 
 **Decision rules followed:** Observation before assertion — every claim sourced from session transcripts, ESE documents, dry run record, and Teryl's field notes. Build-spec-to-Lovable timing (~1 hour) reported from builder's account, not independently verified. Field note claims attributed to Teryl's voice memos, transcribed in real time.
 
