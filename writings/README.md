@@ -38,3 +38,4 @@ tags: ["writings", "index", "essays"]
 | [Every Handoff Drops Context](klappy://writings/every-handoff-drops-context) | How one shared knowledge base eliminates the re-translation tax across every tool on your team |
 | [Decisions Get Lost](klappy://writings/decisions-get-lost) | The most important decisions happen in meetings and chat — that is also where they go to die |
 | [The Journey from AI Tasks to AI-Augmented Workflows](klappy://writings/the-journey-from-ai-tasks-to-ai-augmented-workflows) | Four steps from friction to flow — without changing your tools |
+| [Seven Weeks to Southeast Asia](klappy://writings/seven-weeks-to-southeast-asia) | What a field deployment in Southeast Asia revealed about AI-augmented development — and why speed at implementation is downstream of clarity upstream |
