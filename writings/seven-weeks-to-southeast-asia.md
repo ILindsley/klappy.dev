@@ -13,11 +13,11 @@ stability: semi_stable
 tags: ["writings", "essay", "ai-augmented-workflows", "case-study", "epistemic-discipline", "oddkit", "3d-review"]
 epoch: E0006
 date: 2026-04-01
-hook: "The tool worked in Southeast Asia. Seven weeks earlier, we had nothing but a pile of disconnected documents. Here's what made that possible — and what it means for how you're working with AI right now."
+hook: "The tool worked in Southeast Asia. A year of hard methodology work had laid the foundation. What was missing was the path from that knowledge to working software — and that's what seven weeks produced."
 description: "A field deployment in Southeast Asia revealed something about AI-augmented development that I couldn't have demonstrated in a demo. This is the story of how a multi-stakeholder Bible translation quality assessment tool went from fragmentation to the field in five sessions — and what the gap between session speed and implementation speed actually tells you."
 slug: seven-weeks-to-southeast-asia
 og_title: "Seven Weeks to Southeast Asia — Why Speed at Implementation Is Downstream of Clarity Upstream"
-og_description: "The tool worked in Southeast Asia. Seven weeks earlier, we had nothing but a pile of disconnected documents."
+og_description: "The tool worked in Southeast Asia. A year of methodology work had laid the foundation. Seven weeks produced what was missing: the path from knowledge to working software."
 og_type: article
 derives_from:
   - "canon/values/axioms.md"
@@ -34,7 +34,7 @@ related:
 
 # Seven Weeks to Southeast Asia — Why Speed at Implementation Is Downstream of Clarity Upstream
 
-> In seven weeks, a team went from 20 disconnected documents and no working tool to a field deployment in Southeast Asia — five sessions, roughly five hours of meeting time, and approximately one hour to build the full app. The speed wasn't the AI. It was what happened before the AI touched the code: every decision verified before the next session started, every meeting converted to a durable record before memory degraded, every build spec clean before the first line of code was written. If your AI collaboration keeps losing ground between sessions, the problem isn't your AI. It's the gap between what you said and what got verified.
+> In seven weeks, a team turned a year of hard methodology work into a live field deployment — five sessions, roughly five hours of meeting time, and approximately one hour to build the full app. The prior work was the foundation. What the sessions provided was the missing piece: a verified path from knowledge to working software. The speed wasn't the AI. It was what happened before the AI touched the code: every decision verified before the next session started, every meeting converted to a durable record before memory degraded, every build spec clean before the first line of code was written. If your AI collaboration keeps losing ground between sessions, the problem isn't your AI. It's the gap between what you said and what got verified.
 
 -----
 
@@ -46,7 +46,7 @@ A colleague of mine, Teryl, sat down with a translation team — mother-tongue t
 
 It worked.
 
-That's not a small thing. Seven weeks earlier, we had nothing. Twenty-plus documents in a shared drive, half of them contradicting each other, decisions from an in-person meeting living only in people's memories. No working tool. No single source of truth. A hard departure date and a team scattered across time zones.
+That's not a small thing. What made it possible was a year of hard work that came before any of it. The team — Steve, Andy, Teryl, Amanda, and their broader network — had spent that year developing the methodology, designing the questions, building the agency partnerships, and establishing the framework. All of that was real and valuable. What it hadn't yet produced was a path from that knowledge to working software: no app, no proof of concept, no verified architecture, no single source of truth across the documents. A hard departure date. A team scattered across time zones. That gap — between rich knowledge and working software — is what seven weeks closed.
 
 Here's the question I want to sit with you on: how does that happen?
 
