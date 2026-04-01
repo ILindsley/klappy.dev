@@ -192,4 +192,6 @@ If you don't have an answer, that's where to start.
 
 -----
 
-*This essay is based on a real engagement. Session transcripts, ESE documents, a dry run meeting record, and Teryl's field notes — recorded by voice memo in real time during the Southeast Asia deployment, March 23–24, 2026 — were the primary sources. The build-spec-to-Lovable timing (~1 hour) is reported from the builder's account. Community survey data is still being collected; full results expected by April 30, 2026.*
+*This essay is based on a real engagement. Session transcripts, ESE documents, a dry run meeting record, and Teryl's field notes — recorded by voice memo in real time during the field deployment, March 23–24, 2026 — were the primary sources. The build-spec-to-Lovable timing (~1 hour) is reported from the builder's account. Community survey data is still being collected; full results expected by April 30, 2026.*
+
+*For the security of field workers and the language communities they serve, the names of specific countries, languages, and individuals have been changed throughout this piece.*
