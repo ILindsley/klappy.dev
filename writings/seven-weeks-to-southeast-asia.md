@@ -56,53 +56,37 @@ The bottleneck in AI-augmented development isn't implementation. It's verificati
 
 -----
 
-## The Meeting Nobody Takes Notes From
+## Most People Use AI in Episodes. This Is What Compounding Looks Like.
 
-Have you ever left a meeting confident that something had been decided — and then watched the AI build the wrong thing anyway?
+Think about how you use AI today. You open it, ask it something, it answers. Maybe you ask a follow-up. Then you close it and move on. The next time you open it, it knows nothing about what you worked on before. You're always starting from scratch. It's useful — but each use is an island.
 
-Not because the AI failed. Because the decision never made it into a form the AI could actually use. It lived in the room. In the energy of a productive call. In everyone's vague shared sense that they'd gotten somewhere. And then the call ended and the shared sense evaporated, and what was left was a transcript nobody read and a tool that kept building against assumptions nobody had verified.
+Now think about what it would mean for AI to be present at every stage of a project — and for each stage to build on the last. Not resetting. Compounding. The context from the first meeting informing the second. The decisions from the second shaping what gets built in the third. By the time you're ready to deploy, the AI knows as much as your team does — because it's been in every room.
 
-That's the default state of most AI-assisted development. The tool is powerful. The input is ambiguous. So it executes ambiguously, confidently, at speed — compounding the confusion with every iteration.
+That's what this project did. And the difference isn't subtle.
 
-The first session of the 3D Review project felt like every other first session. A five-person team — Steve, Andy, Teryl, Amanda, and me — on a Zoom call in February, talking through requirements for a tool that needed to assess Bible translation quality across three dimensions simultaneously. Multi-agency context. Board-level attention. Political sensitivity. Hard deadline. And 20-plus documents that nobody had reconciled.
-
-Before the call, I uploaded all of them as baseline context. Every framework draft. Every survey instrument. Every metadata spec. And then, during the call itself, I started copy-pasting the live transcript into the system in real time — chunk by chunk, as the conversation unfolded.
+Before the first call, I uploaded everything: every framework draft, every survey instrument, every metadata spec — 20-plus documents that the team had accumulated over months. That became the baseline. During the call itself, I copy-pasted the live transcript into the system in real time, chunk by chunk, as the conversation unfolded.
 
 The AI wasn't a tool I used after the meeting. It was in the meeting. Reading what was being said as it was said, building against the baseline that was already loaded.
 
-By the time we hung up, we had a working prototype. And the team had shifted from planning to reacting — which is a completely different kind of meeting.
+By the time we hung up, we had a working prototype. Not a plan for a prototype. A prototype. And the team had stopped talking about what they wanted and started reacting to what existed — which is a completely different kind of meeting.
 
 -----
 
-## What You're Actually Doing When You Build Live
+## What Happens When Each Session Stacks on the Last
 
 Here's what I've noticed about the moment when something concrete appears on screen while a team is still talking.
 
-Before the prototype: everyone is planning. Planning conversations produce intentions. People say what they think they want. They describe the shape of the thing they're imagining. They agree on things that aren't actually specific enough to act on.
+Before the prototype: everyone is planning. Planning conversations produce intentions. People describe the shape of the thing they're imagining, agree on things that aren't actually specific enough to act on, and leave feeling productive. The decisions evaporate by Thursday.
 
-After the prototype: everything changes. Teryl looked at the form and immediately named a delivery constraint that appeared in none of the 20 documents. Steve looked at the scoring display and said, out loud, that respondents should never see scores — something the prototype had gotten wrong, and something he might not have articulated clearly until a real respondent saw a number they weren't supposed to see. A requirement for routing reports to different partner organizations surfaced near the end of the call, almost as an afterthought, because Teryl was looking at something real and noticed what was missing.
+After the prototype: the conversation grounds. Teryl immediately named a delivery constraint that appeared in none of the 20 documents. Steve said, out loud, that respondents should never see scores — something the prototype had gotten wrong, and something he might not have articulated until a real respondent saw a number they weren't supposed to see. A requirement for routing reports to different partner organizations surfaced near the end of the call, almost as an afterthought, because Teryl was looking at something real and noticed what was missing.
 
-You can't get that from a planning conversation. You can only react to something that exists.
+That's what stacking looks like in Session 1. But the real compounding happens between sessions.
 
-But — and this is the part most people skip — a live build creates a new problem. Now you have a prototype that encodes assumptions nobody has verified. The team gave you reactions, not corrections. The prototype captured some of what they said and missed some of what they meant. And the next session will build on top of that, compounding whatever the first one got wrong.
+After every meeting, we ran an Epistemic Surface Extraction — ESE — comparing what was built against what was said, and what was said against what the documents required. Session 1 surfaced 14 specific tensions before the next session started. Session 2's ESE pre-identified 8 more before the team's written feedback even arrived. By Session 3, three rounds of capture and verification had resolved enough contradictions that a listening session — no building, just gathering — produced a build spec clean enough to hand to an AI code builder.
 
-Which is why, after every session, we ran an Epistemic Surface Extraction.
+Lovable built the full progressive web app in approximately one hour.
 
------
-
-## Why the Sessions Are the Work
-
-An Epistemic Surface Extraction — ESE — is exactly what it sounds like. You surface what's beneath the conversation. You take the session transcript, the prior documents, and the current build, load them together, and ask: where does what we built contradict what we said? Where does what we said contradict what the documents require?
-
-After Session 1, the ESE identified 14 specific tensions. The scoring display was the most critical. But there were others: the PoC required respondents to complete full project setup before reaching their survey, directly contradicting what the documents described. A structural change from an in-person meeting two days before the call — the whole Church dimension had been reorganized — wasn't reflected anywhere in the build.
-
-Fourteen things that would have become technical debt, user confusion, or field failure. Found before the next session started.
-
-After Session 2, we ran ESE v3 before the team's written review even arrived. Eight tensions pre-identified. When the feedback came in, two of them were raised independently by the team. Ten issues emerged that the ESE hadn't caught — runtime bugs, UX friction, things that only live use reveals. The gap between what ESE predicted and what the team surfaced is itself information: ESE sees structural drift. A dry run sees behavior. You need both.
-
-The point isn't that the ESE is magic. The point is that most teams skip this step entirely. They take meeting output and feed it directly into the next build without ever stopping to ask: what did we actually verify?
-
-That gap — between what was said and what was verified — is where projects lose weeks. Sometimes months. And AI makes it worse, not better, because the tool executes confidently regardless of whether the input was clear.
+Each session had stacked on the last. The AI that built the app in an hour wasn't working from a first draft. It was working from the accumulated clarity of every session that came before it. That's compounding. And it only happens if you treat each meeting as an input to the next one — not as a standalone event.
 
 -----
 
