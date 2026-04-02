@@ -250,10 +250,11 @@ Draft-zeros are disposable. Their value is in the *thinking they preserve*, not 
 
 **Chapter 2: *Where Words Stop Working***
 
-- **Status:** 📋 Draft-zero captured
-- **Draft-zero:** `draft-zeros/ch02-where-words-stop-working.md`
-- **Source:** New essay derived from Cognitive Saturation concepts
-- **Arc:** Conversational scale. The universal moment when talking stops producing understanding. The saturation point where more explanation makes things worse.
+- **Status:** ✅ Published
+- **Draft-zero:** N/A — published (`writings/where-words-stop-working.md`)
+- **Source:** Compiled from 3D Review session transcripts, Fluent Mobile meeting transcript (Apr 1, 2026), author brain dumps, running transcripts, canon documents on cognitive saturation threshold
+- **Arc:** Project scale. The universal moment when planning peaks and the remaining value can only be unlocked by building. Three independent witnesses found the pattern without being taught. The honest tension: building at the wrong moment is its own trap. The documents weren't wasted — the ratio changed.
+- **Provenance:** Oral-first pipeline: source material compilation → draft → Socratic pass → progressive disclosure audit → sensitivity review → frontmatter → publish. Multiple author corrections during drafting session (Apr 1, 2026).
 
 ### Part II — The Recognition
 
