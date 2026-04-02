@@ -21,6 +21,7 @@ tags: ["writings", "index", "essays"]
 | [Choosing Faith, Not Fear](klappy://writings/choosing-faith-not-fear) | The fear that should keep you up isn't AI replacing your job — it's AI replacing your first conversation of the day |
 | [The Broken Wall and the Buried Talent](klappy://writings/the-broken-wall-and-the-buried-talent) | Christians have the most relevant framework for AI governance — and most are too afraid to use it |
 | [The Most Expensive Problem](klappy://writings/the-most-expensive-problem) | Why knowledge transfer is mankind's most expensive problem — and why AI made it worse |
+| [Where Words Stop Working](klappy://writings/where-words-stop-working) | The moment planning peaks and the remaining value can only be unlocked by building something you can poke with a stick |
 | [The Voice Came First](klappy://writings/the-voice-came-first) | What if writing was never the point — just the best bridge we had until something better came along? |
 | [The Parallel Architecture](klappy://writings/the-parallel-architecture) | Theological roots of the Epistemic OS — appendix to The Most Expensive Problem |
 | [From Bible Translation to Epistemic OS](klappy://writings/from-bible-translation-to-epistemic-os) | How years of Bible translation work became an operating system for AI collaboration |
