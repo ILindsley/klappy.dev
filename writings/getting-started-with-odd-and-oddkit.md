@@ -134,30 +134,25 @@ The setup varies by platform, but the URL is always the same.
 
 ## Try It Right Now
 
-Once connected, try these prompts in your next conversation:
+Once connected, try these prompts in your next conversation. Say "use oddkit" or "ask oddkit" to make sure your AI invokes it:
 
-**Orient on a problem:**
-> "Orient me on building a REST API for my side project. I'm deciding between Express and Fastify."
+**Orient on a decision you're facing:**
+> "Use oddkit to orient me on whether I should take this new job offer. I'm weighing salary against work-life balance."
 
-oddkit will assess your situation, surface relevant questions you haven't asked yet, and help you think through the decision — instead of just picking one and selling you on it.
+oddkit will assess your situation, surface questions you haven't asked yet, and help you think through the decision instead of just picking one side and selling you on it.
 
-**Challenge an assumption:**
-> "Challenge the assumption that we should use a microservices architecture for our team of three."
+**Challenge something you believe:**
+> "Ask oddkit to challenge my assumption that I need to go back to school to switch careers."
 
-oddkit will pressure-test your claim, surface specific counter-arguments, and force you to defend the position — or change it before you invest in it.
+oddkit will pressure-test your claim, surface specific counter-arguments, and force you to defend the position — or reconsider before you invest in it.
 
-**Search for what you've captured:**
-> "Search for any decisions we've made about authentication."
+**Record a decision so it sticks:**
+> "We decided to homeschool next year because the local school's class sizes have doubled. Use oddkit to encode that decision with the reasoning."
 
-oddkit searches your knowledge base and returns what's actually been recorded — not what the AI vaguely remembers from a prior session.
+oddkit structures and captures it. The next session that touches education planning will find it automatically — with the reasoning attached.
 
-**Record a decision:**
-> "We decided to use PostgreSQL instead of MongoDB. The reason is we need strong relational queries for the reporting feature. Encode that decision."
-
-oddkit structures and captures it. The next session that touches the database will find it automatically.
-
-**Process a meeting transcript:**
-> *[paste your meeting notes or transcript]* "Encode the key decisions, action items, and constraints from this meeting to my project journal."
+**Process a meeting or conversation:**
+> *[paste your meeting notes or transcript]* "Use oddkit to encode the key decisions, action items, and constraints from this meeting."
 
 You don't have to encode things one at a time. Invite your AI to your meetings, or bring your transcripts afterward — paste them in and ask oddkit to extract and encode everything worth keeping. One conversation captures what would otherwise evaporate before the next standup.
 
