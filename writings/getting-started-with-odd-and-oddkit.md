@@ -66,7 +66,7 @@ You use AI every day. Each session is impressive. But nothing carries over with 
 
 oddkit is an MCP server — a standard protocol that lets AI tools connect to external services. You add it to whatever AI tool you already use: Claude, ChatGPT, Gemini, Cursor, Claude Code, Lovable, Replit, ElevenLabs voice agents — anything that supports MCP. It takes thirty seconds. Then you bootstrap — paste a short identity statement into your project instructions that teaches the AI to verify before claiming, admit what it hasn't checked, and use oddkit proactively. After that, every session starts from a posture of integrity instead of a blank slate.
 
-This page gets you from zero to running in five minutes. The [deeper journey](klappy://writings/the-journey-from-ai-tasks-to-ai-augmented-workflows) — building your own knowledge base, encoding decisions, making AI collaboration cumulative — is there when you're ready. Start here.
+This page gets you from zero to running in five minutes. The [deeper journey](/page/writings/the-journey-from-ai-tasks-to-ai-augmented-workflows) — building your own knowledge base, encoding decisions, making AI collaboration cumulative — is there when you're ready. Start here.
 
 ---
 
@@ -197,7 +197,7 @@ before calling something done.
 
 Think of it as an employee handbook that you and the AI both agree to. You're not configuring a tool — you're establishing shared integrity. The creed and axioms aren't aspirational. They're operational constraints that make the AI behave like someone you'd actually trust with your work.
 
-The [full bootstrap prompt](klappy://docs/oddkit/proactive/proactive-bootstrap) includes additional guidance on continuous session capture, artifact provenance, and proactive tool usage — use it when you're ready for the complete version. The compact version above is enough to start.
+The [full bootstrap prompt](/page/docs/oddkit/proactive/proactive-bootstrap) includes additional guidance on continuous session capture, artifact provenance, and proactive tool usage — use it when you're ready for the complete version. The compact version above is enough to start.
 
 ### A Note on Permissions
 
@@ -253,7 +253,7 @@ This is how I work. It's the difference between using AI for tasks and AI-augmen
 
 For an example, browse the [klappy.dev repo](https://github.com/klappy/klappy.dev). You'll find governance (`canon/`), methodology (`odd/`), planning and implementation records (`docs/`), and public essays (`writings/`). You don't need any of that to start. But it's there when you want to see how deep the rabbit hole goes.
 
-The progression — from a few markdown files to a living knowledge base — is described in detail in [The Journey from AI Tasks to AI-Augmented Workflows](klappy://writings/the-journey-from-ai-tasks-to-ai-augmented-workflows).
+The progression — from a few markdown files to a living knowledge base — is described in detail in [The Journey from AI Tasks to AI-Augmented Workflows](/page/writings/the-journey-from-ai-tasks-to-ai-augmented-workflows).
 
 ---
 
