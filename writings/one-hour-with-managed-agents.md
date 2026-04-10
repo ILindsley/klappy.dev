@@ -72,7 +72,7 @@ The epistemic discipline showed up as behavior, not just configuration.
 
 ## The Bug in the Honest Answer
 
-But the honest answer was also wrong — or at least incomplete. Vodka Architecture *does* exist in the canon. The document had been committed five days earlier at `canon/principles/vodka-architecture.md`. So why didn't the agent find it?
+But the honest answer was also wrong — or at least incomplete. Vodka Architecture *does* exist in the canon. The document had been committed three days earlier at `canon/principles/vodka-architecture.md`. So why didn't the agent find it?
 
 I dug in. Two bugs, both real.
 
