@@ -54,7 +54,7 @@ So when I saw that Managed Agents natively supported MCP servers in agent config
 
 ## The First Spike — Does Proactive Posture Survive?
 
-I didn't theorize. I read the docs, then built.
+I didn't theorize. I read the docs, then built. Well — Claude read the docs. I said "let's go."
 
 The agent configuration was minimal: a system prompt containing the Identity of Proactive Integrity — four axioms that govern how oddkit-powered agents behave — plus oddkit wired in as an MCP server. Fifteen minutes of doc-reading, three API calls (create agent, create environment, start session), and the agent was live.
 
