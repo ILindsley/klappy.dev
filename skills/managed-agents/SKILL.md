@@ -294,3 +294,7 @@ Review BRANCH in OWNER/REPO for compliance with canon governance.
 - **First request after deploy may serve stale KV cache.** A second request resolves it (index freshness verification rebuilds on SHA mismatch).
 - **Shell escaping kills you.** Always use python3 for JSON payloads. Do not try to build JSON with heredocs or string interpolation in bash.
 - **jq may not be installed.** Download the binary at the start of any session that needs it.
+
+## Origin
+
+This skill was built live during a single session on April 9, 2026 — the day after Anthropic launched Claude Managed Agents. The full story, including the bugs discovered, the autonomous PR, and the governance docs that emerged from breaking things: [One Hour with Claude Managed Agents](https://klappy.dev/page/writings/one-hour-with-managed-agents)
