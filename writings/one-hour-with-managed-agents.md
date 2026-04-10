@@ -126,6 +126,20 @@ By the end of the session, the BM25 fix had been battle-tested against all 465 d
 
 The bug that Birch praised for being honestly reported is now fixed — by a different agent, in the same session, on infrastructure that didn't exist yesterday.
 
+## From Session Knowledge to Reusable Skill
+
+There was one more problem. Everything I'd figured out — how to create sessions, send tasks, poll for completion, parse event logs, avoid shell escaping nightmares, wire oddkit as an MCP server — lived only in this session's context. The next time I opened a conversation, none of it would be there. My AI co-author wouldn't know how to spin up an agent. We'd be starting from scratch.
+
+This is the same problem oddkit was built to solve for epistemic governance: knowledge that dies when the session ends. The solution was the same pattern, applied differently.
+
+Claude's skill system lets you package procedural knowledge — step-by-step workflows with code, templates, and gotchas — so it's automatically available in future sessions. Skills are to procedures what canon is to governance: durable, discoverable, and triggered by context rather than memory.
+
+So I turned the entire Managed Agents workflow into a skill. The session's hard-won knowledge became a reusable recipe: reusable agent and environment IDs, the exact curl patterns that work, the python3 JSON trick that avoids escaping issues, the polling pattern, the event parsing, the task templates for frontmatter validation and code PRs, the three-model pipeline, and every known failure mode we hit.
+
+Now when any session in this project says "spin up an agent" or "validate with an agent," the skill triggers. No rediscovery. No re-reading docs. No re-learning that `mcp_servers` requires a matching `mcp_toolset` entry.
+
+Three layers, clean separation: credentials in project instructions, recipes in skills, governance in canon. The infrastructure is Anthropic's. The epistemic discipline is oddkit's. The workflow knowledge is the skill's. Each layer does one thing and stays out of the others' way. Vodka architecture, all the way down.
+
 ---
 
-*The agent configurations, event logs, and PRs are all public. [PR #72](https://github.com/klappy/oddkit/pull/72) is the BM25 fix authored by a Managed Agent. [PR #73](https://github.com/klappy/oddkit/pull/73) deployed it to production.*
+*The agent configurations, event logs, and PRs are all public. [PR #72](https://github.com/klappy/oddkit/pull/72) is the BM25 fix authored by a Managed Agent. [PR #73](https://github.com/klappy/oddkit/pull/73) deployed it to production. The [managed-agents skill](https://github.com/klappy/klappy.dev) packages the entire workflow for reuse.*
