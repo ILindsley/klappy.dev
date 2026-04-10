@@ -142,4 +142,4 @@ Three layers, clean separation: credentials in project instructions, recipes in 
 
 ---
 
-*The agent configurations, event logs, and PRs are all public. [PR #72](https://github.com/klappy/oddkit/pull/72) is the BM25 fix authored by a Managed Agent. [PR #73](https://github.com/klappy/oddkit/pull/73) deployed it to production. The [managed-agents skill](https://github.com/klappy/klappy.dev) packages the entire workflow for reuse.*
+*The agent configurations, event logs, and PRs are all public. [PR #72](https://github.com/klappy/oddkit/pull/72) is the BM25 fix authored by a Managed Agent. [PR #73](https://github.com/klappy/oddkit/pull/73) deployed it to production. The [managed-agents skill](https://github.com/klappy/klappy.dev/blob/main/skills/managed-agents/SKILL.md) packages the entire workflow for reuse.*
