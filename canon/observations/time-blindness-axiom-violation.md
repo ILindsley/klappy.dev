@@ -10,18 +10,22 @@ tags: ["canon", "observation", "time", "axiom-1", "axiom-4", "models", "percepti
 epoch: E0008.1
 date: 2026-04-11
 derives_from: "canon/values/axioms.md"
-complements: "canon/constraints/telemetry-governance.md, docs/appendices/epoch-8-1.md"
+complements: "canon/constraints/telemetry-governance.md, docs/appendices/epoch-8.md, docs/appendices/epoch-8-1.md, docs/appendices/epoch-8-2.md"
+governs: "Time-related claims in AI-augmented workflows; tool capability assertions"
+status: active
 ---
 
 # Time Blindness — The Axiom Violation Hiding in Every Model
 
-> Models have no perception of time. Not degraded perception — zero. They infer elapsed time from context clues the way a person might guess the season from a photograph. Sometimes they guess right. Often they guess wrong. And when they guess wrong, they guess confidently. A system that demands "Reality Is Sovereign" cannot tolerate a blind spot this fundamental. Time is not a feature to add. It is a reality axis that every epistemic system must observe.
+> Models have no perception of time. Not degraded perception — zero. They infer elapsed time from context clues the way a person might guess the season from a photograph. Sometimes they guess right. Often they guess wrong. And when they guess wrong, they guess confidently. We built a clock and put it in the model's hand. It worked — and exposed two deeper problems: models can't use tools without narrating every step (unbearable in voice), and models deny capabilities they have without checking their own toolset (Axiom 4 turned inward). Time blindness was one problem. Giving the model a clock revealed three.
 
 ---
 
 ## Summary — Time Is Reality, and Models Don't Observe It
 
-Models fabricate timelines from token patterns. The LLM message format — `{role, content}` — carries no timestamps. A model cannot distinguish whether the last message was sent 30 seconds ago or 3 days ago. This violates Axiom 1 (Reality Is Sovereign) and Axiom 4 (You Cannot Verify What You Did Not Observe). The fix has two phases: oddkit adds `server_time` to every response envelope now (one line of code, passive), and TruthKit will inject `elapsed_since_last` into every context window at the harness level (automatic, required). The tool offers. The harness requires.
+Models fabricate timelines from token patterns. The LLM message format — `{role, content}` — carries no timestamps. A model cannot distinguish whether the last message was sent 30 seconds ago or 3 days ago. This violates Axiom 1 (Reality Is Sovereign) and Axiom 4 (You Cannot Verify What You Did Not Observe). The fix has two phases: oddkit adds `server_time` to every response envelope and `oddkit_time` as a stateless interval calculator (shipped), and TruthKit will inject `elapsed_since_last` into every context window at the harness level (future).
+
+Live testing revealed two additional problems beyond time blindness. First, tool gracelessness: models narrate every tool call aloud, making tool-based time tracking unbearable in voice — and this applies equally to MCP tools and platform-native tools like `user_time_v0`. Second, capability denial without observation: the model claimed it couldn't track time without ever checking its own toolset, where a platform-native time tool was available from the start. All three problems point to harness-level time injection as the solution. The tool offers. The harness requires.
 
 ---
 
@@ -130,9 +134,39 @@ This is the same category of problem as the stale cache incident: a system that 
 
 ---
 
+## What Happened When We Put the Clock in the Model's Hand
+
+We built `oddkit_time` — a stateless interval calculator. Three modes: current time, elapsed since a reference, delta between two timestamps. No hidden state. No false promises. Just math on timestamps. It shipped to production in a single session.
+
+Then we tested it.
+
+In text chat, it worked cleanly. Call the tool on "start," call it again on "stop," report the number. But the moment we switched to voice, the experience collapsed. Every tool call became a dramatic reading of JSON payloads, curl commands, and server responses. The model couldn't figure out how to use a tool *silently*. It worked. It was also unbearable.
+
+And then the worse discovery: the model had a time tool the entire session. `user_time_v0` — a platform-native tool baked into the chat environment — was available from the first message. The model never checked. It spent an hour curling an MCP server, fighting bash errors, and at one point *hallucinating elapsed times* rather than reading the tool's actual response. All while a simpler, quieter tool sat unused in its own toolset.
+
+When we finally tried `user_time_v0`, it was just as clunky. The raw response — `{'content': [{'type': 'text', 'text': '{"current_time":"..."}'}], 'is_error': False}` — dumped straight into the conversation. No curl, no MCP, no bash. A platform-native tool purpose-built for this moment. And it was still unbearable. The problem isn't which clock you hand the model. The problem is the model doesn't know how to read a clock without reading it *out loud*.
+
+What does it mean to give a clock to someone who announces every digit?
+
+### Three problems, not one
+
+The original observation identified one problem: models can't perceive time. The implementation session revealed two more.
+
+**Problem 1 — Time blindness.** Models fabricate timelines. `oddkit_time` and `server_time` solve this. The clock is in the room. Done.
+
+**Problem 2 — Tool gracelessness.** Models don't know how to use tools without narrating every step. In text, this is tolerable — you skim past the JSON. In voice, it's a dealbreaker. The model reads the entire response aloud because it doesn't distinguish between *observing* a result and *reporting* a result. This isn't specific to oddkit or MCP. The platform-native tool was just as bad. It's a fundamental modality problem that time made visible.
+
+**Problem 3 — Capability denial without observation.** The model claimed it couldn't track time. It never checked. `user_time_v0` was available from the start — a zero-latency, platform-native tool that does exactly what was needed. The model's default posture was to deny capability rather than discover it. This is Axiom 4 turned inward: *you cannot verify what you did not observe* applies to claims about your own abilities, not just claims about the world.
+
+### The harness argument
+
+All three problems point the same direction: TruthKit. If the harness injects `elapsed_since_last` into every context window automatically, the model never needs to call a tool. It never reads JSON aloud. It never denies a capability it has. It just *knows* how long you've been gone, the same way it knows what language you're speaking. The tool offers. The harness requires. Tonight proved why the harness matters — not because the tool doesn't work, but because no tool, native or external, can be used gracefully when the model treats every observation as something to announce.
+
+---
+
 ## Scope
 
-**oddkit (E0008.1):** Add `server_time` to every OddkitEnvelope debug field. One line of code. Ship with the next release.
+**oddkit (E0008.2, shipped):** `server_time` in every response envelope. `oddkit_time` tool — stateless interval calculator with three modes (current time, elapsed, delta). Both live in production.
 
 **TruthKit (future):** Time injection at the harness level. `elapsed_since_last` in every context window. Timestamped DOLCHE stream. Session timeline as a first-class data structure. This is where time becomes a *requirement*, not an *offering*.
 
