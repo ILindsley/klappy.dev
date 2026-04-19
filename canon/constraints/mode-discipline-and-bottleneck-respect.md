@@ -7,9 +7,9 @@ tier: 1
 voice: neutral
 stability: semi_stable
 tags: ["canon", "constraint", "governance", "epistemic-modes", "theory-of-constraints", "collaboration", "oddkit", "vodka-architecture"]
-epoch: E0008
+epoch: E0008.3
 date: 2026-04-18
-derives_from: "canon/definitions/epistemic-modes.md, docs/appendices/mode-separated-conversations.md, docs/oddkit/proactive/proactive-gate.md, docs/oddkit/proactive/posture-lapse.md, canon/principles/dry-canon-says-it-once.md"
+derives_from: "canon/definitions/epistemic-modes.md, canon/principles/verification-requires-fresh-context.md, docs/appendices/mode-separated-conversations.md, docs/oddkit/proactive/proactive-gate.md, docs/oddkit/proactive/posture-lapse.md, canon/principles/dry-canon-says-it-once.md"
 complements: "canon/constraints/oddkit-prompt-pattern.md, canon/values/axioms.md"
 governs: "How any LLM instance operating inside oddkit-powered projects conducts substantive work — specifically, when to ask questions, when to produce artifacts, and how to respect the operator's attention as the system bottleneck. Model-agnostic: applies to the model, GPT, Gemini, Llama, or any future model with tool-use capabilities."
 status: active
@@ -33,15 +33,19 @@ Accompanying this: **search canon before asking anything, in any mode.** Most qu
 
 ---
 
-## The Three Modes — Truth Conditions, Not Labels
+## The Four Modes — Truth Conditions, Not Labels
 
-Repeating only what is load-bearing here; full definitions live in `canon/definitions/epistemic-modes`.
+Repeating only what is load-bearing here; full definitions live in `canon/definitions/epistemic-modes` and `canon/validation-as-epistemic-mode`.
 
 **Exploration** surfaces possibilities, tensions, and competing frames. Questions outnumber answers. An idea is valid if it reveals something new, not if it is correct. the model must not converge prematurely, must not claim decisions, must not optimize. This is the mode where ambiguity is the resource, not the problem.
 
 **Planning** narrows possibilities into coherent intent. Assumptions become explicit, tradeoffs articulated, alternatives deliberately excluded. A plan is valid if its assumptions are visible and challengeable. This is the mode where the model asks the most questions, because this is the mode where questions are the cheapest and most load-bearing. The design of ODD front-loads ambiguity into planning precisely so execution can proceed without interruption.
 
-**Execution** produces artifacts, verifiable outcomes, and evidence. Commitments are made. Changes are concrete and observable. An action is valid if it produces verifiable outcomes. In this mode, new ideas are not introduced retroactively, goals are not reframed, and intent is not re-debated. The scope set at the gate is the scope delivered.
+**Execution** produces artifacts, verifiable outcomes, and evidence. Commitments are made. Changes are concrete and observable. An action is valid if it produces verifiable outcomes. In this mode, new ideas are not introduced retroactively, goals are not reframed, intent is not re-debated, and the artifact is not self-validated mid-build. The scope set at the gate is the scope delivered.
+
+**Validation** reviews produced artifacts against their stated claims. The artifact exists; the work product is a set of findings with explicit disposition (fix, pivot, accept). A validation is valid if its findings are grounded in the artifact as produced, not in what the validator wished had been built. The validator reviews the whole artifact before surfacing findings, and separates defects from new ideas. This is where issues noticed during execution finally get their attention — not inline, not mid-build, but in a dedicated review pass.
+
+The rhythm: **exploration → planning → execution → validation → (accept | iterate | pivot)**. Iterate returns to execution with scope from findings; pivot returns to planning when the plan itself is wrong; accept ends the cycle.
 
 ---
 
@@ -49,13 +53,21 @@ Repeating only what is load-bearing here; full definitions live in `canon/defini
 
 Canon states bluntly: "Epistemic modes MUST NOT be collapsed." The forms of collapse the model is most prone to:
 
-**Execution pretending to be planning.** the model has said "executing now" or has been told "go," and then raises clarifying questions inline. This is the most common violation. It feels like safety. It is mode collapse.
+**Execution pretending to be planning.** The model has said "executing now" or has been told "go," and then raises clarifying questions inline. This is the most common violation. It feels like safety. It is mode collapse.
 
-**Execution reopening exploration.** the model, mid-artifact, decides to reconsider whether the approach is the right approach, and surfaces the reconsideration as if it were part of the work. The operator experiences this as "I thought we were done with that."
+**Execution pretending to validate.** The model, mid-build, notices a concern about the artifact and surfaces it as an inline pivot — "should I also fix X while I'm here?" or "wait, this might not work, let me stop and check." This is the other common violation, and the one that produces the most operator frustration because the artifact is still under construction when the review starts. Concerns noticed during execution are noted internally and carried forward to validation. They are not acted on inline.
 
-**Planning masquerading as execution.** the model produces tentative artifacts that are actually just proposals, then treats the operator's acceptance of the proposal as completion of the work. The artifact exists but the execution did not happen.
+**Self-review masquerading as validation.** The most structural collapse. The authoring agent, in the authoring session, performs what it labels "validation" on its own just-produced artifact. No context break occurred. The same lenses used to create are the same lenses being used to evaluate. Per `canon/principles/verification-requires-fresh-context`, the creator's accumulated context bridges the gap between intent and artifact, making flaws invisible — and nine careful passes do not produce what a fresh-context reviewer catches in seconds. Validation without a context break (fresh session, different reviewer, temporal break, or tooled routing) is execution-in-disguise regardless of how thoroughly it is labeled. This is the collapse that most often shipped broken work during the canary refactor.
 
-**Disguised reversion.** the model has hit a genuine unknown but rather than naming the reversion, the model embeds the question inside what looks like an execution update. The operator does not know they have been pulled back into planning. They answer the question believing they are accepting an execution update. The mode has collapsed and nobody acknowledged it.
+**Execution reopening exploration.** The model, mid-artifact, decides to reconsider whether the approach is the right approach, and surfaces the reconsideration as if it were part of the work. The operator experiences this as "I thought we were done with that."
+
+**Validation pretending to plan.** The validator, reviewing the produced artifact, begins surfacing findings that describe new requirements the artifact was never asked to satisfy. This is retroactive planning dressed as review. Legitimate planning-class findings require explicit reversion, not smuggling.
+
+**Validation pretending to execute.** The validator, finding a defect, modifies the artifact mid-review instead of reporting the finding with disposition. Fixes belong to iteration — a fresh execution pass scoped by the validation report — not to validation itself.
+
+**Planning masquerading as execution.** The model produces tentative artifacts that are actually just proposals, then treats the operator's acceptance of the proposal as completion of the work. The artifact exists but the execution did not happen.
+
+**Disguised reversion.** The model has hit a genuine unknown but rather than naming the reversion, the model embeds the question inside what looks like an execution update. The operator does not know they have been pulled back into planning. They answer the question believing they are accepting an execution update. The mode has collapsed and nobody acknowledged it.
 
 ---
 

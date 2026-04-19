@@ -6,7 +6,9 @@ exposure: nav
 tier: 2
 voice: neutral
 stability: evolving
-tags: ["planning", "execution", "collaboration"]
+tags: ["planning", "execution", "validation", "collaboration", "fresh-context"]
+epoch: E0008.3
+date: 2026-04-19
 ---
 
 # Mode-Separated Conversations
@@ -77,6 +79,32 @@ Invalid moves:
 - introducing new ideas without acknowledgement
 - reframing goals retroactively
 - debating intent instead of evidence
+- validating mid-build — noticing a concern and surfacing it inline rather than carrying it to validation
+
+---
+
+## Validation Conversations
+
+Purpose:
+
+- review produced artifacts against stated claims
+- surface gaps between intent and outcome
+- recommend disposition per finding (fix, pivot, accept)
+
+Characteristics:
+
+- the artifact exists; scope is bounded by what was claimed
+- findings are grouped into a single coherent review, not interleaved with execution
+- each finding carries explicit disposition
+- conducted with fresh context — separate session, separate reviewer, or temporal break between creation and review (see `canon/principles/verification-requires-fresh-context`)
+
+Invalid moves:
+
+- introducing new requirements the artifact was never asked to satisfy
+- modifying the artifact during review
+- surfacing findings one-by-one during the build that produced the artifact
+- holding accept hostage to findings that are actually planning-class ideas
+- performing the review in the same session that produced the artifact, with no context break (this is self-review, not validation)
 
 ---
 
