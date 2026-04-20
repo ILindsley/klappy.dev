@@ -84,6 +84,11 @@ The oddkit tools encode the discipline. They are not invoked on request — they
 - **`oddkit_challenge`** — Pressure-test claims, assumptions, and proposals during exploration and planning — not during execution, where challenge's prompts are not questions to hand back to the operator.
 - **`oddkit_validate`** — Before declaring any task complete. NEEDS_ARTIFACTS means produce the artifacts, not ask the operator whether they are required.
 
+### Before Shipping Code
+
+- **`klappy://canon/constraints/release-validation-gate`** — Fetch and obey before merging any PR to `klappy/oddkit` (or any oddkit-pattern MCP server) and before promoting to prod. Defines the three binding rules; same-session smoke is not validation.
+- **`klappy://canon/principles/contract-governs-handoff-drift`** — Read when a session ledger or handoff recommends shortcutting a canon rule. Canon wins; propose amendment if the session's judgment was actually right.
+
 ### For Durable Records
 
 - **`oddkit_encode`** — Structure decisions, insights, and boundaries as OLDC+H artifacts. Does not persist — the caller saves to file. Encode continuously at natural breakpoints.
