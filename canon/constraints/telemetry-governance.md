@@ -57,10 +57,26 @@ All tracking occurs on `/mcp` POST envelopes. One data point is written per JSON
 
 ### Numeric Values (Doubles)
 
-| Value | What It Records |
-|-------|----------------|
-| Count | Always `1`, for SUM aggregation |
-| Duration | Request processing time in milliseconds |
+| # | Value | What It Records |
+|---|-------|----------------|
+| 1 | Count | Always `1`, for SUM aggregation |
+| 2 | `duration_ms` | Full request wall-clock at the worker edge — includes V8 cold-start, KB fetch, MCP SDK overhead, and handler compute |
+| 3 | `bytes_in` | UTF-8 byte length of the JSON-RPC request body. Tokenizer-agnostic; exact wire size. `0` when the body could not be read |
+| 4 | `bytes_out` | UTF-8 byte length of the response body. `0` for streamed (SSE) responses where the body cannot be measured without consuming the stream |
+| 5 | `tokens_in` | `cl100k_base` token count of the request body. See *Tokenizer Choice* below for rationale. `0` when tokenization was skipped or failed |
+| 6 | `tokens_out` | `cl100k_base` token count of the response body. `0` for streamed responses or tokenizer failure |
+
+#### Why no `tokenize_ms`
+
+A previous iteration shipped a `double7: tokenize_ms` field intended to capture the wall-clock cost of tokenization for bench-vs-prod comparison. It was removed after live-smoke verification confirmed it always reads `0` in production. The cause is a Cloudflare Workers runtime constraint, not a bug: both `performance.now()` and `Date.now()` are frozen between network I/O events as a timing-side-channel mitigation. Tokenization is pure CPU work, so any sub-request timing of it is unmeasurable from inside a Worker request handler. The bench at `workers/test/tokenize.test.mjs` characterized the cost curve once (cl100k handles 50 KB in ~1.3 ms on Node v22, which is the same V8 the Workers runtime uses); future per-call cost can be predicted from `bytes_out` and `tokens_out` against that curve.
+
+#### Tokenizer Choice
+
+Token counts use `gpt-tokenizer/encoding/cl100k_base` (GPT-4's tokenizer) as a tokenizer-agnostic proxy for "payload token shape." This is **not** a billing-accurate measure for any specific consumer model — counts diverge from Claude's tokenizer by approximately 3–4% on English prose. For the question telemetry is trying to answer ("how big are typical payloads, and which tools produce the most output?"), that noise floor is acceptable.
+
+The choice was driven by an empirical bench rather than tokenizer-correctness arguments. On Node v22 (same V8 engine as Workers), `cl100k_base` was roughly six times faster than `@anthropic-ai/tokenizer` (WASM) on representative payload sizes (200 B – 50 KB), with a dramatically more predictable p95 — no WASM memory-grow spikes. Bundle delta measured via esbuild: **432 KB gzipped**, comfortably within paid-tier Workers limits.
+
+The methodology behind this choice is documented separately in `klappy://canon/constraints/measure-before-you-object` — three theoretical objections (bundle bloat, vodka-architecture violation, tokenizer-choice as domain opinion) were falsified by a five-minute bench. See also `klappy://canon/observations/performed-prudence-anti-pattern` for the failure mode that prompted the constraint.
 
 ### Automatic Properties
 
@@ -78,6 +94,7 @@ All tracking occurs on `/mcp` POST envelopes. One data point is written per JSON
 - **Daily/hourly trends** — when usage happens, what caused spikes
 - **Method breakdown** — protocol-level health
 - **Cache health** — module memory hit rate, cold-build frequency, per-tier latency (`GROUP BY cache_tier, AVG(duration)`)
+- **Payload shape** — average and percentile bytes/tokens per tool, response-size distribution, token-cost-per-tool ranking. Lets the maintainer see which tools produce verbose responses and where trimming would actually move the needle (`GROUP BY tool_name, AVG(double6) AS avg_tokens_out`)
 
 ### Per-Request Diagnostics (Ephemeral, Not Stored)
 
@@ -252,4 +269,6 @@ This is not the standard telemetry social contract. The standard contract is: a 
 - [Maintainability — One Person, Indefinitely](klappy://canon/principles/maintainability-one-person-indefinitely) — The principle telemetry serves
 - [KISS — Simplicity Is the Ceiling](klappy://canon/principles/kiss-simplicity-is-the-ceiling) — Why two tools, not twenty
 - [Axiom 4: You Cannot Verify What You Did Not Observe](klappy://canon/values/axioms) — The axiom telemetry corrects
+- [Measure Before You Object](klappy://canon/constraints/measure-before-you-object) — The methodology that drove the tokenizer choice
+- [Performed Prudence Anti-Pattern](klappy://canon/observations/performed-prudence-anti-pattern) — The failure mode that almost killed token tracking before it shipped
 - [Aquifer MCP Telemetry Governance](https://github.com/klappy/aquifer-mcp/blob/main/docs/telemetry-governance-snapshot.md) — The proven pattern this derives from
